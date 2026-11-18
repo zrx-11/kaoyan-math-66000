@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>《极限》 · 第 2014–2113 题</title>
+<title>《极限》 · 第 2001–2100 题</title>
 <link rel="stylesheet" href="../../assets/site.css">
 <script>
 MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
@@ -18,9 +18,428 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <div class="wrap">
 <header class="pagehead">
   <div class="kicker">02-gaoshu-15000 · 专题 01</div>
-  <h1>第 2014 – 2113 题</h1>
+  <h1>第 2001 – 2100 题</h1>
   <p class="sub"><a href="part-20.html">← 上一分页</a> <a href="index.html">目录</a> <a href="part-22.html">下一分页 →</a></p>
 </header>
+<article class="q" id="q2001">
+  <div class="q-head">
+    <span class="qno">第 2001 题</span>
+    <span class="qtype">乘积型递推（取对数化线性）</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_2=2,\ x_{n+2}=\sqrt{x_n x_{n+1}}\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(2^{2/3}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推右端是相邻两项的几何平均，含根号与乘积，直接对 \(x_n\) 列不动点方程无法显式化。标准做法是取对数，把乘积递推化为加法递推。令 \(y_n=\ln x_n\)，由 \(x_n>0\) 知 \(y_n\) 有定义，递推式两边取对数得</p>
+    \[ y_{n+2}=\frac12(y_n+y_{n+1}). \]
+    <p>这是二阶线性齐次递推，特征方程为</p>
+    \[ 2r^2-r-1=0,\qquad r=1,\ r=-\frac12. \]
+    <p>通解写成 \(y_n=A+B\left(-\frac12\right)^{n-1}\)。代入初值 \(y_1=\ln1=0\)、\(y_2=\ln2\)：</p>
+    \[ A+B=0,\qquad A-\frac{B}{2}=\ln2. \]
+    <p>解得 \(B=\dfrac{4}{3}\ln2\)，\(A=\dfrac{2}{3}\ln2\)。由于 \(\left(-\frac12\right)^{n-1}\to0\)，\(y_n\to A\)，于是</p>
+    \[ \lim_{n\to\infty}x_n=e^A=e^{\frac23\ln2}=2^{2/3}. \]
+    <p>数值迭代 20 万步后 \(x_n\approx1.587401\)，与解析值 \(2^{2/3}\approx1.587401\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不取对数，直接对原递推令 \(x_n=x_{n+1}=L\)，得到 \(L=\sqrt{L^2}\) 即恒等式，定不出极限。② 解特征方程时漏掉负根 \(-1/2\)，把振荡衰减项误当成常数。③ 忽略 \(x_n>0\) 的符号约束，在取对数这一步没有先确认每一项为正。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是「几何平均型递推」的标准范式：取对数后化为线性递推，再用特征方程或不动点加衰减项处理。考研与竞赛中同类题常把根号换成 \(x_n^\alpha x_{n+1}^{1-\alpha}\)，处理框架不变，区别只在对数后的系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_2=4,\ x_{n+2}=\sqrt{x_n x_{n+1}}\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+    <p class="var-ans">答案：\(2^{4/3}\)。令 \(y_n=\ln x_n\)，极限 \(A=(y_1+2y_2)/3=2\ln4/3\)，故 \(x_n\to e^A=4^{2/3}=2^{4/3}\approx2.5198\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2002">
+  <div class="q-head">
+    <span class="qno">第 2002 题</span>
+    <span class="qtype">牛顿迭代（平方根型）</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\dfrac12\left(a_n+\dfrac{2}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推式是求 \(\sqrt2\) 的牛顿迭代公式，属单调有界准则型。先用均值不等式给出下界：对任意 \(a_n>0\)，</p>
+    \[ a_{n+1}=\frac12\left(a_n+\frac{2}{a_n}\right)\ge\sqrt{a_n\cdot\frac{2}{a_n}}=\sqrt2. \]
+    <p>故从第二项起 \(a_n\ge\sqrt2\)。再证从第二项起单调递减：当 \(a_n\ge\sqrt2\) 时，</p>
+    \[ a_{n+1}-a_n=\frac12\left(\frac{2}{a_n}-a_n\right)=\frac{2-a_n^2}{2a_n}\le0, \]
+    <p>因为 \(a_n^2\ge2\)。所以 \(\{a_n\}\) 从第二项起单调递减且有下界 \(\sqrt2\)，由单调有界准则收敛。设极限为 \(L>0\)，对递推式取极限：</p>
+    \[ L=\frac12\left(L+\frac{2}{L}\right)\ \Longrightarrow\ L^2=2. \]
+    <p>由 \(L>0\) 取正根 \(L=\sqrt2\)。不动点处迭代函数 \(f(x)=\tfrac12(x+2/x)\) 的导数 \(f'(L)=\tfrac12(1-2/L^2)=0\)，为二阶收敛的吸引不动点。数值迭代 20 万步后 \(a_n\approx1.414214\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不先证 \(a_n>0\) 就对递推式取极限；② 解出 \(L=\pm\sqrt2\) 后不依据 \(a_n>0\) 舍负根；③ 忽略首项 \(a_1=1\lt{}\sqrt2\)，单调性是从第二项才开始的，不能说数列一开始就递减。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>牛顿迭代 \(a_{n+1}=\tfrac12(a_n+c/a_n)\) 是递推极限的高频模型，常与误差平方级收缩、压缩映射判别放在同一组鉴别。证明模板（均值不等式证下界、作差证单调、解方程取正根）在常数 \(c\) 更换时完全沿用。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\tfrac12\left(a_n+\dfrac{3}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+    <p class="var-ans">答案：\(\sqrt3\)。均值不等式给出 \(a_{n+1}\ge\sqrt3\)，从第二项起单调递减收敛，方程 \(L=\tfrac12(L+3/L)\) 化简得 \(L^2=3\)，取正根；数值迭代 20 万步收敛到 \(1.732051\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2003">
+  <div class="q-head">
+    <span class="qno">第 2003 题</span>
+    <span class="qtype">权函数端点集中（含余弦）</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(b_n=\int_0^1 x^n\cos(\pi x)\,dx\)，求 \(\lim\limits_{n\to\infty} n b_n\)。</p>
+  </div>
+  <div class="answer">答案：\(-1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：积分权函数为 \(x^n\)，当 \(n\to\infty\) 时质量集中到右端点 \(x=1\)，属端点集中型积分极限。所用引理为：若 \(f\) 在 \([0,1]\) 上连续，则</p>
+    \[ \lim_{n\to\infty} n\int_0^1 x^n f(x)\,dx=f(1). \]
+    <p>引理的依据是拆分区间：对任意 \(\delta>0\)，在 \([0,1-\delta]\) 上 \(x^n\) 一致趋于零，贡献被 \(n(1-\delta)^n\) 控制趋于零；在 \([1-\delta,1]\) 上 \(f(x)\) 与 \(f(1)\) 相差不超过 \(\varepsilon\)，而 \(n\int_{1-\delta}^1 x^n dx\to1\)。令 \(\delta\to0\) 即得结论。</p>
+    <p>本题 \(f(x)=\cos(\pi x)\)，连续，端点值</p>
+    \[ f(1)=\cos\pi=-1. \]
+    <p>因此 \(\lim n b_n=-1\)。数值上 \(n=1000\) 时 \(n b_n\approx-0.99899\)，向 \(-1\) 逼近。需要注意符号来自余弦在 \(x=1\) 处取 \(-1\)，不能按 \(x=0\) 处的 \(1\) 计算。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把集中点误判为左端点 \(x=0\)，取 \(f(0)=1\) 得到 \(+1\)；\(x^n\) 在 \([0,1]\) 上是向右端 \(1\) 集中。② 直接用 \(x^n\) 的积分 \(1/(n+1)\) 乘 \(f(1)\) 时忘记乘 \(n\)，阶数对不上。③ 忽略 \(f\) 连续这一引理条件，在有间断点的函数上直接套用。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>端点集中型积分极限是选择题与解答题的常客，考法固定为「识别权函数集中端点、取端点函数值」。同组题目把被积函数换成 \(1/(1+x)\)、\(\ln(1+x)\)、\((1-x)^{-1/2}\) 等，分别对应后续 2011、2017、2023 题的处理框架。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(b_n=\int_0^1 x^n\sin(\pi x)\,dx\)，求 \(\lim\limits_{n\to\infty} n b_n\)。</p>
+    <p class="var-ans">答案：\(0\)。由端点集中引理，极限为 \(\sin\pi=0\)；数值上 \(n=1000\) 时 \(n b_n\) 已小于 \(10^{-3}\)，与结论一致。</p>
+  </div>
+</article>
+
+<article class="q" id="q2004">
+  <div class="q-head">
+    <span class="qno">第 2004 题</span>
+    <span class="qtype">和式夹逼（主部为 1/n）</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(c_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k}}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(n\) 项求和，分母根号内 \(k\) 与 \(n^2\) 相比是低阶扰动，先用夹逼把每项的上下界夹住，再比较主部。对 \(1\le k\le n\)，有 \(1\le k\le n\)，故</p>
+    \[ n^2\le n^2+k\le n^2+n. \]
+    <p>各项取倒数并开根号，不等号方向反转：</p>
+    \[ \frac{1}{\sqrt{n^2+n}}\le\frac{1}{\sqrt{n^2+k}}\le\frac{1}{n}. \]
+    <p>对 \(k=1,\dots,n\) 求和：</p>
+    \[ \frac{n}{\sqrt{n^2+n}}\le c_n\le1. \]
+    <p>再用二项展开核对修正项的阶，确认主部不会被扰动改写。提出 \(1/n\) 后单项写成</p>
+    \[ \frac{1}{\sqrt{n^2+k}}=\frac1n\left(1+\frac{k}{n^2}\right)^{-1/2}=\frac1n\left[1-\frac{k}{2n^2}+O\left(\frac{k^2}{n^4}\right)\right]. \]
+    <p>对 \(k=1,\dots,n\) 求和，主部为 \(n\cdot 1/n=1\)；一阶修正为</p>
+    \[ -\frac{1}{2n^3}\sum_{k=1}^n k=-\frac{n(n+1)}{4n^3}=O\left(\frac1n\right), \]
+    <p>二阶修正为 \(O(1/n^2)\)。修正项整体是 \(O(1/n)\) 而非 \(O(1)\)：扰动 \(k/n^2\le1/n\) 趋于零，含 \(k\) 的项被额外的 \(n^2\) 幂次压住。左端化简为 \(\dfrac{1}{\sqrt{1+1/n}}\to1\)，右端为 \(1\)，由夹逼准则 \(c_n\to1\)。数值上 \(n=10000\) 时 \(c_n\approx0.999975\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误把分母写成 \(\sqrt{n^2+k^2}\) 去凑 Riemann 和，本题根号内是 \(k\) 而非 \(k^2\)，两者极限不同。② 放缩时左端用 \(n^2\)、右端用 \(n^2+n\) 后忘记乘项数 \(n\)，得到错误的 \(1/\sqrt{1+1/n}\) 量级判断。③ 逐项等价替换 \(1/\sqrt{n^2+k}\sim1/n\) 后直接求和，未说明误差总和可忽略。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>和式极限的夹逼估计是基础考法，核心是判断扰动项相对于主部的阶。当扰动为 \(k\) 量级时主部不变，当扰动为 \(k^2\) 量级时才需要走定积分定义，两类对照出现在 2013、2019 题中。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(c_n=\sum\limits_{k=1}^n\dfrac{1}{n+k}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+    <p class="var-ans">答案：\(\ln2\)。提出 \(1/n\) 后为 Riemann 和 \(\dfrac1n\sum_{k=1}^n\dfrac{1}{1+k/n}\to\int_0^1\dfrac{dx}{1+x}=\ln2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2005">
+  <div class="q-head">
+    <span class="qno">第 2005 题</span>
+    <span class="qtype">1<sup>∞</sup> 型幂指数列（对数展开）</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(d_n=\left(1+\dfrac1n\right)^{n^2}e^{-n}\)，求 \(\lim\limits_{n\to\infty}d_n\)。</p>
+  </div>
+  <div class="answer">答案：\(e^{-1/2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：底数趋于 \(1\)、指数为 \(n^2\)，属 \(1^\infty\) 型数列极限。标准做法是取自然对数，把幂指运算化为乘法，再用泰勒展开归集常数项。记 \(L_n=\ln d_n\)，则</p>
+    \[ L_n=n^2\ln\left(1+\frac1n\right)-n. \]
+    <p>对 \(\ln(1+1/n)\) 在 \(1/n\to0\) 处展开到二阶：</p>
+    \[ \ln\left(1+\frac1n\right)=\frac1n-\frac{1}{2n^2}+\frac{1}{3n^3}+o\left(\frac1{n^3}\right). \]
+    <p>乘以 \(n^2\)：</p>
+    \[ n^2\ln\left(1+\frac1n\right)=n-\frac12+\frac{1}{3n}+o\left(\frac1n\right). \]
+    <p>减去 \(n\) 后，一阶项 \(n\) 恰好抵消，留下常数 \(-1/2\)：</p>
+    \[ L_n=-\frac12+o(1)\ \Longrightarrow\ d_n=e^{L_n}\to e^{-1/2}. \]
+    <p>必须展开到二阶，因为一阶项 \(n\) 与后面的 \(-n\) 抵消后，决定极限的正是二阶项系数 \(-1/2\)。数值上 \(n=1000\) 时 \(d_n\approx0.60670\)，向 \(e^{-1/2}\approx0.606531\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只展开到一阶，得到 \(L_n=o(1)\) 而误判极限为 \(1\)；二阶项正是答案来源。② 把 \(\ln(1+1/n)\) 的二阶系数符号记反，得到 \(e^{+1/2}\)。③ 直接套用 \((1+1/n)^n\to e\)，忽略指数是 \(n^2\)，数量级不匹配。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>\(1^\infty\) 型数列极限的固定解法是取对数后泰勒展开，考重点在展开阶数与常数项归集。同类题把底数扰动、指数幂次更换后，框架不变；2014、2016 题是同一手法在不同幂次搭配下的平行练习。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(d_n=\left(1+\dfrac{2}{n}\right)^{n^2}e^{-2n}\)，求 \(\lim\limits_{n\to\infty}d_n\)。</p>
+    <p class="var-ans">答案：\(e^{-2}\)。\(\ln d_n=n^2\ln(1+2/n)-2n=n^2(2/n-2/n^2+8/(3n^3)-\cdots)-2n\to-2\)，故 \(d_n\to e^{-2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2006">
+  <div class="q-head">
+    <span class="qno">第 2006 题</span>
+    <span class="qtype">变限积分与指数增长比较</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\int_0^x e^{-t^2}\,dt\)，求 \(\lim\limits_{x\to\infty} f(x)\cdot e^{x^2}\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算 \(+\infty\)（变限积分趋于正常数 \(\sqrt\pi/2\)，乘以 \(e^{x^2}\) 后随指数增长发散），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子为高斯型变限积分，先判断积分本身的收敛值，再与指数因子比较增长阶。由高斯积分公式，</p>
+    \[ \int_0^\infty e^{-t^2}\,dt=\frac{\sqrt\pi}{2}, \]
+    <p>收敛性先单独坐实：\(f'(x)=e^{-x^2}>0\)，故 \(f(x)\) 单调递增；又被积函数非负，\(f(x)\) 不超过无穷积分值 \(\sqrt\pi/2\)，由单调有界准则 \(f(x)\) 收敛到该正常数。任取 \(\varepsilon>0\)，存在 \(X\) 使 \(f(X)>\sqrt\pi/2-\varepsilon\)；当 \(x\ge X\) 时 \(f(x)\ge f(X)\)，于是</p>
+    \[ f(x)e^{x^2}\ge\left(\frac{\sqrt\pi}{2}-\varepsilon\right)e^{x^2}\to+\infty. \]
+    <p>对 \(x\ge1\)，\(f(x)\ge f(1)=\int_0^1 e^{-t^2}dt>0\) 为正常数，同样有</p>
+    \[ f(x)e^{x^2}\ge f(1)e^{x^2}\to+\infty. \]
+    <p>也可用渐近展开看清结构：分部积分给出</p>
+    \[ f(x)=\frac{\sqrt\pi}{2}-\frac{e^{-x^2}}{2x}+O\left(\frac{e^{-x^2}}{x^3}\right), \]
+    <p>乘以 \(e^{x^2}\) 后</p>
+    \[ f(x)e^{x^2}=\frac{\sqrt\pi}{2}e^{x^2}-\frac{1}{2x}+O\left(\frac{1}{x^3}\right), \]
+    <p>主项是 \((\sqrt\pi/2)e^{x^2}\)，随 \(x\to\infty\) 发散到正无穷。数值上 \(x=3\) 时 \(f(x)e^{x^2}\approx7.181\times10^3\)，\(x=5\) 时已达 \(6.38\times10^{10}\)，增长趋势明确。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把被积函数 \(e^{-t^2}\) 的衰减误套到整个乘积上，误以为积分趋于零、乘积也趋于零；积分收敛到正常数而非零。② 忽略指数因子 \(e^{x^2}\) 的符号与方向，本题是正指数增长而非衰减。③ 分部积分渐近式中丢掉常数项 \(\sqrt\pi/2\)，只剩 \(-1/(2x)\) 会误判为 \(0\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题考「变限积分渐近行为」与「指数增长阶比较」的结合：先定积分的极限或渐近主部，再与乘除因子做量级匹配。高斯积分、菲涅耳积分等收敛积分常被嵌入此类比较题，关键是分清积分本身收敛到常数还是趋于零。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)=\int_0^x e^{-t^2}\,dt\)，求 \(\lim\limits_{x\to\infty} f(x)e^{-x^2}\)。</p>
+    <p class="var-ans">答案：\(0\)。由渐近式 \(f(x)=\sqrt\pi/2-e^{-x^2}/(2x)+\cdots\)，乘 \(e^{-x^2}\) 后主部为 \((\sqrt\pi/2)e^{-x^2}\to0\)，余项为 \(O(1/x)\) 亦趋于零。</p>
+  </div>
+</article>
+
+<article class="q" id="q2007">
+  <div class="q-head">
+    <span class="qno">第 2007 题</span>
+    <span class="qtype">增量型递推（平方累加估计）</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_n\}\) 满足 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n}{\sqrt n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推增量为 \(1/x_n\)，不存在有限不动点（令 \(L=L+1/L\) 无解），需通过平方后累加估计 \(x_n^2\) 的主部。由 \(x_1=1>0\)，归纳可知 \(x_n>0\)。平方递推式两边：</p>
+    \[ x_{n+1}^2=\left(x_n+\frac{1}{x_n}\right)^2=x_n^2+2+\frac{1}{x_n^2}. \]
+    <p>从 \(k=1\) 累加到 \(n-1\)：</p>
+    \[ x_n^2=x_1^2+2(n-1)+\sum_{k=1}^{n-1}\frac{1}{x_k^2}. \]
+    <p>余项和的阶需要压低。由上式舍去正项即有 \(x_k^2\ge2(k-1)\)（\(k\ge2\)），于是</p>
+    \[ \frac{1}{x_k^2}\le\frac{1}{2(k-1)},\qquad \sum_{k=1}^{n-1}\frac{1}{x_k^2}=O(\ln n)=o(n). \]
+    <p>两边除以 \(n\)：</p>
+    \[ \frac{x_n^2}{n}=2+o(1)\ \Longrightarrow\ \frac{x_n}{\sqrt n}\to\sqrt2. \]
+    <p>之所以先平方，是因为增量 \(1/x_n\) 在 \(x_n\) 增长后变小，直接累加 \(x_{n+1}-x_n\) 看不出主部；平方后交叉项 \(2\) 成为常数增量，主部清晰。数值迭代 20 万步后 \(x_n/\sqrt n\approx1.414227\)，与 \(\sqrt2\approx1.414214\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接对递推式取极限，列出 \(L=L+1/L\) 后认为无解即发散，忽略所求的是 \(x_n/\sqrt n\) 而非 \(x_n\)。② 平方后余项 \(\sum 1/x_k^2\) 未估计阶数，直接当作有界量，论证不完整。③ 把主部常数 \(2\) 漏掉，得到 \(x_n/\sqrt n\to1\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>增量型递推的主部估计是递推极限的难点题型，核心手法是平方（或取幂）后累加，再把小余项压到 \(o(n)\)。本题与 2018 题对照：2018 有有限不动点用导数判别，本题无不动点用累加估计。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{a}{x_n}\)（\(a>0\)），求 \(\lim\limits_{n\to\infty}\dfrac{x_n}{\sqrt n}\)。</p>
+    <p class="var-ans">答案：\(\sqrt{2a}\)。平方得 \(x_{n+1}^2=x_n^2+2a+a^2/x_n^2\)，累加后余项 \(O(\ln n)=o(n)\)，故 \(x_n^2/n\to2a\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2008">
+  <div class="q-head">
+    <span class="qno">第 2008 题</span>
+    <span class="qtype">振荡积分有界性除以无穷大</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设 \(g(x)=\dfrac1x\int_0^x \sin(t^2)\,dt\)，求 \(\lim\limits_{x\to\infty}g(x)\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子是菲涅耳型振荡积分，先判断其是否收敛（有界），再除以趋于无穷的 \(x\)。作变量代换 \(u=t^2\)，则 \(t=\sqrt u\)，\(dt=du/(2\sqrt u)\)，</p>
+    \[ \int_0^x \sin(t^2)\,dt=\frac12\int_0^{x^2} u^{-1/2}\sin u\,du. \]
+    <p>由 Dirichlet 判别法，\(\int_0^\infty u^{-1/2}\sin u\,du\) 条件收敛：\(u^{-1/2}\) 单调趋于零，\(\sin u\) 的原函数有界。因此分子 \(F(x)=\int_0^x\sin(t^2)dt\) 在 \(x\to\infty\) 时趋于有限常数 \(C\)，自然在 \(x\ge1\) 上有界。</p>
+    <p>于是</p>
+    \[ |g(x)|=\frac{|F(x)|}{x}\le\frac{M}{x}\to0, \]
+    <p>其中 \(M\) 为 \(F\) 的上界。数值上 \(x=50\) 时 \(g(x)\approx0.01238\)，\(x=200\) 时 \(g(x)\approx0.00313\)，包络按 \(1/x\) 下降，极限为零。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 看到 \(\sin(t^2)\) 振幅不衰减就判定积分发散，实际变量代换后振幅 \(u^{-1/2}\) 衰减，积分条件收敛。② 把分子当成随 \(x\) 线性增长，误以为 \(g(x)\) 趋于非零常数。③ 忽略 Dirichlet 判别条件，仅凭振荡就下结论。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题考振荡反常积分的有界性与「有界量除以无穷大」的极限结构。菲涅耳积分 \(\int\sin t^2\)、\(\int\cos t^2\) 是标准素材，常与除以 \(x\)、\(\sqrt x\) 等因子搭配，判断极限阶数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(g(x)=\dfrac1x\int_0^x \cos(t^2)\,dt\)，求 \(\lim\limits_{x\to\infty}g(x)\)。</p>
+    <p class="var-ans">答案：\(0\)。余弦菲涅耳积分同样条件收敛于有限常数，分子有界，除以 \(x\) 后趋于零。</p>
+  </div>
+</article>
+
+<article class="q" id="q2009">
+  <div class="q-head">
+    <span class="qno">第 2009 题</span>
+    <span class="qtype">Euler-Mascheroni 常数识别</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设 \(h_n=\sum\limits_{k=1}^n\dfrac1k-\ln n\)，求 \(\lim\limits_{n\to\infty}h_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\gamma\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：调和级数与对数之差，是经典的 Euler-Mascheroni 常数定义式，需先证极限存在再定值。利用积分比较：对 \(k\ge1\)，函数 \(1/x\) 单调递减，</p>
+    \[ \frac{1}{k+1}\lt{}\int_k^{k+1}\frac{dx}{x}\lt{}\frac{1}{k}. \]
+    <p>从 \(k=1\) 累加到 \(n-1\)：</p>
+    \[ \sum_{k=1}^{n-1}\frac{1}{k+1}\lt{}\ln n\lt{}\sum_{k=1}^{n-1}\frac{1}{k}. \]
+    <p>由此可得 \(h_n=\sum_{k=1}^n1/k-\ln n\) 单调递减且有下界 \(0\)，由单调有界准则收敛。其极限定义为 Euler-Mascheroni 常数</p>
+    \[ \gamma=\lim_{n\to\infty}\left(\sum_{k=1}^n\frac1k-\ln n\right)\approx0.5772157. \]
+    <p>数值上 \(n=10^5\) 时 \(h_n\approx0.5772207\)，与 \(\gamma\) 的差约 \(+5\times10^{-6}\)，符合 \(h_n-\gamma\sim1/(2n)\) 的慢衰减规律。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把该常数与 \(\ln2\approx0.693\) 混淆，两者数值接近但来源不同。② 不证存在性就直接称「极限为常数 \(\gamma\)」，逻辑链条缺少单调有界论证。③ 把 \(\ln n\) 写成 \(\ln(n+1)\) 后误以为极限改变，两种写法极限同为 \(\gamma\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是经典常数的识别题，考调和级数渐近展开 \(H_n=\ln n+\gamma+1/(2n)+o(1)\)。考研中常以选择题形式判断 \(H_n-\ln n\) 的收敛性与极限归属，也可与级数敛散性、积分比较放在同一组考查。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(\sum\limits_{k=1}^n\dfrac1k-\ln(n+1)\right)\)。</p>
+    <p class="var-ans">答案：\(\gamma\)。因 \(\ln(n+1)-\ln n=\ln(1+1/n)\to0\)，两式之差趋于零，极限同为 Euler-Mascheroni 常数。</p>
+  </div>
+</article>
+
+<article class="q" id="q2010">
+  <div class="q-head">
+    <span class="qno">第 2010 题</span>
+    <span class="qtype">无穷乘积（正弦欧拉乘积）</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设 \(p_n=\prod\limits_{k=1}^n\left(1+\dfrac{1}{k^2}\right)\)，求 \(\lim\limits_{n\to\infty}p_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\sinh\pi}{\pi}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：正项无穷乘积，先由对数级数判别收敛，再用欧拉乘积公式定值。取对数：</p>
+    \[ \ln p_n=\sum_{k=1}^n\ln\left(1+\frac{1}{k^2}\right). \]
+    <p>因 \(\ln(1+1/k^2)\sim1/k^2\)，而 \(\sum 1/k^2\) 收敛，故对数级数收敛，\(p_n\) 趋于有限正数。定值用正弦函数的欧拉乘积：</p>
+    \[ \frac{\sin\pi z}{\pi z}=\prod_{k=1}^\infty\left(1-\frac{z^2}{k^2}\right). \]
+    <p>该公式是整函数 \(\sin\pi z/(\pi z)\) 按零点 \(z=\pm k\) 的因式分解，对任意复数 \(z\) 成立，因此可直接代入纯虚数，不必限制在实数区间。令 \(z=i\)，由 \(z^2=-1\)，右边因子翻号为 \(1+1/k^2\)，与本题乘积逐项对应。左边先由指数定义算纯虚正弦：</p>
+    \[ \sin(\pi i)=\frac{e^{i\cdot\pi i}-e^{-i\cdot\pi i}}{2i}=\frac{e^{-\pi}-e^{\pi}}{2i}=i\,\frac{e^\pi-e^{-\pi}}{2}=i\sinh\pi. \]
+    <p>于是左边为</p>
+    \[ \frac{\sin(\pi i)}{\pi i}=\frac{i\sinh\pi}{\pi i}=\frac{\sinh\pi}{\pi}, \]
+    <p>分子分母的虚数单位 \(i\) 约掉，系数 \(\pi\) 保留在分母。右边因子变为 \(1-(i^2/k^2)=1+1/k^2\)，即所求乘积。因此</p>
+    \[ \lim_{n\to\infty}p_n=\frac{\sinh\pi}{\pi}\approx3.676078. \]
+    <p>数值截断到 20 万项得 \(3.676060\)，尾部因子约 \(1+1/(2N^2)\)，与闭式一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 与乘积 \(\prod(1-1/k^2)\) 混淆，后者望远镜乘积为 \(1/2\)。② 不先判别收敛性就套欧拉公式；若 \(\sum1/k\) 型发散，乘积会趋于零或无穷。③ 双曲正弦与正弦的代换符号出错，\(\sin(\pi i)=i\sinh\pi\) 中的虚数单位要约掉。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>无穷乘积题分两层考：先用比较判别法确认收敛，再借特殊函数的欧拉乘积定值。\(\prod(1\pm1/k^2)\)、\(\prod(1\pm1/k^3)\) 是标准素材，2020 题是同框架下幂次为三的版本。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(p_n=\prod\limits_{k=2}^n\left(1-\dfrac{1}{k^2}\right)\)，求 \(\lim\limits_{n\to\infty}p_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。因子分解 \(1-1/k^2=(k-1)(k+1)/k^2\)，望远镜相乘后剩 \((n+1)/(2n)\to1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2011">
+  <div class="q-head">
+    <span class="qno">第 2011 题</span>
+    <span class="qtype">权函数端点集中（有理分母）</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_n=\int_0^1\dfrac{x^n}{1+x}\,dx\)，求 \(\lim\limits_{n\to\infty} n a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：权函数 \(x^n\) 向右端点 \(x=1\) 集中，套用端点集中引理：\(f\) 连续时 \(n\int_0^1 x^n f(x)dx\to f(1)\)。本题 \(f(x)=1/(1+x)\)，在 \([0,1]\) 上连续，端点值</p>
+    \[ f(1)=\frac{1}{1+1}=\frac12. \]
+    <p>引理的估计思路：对 \(\delta>0\)，区间 \([0,1-\delta]\) 上积分被 \(n(1-\delta)^n\) 控制趋于零；区间 \([1-\delta,1]\) 上 \(f(x)\) 与 \(f(1)\) 之差不超过 \(\varepsilon\)，而 \(n\int_{1-\delta}^1x^n dx\to1\)。令 \(\delta\to0\)、\(\varepsilon\to0\) 即得极限。</p>
+    <p>也可直接验证阶数：分部积分或数值计算显示 \(a_n\sim1/(2n)\)，故 \(n a_n\to1/2\)。数值上 \(n=1000\) 时 \(n a_n\approx0.499750\)，向 \(1/2\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把集中点取在 \(x=0\)，用 \(f(0)=1\) 得到极限 \(1\)。② 忽略分母 \(1+x\) 在端点处的取值，把被积函数整体当成 \(x^n\)，得到 \(n/(n+1)\to1\)。③ 对引理条件把握不严，在 \(f\) 于 \(x=1\) 处有间断的题目上直接套用。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2003、2017 同属端点集中族，区别只在连续权函数的选取。考研常把权函数设为分式、对数或幂函数，考查学生能否识别集中端点并正确取端点值，而不是被积分区间的整体形状误导。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_n=\int_0^1\dfrac{x^n}{2+x}\,dx\)，求 \(\lim\limits_{n\to\infty} n a_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。由端点集中引理，极限为 \(1/(2+1)=1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2012">
+  <div class="q-head">
+    <span class="qno">第 2012 题</span>
+    <span class="qtype">Wallis 积分渐近（Laplace 方法）</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设 \(b_n=\int_0^{\pi/2}\sin^n x\,dx\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,b_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt{\dfrac{\pi}{2}}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\sin^n x\) 的质量集中在最大值点 \(x=\pi/2\) 附近，属 Laplace 型积分渐近。令 \(u=\pi/2-x\)，则 \(\sin x=\cos u\)，在 \(u=0\) 附近展开：</p>
+    \[ \cos u=1-\frac{u^2}{2}+O(u^4),\qquad \ln\cos u=-\frac{u^2}{2}+O(u^4). \]
+    <p>被积函数写成 \(\exp(n\ln\cos u)\)，峰值宽度为 \(O(1/\sqrt n)\)。作尺度代换 \(u=v/\sqrt n\)，</p>
+    \[ b_n=\int_0^{\pi/2}\cos^n u\,du\sim\frac{1}{\sqrt n}\int_0^\infty e^{-v^2/2}\,dv. \]
+    <p>峰区之外的贡献先排除：对固定 \(\delta>0\)，当 \(u\ge\delta\) 时 \(\cos u\le\cos\delta\lt{}1\)，该段积分被 \((\pi/2)\cos^n\delta\) 控制，按指数衰减，相对峰区的 \(1/\sqrt n\) 主部可忽略，因此积分上限可由 \(\pi/2\) 推到 \(+\infty\)。高斯积分系数由标准式定出：\(\int_{-\infty}^\infty e^{-v^2/2}dv=\sqrt{2\pi}\)，被积函数为偶函数，半区间值为其一半，即</p>
+    \[ \int_0^\infty e^{-v^2/2}dv=\frac{\sqrt{2\pi}}{2}=\sqrt{\frac{\pi}{2}}. \]
+    <p>故</p>
+    \[ b_n\sim\sqrt{\frac{\pi}{2n}},\qquad \sqrt n\,b_n\to\sqrt{\frac{\pi}{2}}. \]
+    <p>这与 Wallis 公式给出的渐近一致。数值上 \(n=1000\) 时 \(\sqrt n\,b_n\approx1.253001\)，闭式值 \(\sqrt{\pi/2}\approx1.253314\)，偏差随 \(1/n\) 缩小。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误用 Wallis 公式中偶数项、奇数项的精确系数，把渐近常数记错。② 把 \(b_n\) 的阶当成 \(1/n\)，实际峰值宽度 \(1/\sqrt n\)，积分阶为 \(n^{-1/2}\)。③ 展开 \(\ln\cos u\) 时只写 \(\cos u\approx1-u^2/2\) 而不取对数，指数上的二次项归集会出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 Laplace 方法的入门范式：峰点定位、局部展开、尺度代换、高斯积分定值。\(\sin^n x\)、\(\cos^n x\) 的渐近在选择题中常以配 \(\sqrt n\) 或不配系数的形式出现，要求判断积分的正确衰减阶。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(b_n=\int_0^{\pi/2}\cos^n x\,dx\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,b_n\)。</p>
+    <p class="var-ans">答案：\(\sqrt{\dfrac{\pi}{2}}\)。\(\cos^n x\) 的峰点在 \(x=0\)，局部展开与 \(\sin^n x\) 关于 \(\pi/4\) 对称，渐近常数相同。</p>
+  </div>
+</article>
+
+<article class="q" id="q2013">
+  <div class="q-head">
+    <span class="qno">第 2013 题</span>
+    <span class="qtype">Riemann 和（带根号）</span>
+    <span class="qsrc">P975</span>
+  </div>
+  <div class="stem">
+    <p>设 \(c_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k^2}}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln(1+\sqrt2)\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：和式可提出 \(1/n\)，剩余部分是 \(k/n\) 的函数，属定积分定义型 Riemann 和。把分母提出 \(n\)：</p>
+    \[ c_n=\sum_{k=1}^n\frac{1}{n\sqrt{1+(k/n)^2}}=\frac1n\sum_{k=1}^n\frac{1}{\sqrt{1+(k/n)^2}}. \]
+    <p>取分点 \(x_k=k/n\)，小区间长度 \(\Delta x=1/n\)，通项正是 \(\Delta x\cdot f(x_k)\)，其中 \(f(x)=1/\sqrt{1+x^2}\)。首项 \(k=1\) 对应 \(x_1=1/n\to0\)，末项 \(k=n\) 对应 \(x_n=1\)，故积分区间为 \([0,1]\)。这正是函数 \(f(x)=1/\sqrt{1+x^2}\) 在 \([0,1]\) 上的右端点 Riemann 和，故</p>
+    \[ \lim_{n\to\infty}c_n=\int_0^1\frac{dx}{\sqrt{1+x^2}}. \]
+    <p>对 \(F(x)=\ln(x+\sqrt{1+x^2})\) 求导得 \(F'(x)=1/\sqrt{1+x^2}\)，与被积函数一致，原函数为 \(\operatorname{arsinh}x\)，代入上下限：</p>
+    \[ \int_0^1\frac{dx}{\sqrt{1+x^2}}=\ln(1+\sqrt2)-\ln1=\ln(1+\sqrt2). \]
+    <p>数值上 \(n=1000\) 时 \(c_n\approx0.881227\)，闭式值 \(\ln(1+\sqrt2)\approx0.881374\)，偏差为 Riemann 和的离散误差。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把分母 \(n^2+k^2\) 与 2004 题的 \(n^2+k\) 混淆，后者是夹逼主部型，本题才是 Riemann 和。② 积分公式记成 \(\ln(x+\sqrt{x^2-1})\)，对应 \(1/\sqrt{x^2-1}\)，被积函数不符。③ 求和下标从 \(k=1\) 开始，与从 \(k=0\) 开始的 Riemann 和相差一项 \(1/n\)，不影响极限。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>定积分定义求和式极限是高数选择题的固定题型，考法是提出 \(1/n\)、辨认 \(f(k/n)\)、写出积分。根式型、分式型、三角型被积函数交替出现，2019 题是同一框架下分母为线性 \(kn\) 的版本。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(c_n=\sum\limits_{k=1}^n\dfrac{n}{n^2+k^2}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{4}\)。提出 \(1/n\) 后为 \(\dfrac1n\sum 1/(1+(k/n)^2)\to\int_0^1 dx/(1+x^2)=\arctan1=\pi/4\)。</p>
+  </div>
+</article>
+
 <article class="q" id="q2014">
   <div class="q-head">
     <span class="qno">第 2014 题</span>
@@ -2820,434 +3239,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-x}{x^3}\)。</p>
     <p class="var-ans">答案：\(\dfrac13\)。三阶项为 \(x^3/3\)，除以 \(x^3\) 得 \(1/3\)。</p>
   </div>
-</article>
-
-<article class="q" id="q2101">
-  <div class="q-head">
-    <span class="qno">第 2101 题</span>
-    <span class="qtype">根式递推（单调有界准则）</span>
-    <span class="qsrc">P990</span>
-  </div>
-  <div class="stem">
-    <p>设 \(x_1=1,\ x_{n+1}=\sqrt{2+x_n}\)，证明数列 \(\{x_n\}\) 收敛并求极限。</p>
-  </div>
-  <div class="answer">答案：\(2\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：递推右端是把 \(x_n\) 平移后再开根号，属「先猜不动点、再用单调有界准则」的标准范式。</p>
-    <p>第一步，先证有上界。归纳：\(x_1=1\le2\)。若 \(x_n\le2\)，则</p>
-    \[ x_{n+1}=\sqrt{2+x_n}\le\sqrt{2+2}=2, \]
-    <p>故一切 \(x_n\le2\)，数列有上界。</p>
-    <p>第二步，证单调递增。作差：</p>
-    \[ x_{n+1}-x_n=\sqrt{2+x_n}-x_n=\frac{2+x_n-x_n^2}{\sqrt{2+x_n}+x_n}=\frac{(2-x_n)(1+x_n)}{\sqrt{2+x_n}+x_n}. \]
-    <p>由于 \(0\lt{}x_n\le2\)，分子 \((2-x_n)(1+x_n)\ge0\)，分母为正，故 \(x_{n+1}\ge x_n\)，数列单调递增。</p>
-    <p>由单调有界准则，\(\{x_n\}\) 收敛。设极限为 \(L\)，对递推式两边取极限：</p>
-    \[ L=\sqrt{2+L}\ \Longrightarrow\ L^2=2+L\ \Longrightarrow\ L^2-L-2=0. \]
-    <p>解得 \(L=2\) 或 \(L=-1\)。又 \(x_n\ge1>0\)，极限不可能为负，舍去 \(L=-1\)，故 \(\lim x_n=2\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 不先证收敛就直接对递推式取极限，把「解方程」当成「求极限」，漏掉了单调有界这一前提。② 解 \(L^2-L-2=0\) 得两根后不依据 \(x_n>0\) 舍负根。③ 作差时不会有理化，误判单调性；其实开根号型递推只要归纳出界，单调方向由 \(x_1\) 与不动点的大小关系即可判定。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>\(x_{n+1}=\sqrt{a+x_n}\) 是递推极限的入门模板，考研解答题常要求「先证收敛再求值」，考的就是单调有界准则的完整书写。同类题把常数换成 \(a\)，不动点方程为 \(L=\sqrt{a+L}\)，结论 \(L=(1+\sqrt{1+4a})/2\)，证明框架不变。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\sqrt{3+x_n}\)，证明 \(\{x_n\}\) 收敛并求极限。</p>
-    <p class="var-ans">答案：\(\dfrac{1+\sqrt{13}}{2}\)。归纳证 \(x_n\le3\)，作差 \((3-x_n)(1+x_n)\ge0\) 得单调递增；取极限 \(L=\sqrt{3+L}\)，即 \(L^2-L-3=0\)，取正根。</p>
-  </div>
-</article>
-
-<article class="q" id="q2102">
-  <div class="q-head">
-    <span class="qno">第 2102 题</span>
-    <span class="qtype">有限项求和的极限（直接化简）</span>
-    <span class="qsrc">P990</span>
-  </div>
-  <div class="stem">
-    <p>求 \(\lim\limits_{n\to\infty}\left(\dfrac{1}{n^2}+\dfrac{2}{n^2}+\cdots+\dfrac{n}{n^2}\right)\)。</p>
-  </div>
-  <div class="answer">答案：\(\dfrac12\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：这是 \(n\) 项求和，但每一项的分母都是 \(n^2\)，不能直接用夹逼把每项都压成同一个量（因为分子从 \(1\) 到 \(n\) 等差变化），正确做法是先把和式化简成闭式，再求极限。</p>
-    <p>把公共因子 \(1/n^2\) 提出：</p>
-    \[ \sum_{k=1}^n\frac{k}{n^2}=\frac{1}{n^2}\sum_{k=1}^n k. \]
-    <p>由等差数列求和公式 \(\sum_{k=1}^n k=n(n+1)/2\)，得</p>
-    \[ \sum_{k=1}^n\frac{k}{n^2}=\frac{n(n+1)}{2n^2}=\frac{n+1}{2n}=\frac12\left(1+\frac1n\right). \]
-    <p>令 \(n\to\infty\)，\(1/n\to0\)，故</p>
-    \[ \lim_{n\to\infty}\sum_{k=1}^n\frac{k}{n^2}=\frac12. \]
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 误把每项都「等价替换」成 \(k/n^2\sim\) 某个常数后求和，忽略分子随 \(k\) 线性增长、总和贡献 \(O(n^2)\) 量级。② 想用夹逼：最小项 \(1/n^2\)、最大项 \(n/n^2=1/n\)，夹逼给出 \(n\cdot1/n^2\le S_n\le n\cdot1/n\)，即 \(1/n\le S_n\le1\)，上下界都收敛到 \(0\) 与 \(1\)，夹不死——这正是「不能逐项夹逼」的信号，必须先化简。③ 等差求和公式记错为 \(n(n-1)/2\)。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>本题是「和式极限」中最朴素的一类：先化简再取极限。它与 Riemann 和（如后续 2105、2112、2115、2122、2125）形成对照——当和式能写成闭式时直接化简，当项是 \(f(k/n)\cdot(1/n)\) 形式时才转积分。考法常以选择题出现，干扰项是 \(0\)（误以为每项都趋于 \(0\)）与 \(1\)。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(\dfrac{1^2}{n^3}+\dfrac{2^2}{n^3}+\cdots+\dfrac{n^2}{n^3}\right)\)。</p>
-    <p class="var-ans">答案：\(\dfrac13\)。提出 \(1/n^3\)，用平方和公式 \(\sum k^2=n(n+1)(2n+1)/6\)，得 \((n+1)(2n+1)/(6n^2)\to2/6=1/3\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q2103">
-  <div class="q-head">
-    <span class="qno">第 2103 题</span>
-    <span class="qtype">权函数端点集中（左端点 x=0）</span>
-    <span class="qsrc">P991</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 在 \([0,1]\) 上连续，且 \(f(0)=0,\ f(1)=1\)，求 \(\lim\limits_{n\to\infty}\int_0^1 f(x^n)\,dx\)。</p>
-  </div>
-  <div class="answer">答案：\(0\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：被积函数是 \(f(x^n)\)，当 \(n\to\infty\) 时 \(x^n\) 在 \([0,1)\) 上一致趋于 \(0\)，整个积分的「质量」向 \(x=0\) 这一端点集中，属端点集中型积分极限。</p>
-    <p>作换元 \(t=x^n\)，则 \(x=t^{1/n}\)，\(dx=\dfrac1n t^{1/n-1}dt\)：</p>
-    \[ I_n=\int_0^1 f(x^n)\,dx=\frac1n\int_0^1 f(t)\,t^{1/n-1}\,dt. \]
-    <p>核函数 \(K_n(t)=\dfrac1n t^{1/n-1}\) 在 \([0,1]\) 上的总质量为</p>
-    \[ \int_0^1 K_n(t)\,dt=\frac1n\int_0^1 t^{1/n-1}dt=\frac1n\cdot n=1. \]
-    <p>它集中在 \(t=0\) 附近：对任意 \(\delta>0\)，在 \([\delta,1]\) 上 \(|K_n(t)|\le\dfrac1n\delta^{1/n-1}\to0\)，贡献趋于零；而 \([0,\delta]\) 上 \(f(t)\) 由连续性与 \(f(0)=0\) 可知 \(|f(t)|\lt{}\varepsilon\)。于是</p>
-    \[ |I_n|\le\varepsilon\int_0^\delta K_n(t)dt+\frac1n\int_\delta^1|f(t)|t^{1/n-1}dt\to\varepsilon. \]
-    <p>由 \(\varepsilon\) 任意，\(I_n\to0\)。题中 \(f(1)=1\) 是干扰项——质量集中在 \(x=0\)，与右端点值无关。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 误把质量集中点判为 \(x=1\)，用 \(f(1)=1\) 作答，得到错误的 \(1\)。\(x^n\) 在 \([0,1]\) 上是向左端点 \(0\) 压的（与 \(n x^n\) 压向 \(1\) 恰好相反）。② 忽略 \(f(0)=0\) 这个条件：若 \(f(0)\neq0\)，极限应是 \(f(0)\)；本题给 \(f(0)=0\) 才得 \(0\)。③ 直接令 \(x^n\to0\) 得 \(f(0)=0\) 却不说明积分为何收敛到该端点值，缺换元核集中这一步。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>端点集中型积分极限是选择题与解答题的高频模型，关键是分清权函数压向哪一端：\(x^n\)（不带系数）压向 \(0\)，\(n x^n\) 压向 \(1\)。本组题 2103、2113、2123 正是这三种尺度的对照，考法固定为「识别核、取对应端点函数值」。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f\) 在 \([0,1]\) 上连续，\(f(0)=2,\ f(1)=5\)，求 \(\lim\limits_{n\to\infty}\int_0^1 f(x^n)\,dx\)。</p>
-    <p class="var-ans">答案：\(2\)。核 \(K_n(t)=\frac1n t^{1/n-1}\) 集中在 \(t=0\)，极限为 \(f(0)=2\)；右端点 \(f(1)=5\) 不参与。</p>
-  </div>
-</article>
-
-<article class="q" id="q2104">
-  <div class="q-head">
-    <span class="qno">第 2104 题</span>
-    <span class="qtype">三角函数不等式（导数法）</span>
-    <span class="qsrc">P991</span>
-  </div>
-  <div class="stem">
-    <p>证明：对 \(x>0\)，有 \(x-\dfrac{x^3}{6}\lt{}\sin x\lt{}x\)。</p>
-  </div>
-  <div class="answer">答案：成立（证明）</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：要证两个方向的不等式，标准手法是构造辅助函数，用导数符号判定单调性，再比较端点值。</p>
-    <p><b>上界 \(\sin x\lt{}x\)：</b>令 \(g(x)=x-\sin x\)，则 \(g(0)=0\)，且</p>
-    \[ g'(x)=1-\cos x\ge0\quad(x>0), \]
-    <p>且等号仅在 \(x=2k\pi\) 处孤立成立，故 \(g(x)\) 在 \(x>0\) 严格单调递增，\(g(x)>g(0)=0\)，即 \(\sin x\lt{}x\)。</p>
-    <p><b>下界 \(\sin x>x-\dfrac{x^3}{6}\)：</b>令 \(h(x)=\sin x-x+\dfrac{x^3}{6}\)，则 \(h(0)=0\)。逐次求导：</p>
-    \[ h'(x)=\cos x-1+\frac{x^2}{2},\qquad h'(0)=0, \]
-    \[ h''(x)=-\sin x+x,\qquad h''(0)=0, \]
-    \[ h'''(x)=1-\cos x\ge0\quad(x>0). \]
-    <p>由 \(h'''(x)\ge0\) 且 \(h''(0)=0\) 得 \(h''(x)\ge0\)；由 \(h''(x)\ge0\) 且 \(h'(0)=0\) 得 \(h'(x)\ge0\)；再由 \(h'(x)\ge0\) 且 \(h(0)=0\) 得 \(h(x)>0\)（\(x>0\) 时严格），即 \(\sin x>x-x^3/6\)。</p>
-    <p>两式合并即得 \(x-\dfrac{x^3}{6}\lt{}\sin x\lt{}x\)。这也是 \(\sin x\) 在 \(0\) 附近的泰勒展式 \(x-\dfrac{x^3}{6}+o(x^3)\) 的积分形式。上界 \(\sin x\lt{}x\) 对一切 \(x>0\) 成立，下界在 \(x\) 不大时尤其紧，常被用来给 \(\sin x\) 作双向夹逼。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 证下界时只求一次导数就停，发现 \(h'(0)=0\) 无法判号，必须逐次求导到第三次 \(h'''=1-\cos x\ge0\)，再逐级回代。② 忽略 \(x>0\) 的范围，在 \(x\lt{}0\) 上不等式方向可能不同。③ 把不等式写成 \(\sin x\le x\) 而不说明严格性；这里 \(x>0\) 且非孤立点，是严格不等式。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>这组不等式（\(x-\dfrac{x^3}{6}\lt{}\sin x\lt{}x\)，以及 \(1-\dfrac{x^2}{2}\lt{}\cos x\lt{}1\)）是等价无穷小与泰勒展开的「几何原型」，常用来估计极限、证明单调性。考研中直接证明的题不多，但作为中间工具频繁出现，必须熟记其形式与证明套路。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 证明：对 \(x>0\)，有 \(1-\dfrac{x^2}{2}\lt{}\cos x\lt{}1\)。</p>
-    <p class="var-ans">答案：令 \(u(x)=1-\cos x-x^2/2\)，\(u(0)=0,\ u'(x)=\sin x-x\lt{}0\)（由上题 \(\sin x\lt{}x\)），故 \(u(x)\lt{}0\) 即 \(\cos x>1-x^2/2\)；上界 \(\cos x\lt{}1\) 由 \(1-\cos x\ge0\) 直接得。</p>
-  </div>
-</article>
-
-<article class="q" id="q2105">
-  <div class="q-head">
-    <span class="qno">第 2105 题</span>
-    <span class="qtype">Riemann 和（\(1/\sqrt{1+x^2}\)）</span>
-    <span class="qsrc">P991</span>
-  </div>
-  <div class="stem">
-    <p>求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k^2}}\)。</p>
-  </div>
-  <div class="answer">答案：\(\ln(1+\sqrt2)\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：和式分母 \(n^2+k^2\) 可提出 \(n^2\)，写成 \(\dfrac1n f(k/n)\) 形式，正是定积分的 Riemann 和。</p>
-    <p>提出 \(1/n\)：</p>
-    \[ \sum_{k=1}^n\frac{1}{\sqrt{n^2+k^2}}=\sum_{k=1}^n\frac{1}{n\sqrt{1+(k/n)^2}}=\frac1n\sum_{k=1}^n\frac{1}{\sqrt{1+(k/n)^2}}. \]
-    <p>这是函数 \(f(x)=\dfrac{1}{\sqrt{1+x^2}}\) 在 \([0,1]\) 上取右端点 \(x_k=k/n\)、步长 \(1/n\) 的 Riemann 和。由 \(f\) 连续，</p>
-    \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^n f\!\left(\frac{k}{n}\right)=\int_0^1\frac{dx}{\sqrt{1+x^2}}. \]
-    <p>用原函数 \(\int\dfrac{dx}{\sqrt{1+x^2}}=\ln(x+\sqrt{1+x^2})\)（双曲代换 \(x=\sinh u\) 或分部积分）：</p>
-    \[ \int_0^1\frac{dx}{\sqrt{1+x^2}}=\ln(x+\sqrt{1+x^2})\Big|_0^1=\ln(1+\sqrt2)-\ln1=\ln(1+\sqrt2). \]
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 提 \(1/n\) 时开根号出错：\(\sqrt{n^2+k^2}=n\sqrt{1+(k/n)^2}\)，不是 \(\sqrt{n}\sqrt{\cdots}\)。② 原函数记错：\(\int dx/\sqrt{1+x^2}=\operatorname{arcsinh}x=\ln(x+\sqrt{1+x^2})\)，不要写成 \(\arctan x\)（那是 \(1/(1+x^2)\) 的原函数）。③ 误判求和上限：\(k=1\) 到 \(n\) 对应右端点积分，与左端点 \([0,1)\) 积分值相同，不影响连续函数结果。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>Riemann 和求和是「和式极限」的第二大门类（与 2102 闭式化简对照），考法固定为「提 \(1/n\)、凑 \(f(k/n)\)、转 \([0,1]\) 积分」。本题的原函数含对数与根号，是 \(\operatorname{arcsinh}\) 型，常见干扰是把它和 \(\arctan\) 型混淆。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k^2}}\) 中若改为 \(\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+(k\cdot2)^2}}\)，即每项分母 \(\sqrt{n^2+(2k)^2}\)，极限是多少？</p>
-    <p class="var-ans">答案：\(\dfrac12\ln(2+\sqrt5)\)。提出 \(1/n\) 得 \(\frac1n\sum 1/\sqrt{1+(2k/n)^2}\)，令 \(u=2x\)，积分 \(\int_0^1 dx/\sqrt{1+4x^2}=\frac12\ln(2x+\sqrt{1+4x^2})\big|_0^1=\frac12\ln(2+\sqrt5)\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q2106">
-  <div class="q-head">
-    <span class="qno">第 2106 题</span>
-    <span class="qtype">牛顿迭代（平方根型，均值不等式证界）</span>
-    <span class="qsrc">P991</span>
-  </div>
-  <div class="stem">
-    <p>设 \(a_1=1,\ a_{n+1}=\dfrac12\left(a_n+\dfrac{2}{a_n}\right)\)，证明数列 \(\{a_n\}\) 收敛并求极限。</p>
-  </div>
-  <div class="answer">答案：\(\sqrt2\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：递推右端是 \(a_n\) 与 \(2/a_n\) 的算术平均，正是求 \(\sqrt2\) 的牛顿迭代公式，属「均值不等式证下界、作差证单调递减」型。</p>
-    <p>第一步，由 \(a_1=1>0\) 归纳知一切 \(a_n>0\)。由均值不等式，对 \(n\ge1\)：</p>
-    \[ a_{n+1}=\frac12\left(a_n+\frac{2}{a_n}\right)\ge\sqrt{a_n\cdot\frac{2}{a_n}}=\sqrt2. \]
-    <p>故从第二项起 \(a_n\ge\sqrt2\)，数列有下界。</p>
-    <p>第二步，证从第二项起单调递减。作差：</p>
-    \[ a_{n+1}-a_n=\frac12\left(\frac{2}{a_n}-a_n\right)=\frac{2-a_n^2}{2a_n}\le0, \]
-    <p>因为 \(a_n\ge\sqrt2\) 时 \(a_n^2\ge2\)。故 \(\{a_n\}\) 从第二项起单调递减且有下界 \(\sqrt2\)，由单调有界准则收敛。</p>
-    <p>设极限为 \(L>0\)，对递推取极限：</p>
-    \[ L=\frac12\left(L+\frac{2}{L}\right)\ \Longrightarrow\ 2L^2=L^2+2\ \Longrightarrow\ L^2=2. \]
-    <p>取正根 \(L=\sqrt2\)。不动点处 \(f'(L)=\tfrac12(1-2/L^2)=0\)，为二阶收敛的吸引不动点。数值迭代 \(a_1=1,\ a_2=1.5,\ a_3\approx1.4167\)，迅速逼近 \(1.414214\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 不先证 \(a_n>0\) 就对 \(2/a_n\) 与均值不等式操作。② 解 \(L^2=2\) 时不取正根，或忘记 \(a_n\ge\sqrt2\) 这一由均值不等式得到的下界。③ 误以为数列从第一项就递减：\(a_1=1\lt{}\sqrt2\)，单调性是从第二项起成立的。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>牛顿迭代 \(a_{n+1}=\tfrac12(a_n+c/a_n)\) 是递推极限的高频模型，证明模板（均值不等式证下界 \(\sqrt c\)、作差证从第二项起递减、解方程 \(L^2=c\) 取正根）在更换常数 \(c\) 时完全沿用。与 2121 题是同一模型的复现。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\tfrac12\left(a_n+\dfrac{3}{a_n}\right)\)，证明 \(\{a_n\}\) 收敛并求极限。</p>
-    <p class="var-ans">答案：\(\sqrt3\)。均值不等式给出 \(a_{n+1}\ge\sqrt3\)，从第二项起作差 \((3-a_n^2)/(2a_n)\le0\) 单调递减，取极限 \(L=\tfrac12(L+3/L)\) 得 \(L^2=3\)，取正根 \(\sqrt3\approx1.732\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q2107">
-  <div class="q-head">
-    <span class="qno">第 2107 题</span>
-    <span class="qtype">泰勒展开（tan x 的三阶项）</span>
-    <span class="qsrc">P991</span>
-  </div>
-  <div class="stem">
-    <p>求 \(\lim\limits_{x\to0}\dfrac{\tan x-x}{x^3}\)。</p>
-  </div>
-  <div class="answer">答案：\(\dfrac13\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：\(x\to0\) 的 \(0/0\) 型，分母是 \(x^3\)，必须把 \(\tan x\) 展开到 \(x^3\) 这一阶。</p>
-    <p>由泰勒展开（或用 \(\tan x=\sin x/\cos x\) 展开）：</p>
-    \[ \tan x=x+\frac{x^3}{3}+o(x^3). \]
-    <p>代入分子：</p>
-    \[ \tan x-x=\frac{x^3}{3}+o(x^3). \]
-    <p>于是</p>
-    \[ \lim_{x\to0}\frac{\tan x-x}{x^3}=\lim_{x\to0}\frac{x^3/3+o(x^3)}{x^3}=\frac13. \]
-    <p>也可用洛必达验证：原式为 \(0/0\)，连续用三次洛必达，最终化为 \(\lim_{x\to0}\dfrac{\sec^2 x\tan x}{6x}\) 等形式，结果一致。注意 \(\tan x\) 的三阶系数是 \(1/3\)（区别于 \(\sin x\) 的 \(-1/6\)）。\(\tan x-x\sim x^3/3\) 与 2117 的 \(\sin x-x\sim-x^3/6\) 相减即得 \(\tan x-\sin x\sim x^3/2\)，正是 2127 题的答案。展开 \(\tan x\) 时不要用 \(\sin x/\cos x\) 硬除到五阶，直接记展开式 \(x+x^3/3+2x^5/15\) 更稳。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 把 \(\tan x\) 的展开记成 \(x-x^3/6\)（那是 \(\sin x\)），符号与系数全错。② 只展开到一阶 \(\tan x=x+o(x)\)，得分子 \(o(x)\) 无法定值。③ 滥用洛必达时求导次数不足或算错 \((\tan x)'=\sec^2 x\) 的高阶导数。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>等价无穷小与泰勒展开是 \(0/0\) 型极限的第一工具。考研要求熟记 \(\sin x,\cos x,\tan x,\ln(1+x),e^x,(1+x)^\alpha\) 在 \(x=0\) 的前几项。本题的 \(\tan x-x\sim x^3/3\) 与后续 \(\sin x-x\sim-x^3/6\)（2117）常成对出现作干扰。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-x-\frac{x^3}{3}}{x^5}\)。</p>
-    <p class="var-ans">答案：\(\dfrac{2}{15}\)。继续展开 \(\tan x=x+\dfrac{x^3}{3}+\dfrac{2x^5}{15}+o(x^5)\)，分子余 \(2x^5/15\)，除以 \(x^5\) 得 \(2/15\)（与本组分册 2100 题答案一致）。</p>
-  </div>
-</article>
-
-<article class="q" id="q2108">
-  <div class="q-head">
-    <span class="qno">第 2108 题</span>
-    <span class="qtype">误差函数（高斯无穷积分）</span>
-    <span class="qsrc">P991</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)=\int_0^x e^{-t^2}\,dt\)，求 \(\lim\limits_{x\to\infty}f(x)\)。</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{\sqrt\pi}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：这是误差函数的渐近行为，\(\lim_{x\to\infty}f(x)=\int_0^\infty e^{-t^2}dt\)，即高斯积分的一半。\(e^{-t^2}\) 没有初等原函数，不能直接牛顿–莱布尼茨，需用「平方化极坐标」的经典手法。</p>
-    <p>设 \(I=\int_0^\infty e^{-t^2}dt\)。把积分平方并写成累次积分：</p>
-    \[ I^2=\left(\int_0^\infty e^{-t^2}dt\right)^2=\int_0^\infty\int_0^\infty e^{-(u^2+v^2)}\,du\,dv. \]
-    <p>在第一象限作极坐标变换 \(u=r\cos\theta,\ v=r\sin\theta\)，面积元 \(du\,dv=r\,dr\,d\theta\)，\(u^2+v^2=r^2\)，\(r\in[0,\infty),\ \theta\in[0,\pi/2]\)：</p>
-    \[ I^2=\int_0^{\pi/2}\int_0^\infty e^{-r^2}r\,dr\,d\theta. \]
-    <p>内层积分令 \(s=r^2\)，\(r\,dr=ds/2\)：</p>
-    \[ \int_0^\infty e^{-r^2}r\,dr=\frac12\int_0^\infty e^{-s}ds=\frac12. \]
-    <p>故 \(I^2=\dfrac12\int_0^{\pi/2}d\theta=\dfrac12\cdot\dfrac\pi2=\dfrac\pi4\)。由 \(I>0\) 取正根：</p>
-    \[ I=\frac{\sqrt\pi}{2}. \]
-    <p>数值验证：\(x=3\) 时 \(\int_0^3 e^{-t^2}dt\approx0.8862\)，已逼近 \(\sqrt\pi/2\approx0.886227\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 误以为 \(e^{-t^2}\) 有初等原函数，硬套牛顿–莱布尼茨失败。② 极坐标变换时漏掉面积元的 \(r\)，或把第一象限 \(\theta\) 的范围写成 \([0,2\pi]\)（应只取 \([0,\pi/2]\)）。③ 平方后不开正根，答 \(\pm\sqrt\pi/2\)；积分值为正。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>高斯积分 \(\int_0^\infty e^{-t^2}dt=\sqrt\pi/2\) 是概率论与数理统计中正态分布归一化的基础，考研常以「设 \(f(x)=\int_0^x e^{-t^2}dt\)」形式出现，考 \(x\to0\) 时 \(f(x)/x\to1\)（2128 型）或 \(x\to\infty\) 时 \(f(x)\to\sqrt\pi/2\)。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{1}{x}\int_0^x e^{-t^2}dt\)。</p>
-    <p class="var-ans">答案：\(1\)。由洛必达或导数定义，\(\frac1x\int_0^x e^{-t^2}dt\to e^0=1\)（被积函数在 0 处连续，积分中值定理）。注意与 \(x\to\infty\) 时的 \(\sqrt\pi/2\) 区分。</p>
-  </div>
-</article>
-
-<article class="q" id="q2109">
-  <div class="q-head">
-    <span class="qno">第 2109 题</span>
-    <span class="qtype">重要极限 \(1^\infty\) 型（取倒数）</span>
-    <span class="qsrc">P992</span>
-  </div>
-  <div class="stem">
-    <p>求 \(\lim\limits_{n\to\infty}\left(\dfrac{n}{n+1}\right)^n\)。</p>
-  </div>
-  <div class="answer">答案：\(e^{-1}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：底数 \(n/(n+1)\to1\)，指数 \(n\to\infty\)，属 \(1^\infty\) 型。先把底数写成重要极限 \(\left(1+\frac1m\right)^m\) 的形式。</p>
-    <p>把底数取倒数：</p>
-    \[ \frac{n}{n+1}=\frac{1}{1+\frac1n}=\left(1+\frac1n\right)^{-1}. \]
-    <p>于是</p>
-    \[ \left(\frac{n}{n+1}\right)^n=\left(1+\frac1n\right)^{-n}=\left[\left(1+\frac1n\right)^n\right]^{-1}. \]
-    <p>由重要极限 \(\lim\limits_{n\to\infty}\left(1+\frac1n\right)^n=e\)，得</p>
-    \[ \lim_{n\to\infty}\left(\frac{n}{n+1}\right)^n=e^{-1}=\frac1e. \]
-    <p>也可取对数验证：令 \(y_n=\ln\left(\frac{n}{n+1}\right)^n=n\ln\frac{n}{n+1}=-n\ln(1+1/n)\sim-n\cdot\frac1n=-1\)，故 \(y_n\to-1\)，原极限 \(e^{-1}\)。这一做法在底数不是 \(1+1/n\) 的标准形时更通用。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 把 \((n/(n+1))^n\) 误判成底数趋于 \(1\)、指数趋于无穷，结果为 \(1\)；这是 \(1^\infty\) 型未定式，必须用重要极限。② 取倒数后忘记指数上的负号，答成 \(e\) 而非 \(e^{-1}\)。③ 写成 \(\left(1+\frac1n\right)^{-n}\) 后没认出 \(\lim(1+1/n)^n=e\)。取对数法在底数不是标准形时更通用，应作为首选。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>重要极限 \(\lim(1+1/n)^n=e\) 及其各种变形是数列极限的必考内容。常见变体包括 \((n/(n+1))^n\to e^{-1}\)、\((1+1/(2n))^n\to e^{1/2}\)（2129）、\((1+1/n^2)^{n^2}\to e\)（2119），考法固定为「凑出 \(1+1/m\) 的形式再配指数 \(m\)」。取对数法在底数变形复杂时比凑形更可靠。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(\dfrac{n+1}{n+2}\right)^n\)。</p>
-    <p class="var-ans">答案：\(e^{-1}\)。写成 \(\left(\frac{1+1/n}{1+2/n}\right)^n=\frac{(1+1/n)^n}{(1+2/n)^n}\to\frac{e}{e^2}=e^{-1}\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q2110">
-  <div class="q-head">
-    <span class="qno">第 2110 题</span>
-    <span class="qtype">牛顿迭代（\(\sqrt1=1\) 型）</span>
-    <span class="qsrc">P992</span>
-  </div>
-  <div class="stem">
-    <p>设 \(x_1>0,\ x_{n+1}=\dfrac12\left(x_n+\dfrac{1}{x_n}\right)\)，证明数列 \(\{x_n\}\) 收敛并求极限。</p>
-  </div>
-  <div class="answer">答案：\(1\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：与 2106 同模型，递推是 \(x_n\) 与 \(1/x_n\) 的算术平均，为求 \(\sqrt1=1\) 的牛顿迭代。初值 \(x_1>0\) 任意，不影响最终极限。</p>
-    <p>第一步，由 \(x_1>0\) 归纳知 \(x_n>0\)。由均值不等式：</p>
-    \[ x_{n+1}=\frac12\left(x_n+\frac{1}{x_n}\right)\ge\sqrt{x_n\cdot\frac{1}{x_n}}=1. \]
-    <p>故从第二项起 \(x_n\ge1\)，有下界。</p>
-    <p>第二步，证从第二项起单调递减。作差：</p>
-    \[ x_{n+1}-x_n=\frac12\left(\frac{1}{x_n}-x_n\right)=\frac{1-x_n^2}{2x_n}\le0, \]
-    <p>因为 \(x_n\ge1\)。故 \(\{x_n\}\) 从第二项起单调递减且有下界 \(1\)，由单调有界准则收敛。</p>
-    <p>设极限为 \(L>0\)，对递推取极限：</p>
-    \[ L=\frac12\left(L+\frac{1}{L}\right)\ \Longrightarrow\ 2L^2=L^2+1\ \Longrightarrow\ L^2=1. \]
-    <p>取正根 \(L=1\)。数值上无论 \(x_1=100\) 还是 \(x_1=0.01\)，经若干步后都收敛到 \(1\)（牛顿迭代对 \(\sqrt1\) 为二阶收敛）。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 因 \(x_1>0\) 任意而担心极限与初值有关；牛顿迭代对正初值都收敛到 \(\sqrt c\)。② 解 \(L^2=1\) 时取负根 \(-1\)，忽略 \(x_n>0\)。③ 单调性是从第二项起，不是从 \(x_1\) 起。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>本题是 2106 的特例（\(c=1\)），证明框架完全相同。考研中常把 \(c\) 设为任意正数，答案 \(L=\sqrt c\)；当 \(c=1\) 时极限为 \(1\)，是最简洁的情形。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x_1=2,\ x_{n+1}=\tfrac12\left(x_n+\dfrac{1}{x_n}\right)\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
-    <p class="var-ans">答案：\(1\)。均值不等式 \(x_{n+1}\ge1\)，作差 \((1-x_n^2)/(2x_n)\le0\) 单调递减，取极限 \(L^2=1\) 取正根。</p>
-  </div>
-</article>
-
-<article class="q" id="q2111">
-  <div class="q-head">
-    <span class="qno">第 2111 题</span>
-    <span class="qtype">连分式递推（黄金分割）</span>
-    <span class="qsrc">P992</span>
-  </div>
-  <div class="stem">
-    <p>设 \(x_1=1,\ x_{n+1}=\dfrac{1}{1+x_n}\)，证明数列 \(\{x_n\}\) 收敛并求极限。</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{\sqrt5-1}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：递推是 \(1/(1+x_n)\)，连分数形式，不动点为黄金分割比。这类递推数列在 \(x_1\) 处振荡，不宜直接证单调，常用「相邻项之差的比值」或「隔项单调」处理。</p>
-    <p>先猜不动点。设 \(x_n\to L\)，则 \(L=\dfrac{1}{1+L}\)，即</p>
-    \[ L^2+L-1=0\ \Longrightarrow\ L=\frac{-1+\sqrt5}{2}\ (\text{舍去负根}). \]
-    <p>记 \(\alpha=\dfrac{\sqrt5-1}{2}\approx0.618\)，满足 \(\alpha(1+\alpha)=1\)。</p>
-    <p>证收敛。考察相邻项之差：</p>
-    \[ x_{n+1}-\alpha=\frac{1}{1+x_n}-\alpha=\frac{1-\alpha(1+x_n)}{1+x_n}=\frac{1-\alpha-\alpha x_n}{1+x_n}. \]
-    <p>由 \(1-\alpha=\alpha^2\)（因为 \(\alpha^2+\alpha-1=0\)），得 \(1-\alpha-\alpha x_n=\alpha(\alpha-x_n)\)，故</p>
-    \[ |x_{n+1}-\alpha|=\frac{\alpha}{1+x_n}|x_n-\alpha|. \]
-    <p>又 \(x_n>0\)，故 \(1+x_n>1\)，从而 \(\dfrac{\alpha}{1+x_n}\lt{}\alpha\lt{}1\)。即误差每步乘以一个小于 \(\alpha\) 的压缩因子，\(\{|x_n-\alpha|\}\) 几何衰减，故 \(x_n\to\alpha\)。</p>
-    <p>（也可观察到 \(x_n\) 在 \(\alpha\) 两侧振荡：\(x_1=1>\alpha,\ x_2=1/2\lt{}\alpha,\ x_3=2/3>\alpha\)，奇数项递减、偶数项递增，两子列分别收敛到 \(\alpha\)。）</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 直接说「数列单调有界」：本题数列振荡，并不单调，必须用压缩映射或隔项单调。② 解 \(L^2+L-1=0\) 取错根（应取正根 \((\sqrt5-1)/2\)，不是 \((-1-\sqrt5)/2\)）。③ 忘记 \(x_n>0\) 的范围，导致 \(1+x_n>1\) 这一压缩因子估计不成立。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>连分数递推 \(x_{n+1}=1/(1+x_n)\) 收敛到黄金分割比 \(1/\varphi=(\sqrt5-1)/2\)，是递推极限中「非单调收敛」的代表。考研中常要求证明收敛，标准手法是压缩映射（误差乘压缩因子）或隔项单调。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=1+\dfrac{1}{x_n}\)，证明收敛并求极限。</p>
-    <p class="var-ans">答案：\(\dfrac{1+\sqrt5}{2}\)。不动点 \(L=1+1/L\) 即 \(L^2-L-1=0\)，取正根 \(\varphi=(1+\sqrt5)/2\)；误差 \(|x_{n+1}-\varphi|=\frac{1}{x_n\varphi}|x_n-\varphi|\)，压缩到 \(\varphi\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q2112">
-  <div class="q-head">
-    <span class="qno">第 2112 题</span>
-    <span class="qtype">Riemann 和（\(x/(1+x^2)\)）</span>
-    <span class="qsrc">P992</span>
-  </div>
-  <div class="stem">
-    <p>求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^n\dfrac{k}{n^2+k^2}\)。</p>
-  </div>
-  <div class="answer">答案：\(\dfrac12\ln2\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：和式分子为 \(k\)，分母 \(n^2+k^2\)，可提 \(1/n\) 凑成 \(f(k/n)\cdot(1/n)\)，属 Riemann 和。</p>
-    <p>提出 \(1/n\)：</p>
-    \[ \sum_{k=1}^n\frac{k}{n^2+k^2}=\sum_{k=1}^n\frac{1}{n}\cdot\frac{k/n}{1+(k/n)^2}=\frac1n\sum_{k=1}^n\frac{k/n}{1+(k/n)^2}. \]
-    <p>这是 \(f(x)=\dfrac{x}{1+x^2}\) 在 \([0,1]\) 上的右端 Riemann 和：</p>
-    \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^n f\!\left(\frac{k}{n}\right)=\int_0^1\frac{x}{1+x^2}\,dx. \]
-    <p>凑微分积分：令 \(u=1+x^2\)，\(du=2x\,dx\)，</p>
-    \[ \int_0^1\frac{x}{1+x^2}\,dx=\frac12\ln(1+x^2)\Big|_0^1=\frac12\ln2-\frac12\ln1=\frac12\ln2. \]
-    <p>数值验证：\(n=1000\) 时，和式 \(\frac1n\sum k/n\cdot1/[1+(k/n)^2]\) 约为 \(0.3466\)，与 \(\frac12\ln2\approx0.34657\) 吻合。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 提 \(1/n\) 时分子分母同时处理：\(k/(n^2+k^2)=\frac1n\cdot\frac{k/n}{1+(k/n)^2}\)，漏提 \(1/n\) 会得到发散或错误结果。② 原函数凑错：\(\int x/(1+x^2)dx=\frac12\ln(1+x^2)\)，不是 \(\frac12\arctan(x^2)\)。③ 与 2105 混淆：2105 是 \(1/\sqrt{1+x^2}\)（原函数 \(\ln(x+\sqrt{1+x^2})\)），本题是 \(x/(1+x^2)\)（凑微分）。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>Riemann 和求和的核心是「提 \(1/n\)、凑 \(f(k/n)\)」。本题分子 \(k\) 恰好凑出 \(x\)，便于凑微分；同类题把分子改成 \(1\) 就变成 \(\int_0^1 1/(1+x^2)dx=\pi/4\)（可作变式）。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^n\dfrac{1}{n^2+k^2}\)。</p>
-    <p class="var-ans">答案：\(\dfrac{\pi}{4}\)。提 \(1/n\) 得 \(\frac1n\sum 1/[1+(k/n)^2]\to\int_0^1\frac{dx}{1+x^2}=\arctan x\big|_0^1=\pi/4\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q2113">
-  <div class="q-head">
-    <span class="qno">第 2113 题</span>
-    <span class="qtype">端点集中（带 \(n\) 因子，左端点局部）</span>
-    <span class="qsrc">P992</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 在 \([0,1]\) 上可导，且 \(f(0)=0,\ f'(0)=1\)，求 \(\lim\limits_{n\to\infty}n\int_0^1 f(x^n)\,dx\)。</p>
-  </div>
-  <div class="answer">答案：\(1\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：与 2103 同一积分族，但外层多了一个 \(n\)。2103 中 \(\int_0^1 f(x^n)dx\to f(0)\)；这里乘 \(n\) 后发散，需用 \(f(0)=0\) 抵消，极限由 \(f\) 在 \(0\) 处的局部行为决定。</p>
-    <p>作换元 \(t=x^n\)，\(dx=\dfrac1n t^{1/n-1}dt\)：</p>
-    \[ n\int_0^1 f(x^n)\,dx=n\cdot\frac1n\int_0^1 f(t)\,t^{1/n-1}dt=\int_0^1 f(t)\,t^{1/n-1}\,dt. \]
-    <p>由于 \(f(0)=0\) 且 \(f'(0)=1\)，在 \(t=0\) 附近 \(f(t)\sim f'(0)t=t\)。把 \(f(t)=t+o(t)\) 代入：</p>
-    \[ n\int_0^1 f(x^n)dx=\int_0^1 [t+o(t)]\,t^{1/n-1}dt=\int_0^1 t^{1/n}dt+\int_0^1 o(t)\,t^{1/n-1}dt. \]
-    <p>第一项为</p>
-    \[ \int_0^1 t^{1/n}dt=\frac{1}{1+1/n}=\frac{n}{n+1}\to1. \]
-    <p>第二项：\(o(t)\) 在 \(t=0\) 附近是 \(o(t)\)，被 \(t^{1/n-1}\) 乘后整体趋于零（由 \(f\) 可导给出 \(f(t)/t\to f'(0)\)，余项积分可忽略）。故</p>
-    \[ \lim_{n\to\infty}n\int_0^1 f(x^n)\,dx=f'(0)=1. \]
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 不做换元，直接套用 2103 的结论 \(f(0)=0\)，答 \(0\)；外层乘 \(n\) 后阶数变了，必须重新分析。② 忘记 \(f(0)=0\) 这一前提：若 \(f(0)\neq0\)，\(n\int f(x^n)dx\) 发散到无穷。③ 换元后没认出 \(f(t)\sim t\) 把奇异核 \(t^{1/n-1}\) 抵消为 \(t^{1/n}\)。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>本题与 2103、2123 构成「权函数端点集中」三档对照：不带系数压向 \(0\) 取 \(f(0)\)（2103）、带 \(n\) 且 \(f(0)=0\) 取 \(f'(0)\)（2113）、带 \(n\) 的 \(x^n\) 压向 \(1\) 取 \(f(1)\)（2123）。考研解答题常以此组鉴别端点与阶数。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(0)=0,\ f'(0)=2\)，求 \(\lim\limits_{n\to\infty}n\int_0^1 f(x^n)\,dx\)。</p>
-    <p class="var-ans">答案：\(2\)。换元后 \(f(t)\sim2t\)，主部 \(\int_0^1 2t\cdot t^{1/n-1}dt=2\cdot n/(n+1)\to2\)。</p>
-  </div>
-</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 2014–2113 题</span></div>
+</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 2001–2100 题</span></div>
 </div>
 </body>
 </html>
