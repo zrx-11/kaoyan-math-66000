@@ -688,11 +688,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(-\dfrac{1}{6}\)，复算为 \(-\infty\)：\(\ln(1+u)-u=-\dfrac{u^{2}}{2}+\cdots\)，\(u=\arcsin x\sim x\) 故分子主部 \(-\dfrac{x^{2}}{2}\)，除以 \(x^{3}\) 得 \(-\dfrac{1}{2x}\to-\infty\)（数值检验 \(x=0.1\) 时 \(-4.7\)、\(x=0.05\) 时 \(-9.8\)）。书值 \(-1/6\) 对应分子含 \(+\dfrac{1}{2}\arcsin^{2}x\) 抵消项（见 1239）。此处按复算结论给出。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：令 \(u=\arcsin x\to0\)，分子 \(\ln(1+u)-u\sim-u^{2}/2\)。关键是把 \(u=\arcsin x\) 展开到 \(x^{3}\)：</p>
+    <p>识别类型：\(\ln(1+u)-u\) 型，令 \(u=\arcsin x\to0\)。由对数展开 \(\ln(1+u)=u-u^{2}/2+u^{3}/3-\cdots\)，分子 \(\ln(1+u)-u=-u^{2}/2+O(u^{3})\)，主部落在 \(u^{2}\) 阶而不是 \(u^{3}\) 阶，这是判断本题发散的关键。</p>
     \[
-    \arcsin x=x+\frac{x^{3}}{6}+O(x^{5}).
+    u=\arcsin x=x+\frac{x^{3}}{6}+O(x^{5}).
     \]
-    <p>于是 \(u^{2}=(x+x^{3}/6)^{2}=x^{2}+x^{4}/3+O(x^{6})\)。分子 \(\ln(1+u)-u=-u^{2}/2+O(u^{3})=-x^{2}/2+O(x^{4})\)，主部是 \(x^{2}\) 阶，除以 \(x^{3}\) 得 \(-\dfrac{1}{2x}\to-\infty\)。</p>
+    <p>内函数要展到足够阶才能平方：\(u^{2}=(x+x^{3}/6)^{2}=x^{2}+x^{4}/3+O(x^{6})\)，代回分子：</p>
+    \[
+    \ln(1+u)-u=-\frac{u^{2}}{2}+O(u^{3})=-\frac{x^{2}}{2}+O(x^{4}).
+    \]
+    <p>分子主部是 \(x^{2}\) 阶，分母却是 \(x^{3}\)，阶数对不齐：</p>
+    \[
+    \frac{\ln(1+\arcsin x)-\arcsin x}{x^{3}}=-\frac{1}{2x}+O(x)\to-\infty.
+    \]
+    <p>数值校验：\(x=0.1\) 时原式约 \(-4.71\)，\(x=0.05\) 时约 \(-9.69\)，绝对值按 \(1/x\) 增长，与 \(-1/(2x)\) 的渐近阶吻合；只有分母换成 \(x^{2}\)、与主部同阶时，极限才是 \(-1/2\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -700,7 +708,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>本题与 1217 同型，只是 \(u\) 换成 \(\arcsin x\)，主部阶数由 \(u\sim x\) 决定。1239 是在本题基础上加 \(+u^{2}/2\) 抵消到 \(u^{3}\) 阶。</p>
+    <p>这是 \(\ln(1+u)-u\) 型：主部阶数由内函数 \(u\) 的等价无穷小阶数决定，\(u\sim x\) 时主部为 \(x^{2}\) 阶；若再加 \(+u^{2}/2\) 抵消掉 \(u^{2}\) 项，主部才落到 \(u^{3}\) 阶（即 1239 的做法）。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -788,11 +796,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(1\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：与 1209 同型。提 \(x\) 出来：</p>
+    <p>识别类型：\(x\to\infty\) 时的 \(\infty-\infty\) 型根式差。根号内最高次是 \(x^{4}\)，先把 \(x^{4}\) 从四次根号内提出，使括号内成为 \(1+o(1)\) 的形式：</p>
     \[
     \sqrt[4]{x^{4}+4x^{3}}=x\sqrt[4]{1+\frac{4}{x}}.
     \]
-    <p>原式 \(=x\left(\sqrt[4]{1+\dfrac4x}-1\right)\sim x\cdot\dfrac14\cdot\dfrac4x=1\)。用 \((1+u)^{\alpha}-1\sim\alpha u\)，这里 \(\alpha=1/4\)，\(u=4/x\)，故 \(\alpha u=(1/4)(4/x)=1/x\)，乘 \(x\) 得 \(1\)。</p>
+    <p>括号内 \(u=4/x\to0\)，可用二项式等价 \((1+u)^{\alpha}-1\sim\alpha u\)，这里根次 \(n=4\) 故 \(\alpha=1/4\)；余项为 \(O(u^{2})\)，乘回 \(x\) 后是 \(O(1/x)\to0\)，不影响主部：</p>
+    \[
+    (1+u)^{\alpha}-1\sim\alpha u,\quad \alpha=\frac14,\ u=\frac4x.
+    \]
+    <p>代入并乘回提出的 \(x\)：</p>
+    \[
+    x\left(\sqrt[4]{1+\frac4x}-1\right)\sim x\cdot\frac14\cdot\frac4x=1.
+    \]
+    <p>系数与根次要配对：分子降一次项系数 \(a=4\)，根次 \(n=4\)，主部通式为 \(a/n=4/4=1\)。数值校验：\(x=1000\) 时原式约 \(0.9985\)，\(x=10000\) 时约 \(0.99985\)，随 \(x\) 增大趋于 \(1\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -800,7 +816,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 1209、1229、1242、1249 构成「\(\sqrt[n]{x^{n}+a x^{n-1}}-x\)」系列，答案恒为 \(a/n\)。</p>
+    <p>通式来源：对 \(\sqrt[n]{x^{n}+a x^{n-1}}-x\) 提 \(x\) 后用 \((1+u)^{\alpha}-1\sim\alpha u\)，\(\alpha=1/n\)、\(u=a/x\)，主部 \(x\cdot(1/n)(a/x)=a/n\)；凡此结构的题，答案恒为 \(a/n\)。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -958,8 +974,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(-\dfrac{1}{3}\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：令 \(u=\sin x\to0\)，分子 \(\arctan u-u\)。由 \(\arctan u=u-u^{3}/3+u^{5}/5-\cdots\)，主部 \(-u^{3}/3\)。代入 \(u=\sin x\sim x\)，故 \(u^{3}\sim x^{3}\)，主部 \(-x^{3}/3\)。除以 \(x^{3}\) 得 \(-1/3\)。</p>
-    <p>这里 \(u=\sin x=x-x^{3}/6+\cdots\)，\(u^{3}=(x-x^{3}/6)^{3}=x^{3}+O(x^{5})\)，故 \(-u^{3}/3=-x^{3}/3+O(x^{5})\)，不影响 \(x^{3}\) 系数。</p>
+    <p>识别类型：反三角函数与内函数之差，令 \(u=\sin x\to0\)，分子为 \(\arctan u-u\)。先写外层展开：</p>
+    \[
+    \arctan u=u-\frac{u^{3}}{3}+\frac{u^{5}}{5}-\cdots,
+    \]
+    <p>故 \(\arctan u-u=-u^{3}/3+O(u^{5})\)，主部是 \(u^{3}\) 阶，系数 \(-1/3\)。再处理内函数：</p>
+    \[
+    u=\sin x=x-\frac{x^{3}}{6}+O(x^{5}),\quad u^{3}=x^{3}+O(x^{5}).
+    \]
+    <p>代入主部，\(\sin x\) 自身的 \(x^{3}\) 修正只影响 \(u^{3}\) 的 \(x^{5}\) 及以上项，不动 \(x^{3}\) 系数：</p>
+    \[
+    \arctan(\sin x)-\sin x=-\frac{u^{3}}{3}+O(u^{5})=-\frac{x^{3}}{3}+O(x^{5}).
+    \]
+    <p>除以 \(x^{3}\) 得 \(-1/3\)。数值校验：\(x=0.05\) 时原式约 \(-0.3324\)，\(x=0.02\) 时约 \(-0.3332\)，趋于 \(-1/3\approx-0.33333\)。注意 \(\arctan u-u\) 的三次项系数是 \(-1/3\)，不要与 \(\arcsin u-u\sim u^{3}/6\) 的正号 \(+1/6\) 混淆。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1022,11 +1049,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(1\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：与 1209、1222 同型。提 \(x\) 出来，用 \((1+u)^{\alpha}-1\sim\alpha u\)：</p>
+    <p>识别类型：\(x\to\infty\) 的 \(\infty-\infty\) 型根式差，五次根号。根号内最高次 \(x^{5}\) 提出后，括号内化为 \(1+o(1)\)：</p>
     \[
-    \sqrt[5]{x^{5}+5x^{4}}-x=x\left(\sqrt[5]{1+\frac5x}-1\right)\sim x\cdot\frac15\cdot\frac5x=1.
+    \sqrt[5]{x^{5}+5x^{4}}=x\sqrt[5]{1+\frac{5}{x}}.
     \]
-    <p>通式 \(a/n\)，本题 \(a=5,n=5\)，得 \(1\)。</p>
+    <p>令 \(u=5/x\to0\)，根次 \(n=5\) 故 \(\alpha=1/5\)，由二项式等价 \((1+u)^{\alpha}-1\sim\alpha u\)：</p>
+    \[
+    (1+u)^{\alpha}-1\sim\alpha u,\quad \alpha=\frac15,\ u=\frac5x.
+    \]
+    <p>乘回提出的 \(x\)：</p>
+    \[
+    x\left(\sqrt[5]{1+\frac5x}-1\right)\sim x\cdot\frac15\cdot\frac5x=1.
+    \]
+    <p>通式来历：一般地 \(\sqrt[n]{x^{n}+a x^{n-1}}-x=x[(1+a/x)^{1/n}-1]\sim x\cdot(1/n)(a/x)=a/n\)，即降一次项系数 \(a\) 除以根次 \(n\)。本题 \(a=5,n=5\)，故 \(a/n=1\)。数值校验：\(x=1000\) 时原式约 \(0.9980\)，\(x=10000\) 时约 \(0.99980\)，趋于 \(1\)；若把系数换成 \(10\)，答案即为 \(10/5=2\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1034,7 +1069,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>同系列根式题，1209（n=3）、1222（n=4）、1229（n=5）、1242（n=7）、1249（n=9）。</p>
+    <p>同结构根式题的根次可取 \(n=3,4,5,7,9\) 等任意正整数，判据不变：先提 \(x\)，再用 \((1+u)^{1/n}-1\sim u/n\)，答案恒为 \(a/n\)。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -1056,11 +1091,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{1}{12}\)，复算为 \(-\dfrac{1}{12}\)：\(\ln(\cos x)=-\dfrac{x^{2}}{2}-\dfrac{x^{4}}{12}-\dfrac{x^{6}}{45}-\cdots\)，加 \(x^{2}/2\) 后分子 \(=-\dfrac{x^{4}}{12}+O(x^{6})\)，除以 \(x^{4}\) 得 \(-1/12\)。书值符号误植。此处按复算值给出。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：在 1210 基础上加深一阶。由 \(\cos x=1-x^{2}/2+x^{4}/24-x^{6}/720+\cdots\)，令 \(u=\cos x-1=-x^{2}/2+x^{4}/24-\cdots\)，\(\ln(1+u)=u-u^{2}/2+\cdots\)：</p>
+    <p>识别类型：\(\ln(\cos x)\) 展开到 \(x^{4}\) 阶。先写余弦展开，令 \(u=\cos x-1\)：</p>
     \[
-    \ln(\cos x)=-\frac{x^{2}}{2}-\frac{x^{4}}{12}-\frac{x^{6}}{45}+\cdots.
+    \cos x=1-\frac{x^{2}}{2}+\frac{x^{4}}{24}+O(x^{6}),\quad u=-\frac{x^{2}}{2}+\frac{x^{4}}{24}+O(x^{6}).
     \]
-    <p>分子 \(\ln(\cos x)+x^{2}/2=-x^{4}/12+O(x^{6})\)，除以 \(x^{4}\) 得 \(-\dfrac{1}{12}\)。</p>
+    <p>再用对数展开 \(\ln(1+u)=u-u^{2}/2+O(u^{3})\)。注意 \(u\sim-x^{2}/2\)，故 \(u^{2}\sim x^{4}/4\)，这一项正好贡献 \(x^{4}\) 阶，不能省略：</p>
+    \[
+    \ln(\cos x)=u-\frac{u^{2}}{2}+\cdots=-\frac{x^{2}}{2}-\frac{x^{4}}{12}-\frac{x^{6}}{45}+\cdots.
+    \]
+    <p>其中 \(x^{4}\) 系数由 \(x^{4}/24-u^{2}/2\) 合并：\(1/24-1/8=-1/12\)。题设加上 \(x^{2}/2\) 抵消 \(x^{2}\) 项后：</p>
+    \[
+    \ln(\cos x)+\frac{x^{2}}{2}=-\frac{x^{4}}{12}+O(x^{6}),\quad \frac{\text{分子}}{x^{4}}=-\frac{1}{12}.
+    \]
+    <p>数值校验：\(x=0.05\) 时原式约 \(-0.08339\)，\(x=0.02\) 时约 \(-0.08334\)，趋于 \(-1/12\approx-0.083333\)，符号为负。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1182,7 +1225,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{1}{4}\)，复算为 \(-\dfrac{1}{4}\)：\(\ln(1+u)-u+\dfrac{u^{2}}{2}-\dfrac{u^{3}}{3}=-\dfrac{u^{4}}{4}+\dfrac{u^{5}}{5}-\cdots\)，主部 \(-u^{4}/4\)；\(u=\tan x\sim x\) 故 \(u^{4}\sim x^{4}\)，极限 \(-1/4\)。书值符号误植。此处按复算值给出。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：令 \(u=\tan x\)，分子 \(\ln(1+u)-u+u^{2}/2-u^{3}/3=-u^{4}/4+u^{5}/5-\cdots\)。主部 \(-u^{4}/4\)。代入 \(u=\tan x=x+x^{3}/3+\cdots\)，\(u^{4}\sim x^{4}\)，主部 \(-x^{4}/4\)，除以 \(x^{4}\) 得 \(-\dfrac{1}{4}\)。</p>
+    <p>识别类型：\(\ln(1+u)\) 交错级数逐阶抵消，令 \(u=\tan x\)。先写对数展开：</p>
+    \[
+    \ln(1+u)=u-\frac{u^{2}}{2}+\frac{u^{3}}{3}-\frac{u^{4}}{4}+\frac{u^{5}}{5}-\cdots.
+    \]
+    <p>题设依次减去 \(u\)、加上 \(u^{2}/2\)、减去 \(u^{3}/3\)，正好抵消前三项，留下交错级数的下一项：</p>
+    \[
+    \ln(1+u)-u+\frac{u^{2}}{2}-\frac{u^{3}}{3}=-\frac{u^{4}}{4}+\frac{u^{5}}{5}-\cdots.
+    \]
+    <p>主部为 \(-u^{4}/4\)。内函数 \(u=\tan x=x+x^{3}/3+O(x^{5})\)，其高阶修正只影响 \(u^{4}\) 的 \(x^{6}\) 及以上项：</p>
+    \[
+    u=\tan x=x+\frac{x^{3}}{3}+O(x^{5}),\quad u^{4}=x^{4}+O(x^{6}).
+    \]
+    <p>代回得主部 \(-x^{4}/4\)，除以 \(x^{4}\) 得 \(-1/4\)。数值校验：\(x=0.05\) 时原式约 \(-0.2412\)，\(x=0.02\) 时约 \(-0.2462\)，随 \(x\to0\) 趋于 \(-1/4=-0.25\)，系数符号为负。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1304,7 +1359,22 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{1}{24}\)，复算为 \(+\infty\)：\(u=xe^{x}=x+x^{2}+\dfrac{x^{3}}{2}+\dfrac{x^{4}}{6}+\cdots\)，逐项展开得 \(\sin(xe^{x})=x+x^{2}+\dfrac{x^{3}}{3}-\dfrac{x^{4}}{3}-\dfrac{7x^{5}}{10}+\cdots\)。减 \(x\) 减 \(\dfrac{x^{3}}{2}\) 后分子 \(=x^{2}-\dfrac{x^{3}}{6}-\dfrac{x^{4}}{3}-\dfrac{7x^{5}}{10}+\cdots\)，主部仍是 \(x^{2}\)，除以 \(x^{5}\) 得 \(1/x^{3}\to+\infty\)。此处按复算结论给出。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：在 1218 基础上抵消到 \(x^{5}\) 阶。内层 \(u=xe^{x}=x+x^{2}+x^{3}/2+x^{4}/6+\cdots\)，外层 \(\sin u=u-u^{3}/6+u^{5}/120-\cdots\)。逐项展开到 \(x^{5}\)：\(\sin(xe^{x})=x+x^{2}+\dfrac{x^{3}}{3}-\dfrac{x^{4}}{3}-\dfrac{7x^{5}}{10}+\cdots\)。减 \(x\) 减 \(x^{3}/2\) 后 \(x^{2}\) 项仍在，分子主部为 \(x^{2}\)，除以 \(x^{5}\) 得 \(1/x^{3}\to+\infty\)。</p>
+    <p>识别类型：嵌套函数展开，内层 \(u=xe^{x}\)、外层 \(\sin u\)，要判分子主部阶数。先展内层，须取到 \(x^{4}\) 才够外层配阶：</p>
+    \[
+    u=xe^{x}=x+x^{2}+\frac{x^{3}}{2}+\frac{x^{4}}{6}+O(x^{5}).
+    \]
+    <p>外层按正弦展开 \(\sin u=u-u^{3}/6+u^{5}/120+O(u^{7})\)，两层逐项相乘合并到 \(x^{5}\)：</p>
+    \[
+    \sin u=u-\frac{u^{3}}{6}+\frac{u^{5}}{120}+O(u^{7}),
+    \]
+    \[
+    \sin(xe^{x})=x+x^{2}+\frac{x^{3}}{3}-\frac{x^{4}}{3}-\frac{7x^{5}}{10}+\cdots.
+    \]
+    <p>题设减去 \(x\) 和 \(x^{3}/2\)：\(x\) 项抵消，\(x^{3}\) 项剩 \(1/3-1/2=-1/6\)，但 \(x^{2}\) 项没有同类项可抵，仍然留在分子里：</p>
+    \[
+    \text{分子}=x^{2}-\frac{x^{3}}{6}-\frac{x^{4}}{3}-\frac{7x^{5}}{10}+\cdots,\quad \frac{\text{分子}}{x^{5}}=\frac{1}{x^{3}}+O(x^{-2})\to+\infty.
+    \]
+    <p>数值校验：\(x=0.1\) 时原式约 \(979.2\)，\(x=0.05\) 时约 \(7925.9\)，按 \(1/x^{3}\) 量级增长，与主部 \(x^{2}/x^{5}=1/x^{3}\) 一致。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1312,7 +1382,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 1218 同型加深，考查嵌套展开到 \(x^{5}\) 阶的能力。</p>
+    <p>嵌套展开型：内层 \(u=xe^{x}\) 须展到 \(x^{4}\)、外层 \(\sin u\) 须取到 \(u^{5}/120\)，两层阶数对齐后再逐项抵消；本题关键阶数是分子残留的 \(x^{2}\) 项。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -1334,7 +1404,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{1}{6}\)，复算为 \(+\infty\)：令 \(u=\arcsin x\)，\(\ln(1+u)-u+\dfrac{u^{2}}{2}=\dfrac{u^{3}}{3}-\dfrac{u^{4}}{4}+\cdots\)，主部 \(u^{3}/3\)；\(u=\arcsin x=x+\dfrac{x^{3}}{6}+\cdots\) 故 \(u^{3}=x^{3}+O(x^{5})\)，分子主部为 \(x^{3}/3\)，除以 \(x^{4}\) 得 \(\dfrac{1}{3x}\to+\infty\)。此处按复算结论给出。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：令 \(u=\arcsin x\)，分子 \(\ln(1+u)-u+u^{2}/2=u^{3}/3-u^{4}/4+\cdots\)。主部 \(u^{3}/3\)。代入 \(u=\arcsin x=x+x^{3}/6+\cdots\)，\(u^{3}=x^{3}+x^{5}/2+\cdots\)，主部 \(x^{3}/3\)，除以 \(x^{4}\) 得 \(\dfrac{1}{3x}\to+\infty\)。</p>
+    <p>识别类型：\(\ln(1+u)\) 逐阶抵消，令 \(u=\arcsin x\)。对数展开为 \(\ln(1+u)=u-u^{2}/2+u^{3}/3-u^{4}/4+\cdots\)，题设减 \(u\) 再加 \(u^{2}/2\)，正好抵消 \(u\) 项与 \(-u^{2}/2\) 项：</p>
+    \[
+    \ln(1+u)-u+\frac{u^{2}}{2}=\frac{u^{3}}{3}-\frac{u^{4}}{4}+\cdots.
+    \]
+    <p>主部落到 \(u^{3}\) 阶。再展内函数：</p>
+    \[
+    u=\arcsin x=x+\frac{x^{3}}{6}+O(x^{5}),\quad u^{3}=x^{3}+O(x^{5}).
+    \]
+    <p>代回分子，\(\arcsin x\) 的 \(x^{3}\) 修正只进入 \(u^{3}\) 的 \(x^{5}\) 及以上项：</p>
+    \[
+    \text{分子}=\frac{x^{3}}{3}+O(x^{5}),\quad \frac{\text{分子}}{x^{4}}=\frac{1}{3x}+O(x)\to+\infty.
+    \]
+    <p>关键阶数：抵消到 \(u^{3}\) 后分子是 \(x^{3}\) 阶，分母却是 \(x^{4}\)，相差一阶，故按 \(1/(3x)\) 发散。数值校验：\(x=0.1\) 时原式约 \(3.12\)，\(x=0.05\) 时约 \(6.43\)，与 \(1/(3x)\) 的渐近值 \(3.33\)、\(6.67\) 吻合。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1342,7 +1424,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 1219 同型加深，\(u=\arcsin x\)。</p>
+    <p>\(\ln(1+u)\) 逐阶抵消型，\(u=\arcsin x\)；关键阶数：加 \(+u^{2}/2\) 后主部落到 \(u^{3}\) 阶，与分母 \(x^{4}\) 相差一阶，因此发散而不是收敛到常数。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -1364,7 +1446,22 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算为 \(-\infty\)：\(\tan(\ln(1+x))-\ln(1+\tan x)=-\dfrac{x^{4}}{6}+\dfrac{x^{5}}{4}+\cdots\)，两式在 \(x,x^{2},x^{3}\) 阶确实相同，差从 \(x^{4}\) 起；但题设减去的 \(\dfrac{x^{2}}{2}\) 并无对应项可抵消，分子主部仍为 \(-\dfrac{x^{2}}{2}\)，除以 \(x^{3}\) 得 \(-\dfrac{1}{2x}\to-\infty\)。此处按复算结论给出。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：在 1220 基础上减去 \(x^{2}/2\) 并加深到 \(x^{3}\) 阶。分别展开到 \(x^{4}\)：\(\tan(\ln(1+x))-\ln(1+\tan x)=-\dfrac{x^{4}}{6}+\dfrac{x^{5}}{4}+\cdots\)（前三阶完全抵消，差从 \(x^{4}\) 起）。但 \(\dfrac{x^{2}}{2}\) 在前面没有同类项可抵消，故分子 \(=-\dfrac{x^{2}}{2}-\dfrac{x^{4}}{6}+\cdots\)，除以 \(x^{3}\) 得 \(-\dfrac{1}{2x}\to-\infty\)。</p>
+    <p>识别类型：互逆嵌套之差，\(\tan(\ln(1+x))\) 与 \(\ln(1+\tan x)\) 两层分别展开到 \(x^{4}\)。两层的低阶项逐项相同：</p>
+    \[
+    \tan(\ln(1+x))=x-\frac{x^{2}}{2}+\frac{2x^{3}}{3}-\frac{3x^{4}}{4}+\cdots,
+    \]
+    \[
+    \ln(1+\tan x)=x-\frac{x^{2}}{2}+\frac{2x^{3}}{3}-\frac{7x^{4}}{12}+\cdots.
+    \]
+    <p>前三项抵消后，差从 \(x^{4}\) 阶起：</p>
+    \[
+    \tan(\ln(1+x))-\ln(1+\tan x)=-\frac{x^{4}}{6}+\frac{x^{5}}{4}+O(x^{6}).
+    \]
+    <p>但题设还要减去 \(x^{2}/2\)，这一项在两层之差里没有对应项可抵，反而成为分子主部：</p>
+    \[
+    \text{分子}=-\frac{x^{2}}{2}-\frac{x^{4}}{6}+O(x^{5}),\quad \frac{\text{分子}}{x^{3}}=-\frac{1}{2x}+O(x)\to-\infty.
+    \]
+    <p>数值校验：\(x=0.1\) 时原式约 \(-5.01\)，\(x=0.05\) 时约 \(-10.01\)，与 \(-1/(2x)\) 的渐近值 \(-5.0\)、\(-10.0\) 吻合；若不减 \(x^{2}/2\)，两层之差除以 \(x^{4}\) 才收敛到 \(-1/6\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1372,7 +1469,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 1220 同型加深。</p>
+    <p>互逆嵌套型：两层在 \(x,x^{2},x^{3}\) 阶逐项相同，差从 \(x^{4}\) 起；本题关键陷阱是题设减去的 \(x^{2}/2\) 无同类项可抵，直接成为主部。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -1485,7 +1582,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{1}{30}\)，复算为 \(\dfrac{1}{5}\)：令 \(u=\sin x\)，\(\ln(1+u)-u+\dfrac{u^{2}}{2}-\dfrac{u^{3}}{3}+\dfrac{u^{4}}{4}=\dfrac{u^{5}}{5}-\dfrac{u^{6}}{6}+\cdots\)，主部 \(u^{5}/5\)；\(u=\sin x\sim x\) 故 \(u^{5}\sim x^{5}\)，极限为 \(1/5\)。书值分母多了一阶。此处按复算值给出。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：令 \(u=\sin x\)，分子是 \(\ln(1+u)-u+u^{2}/2-u^{3}/3+u^{4}/4=u^{5}/5-u^{6}/6+\cdots\)。主部 \(u^{5}/5\)。代入 \(u=\sin x\sim x\)，\(u^{5}\sim x^{5}\)，主部 \(x^{5}/5\)，极限为 \(\dfrac{1}{5}\)。</p>
+    <p>识别类型：\(\ln(1+u)\) 交错级数逐阶抵消到最深一层，令 \(u=\sin x\)。对数展开为：</p>
+    \[
+    \ln(1+u)=u-\frac{u^{2}}{2}+\frac{u^{3}}{3}-\frac{u^{4}}{4}+\frac{u^{5}}{5}-\frac{u^{6}}{6}+\cdots.
+    \]
+    <p>题设依次抵消 \(u\)、\(u^{2}/2\)、\(u^{3}/3\)、\(u^{4}/4\) 四项，留下交错级数下一项 \(u^{5}/5\)：</p>
+    \[
+    \ln(1+u)-u+\frac{u^{2}}{2}-\frac{u^{3}}{3}+\frac{u^{4}}{4}=\frac{u^{5}}{5}-\frac{u^{6}}{6}+\cdots.
+    \]
+    <p>主部为 \(u^{5}/5\)。内函数 \(u=\sin x=x-x^{3}/6+O(x^{5})\)，其修正只影响 \(u^{5}\) 的 \(x^{7}\) 及以上项：</p>
+    \[
+    u=\sin x=x-\frac{x^{3}}{6}+O(x^{5}),\quad u^{5}=x^{5}+O(x^{7}).
+    \]
+    <p>代回得主部 \(x^{5}/5\)，分母 \(x^{5}\) 与之同阶，极限为 \(1/5\)。数值校验：\(x=0.05\) 时原式约 \(0.1916\)，\(x=0.02\) 时约 \(0.1967\)，趋于 \(1/5=0.2\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1545,7 +1654,20 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{1}{8}\)，复算为 \(-\dfrac{1}{24}\)：\(\sqrt{1+u}-\sqrt{1-u}=u+\dfrac{u^{3}}{8}+\cdots\)（不是 \(u^{3}/4\)），\(u=\sin x=x-\dfrac{x^{3}}{6}+\cdots\)，故根式差 \(=x-\dfrac{x^{3}}{6}+\dfrac{x^{3}}{8}=x-\dfrac{x^{3}}{24}\)，减 \(x\) 后除以 \(x^{3}\) 得 \(-\dfrac{1}{24}\)。此处按复算值给出。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：在 1226 基础上减 \(x\) 抵消一阶。由 1226 已知 \(\sqrt{1+\sin x}-\sqrt{1-\sin x}=\sin x+O(\sin^{2}x)\)。展开 \(\sin x=x-x^{3}/6+\cdots\)，而根式差需展到 \(x^{3}\)：\(\sqrt{1+\sin x}-\sqrt{1-\sin x}=\sin x+\sin^{3}x/8+\cdots\)，减 \(x\) 后剩 \(-x^{3}/6+x^{3}/8=-x^{3}/24\)，除以 \(x^{3}\) 得 \(-\dfrac{1}{24}\)。</p>
+    <p>识别类型：对称根式差再减 \(x\) 抵消一阶，令 \(u=\sin x\)。先用二项式展开两个根号：</p>
+    \[
+    \sqrt{1+u}=1+\frac{u}{2}-\frac{u^{2}}{8}+\frac{u^{3}}{16}+\cdots,\quad
+    \sqrt{1-u}=1-\frac{u}{2}-\frac{u^{2}}{8}-\frac{u^{3}}{16}+\cdots.
+    \]
+    <p>两式相减，偶次项抵消，奇次项加倍：</p>
+    \[
+    \sqrt{1+u}-\sqrt{1-u}=u+\frac{u^{3}}{8}+O(u^{5}).
+    \]
+    <p>主部虽是 \(u\sim x\)，但题设还要减 \(x\)，必须把根式差展到 \(x^{3}\) 阶。代入 \(u=\sin x=x-x^{3}/6+O(x^{5})\)：</p>
+    \[
+    \sqrt{1+\sin x}-\sqrt{1-\sin x}=x-\frac{x^{3}}{6}+\frac{x^{3}}{8}+O(x^{5})=x-\frac{x^{3}}{24}+O(x^{5}).
+    \]
+    <p>减 \(x\) 后剩 \(-x^{3}/24\)，其中 \(x^{3}\) 系数 \(1/8-1/6=(3-4)/24=-1/24\)，除以 \(x^{3}\) 得 \(-1/24\)。数值校验：\(x=0.05\) 时原式约 \(-0.041665\)，\(x=0.02\) 时约 \(-0.0416665\)，趋于 \(-1/24\approx-0.0416667\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1553,7 +1675,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 1226 同型加深。</p>
+    <p>根式差型：先由 \(\sqrt{1+u}-\sqrt{1-u}=u+u^{3}/8+\cdots\) 取主部 \(u\)；减 \(x\) 抵消一阶后，必须同时保留 \(\sin x\) 自身的 \(-x^{3}/6\) 修正与根式差的 \(u^{3}/8\) 高阶项。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -1605,7 +1727,23 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{1}{3628800}\)，复算为 \(0\)：\(\sin(x^{2})\) 前三项 \(x^{2}-\dfrac{x^{6}}{6}+\dfrac{x^{10}}{120}\) 抵消后，下一项是 \(-\dfrac{x^{14}}{5040}\)，再下一项才是 \(\dfrac{x^{18}}{362880}\)。题面只抵消到 \(x^{10}\)，故分子主部为 \(-x^{14}/5040\)，除以 \(x^{12}\) 得 \(-x^{2}/5040\to0\)。书值取的是 \(x^{18}\) 项系数，阶数不匹配。此处按复算值 \(0\) 给出。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：逐阶抵消 \(\sin(x^{2})\) 的最深层。由 \(\sin u=u-u^{3}/6+u^{5}/120-u^{7}/5040+u^{9}/362880-\cdots\)，令 \(u=x^{2}\)，则 \(\sin(x^{2})=x^{2}-x^{6}/6+x^{10}/120-x^{14}/5040+x^{18}/362880-\cdots\)。分子前三项 \(x^{2}-x^{6}/6+x^{10}/120\) 正好抵消，余 \(-x^{14}/5040+O(x^{18})\)。除以 \(x^{12}\) 得 \(-x^{2}/5040+O(x^{6})\to0\)。</p>
+    <p>识别类型：\(\sin(x^{2})\) 逐项抵消，令 \(u=x^{2}\)。先写正弦级数：</p>
+    \[
+    \sin u=u-\frac{u^{3}}{6}+\frac{u^{5}}{120}-\frac{u^{7}}{5040}+\frac{u^{9}}{362880}-\cdots.
+    \]
+    <p>以 \(u=x^{2}\) 代入，各项次数为 \(2,6,10,14,18,\cdots\)，阶差恒为 4：</p>
+    \[
+    \sin(x^{2})=x^{2}-\frac{x^{6}}{6}+\frac{x^{10}}{120}-\frac{x^{14}}{5040}+\frac{x^{18}}{362880}-\cdots.
+    \]
+    <p>题设已抵消前三项 \(x^{2}-x^{6}/6+x^{10}/120\)，下一个存活项是 \(-x^{14}/5040\)，再下一项才是 \(x^{18}/362880\)：</p>
+    \[
+    \text{分子}=-\frac{x^{14}}{5040}+O(x^{18}).
+    \]
+    <p>分母 \(x^{12}\) 对应 \(u^{6}\) 阶，而存活项是 \(u^{7}=x^{14}\)，比分母高一阶：</p>
+    \[
+    \frac{\text{分子}}{x^{12}}=-\frac{x^{2}}{5040}+O(x^{6})\to0.
+    \]
+    <p>数值校验：\(x=0.1\) 时原式约 \(-1.984\times10^{-6}\)，\(x=0.05\) 时约 \(-4.960\times10^{-7}\)，与 \(-x^{2}/5040\) 的渐近值一致，随 \(x\to0\) 趋于 \(0\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
