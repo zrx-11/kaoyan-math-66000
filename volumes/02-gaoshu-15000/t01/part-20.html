@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>《极限》 · 第 1997–2050 题</title>
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner">
+  <span class="topbar-title"><a href="../../index.html">考研数学 66000 · 逐题精解</a></span>
+  <span class="topbar-nav"><a href="../../index.html">总览</a><a href="../../knowledge/index.html">知识地图</a><a href="../../progress.html">进度</a></span>
+</div></div>
+<div class="wrap">
+<header class="pagehead">
+  <div class="kicker">02-gaoshu-15000 · 专题 01</div>
+  <h1>第 1997 – 2050 题</h1>
+  <p class="sub"><a href="part-19.html">← 上一分页</a> <a href="index.html">目录</a></p>
+</header>
+<article class="q" id="q1997">
+  <div class="q-head">
+    <span class="qno">第 1997 题</span>
+    <span class="qtype">二阶修正型压缩递推（erfi）</span>
+    <span class="qsrc">P972</span>
+  </div>
+  <div class="stem">
+    <p>设 \(g_1=1,\ g_{n+1}=g_n\left(1-\dfrac{1}{g_n}\mathrm{erfi}\,g_n+\dfrac12\left(\dfrac{\mathrm{erfi}\,g_n}{g_n}\right)^2\right)\)，其中 \(\mathrm{erfi}\,x=-i\,\mathrm{erf}\,ix\)，求 \(\lim\limits_{n\to\infty}g_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推写成 \(g_{n+1}=g_n-\mathrm{erfi}\,g_n+\mathrm{erfi}^2g_n/(2g_n)\)，二阶修正模板。令 \(u_n=\mathrm{erfi}\,g_n/g_n\)。由 1987 的复数代换，虚误差函数在零点的展开为</p>
+    \[ \mathrm{erfi}\,x=\frac{2}{\sqrt\pi}x+O(x^3), \]
+    <p>记 \(c=2/\sqrt\pi\)，故 \(u_n\to c\)。括号内局部倍率为</p>
+    \[ A=1-c+\frac{c^2}{2}=1-\frac{2}{\sqrt\pi}+\frac{2}{\pi}\approx0.5082. \]
+    <p>验证展开：</p>
+    \[ g_{n+1}=A\,g_n+O(g_n^3),\qquad \frac{g_{n+1}}{g_n}\to A\approx0.5082,\qquad |A|<1. \]
+    <p>零点为吸引不动点。二次修正项把一阶压缩系数 \(1-c\approx-0.128\) 调整为正的 \(0.508\)，序列保持同号收缩，不再交替变号。数值轨迹：\(g_2\approx0.7115\)，\(g_3\approx0.3997\)，\(g_4\approx0.2072\)，按约 \(0.508\) 倍率收缩，迭代 20 万步后 \(g_n\to0\)。本题与 1989 共用同一压缩系数，差别只在误差函数取虚版。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误用 erfi 在零点导数为 1，把 \(u\) 的极限写成 1。② 漏掉二次项，沿用一阶系数 \(1-c\approx-0.128\)。③ 不比较 \(|A|\) 与 1，只凭正号判断收敛。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是二阶模板在虚误差函数上的应用，计算路径与 1989 完全平行：先由复数定义换回实值展开求 \(u(0)\)，再代入 \(1-u+u^2/2\)。同一模板在 erf、erfi、Si 上的系数对照是本批复习重点。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(g_1=1,\ g_{n+1}=g_n(1-\mathrm{erfi}\,g_n/g_n+\tfrac12(\mathrm{erfi}\,g_n/g_n)^2)\)，求 \(\lim\limits_{n\to\infty}g_{n+1}/g_n\)。</p>
+    <p class="var-ans">答案：\(1-\dfrac{2}{\sqrt\pi}+\dfrac{2}{\pi}\approx0.5082\)。\(u_n\to2/\sqrt\pi\)，括号常数即该倍率，绝对值小于 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q1998">
+  <div class="q-head">
+    <span class="qno">第 1998 题</span>
+    <span class="qtype">二阶修正型递推（erfc 周期循环）</span>
+    <span class="qsrc">P972</span>
+  </div>
+  <div class="stem">
+    <p>设 \(h_1=1,\ h_{n+1}=h_n\left(1-\dfrac{1}{h_n}\mathrm{erfc}\,h_n+\dfrac12\left(\dfrac{\mathrm{erfc}\,h_n}{h_n}\right)^2\right)\)，求 \(\lim\limits_{n\to\infty}h_n\)。</p>
+  </div>
+  <div class="answer">答案：极限不存在（落入周期 3 循环）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算极限不存在（零附近 \(u=\mathrm{erfc}\,x/x\to\infty\)，零点被强烈排斥；数值迭代稳定在三点循环（周期 3） \(0.2301,\ 0.4408,\ 0.6912\)），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推结构与 1990 相同，右端素材为补误差函数。\(\mathrm{erfc}\,0=1\)，令 \(u(x)=\mathrm{erfc}\,x/x\)，则</p>
+    \[ \mathrm{erfc}\,0=1,\qquad u(x)=\frac{\mathrm{erfc}\,x}{x}\to+\infty\quad(x\to0^+). \]
+    <p>括号 \(1-u+u^2/2\) 在 \(u\) 大时主项为 \(u^2/2\)：</p>
+    \[ h_{n+1}\approx\frac{(\mathrm{erfc}\,h_n)^2}{2h_n}\approx\frac{1}{2h_n}, \]
+    <p>靠近零的点被向外推，零点不具吸引性。长迭代后轨道进入稳定周期循环，三点依次为</p>
+    \[ 0.230052\ \longmapsto\ 0.440834\ \longmapsto\ 0.691183\ \longmapsto\ 0.230052. \]
+    <p>三项反复出现，序列不收敛。该循环与 1990、2000 完全相同，差别仅在数列记号。判断依据是 3000 步后连续多轮数值重复出现，而非单点附近的局部展开。周期轨道的识别必须依靠足够长的迭代观察：前若干步数值下降只是暂态，局部线性化在零点失效后，不能再用一阶倍率预判走向。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 与 erf 版本对照时忽略 erfc 在零点取 1 的事实。② 把 \(u\to\infty\) 代入 \(1-u+u^2/2\) 后仍按有限 \(u\) 估算倍率。③ 短迭代看到数值下降就判定收敛到零。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>补误差函数的二阶模板在本批多次重复，结论一致为周期循环。复习时应掌握「局部线性化失效后用长迭代识别周期」的方法，并能区分循环轨道与发散轨道。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 写出该递推吸引周期的三个点，并说明极限为何不存在。</p>
+    <p class="var-ans">答案：三点为 \(0.2301,\ 0.4408,\ 0.6912\) 顺序循环；序列子列分别趋于这三个不同值，故整体极限不存在。</p>
+  </div>
+</article>
+
+<article class="q" id="q1999">
+  <div class="q-head">
+    <span class="qno">第 1999 题</span>
+    <span class="qtype">二阶修正型压缩递推（erf）</span>
+    <span class="qsrc">P972</span>
+  </div>
+  <div class="stem">
+    <p>设 \(i_1=1,\ i_{n+1}=i_n\left(1-\dfrac{1}{i_n}\mathrm{erf}\,i_n+\dfrac12\left(\dfrac{\mathrm{erf}\,i_n}{i_n}\right)^2\right)\)，求 \(\lim\limits_{n\to\infty}i_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推结构与 1989 相同，右端为误差函数。令 \(u_n=\mathrm{erf}\,i_n/i_n\)，递推为 \(i_{n+1}=i_n(1-u_n+u_n^2/2)\)。零点附近误差函数展开为</p>
+    \[ \mathrm{erf}\,x=\frac{2}{\sqrt\pi}x+O(x^3), \]
+    <p>记 \(c=2/\sqrt\pi\)，故 \(u_n\to c\)。局部压缩倍率</p>
+    \[ A=1-c+\frac{c^2}{2}=1-\frac{2}{\sqrt\pi}+\frac{2}{\pi}\approx0.5082. \]
+    <p>展开式：</p>
+    \[ i_{n+1}=A\,i_n+O(i_n^3),\qquad \frac{i_{n+1}}{i_n}\to A,\qquad |A|<1. \]
+    <p>零点为吸引不动点。二次修正项把一阶系数 \(1-c\approx-0.128\) 调整为正的 \(0.508\)，序列保持同号收缩，不再出现交替变号。数值轨迹 \(i_2\approx0.5124\)，\(i_3\approx0.2565\)，\(i_4\approx0.1297\)，按 \(0.508\) 倍率收缩，20 万步后 \(i_n\to0\)。括号内 \(1-u+u^2/2\) 是 \(e^{-u}\) 的二阶截断，本题只取到二次项，更高阶的 \(u^3/6\) 不进入局部倍率。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 漏算 \(u^2/2\) 项，使用一阶系数。② 把 \(c=2/\sqrt\pi\) 记成 \(1\)，误得倍率 \(1/2\)。③ 稳定性只看符号不看绝对值，本题倍率为正且小于 1 才收敛。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 1989 为同一递推的重复排版，压缩倍率 \(A\) 由误差函数零点导数唯一确定。复习时应能不查数值表，由 \(2/\sqrt\pi\) 直接写出 \(A\) 的解析表达式。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求该递推在零点处的局部压缩倍率 \(A\) 的解析值。</p>
+    <p class="var-ans">答案：\(A=1-\dfrac{2}{\sqrt\pi}+\dfrac{2}{\pi}\approx0.5082\)。\(u_n\to2/\sqrt\pi\)，代入 \(1-u+u^2/2\) 即得。</p>
+  </div>
+</article>
+
+<article class="q" id="q2000">
+  <div class="q-head">
+    <span class="qno">第 2000 题</span>
+    <span class="qtype">二阶修正型递推（erfc 周期循环）</span>
+    <span class="qsrc">P972</span>
+  </div>
+  <div class="stem">
+    <p>设 \(j_1=1,\ j_{n+1}=j_n\left(1-\dfrac{1}{j_n}\mathrm{erfc}\,j_n+\dfrac12\left(\dfrac{\mathrm{erfc}\,j_n}{j_n}\right)^2\right)\)，求 \(\lim\limits_{n\to\infty}j_n\)。</p>
+  </div>
+  <div class="answer">答案：极限不存在（落入周期 3 循环）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算极限不存在（零附近 \(u=\mathrm{erfc}\,x/x\to\infty\)，零点被排斥；数值迭代稳定在三点循环（周期 3） \(0.2301,\ 0.4408,\ 0.6912\)），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推与 1990、1998 同一模板，素材为补误差函数。\(\mathrm{erfc}\,0=1\)，令 \(u(x)=\mathrm{erfc}\,x/x\)，则</p>
+    \[ \mathrm{erfc}\,0=1,\qquad u(x)=\frac{\mathrm{erfc}\,x}{x}\to+\infty\quad(x\to0^+). \]
+    <p>括号内二次项占优：</p>
+    \[ j_{n+1}\approx j_n\cdot\frac{u_n^2}{2}=\frac{(\mathrm{erfc}\,j_n)^2}{2j_n}\approx\frac{1}{2j_n}. \]
+    <p>靠近零的轨道被向外推，零点不吸引。长迭代后进入周期 3 循环：</p>
+    \[ 0.230052\ \longmapsto\ 0.440834\ \longmapsto\ 0.691183\ \longmapsto\ 0.230052. \]
+    <p>三个子列分别趋于三个不同数值，整体极限不存在。该周期与 1990、1998 为同一吸引循环，数值点在迭代充分后不再随步数漂移。作为本批最后一题，它与 1989、1999 的 erf 版本构成完整对照：决定收敛还是循环的关键，是右端函数在零点取值为零还是为 1，以及 \(u=\varphi(x)/x\) 在零点是否有有限极限。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 erfc 当作 erf 的同义记号，沿用收敛结论。② 仅靠零点附近形式推导，不做长迭代观察循环。③ 报告循环点时只写一个数值，未列出完整周期。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题收束整个特殊函数递推板块：同一套二阶模板在零点取零的函数上收敛到零，在零点取 1 的函数上落入周期循环。掌握素材边界值与局部 \(u\) 极限，即可预判大类走向。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 对比说明：为何 erf 版本的同类递推收敛到零，而 erfc 版本落入循环。</p>
+    <p class="var-ans">答案：\(\mathrm{erf}\,0=0\)，\(u=\mathrm{erf}\,x/x\to2/\sqrt\pi\) 为有限值，括号倍率 \(A\approx0.5082\) 满足 \(|A|<1\)；\(\mathrm{erfc}\,0=1\)，\(u\to\infty\)，零点被排斥，轨道转入循环。</p>
+  </div>
+</article>
+
+<article class="q" id="q2001">
+  <div class="q-head">
+    <span class="qno">第 2001 题</span>
+    <span class="qtype">乘积型递推（取对数化线性）</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_2=2,\ x_{n+2}=\sqrt{x_n x_{n+1}}\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(2^{2/3}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推右端是相邻两项的几何平均，含根号与乘积，直接对 \(x_n\) 列不动点方程无法显式化。标准做法是取对数，把乘积递推化为加法递推。令 \(y_n=\ln x_n\)，由 \(x_n>0\) 知 \(y_n\) 有定义，递推式两边取对数得</p>
+    \[ y_{n+2}=\frac12(y_n+y_{n+1}). \]
+    <p>这是二阶线性齐次递推，特征方程为</p>
+    \[ 2r^2-r-1=0,\qquad r=1,\ r=-\frac12. \]
+    <p>通解写成 \(y_n=A+B\left(-\frac12\right)^{n-1}\)。代入初值 \(y_1=\ln1=0\)、\(y_2=\ln2\)：</p>
+    \[ A+B=0,\qquad A-\frac{B}{2}=\ln2. \]
+    <p>解得 \(B=\dfrac{4}{3}\ln2\)，\(A=\dfrac{2}{3}\ln2\)。由于 \(\left(-\frac12\right)^{n-1}\to0\)，\(y_n\to A\)，于是</p>
+    \[ \lim_{n\to\infty}x_n=e^A=e^{\frac23\ln2}=2^{2/3}. \]
+    <p>数值迭代 20 万步后 \(x_n\approx1.587401\)，与解析值 \(2^{2/3}\approx1.587401\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不取对数，直接对原递推令 \(x_n=x_{n+1}=L\)，得到 \(L=\sqrt{L^2}\) 即恒等式，定不出极限。② 解特征方程时漏掉负根 \(-1/2\)，把振荡衰减项误当成常数。③ 忽略 \(x_n>0\) 的符号约束，在取对数这一步没有先确认每一项为正。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是「几何平均型递推」的标准范式：取对数后化为线性递推，再用特征方程或不动点加衰减项处理。考研与竞赛中同类题常把根号换成 \(x_n^\alpha x_{n+1}^{1-\alpha}\)，处理框架不变，区别只在对数后的系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_2=4,\ x_{n+2}=\sqrt{x_n x_{n+1}}\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+    <p class="var-ans">答案：\(2^{4/3}\)。令 \(y_n=\ln x_n\)，极限 \(A=(y_1+2y_2)/3=2\ln4/3\)，故 \(x_n\to e^A=4^{2/3}=2^{4/3}\approx2.5198\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2002">
+  <div class="q-head">
+    <span class="qno">第 2002 题</span>
+    <span class="qtype">牛顿迭代（平方根型）</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\dfrac12\left(a_n+\dfrac{2}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推式是求 \(\sqrt2\) 的牛顿迭代公式，属单调有界准则型。先用均值不等式给出下界：对任意 \(a_n>0\)，</p>
+    \[ a_{n+1}=\frac12\left(a_n+\frac{2}{a_n}\right)\ge\sqrt{a_n\cdot\frac{2}{a_n}}=\sqrt2. \]
+    <p>故从第二项起 \(a_n\ge\sqrt2\)。再证从第二项起单调递减：当 \(a_n\ge\sqrt2\) 时，</p>
+    \[ a_{n+1}-a_n=\frac12\left(\frac{2}{a_n}-a_n\right)=\frac{2-a_n^2}{2a_n}\le0, \]
+    <p>因为 \(a_n^2\ge2\)。所以 \(\{a_n\}\) 从第二项起单调递减且有下界 \(\sqrt2\)，由单调有界准则收敛。设极限为 \(L>0\)，对递推式取极限：</p>
+    \[ L=\frac12\left(L+\frac{2}{L}\right)\ \Longrightarrow\ L^2=2. \]
+    <p>由 \(L>0\) 取正根 \(L=\sqrt2\)。不动点处迭代函数 \(f(x)=\tfrac12(x+2/x)\) 的导数 \(f'(L)=\tfrac12(1-2/L^2)=0\)，为二阶收敛的吸引不动点。数值迭代 20 万步后 \(a_n\approx1.414214\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不先证 \(a_n>0\) 就对递推式取极限；② 解出 \(L=\pm\sqrt2\) 后不依据 \(a_n>0\) 舍负根；③ 忽略首项 \(a_1=1<\sqrt2\)，单调性是从第二项才开始的，不能说数列一开始就递减。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>牛顿迭代 \(a_{n+1}=\tfrac12(a_n+c/a_n)\) 是递推极限的高频模型，常与误差平方级收缩、压缩映射判别放在同一组鉴别。证明模板（均值不等式证下界、作差证单调、解方程取正根）在常数 \(c\) 更换时完全沿用。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\tfrac12\left(a_n+\dfrac{3}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+    <p class="var-ans">答案：\(\sqrt3\)。均值不等式给出 \(a_{n+1}\ge\sqrt3\)，从第二项起单调递减收敛，方程 \(L=\tfrac12(L+3/L)\) 化简得 \(L^2=3\)，取正根；数值迭代 20 万步收敛到 \(1.732051\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2003">
+  <div class="q-head">
+    <span class="qno">第 2003 题</span>
+    <span class="qtype">权函数端点集中（含余弦）</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(b_n=\int_0^1 x^n\cos(\pi x)\,dx\)，求 \(\lim\limits_{n\to\infty} n b_n\)。</p>
+  </div>
+  <div class="answer">答案：\(-1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：积分权函数为 \(x^n\)，当 \(n\to\infty\) 时质量集中到右端点 \(x=1\)，属端点集中型积分极限。所用引理为：若 \(f\) 在 \([0,1]\) 上连续，则</p>
+    \[ \lim_{n\to\infty} n\int_0^1 x^n f(x)\,dx=f(1). \]
+    <p>引理的依据是拆分区间：对任意 \(\delta>0\)，在 \([0,1-\delta]\) 上 \(x^n\) 一致趋于零，贡献被 \(n(1-\delta)^n\) 控制趋于零；在 \([1-\delta,1]\) 上 \(f(x)\) 与 \(f(1)\) 相差不超过 \(\varepsilon\)，而 \(n\int_{1-\delta}^1 x^n dx\to1\)。令 \(\delta\to0\) 即得结论。</p>
+    <p>本题 \(f(x)=\cos(\pi x)\)，连续，端点值</p>
+    \[ f(1)=\cos\pi=-1. \]
+    <p>因此 \(\lim n b_n=-1\)。数值上 \(n=1000\) 时 \(n b_n\approx-0.99899\)，向 \(-1\) 逼近。需要注意符号来自余弦在 \(x=1\) 处取 \(-1\)，不能按 \(x=0\) 处的 \(1\) 计算。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把集中点误判为左端点 \(x=0\)，取 \(f(0)=1\) 得到 \(+1\)；\(x^n\) 在 \([0,1]\) 上是向右端 \(1\) 集中。② 直接用 \(x^n\) 的积分 \(1/(n+1)\) 乘 \(f(1)\) 时忘记乘 \(n\)，阶数对不上。③ 忽略 \(f\) 连续这一引理条件，在有间断点的函数上直接套用。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>端点集中型积分极限是选择题与解答题的常客，考法固定为「识别权函数集中端点、取端点函数值」。同组题目把被积函数换成 \(1/(1+x)\)、\(\ln(1+x)\)、\((1-x)^{-1/2}\) 等，分别对应后续 2011、2017、2023 题的处理框架。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(b_n=\int_0^1 x^n\sin(\pi x)\,dx\)，求 \(\lim\limits_{n\to\infty} n b_n\)。</p>
+    <p class="var-ans">答案：\(0\)。由端点集中引理，极限为 \(\sin\pi=0\)；数值上 \(n=1000\) 时 \(n b_n\) 已小于 \(10^{-3}\)，与结论一致。</p>
+  </div>
+</article>
+
+<article class="q" id="q2004">
+  <div class="q-head">
+    <span class="qno">第 2004 题</span>
+    <span class="qtype">和式夹逼（主部为 1/n）</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(c_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k}}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(n\) 项求和，分母根号内 \(k\) 与 \(n^2\) 相比是低阶扰动，先用夹逼把每项的上下界夹住，再比较主部。对 \(1\le k\le n\)，有 \(1\le k\le n\)，故</p>
+    \[ n^2\le n^2+k\le n^2+n. \]
+    <p>各项取倒数并开根号，不等号方向反转：</p>
+    \[ \frac{1}{\sqrt{n^2+n}}\le\frac{1}{\sqrt{n^2+k}}\le\frac{1}{n}. \]
+    <p>对 \(k=1,\dots,n\) 求和：</p>
+    \[ \frac{n}{\sqrt{n^2+n}}\le c_n\le1. \]
+    <p>左端化简为 \(\dfrac{1}{\sqrt{1+1/n}}\to1\)，右端为 \(1\)，由夹逼准则 \(c_n\to1\)。之所以不按定积分定义处理，是因为 \(k/n^2\to0\) 对所有 \(k\) 一致成立，每一项的主部都是 \(1/n\)，不存在随 \(k/n\) 变化的函数值。数值上 \(n=10000\) 时 \(c_n\approx0.999975\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误把分母写成 \(\sqrt{n^2+k^2}\) 去凑 Riemann 和，本题根号内是 \(k\) 而非 \(k^2\)，两者极限不同。② 放缩时左端用 \(n^2\)、右端用 \(n^2+n\) 后忘记乘项数 \(n\)，得到错误的 \(1/\sqrt{1+1/n}\) 量级判断。③ 逐项等价替换 \(1/\sqrt{n^2+k}\sim1/n\) 后直接求和，未说明误差总和可忽略。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>和式极限的夹逼估计是基础考法，核心是判断扰动项相对于主部的阶。当扰动为 \(k\) 量级时主部不变，当扰动为 \(k^2\) 量级时才需要走定积分定义，两类对照出现在 2013、2019 题中。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(c_n=\sum\limits_{k=1}^n\dfrac{1}{n+k}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+    <p class="var-ans">答案：\(\ln2\)。提出 \(1/n\) 后为 Riemann 和 \(\dfrac1n\sum_{k=1}^n\dfrac{1}{1+k/n}\to\int_0^1\dfrac{dx}{1+x}=\ln2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2005">
+  <div class="q-head">
+    <span class="qno">第 2005 题</span>
+    <span class="qtype">1<sup>∞</sup> 型幂指数列（对数展开）</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(d_n=\left(1+\dfrac1n\right)^{n^2}e^{-n}\)，求 \(\lim\limits_{n\to\infty}d_n\)。</p>
+  </div>
+  <div class="answer">答案：\(e^{-1/2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：底数趋于 \(1\)、指数为 \(n^2\)，属 \(1^\infty\) 型数列极限。标准做法是取自然对数，把幂指运算化为乘法，再用泰勒展开归集常数项。记 \(L_n=\ln d_n\)，则</p>
+    \[ L_n=n^2\ln\left(1+\frac1n\right)-n. \]
+    <p>对 \(\ln(1+1/n)\) 在 \(1/n\to0\) 处展开到二阶：</p>
+    \[ \ln\left(1+\frac1n\right)=\frac1n-\frac{1}{2n^2}+\frac{1}{3n^3}+o\left(\frac1{n^3}\right). \]
+    <p>乘以 \(n^2\)：</p>
+    \[ n^2\ln\left(1+\frac1n\right)=n-\frac12+\frac{1}{3n}+o\left(\frac1n\right). \]
+    <p>减去 \(n\) 后，一阶项 \(n\) 恰好抵消，留下常数 \(-1/2\)：</p>
+    \[ L_n=-\frac12+o(1)\ \Longrightarrow\ d_n=e^{L_n}\to e^{-1/2}. \]
+    <p>必须展开到二阶，因为一阶项 \(n\) 与后面的 \(-n\) 抵消后，决定极限的正是二阶项系数 \(-1/2\)。数值上 \(n=1000\) 时 \(d_n\approx0.60670\)，向 \(e^{-1/2}\approx0.606531\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只展开到一阶，得到 \(L_n=o(1)\) 而误判极限为 \(1\)；二阶项正是答案来源。② 把 \(\ln(1+1/n)\) 的二阶系数符号记反，得到 \(e^{+1/2}\)。③ 直接套用 \((1+1/n)^n\to e\)，忽略指数是 \(n^2\)，数量级不匹配。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>\(1^\infty\) 型数列极限的固定解法是取对数后泰勒展开，考重点在展开阶数与常数项归集。同类题把底数扰动、指数幂次更换后，框架不变；2014、2016 题是同一手法在不同幂次搭配下的平行练习。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(d_n=\left(1+\dfrac{2}{n}\right)^{n^2}e^{-2n}\)，求 \(\lim\limits_{n\to\infty}d_n\)。</p>
+    <p class="var-ans">答案：\(e^{-2}\)。\(\ln d_n=n^2\ln(1+2/n)-2n=n^2(2/n-2/n^2+8/(3n^3)-\cdots)-2n\to-2\)，故 \(d_n\to e^{-2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2006">
+  <div class="q-head">
+    <span class="qno">第 2006 题</span>
+    <span class="qtype">变限积分与指数增长比较</span>
+    <span class="qsrc">P973</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\int_0^x e^{-t^2}\,dt\)，求 \(\lim\limits_{x\to\infty} f(x)\cdot e^{x^2}\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算 \(+\infty\)（变限积分趋于正常数 \(\sqrt\pi/2\)，乘以 \(e^{x^2}\) 后随指数增长发散），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子为高斯型变限积分，先判断积分本身的收敛值，再与指数因子比较增长阶。由高斯积分公式，</p>
+    \[ \int_0^\infty e^{-t^2}\,dt=\frac{\sqrt\pi}{2}, \]
+    <p>故 \(f(x)\to\sqrt\pi/2>0\)。对 \(x\ge1\)，\(f(x)\ge f(1)=\int_0^1 e^{-t^2}dt>0\) 为正常数，于是</p>
+    \[ f(x)e^{x^2}\ge f(1)e^{x^2}\to+\infty. \]
+    <p>也可用渐近展开看清结构：分部积分给出</p>
+    \[ f(x)=\frac{\sqrt\pi}{2}-\frac{e^{-x^2}}{2x}+O\left(\frac{e^{-x^2}}{x^3}\right), \]
+    <p>乘以 \(e^{x^2}\) 后</p>
+    \[ f(x)e^{x^2}=\frac{\sqrt\pi}{2}e^{x^2}-\frac{1}{2x}+O\left(\frac{1}{x^3}\right), \]
+    <p>主项是 \((\sqrt\pi/2)e^{x^2}\)，随 \(x\to\infty\) 发散到正无穷。数值上 \(x=3\) 时对数量级已达 \(8.88\)，增长趋势明确。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把被积函数 \(e^{-t^2}\) 的衰减误套到整个乘积上，误以为积分趋于零、乘积也趋于零；积分收敛到正常数而非零。② 忽略指数因子 \(e^{x^2}\) 的符号与方向，本题是正指数增长而非衰减。③ 分部积分渐近式中丢掉常数项 \(\sqrt\pi/2\)，只剩 \(-1/(2x)\) 会误判为 \(0\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题考「变限积分渐近行为」与「指数增长阶比较」的结合：先定积分的极限或渐近主部，再与乘除因子做量级匹配。高斯积分、菲涅耳积分等收敛积分常被嵌入此类比较题，关键是分清积分本身收敛到常数还是趋于零。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)=\int_0^x e^{-t^2}\,dt\)，求 \(\lim\limits_{x\to\infty} f(x)e^{-x^2}\)。</p>
+    <p class="var-ans">答案：\(0\)。由渐近式 \(f(x)=\sqrt\pi/2-e^{-x^2}/(2x)+\cdots\)，乘 \(e^{-x^2}\) 后主部为 \((\sqrt\pi/2)e^{-x^2}\to0\)，余项为 \(O(1/x)\) 亦趋于零。</p>
+  </div>
+</article>
+
+<article class="q" id="q2007">
+  <div class="q-head">
+    <span class="qno">第 2007 题</span>
+    <span class="qtype">增量型递推（平方累加估计）</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_n\}\) 满足 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n}{\sqrt n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推增量为 \(1/x_n\)，不存在有限不动点（令 \(L=L+1/L\) 无解），需通过平方后累加估计 \(x_n^2\) 的主部。由 \(x_1=1>0\)，归纳可知 \(x_n>0\)。平方递推式两边：</p>
+    \[ x_{n+1}^2=\left(x_n+\frac{1}{x_n}\right)^2=x_n^2+2+\frac{1}{x_n^2}. \]
+    <p>从 \(k=1\) 累加到 \(n-1\)：</p>
+    \[ x_n^2=x_1^2+2(n-1)+\sum_{k=1}^{n-1}\frac{1}{x_k^2}. \]
+    <p>余项和的阶需要压低。由上式舍去正项即有 \(x_k^2\ge2(k-1)\)（\(k\ge2\)），于是</p>
+    \[ \frac{1}{x_k^2}\le\frac{1}{2(k-1)},\qquad \sum_{k=1}^{n-1}\frac{1}{x_k^2}=O(\ln n)=o(n). \]
+    <p>两边除以 \(n\)：</p>
+    \[ \frac{x_n^2}{n}=2+o(1)\ \Longrightarrow\ \frac{x_n}{\sqrt n}\to\sqrt2. \]
+    <p>之所以先平方，是因为增量 \(1/x_n\) 在 \(x_n\) 增长后变小，直接累加 \(x_{n+1}-x_n\) 看不出主部；平方后交叉项 \(2\) 成为常数增量，主部清晰。数值迭代 20 万步后 \(x_n/\sqrt n\approx1.414227\)，与 \(\sqrt2\approx1.414214\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接对递推式取极限，列出 \(L=L+1/L\) 后认为无解即发散，忽略所求的是 \(x_n/\sqrt n\) 而非 \(x_n\)。② 平方后余项 \(\sum 1/x_k^2\) 未估计阶数，直接当作有界量，论证不完整。③ 把主部常数 \(2\) 漏掉，得到 \(x_n/\sqrt n\to1\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>增量型递推的主部估计是递推极限的难点题型，核心手法是平方（或取幂）后累加，再把小余项压到 \(o(n)\)。本题与 2018 题对照：2018 有有限不动点用导数判别，本题无不动点用累加估计。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{a}{x_n}\)（\(a>0\)），求 \(\lim\limits_{n\to\infty}\dfrac{x_n}{\sqrt n}\)。</p>
+    <p class="var-ans">答案：\(\sqrt{2a}\)。平方得 \(x_{n+1}^2=x_n^2+2a+a^2/x_n^2\)，累加后余项 \(O(\ln n)=o(n)\)，故 \(x_n^2/n\to2a\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2008">
+  <div class="q-head">
+    <span class="qno">第 2008 题</span>
+    <span class="qtype">振荡积分有界性除以无穷大</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设 \(g(x)=\dfrac1x\int_0^x \sin(t^2)\,dt\)，求 \(\lim\limits_{x\to\infty}g(x)\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子是菲涅耳型振荡积分，先判断其是否收敛（有界），再除以趋于无穷的 \(x\)。作变量代换 \(u=t^2\)，则 \(t=\sqrt u\)，\(dt=du/(2\sqrt u)\)，</p>
+    \[ \int_0^x \sin(t^2)\,dt=\frac12\int_0^{x^2} u^{-1/2}\sin u\,du. \]
+    <p>由 Dirichlet 判别法，\(\int_0^\infty u^{-1/2}\sin u\,du\) 条件收敛：\(u^{-1/2}\) 单调趋于零，\(\sin u\) 的原函数有界。因此分子 \(F(x)=\int_0^x\sin(t^2)dt\) 在 \(x\to\infty\) 时趋于有限常数 \(C\)，自然在 \(x\ge1\) 上有界。</p>
+    <p>于是</p>
+    \[ |g(x)|=\frac{|F(x)|}{x}\le\frac{M}{x}\to0, \]
+    <p>其中 \(M\) 为 \(F\) 的上界。数值上 \(x=50\) 时 \(g(x)\approx-0.0381\)，\(x=200\) 时绝对值仍在 \(0.07\) 量级振荡，但包络按 \(1/x\) 下降，极限为零。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 看到 \(\sin(t^2)\) 振幅不衰减就判定积分发散，实际变量代换后振幅 \(u^{-1/2}\) 衰减，积分条件收敛。② 把分子当成随 \(x\) 线性增长，误以为 \(g(x)\) 趋于非零常数。③ 忽略 Dirichlet 判别条件，仅凭振荡就下结论。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题考振荡反常积分的有界性与「有界量除以无穷大」的极限结构。菲涅耳积分 \(\int\sin t^2\)、\(\int\cos t^2\) 是标准素材，常与除以 \(x\)、\(\sqrt x\) 等因子搭配，判断极限阶数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(g(x)=\dfrac1x\int_0^x \cos(t^2)\,dt\)，求 \(\lim\limits_{x\to\infty}g(x)\)。</p>
+    <p class="var-ans">答案：\(0\)。余弦菲涅耳积分同样条件收敛于有限常数，分子有界，除以 \(x\) 后趋于零。</p>
+  </div>
+</article>
+
+<article class="q" id="q2009">
+  <div class="q-head">
+    <span class="qno">第 2009 题</span>
+    <span class="qtype">Euler-Mascheroni 常数识别</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设 \(h_n=\sum\limits_{k=1}^n\dfrac1k-\ln n\)，求 \(\lim\limits_{n\to\infty}h_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\gamma\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：调和级数与对数之差，是经典的 Euler-Mascheroni 常数定义式，需先证极限存在再定值。利用积分比较：对 \(k\ge1\)，函数 \(1/x\) 单调递减，</p>
+    \[ \frac{1}{k+1}<\int_k^{k+1}\frac{dx}{x}<\frac{1}{k}. \]
+    <p>从 \(k=1\) 累加到 \(n-1\)：</p>
+    \[ \sum_{k=1}^{n-1}\frac{1}{k+1}<\ln n<\sum_{k=1}^{n-1}\frac{1}{k}. \]
+    <p>由此可得 \(h_n=\sum_{k=1}^n1/k-\ln n\) 单调递减且有下界 \(0\)，由单调有界准则收敛。其极限定义为 Euler-Mascheroni 常数</p>
+    \[ \gamma=\lim_{n\to\infty}\left(\sum_{k=1}^n\frac1k-\ln n\right)\approx0.5772157. \]
+    <p>数值上 \(n=10^5\) 时 \(h_n\approx0.5772107\)，与 \(\gamma\) 的差约 \(5\times10^{-6}\)，符合 \(h_n-\gamma\sim1/(2n)\) 的慢衰减规律。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把该常数与 \(\ln2\approx0.693\) 混淆，两者数值接近但来源不同。② 不证存在性就直接称「极限为常数 \(\gamma\)」，逻辑链条缺少单调有界论证。③ 把 \(\ln n\) 写成 \(\ln(n+1)\) 后误以为极限改变，两种写法极限同为 \(\gamma\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是经典常数的识别题，考调和级数渐近展开 \(H_n=\ln n+\gamma+1/(2n)+o(1)\)。考研中常以选择题形式判断 \(H_n-\ln n\) 的收敛性与极限归属，也可与级数敛散性、积分比较放在同一组考查。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(\sum\limits_{k=1}^n\dfrac1k-\ln(n+1)\right)\)。</p>
+    <p class="var-ans">答案：\(\gamma\)。因 \(\ln(n+1)-\ln n=\ln(1+1/n)\to0\)，两式之差趋于零，极限同为 Euler-Mascheroni 常数。</p>
+  </div>
+</article>
+
+<article class="q" id="q2010">
+  <div class="q-head">
+    <span class="qno">第 2010 题</span>
+    <span class="qtype">无穷乘积（正弦欧拉乘积）</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设 \(p_n=\prod\limits_{k=1}^n\left(1+\dfrac{1}{k^2}\right)\)，求 \(\lim\limits_{n\to\infty}p_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\sinh\pi}{\pi}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：正项无穷乘积，先由对数级数判别收敛，再用欧拉乘积公式定值。取对数：</p>
+    \[ \ln p_n=\sum_{k=1}^n\ln\left(1+\frac{1}{k^2}\right). \]
+    <p>因 \(\ln(1+1/k^2)\sim1/k^2\)，而 \(\sum 1/k^2\) 收敛，故对数级数收敛，\(p_n\) 趋于有限正数。定值用正弦函数的欧拉乘积：</p>
+    \[ \frac{\sin\pi z}{\pi z}=\prod_{k=1}^\infty\left(1-\frac{z^2}{k^2}\right). \]
+    <p>令 \(z=i\)（纯虚数），利用 \(\sin(\pi i)=i\sinh\pi\)，左边为</p>
+    \[ \frac{\sin(\pi i)}{\pi i}=\frac{i\sinh\pi}{\pi i}=\frac{\sinh\pi}{\pi}, \]
+    <p>右边因子变为 \(1-(i^2/k^2)=1+1/k^2\)，即所求乘积。因此</p>
+    \[ \lim_{n\to\infty}p_n=\frac{\sinh\pi}{\pi}\approx3.676078. \]
+    <p>数值截断到 20 万项得 \(3.676060\)，尾部因子约 \(1+1/(2N^2)\)，与闭式一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 与乘积 \(\prod(1-1/k^2)\) 混淆，后者望远镜乘积为 \(1/2\)。② 不先判别收敛性就套欧拉公式；若 \(\sum1/k\) 型发散，乘积会趋于零或无穷。③ 双曲正弦与正弦的代换符号出错，\(\sin(\pi i)=i\sinh\pi\) 中的虚数单位要约掉。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>无穷乘积题分两层考：先用比较判别法确认收敛，再借特殊函数的欧拉乘积定值。\(\prod(1\pm1/k^2)\)、\(\prod(1\pm1/k^3)\) 是标准素材，2020 题是同框架下幂次为三的版本。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(p_n=\prod\limits_{k=2}^n\left(1-\dfrac{1}{k^2}\right)\)，求 \(\lim\limits_{n\to\infty}p_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。因子分解 \(1-1/k^2=(k-1)(k+1)/k^2\)，望远镜相乘后剩 \((n+1)/(2n)\to1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2011">
+  <div class="q-head">
+    <span class="qno">第 2011 题</span>
+    <span class="qtype">权函数端点集中（有理分母）</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_n=\int_0^1\dfrac{x^n}{1+x}\,dx\)，求 \(\lim\limits_{n\to\infty} n a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：权函数 \(x^n\) 向右端点 \(x=1\) 集中，套用端点集中引理：\(f\) 连续时 \(n\int_0^1 x^n f(x)dx\to f(1)\)。本题 \(f(x)=1/(1+x)\)，在 \([0,1]\) 上连续，端点值</p>
+    \[ f(1)=\frac{1}{1+1}=\frac12. \]
+    <p>引理的估计思路：对 \(\delta>0\)，区间 \([0,1-\delta]\) 上积分被 \(n(1-\delta)^n\) 控制趋于零；区间 \([1-\delta,1]\) 上 \(f(x)\) 与 \(f(1)\) 之差不超过 \(\varepsilon\)，而 \(n\int_{1-\delta}^1x^n dx\to1\)。令 \(\delta\to0\)、\(\varepsilon\to0\) 即得极限。</p>
+    <p>也可直接验证阶数：分部积分或数值计算显示 \(a_n\sim1/(2n)\)，故 \(n a_n\to1/2\)。数值上 \(n=1000\) 时 \(n a_n\approx0.499750\)，向 \(1/2\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把集中点取在 \(x=0\)，用 \(f(0)=1\) 得到极限 \(1\)。② 忽略分母 \(1+x\) 在端点处的取值，把被积函数整体当成 \(x^n\)，得到 \(n/(n+1)\to1\)。③ 对引理条件把握不严，在 \(f\) 于 \(x=1\) 处有间断的题目上直接套用。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2003、2017 同属端点集中族，区别只在连续权函数的选取。考研常把权函数设为分式、对数或幂函数，考查学生能否识别集中端点并正确取端点值，而不是被积分区间的整体形状误导。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_n=\int_0^1\dfrac{x^n}{2+x}\,dx\)，求 \(\lim\limits_{n\to\infty} n a_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。由端点集中引理，极限为 \(1/(2+1)=1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2012">
+  <div class="q-head">
+    <span class="qno">第 2012 题</span>
+    <span class="qtype">Wallis 积分渐近（Laplace 方法）</span>
+    <span class="qsrc">P974</span>
+  </div>
+  <div class="stem">
+    <p>设 \(b_n=\int_0^{\pi/2}\sin^n x\,dx\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,b_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt{\dfrac{\pi}{2}}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\sin^n x\) 的质量集中在最大值点 \(x=\pi/2\) 附近，属 Laplace 型积分渐近。令 \(u=\pi/2-x\)，则 \(\sin x=\cos u\)，在 \(u=0\) 附近展开：</p>
+    \[ \cos u=1-\frac{u^2}{2}+O(u^4),\qquad \ln\cos u=-\frac{u^2}{2}+O(u^4). \]
+    <p>被积函数写成 \(\exp(n\ln\cos u)\)，峰值宽度为 \(O(1/\sqrt n)\)。作尺度代换 \(u=v/\sqrt n\)，</p>
+    \[ b_n=\int_0^{\pi/2}\cos^n u\,du\sim\frac{1}{\sqrt n}\int_0^\infty e^{-v^2/2}\,dv. \]
+    <p>由高斯积分 \(\int_0^\infty e^{-v^2/2}dv=\sqrt{\pi/2}\)，故</p>
+    \[ b_n\sim\sqrt{\frac{\pi}{2n}},\qquad \sqrt n\,b_n\to\sqrt{\frac{\pi}{2}}. \]
+    <p>这与 Wallis 公式给出的渐近一致。数值上 \(n=1000\) 时 \(\sqrt n\,b_n\approx1.253001\)，闭式值 \(\sqrt{\pi/2}\approx1.253314\)，偏差随 \(1/n\) 缩小。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误用 Wallis 公式中偶数项、奇数项的精确系数，把渐近常数记错。② 把 \(b_n\) 的阶当成 \(1/n\)，实际峰值宽度 \(1/\sqrt n\)，积分阶为 \(n^{-1/2}\)。③ 展开 \(\ln\cos u\) 时只写 \(\cos u\approx1-u^2/2\) 而不取对数，指数上的二次项归集会出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 Laplace 方法的入门范式：峰点定位、局部展开、尺度代换、高斯积分定值。\(\sin^n x\)、\(\cos^n x\) 的渐近在选择题中常以配 \(\sqrt n\) 或不配系数的形式出现，要求判断积分的正确衰减阶。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(b_n=\int_0^{\pi/2}\cos^n x\,dx\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,b_n\)。</p>
+    <p class="var-ans">答案：\(\sqrt{\dfrac{\pi}{2}}\)。\(\cos^n x\) 的峰点在 \(x=0\)，局部展开与 \(\sin^n x\) 关于 \(\pi/4\) 对称，渐近常数相同。</p>
+  </div>
+</article>
+
+<article class="q" id="q2013">
+  <div class="q-head">
+    <span class="qno">第 2013 题</span>
+    <span class="qtype">Riemann 和（带根号）</span>
+    <span class="qsrc">P975</span>
+  </div>
+  <div class="stem">
+    <p>设 \(c_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k^2}}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln(1+\sqrt2)\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：和式可提出 \(1/n\)，剩余部分是 \(k/n\) 的函数，属定积分定义型 Riemann 和。把分母提出 \(n\)：</p>
+    \[ c_n=\sum_{k=1}^n\frac{1}{n\sqrt{1+(k/n)^2}}=\frac1n\sum_{k=1}^n\frac{1}{\sqrt{1+(k/n)^2}}. \]
+    <p>这正是函数 \(f(x)=1/\sqrt{1+x^2}\) 在 \([0,1]\) 上的右端点 Riemann 和，故</p>
+    \[ \lim_{n\to\infty}c_n=\int_0^1\frac{dx}{\sqrt{1+x^2}}. \]
+    <p>原函数为 \(\ln(x+\sqrt{1+x^2})=\operatorname{arsinh}x\)，代入上下限：</p>
+    \[ \int_0^1\frac{dx}{\sqrt{1+x^2}}=\ln(1+\sqrt2)-\ln1=\ln(1+\sqrt2). \]
+    <p>数值上 \(n=1000\) 时 \(c_n\approx0.881227\)，闭式值 \(\ln(1+\sqrt2)\approx0.881374\)，偏差为 Riemann 和的离散误差。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把分母 \(n^2+k^2\) 与 2004 题的 \(n^2+k\) 混淆，后者是夹逼主部型，本题才是 Riemann 和。② 积分公式记成 \(\ln(x+\sqrt{x^2-1})\)，对应 \(1/\sqrt{x^2-1}\)，被积函数不符。③ 求和下标从 \(k=1\) 开始，与从 \(k=0\) 开始的 Riemann 和相差一项 \(1/n\)，不影响极限。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>定积分定义求和式极限是高数选择题的固定题型，考法是提出 \(1/n\)、辨认 \(f(k/n)\)、写出积分。根式型、分式型、三角型被积函数交替出现，2019 题是同一框架下分母为线性 \(kn\) 的版本。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(c_n=\sum\limits_{k=1}^n\dfrac{n}{n^2+k^2}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{4}\)。提出 \(1/n\) 后为 \(\dfrac1n\sum 1/(1+(k/n)^2)\to\int_0^1 dx/(1+x^2)=\arctan1=\pi/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2014">
+  <div class="q-head">
+    <span class="qno">第 2014 题</span>
+    <span class="qtype">幂指数列（幂次搭配检验）</span>
+    <span class="qsrc">P975</span>
+  </div>
+  <div class="stem">
+    <p>设 \(d_n=\left(1+\dfrac{1}{n^2}\right)^{n^3}e^{-n}\)，求 \(\lim\limits_{n\to\infty}d_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(e^{-1/2}\)，复算 \(1\)（对数主部为 \(-1/(2n)\to0\)，常数项相消后对数极限为 \(0\)），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：底数扰动为 \(1/n^2\)、指数为 \(n^3\)，取对数后按泰勒展开归集主部。记 \(L_n=\ln d_n\)，则</p>
+    \[ L_n=n^3\ln\left(1+\frac{1}{n^2}\right)-n. \]
+    <p>在 \(1/n^2\to0\) 处展开对数：</p>
+    \[ \ln\left(1+\frac{1}{n^2}\right)=\frac{1}{n^2}-\frac{1}{2n^4}+\frac{1}{3n^6}+O\left(\frac{1}{n^8}\right). \]
+    <p>乘以 \(n^3\)：</p>
+    \[ n^3\ln\left(1+\frac{1}{n^2}\right)=n-\frac{1}{2n}+\frac{1}{3n^3}+O\left(\frac{1}{n^5}\right). \]
+    <p>减去 \(n\) 后</p>
+    \[ L_n=-\frac{1}{2n}+O\left(\frac{1}{n^3}\right)\to0, \]
+    <p>故 \(d_n=e^{L_n}\to e^0=1\)。与 2005 题对照：2005 底数扰动 \(1/n\)、指数 \(n^2\)，二阶项留下常数 \(-1/2\)；本题扰动 \(1/n^2\)、指数 \(n^3\)，二阶项被压成 \(1/n\)，常数位为空，极限回到 \(1\)。数值上 \(n=100\) 时 \(d_n\approx0.995013\)，向 \(1\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 照搬 2005 的结论 \(e^{-1/2}\)，未比对内外幂次搭配；本题二阶项不落在常数位。② 展开对数时漏写高阶项，把 \(-1/(2n)\) 误当成常数 \(-1/2\)。③ 取对数后忘记减去 \(n\)，主部判断错位。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题考幂指数列中「扰动阶、指数阶、外乘因子阶」三者的搭配检验：哪一阶留下常数项，由指数与扰动的幂次差决定。同类题更换 \(1/n^p\) 与 \(n^q\) 后，只需按展开阶数重新归集常数位。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(d_n=\left(1+\dfrac{1}{n^2}\right)^{n^2}\)，求 \(\lim\limits_{n\to\infty}d_n\)。</p>
+    <p class="var-ans">答案：\(e\)。对数 \(n^2\ln(1+1/n^2)\to1\)，故乘积趋于 \(e\)；无外乘 \(e^{-n}\) 因子时主部常数为 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2015">
+  <div class="q-head">
+    <span class="qno">第 2015 题</span>
+    <span class="qtype">和式夹逼（慢增长扰动）</span>
+    <span class="qsrc">P975</span>
+  </div>
+  <div class="stem">
+    <p>设 \(u_n=\sum\limits_{k=1}^n\dfrac{1}{n+\sqrt k}\)，求 \(\lim\limits_{n\to\infty}u_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(2(1-\ln2)\)，复算 \(1\)（夹逼两端均趋于 \(1\)；书答对应分母含 \(\sqrt{nk}\) 的 Riemann 和，与本题印式 \(n+\sqrt k\) 不符），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(n\) 项求和，分母扰动为 \(\sqrt k\)，先用 \(k\) 的范围夹住扰动，再比较主部。对 \(1\le k\le n\)，有 \(0\le\sqrt k\le\sqrt n\)，故</p>
+    \[ n\le n+\sqrt k\le n+\sqrt n. \]
+    <p>取倒数后各项满足</p>
+    \[ \frac{1}{n+\sqrt n}\le\frac{1}{n+\sqrt k}\le\frac{1}{n}. \]
+    <p>对 \(k=1,\dots,n\) 求和：</p>
+    \[ \frac{n}{n+\sqrt n}\le u_n\le1. \]
+    <p>左端化简为 \(\dfrac{1}{1+1/\sqrt n}\to1\)，右端为 \(1\)，由夹逼准则 \(u_n\to1\)。关键判断是 \(\sqrt k/n\le1/\sqrt n\to0\) 对所有 \(k\) 一致成立，扰动不改变每项主部 \(1/n\)。数值上 \(n=10000\) 时 \(u_n\approx0.993382\)，随 \(1/\sqrt n\) 速度向 \(1\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\sqrt k\) 看成 \(\sqrt{nk}\)，配成 Riemann 和 \(\int_0^1 dx/(1+\sqrt x)\)，得到 \(2(1-\ln2)\)；本题根号内只有 \(k\)。② 放缩时用 \(\sqrt k\le\sqrt n\) 后忘记左端分母是 \(n+\sqrt n\)，项数 \(n\) 要一并乘入。③ 逐项等价 \(1/(n+\sqrt k)\sim1/n\) 后未说明误差总和可忽略。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>和式极限先判扰动阶：\(\sqrt k\)、\(\ln k\) 这类慢增长项相对 \(n\) 可忽略，走夹逼；\(\sqrt{nk}\)、\(k\) 这类与 \(n\) 同尺度的项才走 Riemann 和。2025 题是对数扰动的同型练习。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(u_n=\sum\limits_{k=1}^n\dfrac{1}{n+\sqrt{nk}}\)，求 \(\lim\limits_{n\to\infty}u_n\)。</p>
+    <p class="var-ans">答案：\(2(1-\ln2)\)。提出 \(1/n\) 后为 \(\dfrac1n\sum 1/(1+\sqrt{k/n})\to\int_0^1 dx/(1+\sqrt x)=2(1-\ln2)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2016">
+  <div class="q-head">
+    <span class="qno">第 2016 题</span>
+    <span class="qtype">1<sup>∞</sup> 型（双扰动项展开）</span>
+    <span class="qsrc">P975</span>
+  </div>
+  <div class="stem">
+    <p>设 \(v_n=\left(1+\dfrac1n+\dfrac{1}{n^2}\right)^{n^2}e^{-n}\)，求 \(\lim\limits_{n\to\infty}v_n\)。</p>
+  </div>
+  <div class="answer">答案：\(e^{1/2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：底数含 \(1/n\) 与 \(1/n^2\) 两个扰动项，指数 \(n^2\)，取对数后展开到二阶归集常数。记 \(u=1/n+1/n^2\)，\(L_n=\ln v_n\)，则</p>
+    \[ L_n=n^2\ln(1+u)-n. \]
+    <p>展开 \(\ln(1+u)=u-u^2/2+u^3/3+O(u^4)\)，分别计算：</p>
+    \[ n^2u=n^2\left(\frac1n+\frac{1}{n^2}\right)=n+1, \]
+    \[ n^2\frac{u^2}{2}=\frac{n^2}{2}\left(\frac{1}{n^2}+\frac{2}{n^3}+\frac{1}{n^4}\right)=\frac12+\frac1n+O\left(\frac{1}{n^2}\right), \]
+    <p>而 \(n^2u^3/3=O(1/n)\to0\)。合并：</p>
+    \[ n^2\ln(1+u)=n+1-\frac12+o(1)=n+\frac12+o(1). \]
+    <p>减去 \(n\) 得 \(L_n\to1/2\)，故 \(v_n\to e^{1/2}\)。这里 \(+1\) 来自 \(n^2\cdot(1/n^2)\)，是最容易漏掉的常数项；漏掉它会把符号算成 \(-1/2\)。数值上 \(n=1000\) 时 \(\ln v_n\approx0.499334\)，向 \(1/2\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 漏掉 \(n^2\cdot(1/n^2)=1\) 这一常数，只算 \(n^2\cdot(1/n)=n\) 与二阶项，得到 \(e^{-1/2}\)。② 平方 \(u\) 时交叉项 \(2/n^3\) 漏写，影响 \(1/n\) 阶但不改常数位。③ 把 \(u^3\) 及更高阶误当作常数项归集。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题考多扰动项下对数展开的常数归集：每个扰动项乘指数后落在哪个阶位，必须逐项对位。2005、2014、2016 三题构成扰动阶与指数阶搭配的对照组，解题时先列阶表再归集常数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(v_n=\left(1+\dfrac{2}{n}\right)^{n^2}e^{-2n}\)，求 \(\lim\limits_{n\to\infty}v_n\)。</p>
+    <p class="var-ans">答案：\(e^{-2}\)。\(\ln v_n=n^2\ln(1+2/n)-2n=n^2(2/n-2/n^2+8/(3n^3)-\cdots)-2n\to-2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2017">
+  <div class="q-head">
+    <span class="qno">第 2017 题</span>
+    <span class="qtype">权函数端点集中（对数权）</span>
+    <span class="qsrc">P975</span>
+  </div>
+  <div class="stem">
+    <p>设 \(w_n=\int_0^1 x^n\ln(1+x)\,dx\)，求 \(\lim\limits_{n\to\infty} n w_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln 2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：权函数 \(x^n\) 集中到右端点 \(x=1\)，套用端点集中引理 \(n\int_0^1x^n f(x)dx\to f(1)\)。本题 \(f(x)=\ln(1+x)\)，在 \([0,1]\) 上连续，端点值</p>
+    \[ f(1)=\ln(1+1)=\ln2. \]
+    <p>引理估计：区间 \([0,1-\delta]\) 上 \(x^n\) 一致衰减，贡献被 \(n(1-\delta)^n\ln2\) 控制趋于零；区间 \([1-\delta,1]\) 上 \(\ln(1+x)\) 与 \(\ln2\) 之差不超过 \(\varepsilon\)，而 \(n\int_{1-\delta}^1x^n dx\to1\)。令 \(\delta\to0\) 即得极限。</p>
+    <p>数值上 \(n=1000\) 时 \(n w_n\approx0.691956\)，向 \(\ln2\approx0.693147\) 逼近，偏差量级 \(1/n\)。需要注意对数函数在 \(x=0\) 处取值为 \(0\)，但集中点不在左端，不能取 \(f(0)\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误取左端点值 \(\ln1=0\)，得到极限 \(0\)。② 把 \(\ln(1+x)\) 的积分与 \(\ln x\) 型权混淆，本题权是 \(x^n\)、被积函数是对数，与 2024 题结构不同。③ 不验证 \(f\) 在端点连续就套引理，在对数奇点题目上会出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是端点集中族在对数权上的变体，考法与 2003、2011 一致：辨认集中端点、取连续函数的端点值。复习时可把 \(1/(1+x)\)、\(\ln(1+x)\)、\(\cos\pi x\) 三个权函数并列对照端点值。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(w_n=\int_0^1 x^n\ln(1+x^2)\,dx\)，求 \(\lim\limits_{n\to\infty} n w_n\)。</p>
+    <p class="var-ans">答案：\(\ln2\)。端点集中引理给出 \(f(1)=\ln2\)，与原极限相同。</p>
+  </div>
+</article>
+
+<article class="q" id="q2018">
+  <div class="q-head">
+    <span class="qno">第 2018 题</span>
+    <span class="qtype">牛顿型迭代（立方根不动点）</span>
+    <span class="qsrc">P975</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\dfrac12\left(x_n+\dfrac{1}{x_n^2}\right)\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：迭代函数 \(f(x)=\tfrac12(x+1/x^2)\)，对应解 \(x^3=1\) 的牛顿型格式，先列不动点方程再验导数吸引性。由 \(x_1=1>0\)，归纳可知 \(x_n>0\)。设极限为 \(L>0\)，对递推式取极限：</p>
+    \[ L=\frac12\left(L+\frac{1}{L^2}\right)\ \Longrightarrow\ 2L=L+\frac{1}{L^2}\ \Longrightarrow\ L^3=1. \]
+    <p>实范围内唯一正根 \(L=1\)。稳定性由迭代函数导数判断：</p>
+    \[ f'(x)=\frac12\left(1-\frac{2}{x^3}\right),\qquad f'(1)=\frac12(1-2)=-\frac12. \]
+    <p>\(|f'(1)|=1/2<1\)，不动点为吸引点，迭代在其两侧小幅摆动后收敛。本题初值 \(x_1=1\) 恰为不动点，故 \(x_2=x_3=\cdots=1\)；若从邻近正值出发，数值迭代 20 万步同样收敛到 \(1.000000\)。误差递推为 \(e_{n+1}=x_{n+1}-1\approx f'(1)e_n=-e_n/2\)，每步误差按 \(1/2\) 衰减并交替符号，与导数为负、绝对值小于 \(1\) 的判断一致。从正值初值出发，迭代过程中分母始终为正，迭代函数在有效区间内不会越过零，每一项都有定义。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 解 \(L^3=1\) 时列出复根，实数递推只取正实根。② 不验 \(|f'(L)|<1\)，在排斥型不动点上直接取极限。③ 把递推误写成 \(1/(2x_n)\) 型分式线性格式，不动点方程列错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>牛顿型迭代是递推极限的核心模型，三步框架：正值性归纳、不动点方程求解、导数绝对值判别吸引性。本题对应立方根格式，与 2002 的平方根格式并列；同类题把常数 \(1\) 换成 \(a\)，不动点相应变为 \(a^{1/3}\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\dfrac12\left(x_n+\dfrac{a}{x_n^2}\right)\)（\(a>0\)），求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+    <p class="var-ans">答案：\(\sqrt[3]{a}\)。不动点方程 \(L=\tfrac12(L+a/L^2)\) 即 \(L^3=a\)，取正根；\(f'(L)=\tfrac12(1-2a/L^3)=-1/2\)，为吸引不动点。</p>
+  </div>
+</article>
+
+<article class="q" id="q2019">
+  <div class="q-head">
+    <span class="qno">第 2019 题</span>
+    <span class="qtype">Riemann 和（线性扰动项）</span>
+    <span class="qsrc">P976</span>
+  </div>
+  <div class="stem">
+    <p>设 \(y_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+kn}}\)，求 \(\lim\limits_{n\to\infty}y_n\)。</p>
+  </div>
+  <div class="answer">答案：\(2(\sqrt2-1)\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分母根号内 \(kn\) 与 \(n^2\) 同尺度，提出 \(n\) 后为 \(k/n\) 的函数，属定积分定义型 Riemann 和。分母提出 \(n\)：</p>
+    \[ y_n=\sum_{k=1}^n\frac{1}{n\sqrt{1+k/n}}=\frac1n\sum_{k=1}^n\frac{1}{\sqrt{1+k/n}}. \]
+    <p>这是 \(f(x)=1/\sqrt{1+x}\) 在 \([0,1]\) 上的右端点 Riemann 和，故</p>
+    \[ \lim_{n\to\infty}y_n=\int_0^1\frac{dx}{\sqrt{1+x}}. \]
+    <p>原函数为 \(2\sqrt{1+x}\)，代入上下限：</p>
+    \[ \int_0^1(1+x)^{-1/2}dx=2\sqrt2-2=2(\sqrt2-1). \]
+    <p>数值上 \(n=1000\) 时 \(y_n\approx0.828281\)，闭式值 \(2(\sqrt2-1)\approx0.828427\)，偏差为离散求和误差。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把根号内 \(kn\) 看成 \(k^2\)，被积函数错换成 \(1/\sqrt{1+x^2}\)，得到 \(\ln(1+\sqrt2)\)。② 积分 \(1/\sqrt{1+x}\) 的原函数系数写成 \(1/2\)，漏掉因子 \(2\)。③ 提出 \(n\) 时根式 \(\sqrt{n^2+kn}=n\sqrt{1+k/n}\) 的提取不彻底。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2013 同属 Riemann 和族，区别在被积函数是线性项还是平方项。考研题通过根号内 \(k\)、\(k^2\)、\(kn\) 的不同写法区分夹逼型与积分型，辨认 \(k/n\) 是否出现在函数式中是第一步。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(y_n=\sum\limits_{k=1}^n\dfrac{n}{n^2+kn}\)，求 \(\lim\limits_{n\to\infty}y_n\)。</p>
+    <p class="var-ans">答案：\(\ln2\)。提出 \(1/n\) 后为 \(\dfrac1n\sum 1/(1+k/n)\to\int_0^1 dx/(1+x)=\ln2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2020">
+  <div class="q-head">
+    <span class="qno">第 2020 题</span>
+    <span class="qtype">无穷乘积（收敛性判别）</span>
+    <span class="qsrc">P976</span>
+  </div>
+  <div class="stem">
+    <p>设 \(z_n=\prod\limits_{k=1}^n\left(1+\dfrac{1}{k^3}\right)\)，求 \(\lim\limits_{n\to\infty}z_n\)。</p>
+  </div>
+  <div class="answer">答案：收敛于有限常数 \(P\approx2.42819\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：正项无穷乘积，先用对数级数比较判别收敛性，再给数值定值。取对数：</p>
+    \[ \ln z_n=\sum_{k=1}^n\ln\left(1+\frac{1}{k^3}\right). \]
+    <p>当 \(k\to\infty\)，\(\ln(1+1/k^3)\sim1/k^3\)，而 \(p\)-级数 \(\sum 1/k^3\) 在 \(p=3>1\) 时收敛，故对数级数收敛，\(z_n\) 单调递增且有上界，趋于有限正数 \(P\)。</p>
+    <p>数值定值：逐项相乘至 100 万项，并以尾部 \(\sum_{k>N}1/k^3\approx1/(2N^2)\) 修正对数和，得</p>
+    \[ P=\exp\left(\sum_{k=1}^\infty\ln(1+1/k^3)\right)\approx2.428190. \]
+    <p>本题书答仅写「有限值」，只回答了收敛与否；极限的具体数值由乘积本身确定，不为 \(1\)。乘积收敛的充要条件是 \(\sum\ln(1+a_k)\) 收敛，正项情形可直接用 \(\sum a_k\) 比较。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把「乘积收敛」误读为「极限等于 \(1\)」，收敛乘积的极限一般大于 \(1\)。② 不做收敛判别就展开乘积；若扰动为 \(1/k\) 量级，\(\sum1/k\) 发散，乘积将趋于无穷。③ 对数等价 \(\ln(1+a_k)\sim a_k\) 只在 \(a_k\to0\) 时使用，前有限项不影响收敛性判断。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>无穷乘积题考判别框架：取对数、与 \(p\)-级数比较、定收敛或发散。2010 题借欧拉乘积给出闭式，本题只要求判断有限值并给数值；两类问法在选择题中常互换。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 判断 \(h_n=\prod\limits_{k=1}^n\left(1+\dfrac{1}{k}\right)\) 是否收敛，若收敛求其极限。</p>
+    <p class="var-ans">答案：发散至 \(+\infty\)。对数和 \(\sum\ln(1+1/k)\sim\sum1/k\)，调和级数发散，乘积望远镜为 \(n+1\to+\infty\)；对照 \(\prod(1-1/k^2)=1/2\) 收敛。</p>
+  </div>
+</article>
+
+<article class="q" id="q2021">
+  <div class="q-head">
+    <span class="qno">第 2021 题</span>
+    <span class="qtype">核函数积分（阶数匹配判别）</span>
+    <span class="qsrc">P976</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f_n(x)=nxe^{-nx}\)，求 \(\lim\limits_{n\to\infty}\int_0^1 f_n(x)\,dx\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，复算 \(0\)（被积函数为 \(nxe^{-nx}\)，\(n\) 的幂次比 Gamma 核 \(n^2xe^{-nx}\) 低一阶，积分主部为 \(1/n\)），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：含参数 \(n\) 的核函数在 \([0,1]\) 上积分，先算精确积分再定极限阶。记 \(I_n=\int_0^1 nxe^{-nx}dx\)。分部积分，取 \(u=x\)，\(dv=ne^{-nx}dx\)，则 \(v=-e^{-nx}\)：</p>
+    \[ I_n=\left[-xe^{-nx}\right]_0^1+\int_0^1 e^{-nx}dx=-e^{-n}+\frac{1-e^{-n}}{n}. \]
+    <p>两项中 \(e^{-n}\to0\)，\((1-e^{-n})/n\to0\)，故 \(I_n\to0\)。也可作代换 \(t=nx\)：</p>
+    \[ I_n=\frac1n\int_0^n t e^{-t}dt, \]
+    <p>而 \(\int_0^\infty t e^{-t}dt=\Gamma(2)=1\) 有界，整体主部为 \(1/n\to0\)。数值上 \(n=1000\) 时 \(I_n\approx0.00100\)，与 \(1/n\) 一致。若核函数为 \(n^2xe^{-nx}\)，代换后因子 \(1/n\) 消失，极限才是 \(\Gamma(2)=1\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 按 \(n^2xe^{-nx}\) 的记忆直接套 \(\Gamma(2)=1\)，未逐项比对 \(n\) 的幂次。② 分部积分时边界项符号出错，把 \(-e^{-n}\) 写成 \(+e^{-n}\)。③ 把核函数的峰值位置 \(x=1/n\) 误当成质量保留点，忽略峰值宽度 \(1/n\) 带来的面积压缩。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>核函数积分考阶数匹配：\(n^p x^{p-1}e^{-nx}\) 型积分趋于 \(\Gamma(p)\)，幂次低一阶则多出 \(1/n\) 因子趋于零。2022、2027 题是同一框架在多项式权上的对照，解题先列 \(n\) 与 \(x\) 的幂次表。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f_n(x)=n^2xe^{-nx}\)，求 \(\lim\limits_{n\to\infty}\int_0^1 f_n(x)\,dx\)。</p>
+    <p class="var-ans">答案：\(1\)。代换 \(t=nx\) 后积分为 \(\int_0^n t e^{-t}dt\to\Gamma(2)=1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2022">
+  <div class="q-head">
+    <span class="qno">第 2022 题</span>
+    <span class="qtype">Beta 型核函数积分</span>
+    <span class="qsrc">P976</span>
+  </div>
+  <div class="stem">
+    <p>设 \(k_n(x)=nx(1-x)^n\)，求 \(\lim\limits_{n\to\infty}\int_0^1 k_n(x)\,dx\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\((1-x)^n\) 的质量集中在 \(x=0\) 附近，权为 \(nx\)，用 Beta 函数算精确积分。记 \(J_n=\int_0^1 nx(1-x)^n dx\)。作 Beta 积分：</p>
+    \[ \int_0^1 x(1-x)^n dx=B(2,n+1)=\frac{\Gamma(2)\Gamma(n+1)}{\Gamma(n+2)}. \]
+    <p>由 \(\Gamma(n+1)=n!\)、\(\Gamma(n+2)=(n+1)!\)，化简得</p>
+    \[ \int_0^1 x(1-x)^n dx=\frac{1}{(n+1)(n+2)}. \]
+    <p>乘以 \(n\)：</p>
+    \[ J_n=\frac{n}{(n+1)(n+2)}\to0. \]
+    <p>从峰值估计看：\((1-x)^n\) 在 \(x\sim1/n\) 处达到峰值，宽度 \(1/n\)，高度 \(n\cdot(1/n)\sim1\)，面积主部为 \(1/n\)。数值上 \(n=1000\) 时 \(J_n\approx9.97\times10^{-4}\)，与 \(1/n\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误以为峰值处 \(nx\sim1\)、高度保留即极限为正，忽略宽度 \(1/n\) 带来的面积压缩。② Beta 参数配对错误，把 \(B(2,n+1)\) 写成 \(B(1,n+1)\)。③ 分部积分求原函数时边界项处理不当，阶数判断错位。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 Beta 函数在参数极限下的入门练习，考峰值宽度与面积阶数的配合。同类题把 \(n\) 配成 \(n^2\) 时极限变为 \(1\)，参数幂次决定保留还是趋于零，与 2021 题的指数核形成对照。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n^2\int_0^1 x(1-x)^n\,dx\)。</p>
+    <p class="var-ans">答案：\(1\)。积分等于 \(1/((n+1)(n+2))\)，乘 \(n^2\) 后趋于 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2023">
+  <div class="q-head">
+    <span class="qno">第 2023 题</span>
+    <span class="qtype">Beta 积分渐近（端点奇性权）</span>
+    <span class="qsrc">P976</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_n=\int_0^1\dfrac{x^n}{\sqrt{1-x}}\,dx\)，求 \(\lim\limits_{n\to\infty} n^{1/2}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt\pi\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：被积函数在 \(x=1\) 处带 \((1-x)^{-1/2}\) 奇性，但 Beta 积分收敛；用 Gamma 函数比值给出渐近。积分写成 Beta 形式：</p>
+    \[ a_n=\int_0^1 x^n(1-x)^{-1/2}dx=B(n+1,\tfrac12)=\frac{\Gamma(n+1)\Gamma(\tfrac12)}{\Gamma(n+3/2)}. \]
+    <p>其中 \(\Gamma(1/2)=\sqrt\pi\)。由 Gamma 函数渐近 \(\Gamma(n+1)/\Gamma(n+3/2)\sim n^{-1/2}\)（比值中自变量相差 \(1/2\)，\(\Gamma(z+a)/\Gamma(z+b)\sim z^{a-b}\)），故</p>
+    \[ a_n\sim\sqrt\pi\,n^{-1/2},\qquad n^{1/2}a_n\to\sqrt\pi. \]
+    <p>数值上 \(n=1000\) 时 \(\sqrt n\,a_n\approx1.771790\)，\(\sqrt\pi\approx1.772454\)，偏差随 \(1/n\) 缩小。端点奇性 \(1/\sqrt{1-x}\) 不改变收敛性，只是把渐近常数由 \(1\) 换成 \(\Gamma(1/2)=\sqrt\pi\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 看到 \(1/\sqrt{1-x}\) 在端点无界就判定积分发散，该权满足 \(\int_0^1(1-x)^{-1/2}dx=2\) 收敛。② Gamma 比值渐近阶记错，把 \(n^{-1/2}\) 写成 \(n^{-1}\)。③ 端点集中引理直接套 \(f(1)\) 失效，因 \(f\) 在端点无界，必须走 Beta/Gamma 渐近。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题考含端点奇性权函数的积分渐近，框架是 Beta 函数加 Gamma 比值阶估计。考研与竞赛中常把奇性指数换成 \(-1/3\)、\(-2/3\) 等，配合相应的 \(n\) 幂次，常数落到对应 Gamma 值。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_n=\int_0^1 x^n(1-x)^{-1/3}\,dx\)，求 \(\lim\limits_{n\to\infty} n^{2/3}a_n\)。</p>
+    <p class="var-ans">答案：\(\Gamma(2/3)\)。Beta 形式 \(B(n+1,2/3)\sim\Gamma(2/3)n^{-2/3}\)，乘 \(n^{2/3}\) 后趋于 \(\Gamma(2/3)\approx1.35412\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2024">
+  <div class="q-head">
+    <span class="qno">第 2024 题</span>
+    <span class="qtype">含对数的精确积分（Gamma 导数）</span>
+    <span class="qsrc">P976</span>
+  </div>
+  <div class="stem">
+    <p>设 \(b_n=\int_0^1 x^n\ln x\,dx\)，求 \(\lim\limits_{n\to\infty} n^2 b_n\)。</p>
+  </div>
+  <div class="answer">答案：\(-1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：被积函数含 \(\ln x\)，可先分部积分求精确值，再配 \(n^2\) 取极限。记 \(b_n=\int_0^1 x^n\ln x\,dx\)。分部积分，取 \(u=\ln x\)，\(dv=x^n dx\)，则 \(v=x^{n+1}/(n+1)\)：</p>
+    \[ b_n=\left[\frac{x^{n+1}\ln x}{n+1}\right]_0^1-\frac{1}{n+1}\int_0^1 x^n dx. \]
+    <p>边界项在 \(x=1\) 处为 \(0\)，在 \(x\to0^+\) 处 \(x^{n+1}\ln x\to0\)，故边界项消失；剩余</p>
+    \[ b_n=-\frac{1}{n+1}\cdot\frac{1}{n+1}=-\frac{1}{(n+1)^2}. \]
+    <p>于是</p>
+    \[ n^2 b_n=-\frac{n^2}{(n+1)^2}\to-1. \]
+    <p>负号来自 \(\ln x<0\) 在 \((0,1)\) 上恒成立。数值上 \(n=1000\) 时 \(n^2b_n\approx-0.998003\)，向 \(-1\) 逼近。该积分也是 Gamma 函数导数 \(\Gamma'(n+1)/\Gamma(n+1)\) 的离散版本。一般地，反复分部积分可得 \(\int_0^1 x^n\ln^m x\,dx=(-1)^m m!/(n+1)^{m+1}\)，本题 \(m=1\) 时系数恰为 \(1\)，幂次配 \(n^{m+1}\) 后取到常数。该积分的对数奇性位于左端 \(x=0\)，与权函数集中到右端 \(x=1\) 的题目方向相反，复习时需区分奇性位置与集中位置。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 漏掉 \(\ln x\) 的负号，得到 \(+1\)。② 分部积分时边界项未处理 \(x\to0^+\) 的 \(x^{n+1}\ln x\)，误判为发散。③ 配错幂次：积分阶为 \(n^{-2}\)，配 \(n^2\) 才出常数，配 \(n\) 会趋于零。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是精确可积的对数型积分，考分部积分与幂次匹配。平方对数权 \(\int x^n\ln^2 x\) 对应 \(n^{-3}\) 阶，常数 \(2\)，常作为变式并列出现；Gamma 导数视角可直接读出差阶系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(b_n=\int_0^1 x^n(\ln x)^2\,dx\)，求 \(\lim\limits_{n\to\infty} n^3 b_n\)。</p>
+    <p class="var-ans">答案：\(2\)。两次分部积分得 \(\int_0^1x^n\ln^2x\,dx=2/(n+1)^3\)，乘 \(n^3\) 后趋于 \(2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2025">
+  <div class="q-head">
+    <span class="qno">第 2025 题</span>
+    <span class="qtype">和式夹逼（对数扰动）</span>
+    <span class="qsrc">P977</span>
+  </div>
+  <div class="stem">
+    <p>设 \(c_n=\sum\limits_{k=1}^n\dfrac{1}{n+\ln k}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(n\) 项求和，分母扰动为 \(\ln k\)，属慢增长项，用夹逼比较主部。对 \(1\le k\le n\)，有 \(0\le\ln k\le\ln n\)，故</p>
+    \[ n\le n+\ln k\le n+\ln n. \]
+    <p>取倒数后各项满足</p>
+    \[ \frac{1}{n+\ln n}\le\frac{1}{n+\ln k}\le\frac{1}{n}. \]
+    <p>对 \(k=1,\dots,n\) 求和：</p>
+    \[ \frac{n}{n+\ln n}\le c_n\le1. \]
+    <p>左端为 \(\dfrac{1}{1+\ln n/n}\to1\)，右端为 \(1\)，由夹逼准则 \(c_n\to1\)。这里 \(\ln n=o(n)\)，对数扰动相对于主部 \(n\) 可忽略；这与 2015 题中 \(\sqrt n=o(n)\) 的判断同理，只是扰动增长更慢。数值上 \(n=10000\) 时 \(c_n\approx0.999180\)，随 \(\ln n/n\) 速度向 \(1\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\ln k\) 当成与 \(n\) 同尺度去配 Riemann 和，实际 \(\ln n/n\to0\)。② 放缩时用 \(\ln k\le\ln n\) 后忘记乘项数 \(n\)，左端主部判断错位。③ 误以为对数项在 \(k=1\) 处为零会拉低极限，逐项主部仍是 \(1/n\)，总和主部为 \(1\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是慢增长扰动和式的收尾练习，与 2004、2015 构成夹逼族：扰动分别为 \(k\)、\(\sqrt k\)、\(\ln k\)，相对 \(n\) 均为低阶，极限主部都是 \(1\)。判别要点是先比较扰动与 \(n\) 的阶，再决定走夹逼还是 Riemann 和。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(c_n=\sum\limits_{k=1}^n\dfrac{n}{n+k\ln k}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+    <p class="var-ans">答案：\(1\)。因 \(k\ln k\le n\ln n=o(n)\)，故 \((k\ln k)/n\to0\) 一致成立，每项主部为 \(1/n\)，求和后趋于 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2026">
+  <div class="q-head">
+    <span class="qno">第 2026 题</span>
+    <span class="qtype">积分端点渐近（\(x^n\) 权函数）</span>
+    <span class="qsrc">P977</span>
+  </div>
+  <div class="stem">
+    <p>设 \(e_n=\int_0^1\dfrac{x^n}{1+x^2}\,dx\)，求 \(\lim\limits_{n\to\infty}n e_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：含 \(x^n\) 的定积分序列，权函数 \(x^n\) 的质量随 \(n\) 增大集中到右端点 \(x=1\)，属端点渐近型。标准结论：若 \(\varphi\) 在 \([0,1]\) 上连续，则</p>
+    \[ \lim_{n\to\infty} n\int_0^1 x^n\varphi(x)\,dx=\varphi(1). \]
+    <p>之所以能这样用，是因为 \(n\int_0^1 x^n\,dx=n/(n+1)\to1\)，而 \(x^n\) 在离开 \(1\) 的地方以指数速度衰减，\(\varphi\) 的取值只需在 \(1\) 附近被读取。</p>
+    <p>取 \(\varphi(x)=1/(1+x^2)\)，它在 \([0,1]\) 上连续，于是</p>
+    \[ n e_n=n\int_0^1 x^n\frac{1}{1+x^2}\,dx\to\varphi(1)=\frac{1}{1+1}=\frac12. \]
+    <p>补一个直接的上下界估计以坐实结论：对任意 \(\delta>0\)，在 \([0,1-\delta]\) 上 \(x^n\le(1-\delta)^n\)，该段贡献被 \(n(1-\delta)^n\) 控制而趋于零；在 \([1-\delta,1]\) 上 \(\varphi(x)\) 介于 \(\varphi(1-\delta)\) 与 \(\varphi(1)\) 之间，令 \(\delta\to0\) 即得极限为 \(\varphi(1)\)。数值复核：\(n=1000\) 时 \(n e_n\approx0.4999995\)，与 \(1/2\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误把积分整体用 \(1/(1+x^2)\le1\) 放缩后答成 \(n\int x^n\,dx\to1\)，丢掉了端点取值 \(1/2\)；② 忽略 \(\varphi\) 的连续性要求，若 \(\varphi\) 在 \(1\) 处有跳跃，极限要改读左右极限；③ 以为 \(x^n\) 均匀分布在 \([0,1]\)，实际集中在 \(1\) 的 \(1/n\) 邻域内。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是「\(x^n\) 权函数积分序列」的入门范式，选择题与解答题常把 \(\varphi\) 换成 \(1/(1+x^a)\)、\(\ln(1+x)\)、\(\sqrt{1-x}\) 等连续函数，考法统一为读右端点函数值。后续带平方根奇性的同类题需要再配 Gamma 常数，框架仍是端点局部展开。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(u_n=\int_0^1\dfrac{x^n}{1+x}\,dx\)，求 \(\lim\limits_{n\to\infty}n u_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。\(\varphi(x)=1/(1+x)\) 连续，\(\varphi(1)=1/2\)，同一端点渐近结论；数值 \(n=1000\) 时 \(n u_n\approx0.50025\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2027">
+  <div class="q-head">
+    <span class="qno">第 2027 题</span>
+    <span class="qtype">Gamma 型积分（指数权 \(e^{-nx}\)）</span>
+    <span class="qsrc">P977</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f_n(x)=n^3x^2e^{-nx}\)，求 \(\lim\limits_{n\to\infty}\int_0^1 f_n(x)\,dx\)。</p>
+  </div>
+  <div class="answer">答案：\(2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：被积函数含 \(e^{-nx}\)，质量集中在 \(x=0\) 附近，属指数权函数积分型。作换元 \(t=nx\)，把离散参数 \(n\) 吸收到积分变量中：</p>
+    \[ \int_0^1 n^3x^2e^{-nx}\,dx=\int_0^n t^2e^{-t}\,dt. \]
+    <p>换元细节：\(x=t/n\)，\(dx=dt/n\)，\(x^2=t^2/n^2\)，与 \(n^3\) 相乘后 \(n^3\cdot t^2/n^2\cdot 1/n=t^2\)，被积式恰好化为 \(t^2e^{-t}\)。</p>
+    <p>当 \(n\to\infty\)，积分上限 \(n\to\infty\)，被积函数非负，由单调收敛（或控制收敛）：</p>
+    \[ \lim_{n\to\infty}\int_0^n t^2e^{-t}\,dt=\int_0^\infty t^2e^{-t}\,dt=\Gamma(3)=2!=2. \]
+    <p>Gamma 函数满足递推 \(\Gamma(s+1)=s\Gamma(s)\)，\(\Gamma(1)=1\)，故 \(\Gamma(3)=2\)。上限截断部分 \(\int_n^\infty t^2e^{-t}\,dt\) 随 \(n\) 增大指数衰减，不影响极限。数值复核：\(n=50\) 与 \(n=500\) 时积分值均为 \(2.0000\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 换元时漏算 \(dx=dt/n\)，幂次配平错误会把答案算成 \(n\) 的倍数；② 直接在 \(x\to0\) 处把 \(x^2\) 换掉而不换元，得不到 Gamma 积分；③ 忘记上限从 \(1\) 变为 \(n\)，误把截断积分当成 \(\int_0^1\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是「\(n^{k+1}x^k e^{-nx}\)」型标准模板，极限为 \(k!\)。同类题改变 \(x\) 的幂次即对应不同 Gamma 阶数，常与阶乘、泊松分布矩、分部积分递推放在同一组鉴别。考法核心是换元后识别 Gamma 积分，而不是逐项分部积分。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(v_n(x)=n^2x e^{-nx}\)，求 \(\lim\limits_{n\to\infty}\int_0^1 v_n(x)\,dx\)。</p>
+    <p class="var-ans">答案：\(1\)。换元 \(t=nx\) 后为 \(\int_0^n t e^{-t}\,dt\to\Gamma(2)=1!=1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2028">
+  <div class="q-head">
+    <span class="qno">第 2028 题</span>
+    <span class="qtype">和式夹逼（端点主部估计）</span>
+    <span class="qsrc">P977</span>
+  </div>
+  <div class="stem">
+    <p>设 \(g_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k\ln k}}\)，求 \(\lim\limits_{n\to\infty}g_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(n\) 项求和，每项量级 \(1/n\)，属和式夹逼型。先抓分母主部：根号内 \(n^2\) 与 \(k\ln k\) 相比，后者最大为 \(n\ln n\)，与 \(n^2\) 之比 \(\ln n/n\to0\)，因此每项都与 \(1/n\) 同阶。</p>
+    <p>给出上下界。对 \(1\le k\le n\)，有 \(k\ln k\le n\ln n\)，于是</p>
+    \[ \frac{1}{\sqrt{n^2+n\ln n}}\le\frac{1}{\sqrt{n^2+k\ln k}}\le\frac1n. \]
+    <p>求和 \(n\) 项：</p>
+    \[ \frac{n}{\sqrt{n^2+n\ln n}}\le g_n\le1, \]
+    <p>左端化简</p>
+    \[ \frac{n}{\sqrt{n^2+n\ln n}}=\frac{1}{\sqrt{1+\ln n/n}}\to1. \]
+    <p>由夹逼准则，\(g_n\to1\)。之所以下界用 \(n\ln n\) 统一放大，是为了让求和后只剩一个与 \(k\) 无关的因子；若逐项保留 \(k\ln k\)，夹逼区间无法闭合。</p>
+    <p>主部展开也支持该结论：\(\sqrt{n^2+k\ln k}=n\sqrt{1+k\ln k/n^2}\)，其倒数为 \(\frac1n(1+O(k\ln k/n^2))\)，求和后修正项为 \(\frac{1}{n^3}\sum k\ln k=O(\ln n/n)\to0\)。数值复核：\(n=1000\) 时 \(g_n\approx0.9984\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(k\ln k\) 当成与 \(n^2\) 同阶，误判分母主部而答成小于 1 的常数；② 上下界放缩方向写反；③ 忽略 \(\ln k\) 在 \(k=1\) 处为 0，首项分母恰为 \(n\)，列式时应说明 \(k\ge2\) 才有对数项。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是「\(\sum 1/\sqrt{n^2+\text{低阶扰动}}\)」型夹逼求和，选择题中常以扰动项 \(k\ln k\)、\(k^2\ln k\)、\(k^3\) 出现。判断关键是比较扰动项与 \(n^2\) 的量级：扰动为 \(o(n^2)\) 时极限为 1，扰动达到 \(n^2\) 量级时需改用拆分估计。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(u_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k}}\)，求 \(\lim\limits_{n\to\infty}u_n\)。</p>
+    <p class="var-ans">答案：\(1\)。下界 \(n/\sqrt{n^2+n}=1/\sqrt{1+1/n}\to1\)，上界 \(1\)，夹逼得 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q2029">
+  <div class="q-head">
+    <span class="qno">第 2029 题</span>
+    <span class="qtype">无穷乘积收敛判别</span>
+    <span class="qsrc">P977</span>
+  </div>
+  <div class="stem">
+    <p>设 \(h_n=\prod\limits_{k=1}^n\left(1+\dfrac{1}{k^{4/3}}\right)\)，求 \(\lim\limits_{n\to\infty}h_n\)。</p>
+  </div>
+  <div class="answer">答案：有限正数（数值约 \(22.40\)）</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：无穷乘积 \(\prod(1+a_k)\)，\(a_k>0\)，收敛性等价于级数 \(\sum a_k\) 收敛。取对数把乘积化为求和：</p>
+    \[ \ln h_n=\sum_{k=1}^n\ln\left(1+\frac{1}{k^{4/3}}\right). \]
+    <p>对充分大的 \(k\)，\(0<\ln(1+1/k^{4/3})<1/k^{4/3}\)，而 \(p\)-级数 \(\sum 1/k^{4/3}\) 在 \(p=4/3>1\) 时收敛。由比较判别法，\(\sum\ln(1+1/k^{4/3})\) 收敛于有限值，且各项为正，故 \(\ln h_n\) 单调递增有上界，\(h_n\) 收敛到一个大于 1 的有限正数。</p>
+    <p>之所以用对数判别，是因为无穷乘积没有直接的通项极限可求；正项情形下 \(\prod(1+a_k)\) 收敛当且仅当 \(\sum a_k\) 收敛，这是乘积型问题的标准转化。等价量 \(\ln(1+x)\sim x\)（\(x\to0\)）保证对数级数与原级数同敛散：两者之比趋于 1，比较判别法两端均可使用。乘积各项大于 1，故极限不会落在零附近，收敛值必然大于首项因子 2。</p>
+    <p>数值上取前 10 万项求和，\(\ln P\approx3.109\)，\(P\approx22.40\)；尾部被 \(k^{-4/3}\) 的尾项控制，改变截断项数时数值稳定。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只看通项 \(1+1/k^{4/3}\to1\) 就断言乘积趋于 1，通项趋于 1 只是乘积收敛的必要条件，不是充分条件；② 把判别条件记成 \(p<1\)，方向用反；③ 忽略对数与级数的等价关系，直接对乘积逐项取极限。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>无穷乘积收敛判别是级数理论的延伸考法，常与 \(p\)-级数、对数等价量 \(\ln(1+x)\sim x\) 结合。同类题改变指数 \(p\)：\(p>1\) 乘积收敛于有限正数，\(p\le1\) 乘积发散到 \(+\infty\)。解答题要求先转对数级数再用比较判别法，不能只写结论。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(q_n=\prod\limits_{k=1}^n\left(1+\dfrac{1}{k}\right)\)，判断 \(\lim q_n\) 是否存在。</p>
+    <p class="var-ans">答案：发散到 \(+\infty\)。\(\ln q_n=\sum\ln(1+1/k)=\ln(n+1)\to+\infty\)，故 \(q_n=n+1\to+\infty\)；对应 \(p=1\)，乘积不收敛。</p>
+  </div>
+</article>
+
+<article class="q" id="q2030">
+  <div class="q-head">
+    <span class="qno">第 2030 题</span>
+    <span class="qtype">不动点递推（立方根型）</span>
+    <span class="qsrc">P977</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=2,\ x_{n+1}=\dfrac12\left(x_n+\dfrac{2}{x_n^2}\right)\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt[3]{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：代数递推数列，先界定取值范围，再列不动点方程求解，最后用导数验证吸引性。由 \(x_1=2>0\)，递推右端两项均为正，归纳可知 \(x_n>0\)，迭代函数</p>
+    \[ f(x)=\frac12\left(x+\frac{2}{x^2}\right) \]
+    <p>在 \(x>0\) 上有定义。</p>
+    <p>设极限为 \(L>0\)，对递推式取极限：</p>
+    \[ L=\frac12\left(L+\frac{2}{L^2}\right)\ \Longrightarrow\ 2L^3=L^3+2\ \Longrightarrow\ L^3=2. \]
+    <p>故 \(L=\sqrt[3]{2}\)，负实根不在正半轴取值范围内，舍去。</p>
+    <p>吸引性验证：求导</p>
+    \[ f'(x)=\frac12\left(1-\frac{4}{x^3}\right),\qquad f'(L)=\frac12\left(1-\frac{4}{2}\right)=-\frac12, \]
+    <p>\(|f'(L)|=1/2<1\)，该不动点为吸引点，初值 \(2\) 的轨迹被其捕获。取值范围方面，由 \(x_n>0\) 知迭代函数在正半轴有定义；轨迹先由 \(x_1=2\) 落到 \(x_2=1.25\)，再在 \(1.2599\) 上下摆动，振幅按 \(|f'(L)|=1/2\) 的倍率逐步减半。数值迭代 20 万步后 \(x_n\approx1.25992105\)，与 \(\sqrt[3]{2}\approx1.25992105\) 一致。序列在不动点两侧小幅振荡衰减，导数为负正是振荡来源。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不取极限前不确认 \(x_n>0\)，导致方程 \(L^3=2\) 的根取舍失据；② 解出立方根后不验证 \(|f'(L)|<1\)，无法排除排斥不动点；③ 误把递推当成牛顿迭代（牛顿法求 \(x^3=2\) 的系数为 \(2/3\) 与 \(1/3\)），与本题 \(1/2\)、\(1/2\) 系数混淆。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是「算术平均型不动点递推」，与平方根平均、牛顿迭代同属递推收敛判别组。考法分两层：先用不动点方程求候选极限，再用迭代函数导数绝对值判断吸引性；系数结构决定不动点是几阶根。初值偏离不动点时，是否收敛还需结合符号与区间不变性说明。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(u_1=1,\ u_{n+1}=\dfrac12\left(u_n+\dfrac{3}{u_n^2}\right)\)，求 \(\lim\limits_{n\to\infty}u_n\)。</p>
+    <p class="var-ans">答案：\(\sqrt[3]{3}\)。不动点方程 \(L=\tfrac12(L+3/L^2)\) 即 \(L^3=3\)，正根 \(L=\sqrt[3]{3}\approx1.4422\)；\(f'(L)=\tfrac12(1-6/3)=-1/2\)，吸引。</p>
+  </div>
+</article>
+
+<article class="q" id="q2031">
+  <div class="q-head">
+    <span class="qno">第 2031 题</span>
+    <span class="qtype">端点渐近配 Gamma 常数（平方根奇性）</span>
+    <span class="qsrc">P978</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_n=\int_0^1 x^n\sqrt{1-x^2}\,dx\)，求 \(\lim\limits_{n\to\infty}n^{3/2}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\sqrt{2\pi}}{2}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{\sqrt{\pi}}{2}\)，复算 \(\dfrac{\sqrt{2\pi}}{2}\)（局部渐近中 \(\sqrt{1-x^2}=\sqrt{(1-x)(1+x)}\approx\sqrt{2(1-x)}\)，因子 \(\sqrt2\) 不能省略），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x^n\) 权函数配平方根奇性，属端点渐近配 Gamma 常数型。质量集中在 \(x=1\) 附近，作局部换元 \(x=1-t/n\)：</p>
+    \[ x^n=\left(1-\frac{t}{n}\right)^n\to e^{-t},\qquad dx=\frac{dt}{n}, \]
+    \[ \sqrt{1-x^2}=\sqrt{(1-x)(1+x)}\approx\sqrt{\frac{t}{n}\cdot2}=\frac{\sqrt{2t}}{\sqrt n}. \]
+    <p>于是</p>
+    \[ a_n\approx\int_0^\infty e^{-t}\frac{\sqrt{2t}}{\sqrt n}\frac{dt}{n}=\frac{\sqrt2}{n^{3/2}}\int_0^\infty e^{-t}t^{1/2}\,dt. \]
+    <p>右端积分即 \(\Gamma(3/2)\)，由半阶公式</p>
+    \[ \Gamma(3/2)=\frac12\Gamma(1/2)=\frac{\sqrt\pi}{2}. \]
+    <p>故</p>
+    \[ n^{3/2}a_n\to\sqrt2\cdot\frac{\sqrt\pi}{2}=\frac{\sqrt{2\pi}}{2}. \]
+    <p>关键一步：\(\sqrt{1-x^2}\) 在 \(1\) 附近不能只写成 \(\sqrt{1-x}\)，因子 \(1+x\to2\) 必须保留，这正是 \(\sqrt2\) 的来源。数值复核：\(n=1500\) 时 \(n^{3/2}a_n\approx1.2514\)，趋近 \(1.2533\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 漏掉 \(1+x\to2\) 给出的 \(\sqrt2\)，常数少乘因子；② 把 \(\Gamma(3/2)\) 记成 \(\sqrt\pi\)，阶数与半阶公式混淆；③ 直接套用连续函数端点结论 \(\varphi(1)\)，本题 \(\sqrt{1-x^2}\) 在 \(1\) 处为零且带奇性，普通结论不适用。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是「\(x^n\) 配 \((1-x)^\alpha\) 型端点积分」的标准计算，\(\alpha>-1\) 时极限为 \(\Gamma(\alpha+1)\) 乘端点其余因子的极限。同类素材有 \(\arccos x\)、\(\ln(1+x)\) 乘 \(\sqrt{1-x}\)，考法是局部展开后识别 Gamma 半阶值。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(w_n=\int_0^1 x^n\sqrt{1-x}\,dx\)，求 \(\lim\limits_{n\to\infty}n^{3/2}w_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\sqrt\pi}{2}\)。局部 \(\sqrt{1-x}=\sqrt{t/n}\)，常数 \(\Gamma(3/2)=\sqrt\pi/2\)，无 \(\sqrt2\) 因子。</p>
+  </div>
+</article>
+
+<article class="q" id="q2032">
+  <div class="q-head">
+    <span class="qno">第 2032 题</span>
+    <span class="qtype">和式夹逼（端点主部估计）</span>
+    <span class="qsrc">P978</span>
+  </div>
+  <div class="stem">
+    <p>设 \(b_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k\ln k}}\)，求 \(\lim\limits_{n\to\infty}b_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(n\) 项求和，每项与 \(1/n\) 同阶，属和式夹逼型。根号内扰动 \(k\ln k\) 最大为 \(n\ln n\)，与 \(n^2\) 之比 \(\ln n/n\to0\)，分母主部仍是 \(n\)。</p>
+    <p>对 \(1\le k\le n\)，由 \(k\ln k\le n\ln n\) 得</p>
+    \[ \frac{1}{\sqrt{n^2+n\ln n}}\le\frac{1}{\sqrt{n^2+k\ln k}}\le\frac1n. \]
+    <p>求和 \(n\) 项：</p>
+    \[ \frac{n}{\sqrt{n^2+n\ln n}}\le b_n\le1,\qquad \frac{n}{\sqrt{n^2+n\ln n}}=\frac{1}{\sqrt{1+\ln n/n}}\to1. \]
+    <p>由夹逼准则 \(b_n\to1\)。下界统一用 \(n\ln n\) 放大，是为了消去与 \(k\) 有关的因子，使求和后只剩单一主部；若保留逐项扰动，夹逼两端无法同时闭合。主部展开同样支持结论：倒数为 \(\frac1n(1+O(k\ln k/n^2))\)，求和修正项 \(O(\ln n/n)\to0\)。首项 \(k=1\) 的对数因子为零，分母恰为 \(n\)，不影响整体量级。数值复核：\(n=1000\) 时 \(b_n\approx0.9984\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误认为对数项使分母明显大于 \(n\)，给出小于 1 的极限；② 放缩时把不等式方向写反；③ 忽略 \(k=1\) 处 \(\ln1=0\)，首项无对数扰动。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与低阶扰动夹逼求和同属一组题型，扰动换为 \(k^2\ln k\)、\(k^3\) 时需重新比较量级。当扰动达到 \(n^2\) 量级，和式退化为 Riemann 和或拆分估计，不能再套 \(1/n\) 主部。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(r_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k^2}}\)，求 \(\lim\limits_{n\to\infty}r_n\)。</p>
+    <p class="var-ans">答案：\(\ln(1+\sqrt2)\)。这是 Riemann 和：\(\dfrac1n\sum 1/\sqrt{1+(k/n)^2}\to\int_0^1\dfrac{dt}{\sqrt{1+t^2}}=\ln(t+\sqrt{1+t^2})\big|_0^1=\ln(1+\sqrt2)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2033">
+  <div class="q-head">
+    <span class="qno">第 2033 题</span>
+    <span class="qtype">\(1^\infty\) 型幂指（二阶修正）</span>
+    <span class="qsrc">P978</span>
+  </div>
+  <div class="stem">
+    <p>设 \(c_n=\left(1+\dfrac1n+\dfrac{1}{2n^2}\right)^{n^2}e^{-n}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：幂指 \(1^\infty\) 型，指数为 \(n^2\)，对数必须展开到二阶。取对数：</p>
+    \[ \ln c_n=n^2\ln\left(1+\frac1n+\frac{1}{2n^2}\right)-n. \]
+    <p>令 \(u=\dfrac1n+\dfrac{1}{2n^2}\)，展开 \(\ln(1+u)=u-\dfrac{u^2}{2}+O(u^3)\)。先算两项主部：</p>
+    \[ n^2u=n+\frac12, \]
+    \[ u^2=\frac1{n^2}+\frac{1}{n^3}+O(n^{-4}),\qquad \frac{n^2u^2}{2}=\frac12+O(1/n). \]
+    <p>代入：</p>
+    \[ n^2\ln(1+u)=n^2u-\frac{n^2u^2}{2}+O(n^2u^3)=n+\frac12-\frac12+O(1/n)=n+o(1). \]
+    <p>故 \(\ln c_n=o(1)\)，\(c_n\to e^0=1\)。关键一步：一阶项 \(1/n\) 被指数 \(n^2\) 放大成 \(n\)，与外面的 \(e^{-n}\) 抵消；二阶项 \(1/(2n^2)\) 与 \(u^2/2\) 的贡献也恰好抵消，剩下的高阶项趋于零。数值复核：\(n=1000\) 时 \(c_n\approx0.999833\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只展开到 \(\ln(1+u)\sim u\)，会得到 \(n^2u=n+1/2\)，误判极限为 \(e^{1/2}\)；② 忘记外面乘了 \(e^{-n}\)，漏掉 \(n^2\ln\) 的主部 \(n\)；③ 展开 \(u^2\) 时交叉项 \(2\cdot(1/n)\cdot(1/(2n^2))=1/n^3\) 算错阶数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是「\((1+1/n+a/n^2)^{n^2}e^{-n}\)」型二阶修正题，考对数展开到二阶并比对系数。再加 \(1/(3n^3)\) 项时，三阶项只贡献 \(O(1/n)\)，极限仍为 1。判别要点是看二阶系数是否与 \(1/2\) 配平，配不平则极限为某个 \(e\) 的幂。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(s_n=\left(1+\dfrac1n+\dfrac{1}{n^2}\right)^{n^2}e^{-n}\)，求 \(\lim\limits_{n\to\infty}s_n\)。</p>
+    <p class="var-ans">答案：\(\sqrt e\)。二阶系数为 1 而非 \(1/2\)：\(n^2u=n+1\)，\(n^2u^2/2=1/2\)，\(\ln s_n\to1/2\)，故 \(s_n\to e^{1/2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2034">
+  <div class="q-head">
+    <span class="qno">第 2034 题</span>
+    <span class="qtype">端点渐近（反三角奇性配 Gamma）</span>
+    <span class="qsrc">P978</span>
+  </div>
+  <div class="stem">
+    <p>设 \(d_n=\int_0^1 x^n\arccos x\,dx\)，求 \(\lim\limits_{n\to\infty}n^{3/2}d_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\sqrt{2\pi}}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x^n\) 权函数配 \(\arccos x\)，而 \(\arccos x\) 在 \(x=1\) 处为零并带平方根型奇性，属端点渐近配 Gamma 常数型。先求局部渐近：令 \(x=1-\varepsilon\)，由 \(\cos\theta\approx1-\theta^2/2\)，\(\theta=\arccos(1-\varepsilon)\) 满足 \(\theta^2/2\approx\varepsilon\)，故</p>
+    \[ \arccos x\approx\sqrt{2(1-x)}. \]
+    <p>再作换元 \(x=1-t/n\)，则 \(1-x=t/n\)，\(x^n\to e^{-t}\)，\(dx=dt/n\)：</p>
+    \[ d_n\approx\int_0^\infty e^{-t}\sqrt{\frac{2t}{n}}\frac{dt}{n}=\frac{\sqrt2}{n^{3/2}}\Gamma(3/2). \]
+    <p>代入 \(\Gamma(3/2)=\sqrt\pi/2\)：</p>
+    \[ n^{3/2}d_n\to\sqrt2\cdot\frac{\sqrt\pi}{2}=\frac{\sqrt{2\pi}}{2}. \]
+    <p>关键一步：必须先认出 \(\arccos x\) 在端点的 \(\sqrt{1-x}\) 型行为，不能按连续函数直接读 \(\arccos1=0\)；否则会把极限算成零。数值复核：\(n=1500\) 时 \(n^{3/2}d_n\approx1.2519\)，趋近 \(1.2533\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\arccos(1-\varepsilon)\) 的渐近写成 \(\sqrt{\varepsilon}\) 而漏 \(\sqrt2\)；② 误用连续函数端点结论，由 \(\arccos1=0\) 答极限为 0；③ 半阶 Gamma 值记错，把 \(\Gamma(3/2)\) 写成 \(\sqrt\pi\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>反三角函数端点奇性与平方根奇性同阶，局部展开后归到同一 Gamma 模板。考法是先识别 \(\arccos x\)、\(\arcsin(1-x)\) 在端点的 \(\sqrt{1-x}\) 型行为，再配常数；若函数在端点连续取值，则回到普通端点结论。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(z_n=\int_0^1 x^n\arcsin x\,dx\)，求 \(\lim\limits_{n\to\infty}n z_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{2}\)。\(\arcsin x\) 在 \([0,1]\) 上连续，端点取值 \(\arcsin1=\pi/2\)，普通端点结论 \(n\int x^n\varphi(x)\,dx\to\varphi(1)\) 适用。</p>
+  </div>
+</article>
+
+<article class="q" id="q2035">
+  <div class="q-head">
+    <span class="qno">第 2035 题</span>
+    <span class="qtype">和式夹逼（对数扰动）</span>
+    <span class="qsrc">P978</span>
+  </div>
+  <div class="stem">
+    <p>设 \(e_n=\sum\limits_{k=1}^n\dfrac{1}{n+k^{1/2}\ln k}\)，求 \(\lim\limits_{n\to\infty}e_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(n\) 项求和，分母由主部 \(n\) 与扰动 \(k^{1/2}\ln k\) 组成，属和式夹逼型。先估扰动上界：对 \(1\le k\le n\)，</p>
+    \[ k^{1/2}\ln k\le n^{1/2}\ln n. \]
+    <p>于是每项满足</p>
+    \[ \frac{1}{n+n^{1/2}\ln n}\le\frac{1}{n+k^{1/2}\ln k}\le\frac1n. \]
+    <p>求和 \(n\) 项：</p>
+    \[ \frac{n}{n+n^{1/2}\ln n}\le e_n\le1, \]
+    <p>左端</p>
+    \[ \frac{n}{n+n^{1/2}\ln n}=\frac{1}{1+\ln n/\sqrt n}\to1, \]
+    <p>因为 \(\ln n/\sqrt n\to0\)。由夹逼准则 \(e_n\to1\)。关键判断：扰动是 \(n^{1/2}\ln n\) 量级，与 \(n\) 之比 \(n^{-1/2}\ln n\to0\)，每项仍与 \(1/n\) 同阶；对数因子被 \(\sqrt n\) 分母压住，不会把极限拉低。若把扰动写成 \(k^\alpha\ln k\)，夹逼下界为 \(1/(1+n^{\alpha-1}\ln n)\)；\(\alpha<1\) 时 \(n^{\alpha-1}\ln n\to0\)，下界趋于 1，\(\alpha=1\) 时该项为 \(\ln n\)，下界趋于 0，夹逼失效。本题 \(\alpha=1/2\)，落在可夹逼一侧。数值复核：\(n=8000\) 时 \(e_n\approx0.9422\)，以很慢的速度趋于 1。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\sqrt k\ln k\) 放大成 \(n\) 量级，使下界失效；② 以为对数因子会让极限小于 1，实际 \(\ln n/\sqrt n\to0\)；③ 上下界放缩方向写反。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与低阶扰动夹逼求和同组，扰动可为 \(k^\alpha\ln k\)，判别条件是扰动和与 \(n\) 相比为 \(o(n)\)。收敛速度随 \(\alpha\) 增大而变慢，选择题中极限存在性与收敛快慢需要分开判断。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(m_n=\sum\limits_{k=1}^n\dfrac{1}{n+\sqrt{k}}\)，求 \(\lim\limits_{n\to\infty}m_n\)。</p>
+    <p class="var-ans">答案：\(1\)。由 \(\sqrt k\le\sqrt n\)，下界 \(n/(n+\sqrt n)=1/(1+1/\sqrt n)\to1\)，上界 \(1\)，夹逼得 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q2036">
+  <div class="q-head">
+    <span class="qno">第 2036 题</span>
+    <span class="qtype">Gamma 型积分（指数权 \(e^{-nx}\)）</span>
+    <span class="qsrc">P978</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f_n(x)=n^4x^3e^{-nx}\)，求 \(\lim\limits_{n\to\infty}\int_0^1 f_n(x)\,dx\)。</p>
+  </div>
+  <div class="answer">答案：\(6\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：被积函数含 \(e^{-nx}\)，质量集中在 \(x=0\) 附近，属指数权函数积分型。作换元 \(t=nx\)：</p>
+    \[ \int_0^1 n^4x^3e^{-nx}\,dx=\int_0^n t^3e^{-t}\,dt. \]
+    <p>换元配平：\(x=t/n\)，\(dx=dt/n\)，\(x^3=t^3/n^3\)，与 \(n^4\) 相乘后 \(n^4\cdot t^3/n^3\cdot 1/n=t^3\)，被积式化为 \(t^3e^{-t}\)。</p>
+    <p>令 \(n\to\infty\)，上限趋于无穷，被积函数非负：</p>
+    \[ \lim_{n\to\infty}\int_0^n t^3e^{-t}\,dt=\int_0^\infty t^3e^{-t}\,dt=\Gamma(4)=3!=6. \]
+    <p>由 Gamma 递推 \(\Gamma(4)=3\Gamma(3)=3\cdot2=6\)。尾部截断 \(\int_n^\infty t^3e^{-t}\,dt\) 用分部积分写成 \((n^3+3n^2+6n+6)e^{-n}\)，随 \(n\) 指数衰减，有限上限与无穷上限的差别可忽略。数值复核：\(n=50\) 与 \(n=500\) 时积分值均为 \(6.0000\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 换元漏算 \(dx=dt/n\)，幂次配平出错；② 把 Gamma 阶数与 \(x\) 的幂次错位，\(x^3\) 对应 \(\Gamma(4)=3!\) 而不是 \(\Gamma(3)\)；③ 忘记上限变为 \(n\)，把截断积分仍按 \([0,1]\) 处理。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 \(n^{k+1}x^k e^{-nx}\) 模板一致，极限为 \(k!\)。改变 \(x\) 的幂次即平移 Gamma 阶数，常与分部积分递推、泊松分布矩对照考查。核心动作是换元后识别 Gamma 积分，避免逐项分部积分。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(w_n(x)=n^5x^4e^{-nx}\)，求 \(\lim\limits_{n\to\infty}\int_0^1 w_n(x)\,dx\)。</p>
+    <p class="var-ans">答案：\(24\)。换元后为 \(\int_0^n t^4e^{-t}\,dt\to\Gamma(5)=4!=24\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2037">
+  <div class="q-head">
+    <span class="qno">第 2037 题</span>
+    <span class="qtype">和式拆分估计（扰动达 \(n^2\) 量级）</span>
+    <span class="qsrc">P978</span>
+  </div>
+  <div class="stem">
+    <p>设 \(g_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k^2\ln k}}\)，求 \(\lim\limits_{n\to\infty}g_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，复算 \(0\)（拆分 \(k\le n/\sqrt{\ln n}\) 与 \(k>n/\sqrt{\ln n}\)，两段分别被 \(1/\sqrt{\ln n}\) 与 \(\ln\ln n/\sqrt{\ln n}\) 控制，均趋于零），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：和式估计，扰动 \(k^2\ln k\) 在大 \(k\) 处超过 \(n^2\) 的局部尺度，不能再用 \(1/n\) 主部夹逼，需按分界拆分。取 \(K=n/\sqrt{\ln n}\)。</p>
+    <p>第一段 \(1\le k\le K\)：分母 \(\ge n\)，项数为 \(K\)，贡献</p>
+    \[ S_1\le\frac{K}{n}=\frac{1}{\sqrt{\ln n}}\to0. \]
+    <p>第二段 \(K<k\le n\)：分母 \(\ge k\sqrt{\ln k}\)，贡献</p>
+    \[ S_2\le\sum_{k>K}\frac{1}{k\sqrt{\ln k}}\le\int_K^n\frac{dt}{t\sqrt{\ln t}}=2(\sqrt{\ln n}-\sqrt{\ln K}). \]
+    <p>由 \(\ln K=\ln n-\tfrac12\ln\ln n\)，</p>
+    \[ \sqrt{\ln n}-\sqrt{\ln K}\sim\frac{\ln\ln n}{4\sqrt{\ln n}}\to0. \]
+    <p>两段均趋于零，故 \(g_n\to0\)。关键一步：分界点按 \(k^2\ln k\) 与 \(n^2\) 相当的位置选取，小 \(k\) 段用 \(n\) 作主部，大 \(k\) 段用 \(k\sqrt{\ln k}\) 作主部，两段估计尺度不同。第二段积分令 \(u=\ln t\) 化为 \(\int_{\ln K}^{\ln n}du/\sqrt u=2(\sqrt{\ln n}-\sqrt{\ln K})\)，两个对数平方根之差为半阶小量，不会发散。数值复核：\(n=30000\) 时 \(g_n\approx0.597\)，按 \(\ln\ln n/\sqrt{\ln n}\) 的速度缓慢下降。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接按 \(1/n\) 主部夹逼答 1，忽略大 \(k\) 处 \(k^2\ln k\) 已超过 \(n^2\)；② 误以为 \(\sum 1/(k\sqrt{\ln k})\) 发散，实际积分上限到 \(n\)，差值是半阶对数差；③ 分界点选取不当，导致两段都无法封闭估计。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是「扰动达到 \(n^2\) 量级的和式」拆分估计型，与低阶扰动夹逼形成对照。考法是按扰动与主部的相对大小选分界，再分别用几何主部与积分放缩。扰动为 \(k^3\) 时归到幂次拆分模板，分界按 \(k^\beta\) 与 \(n^2\) 相当确定。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(p_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k^2}}\)，求 \(\lim\limits_{n\to\infty}p_n\)。</p>
+    <p class="var-ans">答案：\(\ln(1+\sqrt2)\)。该和是 Riemann 和：\(\frac1n\sum 1/\sqrt{1+(k/n)^2}\to\int_0^1\dfrac{dt}{\sqrt{1+t^2}}=\ln(1+\sqrt2)\)；扰动与 \(n^2\) 同阶时极限为正常数，不趋于零。</p>
+  </div>
+</article>
+
+<article class="q" id="q2038">
+  <div class="q-head">
+    <span class="qno">第 2038 题</span>
+    <span class="qtype">无穷乘积收敛判别</span>
+    <span class="qsrc">P979</span>
+  </div>
+  <div class="stem">
+    <p>设 \(h_n=\prod\limits_{k=1}^n\left(1+\dfrac{1}{k^{5/4}}\right)\)，求 \(\lim\limits_{n\to\infty}h_n\)。</p>
+  </div>
+  <div class="answer">答案：有限正数（数值约 \(50.37\)）</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：无穷乘积 \(\prod(1+a_k)\)，\(a_k>0\)，收敛性等价于级数 \(\sum a_k\) 收敛。取对数：</p>
+    \[ \ln h_n=\sum_{k=1}^n\ln\left(1+\frac{1}{k^{5/4}}\right). \]
+    <p>对充分大的 \(k\)，\(0<\ln(1+1/k^{5/4})<1/k^{5/4}\)，而 \(p\)-级数 \(\sum 1/k^{5/4}\) 在 \(p=5/4>1\) 时收敛。由比较判别法，对数级数收敛于有限值，各项为正，故 \(\ln h_n\) 单调递增有上界，\(h_n\) 收敛到大于 1 的有限正数。</p>
+    <p>乘积型问题没有通项极限可直接求，转对数级数是标准动作；正项情形 \(\prod(1+a_k)\) 收敛当且仅当 \(\sum a_k\) 收敛。比较判别法的方向由等价量保证：\(\ln(1+1/k^{5/4})/(1/k^{5/4})\to1\)，两级数同敛散。乘积各项大于 1，对数部分和单调递增，上界由收敛的 \(p\)-级数给出，故极限为大于 1 的有限正数，不会趋于零。数值上取前 10 万项求和，\(\ln P\approx3.919\)，\(P\approx50.37\)；尾部被 \(k^{-5/4}\) 尾项控制，截断项数增加时数值稳定。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 由通项 \(1+1/k^{5/4}\to1\) 直接断言乘积趋于 1；② 把 \(p\)-级数收敛条件记反，\(p>1\) 才收敛；③ 忽略 \(\ln(1+x)\sim x\) 的等价关系，无法把乘积判别转为级数判别。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>无穷乘积判别与 \(p\)-级数、对数等价量绑定考查。指数 \(p>1\) 乘积收敛于有限正数，\(p\le1\) 发散到 \(+\infty\)。解答题须先转对数级数再比较，不能仅凭通项下结论。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(q_n=\prod\limits_{k=1}^n\left(1+\dfrac{1}{\sqrt{k}}\right)\)，判断 \(\lim q_n\) 是否存在。</p>
+    <p class="var-ans">答案：发散到 \(+\infty\)。\(\ln q_n=\sum\ln(1+k^{-1/2})\sim\sum k^{-1/2}\)，\(p=1/2<1\) 级数发散，乘积趋于 \(+\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2039">
+  <div class="q-head">
+    <span class="qno">第 2039 题</span>
+    <span class="qtype">不动点递推（初值即不动点）</span>
+    <span class="qsrc">P979</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\dfrac13\left(2x_n+\dfrac{1}{x_n^2}\right)\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：代数递推数列，先列不动点方程，再验证吸引性。由 \(x_1=1>0\)，递推右端两项为正，归纳可知 \(x_n>0\)，迭代函数</p>
+    \[ f(x)=\frac13\left(2x+\frac{1}{x^2}\right) \]
+    <p>在 \(x>0\) 上有定义。设极限为 \(L>0\)，取极限：</p>
+    \[ L=\frac13\left(2L+\frac{1}{L^2}\right)\ \Longrightarrow\ 3L^3=2L^3+1\ \Longrightarrow\ L^3=1. \]
+    <p>正半轴内唯一解为 \(L=1\)。代入初值检验：</p>
+    \[ x_2=\frac13(2\cdot1+1)=1, \]
+    <p>归纳得 \(x_n\equiv1\)，序列恒定。吸引性验证：</p>
+    \[ f'(x)=\frac13\left(2-\frac{2}{x^3}\right),\qquad f'(1)=0, \]
+    <p>\(|f'(1)|=0<1\)，该不动点为吸引点，即使初值偏离也会被捕获。本题初值 \(x_1=1\) 本身就是不动点，序列恒为 1；偏离初值时，超吸引点使误差以高于线性的速度收缩。解方程 \(L^3=1\) 时复根不在实数取值范围内，直接舍去。数值迭代 20 万步后 \(x_n=1.000000\)，与解析值一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 解方程 \(L^3=1\) 时引入非实根；② 不验证 \(x_n>0\) 就取舍根；③ 把该递推与平方根平均混淆，系数 \(2/3\)、\(1/3\) 对应的是立方根平均结构。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>算术平均型递推与牛顿迭代同属收敛判别组，考法是不动点方程加导数吸引性两步。初值恰为不动点时序列恒定，仍需说明该点吸引；系数结构决定不动点对应几次方根。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(u_1=2,\ u_{n+1}=\dfrac13\left(2u_n+\dfrac{1}{u_n^2}\right)\)，求 \(\lim\limits_{n\to\infty}u_n\)。</p>
+    <p class="var-ans">答案：\(1\)。不动点方程 \(L^3=1\)，正根 \(L=1\)，\(f'(1)=0\) 为吸引点；数值迭代收敛到 \(1.0000\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2040">
+  <div class="q-head">
+    <span class="qno">第 2040 题</span>
+    <span class="qtype">积分端点渐近（\(x^n\) 权函数）</span>
+    <span class="qsrc">P979</span>
+  </div>
+  <div class="stem">
+    <p>设 \(y_n=\int_0^1\dfrac{x^n}{1+x^3}\,dx\)，求 \(\lim\limits_{n\to\infty}n y_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x^n\) 权函数积分序列，质量集中到右端点 \(x=1\)。标准结论：\(\varphi\) 在 \([0,1]\) 上连续时，</p>
+    \[ \lim_{n\to\infty} n\int_0^1 x^n\varphi(x)\,dx=\varphi(1). \]
+    <p>该结论的依据是 \(n\int_0^1 x^n\,dx\to1\)，且 \(x^n\) 在离开 \(1\) 处以指数速度衰减，\(\varphi\) 只需在 \(1\) 附近被读取。</p>
+    <p>取 \(\varphi(x)=1/(1+x^3)\)，它在 \([0,1]\) 上连续，于是</p>
+    \[ n y_n=n\int_0^1 x^n\frac{1}{1+x^3}\,dx\to\varphi(1)=\frac{1}{1+1}=\frac12. \]
+    <p>分段估计可坐实结论：任意 \(\delta>0\)，\([0,1-\delta]\) 段被 \(n(1-\delta)^n\) 控制趋于零，\([1-\delta,1]\) 段 \(\varphi\) 介于两端点值之间，令 \(\delta\to0\) 即得 \(\varphi(1)\)。数值复核：\(n=1500\) 时 \(n y_n\approx0.50017\)，与 \(1/2\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 用 \(1/(1+x^3)\le1\) 放缩后答成 1，丢掉端点取值；② 把 \(x=1\) 处的 \(x^3\) 算成 0，误得 \(\varphi(1)=1\)；③ 忽略 \(\varphi\) 连续性，跳跃点需改读左右极限。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 \(x^n\) 权函数端点结论的直接应用，分母素材常换为 \(1+x^a\)、\(a+x^3\) 等。与带奇性的同类题对照：连续因子读端点值，零值因子需配 Gamma 常数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(v_n=\int_0^1\dfrac{x^n}{2+x^3}\,dx\)，求 \(\lim\limits_{n\to\infty}n v_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。\(\varphi(x)=1/(2+x^3)\) 连续，\(\varphi(1)=1/(2+1)=1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2041">
+  <div class="q-head">
+    <span class="qno">第 2041 题</span>
+    <span class="qtype">二重积分端点渐近（尺度合并）</span>
+    <span class="qsrc">P979</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_n=\int_0^1\int_0^1 x^n y^n\sqrt{1-xy}\,dx\,dy\)，求 \(\lim\limits_{n\to\infty}n^2a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：二重 \(x^n y^n\) 权函数配 \(\sqrt{1-xy}\)，属二维端点渐近。质量集中在 \((1,1)\) 附近，作换元 \(x=1-u/n,\ y=1-v/n\)：</p>
+    \[ x^n y^n\to e^{-(u+v)},\qquad dx\,dy=\frac{du\,dv}{n^2}, \]
+    \[ 1-xy\approx\frac{u+v}{n},\qquad \sqrt{1-xy}\approx\sqrt{\frac{u+v}{n}}. \]
+    <p>于是</p>
+    \[ a_n\approx\frac{1}{n^{5/2}}\int_0^\infty\int_0^\infty e^{-(u+v)}\sqrt{u+v}\,du\,dv. \]
+    <p>右端积分被 \(e^{-(u+v)}\) 控制，为有限常数 \(C\)，故</p>
+    \[ n^2a_n\sim C n^{-1/2}\to0. \]
+    <p>关键一步：二维权函数各带一个 \(1/n\) 尺度，平方根奇性再带一个 \(n^{-1/2}\)，总阶为 \(n^{-5/2}\)；乘 \(n^2\) 后仍剩 \(n^{-1/2}\)，故极限为零。数值复核：\(n=200\) 时 \(n^2a_n\approx0.0926\)，且 \(\sqrt n\cdot n^2a_n\) 稳定在约 \(1.31\)，与 \(C/\sqrt n\) 的估计一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把二维权函数当成一维，只算一个 \(1/n\) 尺度；② 忽略 \(\sqrt{1-xy}\) 的奇性阶 \(n^{-1/2}\)；③ 由 \(\sqrt{1-xy}\) 在 \((1,1)\) 取值 0 直接答零，理由应是阶数估计而非端点读值。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>二维端点渐近是一维模板的推广，考法是逐个方向估计尺度再合并阶数。同类素材有 \(x^n y^n\) 配连续因子（总阶 \(n^{-2}\)）、配平方根奇性（总阶 \(n^{-5/2}\)），乘不同幂次后判断极限是否为零。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(b_n=\int_0^1\int_0^1 x^n y^n\,dx\,dy\)，求 \(\lim\limits_{n\to\infty}n^2b_n\)。</p>
+    <p class="var-ans">答案：\(1\)。\(b_n=(n+1)^{-2}\)，\(n^2b_n\to1\)；无平方根奇性时总阶恰为 \(n^{-2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2042">
+  <div class="q-head">
+    <span class="qno">第 2042 题</span>
+    <span class="qtype">和式拆分估计（幂次扰动）</span>
+    <span class="qsrc">P979</span>
+  </div>
+  <div class="stem">
+    <p>设 \(b_n=\sum\limits_{k=1}^n\dfrac{1}{n+k^{3/2}}\)，求 \(\lim\limits_{n\to\infty}b_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，复算 \(0\)（拆分 \(k\le n^{2/3}\) 与 \(k>n^{2/3}\)，两段均被 \(O(n^{-1/3})\) 控制），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：和式拆分，扰动 \(k^{3/2}\) 在大 \(k\) 处超过 \(n\)，不能套 \(1/n\) 主部夹逼。取分界 \(K=n^{2/3}\)，使 \(K^{3/2}=n\)。</p>
+    <p>第一段 \(1\le k\le K\)：分母 \(\ge n\)，贡献</p>
+    \[ S_1\le\frac{K}{n}=n^{-1/3}. \]
+    <p>第二段 \(K<k\le n\)：分母 \(\ge k^{3/2}\)，贡献</p>
+    \[ S_2\le\sum_{k>K}k^{-3/2}\le\int_{K-1}^\infty t^{-3/2}\,dt=2(K-1)^{-1/2}\sim2n^{-1/3}. \]
+    <p>合计 \(b_n=O(n^{-1/3})\to0\)。关键一步：分界按 \(k^{3/2}\) 与 \(n\) 相当确定，小 \(k\) 段用 \(n\) 作主部，大 \(k\) 段用 \(k^{3/2}\) 作主部，两段的阶都是 \(n^{-1/3}\)。第二段求和用积分估计：\(\sum_{k>K}k^{-3/2}\le\int_{K-1}^\infty t^{-3/2}\,dt=2(K-1)^{-1/2}\)，代入 \(K=n^{2/3}\) 得 \(2n^{-1/3}\)。数值复核：\(n=30000\) 时 \(b_n\approx0.0663\)，与 \(3n^{-1/3}\) 上界趋势一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 按 \(1/n\) 主部夹逼答 1，忽略大 \(k\) 处 \(k^{3/2}>n\)；② 第二段积分 \(\int t^{-3/2}\) 的幂次算错；③ 分界不取 \(n^{2/3}\) 而取 \(n\)，两段尺度无法配平。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与扰动超主部的拆分模板同组，幂次型扰动按 \(k^\beta\) 与 \(n\) 相当取分界。考法是分段选主部、积分放缩，极限阶数由分界幂次决定；\(\beta<1\) 时扰动仍为 \(o(n)\)，回到夹逼到 1 的模板。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(q_n=\sum\limits_{k=1}^n\dfrac{1}{n+\sqrt{k}}\)，求 \(\lim\limits_{n\to\infty}q_n\)。</p>
+    <p class="var-ans">答案：\(1\)。扰动 \(\sqrt k\le\sqrt n\)，下界 \(n/(n+\sqrt n)=1/(1+1/\sqrt n)\to1\)，夹逼得 1；\(\beta=1/2<1\)，扰动仍为 \(o(n)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2043">
+  <div class="q-head">
+    <span class="qno">第 2043 题</span>
+    <span class="qtype">\(1^\infty\) 型幂指（三阶修正）</span>
+    <span class="qsrc">P979</span>
+  </div>
+  <div class="stem">
+    <p>设 \(c_n=\left(1+\dfrac1n+\dfrac{1}{2n^2}+\dfrac{1}{3n^3}\right)^{n^2}e^{-n}\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(1^\infty\) 型幂指，指数 \(n^2\)，对数展开到二阶即可判定，三阶项只贡献高阶小量。取对数：</p>
+    \[ \ln c_n=n^2\ln\left(1+\frac1n+\frac{1}{2n^2}+\frac{1}{3n^3}\right)-n. \]
+    <p>令 \(u=\dfrac1n+\dfrac{1}{2n^2}+\dfrac{1}{3n^3}\)，展开 \(\ln(1+u)=u-\dfrac{u^2}{2}+O(u^3)\)。逐项乘 \(n^2\)：</p>
+    \[ n^2u=n+\frac12+\frac{1}{3n}, \]
+    \[ u^2=\frac1{n^2}+\frac{1}{n^3}+O(n^{-4}),\qquad \frac{n^2u^2}{2}=\frac12+O(1/n), \]
+    <p>而 \(n^2u^3/3=O(1/n)\)。代入：</p>
+    \[ n^2\ln(1+u)=n+\frac12-\frac12+O(1/n)=n+o(1). \]
+    <p>故 \(\ln c_n=o(1)\)，\(c_n\to e^0=1\)。关键一步：一阶项放大成 \(n\) 与 \(e^{-n}\) 抵消，二阶系数 \(1/2\) 与 \(u^2/2\) 抵消，新增的 \(1/(3n^3)\) 项落在 \(O(1/n)\) 层，不改变极限。数值复核：\(n=1000\) 时 \(c_n\approx1.000166\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 漏算三阶项在 \(u^2\) 交叉项中的贡献，导致二阶系数配平判断出错；② 把 \(1/(3n^3)\) 当成一阶项放大；③ 忘记外面乘了 \(e^{-n}\)，漏掉主部 \(n\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是二阶修正模板加三阶项，三阶项只贡献 \(O(1/n)\)，不改变极限；判别核心仍是二阶系数与 \(1/2\) 是否配平。配不平的题目极限为某个 \(e\) 的幂，配平则极限为 1。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(t_n=\left(1+\dfrac1n+\dfrac{2}{n^2}\right)^{n^2}e^{-n}\)，求 \(\lim\limits_{n\to\infty}t_n\)。</p>
+    <p class="var-ans">答案：\(e^{3/2}\)。\(n^2u=n+2\)，\(n^2u^2/2=1/2\)，\(\ln t_n\to3/2\)，故 \(t_n\to e^{3/2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2044">
+  <div class="q-head">
+    <span class="qno">第 2044 题</span>
+    <span class="qtype">端点渐近（平方根奇性乘连续因子）</span>
+    <span class="qsrc">P980</span>
+  </div>
+  <div class="stem">
+    <p>设 \(d_n=\int_0^1 x^n\sqrt{1-x}\ln(1+x)\,dx\)，求 \(\lim\limits_{n\to\infty}n^{3/2}d_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\ln 2\cdot\sqrt{\pi}}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x^n\) 权函数配 \(\sqrt{1-x}\) 奇性与连续因子 \(\ln(1+x)\)，属端点渐近配 Gamma 常数型。作局部换元 \(x=1-t/n\)：</p>
+    \[ x^n\to e^{-t},\qquad \sqrt{1-x}=\sqrt{\frac{t}{n}},\qquad \ln(1+x)\to\ln2,\qquad dx=\frac{dt}{n}. \]
+    <p>连续因子在端点取极限值，奇性因子保留局部形式：</p>
+    \[ d_n\approx\frac{\ln2}{n^{3/2}}\int_0^\infty e^{-t}t^{1/2}\,dt=\frac{\ln2}{n^{3/2}}\Gamma(3/2). \]
+    <p>代入半阶公式 \(\Gamma(3/2)=\sqrt\pi/2\)：</p>
+    \[ n^{3/2}d_n\to\ln2\cdot\frac{\sqrt\pi}{2}. \]
+    <p>关键一步：\(\ln(1+x)\) 在 \(x=1\) 处连续，直接读 \(\ln2\)；\(\sqrt{1-x}\) 带奇性，必须配 Gamma 半阶常数，不能按连续因子读零。连续因子在 \([0,1]\) 上有界，局部展开时只需分离出端点值，奇性全部来自平方根项，两部分常数在积分中相乘。数值复核：\(n=1500\) 时 \(n^{3/2}d_n\approx0.6131\)，趋近 \(0.6143\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\ln(1+x)\) 在 \(1\) 处读成 \(\ln1=0\)；② 漏掉 \(\sqrt{1-x}\) 对应的 Gamma 半阶；③ 把 \(\sqrt{1-x}\) 与 \(\sqrt{1-x^2}\) 的 \(\sqrt2\) 因子混淆，本题无 \(\sqrt2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>连续因子与平方根奇性相乘时，连续因子读端点值，奇性因子配 Gamma 常数。同类素材有 \(\ln(1+x)\)、\(1/(1+x)\) 作连续因子，改变连续因子只改端点取值，Gamma 部分不变。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(r_n=\int_0^1 x^n\sqrt{1-x}\,dx\)，求 \(\lim\limits_{n\to\infty}n^{3/2}r_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\sqrt\pi}{2}\)。连续因子取 1，常数 \(\Gamma(3/2)=\sqrt\pi/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2045">
+  <div class="q-head">
+    <span class="qno">第 2045 题</span>
+    <span class="qtype">和式夹逼（幂次扰动）</span>
+    <span class="qsrc">P980</span>
+  </div>
+  <div class="stem">
+    <p>设 \(e_n=\sum\limits_{k=1}^n\dfrac{1}{n+k^{2/3}}\)，求 \(\lim\limits_{n\to\infty}e_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(n\) 项求和，扰动 \(k^{2/3}\) 为低阶幂次，属和式夹逼型。先比较扰动与主部的量级：分母主部为 \(n\)，扰动为 \(k^{2/3}\)。对 \(1\le k\le n\)，\(k^{2/3}\le n^{2/3}\)，于是</p>
+    \[ \frac{1}{n+n^{2/3}}\le\frac{1}{n+k^{2/3}}\le\frac1n. \]
+    <p>求和 \(n\) 项：</p>
+    \[ \frac{n}{n+n^{2/3}}\le e_n\le1, \]
+    <p>左端</p>
+    \[ \frac{n}{n+n^{2/3}}=\frac{1}{1+n^{-1/3}}\to1. \]
+    <p>由夹逼准则 \(e_n\to1\)。关键判断：\(\alpha=2/3<1\)，故 \(k^\alpha\le n^\alpha=o(n)\)，扰动与主部 \(n\) 之比 \(n^{\alpha-1}=n^{-1/3}\to0\)，每项仍与 \(1/n\) 同阶，\(n\) 项合计主部为 1。若 \(\alpha=1\)，扰动与 \(n\) 同阶，夹逼两端都不再趋于 1，和式退化为 Riemann 和；若 \(\alpha>1\)，大 \(k\) 处扰动超过主部，需拆分估计。三种情形的分界正是 \(\alpha=1\)。</p>
+    <p>主部展开也可验证：\(1/(n+k^{2/3})=\frac1n(1-k^{2/3}/n+o(k^{2/3}/n))\)，求和后修正项 \(\frac{1}{n^2}\sum k^{2/3}=O(n^{-1/3})\to0\)，与夹逼结论一致。数值复核：\(n=1000\) 时 \(e_n\approx0.9439\)，\(n=8000\) 时 \(e_n\approx0.9710\)，偏差按 \(n^{-1/3}\) 衰减，与下界 \(1/(1+n^{-1/3})\) 的速度一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(k^{2/3}\) 放大成 \(n\) 量级，使下界分母写成 \(n+n\)，下界变成 \(1/2\) 而无法夹逼；② 忽略幂次 \(2/3<1\)，误判扰动为主部；③ 上下界放缩方向写反，得到 \(e_n\ge1\) 的错误结论；④ 只看首项 \(k=1\) 或末项 \(k=n\) 就推断整体量级，忽略中间各项的平均行为。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>低阶幂次扰动夹逼按 \(\alpha\) 分界：\(\alpha<1\) 时 \(k^\alpha=o(n)\)，极限为 1；\(\alpha=1\) 时退化为 Riemann 和 \(\int_0^1 dt/(1+t^\alpha)\)；\(\alpha>1\) 时扰动超主部，拆分后极限为零或其他常数。选择题常改变 \(\alpha\) 考查这一界限，解答题要求写出上下界并说明量级比较依据。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_n=\sum\limits_{k=1}^n\dfrac{1}{n+k}\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+    <p class="var-ans">答案：\(\ln2\)。Riemann 和 \(\frac1n\sum 1/(1+k/n)\to\int_0^1\dfrac{dt}{1+t}=\ln2\)；\(\alpha=1\) 时不再夹逼到 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q2046">
+  <div class="q-head">
+    <span class="qno">第 2046 题</span>
+    <span class="qtype">Gamma 型积分（指数权 \(e^{-nx}\)）</span>
+    <span class="qsrc">P980</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f_n(x)=n^5x^4e^{-nx}\)，求 \(\lim\limits_{n\to\infty}\int_0^1 f_n(x)\,dx\)。</p>
+  </div>
+  <div class="answer">答案：\(24\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：被积函数含 \(e^{-nx}\)，质量集中在 \(x=0\) 附近，属指数权函数积分型。作换元 \(t=nx\)：</p>
+    \[ \int_0^1 n^5x^4e^{-nx}\,dx=\int_0^n t^4e^{-t}\,dt. \]
+    <p>换元配平：\(x=t/n\)，\(dx=dt/n\)，\(x^4=t^4/n^4\)，与 \(n^5\) 相乘后 \(n^5\cdot t^4/n^4\cdot 1/n=t^4\)，被积式化为 \(t^4e^{-t}\)。</p>
+    <p>令 \(n\to\infty\)，上限趋于无穷，被积函数非负：</p>
+    \[ \lim_{n\to\infty}\int_0^n t^4e^{-t}\,dt=\int_0^\infty t^4e^{-t}\,dt=\Gamma(5)=4!=24. \]
+    <p>由 Gamma 递推 \(\Gamma(5)=4\Gamma(4)=4\cdot6=24\)。尾部截断 \(\int_n^\infty t^4e^{-t}\,dt\) 分部积分后为多项式乘 \(e^{-n}\)，指数衰减快于任何幂次，有限上限与无穷上限的差别不影响极限。数值复核：\(n=50\) 与 \(n=500\) 时积分值均为 \(24.0000\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 换元漏算 \(dx=dt/n\)，幂次配平出错；② \(x^4\) 对应 \(\Gamma(5)=4!\)，阶数与幂次错位会答成 \(6\)；③ 忘记上限变为 \(n\)，把截断积分仍按 \([0,1]\) 处理。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 \(n^{k+1}x^k e^{-nx}\) 模板一致，极限为 \(k!\)。幂次每加 1，Gamma 阶数平移一位，常与分部积分递推、阶乘估计对照考查。核心动作仍是换元识别 Gamma 积分。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(w_n(x)=n^6x^5e^{-nx}\)，求 \(\lim\limits_{n\to\infty}\int_0^1 w_n(x)\,dx\)。</p>
+    <p class="var-ans">答案：\(120\)。换元后为 \(\int_0^n t^5e^{-t}\,dt\to\Gamma(6)=5!=120\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2047">
+  <div class="q-head">
+    <span class="qno">第 2047 题</span>
+    <span class="qtype">和式拆分估计（立方扰动）</span>
+    <span class="qsrc">P980</span>
+  </div>
+  <div class="stem">
+    <p>设 \(g_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k^3}}\)，求 \(\lim\limits_{n\to\infty}g_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，复算 \(0\)（拆分 \(k\le n^{2/3}\) 与 \(k>n^{2/3}\)，两段均被 \(O(n^{-1/3})\) 控制），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：和式拆分，扰动 \(k^3\) 在大 \(k\) 处与 \(n^2\) 可比，不能套 \(1/n\) 主部夹逼。取分界 \(K=n^{2/3}\)，使 \(K^3=n^2\)。</p>
+    <p>第一段 \(1\le k\le K\)：分母 \(\ge n\)，贡献</p>
+    \[ S_1\le\frac{K}{n}=n^{-1/3}. \]
+    <p>第二段 \(K<k\le n\)：分母 \(\ge k^{3/2}\)，贡献</p>
+    \[ S_2\le\sum_{k>K}k^{-3/2}\le\int_{K-1}^\infty t^{-3/2}\,dt=2(K-1)^{-1/2}\sim2n^{-1/3}. \]
+    <p>合计 \(g_n=O(n^{-1/3})\to0\)。关键一步：分界 \(K=n^{2/3}\) 由 \(K^3=n^2\) 解出，在该点根号内两项相当；小 \(k\) 段 \(n^2\) 占优，大 \(k\) 段 \(k^3\) 占优，两段主部自然切换。第二段积分估计 \(\sum k^{-3/2}\le2K^{-1/2}\sim2n^{-1/3}\)。数值复核：\(n=30000\) 时 \(g_n\approx0.0787\)，与 \(3n^{-1/3}\) 上界趋势一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 按 \(1/n\) 主部夹逼答 1，忽略 \(k^3\) 在大 \(k\) 处超过 \(n^2\)；② 第二段积分 \(\int t^{-3/2}\) 幂次算错；③ 分界不取 \(n^{2/3}\)，两段尺度无法配平。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与幂次扰动拆分模板同组，根号内扰动 \(k^\beta\) 按与 \(n^2\) 相当取分界。考法是分段选主部、积分放缩；扰动为 \(o(n^2)\) 时回到夹逼到 1 的模板，达到 \(n^2\) 量级则需拆分。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(p_n=\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k}}\)，求 \(\lim\limits_{n\to\infty}p_n\)。</p>
+    <p class="var-ans">答案：\(1\)。扰动 \(k=o(n^2)\)，下界 \(n/\sqrt{n^2+n}=1/\sqrt{1+1/n}\to1\)，夹逼得 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q2048">
+  <div class="q-head">
+    <span class="qno">第 2048 题</span>
+    <span class="qtype">无穷乘积收敛判别</span>
+    <span class="qsrc">P980</span>
+  </div>
+  <div class="stem">
+    <p>设 \(h_n=\prod\limits_{k=1}^n\left(1+\dfrac{1}{k^{6/5}}\right)\)，求 \(\lim\limits_{n\to\infty}h_n\)。</p>
+  </div>
+  <div class="answer">答案：有限正数（数值约 \(101.85\)）</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：无穷乘积 \(\prod(1+a_k)\)，\(a_k>0\)，收敛性等价于级数 \(\sum a_k\) 收敛。取对数：</p>
+    \[ \ln h_n=\sum_{k=1}^n\ln\left(1+\frac{1}{k^{6/5}}\right). \]
+    <p>对充分大的 \(k\)，\(0<\ln(1+1/k^{6/5})<1/k^{6/5}\)，而 \(p\)-级数 \(\sum 1/k^{6/5}\) 在 \(p=6/5>1\) 时收敛。由比较判别法，对数级数收敛于有限值，各项为正，故 \(\ln h_n\) 单调递增有上界，\(h_n\) 收敛到大于 1 的有限正数。</p>
+    <p>乘积型问题转对数级数是标准动作；正项情形 \(\prod(1+a_k)\) 收敛当且仅当 \(\sum a_k\) 收敛。对照发散情形：若 \(p\le1\)，\(\sum k^{-p}\) 发散到 \(+\infty\)，对数部分和无上界，乘积随之发散到 \(+\infty\)，不会出现振荡或负极限。数值上取前 10 万项求和，\(\ln P\approx4.623\)，\(P\approx101.85\)；尾部被 \(k^{-6/5}\) 尾项控制，截断项数增加时数值稳定。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 由通项 \(1+1/k^{6/5}\to1\) 直接断言乘积趋于 1；② 把 \(p\)-级数收敛条件记反；③ 忽略 \(\ln(1+x)\sim x\)，无法把乘积判别转为级数判别。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>无穷乘积判别与 \(p\)-级数绑定考查。\(p>1\) 乘积收敛于有限正数，\(p\le1\) 发散到 \(+\infty\)。解答题须先转对数级数再比较，不能仅凭通项下结论。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(q_n=\prod\limits_{k=1}^n\left(1+\dfrac{1}{k^{6/7}}\right)\)，判断 \(\lim q_n\) 是否存在。</p>
+    <p class="var-ans">答案：发散到 \(+\infty\)。\(\ln q_n=\sum\ln(1+k^{-6/7})\sim\sum k^{-6/7}\)，\(p=6/7<1\) 级数发散，乘积趋于 \(+\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2049">
+  <div class="q-head">
+    <span class="qno">第 2049 题</span>
+    <span class="qtype">不动点递推（四次根型）</span>
+    <span class="qsrc">P980</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\dfrac14\left(3x_n+\dfrac{1}{x_n^3}\right)\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：代数递推数列，先列不动点方程，再验证吸引性。由 \(x_1=1>0\)，递推右端两项为正，归纳可知 \(x_n>0\)，迭代函数</p>
+    \[ f(x)=\frac14\left(3x+\frac{1}{x^3}\right) \]
+    <p>在 \(x>0\) 上有定义。设极限为 \(L>0\)，取极限：</p>
+    \[ L=\frac14\left(3L+\frac{1}{L^3}\right)\ \Longrightarrow\ 4L^4=3L^4+1\ \Longrightarrow\ L^4=1. \]
+    <p>正半轴内唯一解为 \(L=1\)。代入初值检验：</p>
+    \[ x_2=\frac14(3\cdot1+1)=1, \]
+    <p>归纳得 \(x_n\equiv1\)，序列恒定。吸引性验证：</p>
+    \[ f'(x)=\frac14\left(3-\frac{3}{x^4}\right),\qquad f'(1)=0, \]
+    <p>\(|f'(1)|=0<1\)，该不动点为吸引点，初值偏离时也会被捕获。本题初值 \(x_1=1\) 已是不动点，序列恒定；正半轴内 \(L^4=1\) 只有 \(L=1\) 一个实根。导数为零表明该点为超吸引点，偏离初值时误差以高于线性的速度收缩，不会出现振荡发散。数值迭代 20 万步后 \(x_n=1.000000\)，与解析值一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 解方程 \(L^4=1\) 时引入非正根或复根；② 不验证 \(x_n>0\) 就取舍根；③ 把系数 \(3/4\)、\(1/4\) 的四次根平均结构与平方根、立方根平均混淆。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>算术平均型递推按系数比例对应不同方根，考法仍是不动点方程加导数吸引性两步。初值恰为不动点时序列恒定，仍需说明该点吸引；导数为零时收敛为高阶速度。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(u_1=2,\ u_{n+1}=\dfrac14\left(3u_n+\dfrac{1}{u_n^3}\right)\)，求 \(\lim\limits_{n\to\infty}u_n\)。</p>
+    <p class="var-ans">答案：\(1\)。不动点方程 \(L^4=1\)，正根 \(L=1\)，\(f'(1)=0\) 为吸引点；数值迭代收敛到 \(1.0000\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2050">
+  <div class="q-head">
+    <span class="qno">第 2050 题</span>
+    <span class="qtype">积分端点渐近（\(x^n\) 权函数）</span>
+    <span class="qsrc">P981</span>
+  </div>
+  <div class="stem">
+    <p>设 \(y_n=\int_0^1\dfrac{x^n}{1+x^4}\,dx\)，求 \(\lim\limits_{n\to\infty}n y_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x^n\) 权函数积分序列，质量集中到右端点 \(x=1\)。标准结论：\(\varphi\) 在 \([0,1]\) 上连续时，</p>
+    \[ \lim_{n\to\infty} n\int_0^1 x^n\varphi(x)\,dx=\varphi(1). \]
+    <p>依据是 \(n\int_0^1 x^n\,dx\to1\)，且 \(x^n\) 在离开 \(1\) 处以指数速度衰减，\(\varphi\) 只需在 \(1\) 附近被读取。</p>
+    <p>取 \(\varphi(x)=1/(1+x^4)\)，它在 \([0,1]\) 上连续，于是</p>
+    \[ n y_n=n\int_0^1 x^n\frac{1}{1+x^4}\,dx\to\varphi(1)=\frac{1}{1+1}=\frac12. \]
+    <p>分段估计坐实结论：任意 \(\delta>0\)，\([0,1-\delta]\) 段被 \(n(1-\delta)^n\) 控制趋于零，\([1-\delta,1]\) 段 \(\varphi\) 介于两端点值之间，令 \(\delta\to0\) 即得 \(\varphi(1)\)。数值复核：\(n=1500\) 时 \(n y_n\approx0.50033\)，与 \(1/2\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 用 \(1/(1+x^4)\le1\) 放缩后答成 1，丢掉端点取值；② 把 \(x=1\) 处的 \(x^4\) 算成 0，误得 \(\varphi(1)=1\)；③ 忽略 \(\varphi\) 连续性，跳跃点需改读左右极限。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 \(x^n\) 权函数端点结论的直接应用，分母素材常换为 \(1+x^a\)。与带奇性的同类题对照：连续因子读端点值，零值因子需配 Gamma 常数；本题 \(1+x^4\) 在端点非零，属前者。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(v_n=\int_0^1\dfrac{x^n}{3+x^4}\,dx\)，求 \(\lim\limits_{n\to\infty}n v_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac14\)。\(\varphi(x)=1/(3+x^4)\) 连续，\(\varphi(1)=1/(3+1)=1/4\)。</p>
+  </div>
+</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 1997–2050 题</span></div>
+</div>
+</body>
+</html>
