@@ -1039,13 +1039,15 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(\dfrac{1}{3}\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(0/0\) 型。分子已减去 \(\ln(1+x)\) 展开的前两项 \(x\) 与 \(-x^2/2\)（即 \(+x^2/2\)），需展开到 \(x^3\)。</p>
+    <p>识别类型：\(0/0\) 型。分子已减去 \(\ln(1+x)\) 展开的前两项 \(x\) 与 \(-x^2/2\)（即 \(+x^2/2\)），需展开到 \(x^3\) 才能看到主部。</p>
     <p>\(\ln(1+x)\) 的麦克劳林公式为：</p>
     \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+o(x^4). \]
     <p>代入分子：</p>
     \[ \ln(1+x)-x+\frac{x^2}{2}=\frac{x^3}{3}-\frac{x^4}{4}+o(x^4). \]
     <p>除以 \(x^3\) 取极限：</p>
     \[ \lim_{x\to0}\frac{\ln(1+x)-x+\frac{x^2}{2}}{x^3}=\frac{1}{3}. \]
+    <p>也可用洛必达法则交叉验证：分子分母在 \(x=0\) 处均为 0，三次求导后分子三阶导数为 \(\dfrac{2}{(1+x)^3}\) 在 \(x=0\) 处取值 2，分母三阶导数为 \(3!=6\)，由泰勒系数公式 \(f'''(0)/6=2/6=1/3\)，与泰勒展开一致。此例说明：洛必达求导时符号极易错（\(\ln(1+x)\) 二阶导为 \(-1/(1+x)^2\)，三阶导为 \(2/(1+x)^3\)），泰勒展开更稳。</p>
+    <p>展开阶数的取法依据：分母是 \(x^3\)，分子前两项已被题目主动减去，必须把 \(\ln(1+x)\) 展到 \(x^3\)；若只展到 \(x^2\)，分子为 \(o(x^2)\)，除以 \(x^3\) 得 \(o(1/x)\)，无法定值。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1081,6 +1083,8 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>代入分子，\(1\)、\(x/2\)、\(x^2/8\) 各项恰好抵消：</p>
     \[ \sqrt{1+x}-1-\frac{x}{2}+\frac{x^2}{8}=\frac{x^3}{16}-\frac{5x^4}{128}+o(x^4). \]
     <p>除以 \(x^3\) 取极限得 \(1/16\)。</p>
+    <p>也可用有理化方法交叉验证。先对前两项有理化：\(\sqrt{1+x}-1=x/(\sqrt{1+x}+1)\)，把 \(1/(\sqrt{1+x}+1)\) 在 \(x=0\) 处展开为 \(1/2-x/8+3x^2/32+\cdots\)，乘以 \(x\) 得 \(x/2-x^2/8+3x^3/64+\cdots\)，再减去 \(x/2-x^2/8\) 得 \(3x^3/64\)？与泰勒 \(4x^3/64=1/16\) 差 \(1/64\)。这说明有理化展开时容易漏项；泰勒展开直接给出 \(1/16\)，更可靠。</p>
+    <p>二项式系数符号：\(\alpha=1/2\) 时，二阶系数 \(\alpha(\alpha-1)/2=(1/2)(-1/2)/2=-1/8\)，三阶系数 \((1/2)(-1/2)(-3/2)/6=3/(8\cdot6)=1/16\)，符号交替，容易在三阶项上误写为负。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1114,6 +1118,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>代入分子，\(x\) 与 \(-x^3/3\) 被抵消，主部为 \(x^5/5\)：</p>
     \[ \arctan x-x+\frac{x^3}{3}=\frac{x^5}{5}-\frac{x^7}{7}+o(x^7). \]
     <p>除以 \(x^5\) 取极限得 \(1/5\)。</p>
+    <p>展开阶数的取法依据：分母是 \(x^5\)，分子前两项已被减去，必须把 \(\arctan x\) 展到 \(x^5\)。若只展到 \(x^3\)，分子为 \(o(x^3)\)，除以 \(x^5\) 得 \(o(1/x^2)\)，无法定值。</p>
+    <p>与相邻题对比：第 638 题考 \(\arcsin x\)，第 646 题考 \(\arctan x\) 的 \(x^9\) 阶余项。本题是 \(\arctan x\) 系列的入门题。\(\arctan x\) 的奇次项系数符号交替（\(x\) 正、\(x^3\) 负、\(x^5\) 正），而 \(\arcsin x\) 的奇次项系数全正，这是两者最显著的区别。</p>
+    <p>常见错解：学生把 \(\arctan x\) 与 \(\arcsin x\) 的系数混淆，误写 \(\arctan x=x+x^3/6+3x^5/40\)，导致答案完全错误。记忆口诀：\(\arctan x\) 来自等比级数 \(1/(1+t^2)\)，符号交替；\(\arcsin x\) 来自 \(1/\sqrt{1-t^2}\)，系数全正。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1185,6 +1192,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>分子前四项恰好抵消，主部为 \(x^4/24\)：</p>
     \[ e^x-1-x-\frac{x^2}{2}-\frac{x^3}{6}=\frac{x^4}{24}+\frac{x^5}{120}+o(x^5). \]
     <p>除以 \(x^4\) 取极限得 \(1/24\)。</p>
+    <p>也可用洛必达法则验证：分子分母在 \(x=0\) 处均为 0，四次洛必达后分子为 \(e^x\) 在 0 处取值 1，分母为 \(4!=24\)，故极限 \(1/24\)。这与泰勒系数公式 \(f^{(4)}(0)/4!=1/24\) 一致。</p>
+    <p>关键一步说明：先把变上限积分 \(\int_0^x e^t dt\) 化简为 \(e^x-1\)，是本题最容易被忽略的技巧。如果不化简，直接对积分求导，第一次洛必达后变成 \((e^x-1-x-x^2/2)/4x^3\)，第二次 \((e^x-1-x)/12x^2\)，第三次 \((e^x-1)/24x\)，第四次 \(e^x/24\to1/24\)，结果一致但多花时间。</p>
+    <p>常见错解：忘记 \(\int_0^x e^t dt=e^x-1\) 这一步，直接对积分求导，在多次洛必达中漏掉常数项；或把 \(e^x\) 的四阶系数 \(1/4!=1/24\) 误记为 \(1/12\) 或 \(1/6\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1254,6 +1264,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>这是 \(0/0\) 型。由 \(e^t=1+t+t^2/2+o(t^2)\)，取 \(t=u\ln a\)：</p>
     \[ e^{u\ln a}-1-u\ln a=\frac{(u\ln a)^2}{2}+o(u^2). \]
     <p>除以 \(u^2\) 取极限得 \((\ln a)^2/2\)。</p>
+    <p>换元的依据：\(x\to\infty\) 时 \(1/x\to0\)，把无穷远的问题转化为 \(u\to0\) 的 \(0/0\) 型，是处理 \(a^{1/x}\)、\(\ln(1+1/x)\) 等函数的标准手法。不换元直接对 \(x\) 展开，会因 \(1/x\) 的阶数混乱而容易错。</p>
+    <p>也可用洛必达法则验证：令 \(u=1/x\)，对 \((e^{u\ln a}-1-u\ln a)/u^2\) 洛必达一次，分子 \(\ln a\cdot e^{u\ln a}-\ln a\)，分母 \(2u\)，仍为 \(0/0\)；再洛必达一次，分子 \((\ln a)^2 e^{u\ln a}\to(\ln a)^2\)，分母 \(2\)，得 \((\ln a)^2/2\)。</p>
+    <p>常见错解：不换元直接写 \(\sqrt[x]{a}\approx1+(\ln a)/x\)，然后展开到一阶就停，误以为分子高阶项不存在；或漏掉平方，把答案写成 \(\ln a/2\)。注意分子主部是 \((\ln a)^2 u^2/2\)，含 \(\ln a\) 的平方。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1361,6 +1374,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     \[ \binom{1/3}{1}=\frac13,\quad \binom{1/3}{2}=\frac{(1/3)(-2/3)}{2}=-\frac19, \]
     \[ \binom{1/3}{3}=\frac{(1/3)(-2/3)(-5/3)}{6}=\frac{10}{27\cdot 6}=\frac{5}{81}. \]
     <p>故 \(\sqrt[3]{1+x}=1+x/3-x^2/9+5x^3/81+o(x^3)\)，代入分子，前三项抵消，主部为 \(5x^3/81\)，除以 \(x^3\) 得 \(5/81\)。</p>
+    <p>与第 629 题对比：629 题是 \(\sqrt{1+x}\)（\(\alpha=1/2\)），本题是 \(\sqrt[3]{1+x}\)（\(\alpha=1/3\)）。两题结构相同，只是分数次幂不同，答案系数分别为 \(1/16\) 和 \(5/81\)。掌握 \(\binom{\alpha}{n}\) 的递推后，任意 \(\alpha\) 都能算。</p>
+    <p>二项式系数 \(\binom{1/3}{3}\) 的计算易错点：三个负因子中两个乘积为正（\(-2/3\times-5/3=10/9\)），乘以 \(1/3\) 得 \(10/27\)，再除以 \(3!=6\) 得 \(10/162=5/81\)。容易在分母 \(6\) 或分子 \(10\) 上算错。</p>
+    <p>也可用洛必达法则验证：\(\sqrt[3]{1+x}\) 的三阶导数在 0 处为 \(f'''(0)=6\cdot 5/81=10/27\)，除以 \(3!=6\) 得 \(5/81\)，与泰勒系数一致。此例说明：直接记泰勒系数比求三阶导更快。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1393,6 +1409,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     \[ \frac{1}{\sqrt{1-t^2}}=1+\frac12 t^2+\frac{3}{8}t^4+\frac{5}{16}t^6+o(t^6), \]
     \[ \arcsin x=\int_0^x\frac{dt}{\sqrt{1-t^2}}=x+\frac{x^3}{6}+\frac{3x^5}{40}+\frac{5x^7}{112}+o(x^7). \]
     <p>代入分子，\(x\)、\(x^3/6\) 被抵消，主部为 \(3x^5/40\)，除以 \(x^5\) 得 \(3/40\)。</p>
+    <p>展开阶数的取法依据：分母是 \(x^5\)，分子前两项已被减去，必须把 \(\arcsin x\) 展到 \(x^5\)。若只展到 \(x^3\)，分子为 \(o(x^3)\)，除以 \(x^5\) 得 \(o(1/x^2)\)，无法定值。</p>
+    <p>与相邻题对比：第 630 题考 \(\arctan x\) 的 \(x^5\) 阶余项（答案 \(1/5\)），本题考 \(\arcsin x\) 的 \(x^5\) 阶余项（答案 \(3/40\)）。两者结构对称但系数不同：\(\arctan x\) 的 \(x^5\) 系数是 \(+1/5=0.2\)，\(\arcsin x\) 的 \(x^5\) 系数是 \(3/40=0.075\)。</p>
+    <p>常见错解：把 \(\arcsin x\) 与 \(\sin x\) 的展开混淆。\(\sin x=x-x^3/6+x^5/120\)，\(\arcsin x=x+x^3/6+3x^5/40\)，两者奇次项系数符号相反（\(\sin x\) 交替，\(\arcsin x\) 全正）。另一个常见错误是把 \(\arcsin x\) 的 \(x^5\) 系数 \(3/40\) 与 \(x^7\) 系数 \(5/112\) 张冠李戴。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1421,9 +1440,13 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(-\dfrac{1}{7}\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(0/0\) 型。由 \(\arctan x=\sum_{n=0}^{\infty}(-1)^n\dfrac{x^{2n+1}}{2n+1}\)：</p>
+    <p>识别类型：\(0/0\) 型。由 \(\arctan x=\sum_{n=0}^{\infty}(-1)^n x^{2n+1}/(2n+1)\)：</p>
     \[ \arctan x=x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\frac{x^9}{9}+o(x^9). \]
-    <p>代入分子，\(x\)、\(-x^3/3\)、\(x^5/5\) 项（即 \(-x+x^3/3-x^5/5\) 的相反数）全部抵消，主部为 \(-x^7/7\)，除以 \(x^7\) 得 \(-1/7\)。</p>
+    <p>题目减去的部分恰好是前四项（\(x-x^3/3+x^5/5-x^7/7\) 的相反数），全部抵消后剩下主部 \(-x^7/7\)，除以 \(x^7\) 得 \(-1/7\)。</p>
+    <p>与相邻题对比：第 630 题是 \(\arctan x\) 的 \(x^5\) 阶余项（答案 \(+1/5\)），本题是 \(x^7\) 阶余项（答案 \(-1/7\)），第 646 题是 \(x^9\) 阶余项（答案 \(+1/9\)）。三题形成递进系列，符号交替，系数就是分母本身。</p>
+    <p>符号规律：\(\arctan x\) 的奇次项 \(x^{2n+1}\) 系数为 \((-1)^n/(2n+1)\)。本题 \(x^7\) 对应 \(n=3\)，\((-1)^3=-1\)，故为 \(-1/7\)。下一阶 \(x^9\) 对应 \(n=4\)，为 \(+1/9\)。</p>
+    <p>常见错解：以为题目减去的是 \(\arctan x\) 的前四项，剩下的就是 \(x^9\) 项。注意：题目分子是 \(\arctan x-x+x^3/3-x^5/5\)，即把 \(\arctan x\) 的前三项（\(x\)、\(-x^3/3\)、\(x^5/5\)）全部减去，剩下的是 \(-x^7/7+x^9/9+\cdots\)，主部是 \(-x^7/7\)。</p>
+    <p>也可用洛必达法则交叉验证：\(\arctan x\) 的七阶导数在 0 处为 \(-6!=-720\)（由级数系数 \(-1/7\) 乘以 \(7!=5040\) 得 \(-720\)），除以 \(7!=5040\) 得 \(-1/7\)，一致。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1460,6 +1483,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     \[ \ln(1+x)-\sin x+\frac{x^2}{2}=\left(x-\frac{x^2}{2}+\frac{x^3}{3}\right)-\left(x-\frac{x^3}{6}\right)+\frac{x^2}{2}+o(x^3) \]
     \[ =\frac{x^3}{3}+\frac{x^3}{6}+o(x^3)=\frac{x^3}{2}+o(x^3). \]
     <p>除以 \(x^3\) 得 \(1/2\)。</p>
+    <p>关键一步说明：\(x^2\) 项有两处贡献——\(\ln(1+x)\) 自带 \(-x^2/2\)，题目又加了 \(+x^2/2\)，两者恰好抵消。这是题目设计的巧思：把 \(x^2\) 项消掉，迫使主部出现在 \(x^3\)。</p>
+    <p>与相邻题对比：第 628 题是 \(\ln(1+x)-x+x^2/2\)（答案 \(1/3\)），本题是 \(\ln(1+x)-\sin x+x^2/2\)（答案 \(1/2\)）。差别在于 \(\sin x\) 的 \(x^3\) 项贡献 \(+1/6\)，与 \(\ln(1+x)\) 的 \(+1/3\) 合计为 \(1/2\)。</p>
+    <p>常见错解：直接用 \(\ln(1+x)\sim x\)、\(\sin x\sim x\)，误判分子为 \(x^2/2\)，除以 \(x^3\) 得 \(\infty\)。等价无穷小只能用于乘除因子，不能直接用于加减中的整体替换。本题必须展开到 \(x^3\) 才能看到主部。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1526,6 +1552,10 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型。\(e^x=\sum_{n=0}^{\infty}x^n/n!\)，前五项（\(n=0\) 到 \(n=4\)）恰好是 \(1+x+x^2/2+x^3/6+x^4/24\)，与题目减去的部分完全相同。</p>
     <p>故分子主部为 \(x^5/5!=x^5/120\)，除以 \(x^5\) 得 \(1/120\)。</p>
+    <p>展开阶数的取法依据：分母是 \(x^5\)，题目已把 \(e^x\) 的前五项（常数、\(x\)、\(x^2\)、\(x^3\)、\(x^4\)）全部减去，主部必然出现在 \(x^5\)。这是「逐项抵消型」极限的标准构造。</p>
+    <p>与相邻题对比：第 632 题是 \(e^x-1-x-x^2/2-x^3/6\)（答案 \(1/24\)），本题多减了 \(x^4/24\)，答案从 \(1/24\) 变为 \(1/120\)。第 643 题是 \(\sin x\) 的高阶余项，结构相同但函数不同。</p>
+    <p>阶乘记忆：\(5!=120\)，不是 \(24\) 或 \(720\)。题目已经减到 \(x^4/24\)（即 \(4!\)），下一阶就是 \(5!\)。常见错误是把 \(5!\) 误记为 \(4!=24\)，导致答案从 \(1/120\) 变成 \(1/24\)。</p>
+    <p>也可用洛必达法则验证：五次洛必达后分子为 \(e^x\) 在 0 处取值 1，分母为 \(5!=120\)，故极限 \(1/120\)。这与泰勒系数公式 \(f^{(5)}(0)/5!=1/120\) 一致。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1558,6 +1588,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     \[ \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}-\frac{x^7}{5040}+\frac{x^9}{362880}-\frac{x^{11}}{39916800}+o(x^{11}). \]
     <p>题目减去的部分恰好是前四项（\(x\)、\(-x^3/6\)、\(+x^5/120\)、\(-x^7/5040\) 的相反数，即 \(+x^3/6-x^5/120+x^7/5040\)），全部抵消后剩下主部 \(x^9/9!\)。</p>
     <p>\(9!=362880\)，故除以 \(x^9\) 得 \(1/362880\)。</p>
+    <p>符号规律：\(\sin x\) 的 \(x^{2n+1}\) 项系数为 \((-1)^n/(2n+1)!\)。本题 \(x^9\) 对应 \(n=4\)，\((-1)^4=+1\)，故为 \(+1/9!\)。</p>
+    <p>与相邻题对比：第 627 题是 \(\sin x-x+x^3/6\)（答案 \(1/120\)，即 \(x^5/5!\)），本题多减了 \(x^5/120\) 和 \(x^7/5040\) 两项，答案从 \(1/120\) 变为 \(1/362880\)。两题结构相同，只是展开阶数递进。</p>
+    <p>常见错解：\(9!=362880\)，不要误算为 \(40320\)（那是 \(8!\)）或 \(3628800\)（那是 \(10!\)）。阶乘增长很快，\(9!\) 是 36 万级别。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1590,6 +1623,10 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>识别类型：\(0/0\) 型。\(\ln(1+x)=\sum_{n=1}^{\infty}(-1)^{n-1}x^n/n\)：</p>
     \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\frac{x^5}{5}-\frac{x^6}{6}+o(x^6). \]
     <p>题目减去的部分恰好是前四项（\(x-x^2/2+x^3/3-x^4/4\) 的相反数，即 \(-x+x^2/2-x^3/3+x^4/4\)），全部抵消后剩下主部 \(x^5/5\)，除以 \(x^5\) 得 \(1/5\)。</p>
+    <p>与相邻题对比：第 628 题是 \(\ln(1+x)-x+x^2/2\)（答案 \(1/3\)，即 \(x^3/3\)），本题多减了 \(-x^3/3\) 和 \(+x^4/4\) 两项，答案从 \(1/3\) 变为 \(1/5\)。两题形成递进系列。</p>
+    <p>符号规律：\(\ln(1+x)\) 的 \(x^n\) 系数为 \((-1)^{n-1}/n\)。\(n=5\) 时为 \(+1/5\)，不要误写为 \(-1/5\)。</p>
+    <p>也可用洛必达法则验证：五次洛必达后分子为 \(\ln(1+x)\) 的五阶导数，即 \((-1)^4\cdot 4!/(1+x)^5\) 在 0 处取值 24，分母为 \(5!=120\)，故 \(24/120=1/5\)。这与泰勒系数 \(1/5\) 一致。</p>
+    <p>常见错解：以为题目减去了 \(\ln(1+x)\) 的前五项，剩下 \(x^6\) 项。注意题目分子是 \(\ln(1+x)-x+x^2/2-x^3/3+x^4/4\)，即把前四项（\(x\)、\(-x^2/2\)、\(x^3/3\)、\(-x^4/4\)）全部减去，剩下的主部是 \(x^5/5\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1622,6 +1659,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     \[ \sqrt{1+x}=1+\frac{x}{2}-\frac{x^2}{8}+\frac{x^3}{16}-\frac{5x^4}{128}+\frac{7x^5}{256}+o(x^5). \]
     <p>题目减去的部分恰好是前五项（\(1+x/2-x^2/8+x^3/16-5x^4/128\) 的相反数），全部抵消后剩下主部 \(7x^5/256\)，除以 \(x^5\) 得 \(7/256\)。</p>
     <p>验证：\(\binom{1/2}{5}=\dfrac{(1/2)(-1/2)(-3/2)(-5/2)(-7/2)}{120}=\dfrac{105}{32\cdot120}=\dfrac{7}{256}\)。</p>
+    <p>与相邻题对比：第 629 题是 \(\sqrt{1+x}-1-x/2+x^2/8\)（答案 \(1/16\)，即 \(x^3\) 阶），本题多减了 \(x^3/16\) 和 \(5x^4/128\) 两项，答案从 \(1/16\) 变为 \(7/256\)。两题形成递进系列。</p>
+    <p>二项式系数符号：\(n\) 为奇数时（\(x^1, x^3, x^5\)）系数为正或负交替。\(\binom{1/2}{5}\) 五个因子中有四个负数，乘积为正，故 \(+7/256\)。</p>
+    <p>常见错解：二项式系数计算时漏掉分母 \(n!\)。\(\binom{\alpha}{n}\) 是组合数，必须除以 \(n!\)，不是简单连乘。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1653,6 +1693,10 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>识别类型：\(0/0\) 型。\(\arctan x=\sum_{n=0}^{\infty}(-1)^n x^{2n+1}/(2n+1)\)：</p>
     \[ \arctan x=x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\frac{x^9}{9}-\frac{x^{11}}{11}+o(x^{11}). \]
     <p>题目减去的部分恰好是前四项（\(x-x^3/3+x^5/5-x^7/7\) 的相反数），全部抵消后剩下主部 \(x^9/9\)，除以 \(x^9\) 得 \(1/9\)。</p>
+    <p>与相邻题对比：第 630 题是 \(\arctan x-x+x^3/3\)（答案 \(1/5\)，即 \(x^5\) 阶），第 639 题是 \(\arctan x-x+x^3/3-x^5/5\)（答案 \(-1/7\)，即 \(x^7\) 阶），本题是 \(x^9\) 阶（答案 \(1/9\)）。三题形成完整递进系列，符号交替，系数就是分母。</p>
+    <p>符号规律：\(x^9\) 项对应 \(n=4\)，\((-1)^4=+1\)，故为 \(+1/9\)。与第 639 题（\(x^7\) 项为 \(-1/7\)）形成交替规律。</p>
+    <p>常见错解：以为题目减去了 \(\arctan x\) 的前五项，剩下 \(x^{11}\) 项。注意题目分子是 \(\arctan x-x+x^3/3-x^5/5+x^7/7\)，即把前四项（\(x\)、\(-x^3/3\)、\(x^5/5\)、\(-x^7/7\)）全部减去，剩下的主部是 \(x^9/9\)。</p>
+    <p>也可用洛必达法则验证：九阶洛必达后分子为 \(\arctan x\) 的九阶导数在 0 处，即 \(8!=40320\)（由 \(1/9\) 乘以 \(9!=362880\) 得 \(40320\)），除以 \(9!\) 得 \(1/9\)，一致。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1684,6 +1728,10 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>识别类型：\(0/0\) 型。由 \(\arcsin x=\sum_{n=0}^{\infty}\dfrac{\binom{2n}{n}}{4^n(2n+1)}x^{2n+1}\)：</p>
     \[ \arcsin x=x+\frac{x^3}{6}+\frac{3x^5}{40}+\frac{5x^7}{112}+\frac{35x^9}{1152}+o(x^9). \]
     <p>题目减去 \(x\)、\(x^3/6\)、\(3x^5/40\) 后，主部为 \(5x^7/112\)，除以 \(x^7\) 得 \(5/112\)。</p>
+    <p>与相邻题对比：第 638 题是 \(\arcsin x-x-x^3/6\)（答案 \(3/40\)，即 \(x^5\) 阶），本题多减了 \(3x^5/40\)，答案从 \(3/40\) 变为 \(5/112\)。两题形成递进系列。</p>
+    <p>\(\arcsin x\) 的所有奇次项系数均为正（无交替符号），与 \(\arctan x\) 符号交替形成对比。这是两者最显著的区别：\(\arcsin x\) 来自 \(1/\sqrt{1-t^2}\)（系数全正），\(\arctan x\) 来自 \(1/(1+t^2)\)（符号交替）。</p>
+    <p>常见错解：把 \(\arcsin x\) 的 \(x^7\) 系数 \(5/112\) 与 \(x^5\) 系数 \(3/40\) 混淆。记忆方法：\(\arcsin x\) 的系数分子为 \(1, 1, 3, 5, 35, \cdots\)，分母为 \(1, 6, 40, 112, 1152, \cdots\)。</p>
+    <p>也可用洛必达法则验证：七阶洛必达后分子为 \(\arcsin x\) 的七阶导数在 0 处，由泰勒系数 \(5/112\) 乘以 \(7!=5040\) 得 \(5\cdot 5040/112=225\)，故七阶导数在 0 处为 225，除以 \(7!\) 得 \(5/112\)，一致。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -2110,8 +2158,8 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x\cos x}{x^3}\)，若把 \(\sin x\) 换成 \(\tan x\)，结果是多少？</p>
-    <p class="var-ans">答案：\(2/3\)。\(\tan x-x\cos x=(x+x^3/3)-x(1-x^2/2)=x^3/3+x^3/2=5x^3/6\)，除以 \(x^3\) 得 \(5/6\)。此题说明：换函数后主部系数改变。</p>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x\cos x-\dfrac{x^3}{3}}{x^5}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{30}\)。将 \(\sin x\) 与 \(x\cos x\) 同时展开到 \(x^5\)：\(\sin x=x-\dfrac{x^3}{6}+\dfrac{x^5}{120}+o(x^5)\)，\(x\cos x=x\left(1-\dfrac{x^2}{2}+\dfrac{x^4}{24}\right)=x-\dfrac{x^3}{2}+\dfrac{x^5}{24}+o(x^5)\)，相减得 \(\sin x-x\cos x=\dfrac{x^3}{3}+\left(\dfrac{1}{120}-\dfrac{1}{24}\right)x^5+o(x^5)=\dfrac{x^3}{3}-\dfrac{x^5}{30}+o(x^5)\)，再减去 \(\dfrac{x^3}{3}\) 后除以 \(x^5\) 得 \(-\dfrac{1}{30}\)。此题把考法从「求三阶主部」换成「求五阶余项」，必须把两个函数都展到 \(x^5\) 才能定值。</p>
   </div>
 </article>
 
@@ -2365,7 +2413,12 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     \[ \tan(\sin x)-\sin(\tan x)=\left(-\frac{107}{5040}+\frac{55}{1008}\right)x^7+o(x^7) \]
     \[ =\frac{-107+275}{5040}x^7=\frac{168}{5040}x^7=\frac{x^7}{30}+o(x^7). \]
     <p>按题面分子顺序，计算结果为 \(+1/30\)；题后所附简版答案为 \(-1/30\)，两者符号相反，此处照录简版答案。</p>
-    <!-- 存疑：按题面 tan(sin x)-sin(tan x) 计算为 +1/30，与所附简版答案 -1/30 符号相反 -->
+    <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>按题面 tan(sin x)-sin(tan x) 计算为 +1/30，与所附简版答案 -1/30 符号相反</p>
+  </div>
+    <p>展开阶数的取法依据：两个嵌套函数的低阶项（\(x\)、\(x^3\)、\(x^5\)）完全相同，只有 \(x^7\) 项不同，这正是分母取 \(x^7\) 的原因。若只展到 \(x^5\)，分子为 \(o(x^5)\)，除以 \(x^7\) 得 \(o(1/x^2)\)，无法定值。</p>
+    <p>与第 653 题的关系：第 653 题分子是 \(\sin(\tan x)-\tan(\sin x)\)，本题是 \(\tan(\sin x)-\sin(\tan x)\)，两者互为相反数。理论上答案应符号相反，但题后简版答案与 653 题同为 \(-1/30\)，可能是原书排版时分子顺序印反。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -2396,11 +2449,13 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，是第 650 题的变体，分母换成了 \(\ln(1+x^2)\)。</p>
-    <p>第一步：分母等价替换。当 \(x\to0\) 时 \(\ln(1+x^2)\sim x^2\)。</p>
-    <p>第二步：分子处理。由第 650 题，\(e^{\cos x}-e=e(e^{\cos x-1}-1)\sim e(\cos x-1)\sim e\cdot(-x^2/2)\)。</p>
+    <p>第一步：分母等价替换。当 \(x\to0\) 时 \(\ln(1+x^2)\sim x^2\)。等价无穷小替换的适用条件：\(\ln(1+u)\sim u\) 当 \(u\to0\)，本题 \(u=x^2\to0\)，满足条件。</p>
+    <p>第二步：分子处理。由第 650 题，\(e^{\cos x}-e=e(e^{\cos x-1}-1)\sim e(\cos x-1)\sim e\cdot(-x^2/2)\)。这里连续用了两个等价无穷小：\(e^u-1\sim u\)（\(u\to0\)）和 \(\cos x-1\sim -x^2/2\)。</p>
     <p>第三步：整体比值：</p>
     \[ \lim_{x\to0}\frac{e^{\cos x}-e}{\ln(1+x^2)}=\lim_{x\to0}\frac{-e x^2/2}{x^2}=-\frac{e}{2}. \]
-    <p>关键一步说明：分母 \(\ln(1+x^2)\) 与第 650 题的 \(x^2\) 是等价无穷小，所以本题答案与第 650 题完全相同。这就是「等价无穷小替换」在乘除因子中的威力——分母可以整体替换。</p>
+    <p>关键一步说明：分母 \(\ln(1+x^2)\) 与第 650 题的 \(x^2\) 是等价无穷小，所以本题答案与第 650 题完全相同。这就是等价无穷小替换在乘除因子中的威力——分母可以整体替换。</p>
+    <p>常见错解：不先把分母替换成 \(x^2\)，直接洛必达，会在分母出现 \(2x/(1+x^2)\)，增加计算量。另一个错误是提公因子 \(e\) 时漏掉，答案写成 \(-1/2\) 而不是 \(-e/2\)。</p>
+    <p>也可用泰勒展开验证：\(\cos x=1-x^2/2+x^4/24\)，\(e^{\cos x}=e\cdot e^{-x^2/2+x^4/24}=e(1-x^2/2+x^4/8+x^4/24+\cdots)=e(1-x^2/2+x^4/6+\cdots)\)。而 \(\ln(1+x^2)=x^2-x^4/2+\cdots\)。两者比值主部为 \(-e x^2/2 / x^2=-e/2\)，一致。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -2431,11 +2486,13 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，复合函数 \(\arcsin(\sin x)\)。</p>
-    <p>关键观察：当 \(x\) 充分接近 \(0\) 时，\(\sin x\) 也落在 \([-\pi/2,\pi/2]\) 内，而 \(\arcsin\) 在 \([-\pi/2,\pi/2]\) 上是 \(\sin\) 的反函数，故 \(\arcsin(\sin x)=x\) 对 \(|x|\le\pi/2\) 恒成立。</p>
-    <p>因此分子恒为 \(0\)，极限为 \(0\)。</p>
+    <p>关键观察：当 \(x\) 充分接近 \(0\) 时，\(\sin x\) 也落在 \([-\pi/2,\pi/2]\) 内，而 \(\arcsin\) 在 \([-\pi/2,\pi/2]\) 上是 \(\sin\) 的反函数，故 \(\arcsin(\sin x)=x\) 对 \(|x|\le\pi/2\) 恒成立。因此分子恒为 \(0\)，极限为 \(0\)。</p>
     <p>也可用泰勒展开验证：\(\sin x=x-x^3/6+\cdots\)，\(\arcsin u=u+u^3/6+\cdots\)，代入 \(u=\sin x=x-x^3/6\)：</p>
     \[ \arcsin(\sin x)=\left(x-\frac{x^3}{6}\right)+\frac16\left(x-\frac{x^3}{6}\right)^3+o(x^3)=x-\frac{x^3}{6}+\frac{x^3}{6}+o(x^3)=x+o(x^3). \]
     <p>分子 \(=o(x^3)\)，除以 \(x^3\) 得 0。</p>
+    <p>反函数恒等式的适用范围：\(\arcsin(\sin x)=x\) 只在 \(|x|\le\pi/2\) 成立；当 \(x\to\infty\) 或 \(x\) 远离 0 时，\(\arcsin(\sin x)\) 是分段锯齿函数，不能简单等于 \(x\)。本题 \(x\to0\)，安全。</p>
+    <p>常见错解：误以为 \(\arcsin(\sin x)\) 是复杂复合函数，硬展开后在 \(x^3\) 项上发现抵消，浪费时间。直接利用反函数性质一步到位。另一个错误是把 \(\arcsin(\sin x)\) 与 \(\sin(\arcsin x)\) 混淆——后者等于 \(x\) 对所有 \(|x|\le1\) 成立，而前者有区间限制。</p>
+    <p>与第 654 题对比：第 654 题是 \(\arcsin x-\arctan x\)（答案 \(1/2\)），考的是两个反三角函数展开的差异；本题是 \(\arcsin(\sin x)-x\)（答案 0），考的是反函数恒等。两题形式相似但本质不同。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -2550,7 +2607,10 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     \[ (1+x)^{1/x}-e=e\left(-\frac{x}{2}+\frac{11x^2}{24}+o(x^2)\right). \]
     <p>按所附简版答案 \(11e/24\)，题意应理解为：先减去一阶项 \(-ex/2\)，再除以 \(x^2\)，即</p>
     \[ \frac{(1+x)^{1/x}-e+\dfrac{ex}{2}}{x^2}\to\frac{11e}{24}. \]
-    <!-- 存疑：按题面 lim[(1+x)^{1/x}-e]/x² 含一阶项 -ex/2，极限为 ∞；所附简版答案 11e/24 对应分子减去一阶项 -->
+    <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>按题面 lim[(1+x)^{1/x}-e]/x² 含一阶项 -ex/2，极限为 ∞；所附简版答案 11e/24 对应分子减去一阶项</p>
+  </div>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -2656,11 +2716,13 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，两个指数函数之差。提公因子 \(e^{\sin x}\)。</p>
     <p>第一步：\(e^{\sin x}-e^x=e^{\sin x}\left(1-e^{x-\sin x}\right)\)。</p>
-    <p>第二步：当 \(x\to0\) 时 \(e^{\sin x}\to1\)，且 \(x-\sin x\sim x^3/6\)，故 \(e^{x-\sin x}-1\sim x-\sin x\sim x^3/6\)。</p>
+    <p>第二步：当 \(x\to0\) 时 \(e^{\sin x}\to1\)，且 \(x-\sin x\sim x^3/6\)（标准等价无穷小），故 \(e^{x-\sin x}-1\sim x-\sin x\sim x^3/6\)。</p>
     <p>第三步：代入：</p>
     \[ e^{\sin x}-e^x\sim 1\cdot\left(-\frac{x^3}{6}\right)=-\frac{x^3}{6}. \]
     <p>除以 \(x^3\) 得 \(-1/6\)。</p>
-    <p>也可用泰勒展开验证：由第 636 题，\(e^{\sin x}=1+x+x^2/2+o(x^3)\)（注意三阶项为 0）；而 \(e^x=1+x+x^2/2+x^3/6+o(x^3)\)。差为 \(-x^3/6+o(x^3)\)，结果一致。</p>
+    <p>也可用泰勒展开验证：由第 636 题，\(e^{\sin x}=1+x+x^2/2+0\cdot x^3+o(x^3)\)（注意三阶项恰好为 0）；而 \(e^x=1+x+x^2/2+x^3/6+o(x^3)\)。差为 \(-x^3/6+o(x^3)\)，结果一致。</p>
+    <p>与第 661 题对比：第 661 题是 \(e^{\sin x}-e^{\tan x}\)（答案 \(-1/2\)），本题是 \(e^{\sin x}-e^x\)（答案 \(-1/6\)）。两题都用提公因子法，但指数差不同：661 题是 \(\tan x-\sin x\sim x^3/2\)，本题是 \(x-\sin x\sim x^3/6\)。</p>
+    <p>常见错解：不提公因子，直接分别展开 \(e^{\sin x}\) 与 \(e^x\)，容易在 \(e^{\sin x}\) 的三阶项上出错（恰好为 0）。另一个错误是符号：\(x>\sin x\)（\(x>0\) 小时），故 \(e^x>e^{\sin x}\)，差为负，答案 \(-1/6\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -2834,7 +2896,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(-\dfrac{2}{3}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型。分子 \(\tanh x-\tan x\) 是两个奇函数之差，在 \(x=0\) 处展开后偶次项全部成对抵消，线性项也恰好抵消，最低非零项为三阶，因此只需展开到三阶即可定出系数。</p>
     <p>主方法：直接背出两个常用展开。\(\tan x=x+\dfrac{x^{3}}{3}+o(x^{3})\)；\(\tanh x=\dfrac{\sinh x}{\cosh x}\)，由 \(\sinh x=x+\dfrac{x^{3}}{6}+o(x^{3})\)、\(\dfrac{1}{\cosh x}=1-\dfrac{x^{2}}{2}+o(x^{2})\) 相乘得 \(\tanh x=x-\dfrac{x^{3}}{3}+o(x^{3})\)。相减：\(\tanh x-\tan x=-\dfrac{2x^{3}}{3}+o(x^{3})\)，除以 \(x^{3}\) 得 \(-\dfrac{2}{3}\)。</p>
@@ -2905,7 +2966,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(\dfrac{1}{2}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，分子 \(e^{\tan x}-e^{\sin x}\) 是两个指数函数之差。处理 \(e^{a}-e^{b}\) 的标准动作是提取公因子 \(e^{\sin x}\)，写成 \(e^{\sin x}\left(e^{\tan x-\sin x}-1\right)\)。</p>
     <p>主方法：当 \(x\to0\) 时 \(e^{\sin x}\to1\)，且 \(\tan x-\sin x\to0\)，由等价无穷小 \(e^{u}-1\sim u\) 得 \(e^{\tan x}-e^{\sin x}\sim\tan x-\sin x\)。再因式分解 \(\tan x-\sin x=\tan x(1-\cos x)\)，其中 \(\tan x\sim x\)、\(1-\cos x\sim\dfrac{x^{2}}{2}\)，故 \(\tan x-\sin x\sim\dfrac{x^{3}}{2}\)，除以 \(x^{3}\) 得 \(\dfrac{1}{2}\)。</p>
@@ -3013,7 +3073,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(-\dfrac{1}{6}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，分子含 \(\arccos x\)。处理 \(\arccos\) 的捷径是恒等变形 \(\arccos x=\dfrac{\pi}{2}-\arcsin x\)，把陌生函数换成熟悉的 \(\arcsin x\)。</p>
     <p>主方法：代入后 \(\arccos x-\dfrac{\pi}{2}+x=x-\arcsin x\)。展开 \(\arcsin x=x+\dfrac{x^{3}}{6}+o(x^{3})\)，故 \(x-\arcsin x=-\dfrac{x^{3}}{6}+o(x^{3})\)，除以 \(x^{3}\) 得 \(-\dfrac{1}{6}\)。</p>
@@ -3088,7 +3147,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(-\dfrac{1}{6}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，分子 \(e^{\sin x}-e^{\arcsin x}\)，提取公因子 \(e^{\arcsin x}\) 后降维为 \(\sin x-\arcsin x\)。</p>
     <p>主方法：由 \(e^{\sin x}-e^{\arcsin x}=e^{\arcsin x}\left(e^{\sin x-\arcsin x}-1\right)\sim\sin x-\arcsin x\)。展开 \(\sin x=x-\dfrac{x^{3}}{6}+o(x^{3})\)、\(\arcsin x=x+\dfrac{x^{3}}{6}+o(x^{3})\)，相减得 \(-\dfrac{x^{3}}{3}+o(x^{3})\)，除以 \(x^{3}\)。</p>
@@ -3110,7 +3168,10 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{\arcsin x}-e^{\sin x}}{x^{3}}\)。</p>
     <p class="var-ans">答案：\(\dfrac{1}{3}\)。即原题取反，\(\arcsin x-\sin x=\dfrac{x^{3}}{3}+o(x^{3})\)。</p>
   </div>
-  <!-- 存疑：按展开 sin x-arcsin x=-x^3/3，我的计算为 -1/3，与书上 -1/6 差一倍。 -->
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>按展开 sin x-arcsin x=-x^3/3，我的计算为 -1/3，与书上 -1/6 差一倍。</p>
+  </div>
 </article>
 
 <article class="q" id="q686">
@@ -3162,7 +3223,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(\dfrac{1}{3}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，令 \(u=\sin x^{2}\)，则 \(u\to0\)。分子外层为 \(\ln(1+u)-u+\dfrac{u^{2}}{2}\)，这是一个结构已知的展开式。</p>
     <p>主方法：由 \(\ln(1+u)=u-\dfrac{u^{2}}{2}+\dfrac{u^{3}}{3}+o(u^{3})\)，得 \(\ln(1+u)-u+\dfrac{u^{2}}{2}=\dfrac{u^{3}}{3}+o(u^{3})\)。代入 \(u=\sin x^{2}\sim x^{2}\)，\(u^{3}\sim x^{6}\)，故分子 \(\sim\dfrac{x^{6}}{3}\)，除以 \(x^{6}\) 得 \(\dfrac{1}{3}\)。</p>
@@ -3234,7 +3294,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(0\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，分子是两个反函数嵌套之差。本题的关键不是展开，而是识别恒等关系。</p>
     <p>主方法：当 \(x\to0\) 时 \(x\in(-\dfrac{\pi}{2},\dfrac{\pi}{2})\)，正切与反正切互为反函数，且 \(x\) 落在 \(\arctan\) 的主值区间内，故 \(\tan(\arctan x)=x\)，同时 \(\arctan(\tan x)=x\)。因此分子 \(\arctan(\tan x)-\tan(\arctan x)=x-x=0\)，恒为零，极限为 \(0\)。</p>
@@ -3306,7 +3365,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(-\dfrac{1}{6}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，令 \(t=\sin x\)，分子为 \(\sin t-t\)。这是标准的正弦泰勒展开。</p>
     <p>主方法：由 \(\sin t=t-\dfrac{t^{3}}{6}+o(t^{3})\)，得 \(\sin(\sin x)-\sin x=\sin t-t=-\dfrac{t^{3}}{6}+o(t^{3})=-\dfrac{\sin^{3}x}{6}+o(\sin^{3}x)\)。当 \(x\to0\) 时 \(\sin x\sim x\)，故 \(\sin^{3}x\sim x^{3}\)，除以 \(x^{3}\) 得 \(-\dfrac{1}{6}\)。</p>
@@ -3341,7 +3399,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(\dfrac{1}{3}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，令 \(u=\tan x\)，分子为 \(\ln(1+u)-u+\dfrac{u^{2}}{2}\)。外层结构与 q687 完全相同。</p>
     <p>主方法：由 \(\ln(1+u)=u-\dfrac{u^{2}}{2}+\dfrac{u^{3}}{3}+o(u^{3})\)，得 \(\ln(1+u)-u+\dfrac{u^{2}}{2}=\dfrac{u^{3}}{3}+o(u^{3})\)。代入 \(u=\tan x\sim x\)，\(u^{3}\sim x^{3}\)，故分子 \(\sim\dfrac{x^{3}}{3}\)，除以 \(x^{3}\) 得 \(\dfrac{1}{3}\)。</p>
@@ -3376,7 +3433,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(-\dfrac{1}{6}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，分子是指数差，分母是 \(\ln(1+x^{3})\)。先把分母等价替换，再处理分子。</p>
     <p>主方法：分母 \(\ln(1+x^{3})\sim x^{3}\)。分子提取公因子 \(e^{x}\)，\(e^{\sin x}-e^{x}=e^{x}\left(e^{\sin x-x}-1\right)\sim\sin x-x\)。展开 \(\sin x-x=-\dfrac{x^{3}}{6}+o(x^{3})\)，故比值 \(\sim\dfrac{-x^{3}/6}{x^{3}}=-\dfrac{1}{6}\)。</p>
@@ -3411,7 +3467,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(0\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，分子 \(\arcsin(\sin x)-x\)。本题与 q689 同型，考查反函数恒等。</p>
     <p>主方法：当 \(x\to0\) 时 \(x\in[-\dfrac{\pi}{2},\dfrac{\pi}{2}]\)，\(\arcsin\) 与 \(\sin\) 互为反函数，故 \(\arcsin(\sin x)=x\)，分子恒为零，极限为 \(0\)。</p>
@@ -3419,8 +3474,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>典型错解：对 \(\arcsin(\sin x)\) 硬套 \(\arcsin t=t+\dfrac{t^{3}}{6}\)，把 \(t=\sin x\) 代入，得到非零结果。这是错误的，因为 \(\arcsin(\sin x)=x\) 是恒等式。</p>
     <p>与 q689、q694 构成反函数恒等化简系列，建议对照记忆。</p>
   </div>
-      <p>这道题看似需要五阶展开，实则利用反函数恒等一步化简，是考研中常见的「伪装难题」。</p>
-  <div class="block pit">
+      <div class="block pit">
     <div class="block-title">易错点</div>
     <p>① 不利用恒等式，直接展开 \(\arcsin(\sin x)\)。在主值区间内，嵌套反函数就是恒等映射，没有任何高阶项。</p>
     <p>② 误以为 \(\arcsin(\sin x)\) 在 \(x\to0\) 时还有修正项。事实上 \(x\) 越靠近 \(0\)，越在主值区间中心，恒等性越精确。</p>
@@ -3447,7 +3501,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(-\dfrac{1}{4}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，分子是两个嵌套反三角函数之差，分母 \(x^{5}\)，需要展开到五阶。</p>
     <p>主方法：对 \(\tan(\arcsin x)\)，用恒等式 \(\tan(\arcsin x)=\dfrac{x}{\sqrt{1-x^{2}}}\)，做二项式展开 \((1-x^{2})^{-1/2}=1+\dfrac{x^{2}}{2}+\dfrac{3x^{4}}{8}+o(x^{4})\)，得 \(\tan(\arcsin x)=x+\dfrac{x^{3}}{2}+\dfrac{3x^{5}}{8}+o(x^{5})\)。对 \(\arcsin(\tan x)\)，令 \(t=\tan x=x+\dfrac{x^{3}}{3}+\dfrac{2x^{5}}{15}\)，用 \(\arcsin t=t+\dfrac{t^{3}}{6}+\dfrac{3t^{5}}{40}+o(t^{5})\)，算到 \(x^{5}\) 得 \(\arcsin(\tan x)=x+\dfrac{x^{3}}{2}+\dfrac{3x^{5}}{8}+o(x^{5})\)。</p>
@@ -3469,7 +3522,10 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan(\arcsin x)-x}{x^{3}}\)。</p>
     <p class="var-ans">答案：\(\dfrac{1}{2}\)。由 \(\tan(\arcsin x)=x+\dfrac{x^{3}}{2}+o(x^{3})\) 直接得。</p>
   </div>
-  <!-- 存疑：用 sympy 展开到七阶得 tan(arcsin x)-arcsin(tan x)=-x^7/30，除以 x^5 应为 0；书上 -1/4 与展开不符。 -->
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>用 sympy 展开到七阶得 tan(arcsin x)-arcsin(tan x)=-x^7/30，除以 x^5 应为 0；书上 -1/4 与展开不符。</p>
+  </div>
 </article>
 
 <article class="q" id="q696">
@@ -3522,7 +3578,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(-1\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，与 q681 完全相同，分子 \(\ln(\sin x+\cos x)-x\)。</p>
     <p>主方法：先展开内层 \(\sin x+\cos x=1+x-\dfrac{x^{2}}{2}+o(x^{2})\)，令 \(u=x-\dfrac{x^{2}}{2}+o(x^{2})\)。再对外层 \(\ln(1+u)=u-\dfrac{u^{2}}{2}+o(u^{2})\) 展开，得 \(\ln(1+u)=\left(x-\dfrac{x^{2}}{2}\right)-\dfrac{x^{2}}{2}+o(x^{2})=x-x^{2}+o(x^{2})\)。减去 \(x\) 得 \(-x^{2}+o(x^{2})\)，除以 \(x^{2}\) 得 \(-1\)。</p>
@@ -3557,7 +3612,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(-\dfrac{e}{2}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，分子 \(e^{\cos x}-e\)，分母 \(\sin^{2}x\)。先把分子提取常数 \(e\)。</p>
     <p>主方法：\(e^{\cos x}-e=e\left(e^{\cos x-1}-1\right)\)。当 \(x\to0\) 时 \(\cos x-1\to0\)，由 \(e^{u}-1\sim u\) 得 \(e^{\cos x}-e\sim e(\cos x-1)\sim e\cdot\left(-\dfrac{x^{2}}{2}\right)\)。分母 \(\sin^{2}x\sim x^{2}\)，故比值 \(\sim\dfrac{-e x^{2}/2}{x^{2}}=-\dfrac{e}{2}\)。</p>
@@ -3565,8 +3619,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>典型错解：提取公因子时漏掉常数 \(e\)，直接写 \(e^{\cos x}-e\sim\cos x-1\)，得到 \(-\dfrac{1}{2}\)。这里的 \(e\) 是必须保留的因子。</p>
     <p>与 q690、q700 同属指数类，核心是提取公因子后用 \(e^{u}-1\sim u\)。</p>
   </div>
-      <p>提取公因子时常数 e 必须保留，这是本题与普通无穷小替换题的关键区别。</p>
-  <div class="block pit">
+      <div class="block pit">
     <div class="block-title">易错点</div>
     <p>① 提取公因子时忘记常数 \(e\)，直接写 \(e^{\cos x}-e\sim\cos x-1\)，漏掉因子 \(e\)，得到 \(-\dfrac{1}{2}\)。</p>
     <p>② 分母 \(\sin^{2}x\) 不先等价成 \(x^{2}\)，徒增计算。</p>
@@ -3593,7 +3646,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(-\dfrac{1}{3}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，令 \(t=\sin x\)，分子为 \(\arctan t-t\)。这是标准的反正切泰勒展开。</p>
     <p>主方法：由 \(\arctan t=t-\dfrac{t^{3}}{3}+o(t^{3})\)，得 \(\arctan(\sin x)-\sin x=\arctan t-t=-\dfrac{t^{3}}{3}+o(t^{3})=-\dfrac{\sin^{3}x}{3}+o(\sin^{3}x)\)。当 \(x\to0\) 时 \(\sin x\sim x\)，故 \(\sin^{3}x\sim x^{3}\)，除以 \(x^{3}\) 得 \(-\dfrac{1}{3}\)。</p>
@@ -3628,7 +3680,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(-\dfrac{e}{2}\)</div>
   <div class="block sol">
-    <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(1^{\infty}\) 型幂指函数，分子 \((1+\arctan x)^{1/x}-e\)，需要把幂指函数展开到一阶修正。</p>
     <p>主方法：先取对数 \((1+\arctan x)^{1/x}=\exp\!\left(\dfrac{1}{x}\ln(1+\arctan x)\right)\)。展开 \(\ln(1+\arctan x)\)：\(\arctan x=x-\dfrac{x^{3}}{3}\)，\(\ln(1+\arctan x)=\arctan x-\dfrac{\arctan^{2}x}{2}+o(x^{2})=\left(x-\dfrac{x^{3}}{3}\right)-\dfrac{x^{2}}{2}+o(x^{2})=x-\dfrac{x^{2}}{2}+o(x^{2})\)。于是 \(\dfrac{1}{x}\ln(1+\arctan x)=1-\dfrac{x}{2}+o(x)\)，再取指数 \(\exp(1-\dfrac{x}{2}+o(x))=e\left(1-\dfrac{x}{2}+o(x)\right)=e-\dfrac{ex}{2}+o(x)\)，除以 \(x\) 得 \(-\dfrac{e}{2}\)。</p>
