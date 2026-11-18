@@ -2236,11 +2236,17 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>2</b>，按题面复算为 <b>\(\dfrac{1+\sqrt{17}}{2}\approx2.5616\)</b>。不动点方程 $x^2=4+x$，取正根 $(1+\sqrt{17})/2$；2 不满足该方程。以复算为准。</p></div>
 
   <div class="block sol">
-    <div class="block-title">解析</div>
-    <p><b>识别类型</b>：根式递推，单调有界定理。</p>
-    <p>不动点 \(L=\sqrt{4+L}\)，平方得 \(L^{2}-L-4=0\)，正根 \(L=\dfrac{1+\sqrt{17}}{2}\approx2.5616\)。</p>
-    <p>\(x_{1}=5>L\)；若 \(x_{n}>L\)，则 \(x_{n+1}=\sqrt{4+x_{n}}>L\)，且 \(x_{n}>L\) 时 \(4+x_{n}\lt {}x_{n}^{2}\)，故 \(x_{n+1}\lt {}x_{n}\)。数列递减有下界 \(L\)，极限为 \(\dfrac{1+\sqrt{17}}{2}\)。</p>
-  </div>
+    <div class="block-title">解析</div>    <p>识别类型：一阶递推 \(x_{n+1}=\varphi(x_{n})\)，\(\varphi(t)=\sqrt{4+t}\)。套路是「单调 + 有界 \(\Rightarrow\) 收敛」，再对递推式两端取极限解不动点；本题的额外难点是 \(x_{1}=5\) 在不动点右侧，方向先判。</p>
+    <p>不动点：设 \(L=\sqrt{4+L}\)，平方得 \(L^{2}-L-4=0\)，取正根</p>
+    \[ L=\frac{1+\sqrt{17}}{2}\approx2.5616. \]
+    <p>方向：\(x_{2}=\sqrt{4+5}=3<x_{1}\)，而 \(\varphi\) 单调增且 \(\varphi(L)=L\)。只要 \(x_{n}>L\)，就有</p>
+    \[ x_{n+1}-L=\sqrt{4+x_{n}}-\sqrt{4+L}=\frac{x_{n}-L}{\sqrt{4+x_{n}}+\sqrt{4+L}}, \]
+    <p>右端分母为正且大于 \(1\)，故 \(0<x_{n+1}-L<x_{n}-L\)：从 \(n\ge2\) 起单调减、以 \(L\) 为下界，由单调有界准则收敛。</p>
+    <p>求值：令 \(x_{n}\to A\)，对 \(x_{n+1}=\sqrt{4+x_{n}}\) 取极限得 \(A^{2}-A-4=0\)，又 \(A>x_{2}=3\)，舍负根，故 \(A=(1+\sqrt{17})/2\)。</p>
+    <p>速度：由 \(x_{n}\ge L\) 得 \(\sqrt{4+x_{n}}\ge\sqrt{4+L}\)，于是</p>
+    \[ \lvert x_{n+1}-L\rvert\le\frac{\lvert x_{n}-L\rvert}{2\sqrt{4+L}}\approx0.195\,\lvert x_{n}-L\rvert, \]
+    <p>线性收敛。数值校验：\(x_{10}=2.561552990\)，与极限差 \(1.77\times10^{-7}\)；按上式估 \(0.438\times0.195^{9}\approx9.0\times10^{-8}\)，同量级。</p>
+</div>
 
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -2514,12 +2520,16 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1/3</b>，按题面复算为 <b>\(0\)</b>。$\ln(1+\frac1n)-\frac1n+\frac1{2n^2}\sim\frac1{3n^3}$，乘 $n^2$ 得 $\frac1{3n}\to0$；1/3 对应乘 $n^3$。以复算为准。</p></div>
 
   <div class="block sol">
-    <div class="block-title">解析</div>
-    <p><b>识别类型</b>：\(\ln(1+1/n)\) 展开到 \(n^{-3}\) 项后乘 \(n^{2}\)。</p>
-    <p>括号内剩余主部：</p>
-    \[\ln\!\left(1+\frac1n\right)-\frac1n+\frac{1}{2n^{2}}=\frac{1}{3n^{3}}+O(n^{-4}).\]
-    <p>乘 \(n^{2}\) 得 \(\dfrac{1}{3n}+O(n^{-2})\to0\)，故极限为 \(0\)。</p>
-  </div>
+    <div class="block-title">解析</div>    <p>识别类型：\(n^{2}\) 乘「对数展开被截断后的余项」，套路是把 \(\ln(1+1/n)\) 展开到指定阶、看第一个没被消掉的项。这类题不靠技巧，靠阶数核对。</p>
+    <p>由</p>
+    \[ \ln(1+t)=t-\frac{t^{2}}{2}+\frac{t^{3}}{3}+o(t^{3}),\qquad t=\frac{1}{n}, \]
+    <p>得 \(\ln(1+1/n)=1/n-1/(2n^{2})+1/(3n^{3})+o(n^{-3})\)。括号里的 \(-1/n\)、\(+1/(2n^{2})\) 把前两阶全部抵消，只剩三阶余项：</p>
+    \[ \ln\Bigl(1+\frac{1}{n}\Bigr)-\frac{1}{n}+\frac{1}{2n^{2}}=\frac{1}{3n^{3}}+o(n^{-3}). \]
+    <p>量级是 \(n^{-3}\)，被 \(n^{2}\) 乘过之后降到 \(n^{-1}\)，这是本题判据——乘数不足以把余项提成常数，极限只能为零。</p>
+    \[ n^{2}\Bigl[\ln\Bigl(1+\frac{1}{n}\Bigr)-\frac{1}{n}+\frac{1}{2n^{2}}\Bigr]=\frac{1}{3n}+o(n^{-1})\to0. \]
+    <p>换乘 \(n^{3}\) 则极限是 \(1/3\)；本组连号题答案同为 \(0\) 即源于此。</p>
+    <p>数值校验：\(n=1000\) 时括号为 \(3.3308\times10^{-10}\)，乘 \(n^{2}\) 得 \(3.3308\times10^{-4}\)，与 \(1/(3n)\) 差 \(0.1\%\)。</p>
+</div>
 
   <div class="block pit">
     <div class="block-title">易错点</div>
