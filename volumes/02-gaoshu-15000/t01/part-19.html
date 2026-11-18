@@ -3105,7 +3105,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="answer">答案：\(+\infty\)（慢增发散）</div>
 
-  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>\(+\infty\)（慢增发散）</b>。$f(0)=1$ 且 $f'>0$，$f$ 单调增且 $\ge1$，不可能趋于 0（数值 $f(2\cdot10^5)\approx18.79$）。以复算为准。</p>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>\(+\infty\)（慢增发散）</b>。$f(0)=1$ 且 $f'>0$，$f$ 单调增且 $\ge1$，不可能趋于 0（数值 $f(2\cdot10^5)\approx5.12$，两法一致，与渐近式 $\sqrt{2\ln x}\approx4.94$ 同量级，符合 $\sqrt{2\ln x}$ 的慢增规律）。以复算为准。</p>
   </div>
 
   <div class="block sol">
@@ -3685,33 +3685,38 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>设数列 \(\{x_{n}\}\) 满足 \(x_{1}=1,\ x_{n+1}=x_{n}+\dfrac{1}{n^{3}x_{n}}\)，证明 \(\lim\limits_{n\to\infty}x_{n}\) 存在并求之。</p>
   </div>
-  <div class="answer">答案：\(\sqrt{1+2\zeta(3)}\approx1.8450\)</div>
+  <div class="answer">答案：\(\approx2.0996\)（迭代值，无闭式：\(x_{n}^{2}\to1+2\zeta(3)+\displaystyle\sum_{k\ge1}\frac{1}{k^{6}x_{k}^{2}}\approx4.4084\)）</div>
 
-  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>sqrt(1+zeta3/2)</b>，按题面复算为 <b>\(\sqrt{1+2\zeta(3)}\approx1.8450\)</b>。$x_{n+1}=x_n+\frac1{n^3x_n}$ 给 $\Delta(x^2)\approx\frac2{n^3}$，故 $x^2\to1+2\zeta(3)$；书把系数写成 1/2。以复算为准。</p></div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>sqrt(1+zeta3/2)</b>，卡片旧值 <b>\(\sqrt{1+2\zeta(3)}\approx1.8450\)</b> 同样错。按题面复算：$x_{n+1}^{2}-x_{n}^{2}=\frac{2}{n^{3}}+\frac{1}{n^{6}x_{n}^{2}}$，二次项累加 $\approx1.0043$（其中 $n=1$ 项就是 \(1\)，因为 $x_1=1$），故 $x^{2}\to1+2\zeta(3)+1.0043=4.4084$，$x\to2.0996$（迭代 $n=2\times10^{6}$ 得 2.099624，与复算吻合）。书值丢系数、旧值丢二次项；「高阶项可丢」在递推平方化里要看首项处的量级，不是无条件成立。</p></div>
 
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p><b>识别类型</b>：与 1882 同模板，分母为 \(n^{3}\)，平方化后累加。</p>
-    <p>平方化：</p>
-    \[x_{n+1}^{2}-x_{n}^{2}\approx2x_{n}\cdot\frac{1}{n^{3}x_{n}}=\frac{2}{n^{3}},\]
-    <p>故 \(x_{n}^{2}\approx1+2\sum_{k=1}^{n-1}1/k^{3}\to1+2\zeta(3)\)，\(\lim x_{n}=\sqrt{1+2\zeta(3)}\approx1.8450\)。</p>
+    <p><b>识别类型</b>：形如 \(x_{n+1}=x_{n}+a_{n}/x_{n}\) 的递推，平方化后把增量线性化，再逐项求和。能否丢掉二次项要看 \(a_{n}\) 在主项处的量级，不是无条件成立。</p>
+    <p>平方化时把交叉项与二次项一并写出：</p>
+    \[ x_{n+1}^{2}-x_{n}^{2}=2x_{n}\cdot\frac{1}{n^{3}x_{n}}+\frac{1}{n^{6}x_{n}^{2}}=\frac{2}{n^{3}}+\frac{1}{n^{6}x_{n}^{2}}. \]
+    <p>第一项累加 \(2\sum1/k^{3}\to2\zeta(3)=2.4041\)。第二项不能当高阶零：\(n=1\) 时 \(x_{1}=1\)，它等于 \(1\)，其余 \(n\ge2\) 的部分只有 \(0.00431\)，合计</p>
+    \[ \sum_{k\ge1}\frac{1}{k^{6}x_{k}^{2}}=1+0.00431\approx1.0043. \]
+    <p>于是</p>
+    \[ x_{n}^{2}\to1+2.4041+1.0043=4.4084,\qquad \lim x_{n}=\sqrt{4.4084}\approx2.0996. \]
+    <p>只留 \(2/n^{3}\) 得到 \(\sqrt{1+2\zeta(3)}=1.8450\)，这正是旧答案的来历：它丢掉了 \(n=1\) 处与主项同量级的 \(1\)。迭代到 \(n=2\times10^{6}\) 实测 \(x=2.099624\)，与上式吻合。</p>
   </div>
 
   <div class="block pit">
-    <div class="block-title">易错点<p><p>平方化累加 2/n^3。</p></p><p>平方化累加 2/n^3 涉及 zeta(3)，书给系数与推导略有出入。</p><p>本题与 1882 同模板，只是分母从 n 的平方变为 n 的三次方。</p></div>
+    <div class="block-title">易错点</div>
     <p>① 平方差近似的系数 \(2\) 容易丢。</p>
-    <p>② \(\zeta(3)\) 是 Apéry 常数，无简单解析表达式。</p>
+    <p>② 把 \(\dfrac{1}{n^{6}x_{n}^{2}}\) 一律当高阶项丢掉，得到偏小的 \(1.8450\)；本题 \(n=1\) 处它就等于 \(1\)，与主项同量级。</p>
+    <p>③ \(\zeta(3)\) 是 Apéry 常数，没有简单解析式，答案只能写成 \(\zeta(3)\) 加数值修正项，或直接写迭代值 \(2.0996\)。</p>
   </div>
 
   <div class="block trend">
-    <div class="block-title">考向<p><p>本题平方化累加 2/n^3，涉及 zeta(3)。</p></p><p>平方化后累加 2/n^3，涉及 zeta(3)，书给系数与推导有出入，以推导为准。</p></div>
-    <p>平方化递推是级数求和与递推数列的结合。本题与 1882（\(n^{2}\)）构成系列。</p>
+    <div class="block-title">考向</div>
+    <p>平方化递推是级数求和与递推数列的结合。分母升幂只让主项级数更快收敛到接近 \(1\) 的常数，而二次项修正的首项始终是 \(1/(1\cdot x_{1}^{2})\)——它不随分母升幂而变小，所以「高阶项可丢」要看首项处的量级再决定。</p>
   </div>
 
   <div class="block var">
-    <div class="block-title">变式<p>补充：<p>zeta(3)。</p></p><p>平方化后累加的系数为 2，这是由 x_{n+1}^2 - x_n^2 约等于 2 x_n (x_{n+1}-x_n) 得来。</p></div>
+    <div class="block-title">变式</div>
     <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=x_{n}+1/(n^{4}x_{n})\)，求 \(\lim x_{n}\)。</p>
-    <p class="var-ans">答案：\(\sqrt{1+\pi^{4}/45}\)。因为 \(2\sum1/k^{4}=2\cdot\pi^{4}/90=\pi^{4}/45\)。</p>
+    <p class="var-ans">答案：\(\approx2.0410\)（迭代值）。平方化得 \(x_{n}^{2}\to1+2\zeta(4)+\sum1/(k^{8}x_{k}^{2})\approx1+2.1646+1.0010=4.1657\)，开方 \(2.0410\)；只留主项的 \(\sqrt{1+\pi^{4}/45}\approx1.7789\) 同样丢了修正项，而 \(n=1\) 处该修正恰为 \(1\)。</p>
   </div>
 </article>
 
@@ -3936,9 +3941,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>设 \(f(x)\) 满足 \(f'(x)=\dfrac{1}{x^{2}+xf(x)+f^{2}(x)}\)，且 \(f(0)=1\)，证明 \(\lim\limits_{x\to+\infty}f(x)\) 存在。</p>
   </div>
-  <div class="answer">答案：极限存在，有限值 \(L\approx1.93\)（非 \(0\)）</div>
+  <div class="answer">答案：极限存在，\(1\le L\le1+\dfrac{\pi}{2}\)，数值 \(L\approx1.9215\)（非 \(0\)）</div>
 
-  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>极限存在，有限值 \(L\approx1.93\)（非 \(0\)）</b>。$f'>0$ 且 $f'\le\frac1{x^2}$，$f$ 单调增有界，极限有限；数值 $f(2\cdot10^4)\approx1.932$，不可能是 0。以复算为准。</p>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>极限存在，\(1\le L\le1+\frac{\pi}{2}\)，数值 \(L\approx1.9215\)（非 \(0\)）</b>。$f'>0$ 且 $f'\le\frac1{x^2}$，$f$ 单调增有界，极限有限；RK4（$h=0.01$，积到 $X=2000$ 再补 $1/X$ 尾项）给 $L\approx1.9215$，步长减半数值不变；旧值 $1.932$ 只能由 $h=1$ 的粗步长复现（离散过冲），不可能是 0。以复算为准。</p>
   </div>
 
   <div class="block sol">
@@ -3949,9 +3954,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>故 \(f'(x)>0\)，结合 \(f(0)=1\)，\(f\) 单调递增且 \(f(x)\ge1\)。于是分母不小于 \(x^{2}+f^{2}\ge x^{2}+1\)，导数有上界</p>
     \[ 0<f'(x)\le\frac{1}{x^{2}+1}. \]
     <p>积分即得上界：</p>
-    \[ f(x)\le1+\arctan x<1+\frac{\pi}{2}\approx2.571. \]
+    \[ f(x)\le1+\arctan x\lt{}1+\frac{\pi}{2}\approx2.571. \]
     <p>单调递增且有上界，由单调有界准则极限存在。下界方面，\(f(x)\ge f(0)=1\)，故 \(L\ge1>0\)；上界方面，对导数上界积分即得 \(L\le1+\pi/2\approx2.571\)。极限被夹在有限区间内，不可能趋于 \(0\)；积分式 \(L=1+\int_{0}^{\infty}\frac{dt}{t^{2}+tf(t)+f^{2}(t)}\) 含未知 \(f(t)\)，无法初等积出。</p>
-    <p>数值校验：上界 \(1+\pi/2\approx2.571\) 由 \(\int_{0}^{\infty}1/(1+t^{2})dt=\pi/2\) 直接得到；\(f\ge1\) 由 \(f'(x)>0\) 与 \(f(0)=1\) 得到，夹逼范围 \(1\le L\le2.571\)，排除极限为 \(0\)。</p>
+    <p>数值校验：上界 \(1+\pi/2\approx2.571\) 由 \(\int_{0}^{\infty}1/(1+t^{2})dt=\pi/2\) 得到；RK4（步长 \(0.01\)，积到 \(X=2000\) 再补 \(1/X\) 尾项）给 \(L\approx1.9215\)，步长减半不变，落在 \(1\le L\le2.571\) 内，故极限不是 \(0\)。</p>
   </div>
 
   <div class="block pit">
