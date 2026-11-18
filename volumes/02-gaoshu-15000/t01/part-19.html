@@ -298,11 +298,15 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>x</b>，按题面复算为 <b>\(x+a\)</b>。\(\frac1n\sum_{k=1}^n(x+\frac{2ka}{n})\to x+a\int_0^1 2t\,\mathrm{d}t=x+a\)，书漏掉 \(+a\)。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：先求和再取极限。括号内有 \(n-1\) 项，第 \(k\) 项为 \(x+\dfrac{2ka}{n}\)（\(k=1,2,\cdots,n-1\)）。</p>
-    <p>和为 \((n-1)x+\dfrac{2a}{n}\sum_{k=1}^{n-1}k=(n-1)x+\dfrac{2a}{n}\cdot\dfrac{(n-1)n}{2}=(n-1)(x+a)\)。</p>
-    <p>乘 \(1/n\)：</p>
-    \[ \frac{(n-1)(x+a)}{n}\to x+a. \]
-    <p>故原式极限 \(=x+a\)。</p>
+    <p>识别类型：括号里是首项 \(x+2a/n\)、末项 \(x+2(n-1)a/n\) 的等差列，共 \(n-1\) 项，外面乘 \(1/n\)。这是「先求和、再取极限」，不是直接凑右端点黎曼和。</p>
+    <p>把每项拆成常数部分 \(x\) 与等差增量 \(2ak/n\) 分别求和：</p>
+    \[ \sum_{k=1}^{n-1}\Bigl(x+\frac{2ka}{n}\Bigr)=(n-1)x+\frac{2a}{n}\sum_{k=1}^{n-1}k=(n-1)x+\frac{2a}{n}\cdot\frac{(n-1)n}{2}=(n-1)(x+a). \]
+    <p>乘 \(1/n\) 后 \(\dfrac{n-1}{n}(x+a)\to x+a\)，这就是答案。若把上限补到 \(n\)，多出的项是 \(x+2a\)，其贡献被 \(1/n\) 稀释：</p>
+    \[ \frac1n\sum_{k=1}^{n}\Bigl(x+\frac{2ka}{n}\Bigr)=x+a\cdot\frac{n+1}{n}\to x+a, \]
+    <p>两种写法之差就是一整项被 \(1/n\) 稀释：</p>
+    \[ \frac1n\sum_{k=1}^{n}\Bigl(x+\frac{2ka}{n}\Bigr)-\frac1n\sum_{k=1}^{n-1}\Bigl(x+\frac{2ka}{n}\Bigr)=\frac{x+2a}{n}\to0. \]
+    <p>所以两种写法差 \(O(1/n)\)，极限相同——这解释了为什么「少最后一项」不影响结果，但项数 \(n-1\) 在求和那一步必须数对，否则会丢掉 \(a\)。</p>
+    <p>数值校验：取 \(x=1,\ a=2,\ n=1000\)，按 \(n-1\) 项求和除以 \(n\) 得 \(2.997\)（理论值 \((n-1)(x+a)/n=2.997\)）；补到 \(n\) 项时为 \(3.002\)，与 \(x+a(n+1)/n\) 一致，两者都以 \(3\) 为极限。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
