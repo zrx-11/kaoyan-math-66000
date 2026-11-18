@@ -1076,7 +1076,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block var"><div class="block-title">变式</div>
     <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=a_n/(1+a_n^2)+a_n^3/4\)，求 \(\lim \sqrt n\,a_n\)。</p>
-    <p class="var-ans">答案：\(\dfrac{1}{\sqrt2}\)。去掉 \(+a_n^3/2\) 项后回到 1926 型，\(1/a_n^2\sim2n\)，\(\sqrt n\,a_n\to1/\sqrt2\)。</p>
+    <p class="var-ans">答案：\(\sqrt{\dfrac23}\)。展开 \(a/(1+a^2)=a-a^3+O(a^5)\)，加 \(a^3/4\) 后 \(a_{n+1}=a_n-\tfrac34 a_n^3+O(a_n^5)\)，三次型 \(a_n^2\sim1/(2cn)=2/(3n)\)，故 \(\sqrt n\,a_n\to\sqrt{2/3}\)。</p>
   </div>
 </article>
 
@@ -1177,28 +1177,28 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <span class="qsrc">P964</span>
   </div>
   <div class="stem">
-    <p>设 \(x_1=1,\ x_{n+1}=\dfrac{x_n}{1+x_n}-\ln(1+x_n)\)，求 \(\lim\limits_{n\to\infty}n x_n\)。</p>
+    <p>设 \(x_1=1,\ x_{n+1}=\dfrac{x_n}{1+x_n}\ln(1+x_n)\)，求 \(\lim\limits_{n\to\infty}n x_n\)。</p>
   </div>
   <div class="answer">答案：\(0\)</div>
-  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，复算 \(0\)（\(x_{n+1}=-\tfrac{x_n^2}{2}+\tfrac{2x_n^3}{3}+O(x_n^4)\)，模按平方二次收敛到 0，符号交替，\(n x_n\to0\)），以复算为准。</p></div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，复算 \(0\)（乘积展开 \(x_{n+1}=\tfrac{x_n}{1+x_n}\ln(1+x_n)=x_n^2-\tfrac32 x_n^3+O(x_n^4)\)，模按平方二次收敛到 0，序列恒正，\(n x_n\to0\)），以复算为准。</p></div>
   <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：右端是两项之差，必须分别展开再相减。先判断收敛：从 \(x_1=1\) 出发 \(x_2=1/2-\ln2\lt{}0\)，之后符号交替，模单调递减趋于 0（下面展开说明）。两边取极限，不动点满足 \(L=L/(1+L)-\ln(1+L)\)，唯一解 \(L=0\)。</p>
+    <p>识别类型：右端是两项之积，必须分别展开再相乘。先判断收敛：从 \(x_1=1\) 出发 \(x_2=\tfrac12\ln2\approx0.347>0\)，序列恒正且模单调递减趋于 0（下面展开说明）。两边取极限，不动点满足 \(L=\tfrac{L}{1+L}\ln(1+L)\)，唯一解 \(L=0\)。</p>
     <p>在 \(x\to0\) 附近分别展开两项：</p>
     \[ \frac{x}{1+x}=x-x^2+x^3-x^4+\cdots, \]
     \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\cdots. \]
-    <p>相减：</p>
-    \[ x_{n+1}=\left(x_n-x_n^2+x_n^3\right)-\left(x_n-\frac{x_n^2}{2}+\frac{x_n^3}{3}\right)+O(x_n^4)=-\frac{x_n^2}{2}+\frac{2x_n^3}{3}+O(x_n^4). \]
-    <p>主项为 \(-x_n^2/2\)，故 \(|x_{n+1}|\sim x_n^2/2\)，二次收敛到 0，符号交替。若 \(x_n\sim C/n\)，则 \(|x_{n+1}|\sim C^2/(2n^2)\)，与 \(C/(n+1)\sim C/n\) 量级不符，说明 \(x_n\) 衰减比 \(1/n\) 快得多。实际上 \(\ln|x_{n+1}|=2\ln|x_n|-\ln2+o(1)\)，故 \(\ln|x_n|\) 按 \(2^n\) 增长负方向，\(x_n\) 超指数衰减，\(n x_n\to0\)。</p>
+    <p>相乘：</p>
+    \[ x_{n+1}=\left(x_n-x_n^2+x_n^3+\cdots\right)\left(x_n-\frac{x_n^2}{2}+\frac{x_n^3}{3}+\cdots\right)=x_n^2-\frac{3x_n^3}{2}+O(x_n^4). \]
+    <p>主项为 \(+x_n^2\)，故 \(|x_{n+1}|\sim x_n^2\)，二次收敛到 0，序列保持正号。若 \(x_n\sim C/n\)，则 \(|x_{n+1}|\sim C^2/n^2\)，与 \(C/(n+1)\sim C/n\) 量级不符，说明 \(x_n\) 衰减比 \(1/n\) 快得多。实际上 \(\ln|x_{n+1}|=2\ln|x_n|+o(1)\)，故 \(\ln|x_n|\) 按 \(2^n\) 走向负方向，\(x_n\) 超指数衰减，\(n x_n\to0\)。</p>
   </div>
   <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 把右端看成乘法：本题是减法，必须两项分别展开；乘法与减法在 0 附近主项完全不同。② 忽略符号交替：\(x_{n+1}\sim-x_n^2/2\) 带负号，序列在 0 两侧振荡，但模仍单调递减。</p>
+    <p>① 把右端看成减法：本题是乘积，必须两项分别展开后相乘；乘积与减法在 0 附近主项完全不同。② 误以为序列会变号：\(x_{n+1}\sim x_n^2\) 主项为正，序列在 0 同侧单调递减，模仍单调趋于 0。</p>
   </div>
   <div class="block trend"><div class="block-title">考向</div>
-    <p>「两项分别展开再相减」是处理减法型递推的固定手法，考的是泰勒展开到同阶后相消。与 1944–1946 的稳定性判断同组。</p>
+    <p>「两项分别展开再相乘」是处理乘积型递推的固定手法，考的是泰勒展开到同阶后逐项相乘。与 1944–1946 的稳定性判断同组。</p>
   </div>
   <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n/(1+x_n)-\ln(1+x_n)\)，求 \(\lim \ln|x_n|/2^n\)。</p>
-    <p class="var-ans">答案：\(-\ln2\)。由 \(|x_{n+1}|=x_n^2/2(1+O(x_n))\)，\(\ln|x_{n+1}|=2\ln|x_n|-\ln2+o(1)\)，两边除以 \(2^{n+1}\) 取极限得 \(-\ln2\)。</p>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n/(1+x_n)\ln(1+x_n)\)，求 \(\lim \ln|x_n|/2^n\)。</p>
+    <p class="var-ans">答案：\(0\)。由 \(|x_{n+1}|=x_n^2(1+O(x_n))\)，\(\ln|x_{n+1}|=2\ln|x_n|+o(1)\)，两边除以 \(2^{n+1}\) 取极限，初值 \(\ln|x_1|=\ln1=0\)，故极限为 \(0\)。</p>
   </div>
 </article>
 
@@ -2053,20 +2053,20 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>识别类型：递推可改写为 \(f_{n+1}=f_n-\arctan f_n\)，右端在零点附近是「恒等函数减去一个与自身同阶的函数」，一阶项相消后按更高阶衰减，属趋近零的压缩递推。先找不动点：令 \(L=f(L)\)，即</p>
     \[ L=L-\arctan L\ \Longrightarrow\ \arctan L=0\ \Longrightarrow\ L=0. \]
     <p>再判断零点附近的衰减阶。利用 \(x\to0\) 时的泰勒展开</p>
-    \[ \arctan x=x-\frac{x^3}{6}+O(x^5), \]
+    \[ \arctan x=x-\frac{x^3}{3}+O(x^5), \]
     <p>代入递推式，一阶项恰好抵消：</p>
-    \[ f_{n+1}=f_n-\arctan f_n=f_n-\left(f_n-\frac{f_n^3}{6}+O(f_n^5)\right)=\frac{f_n^3}{6}+O(f_n^5). \]
+    \[ f_{n+1}=f_n-\arctan f_n=f_n-\left(f_n-\frac{f_n^3}{3}+O(f_n^5)\right)=\frac{f_n^3}{3}+O(f_n^5). \]
     <p>之所以必须展开到三阶，是因为本题正是靠 \(x\) 与 \(\arctan x\) 的一阶相同、三阶不同才产生衰减；只展开到一阶会得到 \(f_{n+1}=0+O(f_n^3)\) 而看不出主项。稳定性由导数判断：\(g(x)=x-\arctan x\)，\(g'(x)=1-\dfrac{1}{1+x^2}\)，\(g'(0)=0\)，零点为强吸引不动点。从 \(f_1=1\) 出发迭代 20 万步，\(f_n\) 单调回落并趋于 \(0\)。</p>
   </div>
   <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 把衰减误判为线性：\(f_{n+1}/f_n\to0\)，实际是三次方收缩，速度比线性快得多。② 把 \(\arctan x\) 展开的三阶系数记成 \(1/3\) 或符号写反，导致主项系数错误。③ 直接令 \(f_n=f_{n+1}=L\) 解方程而不检查零点是否为吸引不动点，在排斥型映射上会得出错误结论。</p>
+    <p>① 把衰减误判为线性：\(f_{n+1}/f_n\to0\)，实际是三次方收缩，速度比线性快得多。② 把 \(\arctan x\) 展开的三阶系数记成 \(1/6\) 或符号写反，导致主项系数错误。③ 直接令 \(f_n=f_{n+1}=L\) 解方程而不检查零点是否为吸引不动点，在排斥型映射上会得出错误结论。</p>
   </div>
   <div class="block trend"><div class="block-title">考向</div>
     <p>本题是「特殊函数减自身」型压缩递推的母题，考法固定为两步：先由不动点方程定位零点，再用泰勒展开判断衰减阶与稳定性。同组的双曲函数、积分型特殊函数题都沿用这一框架，区别只在展开后一阶项是抵消还是保留。</p>
   </div>
   <div class="block var"><div class="block-title">变式</div>
     <p><b>变式</b> 设 \(f_1=1,\ f_{n+1}=f_n-\arctan f_n\)，求 \(\lim\limits_{n\to\infty}\dfrac{f_{n+1}}{f_n^3}\)。</p>
-    <p class="var-ans">答案：\(\dfrac16\)。由 \(\arctan x=x-x^3/6+O(x^5)\) 得 \(f_{n+1}=f_n^3/6+O(f_n^5)\)，比值趋于 \(1/6\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。由 \(\arctan x=x-x^3/3+O(x^5)\) 得 \(f_{n+1}=f_n^3/3+O(f_n^5)\)，比值趋于 \(1/3\)。</p>
   </div>
 </article>
 
@@ -2510,7 +2510,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     \[ j_{n+1}\approx j_n\cdot\frac{u^2}{2}=\frac{(\mathrm{erfc}\,j_n)^2}{2j_n}\approx\frac{1}{2j_n}\to+\infty, \]
     <p>零点不仅不吸引，反而把靠近它的序列向外推。不动点方程 \(L=L-\mathrm{erfc}\,L+\mathrm{erfc}^2L/(2L)\) 除无穷远解外，对应 \(\mathrm{erfc}\,L=2L\) 的有限根也不具备吸引性。</p>
     <p>数值迭代 3000 步后进入稳定周期循环，三个点依次为</p>
-    \[ 0.230052\ \longmapsto\ 0.440834\ \longmapsto\ 0.691183\ \longmapsto\ 0.230052. \]
+    \[ 0.230052\ \longmapsto\ 0.691183\ \longmapsto\ 0.440834\ \longmapsto\ 0.230052. \]
     <p>三项反复出现，序列不收敛，极限不存在。这一结果与 erf 版本（1989）形成对照：差别只在补误差函数在零点不取零，导致 \(u\) 在零点发散。</p>
   </div>
   <div class="block pit"><div class="block-title">易错点</div>
@@ -2521,7 +2521,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block var"><div class="block-title">变式</div>
     <p><b>变式</b> 对递推 \(x_{n+1}=x_n-\mathrm{erfc}\,x_n+\mathrm{erfc}^2x_n/(2x_n)\)，数值写出其吸引周期的三个点。</p>
-    <p class="var-ans">答案：三点循环为 \(0.2301,\ 0.4408,\ 0.6912\)，顺序循环，序列极限不存在。</p>
+    <p class="var-ans">答案：三点循环为 \(0.2301,\ 0.6912,\ 0.4408\)，顺序循环，序列极限不存在。</p>
   </div>
 </article>
 
@@ -2768,7 +2768,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>括号 \(1-u+u^2/2\) 在 \(u\) 大时主项为 \(u^2/2\)：</p>
     \[ h_{n+1}\approx\frac{(\mathrm{erfc}\,h_n)^2}{2h_n}\approx\frac{1}{2h_n}, \]
     <p>靠近零的点被向外推，零点不具吸引性。长迭代后轨道进入稳定周期循环，三点依次为</p>
-    \[ 0.230052\ \longmapsto\ 0.440834\ \longmapsto\ 0.691183\ \longmapsto\ 0.230052. \]
+    \[ 0.230052\ \longmapsto\ 0.691183\ \longmapsto\ 0.440834\ \longmapsto\ 0.230052. \]
     <p>三项反复出现，序列不收敛。该循环与 1990、2000 完全相同，差别仅在数列记号。判断依据是 3000 步后连续多轮数值重复出现，而非单点附近的局部展开。周期轨道的识别必须依靠足够长的迭代观察：前若干步数值下降只是暂态，局部线性化在零点失效后，不能再用一阶倍率预判走向。</p>
   </div>
   <div class="block pit"><div class="block-title">易错点</div>
@@ -2779,7 +2779,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block var"><div class="block-title">变式</div>
     <p><b>变式</b> 写出该递推吸引周期的三个点，并说明极限为何不存在。</p>
-    <p class="var-ans">答案：三点为 \(0.2301,\ 0.4408,\ 0.6912\) 顺序循环；序列子列分别趋于这三个不同值，故整体极限不存在。</p>
+    <p class="var-ans">答案：三点为 \(0.2301,\ 0.6912,\ 0.4408\) 顺序循环；序列子列分别趋于这三个不同值，故整体极限不存在。</p>
   </div>
 </article>
 
@@ -2831,7 +2831,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>括号内二次项占优：</p>
     \[ j_{n+1}\approx j_n\cdot\frac{u_n^2}{2}=\frac{(\mathrm{erfc}\,j_n)^2}{2j_n}\approx\frac{1}{2j_n}. \]
     <p>靠近零的轨道被向外推，零点不吸引。长迭代后进入周期 3 循环：</p>
-    \[ 0.230052\ \longmapsto\ 0.440834\ \longmapsto\ 0.691183\ \longmapsto\ 0.230052. \]
+    \[ 0.230052\ \longmapsto\ 0.691183\ \longmapsto\ 0.440834\ \longmapsto\ 0.230052. \]
     <p>三个子列分别趋于三个不同数值，整体极限不存在。该周期与 1990、1998 为同一吸引循环，数值点在迭代充分后不再随步数漂移。作为本批最后一题，它与 1989、1999 的 erf 版本构成完整对照：决定收敛还是循环的关键，是右端函数在零点取值为零还是为 1，以及 \(u=\varphi(x)/x\) 在零点是否有有限极限。</p>
   </div>
   <div class="block pit"><div class="block-title">易错点</div>
@@ -3030,7 +3030,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     \[ f(x)=\frac{\sqrt\pi}{2}-\frac{e^{-x^2}}{2x}+O\left(\frac{e^{-x^2}}{x^3}\right), \]
     <p>乘以 \(e^{x^2}\) 后</p>
     \[ f(x)e^{x^2}=\frac{\sqrt\pi}{2}e^{x^2}-\frac{1}{2x}+O\left(\frac{1}{x^3}\right), \]
-    <p>主项是 \((\sqrt\pi/2)e^{x^2}\)，随 \(x\to\infty\) 发散到正无穷。数值上 \(x=3\) 时对数量级已达 \(8.88\)，增长趋势明确。</p>
+    <p>主项是 \((\sqrt\pi/2)e^{x^2}\)，随 \(x\to\infty\) 发散到正无穷。数值上 \(x=3\) 时 \(f(x)e^{x^2}\approx7.181\times10^3\)，\(x=5\) 时已达 \(6.38\times10^{10}\)，增长趋势明确。</p>
   </div>
   <div class="block pit"><div class="block-title">易错点</div>
     <p>① 把被积函数 \(e^{-t^2}\) 的衰减误套到整个乘积上，误以为积分趋于零、乘积也趋于零；积分收敛到正常数而非零。② 忽略指数因子 \(e^{x^2}\) 的符号与方向，本题是正指数增长而非衰减。③ 分部积分渐近式中丢掉常数项 \(\sqrt\pi/2\)，只剩 \(-1/(2x)\) 会误判为 \(0\)。</p>
@@ -3093,7 +3093,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>由 Dirichlet 判别法，\(\int_0^\infty u^{-1/2}\sin u\,du\) 条件收敛：\(u^{-1/2}\) 单调趋于零，\(\sin u\) 的原函数有界。因此分子 \(F(x)=\int_0^x\sin(t^2)dt\) 在 \(x\to\infty\) 时趋于有限常数 \(C\)，自然在 \(x\ge1\) 上有界。</p>
     <p>于是</p>
     \[ |g(x)|=\frac{|F(x)|}{x}\le\frac{M}{x}\to0, \]
-    <p>其中 \(M\) 为 \(F\) 的上界。数值上 \(x=50\) 时 \(g(x)\approx-0.0381\)，\(x=200\) 时绝对值仍在 \(0.07\) 量级振荡，但包络按 \(1/x\) 下降，极限为零。</p>
+    <p>其中 \(M\) 为 \(F\) 的上界。数值上 \(x=50\) 时 \(g(x)\approx0.01238\)，\(x=200\) 时 \(g(x)\approx0.00313\)，包络按 \(1/x\) 下降，极限为零。</p>
   </div>
   <div class="block pit"><div class="block-title">易错点</div>
     <p>① 看到 \(\sin(t^2)\) 振幅不衰减就判定积分发散，实际变量代换后振幅 \(u^{-1/2}\) 衰减，积分条件收敛。② 把分子当成随 \(x\) 线性增长，误以为 \(g(x)\) 趋于非零常数。③ 忽略 Dirichlet 判别条件，仅凭振荡就下结论。</p>
@@ -3124,7 +3124,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     \[ \sum_{k=1}^{n-1}\frac{1}{k+1}\lt{}\ln n\lt{}\sum_{k=1}^{n-1}\frac{1}{k}. \]
     <p>由此可得 \(h_n=\sum_{k=1}^n1/k-\ln n\) 单调递减且有下界 \(0\)，由单调有界准则收敛。其极限定义为 Euler-Mascheroni 常数</p>
     \[ \gamma=\lim_{n\to\infty}\left(\sum_{k=1}^n\frac1k-\ln n\right)\approx0.5772157. \]
-    <p>数值上 \(n=10^5\) 时 \(h_n\approx0.5772107\)，与 \(\gamma\) 的差约 \(5\times10^{-6}\)，符合 \(h_n-\gamma\sim1/(2n)\) 的慢衰减规律。</p>
+    <p>数值上 \(n=10^5\) 时 \(h_n\approx0.5772207\)，与 \(\gamma\) 的差约 \(+5\times10^{-6}\)，符合 \(h_n-\gamma\sim1/(2n)\) 的慢衰减规律。</p>
   </div>
   <div class="block pit"><div class="block-title">易错点</div>
     <p>① 把该常数与 \(\ln2\approx0.693\) 混淆，两者数值接近但来源不同。② 不证存在性就直接称「极限为常数 \(\gamma\)」，逻辑链条缺少单调有界论证。③ 把 \(\ln n\) 写成 \(\ln(n+1)\) 后误以为极限改变，两种写法极限同为 \(\gamma\)。</p>
