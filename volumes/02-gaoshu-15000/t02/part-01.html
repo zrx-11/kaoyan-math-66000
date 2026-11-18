@@ -117,7 +117,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block var">
     <div class="block-title">变式</div>
     <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\dfrac{2k}{n}\sin\dfrac{2k}{n}\)。</p>
-    <p class="var-ans">答案：\(-2\cos2+\sin2\)。令 \(x=2k/n\)，和式化为 \(\int_0^2 x\sin x\,dx\)，分部积分得 \([-x\cos x+\sin x]_0^2=-2\cos2+\sin2\)。</p>
+    <p class="var-ans">答案：\(-\cos2+\dfrac12\sin2\approx0.87080\)。取 \(x_{k}=2k/n\) 时网格宽度是 \(2/n\)，而和式只带 \(1/n\)，即 \(\dfrac1n=\dfrac12\cdot\dfrac{2}{n}\)，所以极限是半个积分：\(\dfrac12\displaystyle\int_0^2x\sin x\,dx=\dfrac12\bigl[-x\cos x+\sin x\bigr]_0^2=-\cos2+\dfrac12\sin2\)。</p>
   </div>
 </article>
 
@@ -309,7 +309,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block var">
     <div class="block-title">变式</div>
     <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{\sqrt{n^{2}+2k^{2}}}\)。</p>
-    <p class="var-ans">答案：\(\dfrac{1}{\sqrt2}\ln(1+\sqrt2)\)。提出 \(n\) 后和式化为 \(\frac1{\sqrt2}\int_0^1\frac{dx}{\sqrt{1+x^{2}/2}}\)，积分得 \(\frac1{\sqrt2}\ln(1+\sqrt2)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{\sqrt2}\ln(\sqrt2+\sqrt3)\approx0.81050\)。提出 \(n\) 后和式化为 \(\displaystyle\int_0^1\frac{dx}{\sqrt{1+2x^{2}}}\)；令 \(u=\sqrt2x\)，上限从 \(1\) 变成 \(\sqrt2\)，于是 \(\dfrac1{\sqrt2}\displaystyle\int_0^{\sqrt2}\frac{du}{\sqrt{1+u^{2}}}=\dfrac1{\sqrt2}\Bigl[\ln\bigl(u+\sqrt{1+u^{2}}\bigr)\Bigr]_0^{\sqrt2}=\dfrac1{\sqrt2}\ln(\sqrt2+\sqrt3)\)。</p>
   </div>
 </article>
 
@@ -636,16 +636,18 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>\(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{k^{2}}{n^{2}}\right)^{k}}=\)</p>
   </div>
-  <div class="answer">答案：\(2e^{-1/2}\)</div>
+  <div class="answer">答案：\(+\infty\)（发散）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(2e^{-1/2}\approx1.2131\)</b>，按题面复算为 <b>\(+\infty\)（发散）</b>。上标经页面图 10 倍放大确认是 \(k\)（既不是 \(k^{2}\)，也不是 \(k/n\)）。错因：\(\ln L_n=\dfrac1n\sum\limits_{k=1}^{n}k\ln\bigl(1+\dfrac{k^{2}}{n^{2}}\bigr)\)，把 \(k\) 拆成 \(n\cdot(k/n)\) 后外层 \(1/n\) 与这个 \(n\) 相消，剩下的是不带 \(1/n\) 的 \(\sum\limits_{k=1}^{n}\dfrac{k}{n}\ln\bigl(1+(\frac{k}{n})^{2}\bigr)\)，它是黎曼和的 \(n\) 倍，故 \(\ln L_n\sim0.193147n\to+\infty\)。书答 \(2e^{-1/2}=e^{\ln2-1/2}\) 恰好等于 \(\exp\int_0^1x\ln(1+x^{2})\,dx\)，即把积分值直接当成了 \(\ln L\)，漏掉了外面的 \(n\) 倍。</p></div>
   <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：连乘再开 \(n\) 次方，属幂指连乘型。连乘不能直接套定积分定义，先取自然对数把乘积化成求和，再判断求和式能否配成 Riemann 和。</p>
-    <p>设原极限为 \(L\)，取对数：</p>
-    \[ \ln L=\lim_{n\to\infty}\frac1n\sum_{k=1}^{n}k\ln\left(1+\frac{k^2}{n^2}\right). \]
-    <p>把 \(k\) 拆成 \(n\cdot(k/n)\)，求和式即标准 Riemann 和：</p>
-    \[ \frac1n\sum_{k=1}^{n}\frac{k}{n}\ln\left(1+\left(\frac{k}{n}\right)^2\right)\longrightarrow\int_0^1 x\ln(1+x^2)\,dx. \]
-    <p>令 \(u=1+x^2\)，则 \(du=2x\,dx\)，即 \(x\,dx=du/2\)；\(x=0\) 时 \(u=1\)，\(x=1\) 时 \(u=2\)：</p>
-    \[ \int_0^1 x\ln(1+x^2)\,dx=\frac12\int_1^2\ln u\,du=\frac12\bigl[u\ln u-u\bigr]_1^2=\frac12(2\ln2-1)=\ln2-\frac12. \]
-    <p>故 \(L=e^{\ln2-1/2}=2e^{-1/2}\)。数值复核：\(n=10^3\) 时对数和约为 \(0.1931\)，与 \(\ln2-1/2\approx0.19315\) 吻合。</p>
+    <p>识别类型：连乘再开 \(n\) 次方。外层开方把乘积化成长度 \(n\) 的和，但括号里的指数 \(k\) 又把这个和抬高 \(n\) 倍，这一步判错就会把发散算成有限值。</p>
+    <p>设第 \(n\) 项为 \(L_n\)，先取对数：</p>
+    \[ \ln L_n=\frac1n\sum_{k=1}^{n}k\ln\left(1+\frac{k^{2}}{n^{2}}\right). \]
+    <p>把 \(k\) 写成 \(n\cdot(k/n)\)，外层 \(1/n\) 与这个 \(n\) 相消，得</p>
+    \[ \ln L_n=\sum_{k=1}^{n}\frac{k}{n}\ln\left(1+\left(\frac{k}{n}\right)^{2}\right)=n\cdot\frac1n\sum_{k=1}^{n}f\Bigl(\frac{k}{n}\Bigr),\quad f(x)=x\ln(1+x^{2}). \]
+    <p>括号内才是黎曼和，因子 \(n\) 留在外面乘，于是</p>
+    \[ \ln L_n\sim n\int_0^1x\ln(1+x^{2})\,dx=n\cdot\frac12\int_1^2\ln u\,du=n\Bigl(\ln2-\frac12\Bigr)=0.193147\,n. \]
+    <p>故 \(\ln L_n\to+\infty\)，\(L_n\to+\infty\)，极限发散。数值上 \(n=10^{3}\) 时 \(\ln L_n=193.494\)，\(n=10^{4}\) 时 \(1931.818\)，两种比值 \(0.19349\)、\(0.193182\) 正收敛到 \(0.193147\)。</p>
   </div>
   <div class="block pit"><div class="block-title">易错点</div>
     <p>① 把连乘当连加处理，直接对 \(\prod\) 套定积分定义；连乘必须先取对数，对数把乘积变求和后才能配 Riemann 和。② 拆 \(k=n\cdot(k/n)\) 时漏掉一个 \(1/n\)，导致积分变量与权重对不上。③ 积分 \(\int\ln u\,du\) 分部积分记错，写成 \(u\ln u\) 而漏减 \(u\) 项，常数部分随之出错。</p>
@@ -687,7 +689,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block var"><div class="block-title">变式</div>
     <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left[\sum\limits_{k=1}^{n}\dfrac{1}{k(k+2)}\right]^{n}\)。</p>
-    <p class="var-ans">答案：\(e^{-3/2}\)。裂项 \(\frac1{k(k+2)}=\frac12(\frac1k-\frac1{k+2})\)，部分和为 \(\frac12(1+\frac12-\frac1{n+1}-\frac1{n+2})\to\frac34\)，底数不是 \(1\)，按 \(1^\infty\) 型另算；本题意在提示裂项后须先判断底数极限是否为 \(1\)。</p>
+    <p class="var-ans">答案：\(0\)。裂项 \(\frac1{k(k+2)}=\frac12\bigl(\frac1k-\frac1{k+2}\bigr)\)，部分和为 \(\frac12\bigl(1+\frac12-\frac1{n+1}-\frac1{n+2}\bigr)\to\frac34\)。底数极限是 \(3/4\lt{}1\) 而不是 \(1\)，指数 \(n\to\infty\)，故 \(\bigl(\frac34\bigr)^{n}\to0\)，不属 \(1^{\infty}\) 型，套不上下游的重要极限。数值上 \(n=10\) 时 \(0.6629^{10}=0.0164\)、\(n=100\) 时 \(3.1\times10^{-14}\)、\(n=1000\) 时约 \(10^{-126}\)，一路趋零。</p>
   </div>
 </article>
 
