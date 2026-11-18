@@ -3106,19 +3106,17 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}\dfrac{\ln(1+\arcsin x)-\arcsin x+\dfrac{1}{2}(\arcsin x)^{2}}{x^{4}}\)。</p>
   </div>
-  <div class="answer">答案：\(-\dfrac{1}{4}\)</div>
+  <div class="answer">答案：发散（\(+\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(-\dfrac{1}{4}\)。复算：发散（\(+\infty\)）。理由：分子 \(\ln(1+u)-u+\dfrac{u^{2}}{2}\) 的最低次为 \(\dfrac{u^{3}}{3}\sim\dfrac{x^{3}}{3}\)，除以 \(x^{4}\) 得 \(\dfrac{1}{3x}\to+\infty\)。书给 \(-\dfrac{1}{4}\) 对应 \(-\dfrac{u^{4}}{4}\) 项，推测题面漏印了 \(-\dfrac{u^{3}}{3}\) 项。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(0/0\) 型，分子外层是 \(\ln(1+u)-u+\dfrac{u^{2}}{2}\)，其中 \(u=\arcsin x\)。先对外层 \(\ln(1+u)\) 做泰勒展开，再把 \(u=\arcsin x\) 代入。</p>
+    <p>识别类型：\(0/0\) 型，但展开后发现分子最低次高于分母，实际发散。令 \(u=\arcsin x\)，分子外层为 \(\ln(1+u)-u+\dfrac{u^{2}}{2}\)。</p>
     <p>外层展开：\(\ln(1+u)=u-\dfrac{u^{2}}{2}+\dfrac{u^{3}}{3}-\dfrac{u^{4}}{4}+o(u^{4})\)，故：</p>
     \[ \ln(1+u)-u+\frac{u^{2}}{2}=\frac{u^{3}}{3}-\frac{u^{4}}{4}+o(u^{4}). \]
-    <p>代入 \(u=\arcsin x=x+\dfrac{x^{3}}{6}+o(x^{3})\)，需要算到 \(x^{4}\)：</p>
-    \[ u^{4}=\left(x+\frac{x^{3}}{6}\right)^{4}=x^{4}+o(x^{4}),\qquad u^{3}=x^{3}+o(x^{3}). \]
-    <p>分子中 \(u^{4}\) 项为 \(-\dfrac{u^{4}}{4}=-\dfrac{x^{4}}{4}+o(x^{4})\)，这是决定 \(x^{4}\) 阶系数的项，故所求极限为 \(-\dfrac{1}{4}\)。</p>
-  </div>
-  <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>按题面分子 ln(1+u)-u+u^2/2 最低次为 u^3/3~x^3/3，除以 x^4 实为发散；书上答案 -1/4 对应 -u^4/4 项，推测题面或漏印 -u^3/3 项。</p>
+    <p>代入 \(u=\arcsin x=x+\dfrac{x^{3}}{6}+o(x^{3})\)，\(u^{3}=x^{3}+o(x^{3})\)，\(u^{4}=x^{4}+o(x^{4})\)。因此分子为：</p>
+    \[ \frac{x^{3}}{3}-\frac{x^{4}}{4}+o(x^{3}). \]
+    <p>除以 \(x^{4}\) 得 \(\dfrac{1}{3x}-\dfrac{1}{4}+o(1)\)，当 \(x\to0\) 时 \(\dfrac{1}{3x}\to+\infty\)，极限发散。</p>
+    <p>阶数依据：分母是 \(x^{4}\)，但分子最低次是 \(x^{3}\)，比分母低一阶，比值发散。这是本题与普通 \(0/0\) 型的关键区别。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -3145,16 +3143,18 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}\dfrac{e^{\sin x}-e^{\arcsin x}}{x^{3}}\)。</p>
   </div>
-  <div class="answer">答案：\(-\dfrac{1}{6}\)</div>
+  <div class="answer">答案：\(-\dfrac{1}{3}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(-\dfrac{1}{6}\)。复算：\(-\dfrac{1}{3}\)。理由：提取公因子后分子 \(\sim\sin x-\arcsin x=-\dfrac{x^{3}}{3}\)，sympy 独立展开验证。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(0/0\) 型，分子 \(e^{\sin x}-e^{\arcsin x}\)，提取公因子 \(e^{\arcsin x}\) 后降维为 \(\sin x-\arcsin x\)。</p>
-    <p>主方法：由 \(e^{\sin x}-e^{\arcsin x}=e^{\arcsin x}\left(e^{\sin x-\arcsin x}-1\right)\sim\sin x-\arcsin x\)。展开 \(\sin x=x-\dfrac{x^{3}}{6}+o(x^{3})\)、\(\arcsin x=x+\dfrac{x^{3}}{6}+o(x^{3})\)，相减得 \(-\dfrac{x^{3}}{3}+o(x^{3})\)，除以 \(x^{3}\)。</p>
-    <p>第二种方法：对两个指数函数分别展开到三阶。\(e^{\sin x}\)：\(\sin x=x-\dfrac{x^{3}}{6}\)，代入 \(e^{u}=1+u+\dfrac{u^{2}}{2}+\dfrac{u^{3}}{6}\)，得 \(1+x+\dfrac{x^{2}}{2}+0\cdot x^{3}+o(x^{3})\)。\(e^{\arcsin x}\)：\(\arcsin x=x+\dfrac{x^{3}}{6}\)，得 \(1+x+\dfrac{x^{2}}{2}+\dfrac{x^{3}}{3}+o(x^{3})\)。两式相减为 \(-\dfrac{x^{3}}{3}+o(x^{3})\)。</p>
-    <p>阶数依据：分母 \(x^{3}\)，两个指数展开的 \(x^{3}\) 项系数之差就是答案。这里 \(\sin x\) 与 \(\arcsin x\) 的三阶系数一负一正，相减时加倍。</p>
-    <p>（按题面简版答案取 \(-\dfrac{1}{6}\)。）</p>
+    <p>识别类型：\(0/0\) 型，分子 \(e^{\sin x}-e^{\arcsin x}\)，提取公因子 \(e^{\arcsin x}\)。</p>
+    <p>主方法：\(e^{\sin x}-e^{\arcsin x}=e^{\arcsin x}\left(e^{\sin x-\arcsin x}-1\right)\sim\sin x-\arcsin x\)。展开 \(\sin x=x-\dfrac{x^{3}}{6}+o(x^{3})\)、\(\arcsin x=x+\dfrac{x^{3}}{6}+o(x^{3})\)，相减得：</p>
+    \[ \sin x-\arcsin x=-\frac{x^{3}}{6}-\frac{x^{3}}{6}+o(x^{3})=-\frac{x^{3}}{3}+o(x^{3}). \]
+    <p>除以 \(x^{3}\) 得 \(-\dfrac{1}{3}\)。</p>
+    <p>第二种方法：对两个指数函数分别展开到三阶。\(e^{\sin x}\)：\(\sin x=x-\dfrac{x^{3}}{6}\)，代入 \(e^{u}=1+u+\dfrac{u^{2}}{2}+\dfrac{u^{3}}{6}\)，得 \(1+x+\dfrac{x^{2}}{2}+0\cdot x^{3}+o(x^{3})\)。\(e^{\arcsin x}\)：\(\arcsin x=x+\dfrac{x^{3}}{6}\)，得 \(1+x+\dfrac{x^{2}}{2}+\dfrac{x^{3}}{3}+o(x^{3})\)。两式相减为 \(-\dfrac{x^{3}}{3}+o(x^{3})\)，与主方法一致。</p>
+    <p>阶数依据：\(\sin x\) 与 \(\arcsin x\) 的三阶系数一负一正（\(-\dfrac{1}{6}\) 与 \(+\dfrac{1}{6}\)），相减时加倍为 \(-\dfrac{1}{3}\)。</p>
   </div>
-    <div class="block pit">
+  <div class="block pit">
     <div class="block-title">易错点</div>
     <p>① 提取公因子时选错方向。本题应提取 \(e^{\arcsin x}\)，因为 \(\arcsin x\) 与 \(\sin x\) 都趋于 \(0\)，提取后 \(e^{u}-1\sim u\) 直接可用。</p>
     <p>② \(\sin x\) 的三阶系数是 \(-\dfrac{1}{6}\)、\(\arcsin x\) 的三阶系数是 \(+\dfrac{1}{6}\)，相减时符号为 \(-\dfrac{1}{6}-\dfrac{1}{6}=-\dfrac{1}{3}\)，符号最易出错。</p>
@@ -3167,10 +3167,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <div class="block-title">变式</div>
     <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{\arcsin x}-e^{\sin x}}{x^{3}}\)。</p>
     <p class="var-ans">答案：\(\dfrac{1}{3}\)。即原题取反，\(\arcsin x-\sin x=\dfrac{x^{3}}{3}+o(x^{3})\)。</p>
-  </div>
-  <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>按展开 sin x-arcsin x=-x^3/3，我的计算为 -1/3，与书上 -1/6 差一倍。</p>
   </div>
 </article>
 
@@ -3473,6 +3469,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>为什么分母是 \(x^{5}\) 却不展开五阶？因为分子在主值区间内恒等于零，不存在任何低阶或高阶修正项，展开多少阶都得 \(x-x=0\)。题目用 \(x^{5}\) 分母是干扰项，考查学生是否被高阶分母吓住而去硬算。</p>
     <p>典型错解：对 \(\arcsin(\sin x)\) 硬套 \(\arcsin t=t+\dfrac{t^{3}}{6}\)，把 \(t=\sin x\) 代入，得到非零结果。这是错误的，因为 \(\arcsin(\sin x)=x\) 是恒等式。</p>
     <p>与 q689、q694 构成反函数恒等化简系列，建议对照记忆。</p>
+    <p>这道题的训练点在于，面对一个看似需要五阶展开的式子，若能先识别出反函数恒等关系，便可一步化简，避免无效计算；分母写成五阶是干扰项，考查学生是否被高阶分母吓住。</p>
   </div>
       <div class="block pit">
     <div class="block-title">易错点</div>
@@ -3499,16 +3496,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}\dfrac{\tan(\arcsin x)-\arcsin(\tan x)}{x^{5}}\)。</p>
   </div>
-  <div class="answer">答案：\(-\dfrac{1}{4}\)</div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(-\dfrac{1}{4}\)。复算：\(0\)。理由：sympy 展开到七阶得 \(\tan(\arcsin x)-\arcsin(\tan x)=-\dfrac{x^{7}}{30}\)，除以 \(x^{5}\) 后趋于 \(0\)。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(0/0\) 型，分子是两个嵌套反三角函数之差，分母 \(x^{5}\)，需要展开到五阶。</p>
-    <p>主方法：对 \(\tan(\arcsin x)\)，用恒等式 \(\tan(\arcsin x)=\dfrac{x}{\sqrt{1-x^{2}}}\)，做二项式展开 \((1-x^{2})^{-1/2}=1+\dfrac{x^{2}}{2}+\dfrac{3x^{4}}{8}+o(x^{4})\)，得 \(\tan(\arcsin x)=x+\dfrac{x^{3}}{2}+\dfrac{3x^{5}}{8}+o(x^{5})\)。对 \(\arcsin(\tan x)\)，令 \(t=\tan x=x+\dfrac{x^{3}}{3}+\dfrac{2x^{5}}{15}\)，用 \(\arcsin t=t+\dfrac{t^{3}}{6}+\dfrac{3t^{5}}{40}+o(t^{5})\)，算到 \(x^{5}\) 得 \(\arcsin(\tan x)=x+\dfrac{x^{3}}{2}+\dfrac{3x^{5}}{8}+o(x^{5})\)。</p>
-    <p>两式相减，按题面简版答案取 \(x^{5}\) 项系数之差，得 \(-\dfrac{1}{4}\)。</p>
-    <p>阶数依据：分母 \(x^{5}\)，若只展开到三阶，两项 \(x^{3}/2\) 抵消后无法定值，必须到五阶。</p>
-    <p>（按题面简版答案取 \(-\dfrac{1}{4}\)。）</p>
+    <p>识别类型：\(0/0\) 型，分子是两个嵌套反三角函数之差，分母 \(x^{5}\)。</p>
+    <p>主方法：对 \(\tan(\arcsin x)\)，用恒等式 \(\tan(\arcsin x)=\dfrac{x}{\sqrt{1-x^{2}}}\)，做二项式展开：</p>
+    \[ (1-x^{2})^{-1/2}=1+\frac{x^{2}}{2}+\frac{3x^{4}}{8}+o(x^{4}),\quad \tan(\arcsin x)=x+\frac{x^{3}}{2}+\frac{3x^{5}}{8}+o(x^{5}). \]
+    <p>对 \(\arcsin(\tan x)\)，令 \(t=\tan x=x+\dfrac{x^{3}}{3}+\dfrac{2x^{5}}{15}\)，用 \(\arcsin t=t+\dfrac{t^{3}}{6}+\dfrac{3t^{5}}{40}+o(t^{5})\)，算到 \(x^{5}\)：</p>
+    \[ \arcsin(\tan x)=x+\frac{x^{3}}{2}+\frac{3x^{5}}{8}+o(x^{5}). \]
+    <p>两式相减：\(\tan(\arcsin x)-\arcsin(\tan x)=o(x^{5})\)。进一步展开到七阶，sympy 验证最低次为 \(-\dfrac{x^{7}}{30}\)，因此除以 \(x^{5}\) 后为 \(-\dfrac{x^{2}}{30}\to0\)。</p>
+    <p>阶数依据：两项在 \(x^{5}\) 阶完全相同，必须展开到更高阶才能看出差异，但差异已是 \(x^{7}\) 阶，除以 \(x^{5}\) 后仍趋于 \(0\)。</p>
   </div>
-    <div class="block pit">
+  <div class="block pit">
     <div class="block-title">易错点</div>
     <p>① 嵌套展开阶数必须到五阶。题目分母是 \(x^{5}\)，若只展开到三阶，两项 \(x^{3}/2\) 抵消后无法定值。</p>
     <p>② \(\tan(\arcsin x)\) 用恒等式 \(\dfrac{x}{\sqrt{1-x^{2}}}\) 展开比逐层套公式更可靠，避免复合展开时遗漏交叉项。</p>
@@ -3521,10 +3521,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <div class="block-title">变式</div>
     <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan(\arcsin x)-x}{x^{3}}\)。</p>
     <p class="var-ans">答案：\(\dfrac{1}{2}\)。由 \(\tan(\arcsin x)=x+\dfrac{x^{3}}{2}+o(x^{3})\) 直接得。</p>
-  </div>
-  <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>用 sympy 展开到七阶得 tan(arcsin x)-arcsin(tan x)=-x^7/30，除以 x^5 应为 0；书上 -1/4 与展开不符。</p>
   </div>
 </article>
 
@@ -3618,6 +3614,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>阶数依据：\(\cos x-1\sim-\dfrac{x^{2}}{2}\) 是二阶无穷小，分母 \(\sin^{2}x\sim x^{2}\) 也是二阶，两者同阶，比值为常数。</p>
     <p>典型错解：提取公因子时漏掉常数 \(e\)，直接写 \(e^{\cos x}-e\sim\cos x-1\)，得到 \(-\dfrac{1}{2}\)。这里的 \(e\) 是必须保留的因子。</p>
     <p>与 q690、q700 同属指数类，核心是提取公因子后用 \(e^{u}-1\sim u\)。</p>
+    <p>提取公因子时常数 e 必须保留，这是本题与普通无穷小替换题的关键区别；若直接写 e^{cos x}-e ~ cos x-1，会漏掉因子 e 而得到 -1/2。</p>
   </div>
       <div class="block pit">
     <div class="block-title">易错点</div>

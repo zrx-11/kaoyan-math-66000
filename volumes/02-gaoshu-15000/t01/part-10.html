@@ -54,8 +54,8 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\dfrac{x^2+\ln x}{x^2-\ln x}\right)^{x^2}\)。</p>
-    <p class="var-ans">答案：\(e^2\)。指数 \(x^2\) 趋于无穷，\(v(u-1)=x^2\cdot\frac{2\ln x}{x^2-\ln x}\sim 2\ln x\to\infty\)？实际上 \(\frac{2x^2\ln x}{x^2-\ln x}\sim 2\ln x\to\infty\)，故极限为 \(+\infty\)。若改为 \(\left(\frac{x^2+1}{x^2-1}\right)^{x^2}\)，答案为 \(e^2\)。</p>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\dfrac{x^2+1}{x^2-1}\right)^{x^2}\)。</p>
+    <p class="var-ans">答案：\(e^2\)。底数 \(\to1\)，指数 \(x^2\to\infty\)，属 \(1^\infty\) 型。\(u-1=\frac{2}{x^2-1}\)，\(v(u-1)=x^2\cdot\frac{2}{x^2-1}\to2\)，故极限为 \(e^2\)。</p>
   </div>
 </article>
 
@@ -68,30 +68,32 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>\(\lim\limits_{x\to0}(\cos x)^{\frac{1}{x^4}}=\)</p>
   </div>
-  <div class="answer">答案：\(e^{-\frac{1}{12}}\)</div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给：\(e^{-1/12}\)。复算：\(0\)。理由：\(\ln\cos x=-\dfrac{x^2}{2}-\dfrac{x^4}{12}+\cdots\)，除以 \(x^4\) 后含 \(-\dfrac{1}{2x^2}\to-\infty\)，故 \(\ln L\to-\infty\)、\(L=0\)。以复算为准。</p>
+  </div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：底数 \(\cos x\to1\)，指数 \(\frac{1}{x^4}\to\infty\)，属 \(1^\infty\) 型。</p>
-    <p>用 \(e^{\lim v(u-1)}\) 公式。先算 \(\ln\cos x\)：</p>
-    <p>由第 875 题已得</p>
-    \[ \ln\cos x=-\frac{x^2}{2}-\frac{x^4}{12}+o(x^4). \]
-    <p>取对数：</p>
-    \[ \frac{1}{x^4}\ln\cos x=-\frac{1}{2x^2}-\frac{1}{12}+o(1). \]
-    <p>这一项发散到 \(-\infty\)，那原极限应为 \(0\)。但本题按本书口径，考查的是「\(\cos x\) 的对数展开中 \(x^4\) 系数」这一常数，故答案写为 \(e^{-1/12}\)。</p>
-    <p>实际上，若题目是 \(\cos x^{1/x^4}\)，由于 \(-x^2/2/x^4=-1/(2x^2)\) 发散，极限为 \(0\)。</p>
-    <p><div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>本书口径为 e^{-1/12}；严格展开 ln cos x = -x^2/2 - x^4/12 - ...，除以 x^4 后 -1/(2x^2) 项发散，按本书口径写 e^{-1/12}</p>
-  </div></p>
+    <p>识别类型：底数 \(\cos x\to1\)，指数 \(\frac{1}{x^4}\to+\infty\)，形式上属 \(1^\infty\) 型。但 \(1^\infty\) 公式 \(e^{\lim v(u-1)}\) 只有在 \(\lim v(u-1)\) 为有限实数时才给出 \(e^{\text{常数}}\)；若 \(v(u-1)\to-\infty\)，则真实极限是 \(e^{-\infty}=0\)，不是某个 \(e^{\text{常数}}\)。</p>
+    <p>第一步：用 \(1^\infty\) 公式先算 \(v(u-1)\)。这里 \(u=\cos x\)，\(v=1/x^4\)。</p>
+    <p>第二步：展开 \(\cos x\)。由 \(\cos x=1-\dfrac{x^2}{2}+\dfrac{x^4}{24}+O(x^6)\)，故</p>
+    \[ u-1=\cos x-1=-\frac{x^2}{2}+\frac{x^4}{24}+O(x^6). \]
+    <p>第三步：乘以 \(v=1/x^4\)：</p>
+    \[ v(u-1)=\frac{1}{x^4}\left(-\frac{x^2}{2}+\frac{x^4}{24}+O(x^6)\right)=-\frac{1}{2x^2}+\frac{1}{24}+O(x^2). \]
+    <p>当 \(x\to0\) 时，\(-\dfrac{1}{2x^2}\to-\infty\)，常数项 \(\frac{1}{24}\) 与高阶项都被这一发散项压倒。</p>
+    <p>第四步：取指数。\(L=e^{v(u-1)}\)，由于 \(v(u-1)\to-\infty\)，故 \(L=0\)。</p>
+    <p>关键一步：本题最容易犯的错是「看到 \(1^\infty\) 就机械套 \(e^{\text{常数}}\)」，只取展开中的 \(x^4\) 系数 \(-1/12\)（或 \(-1/24\)），忽略主部 \(-x^2/2\) 除以 \(x^4\) 后发散。判断阶数的顺序必须是：先看 \(u-1\) 的最低非零阶，再看这个阶数与指数 \(v\) 的阶数之比。本题 \(u-1\) 主部是 \(x^2\)，\(v=1/x^4\)，乘积是 \(1/x^2\)，明显发散。</p>
+    <p>对照：\((\cos x)^{1/x^2}\) 中 \(v=1/x^2\)，\(v(u-1)=-1/2+O(x^2)\to-1/2\)，有限，答案 \(e^{-1/2}\)。这才是考研中真正出现的 \(1^\infty\) 题。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 直接套 \(1^\infty\) 公式 \(e^{\lim v(u-1)}\)，其中 \(u-1=\cos x-1\sim -x^2/2\)，\(v=1/x^4\)，得 \(v(u-1)=-1/(2x^2)\to-\infty\)，极限为 \(0\)。这是严格推导的结果。</p>
-    <p>② 忽略 \(u-1\) 的主部 \(-x^2/2\)，只看高阶项 \(-x^4/12\)，得到 \(e^{-1/12}\)。这正是本书答案所采用的口径——只看「抵消到四次后剩余的常数」。</p>
+    <p>① 机械套 \(1^\infty\) 公式只取常数项。\(u-1\) 的最低阶项决定整个极限行为，高阶项在发散情形下毫无作用。</p>
+    <p>② 误记 \(\cos x\) 展开的 \(x^4\) 系数：\(\cos x=1-x^2/2+x^4/24-\cdots\)，所以 \(\ln\cos x\) 的 \(x^4\) 系数是 \(-1/12\)，不是 \(-1/24\) 或 \(-1/6\)。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>本题展示了幂指极限中「展开阶数要选对」这一原则。常见同类题：\((\cos x)^{1/x^2}\to e^{-1/2}\)、\((\cos x)^{1/x^4}\) 按本书口径 \(e^{-1/12}\)。考研中以 \((\cos x)^{1/x^2}\) 为多见。</p>
+    <p>本题展示了幂指极限中「展开阶数要选对」这一原则。常见同类题：\((\cos x)^{1/x^2}\to e^{-1/2}\) 是考研中真正常考的版本。指数阶数若高于 \(u-1\) 的主部阶数，极限会发散到 \(0\) 或 \(+\infty\)，不再是 \(1^\infty\) 的有限情形。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -109,29 +111,36 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>\(\lim\limits_{x\to\infty}\left(\sin\dfrac{1}{x}+\cos\dfrac{1}{x}\right)^{x^2}=\)</p>
   </div>
-  <div class="answer">答案：\(e^{-\frac{1}{2}}\)</div>
+  <div class="answer">答案：发散（\(+\infty\)）</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给：\(e^{-1/2}\)。复算：发散（\(+\infty\)）。理由：令 \(t=1/x\)，\(\sin t+\cos t=1+t-\dfrac{t^2}{2}+\cdots\)，\(x^2(u-1)=\dfrac{1}{t^2}\left(t-\dfrac{t^2}{2}+\cdots\right)=\dfrac{1}{t}-\dfrac12+\cdots\to+\infty\)。以复算为准。</p>
+  </div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：令 \(t=\frac{1}{x}\to0\)，则底数 \(\sin t+\cos t\to1\)，指数 \(x^2=\frac{1}{t^2}\to\infty\)，属 \(1^\infty\) 型。</p>
-    <p>按本书口径，本题考查「\(\sin t+\cos t\) 展开到二阶后的常数项」。展开：</p>
-    \[ \sin t+\cos t=1+t-\frac{t^2}{2}-\frac{t^3}{6}+\cdots. \]
-    <p>本题按本书口径将底数处理为仅保留到二次项的形式 \(1-\frac{t^2}{2}\)，于是</p>
-    \[ v(u-1)=\frac{1}{t^2}\left(-\frac{t^2}{2}\right)=-\frac12. \]
-    <p>故 \(L=e^{-1/2}\)。</p>
-    <p>需要指出：严格展开中 \(u-1=t-\frac{t^2}{2}+\cdots\)，\(v(u-1)=\frac{1}{t}-\frac12+\cdots\to+\infty\)，极限发散。本书口径只取二阶常数部分。</p>
-    <p><div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>本书口径为 e^{-1/2}；严格展开 sin t + cos t = 1 + t - t^2/2 - ...，x^2(u-1) ~ 1/t -> +infty，按本书口径写 e^{-1/2}</p>
-  </div></p>
+    <p>识别类型：令 \(t=\frac{1}{x}\to0^+\)，则底数 \(\sin t+\cos t\to1\)，指数 \(x^2=\frac{1}{t^2}\to+\infty\)，形式上属 \(1^\infty\) 型。但 \(1^\infty\) 公式给出有限值的前提是 \(\lim v(u-1)\) 为有限实数；若这一乘积发散到 \(+\infty\)，真实极限就是 \(e^{+\infty}=+\infty\)。</p>
+    <p>第一步：展开底数。</p>
+    \[ \sin t=t-\frac{t^3}{6}+O(t^5),\qquad \cos t=1-\frac{t^2}{2}+\frac{t^4}{24}+O(t^6). \]
+    <p>相加：</p>
+    \[ \sin t+\cos t=1+t-\frac{t^2}{2}-\frac{t^3}{6}+O(t^4). \]
+    <p>第二步：写 \(u-1\)。</p>
+    \[ u-1=\sin t+\cos t-1=t-\frac{t^2}{2}-\frac{t^3}{6}+O(t^4). \]
+    <p>注意最低非零阶是 \(t^1\)（一次项），不是 \(t^2\)。</p>
+    <p>第三步：乘以指数 \(v=x^2=1/t^2\)。</p>
+    \[ v(u-1)=\frac{1}{t^2}\left(t-\frac{t^2}{2}-\frac{t^3}{6}+O(t^4)\right)=\frac{1}{t}-\frac{1}{2}-\frac{t}{6}+O(t^2). \]
+    <p>当 \(t\to0^+\) 时，\(\frac{1}{t}\to+\infty\)，常数项 \(-1/2\) 被这一发散项压倒。</p>
+    <p>第四步：取指数。\(L=e^{v(u-1)}\to e^{+\infty}=+\infty\)。</p>
+    <p>关键一步：本题与「只看二次项」的错解差别就在一次项 \(t\)。\(\sin t\) 贡献了 \(+t\)，它乘上 \(1/t^2\) 后变成 \(1/t\)，直接发散。要让 \(1^\infty\) 公式给出有限值，必须让 \(u-1\) 的最低阶项与 \(v\) 相乘后是常数，即 \(u-1\) 应与 \(1/v=t^2\) 同阶——但本题 \(u-1=O(t)\)，与 \(t^2\) 差一个量级，必然发散。</p>
+    <p>对照：\((\cos(1/x))^{x^2}\) 中 \(u-1=\cos t-1=-t^2/2+O(t^4)\)，主部正好是 \(t^2\)，乘 \(1/t^2\) 得 \(-1/2\)，有限，答案 \(e^{-1/2}\)。这才是真正收敛的 \(1^\infty\) 题。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 严格展开会发现 \(u-1\) 有一个一次项 \(t\)，它乘上 \(1/t^2\) 后发散。这与「只看二次项」的本书口径结论不同。</p>
-    <p>② 与第 913 题对照：第 913 题底数是 \(\sin t+\cos t-1\)（减了 1），主部是 \(t\)，指数 \(1/t^2\)，属 \(0^\infty\) 型，答案为 \(0\)。两题底数相差一个「\(-1\)」，结果完全不同。</p>
+    <p>① 只看二次项，把底数近似为 \(1-t^2/2\)，丢掉了 \(\sin t\) 贡献的一次项 \(t\)。这一项是发散的根源。</p>
+    <p>② 与第 913 题对照：第 913 题底数是 \(\sin t+\cos t-1\)（已经减 1），主部是 \(t\)，指数 \(1/t^2\)，属 \(0^\infty\) 型，答案为 \(0\)。本题底数没有减 1，主部虽然也是 \(t\)，但因为底数整体趋于 1，被错误地套上 \(1^\infty\) 公式。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>「\((\sin\frac1x+\cos\frac1x)^{x^2}\)」是 \(1^\infty\) 型的经典包装题。考研中常见变体：\((\sin\frac1x+\cos\frac1x)^{x}\to e\)、\((\cos\frac1x)^{x^2}\to e^{-1/2}\)。</p>
+    <p>「\((\sin\frac1x+\cos\frac1x)^{x^2}\)」是 \(1^\infty\) 型的常见包装题，但严格计算会发现底数的一次项未被抵消，指数又偏高，导致发散。考研中常见变体：\((\sin\frac1x+\cos\frac1x)^{x}\to e\)（指数 \(x=1/t\)，与 \(u-1=O(t)\) 相乘正好是常数 1）、\((\cos\frac1x)^{x^2}\to e^{-1/2}\)（主部正好是 \(t^2\)）。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -187,7 +196,11 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>\(\lim\limits_{x\to\infty}\dfrac{(x+1)^{x+2}(x+2)^{x+1}}{(x+3)^{2x+3}}=\)</p>
   </div>
-  <div class="answer">答案：\(e^{-4}\)</div>
+  <div class="answer">答案：\(e^{-3}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给：\(e^{-4}\)。复算：\(e^{-3}\)。理由：逐项展开 \(\ln(x+a)=\ln x+a/x-a^2/(2x^2)+\cdots\)，合并后常数项为 \(1+2-6=-3\)。以复算为准。</p>
+  </div>
   <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(x\to\infty\) 时多个幂指因子相乘除。直接乘除不好处理，取对数化为三个 \((x+a)\ln(x+b)\) 的线性组合：</p>
@@ -197,26 +210,26 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>代入 \(S\)：</p>
     <p>第一项 \((x+2)\ln(x+1)\)，\(a=1\)：</p>
     \[ (x+2)\ln x+(x+2)\left(\frac{1}{x}-\frac{1}{2x^2}+O(x^{-3})\right)=(x+2)\ln x+1+\frac{3}{2x}+O(x^{-2}). \]
+    <p>其中常数项 \(1\) 来自 \((x+2)\cdot(1/x)=1+2/x\)，合并 \(2/x\) 与第二项 \((x+2)\cdot(-1/(2x^2))=-1/(2x)+\cdots\) 后 \(1/x\) 系数为 \(3/2\)，但常数项就是 \(1\)。</p>
     <p>第二项 \((x+1)\ln(x+2)\)，\(a=2\)：</p>
     \[ (x+1)\ln x+(x+1)\left(\frac{2}{x}-\frac{4}{2x^2}+O(x^{-3})\right)=(x+1)\ln x+2+O(x^{-2}). \]
+    <p>常数项 \(2\) 来自 \((x+1)\cdot(2/x)=2+2/x\)。</p>
     <p>第三项 \(-(2x+3)\ln(x+3)\)，\(a=3\)：</p>
     \[ -(2x+3)\ln x-(2x+3)\left(\frac{3}{x}-\frac{9}{2x^2}+O(x^{-3})\right)=-(2x+3)\ln x-6+O(x^{-2}). \]
-    <p>合并 \(\ln x\) 的系数：\((x+2)+(x+1)-(2x+3)=0\)，恰好消去。</p>
+    <p>常数项 \(-6\) 来自 \(-(2x+3)\cdot(3/x)=-6-9/x\)。</p>
+    <p>合并 \(\ln x\) 的系数：\((x+2)+(x+1)-(2x+3)=0\)，恰好消去。这一步是关键——若不消去，\(\ln x\) 项会发散。</p>
     <p>合并常数项：\(1+2-6=-3\)。</p>
-    <p>按本书口径，本题答案为 \(e^{-4}\)。</p>
-    <p><div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>本书口径为 e^{-4}；按上式逐项展开得常数项 -3，即 e^{-3}，按本书口径写 e^{-4}</p>
-  </div></p>
+    <p>故 \(S\to-3\)，原极限 \(L=e^{-3}\)。</p>
+    <p>关键一步：常数项的算法是「每个因子的指数 \(x+a\) 乘上 \(\ln(x+b)\) 展开式中的 \(b/x\) 项」。第一项指数 \(x+2\)、\(b=1\)，贡献 \(1\)；第二项指数 \(x+1\)、\(b=2\)，贡献 \(2\)；第三项指数 \(-(2x+3)\)、\(b=3\)，贡献 \(-6\)。这是固定公式：对 \((x+a)^{x+b}\) 类因子，\(\ln(x+b)\) 展开中 \(b_{\ln}/x\) 项乘上指数的主部 \(x\)，得到常数 \(b_{\ln}\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
     <p>① 不展开 \(\ln(x+a)\) 直接猜：这类题必须逐项展开到常数项，否则无法定出 \(e^c\) 中的 \(c\)。</p>
-    <p>② 系数错配：\((x+2)\ln(x+1)\)、\((x+1)\ln(x+2)\)、\((2x+3)\ln(x+3)\) 三个组合中 \(a,b\) 位置要对应清楚。</p>
+    <p>② 系数错配：\((x+2)\ln(x+1)\)、\((x+1)\ln(x+2)\)、\((2x+3)\ln(x+3)\) 三个组合中 \(a,b\) 位置要对应清楚。常见错解是把常数项算成 \(1+2-6=-3\) 之外的值，例如漏看第三项系数 \(2\) 而误算为 \(-3\) 应为 \(-4\)。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>「多个 \((x+a)^{x+b}\) 相乘除」类题，是 \(x\to\infty\) 时幂指渐近的代表。标准方法：取对数后展开 \(\ln(x+a)=\ln x+a/x+\cdots\)，再合并常数项。</p>
+    <p>「多个 \((x+a)^{x+b}\) 相乘除」类题，是 \(x\to\infty\) 时幂指渐近的代表。标准方法：取对数后展开 \(\ln(x+a)=\ln x+a/x+\cdots\)，再合并常数项。这类题在考研中以填空题形式出现，关键是别漏项。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -477,33 +490,35 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>\(\lim\limits_{x\to0}(\cos x)^{\frac{1}{x^6}}=\)</p>
   </div>
-  <div class="answer">答案：\(e^{-\frac{1}{45}}\)</div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给：\(e^{-1/45}\)。复算：\(0\)。理由：\(\ln\cos x=-\dfrac{x^2}{2}-\dfrac{x^4}{12}-\dfrac{x^6}{45}+\cdots\)，除以 \(x^6\) 后含 \(-\dfrac{1}{2x^4}\to-\infty\)，故 \(\ln L\to-\infty\)、\(L=0\)。以复算为准。</p>
+  </div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：底数 \(\cos x\to1\)，指数 \(1/x^6\to\infty\)，属 \(1^\infty\) 型。本题需要把 \(\ln\cos x\) 展开到 \(x^6\) 项。</p>
+    <p>识别类型：底数 \(\cos x\to1\)，指数 \(1/x^6\to+\infty\)，形式上属 \(1^\infty\) 型。但和第 902 题一样，\(1^\infty\) 公式给出有限值的前提是 \(\lim v(u-1)\) 为有限实数；若 \(v(u-1)\to-\infty\)，真实极限是 \(e^{-\infty}=0\)。</p>
     <p>第一步：求 \(\ln\cos x\) 的导数。</p>
     \[ (\ln\cos x)'=\frac{-\sin x}{\cos x}=-\tan x. \]
     <p>第二步：写出 \(\tan x\) 的泰勒展开。这是需要记忆的：</p>
     \[ \tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+\frac{17x^7}{315}+\cdots. \]
     <p>第三步：积分回 \(\ln\cos x\)（利用 \(\ln\cos 0=0\)）。</p>
-    \[ \ln\cos x=-\int_0^x\tan t\,dt=-\frac{x^2}{2}-\frac{x^4}{12}-\frac{2}{15}\cdot\frac{x^6}{6}-\cdots=-\frac{x^2}{2}-\frac{x^4}{12}-\frac{x^6}{45}+\cdots. \]
-    <p>第四步：除以 \(x^6\)：</p>
-    \[ \frac{\ln\cos x}{x^6}=-\frac{1}{2x^4}-\frac{1}{12x^2}-\frac{1}{45}+o(1). \]
-    <p>按本书口径，本题考查的是常数项 \(-1/45\)，故 \(L=e^{-1/45}\)。</p>
-    <p><div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>本书口径为 e^{-1/45}；严格展开含 -1/(2x^4)、-1/(12x^2) 发散项，按本书口径写 e^{-1/45}</p>
-  </div></p>
-    <p>关键一步：本题与第 902 题同型。第 902 题指数 \(1/x^4\)，对应 \(\ln\cos x\) 的 \(x^4\) 系数 \(-1/12\)；本题指数 \(1/x^6\)，对应 \(x^6\) 系数 \(-1/45\)。考察对 \(\tan x\) 高阶展开系数的记忆。</p>
+    \[ \ln\cos x=-\int_0^x\tan t\,dt=-\frac{x^2}{2}-\frac{x^4}{12}-\frac{2}{15}\cdot\frac{x^6}{6}-\cdots=-\frac{x^2}{2}-\frac{x^4}{12}-\frac{x^6}{45}+O(x^8). \]
+    <p>第四步：除以 \(x^6\)。</p>
+    \[ \frac{\ln\cos x}{x^6}=-\frac{1}{2x^4}-\frac{1}{12x^2}-\frac{1}{45}+O(x^2). \]
+    <p>当 \(x\to0\) 时，\(-\dfrac{1}{2x^4}\to-\infty\)，\(-\dfrac{1}{12x^2}\to-\infty\)，常数项 \(-1/45\) 被这两个发散项压倒。</p>
+    <p>第五步：取指数。\(L=e^{\ln L}\)，由于 \(\ln L\to-\infty\)，故 \(L=0\)。</p>
+    <p>关键一步：本题与第 902 题同型，只是指数从 \(1/x^4\) 换成 \(1/x^6\)，发散得更快。判断方法完全一致：先看 \(u-1\)（即 \(\cos x-1\sim -x^2/2\)）的主部阶数是 \(x^2\)，再看指数 \(v=1/x^6\) 的阶数是 \(x^{-6}\)，乘积阶数是 \(x^{-4}\)，必然发散到 \(-\infty\)。</p>
+    <p>对照：\((\cos x)^{1/x^2}\) 中 \(v=1/x^2\)，\(v(u-1)=-1/2+O(x^2)\to-1/2\)，有限，答案 \(e^{-1/2}\)。这是真正收敛的 \(1^\infty\) 题。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 严格展开会发现 \(\ln\cos x/x^6\) 中含 \(-1/(2x^4)\) 发散项，极限为 0。本书口径只取 \(x^6\) 系数。</p>
-    <p>② \(x^6\) 系数记错：\(\tan x\) 的 \(x^5\) 系数是 \(2/15\)，积分后为 \(\frac{2}{15}\cdot\frac{1}{6}=\frac{1}{45}\)，加负号。</p>
+    <p>① 机械套 \(1^\infty\) 公式只取 \(x^6\) 系数 \(-1/45\)，忽略主部 \(-x^2/2\) 除以 \(x^6\) 后是 \(-1/(2x^4)\) 发散。</p>
+    <p>② \(x^6\) 系数记错：\(\tan x\) 的 \(x^5\) 系数是 \(2/15\)，积分后为 \(\dfrac{2}{15}\cdot\dfrac{1}{6}=\dfrac{1}{45}\)，加负号。但即便系数记对，本题也不收敛。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>本题与第 902 题同型，只是把指数从 \(1/x^4\) 换成 \(1/x^6\)，对应 \(\ln\cos x\) 的更高阶系数。考察对 \(\tan x\) 高阶展开的记忆。</p>
+    <p>本题与第 902 题同型，只是把指数从 \(1/x^4\) 换成 \(1/x^6\)，发散得更快。考研中真正出现的 \(1^\infty\) 题是 \((\cos x)^{1/x^2}\to e^{-1/2}\)。指数阶数高于 \(u-1\) 主部阶数的题，极限会发散到 \(0\) 或 \(+\infty\)。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -546,7 +561,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block var">
     <div class="block-title">变式</div>
     <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\sin\frac{1}{x}\right)^{x}\)。</p>
-    <p class="var-ans">答案：\(1\)。令 \(t=1/x\)，\((\sin t)^{1/t}\)，对数为 \(\frac{\ln\sin t}{t}\)。由 \(\sin t\sim t\)，\(\ln\sin t\sim\ln t\)，故 \(\frac{\ln t}{t}\to-\infty\)？实际上 \(\sin t\sim t\)，\(\ln\sin t/t\sim\ln t/t\to-\infty\)，极限为 0。修正：\(\lim_{t\to0^+}(\sin t)^{1/t}=0\)。</p>
+    <p class="var-ans">答案：\(0\)。令 \(t=1/x\to0^+\)，原式化为 \((\sin t)^{1/t}\)。取对数 \(\ln L=\dfrac{\ln\sin t}{t}\)。由 \(\sin t\sim t\)，\(\ln\sin t\sim\ln t\)，故 \(\ln L\sim\dfrac{\ln t}{t}\)。当 \(t\to0^+\) 时 \(\ln t\to-\infty\)、\(t\to0^+\)，\(\dfrac{\ln t}{t}\to-\infty\)，从而 \(L=e^{-\infty}=0\)。</p>
   </div>
 </article>
 
@@ -559,44 +574,35 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}\left(\dfrac{\sin x+\sin 2x+\cdots+\sin nx}{nx}\right)^{\frac{1}{x^2}}\)。</p>
   </div>
-  <div class="answer">答案：\(e^{-\frac{n(n+1)^2}{24}}\)</div>
+  <div class="answer">答案：发散（\(+\infty\)，\(n\ge2\) 时）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(e^{-n(n+1)^2/24}\)。复算：\(+\infty\)（底数在 \(x=0\) 处极限为 \((n+1)/2\ne1\)，不满足 \(1^\infty\) 型条件；书答对应已归一化的底数）。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：底数在 \(x\to0\) 时趋于 \(1\)，指数 \(1/x^2\to\infty\)，属 \(1^\infty\) 型，用标准公式 \(\lim u^v=e^{\lim v(u-1)}\)。关键在于把分子这个三角求和展开到 \(x^3\) 阶——因为分母是 \(nx\)、指数是 \(1/x^2\)，只有 \(x^2\) 阶的偏差才会留下来。</p>
-    <p>逐项展开 \(\sin kx=kx-\dfrac{k^3x^3}{6}+o(x^3)\)，对 \(k=1,2,\cdots,n\) 求和：</p>
+    <p>先识别底数在 \(x\to0\) 时的极限。逐项展开 \(\sin kx=kx-\dfrac{k^3x^3}{6}+o(x^3)\)，对 \(k=1,\cdots,n\) 求和：</p>
     \[
     \sum_{k=1}^{n}\sin kx=x\sum_{k=1}^{n}k-\frac{x^3}{6}\sum_{k=1}^{n}k^3+o(x^3).
     \]
-    <p>用等差求和公式 \(\sum k=\dfrac{n(n+1)}{2}\)、立方和公式 \(\sum k^3=\left[\dfrac{n(n+1)}{2}\right]^2\)，代入底数：</p>
+    <p>代入底数并除以 \(nx\)：</p>
     \[
-    u=\frac{1}{nx}\sum_{k=1}^{n}\sin kx
-      =\frac{n+1}{2}-\frac{x^2}{6n}\cdot\frac{n^2(n+1)^2}{4}+o(x^2)
-      =\frac{n+1}{2}-\frac{n(n+1)^2}{24}x^2+o(x^2).
+    u=\frac{1}{nx}\sum_{k=1}^{n}\sin kx=\frac{1}{n}\sum_{k=1}^{n}k-\frac{x^2}{6n}\sum_{k=1}^{n}k^3+o(x^2).
     \]
-    <p>按本书口径，底数的常数部分归一为 \(1\) 后，\(u-1\) 的 \(x^2\) 系数即 \(-\dfrac{n(n+1)^2}{24}\)。于是</p>
-    \[
-    \lim_{x\to0}\frac{1}{x^2}(u-1)=-\frac{n(n+1)^2}{24},
-    \]
-    <p>原极限 \(=e^{-\frac{n(n+1)^2}{24}}\)。</p>
-    <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>若严格按字面，底数在 x=0 处取 (n+1)/2；本书口径按归一化后的 1^∞ 取 x² 偏差，得上述结果。</p>
-  </div>
+    <p>用 \(\sum k=\dfrac{n(n+1)}{2}\)、\(\sum k^3=\left[\dfrac{n(n+1)}{2}\right]^2\)，得 \(u(0)=\dfrac{n+1}{2}\)。当 \(n\ge2\) 时 \(u(0)>1\)，于是 \(u^{1/x^2}\to+\infty\)。这不是 \(1^\infty\) 型，因为底数极限不是 \(1\)。</p>
+    <p>若强行套 \(1^\infty\) 公式 \(u^v=e^{v(u-1)}\)，要求 \(u(0)=1\)；本题 \(u(0)=(n+1)/2\)，多出一个因子 \(((n+1)/2)^{1/x^2}\)，该因子对 \(n\ge2\) 发散到 \(+\infty\)。</p>
+    <p>书答 \(e^{-n(n+1)^2/24}\) 相当于把底数先除以 \((n+1)/2\) 归一化为 \(1\) 后再取指数偏差，但印刷式分母只有 \(nx\)，未做归一化。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 展开阶数不够。只把 \(\sin kx\) 展到一阶 \(kx\)，会得到底数恒为常数、指数发散，无法定值。必须展到 \(x^3\)，那个 \(x^3\) 项除以 \(nx\) 后才给出 \(x^2\) 阶偏差。</p>
-    <p>② 立方和公式记错。\(\sum k^3=[n(n+1)/2]^2\) 与 \(\sum k=n(n+1)/2\) 只差一个平方，抄错一步系数就会从 \(n(n+1)^2/24\) 变成别的数。</p>
-    <p>③ 把 \(\sin kx\) 等价成 \(kx\) 后直接丢掉高阶项。等价无穷小只能替换整体因子，不能在求和里逐项替换后再相加——这里恰恰要靠高阶项才能定极限。</p>
+    <p>① 不先判底数极限就套 \(1^\infty\) 公式。\(1^\infty\) 的前提是底数趋于 \(1\)，本题底数趋于 \((n+1)/2\)。</p>
+    <p>② 立方和公式记错。\(\sum k^3=[n(n+1)/2]^2\) 与 \(\sum k\) 只差一个平方。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>「求和 + 幂指」是 \(1^\infty\) 型的经典包装：把一串 \(\sin kx\)、\(\cos kx\) 或 \(e^{kx}\) 加起来当底数，考的是「展到几阶才够」的判断力。真题常把求和换成等差/等比数列，本质都是用 \(\sum k\)、\(\sum k^2\)、\(\sum k^3\) 公式把系数攒出来。</p>
+    <p>「求和 + 幂指」题型，先判底数极限是 \(1\) 还是别的数。真题中若分母写成 \(n\cdot\dfrac{n+1}{2}\cdot x\)，才是归一化的 \(1^\infty\) 型。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
     <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{\sin x+\sin 2x+\cdots+\sin nx}{n\cdot x\cdot\frac{n+1}{2}}\right)^{1/x^2}\)。</p>
-    <p class="var-ans">答案：\(e^{-n(n+1)/12}\)。归一化常数 \(\frac{n+1}{2}\) 除到底数后，\(x^2\) 系数为 \(-\frac{n(n+1)^2}{24}\cdot\frac{2}{n+1}=-\frac{n(n+1)}{12}\)。</p>
+    <p class="var-ans">答案：\(e^{-n(n+1)/12}\)。归一化后底数为 \(1\)，\(x^2\) 系数为 \(-n(n+1)^2/24\cdot\dfrac{2}{n+1}=-n(n+1)/12\)。</p>
   </div>
 </article>
 
@@ -872,29 +878,27 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}(\cos x)^{\frac{1}{x^8}}\)。</p>
   </div>
-  <div class="answer">答案：\(e^{-\frac{1}{315}}\)</div>
+  <div class="answer">答案：\(e^{-\dfrac{17}{2520}}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(e^{-1/315}\)。复算：\(e^{-17/2520}\)（\(\ln\cos x\) 的 \(x^8\) 项系数经逐阶合并为 \(-17/2520\)，与 \(-1/315=-8/2520\) 差 \(9/2520\)）。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(x\to0\) 时 \(\cos x\to1\)，指数 \(1/x^8\to\infty\)，属 \(1^\infty\) 型。指数高达 \(8\) 次，必须把 \(\ln\cos x\) 展开到 \(x^8\) 阶才能定值——低阶项在归一化后被吸收。</p>
-    <p>用 \(\cos x=1-\dfrac{x^2}{2}+\dfrac{x^4}{24}-\dfrac{x^6}{720}+\dfrac{x^8}{40320}+o(x^8)\)，令 \(u=\cos x-1\)，则 \(\ln\cos x=\ln(1+u)=u-\dfrac{u^2}{2}+\dfrac{u^3}{3}-\dfrac{u^4}{4}+\cdots\)。</p>
-    <p>逐项合并 \(x^2,x^4,x^6,x^8\) 各阶系数：\(x^2\) 系数 \(-1/2\)、\(x^4\) 系数 \(-1/12\)、\(x^6\) 系数 \(-1/45\)，在归一化后被吸收；留下的 \(x^8\) 系数为 \(-\dfrac{1}{315}\)。于是</p>
+    <p>识别类型：\(\cos x\to1\)、指数 \(1/x^8\to\infty\)，是 \(1^\infty\) 型。用 \(\ln(\cos x)^{1/x^8}=\dfrac{1}{x^8}\ln\cos x\)，只需把 \(\ln\cos x\) 展开到 \(x^8\) 阶。</p>
+    <p>令 \(u=\cos x-1=-\dfrac{x^2}{2}+\dfrac{x^4}{24}-\dfrac{x^6}{720}+\dfrac{x^8}{40320}+o(x^8)\)，则 \(\ln\cos x=\ln(1+u)=u-\dfrac{u^2}{2}+\dfrac{u^3}{3}-\dfrac{u^4}{4}+\cdots\)。</p>
+    <p>逐阶合并：</p>
     \[
-    \frac{\ln\cos x}{x^8}\to-\frac{1}{315},
+    \ln\cos x=-\frac{x^2}{2}-\frac{x^4}{12}-\frac{x^6}{45}-\frac{17x^8}{2520}+o(x^8).
     \]
-    <p>原极限 \(=e^{-1/315}\)。</p>
-    <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>直接展开 ln cos x 到 x^8 得 -17/2520；本书口径取 -1/315。</p>
-  </div>
+    <p>其中 \(x^8\) 系数的来源：\(u\) 中 \(x^8\) 项 \(1/40320\)，\(-u^2/2\) 贡献 \(-\dfrac{1}{2}\cdot2\cdot(-1/2)\cdot(1/24)=1/96\)（即 \(x^4\cdot x^4\) 交叉项），\(u^3/3\) 贡献 \(\dfrac{1}{3}\cdot3\cdot(-1/2)^2\cdot(-1/2)\)（即三个 \(x^2\) 相乘），\(-u^4/4\) 贡献 \(-\dfrac{1}{4}\cdot(-1/2)^4\)。合并后通分得 \(-17/2520\)。</p>
+    <p>于是 \(\dfrac{1}{x^8}\ln\cos x\to-\dfrac{17}{2520}\)，原极限 \(=e^{-17/2520}\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 展开阶数不够。只展到 \(x^2\) 或 \(x^4\) 会得到发散或错误常数；指数 \(1/x^8\) 要求 \(\ln\cos x\) 的 \(x^8\) 项。</p>
-    <p>② 把 \(\cos x\) 直接等价成 \(1-x^2/2\)。等价无穷小 \(1-\cos x\sim x^2/2\) 只能用于乘除因子，这里是幂指底数，必须用对数展开。</p>
+    <p>① 只展到 \(x^6\) 就停。指数是 \(1/x^8\)，必须取 \(x^8\) 项。</p>
+    <p>② 合并 \(u^2,u^3,u^4\) 交叉项时漏系数。\(x^8\) 由多种组合（\(2+6,4+4,2+2+4,2+2+2+2\)）贡献，漏一项就错。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 932、942 同族（指数分别为 \(1/x^8,1/x^{10},1/x^{12}\)），考的是 \(\ln\cos x\) 的高阶泰勒系数记忆。这类题在竞赛和考研压轴题里出现，本质是「展到几阶」的精准判断。</p>
+    <p>与 932、942 同族（指数分别为 \(1/x^8,1/x^{10},1/x^{12}\)），考 \(\ln\cos x\) 高阶泰勒系数。标准结果依次为 \(-1/2,-1/12,-1/45,-17/2520,-31/14175,-691/935550\)。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -950,37 +954,35 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}\left(\dfrac{e^x+e^{-x}}{2}\right)^{\frac{1}{x^2}}\)。</p>
   </div>
-  <div class="answer">答案：\(e^{\frac{1}{6}}\)</div>
+  <div class="answer">答案：\(e^{\dfrac{1}{2}}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(e^{1/6}\)。复算：\(e^{1/2}\)（\(\ln\cosh x\) 的 \(x^2\) 项系数为 \(1/2\)，不是 \(1/6\)）。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(x\to0\) 时底数 \((e^x+e^{-x})/2\to1\)，指数 \(1/x^2\to\infty\)，属 \(1^\infty\) 型。底数即双曲余弦 \(\cosh x\)。</p>
+    <p>识别类型：底数 \(\cosh x=\dfrac{e^x+e^{-x}}{2}\to1\)，指数 \(1/x^2\to\infty\)，是 \(1^\infty\) 型。</p>
     <p>展开：\(e^x=1+x+x^2/2+x^3/6+x^4/24+\cdots\)，\(e^{-x}=1-x+x^2/2-x^3/6+x^4/24+\cdots\)，相加除以 \(2\)：</p>
     \[
-    \frac{e^x+e^{-x}}{2}=1+\frac{x^2}{2}+\frac{x^4}{24}+o(x^4).
+    \cosh x=1+\frac{x^2}{2}+\frac{x^4}{24}+o(x^4).
     \]
-    <p>取对数：\(\ln\cosh x=\ln(1+x^2/2+x^4/24+\cdots)=x^2/2+x^4/24-(x^2/2)^2/2+\cdots=x^2/2-x^4/12+\cdots\)。按本书口径归一化后，\(x^2\) 系数给出 \(\dfrac{1}{6}\)，故</p>
+    <p>取对数：令 \(u=\cosh x-1=x^2/2+x^4/24+\cdots\)，则 \(\ln\cosh x=\ln(1+u)=u-u^2/2+\cdots\)。</p>
     \[
-    \frac{1}{x^2}\ln\frac{e^x+e^{-x}}{2}\to\frac{1}{6},
+    \ln\cosh x=\frac{x^2}{2}+\frac{x^4}{24}-\frac{1}{2}\left(\frac{x^2}{2}\right)^2+o(x^4)=\frac{x^2}{2}-\frac{x^4}{12}+o(x^4).
     \]
-    <p>原极限 \(=e^{1/6}\)。</p>
-    <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>直接展开得 ln cosh x ~ x^2/2，对应 e^{1/2}；本书口径为 e^{1/6}。</p>
-  </div>
+    <p>除以 \(x^2\) 取极限：\(\dfrac{1}{x^2}\ln\cosh x\to\dfrac{1}{2}\)，原极限 \(=e^{1/2}\)。</p>
+    <p>为什么不是 \(1/6\)：\(\ln(1+u)\) 的一阶项就是 \(u\) 本身，\(u\) 的 \(x^2\) 系数是 \(1/2\)，所以答案直接是 \(1/2\)。\(x^4\) 项在 \(x^2\) 次方指数下被除掉。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 奇偶项没抵消干净。\(e^x+e^{-x}\) 是偶函数，奇次项全部抵消，只剩偶次项；若把 \(x\) 项残留会算错。</p>
-    <p>② 取对数时忘记展开 \(\ln(1+u)\) 本身。直接写 \(\ln(1+x^2/2+\cdots)=x^2/2+\cdots\) 是对的，但要意识到 \((u-1)\) 的 \(x^2\) 系数才是答案来源。</p>
+    <p>① 奇偶项没抵消干净。\(e^x+e^{-x}\) 是偶函数，奇次项全部抵消。</p>
+    <p>② 把 \(\ln(1+u)\) 的一阶项 \(u\) 误写成 \(u/3\)。\(u\) 本身就是 \(x^2/2\)，不要再除。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>这是 \(1^\infty\) 型的标准模板题，与 94 题的 \(e^x+e^{2x}+\cdots+e^{nx}\) 求和版联动。考的是指数函数泰勒展开与对数展开的配合。</p>
+    <p>\(1^\infty\) 型标准模板题，考指数函数泰勒展开与对数展开配合。对比 \((\cos x)^{1/x^2}=e^{-1/2}\)，\(\cosh x\) 给出对称的 \(e^{1/2}\)。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{e^x+e^{2x}}{2}\right)^{1/x^2}\)。</p>
-    <p class="var-ans">答案：\(e^{5/12}\)。\((e^x+e^{2x})/2=1+3x/2+5x^2/4+\cdots\)，含 \(x\) 项非常数，需先归一化再算；本题按本书口径取 \(x^2\) 偏差系数。</p>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{e^x+e^{2x}+e^{3x}}{3}\right)^{1/x^2}\)。</p>
+    <p class="var-ans">答案：\(e^{7/9}\)。底数平均展开为 \(1+2x+7x^2/3+\cdots\)，含 \(x\) 项需先归一化，取 \(x^2\) 偏差系数。</p>
   </div>
 </article>
 
@@ -1172,34 +1174,36 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}\dfrac{\sin x-\sinh x}{x^3}\)。</p>
   </div>
-  <div class="answer">答案：\(0\)</div>
+  <div class="answer">答案：\(-\dfrac{1}{3}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(0\)。复算：\(-1/3\)（\(\sin x-\sinh x\) 的 \(x^3\) 项系数为 \(-1/3\)；\(x^5\) 项虽抵消，但分母是 \(x^3\)，只取到 \(x^3\) 阶）。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(x\to0\) 的 \(0/0\) 型，分子 \(\sin x-\sinh x\)。\(\sinh x=(e^x-e^{-x})/2\)，与 \(\sin x\) 是一对奇偶对称函数：\(\sin x\) 奇次项正负交替，\(\sinh x\) 奇次项全正。</p>
+    <p>识别类型：\(0/0\) 型，分母 \(x^3\)。\(\sin x\) 与 \(\sinh x\) 是一对奇偶对称函数：\(\sin x\) 奇次项正负交替，\(\sinh x\) 奇次项全正。</p>
     <p>展到 \(x^5\) 阶：</p>
     \[
     \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}+o(x^5),\qquad
     \sinh x=x+\frac{x^3}{6}+\frac{x^5}{120}+o(x^5).
     \]
-    <p>两者 \(x^3\) 系数反号（\(-1/6\) 与 \(+1/6\)），相减得 \(-x^3/3\)；但 \(x^5\) 系数同为 \(+1/120\)，相减后 \(x^5\) 项抵消为 \(0\)。本书口径正取这一高阶抵消：差的 \(x^5\) 项为零，故答案 \(0\)。</p>
-    <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>直接按分母 x^3 取低阶项得 -1/3；本书口径取 x^5 项抵消的 0。</p>
+    <p>相减：</p>
+    \[
+    \sin x-\sinh x=-\frac{x^3}{6}-\frac{x^3}{6}+\left(\frac{x^5}{120}-\frac{x^5}{120}\right)+o(x^5)=-\frac{x^3}{3}+o(x^3).
+    \]
+    <p>除以 \(x^3\) 得 \(-1/3\)。</p>
+    <p>关键：分母是 \(x^3\)，只需要分子的 \(x^3\) 项。\(x^5\) 项抵消为零是事实，但它在 \(o(x^3)\) 里，不影响 \(x^3\) 系数。书答 \(0\) 是误把 \(x^5\) 抵消当成了分子整体为零。</p>
   </div>
-    <p>为什么要展到 \(x^5\)？因为只展到 \(x^3\) 会得到非零值，而题目答案为 \(0\)，提示我们高阶项有抵消。这一类「两个函数泰勒级数对比」的题（920、940）考的就是逐项对照系数，常见错是把 \(\sinh\) 当成 \(\sin\) 的别名，或记错双曲函数系数。</p>
-  </div>  <div class="block pit">
+  <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 把 \(\sinh x\) 当成 \(\sin x\) 或记错泰勒级数。\(\sinh x=x+x^3/6+\cdots\)，系数与 \(\sin x\) 反号。</p>
-    <p>② 展开阶数不够。要判断高阶抵消，必须展到足够阶。</p>
+    <p>① 把 \(\sinh x\) 当成 \(\sin x\)。\(\sinh x=x+x^3/6+\cdots\)，\(x^3\) 系数与 \(\sin x\) 反号。</p>
+    <p>② 看到 \(x^5\) 抵消就以为分子为零。分母阶数决定取哪一阶，本题只取到 \(x^3\)。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>双曲函数与三角函数的泰勒级数对比是竞赛题常客，考奇偶对称（\(\sin\) 奇次项正负交替，\(\sinh\) 全正）。</p>
+    <p>双曲函数与三角函数泰勒级数对比是竞赛题常客。同族：\((\cos x-\cosh x)/x^4=-1/6\)。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\cos x-\cosh x}{x^4}\)。</p>
-    <p class="var-ans">答案：\(-1/6\)。\(\cos x=1-x^2/2+x^4/24-\cdots\)，\(\cosh x=1+x^2/2+x^4/24+\cdots\)，差为 \(-x^2+o(x^2)\)；按本书口径取 \(x^4\) 偏差为 \(0\)，对应 \(-x^2\) 主导。</p>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-\sinh x}{x^5}\)。</p>
+    <p class="var-ans">答案：\(0\)。分子 \(x^3\) 项为 \(-x^3/3\)，\(x^5\) 项抵消，除以 \(x^5\) 后 \(-x^3/3\) 趋于 \(0\)。</p>
   </div>
 </article>
 
@@ -1248,28 +1252,26 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}(\cos x)^{\frac{1}{x^{10}}}\)。</p>
   </div>
-  <div class="answer">答案：\(e^{-\frac{1}{945}}\)</div>
+  <div class="answer">答案：\(e^{-\dfrac{31}{14175}}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(e^{-1/945}\)。复算：\(e^{-31/14175}\)（\(\ln\cos x\) 的 \(x^{10}\) 项系数为 \(-31/14175\)，与 \(-1/945=-15/14175\) 差 \(16/14175\)）。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(x\to0\) 时 \(\cos x\to1\)、指数 \(1/x^{10}\to\infty\) 的 \(1^\infty\) 型。指数高达十次，必须把 \(\ln\cos x\) 展开到 \(x^{10}\) 阶才能定值；低阶项在归一化后被吸收。</p>
-    <p>用 \(\cos x=1-\dfrac{x^2}{2}+\dfrac{x^4}{24}-\dfrac{x^6}{720}+\dfrac{x^8}{40320}-\dfrac{x^{10}}{3628800}+\cdots\)，令 \(u=\cos x-1\)，则 \(\ln(1+u)=u-u^2/2+u^3/3-\cdots\)。逐项合并 \(x^2,x^4,x^6,x^8,x^{10}\) 各阶：低阶系数归一化后吸收，留下 \(x^{10}\) 系数为 \(-1/945\)。于是</p>
+    <p>识别类型：\(\cos x\to1\)、指数 \(1/x^{10}\to\infty\)，是 \(1^\infty\) 型。取对数后需把 \(\ln\cos x\) 展开到 \(x^{10}\) 阶。</p>
+    <p>令 \(u=\cos x-1=-x^2/2+x^4/24-x^6/720+x^8/40320-x^{10}/3628800+\cdots\)，\(\ln(1+u)=u-u^2/2+u^3/3-u^4/4+u^5/5-\cdots\)。逐阶合并到 \(x^{10}\)：</p>
     \[
-    \frac{\ln\cos x}{x^{10}}\to-\frac{1}{945},
+    \ln\cos x=-\frac{x^2}{2}-\frac{x^4}{12}-\frac{x^6}{45}-\frac{17x^8}{2520}-\frac{31x^{10}}{14175}+o(x^{10}).
     \]
-    <p>原极限 \(=e^{-1/945}\)。</p>
-    <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>直接展开 ln cos x 到 x^10 得 -31/14175；本书口径为 -1/945。</p>
+    <p>\(x^{10}\) 系数由多种组合贡献：\(u\) 中 \(x^{10}\) 项、\(-u^2/2\) 中 \(2+8\) 与 \(4+6\) 交叉、\(u^3/3\) 中 \(2+2+6\) 与 \(2+4+4\) 交叉、\(-u^4/4\) 中 \(2+2+2+4\) 交叉、\(u^5/5\) 中五个 \(x^2\) 相乘。合并通分后得 \(-31/14175\)。</p>
+    <p>于是 \(\dfrac{1}{x^{10}}\ln\cos x\to-\dfrac{31}{14175}\)，原极限 \(=e^{-31/14175}\)。</p>
   </div>
-    <p>为什么展到 \(x^{10}\)？因为指数是 \(1/x^{10}\)，只有 \(x^{10}\) 项除以 \(x^{10}\) 后留常数，低阶项除以 \(x^{10}\) 会发散或趋零——这里低阶项在归一化后吸收。922、942 是同型，只是指数分别为 \(1/x^8,1/x^{12}\)，对应取 \(\ln\cos x\) 的 \(x^8,x^{12}\) 系数。</p>
-  
-    <p>补充：对比 922（指数 \(1/x^8\)）与 942（指数 \(1/x^{12}\)），三题结构完全相同，只是展开阶数依次加二。这类题考的不是计算速度，而是阶数判断。</p></div>  <div class="block pit">
+  <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>展开阶数必须与指数匹配：指数 \(1/x^{10}\) 对应 \(x^{10}\) 系数。</p>
+    <p>① 阶数不匹配。指数 \(1/x^{10}\) 对应 \(x^{10}\) 项，取 \(x^8\) 或 \(x^{12}\) 都错。</p>
+    <p>② 交叉项组合漏算。\(x^{10}\) 有 7 种整数分拆，漏一种系数就错。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 922、942 同族。</p>
+    <p>与 922、942 同族。\(\ln\cos x\) 前 6 项系数依次为 \(-1/2,-1/12,-1/45,-17/2520,-31/14175,-691/935550\)。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -1323,28 +1325,30 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}\left(\dfrac{\cos x+\cos 2x+\cdots+\cos nx}{n}\right)^{\frac{1}{x^2}}\)。</p>
   </div>
-  <div class="answer">答案：\(e^{-\frac{n(n+1)(2n+1)}{12}}\)</div>
+  <div class="answer">答案：\(e^{-\dfrac{(n+1)(2n+1)}{12}}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(e^{-n(n+1)(2n+1)/12}\)。复算：\(e^{-(n+1)(2n+1)/12}\)（除以 \(n\) 后，\(\sum k^2\) 中的 \(n\) 与分母 \(n\) 约掉一个，不应保留 \(n\) 因子）。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：与 914 对偶，把正弦换成余弦。\(\cos kx=1-k^2x^2/2+o(x^2)\)，求和后底数在 \(x=0\) 处为 \(n/n=1\)，是真正的 \(1^\infty\) 型。</p>
+    <p>识别类型：底数在 \(x=0\) 处为 \(n/n=1\)，是真正的 \(1^\infty\) 型。\(\cos kx=1-k^2x^2/2+o(x^2)\)。</p>
     <p>求和：</p>
     \[
     \sum_{k=1}^{n}\cos kx=n-\frac{x^2}{2}\sum_{k=1}^{n}k^2+o(x^2).
     \]
-    <p>除以 \(n\)：\(u=1-\dfrac{x^2}{2n}\sum k^2+o(x^2)\)。本书口径下 \(u-1\) 的 \(x^2\) 系数为 \(-\dfrac{1}{2n}\sum k^2\)，用 \(\sum k^2=n(n+1)(2n+1)/6\) 代入，乘以 \(1/x^2\) 取极限：</p>
+    <p>除以 \(n\)：</p>
     \[
-    \lim\frac{1}{x^2}(u-1)=-\frac{n(n+1)(2n+1)}{12},
+    u=\frac{1}{n}\sum_{k=1}^{n}\cos kx=1-\frac{x^2}{2n}\sum_{k=1}^{n}k^2+o(x^2).
     \]
-    <p>原极限 \(=e^{-n(n+1)(2n+1)/12}\)。</p>
-    <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>若除以 n 后归一，系数为 -(n+1)(2n+1)/12；本书口径保留 n 因子。</p>
+    <p>用 \(\sum k^2=\dfrac{n(n+1)(2n+1)}{6}\) 代入：</p>
+    \[
+    u-1=-\frac{x^2}{2n}\cdot\frac{n(n+1)(2n+1)}{6}=-\frac{x^2(n+1)(2n+1)}{12}.
+    \]
+    <p>乘以 \(1/x^2\) 取极限：\(\lim\dfrac{u-1}{x^2}=-\dfrac{(n+1)(2n+1)}{12}\)，原极限 \(=e^{-(n+1)(2n+1)/12}\)。</p>
+    <p>关键约分：\(\sum k^2\) 含一个 \(n\)，除以 \(n\) 后约掉，只剩 \((n+1)(2n+1)/12\)。书答多乘了一个 \(n\)。</p>
   </div>
-    <p>为什么展到 \(x^2\)？因为指数是 \(1/x^2\)，需要 \(u-1\) 的 \(x^2\) 项。余弦展开 \(x^2\) 系数为负，所以答案指数带负号。914、944 是同族（正弦版、指数求和版），区别只在被展开函数与求和公式 \(\sum k,\sum k^2,\sum k^3\) 的选择。</p>
-  </div>  <div class="block pit">
+  <div class="block pit">
     <div class="block-title">易错点</div>
     <p>① \(\sum k^2=n(n+1)(2n+1)/6\)，不要与 \(\sum k\) 或 \(\sum k^3\) 混淆。</p>
-    <p>② 余弦展开是 \(\cos kx=1-k^2x^2/2\)，\(x^2\) 系数为负，所以答案在指数上是负号。</p>
+    <p>② 约分漏一步。除以 \(n\) 后要把 \(n\) 因子约掉，不要多留。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
@@ -1353,7 +1357,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block var">
     <div class="block-title">变式</div>
     <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{\cos x+\cos 2x+\cdots+\cos nx}{n}\right)^{1/x^4}\)。</p>
-    <p class="var-ans">答案：\(e^{n(n+1)(2n+1)(3n^2+3n-1)/180}\)。需展到 \(x^4\) 阶，用 \(\sum k^4\) 公式。</p>
+    <p class="var-ans">答案：\(e^{(n+1)(2n+1)(3n^2+3n-1)/180}\)。需展到 \(x^4\) 阶，用 \(\sum k^4\) 公式。</p>
   </div>
 </article>
 
@@ -1543,30 +1547,29 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}\dfrac{\sin x-\arctan x}{x^3}\)。</p>
   </div>
-  <div class="answer">答案：\(-\dfrac{1}{6}\)</div>
+  <div class="answer">答案：\(\dfrac{1}{6}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(-1/6\)。复算：\(1/6\)（\(\sin x-\arctan x=(x-x^3/6)-(x-x^3/3)=x^3/6+o(x^3)\)，符号为正）。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(x\to0\) 的 \(0/0\) 型，分母 \(x^3\)，两函数都展到 \(x^3\) 阶。用泰勒展开比洛必达连求导三次更稳。</p>
+    <p>识别类型：\(0/0\) 型，分母 \(x^3\)，两函数都展到 \(x^3\) 阶。</p>
     \[
     \sin x=x-\frac{x^3}{6}+o(x^3),\qquad \arctan x=x-\frac{x^3}{3}+o(x^3).
     \]
-    <p>相减：\(\sin x-\arctan x=-\dfrac{x^3}{6}+\dfrac{x^3}{3}+o(x^3)=\dfrac{x^3}{6}+o(x^3)\)。</p>
-    <p>本书口径取 \(-1/6\)，对应 \(\arctan x\) 的 \(x^3\) 系数与 \(\sin x\) 同号相减的情形：差为 \(-x^3/3\) 再除以 \(2\)。</p>
-    <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>直接展开 sin x - arctan x = x^3/6 + o(x^3)，对应 1/6；本书答案为 -1/6。</p>
+    <p>相减：</p>
+    \[
+    \sin x-\arctan x=\left(x-\frac{x^3}{6}\right)-\left(x-\frac{x^3}{3}\right)+o(x^3)=-\frac{x^3}{6}+\frac{x^3}{3}+o(x^3)=\frac{x^3}{6}+o(x^3).
+    \]
+    <p>除以 \(x^3\) 得 \(1/6\)。</p>
+    <p>符号来源：\(\sin x\) 的 \(x^3\) 系数是 \(-1/6\)，\(\arctan x\) 的 \(x^3\) 系数也是 \(-1/3\)。相减时 \(-1/6-(-1/3)=-1/6+1/3=1/6\)。书答 \(-1/6\) 是把 \(\arctan x\) 的系数符号记反了。</p>
   </div>
-    <p>常见错是把 \(\arctan x\) 的 \(x^3\) 系数记成 \(+1/3\) 或 \(-1/6\)，或把相减方向弄反。920、930 是同族，考常见泰勒级数系数记忆。</p>
-  
-    <p>补充：泰勒级数记忆表——\(\sin x=x-x^3/6\)、\(rcsin x=x+x^3/6\)、\(	an x=x+x^3/3\)、\(rctan x=x-x^3/3\)。把这四对系数对照记，符号就不会混。</p>
-    <p>泰勒级数记忆表：\(\sin x=x-x^3/6\)、\(rcsin x=x+x^3/6\)、\(	an x=x+x^3/3\)、\(rctan x=x-x^3/3\)。把这四对系数对照记，符号就不会混。本题 \(rctan x\) 的 \(x^3\) 系数为负，与 \(\sin x\) 反号。本书口径取 \(-1/6\)。</p></div>  <div class="block pit">
+  <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① \(\arctan x=x-x^3/3+\cdots\)，\(x^3\) 系数为负；不要记成 \(+1/3\)。</p>
-    <p>② 符号相减方向：\(\sin x-\arctan x\)，顺序反了符号就反。</p>
+    <p>① \(\arctan x=x-x^3/3+\cdots\)，\(x^3\) 系数为负，不要记成 \(+1/3\)。</p>
+    <p>② 符号相减方向。\(\sin x-\arctan x\)，顺序反了符号就反。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 920、930 同族，考常见泰勒级数系数。</p>
+    <p>与 920、930 同族，考常见泰勒级数系数记忆。记忆表：\(\sin x=x-x^3/6\)、\(\arcsin x=x+x^3/6\)、\(\tan x=x+x^3/3\)、\(\arctan x=x-x^3/3\)。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -1617,29 +1620,26 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}(\cos x)^{\frac{1}{x^{12}}}\)。</p>
   </div>
-  <div class="answer">答案：\(e^{-\frac{1}{10395}}\)</div>
+  <div class="answer">答案：\(e^{-\dfrac{691}{935550}}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(e^{-1/10395}\)。复算：\(e^{-691/935550}\)（\(\ln\cos x\) 的 \(x^{12}\) 项系数为 \(-691/935550\)，与 \(-1/10395=-90/935550\) 差 \(601/935550\)）。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(x\to0\) 时 \(\cos x\to1\)、指数 \(1/x^{12}\to\infty\) 的 \(1^\infty\) 型。指数高达十二次，必须把 \(\ln\cos x\) 展开到 \(x^{12}\) 阶。</p>
-    <p>用 \(\cos x\) 展开到 \(x^{12}\)，令 \(u=\cos x-1\)，\(\ln(1+u)=u-u^2/2+u^3/3-\cdots\)。低阶 \(x^2,\cdots,x^{10}\) 系数归一化后吸收，留下 \(x^{12}\) 系数为 \(-1/10395\)。于是</p>
+    <p>识别类型：\(\cos x\to1\)、指数 \(1/x^{12}\to\infty\)，是 \(1^\infty\) 型。取对数后需把 \(\ln\cos x\) 展开到 \(x^{12}\) 阶。</p>
+    <p>令 \(u=\cos x-1\)，\(\ln(1+u)=u-u^2/2+u^3/3-\cdots\)。逐阶合并到 \(x^{12}\)：</p>
     \[
-    \frac{\ln\cos x}{x^{12}}\to-\frac{1}{10395},
+    \ln\cos x=-\frac{x^2}{2}-\frac{x^4}{12}-\frac{x^6}{45}-\frac{17x^8}{2520}-\frac{31x^{10}}{14175}-\frac{691x^{12}}{935550}+o(x^{12}).
     \]
-    <p>原极限 \(=e^{-1/10395}\)。</p>
-    <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>直接展开 ln cos x 到 x^12 得 -691/935550；本书口径为 -1/10395。</p>
+    <p>\(x^{12}\) 系数由 \(x\) 分解为偶数和的组合贡献：\(12=2+10=4+8=6+6=2+2+8=2+4+6=4+4+4=2+2+2+6=2+2+4+4=2+2+2+2+4=2+2+2+2+2+2\)，共 10 种分拆。合并后通分得 \(-691/935550\)。这个分子 691 是 Bernoulli 数相关的系数。</p>
+    <p>于是 \(\dfrac{1}{x^{12}}\ln\cos x\to-\dfrac{691}{935550}\)，原极限 \(=e^{-691/935550}\)。</p>
   </div>
-    <p>为什么展到 \(x^{12}\)？因为指数是 \(1/x^{12}\)，只有 \(x^{12}\) 项除以 \(x^{12}\) 后留常数。922、932 是同型，只是指数为 \(1/x^8,1/x^{10}\)，对应取 \(\ln\cos x\) 的 \(x^8,x^{10}\) 系数。</p>
-  
-    <p>补充：\(\ln\cos x\) 的泰勒展开前几项依次是 \(-x^2/2,-x^4/12,-x^6/45,-x^8/2520,-x^{10}/14175,-x^{12}/935550\)。指数取哪一项，答案就是那一项系数。</p>
-    <p>\(\ln\cos x\) 的泰勒展开前几项依次是 \(-x^2/2,-x^4/12,-x^6/45,-x^8/2520,-x^{10}/14175,-x^{12}/935550\)。指数取哪一项，答案就是那一项系数。本题指数 \(1/x^{12}\)，故取 \(x^{12}\) 系数。本书口径为 \(-1/10395\)。</p></div>  <div class="block pit">
+  <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>阶数必须与指数匹配。</p>
+    <p>① 阶数不匹配。指数 \(1/x^{12}\) 对应 \(x^{12}\) 项。</p>
+    <p>② 交叉项组合漏算。\(x^{12}\) 的偶数分拆有 10 种，漏一种系数就错。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 922、932 同族。</p>
+    <p>与 922、932 同族。\(\ln\cos x\) 前 6 项系数依次为 \(-1/2,-1/12,-1/45,-17/2520,-31/14175,-691/935550\)。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -1690,37 +1690,35 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>求 \(\lim\limits_{x\to0}\left(\dfrac{e^x+e^{2x}+\cdots+e^{nx}-n}{nx}\right)^{\frac{1}{x}}\)。</p>
   </div>
-  <div class="answer">答案：\(e^{\frac{n(n+1)(2n+1)}{12}}\)</div>
+  <div class="answer">答案：发散（\(+\infty\)，\(n\ge2\) 时）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(e^{n(n+1)(2n+1)/12}\)。复算：\(+\infty\)（底数在 \(x=0\) 处极限为 \((n+1)/2\ne1\)，不满足 \(1^\infty\) 型条件）。以复算为准。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：与 914、934 同型，把正弦换成指数函数。\(e^{kx}=1+kx+k^2x^2/2+o(x^2)\)，求和后底数归一为 \(1\)，是 \(1^\infty\) 型。</p>
-    <p>求和：</p>
+    <p>先识别底数在 \(x\to0\) 时的极限。\(e^{kx}=1+kx+k^2x^2/2+o(x^2)\)，求和：</p>
     \[
     \sum_{k=1}^{n}e^{kx}-n=x\sum_{k=1}^{n}k+\frac{x^2}{2}\sum_{k=1}^{n}k^2+o(x^2).
     \]
-    <p>除以 \(nx\)：\(u=\dfrac{n+1}{2}+\dfrac{x}{2n}\sum k^2+o(x)\)。本书口径下 \(u-1\) 的 \(x\) 系数为 \(\dfrac{1}{2n}\sum k^2\)，用 \(\sum k^2=n(n+1)(2n+1)/6\) 代入，乘以 \(1/x\)：</p>
+    <p>除以 \(nx\)：</p>
     \[
-    \lim\frac{1}{x}(u-1)=\frac{n(n+1)(2n+1)}{12},
+    u=\frac{1}{nx}\left(\sum e^{kx}-n\right)=\frac{1}{n}\sum_{k=1}^{n}k+\frac{x}{2n}\sum_{k=1}^{n}k^2+o(x).
     \]
-    <p>原极限 \(=e^{n(n+1)(2n+1)/12}\)。</p>
-    <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>除以 nx 后归一系数为 (n+1)(2n+1)/12；本书口径保留 n 因子。</p>
+    <p>用 \(\sum k=\dfrac{n(n+1)}{2}\)，得 \(u(0)=\dfrac{n+1}{2}\)。当 \(n\ge2\) 时 \(u(0)>1\)，于是 \(u^{1/x}\to+\infty\)。</p>
+    <p>这不是 \(1^\infty\) 型，因为底数极限不是 \(1\)。若强行套公式，会多出一个因子 \(((n+1)/2)^{1/x}\)，该因子对 \(n\ge2\) 发散到 \(+\infty\)。</p>
+    <p>书答 \(e^{n(n+1)(2n+1)/12}\) 相当于把底数归一化为 \(1\) 后再取 \(x\) 偏差，但印刷式分母只有 \(nx\)，底数在 \(x=0\) 处为 \((n+1)/2\)。</p>
   </div>
-    <p>为什么展到 \(x^2\)？因为指数是 \(1/x\)，需要 \(u-1\) 的 \(x\) 项。914、934 是同族，区别在被展开函数与求和公式 \(\sum k,\sum k^2,\sum k^3\) 的选择。</p>
-  </div>  <div class="block pit">
+  <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 展开 \(e^{kx}\) 到 \(x^2\) 阶，因为指数是 \(1/x\)，需要 \(u-1\) 的 \(x\) 项。</p>
-    <p>② \(\sum k^2=n(n+1)(2n+1)/6\)。</p>
+    <p>① 不先判底数极限就套 \(1^\infty\) 公式。</p>
+    <p>② \(\sum k=n(n+1)/2\)，除以 \(n\) 得 \((n+1)/2\)，这才是底数极限。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 914、934 构成三角/指数求和三兄弟。</p>
+    <p>与 914、934 构成三角/指数求和三兄弟。考求和公式与 \(1^\infty\) 配合，先判底数是否归一为 1。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{e^x+e^{2x}+\cdots+e^{nx}-n}{nx}\right)^{1/x^2}\)。</p>
-    <p class="var-ans">答案：\(e^{n(n+1)(2n+1)/6}\)。需展到 \(x^3\) 阶。</p>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{e^x+e^{2x}+\cdots+e^{nx}-n}{nx\cdot\frac{n+1}{2}}\right)^{1/x}\)。</p>
+    <p class="var-ans">答案：\(e^{(2n+1)/6}\)。归一化后底数为 \(1\)，\(x\) 系数为 \((n+1)(2n+1)/12\cdot2/(n+1)=(2n+1)/6\)。</p>
   </div>
 </article>
 
@@ -2079,19 +2077,15 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>计算 \(\lim\limits_{x\to1}\dfrac{e^x-e\left[1+(x-1)+\dfrac{(x-1)^2}{2}+\dfrac{(x-1)^3}{6}\right]}{(x-1)^4}\)。</p>
   </div>
   <div class="answer">答案：\(\dfrac{e}{24}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>原书该题公式在 PDF 中渲染损坏，按书答 \(e/24\) 还原为 \(e^x\) 在 \(x=1\) 处的泰勒余项题。复算：\(e/24\)（\(e^t\) 展到 \(t^4\)，分子 = \(e\cdot t^4/24\)，除以 \(t^4\) 得 \(e/24\)），与书值一致。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型，分母 \((x-1)^4\)，把 \(e^x\) 在 \(x=1\) 处展开到四阶。</p>
     <p>令 \(t=x-1\)，则 \(e^x=e^{1+t}=e\cdot e^t=e\left(1+t+\dfrac{t^2}{2}+\dfrac{t^3}{6}+\dfrac{t^4}{24}+o(t^4)\right)\)。</p>
     <p>分子：\(e^x-e\left(1+t+\dfrac{t^2}{2}+\dfrac{t^3}{6}\right)=e\cdot\dfrac{t^4}{24}+o(t^4)\)，除以 \(t^4\) 得 \(e/24\)。</p>
-    <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>注：原书该题公式在 PDF 中渲染损坏，按本书答案 e/24 还原为 e^x 在 x=1 处的泰勒余项题。</p>
-  </div>
     <p>关键：展开点是 \(x=1\) 不是 \(x=0\)，必须用 \(e^t\) 的展开且整体乘 \(e\)；展到 \(t^4\) 因为分母是 \(t^4\)，只展到 \(t^3\) 会得到 \(0\)。</p>
-  
-    <p>补充：展开点在 \(x=1\)，整体乘 \(e\) 不要漏；只展到 \(t^3\) 会得到 \(0\)，必须展到 \(t^4\)。</p>
-    <p>展开点在 \(x=1\)，整体乘 \(e\) 不要漏；只展到 \(t^3\) 会得到 \(0\)，必须展到 \(t^4\)。\(e^t=1+t+t^2/2+t^3/6+t^4/24+\cdots\)，分子减去前三项后剩 \(e\cdot t^4/24\)，除以 \(t^4\) 得 \(e/24\)。</p></div>  <div class="block pit">
+  </div>
+  <div class="block pit">
     <div class="block-title">易错点</div>
     <p>① 展开点是 \(x=1\)，不是 \(x=0\)，必须用 \(e^t\) 的展开且整体乘 \(e\)。</p>
     <p>② 展到 \(t^4\)，因为分母是 \(t^4\)；只展到 \(t^3\) 会得到 \(0\)。</p>
@@ -2400,6 +2394,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p>计算 \(\lim\limits_{x\to0}\left(\dfrac{1}{x}-\dfrac{1}{e^x-1}-\dfrac{1}{2}\right)/x\)。</p>
   </div>
   <div class="answer">答案：\(-\dfrac{1}{12}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>原书该题公式在 PDF 中渲染损坏，按书答 \(-1/12\) 还原为 \(e^x-1\) 的倒数展开题。复算：\(-1/12\)（\(1/(e^x-1)=1/x-1/2+x/12+\cdots\)，代入后为 \(-x/12\)，除以 \(x\) 得 \(-1/12\)），与书值一致。</p></div>
   <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(\infty-\infty\) 型，通分后展开。用 \(e^x-1=x+x^2/2+x^3/6+x^4/24+\cdots\)。</p>
@@ -2409,14 +2404,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     =\frac{1}{x}-\frac{1}{2}+\frac{x}{12}+o(x).
     \]
     <p>代入：\(\dfrac{1}{x}-\dfrac{1}{e^x-1}-\dfrac{1}{2}=-\dfrac{x}{12}+o(x)\)，除以 \(x\) 得 \(-1/12\)。</p>
-    <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>注：原书该题公式在 PDF 中渲染损坏，按本书答案 -1/12 还原为 e^x-1 的倒数展开题。</p>
-  </div>
     <p>关键：\(1/(e^x-1)=1/x-1/2+x/12+\cdots\) 是常用展开，\(x\) 系数为 \(+1/12\)。常见错是通分后展的阶数不够。</p>
-  
-    <p>补充：\(1/(e^x-1)=1/x-1/2+x/12-x^3/720+\cdots\)，常用展开，\(x\) 系数为 \(+1/12\)。</p>
-    <p>\(1/(e^x-1)=1/x-1/2+x/12-x^3/720+\cdots\) 是常用展开，\(x\) 系数为 \(+1/12\)。代入后 \(1/x-1/(e^x-1)-1/2=-x/12+o(x)\)，除以 \(x\) 得 \(-1/12\)。常见错是通分后展的阶数不够。</p></div>  <div class="block pit">
+  </div>
+  <div class="block pit">
     <div class="block-title">易错点</div>
     <p>① \(\dfrac{1}{e^x-1}=\dfrac{1}{x}-\dfrac{1}{2}+\dfrac{x}{12}+\cdots\) 是常用展开，\(x\) 的系数为 \(+1/12\)。</p>
     <p>② 通分后要展到 \(x\) 阶，因为最后还要除以 \(x\)。</p>
@@ -2552,23 +2542,23 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>计算 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\left(\dfrac{k^{3}}{n^{4}+k}+\dfrac{k^{2}}{n^{3}}\right)\cos\dfrac{k}{n}\)。</p>
   </div>
-  <div class="answer">答案：\(\dfrac{11}{30}\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型为「\(n\) 项和的极限」，权重 \(\dfrac{k^{3}}{n^{4}+k}\) 与 \(\dfrac{k^{2}}{n^{3}}\) 都是 \(1/n\) 的量级，天然对应把区间 \([0,1]\) 等距分割后的 Riemann 和。先整理第一项权重：</p>
+  <div class="answer">答案：\(6-6\sin1-\cos1\)（约 \(0.411\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(\dfrac{11}{30}\)。复算：\(6-6\sin1-\cos1\approx0.411\)（权重化为 \(\frac1n[(k/n)^3+(k/n)^2]\) 后 Riemann 和收敛到定积分 \(\int_0^1(x^3+x^2)\cos x\,dx\)，数值 0.411，书答 11/30≈0.367 不符）。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型为「\(n\) 项和的极限」，权重 \(\dfrac{k^{3}}{n^{4}+k}\) 与 \(\dfrac{k^{2}}{n^{3}}\) 都是 \(1/n\) 量级，对应 \([0,1]\) 上等距分割的 Riemann 和。先整理第一项权重：</p>
     \[
     \frac{k^{3}}{n^{4}+k}=\frac{k^{3}}{n^{4}}\cdot\frac{1}{1+k/n^{4}}
-    =\frac1n\left(\frac{k}{n}\right)^{3}\left(1-\frac{k}{n^{4}}+O\!\left(\frac{k^{2}}{n^{8}}\right)\right).
+    =\frac1n\left(\frac{k}{n}\right)^{3}\left(1-\frac{k}{n^{4}}+O(n^{-8})\right).
     \]
-    <p>其中修正项 \(\sum\dfrac{k^{4}}{n^{8}}\le\dfrac{n\cdot n^{4}}{n^{8}}=n^{-3}\to0\)，不影响极限。于是两项权重合并为 \(\dfrac1n\left[\left(\dfrac{k}{n}\right)^{3}+\left(\dfrac{k}{n}\right)^{2}\right]\)。</p>
-    <p>本书简版答案列为 \(\dfrac{11}{30}\)，其取法是把非线因子 \(\cos(k/n)\) 按其在 \(0\) 处的一阶主部代入：\(\cos x\) 的主部为常数 1，此时和式退化为 \(\sum\dfrac1n[(k/n)^{3}+(k/n)^{2}]\to\int_0^1(x^{3}+x^{2})dx=\dfrac14+\dfrac13=\dfrac{7}{12}\)。严格作为 Riemann 和时应保留 \(\cos x\)：</p>
+    <p>修正项 \(\sum\dfrac{k^{4}}{n^{8}}\le\dfrac{n^{5}}{5n^{8}}=\dfrac{1}{5n^{3}}\to0\)，故两项权重合并为 \(\dfrac1n\left[\left(\dfrac{k}{n}\right)^{3}+\left(\dfrac{k}{n}\right)^{2}\right]\)。于是和式就是 \(f(x)=(x^{3}+x^{2})\cos x\) 在 \([0,1]\) 上的右端点 Riemann 和：</p>
     \[
-    \int_0^1(x^{3}+x^{2})\cos x\,dx
-    =6-6\sin1-\cos1\approx0.411.
+    \lim_{n\to\infty}\sum_{k=1}^{n}\frac1n f\!\left(\frac{k}{n}\right)=\int_0^1(x^{3}+x^{2})\cos x\,dx.
     \]
-    <p>两种口径不同；本书口径给出 \(\dfrac{11}{30}\)，本题按所给简版答案记录。</p>
-  </div>
-  <div class="block pit">
+    <p>分部积分：\(\int x^{2}\cos x\,dx=x^{2}\sin x+2x\cos x-2\sin x\)，在 \([0,1]\) 上为 \(2\cos1-\sin1\)；\(\int x^{3}\cos x\,dx=x^{3}\sin x+3x^{2}\cos x-6x\sin x-6\cos x\)，在 \([0,1]\) 上为 \(6-5\sin1-3\cos1\)。相加得</p>
+    \[
+    (2\cos1-\sin1)+(6-5\sin1-3\cos1)=6-6\sin1-\cos1\approx0.411.
+    \]
+    <p>数值验证：取 \(n=1000\) 直接求和得 0.4114，与积分值一致。</p><div class="block pit">
     <div class="block-title">易错点</div>
     <p>① 把 \(\dfrac{k^{3}}{n^{4}+k}\) 的分母 \(+k\) 漏掉或随意丢弃，虽然本题该修正趋于 0，但在分母幂次更低时会改变结果，必须先估计量级。</p>
     <p>② 对 \(\cos(k/n)\) 的处理：它在 \(k/n\in[0,1]\) 上并非处处接近 1（\(\cos1\approx0.54\)），严格积分不能直接令 \(\cos\equiv1\)；本书主部替换是一种近似口径。</p>
@@ -2624,8 +2614,8 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x+x^{3}/6}{x^{7}}\)。</p>
-    <p class="var-ans">答案：\(-1/5040\)。\(\sin x=x-x^{3}/6+x^{5}/120-x^{7}/5040+\cdots\)，分子保留到 \(x^{7}\) 得 \(\dfrac{x^{5}}{120}-\dfrac{x^{7}}{5040}\)；除以 \(x^{7}\) 时前一项为 \(x^{-2}/120\to\infty\)，故应先约去 \(x^{5}\) 再看：原式分子主部 \(x^{5}/120\)，除以 \(x^{7}\) 趋于 \(\infty\)。</p>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{x}\sin x-x(1+x)}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(1/3\)。把 \(e^{x}=1+x+x^{2}/2+x^{3}/6+o(x^{3})\) 与 \(\sin x=x-x^{3}/6+o(x^{3})\) 相乘，保留到 \(x^{3}\)：\(x^{3}\) 项来自 \((x^{2}/2)\cdot x=x^{3}/2\) 与 \(1\cdot(-x^{3}/6)=-x^{3}/6\)，合计 \(x^{3}/3\)，故 \(e^{x}\sin x=x+x^{2}+x^{3}/3+o(x^{3})\)。分子减去 \(x(1+x)=x+x^{2}\) 余 \(x^{3}/3\)，除以 \(x^{3}\) 得 \(1/3\)。</p>
   </div>
 </article>
 
@@ -2995,24 +2985,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>计算 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\left(\dfrac{k^{4}}{n^{5}+k}+\dfrac{k^{3}}{n^{4}}\right)\tan\dfrac{k}{n}\)。</p>
   </div>
-  <div class="answer">答案：\(\dfrac{11}{30}\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型为「\(n\) 项和的 Riemann 和」。先整理第一项权重：</p>
+  <div class="answer">答案：\(\displaystyle\int_0^1(x^{4}+x^{3})\tan x\,dx\approx0.499\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(\dfrac{11}{30}\)。复算：\(\int_0^1(x^{4}+x^{3})\tan x\,dx\approx0.499\)（权重化为 \(\frac1n[(k/n)^4+(k/n)^3]\) 后 Riemann 和收敛到定积分，\(n=1000\) 直接求和得 0.500，书答 11/30≈0.367 不符）。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型为 Riemann 和。整理第一项权重：</p>
     \[
-    \frac{k^{4}}{n^{5}+k}=\frac{k^{4}}{n^{5}}\cdot\frac{1}{1+k/n^{5}}
-    =\frac1n\left(\frac{k}{n}\right)^{4}\left(1-\frac{k}{n^{5}}+o(1)\right),
+    \frac{k^{4}}{n^{5}+k}=\frac{k^{4}}{n^{5}}\cdot\frac{1}{1+k/n^{5}}=\frac1n\left(\frac{k}{n}\right)^{4}\left(1+o(1)\right),
     \]
-    <p>修正项 \(\sum k^{5}/n^{10}\le n^{6}/n^{10}=n^{-4}\to0\)。两项权重合并为 \(\dfrac1n\left[\left(\dfrac{k}{n}\right)^{4}+\left(\dfrac{k}{n}\right)^{3}\right]\)。</p>
-    <p>本书简版答案 \(\dfrac{11}{30}\) 的取法是把 \(\tan(k/n)\) 按其在 0 处的一阶主部 \(\tan x\sim x\) 代入，即 \(\tan(k/n)\approx k/n\)：</p>
+    <p>修正项 \(\sum k^{5}/n^{10}\le n^{6}/(6n^{10})=O(n^{-4})\to0\)。两项权重合并为 \(\frac1n[(k/n)^{4}+(k/n)^{3}]\)。和式即 \(f(x)=(x^{4}+x^{3})\tan x\) 在 \([0,1]\) 上的 Riemann 和：</p>
     \[
-    \sum\frac1n\left[\left(\frac{k}{n}\right)^{4}+\left(\frac{k}{n}\right)^{3}\right]\cdot\frac{k}{n}
-    \longrightarrow\int_0^1(x^{5}+x^{4})dx
-    =\frac16+\frac15=\frac{11}{30}.
+    \lim_{n\to\infty}\sum_{k=1}^{n}\frac1n f\!\left(\frac{k}{n}\right)=\int_0^1(x^{4}+x^{3})\tan x\,dx.
     \]
-    <p>严格作为 Riemann 和时应保留 \(\tan x\) 本身，即 \(\int_0^1(x^{4}+x^{3})\tan x\,dx\)，其值含 \(\ln\cos\) 与多重对数，不是有理数；本书口径取一阶主部，答案为 \(11/30\)。</p>
-  </div>
-  <div class="block pit">
+    <p>该积分由 \(\int x^{m}\tan x\,dx\) 分部积分得到，结果含 \(\ln\cos x\) 与多重对数函数，不展开为初等有理式；数值为 \(0.4985\)。数值验证：\(n=1000\) 直接求和得 0.5001，与积分一致。</p>
+    <p>书答 11/30 是把 \(\tan(k/n)\) 近似为 \(k/n\) 所得，但 \(\tan x\) 在 \([0,1]\) 上并不恒等於 \(x\)（\(\tan1\approx1.56\)），Riemann 和必须用真实函数 \(f\) 积分，不能线性化。</p><div class="block pit">
     <div class="block-title">易错点</div>
     <p>① 漏掉第一项权重分母 \(+k\) 的修正，虽本题趋于 0，但需先估计。</p>
     <p>② 不区分「本书主部替换口径」与「严格 Riemann 积分」。\(\tan x\) 在 \(x\in[0,1]\) 上并非处处接近 \(x\)（\(\tan1\approx1.56\)），严格积分不能直接线性化。</p>
@@ -3383,24 +3368,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>计算 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\left(\dfrac{k^{5}}{n^{6}+k}+\dfrac{k^{4}}{n^{5}}\right)\arcsin\dfrac{k}{n}\)。</p>
   </div>
-  <div class="answer">答案：\(\dfrac{13}{42}\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
+  <div class="answer">答案：\(-\dfrac{8}{75}+\dfrac{151\pi}{960}\approx0.388\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(\dfrac{13}{42}\)。复算：\(-\dfrac{8}{75}+\dfrac{151\pi}{960}\approx0.388\)（权重化为 \(\frac1n[(k/n)^5+(k/n)^4]\) 后 Riemann 和收敛到定积分 \(\int_0^1(x^5+x^4)\arcsin x\,dx\)，\(n=1000\) 求和得 0.389，书答 13/42≈0.310 不符）。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
     <p>识别类型为 Riemann 和。整理第一项权重：</p>
     \[
-    \frac{k^{5}}{n^{6}+k}=\frac{k^{5}}{n^{6}}\cdot\frac{1}{1+k/n^{6}}
-    =\frac1n\left(\frac{k}{n}\right)^{5}\left(1+o(1)\right),
+    \frac{k^{5}}{n^{6}+k}=\frac{k^{5}}{n^{6}}\cdot\frac{1}{1+k/n^{6}}=\frac1n\left(\frac{k}{n}\right)^{5}(1+o(1)),
     \]
-    <p>修正项 \(\sum k^{6}/n^{12}\le n^{7}/n^{12}=n^{-5}\to0\)。两项权重合并为 \(\dfrac1n\left[\left(\dfrac{k}{n}\right)^{5}+\left(\dfrac{k}{n}\right)^{4}\right]\)。</p>
-    <p>本书简版答案 \(\dfrac{13}{42}\) 的取法是把 \(\arcsin(k/n)\) 按一阶主部 \(\arcsin x\sim x\) 代入，即 \(\arcsin(k/n)\approx k/n\)：</p>
+    <p>修正项 \(\sum k^{6}/n^{12}\le n^{7}/(7n^{12})=O(n^{-5})\to0\)。两项权重合并为 \(\frac1n[(k/n)^{5}+(k/n)^{4}]\)。和式即 \(f(x)=(x^{5}+x^{4})\arcsin x\) 在 \([0,1]\) 上的 Riemann 和：</p>
     \[
-    \sum\frac1n\left[\left(\frac{k}{n}\right)^{5}+\left(\frac{k}{n}\right)^{4}\right]\cdot\frac{k}{n}
-    \longrightarrow\int_0^1(x^{6}+x^{5})dx
-    =\frac17+\frac16=\frac{13}{42}.
+    \lim_{n\to\infty}\sum_{k=1}^{n}\frac1n f\!\left(\frac{k}{n}\right)=\int_0^1(x^{5}+x^{4})\arcsin x\,dx.
     \]
-    <p>严格作为 Riemann 和时应保留 \(\arcsin x\) 本身，即 \(\int_0^1(x^{5}+x^{4})\arcsin x\,dx\)，其值含 \(\sqrt2,\ln(1+\sqrt2)\) 等，不是有理数；本书口径取一阶主部，答案为 \(13/42\)。</p>
-  </div>
-  <div class="block pit">
+    <p>令 \(u=\arcsin x\) 分部积分（或直接查积分表），得该积分值为 \(-8/75+151\pi/960\approx0.3875\)。数值验证：\(n=1000\) 直接求和得 0.3891，与积分一致。</p>
+    <p>书答 13/42 是把 \(\arcsin(k/n)\) 近似为 \(k/n\) 所得，但 \(\arcsin x\) 在 \([0,1]\) 上偏离 \(x\) 明显（\(\arcsin1=\pi/2\)），Riemann 和必须用真实函数积分。</p><div class="block pit">
     <div class="block-title">易错点</div>
     <p>① 漏掉第一项权重分母 \(+k\) 的修正（本题趋于 0，但需先估计）。</p>
     <p>② 把 \(\arcsin x\) 的主部记错：\(\arcsin x=x+x^{3}/6+\cdots\)，一阶主部是 \(x\)，不是 \(x^{3}\)。</p>
@@ -3760,24 +3740,19 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="stem">
     <p>计算 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\left(\dfrac{k^{6}}{n^{7}+k}+\dfrac{k^{5}}{n^{6}}\right)\arctan\dfrac{k}{n}\)。</p>
   </div>
-  <div class="answer">答案：\(\dfrac{15}{56}\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
+  <div class="answer">答案：\(-\dfrac{257}{1260}+\dfrac{\ln2}{14}+\dfrac{5\pi}{42}\approx0.220\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(\dfrac{15}{56}\)。复算：\(-\dfrac{257}{1260}+\dfrac{\ln2}{14}+\dfrac{5\pi}{42}\approx0.220\)（权重化为 \(\frac1n[(k/n)^6+(k/n)^5]\) 后 Riemann 和收敛到定积分 \(\int_0^1(x^6+x^5)\arctan x\,dx\)，\(n=1000\) 求和得 0.220，书答 15/56≈0.268 不符）。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
     <p>识别类型为 Riemann 和。整理第一项权重：</p>
     \[
-    \frac{k^{6}}{n^{7}+k}=\frac{k^{6}}{n^{7}}\cdot\frac{1}{1+k/n^{7}}
-    =\frac1n\left(\frac{k}{n}\right)^{6}\left(1+o(1)\right),
+    \frac{k^{6}}{n^{7}+k}=\frac{k^{6}}{n^{7}}\cdot\frac{1}{1+k/n^{7}}=\frac1n\left(\frac{k}{n}\right)^{6}(1+o(1)),
     \]
-    <p>修正项 \(\sum k^{7}/n^{14}\le n^{8}/n^{14}=n^{-6}\to0\)。两项权重合并为 \(\dfrac1n\left[\left(\dfrac{k}{n}\right)^{6}+\left(\dfrac{k}{n}\right)^{5}\right]\)。</p>
-    <p>本书简版答案 \(\dfrac{15}{56}\) 的取法是把 \(\arctan(k/n)\) 按一阶主部 \(\arctan x\sim x\) 代入，即 \(\arctan(k/n)\approx k/n\)：</p>
+    <p>修正项 \(\sum k^{7}/n^{14}\le n^{8}/(8n^{14})=O(n^{-6})\to0\)。两项权重合并为 \(\frac1n[(k/n)^{6}+(k/n)^{5}]\)。和式即 \(f(x)=(x^{6}+x^{5})\arctan x\) 在 \([0,1]\) 上的 Riemann 和：</p>
     \[
-    \sum\frac1n\left[\left(\frac{k}{n}\right)^{6}+\left(\frac{k}{n}\right)^{5}\right]\cdot\frac{k}{n}
-    \longrightarrow\int_0^1(x^{7}+x^{6})dx
-    =\frac18+\frac17=\frac{15}{56}.
+    \lim_{n\to\infty}\sum_{k=1}^{n}\frac1n f\!\left(\frac{k}{n}\right)=\int_0^1(x^{6}+x^{5})\arctan x\,dx.
     \]
-    <p>严格作为 Riemann 和时应保留 \(\arctan x\) 本身，即 \(\int_0^1(x^{6}+x^{5})\arctan x\,dx\)，其值含 \(\pi,\ln2\) 等，不是有理数；本书口径取一阶主部，答案为 \(15/56\)。</p>
-  </div>
-  <div class="block pit">
+    <p>分部积分（令 \(u=\arctan x\)，\(dv=(x^{6}+x^{5})dx\)）得该积分值为 \(-257/1260+\ln2/14+5\pi/42\approx0.2195\)。数值验证：\(n=1000\) 直接求和得 0.2203，与积分一致。</p>
+    <p>书答 15/56 是把 \(\arctan(k/n)\) 近似为 \(k/n\) 所得，但 \(\arctan1=\pi/4\approx0.785\) 而 \(1\) 与之相差明显，Riemann 和必须用真实函数积分。</p><div class="block pit">
     <div class="block-title">易错点</div>
     <p>① 漏掉第一项权重分母 \(+k\) 的修正（本题趋于 0，但需先估计）。</p>
     <p>② 把 \(\arctan x\) 的主部记错：\(\arctan x=x-x^{3}/3+\cdots\)，一阶主部是 \(x\)，不是 \(-x^{3}/3\)。</p>
