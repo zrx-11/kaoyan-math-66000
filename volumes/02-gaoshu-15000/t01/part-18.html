@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>《极限》 · 第 1942–2000 题</title>
+<title>《极限》 · 第 1916–2000 题</title>
 <link rel="stylesheet" href="../../assets/site.css">
 <script>
 MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
@@ -18,9 +18,853 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <div class="wrap">
 <header class="pagehead">
   <div class="kicker">02-gaoshu-15000 · 专题 01</div>
-  <h1>第 1942 – 2000 题</h1>
+  <h1>第 1916 – 2000 题</h1>
   <p class="sub"><a href="part-17.html">← 上一分页</a> <a href="index.html">目录</a></p>
 </header>
+<article class="q" id="q1916">
+  <div class="q-head">
+    <span class="qno">第 1916 题</span>
+    <span class="qtype">线性收敛误差衰减（平方根迭代）</span>
+    <span class="qsrc">P958</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\,x_{n+1}=\sqrt{2+x_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{2-x_n}{2^{-n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：仍在 1901 的递推上，问误差 \(e_n=2-x_n\) 与 \(2^{-n}\) 的比值。1908 已证误差是线性收敛 \(e_{n+1}=e_n/4+O(e_n^2)\)，本题比较 \(e_n\) 与 \(2^{-n}\)。之所以这样比，是因为线性收敛公比为 \(1/4=2^{-2}\)，误差衰减比 \(2^{-n}\) 快得多。</p>
+  <p>由 1908 的展开：</p>
+  \[ e_{n+1}=\frac{e_n}{4}+O(e_n^2),\qquad e_n\to0. \]
+  <p>于是 \(e_{n+1}/e_n\to1/4\)，即 \(e_n\sim C\cdot4^{-n}=C\cdot2^{-2n}\)（\(C>0\) 由初值决定）。因此</p>
+  \[ \frac{e_n}{2^{-n}}=\frac{C\cdot2^{-2n}}{2^{-n}}=C\cdot2^{-n}\to0. \]
+  <p>分母 \(2^{-n}\) 衰减得比误差 \(2^{-2n}\) 慢，比值趋于 0。这说明平方根迭代的误差是 \(4^{-n}\) 量级（线性收敛公比 1/4），不是 \(2^{-n}\)；若要给出误差的真实衰减速率，应写 \(e_n\cdot4^n\to C\) 为非零常数。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 误以为误差是 \(2^{-n}\)，比值趋于非零常数；② 把公比 \(1/4\) 误写成 \(1/2\)；③ 不区分线性收敛（\(q^n\) 衰减）与二次收敛（超指数衰减）。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>本题用比值判定线性收敛速率：公比 \(1/4\) 对应误差 \(4^{-n}\)。它与 1908（误差比发散）、1909（二次误差常数）共同构成不动点迭代收敛阶的完整考查链。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\,x_{n+1}=\sqrt{2+x_n}\)，求 \(\lim\limits_{n\to\infty}(2-x_n)4^n\)。</p>
+  <p class="var-ans">答案：某正的常数 \(C\)（由初值 \(x_1=1\) 决定，存在且非零）。线性收敛 \(e_{n+1}=e_n/4+O(e_n^2)\)，故 \(e_n4^n\) 收敛到非零常数。</p>
+  </div>
+</article>
+
+<article class="q" id="q1917">
+  <div class="q-head">
+    <span class="qno">第 1917 题</span>
+    <span class="qtype">牛顿迭代二次误差比（一般常数）</span>
+    <span class="qsrc">P958</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\,a_{n+1}=\dfrac12\left(a_n+\dfrac{9}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_{n+1}-3}{(a_n-3)^2}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac16\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1909 同型的牛顿迭代，求 \(\sqrt9=3\)。误差比仍是常数，只需把常数 \(2\) 换成 \(9\)、极限点 \(\sqrt2\) 换成 \(3\)。之所以直接作代数配方，是因为牛顿迭代的误差恒为完全平方。</p>
+  <p>先由均值不等式 \(a_{n+1}=\tfrac12(a_n+9/a_n)\ge3\)，且 \(a_{n+1}-a_n=(9-a_n^2)/(2a_n)\le0\)（当 \(a_n\ge3\)），故 \(\{a_n\}\) 单调递减趋于 3。设 \(e_n=a_n-3\)，配方：</p>
+  \[ a_{n+1}-3=\frac12\left(a_n+\frac{9}{a_n}\right)-3=\frac{a_n^2-6a_n+9}{2a_n}=\frac{(a_n-3)^2}{2a_n}. \]
+  <p>所求比值为</p>
+  \[ \frac{a_{n+1}-3}{(a_n-3)^2}=\frac{1}{2a_n}\to\frac{1}{2\cdot3}=\frac16. \]
+  <p>系数 \(1/6\) 是 \(1/(2\cdot3)\)，即 \(1/(2\sqrt c)\) 在 \(c=9\) 时的取值。对比 1909（\(c=2\)，常数 \(1/(2\sqrt2)\)），可见牛顿迭代二次误差常数的一般公式为 \(1/(2\sqrt c)\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 把常数误算成 \(1/3\)（漏了分母的 2）；② 不证 \(a_n\to3\) 就取极限；③ 配方时符号写错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>本题考查牛顿迭代 \(a_{n+1}=\tfrac12(a_n+c/a_n)\) 的二次误差常数公式 \(1/(2\sqrt c)\)，取 \(c=9\) 得 \(1/6\)。考研中常见 \(c=2,4,9\) 等具体值，核心方法都是代数配方 \(a_{n+1}-\sqrt c=(a_n-\sqrt c)^2/(2a_n)\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\,a_{n+1}=\tfrac12\left(a_n+\dfrac{4}{a_n}\right)\)，求误差比 \(\lim(a_{n+1}-2)/(a_n-2)^2\)。</p>
+  <p class="var-ans">答案：\(1/4\)。配方 \(a_{n+1}-2=(a_n-2)^2/(2a_n)\)，令 \(a_n\to2\) 得 \(1/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1918">
+  <div class="q-head">
+    <span class="qno">第 1918 题</span>
+    <span class="qtype">压缩递推阶估计（\(x/(1+x^2)\) 型）</span>
+    <span class="qsrc">P958</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\,x_{n+1}=\dfrac{x_n}{1+x_n^2}\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{\sqrt2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：递推 \(x_{n+1}=x_n/(1+x_n^2)\) 把分子保留、分母加 \(x_n^2\)，压缩到 0。与 \(\sin\) 型不同，这里增量是 \(x_n^3\) 阶（因为 \(x/(1+x^2)=x-x^3+O(x^5)\)），故取 \(1/x_n^2\) 倒量。之所以平方倒量，是因为 \(x_{n+1}^{-2}-x_n^{-2}\) 是常数。</p>
+  <p>由 \(0<x_{n+1}<x_n\) 知 \(x_n\to0\)。两边取倒数平方：</p>
+  \[ \frac{1}{x_{n+1}^2}=\frac{(1+x_n^2)^2}{x_n^2}=\frac{1}{x_n^2}+2+x_n^2. \]
+  <p>即 \(1/x_{n+1}^2-1/x_n^2=2+O(x_n^2)\)，而 \(x_n^2\to0\)，故差趋于 2。由 Stolz 定理得 \(1/x_n^2\sim2n\)，即 \(x_n^2\sim1/(2n)\)，\(x_n\sim1/\sqrt{2n}\)。于是</p>
+  \[ \sqrt n\,x_n\to\frac{1}{\sqrt2}. \]
+  <p>系数 \(1/2\) 来自分母展开 \((1+x^2)^2=1+2x^2+x^4\) 中的 \(2x^2\) 项，倒量后常数为 2。下一级 \(x_n^2\) 项是 \(O(1/n)\)，累加为 \(O(\ln n)\)，不影响 \(\sqrt n\,x_n\) 的主阶。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 取 \(1/x_n\) 倒量，差不是常数；② 把 \((1+x^2)^2\) 展开成 \(1+x^4\) 漏掉 \(2x^2\)；③ 把结果写成 \(\sqrt2\) 而非 \(1/\sqrt2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>本题考查「\(x_{n+1}=x_n/(1+x_n^2)\)」型压缩递推的主阶 \(x_n^2\sim1/(2n)\)，取倒数平方是钥匙。考研常以 \(\sqrt n\,x_n\) 或 \(n x_n^2\) 两种形式考查同一主阶，与 \(\sin\) 型（1903）、\(\ln\) 型（1907）共同构成压缩递推阶估计模块。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\,x_{n+1}=\dfrac{x_n}{1+2x_n^2}\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,x_n\)。</p>
+  <p class="var-ans">答案：\(1/2\)。倒量 \(1/x_{n+1}^2=1/x_n^2+4+O(x_n^2)\)，得 \(x_n^2\sim1/(4n)\)，故 \(\sqrt n\,x_n\to1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1919">
+  <div class="q-head">
+    <span class="qno">第 1919 题</span>
+    <span class="qtype">压缩递推阶估计（arctan 迭代）</span>
+    <span class="qsrc">P958</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\,a_{n+1}=\arctan(a_n)\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\sqrt3}{\sqrt2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：\(a_{n+1}=\arctan a_n\) 压缩到 0，与 \(\sin\) 型同属三次小量型，但系数不同。\(\arctan a=a-a^3/3+O(a^5)\)，增量是 \(a^3\) 阶，故取 \(1/a_n^2\) 倒量。之所以平方倒量，是因为倒量后差为常数。</p>
+  <p>由 \(0<a_{n+1}=\arctan a_n<a_n\) 知 \(a_n\to0\)。利用 \(\arctan a=a-a^3/3+O(a^5)\)，</p>
+  \[ a_{n+1}^2=a_n^2\left(1-\frac{a_n^2}{3}+O(a_n^4)\right)^2=a_n^2\left(1-\frac{2a_n^2}{3}+O(a_n^4)\right). \]
+  <p>取倒数：</p>
+  \[ \frac{1}{a_{n+1}^2}=\frac{1}{a_n^2}\cdot\frac{1}{1-2a_n^2/3+O(a_n^4)}=\frac{1}{a_n^2}+\frac23+O(a_n^2). \]
+  <p>故 \(1/a_n^2\sim\dfrac{2n}{3}\)，即 \(a_n^2\sim\dfrac{3}{2n}\)，\(a_n\sim\sqrt{\dfrac{3}{2n}}\)。于是</p>
+  \[ \sqrt n\,a_n\to\sqrt{\frac32}=\frac{\sqrt3}{\sqrt2}. \]
+  <p>系数 \(2/3\) 来自 \(\arctan a\) 展开中 \(-a^3/3\)：平方后 \(2\cdot(1/3)=2/3\)。对比 \(\sin\) 型（系数 \(1/3\)，见 1903、1913），\(\arctan\) 型的平方倒量常数是 \(2/3\)，对应 \(a_n\sim\sqrt{3/(2n)}\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 把 \(\arctan\) 的三次项系数记成 \(1/6\)（那是 \(\sin\) 的）；② 取 \(1/a_n\) 倒量；③ 结果写成 \(\sqrt{2/3}\) 而非 \(\sqrt{3/2}\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>\(\arctan\) 型与 \(\sin\) 型在考研中常成对出现考查系数记忆：\(\sin x=x-x^3/6\) 给倒量常数 \(1/3\)，\(\arctan x=x-x^3/3\) 给 \(2/3\)。本题是 \(\arctan\) 型主阶。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\,a_{n+1}=\arctan(a_n)\)，求 \(\lim\limits_{n\to\infty}n a_n^2\)。</p>
+  <p class="var-ans">答案：\(3/2\)。由 \(a_n^2\sim3/(2n)\) 得 \(n a_n^2\to3/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1920">
+  <div class="q-head">
+    <span class="qno">第 1920 题</span>
+    <span class="qtype">压缩递推阶估计（\(x/(1+x^2)\) 型）</span>
+    <span class="qsrc">P958</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\,x_{n+1}=\dfrac{x_n}{1+x_n^2}\)，求 \(\lim\limits_{n\to\infty}nx_n^2\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1918 同一递推 \(x_{n+1}=x_n/(1+x_n^2)\)，主阶已在 1918 求出 \(x_n^2\sim1/(2n)\)。本题直接取平方比。之所以仍倒量化，是因为 \(x_{n+1}^{-2}-x_n^{-2}\) 是常数。</p>
+  <p>由 \(0<x_{n+1}<x_n\) 知 \(x_n\to0\)。两边取倒数平方：</p>
+  \[ \frac{1}{x_{n+1}^2}=\frac{(1+x_n^2)^2}{x_n^2}=\frac{1}{x_n^2}+2+x_n^2. \]
+  <p>差 \(2+O(x_n^2)\to2\)，由 Stolz 定理 \(1/x_n^2\sim2n\)，即 \(x_n^2\sim1/(2n)\)。于是</p>
+  \[ n x_n^2\to\frac12. \]
+  <p>系数 \(1/2\) 来自倒量常数 \(2\)。本题与 1918 是同一主阶的两种问法：1918 问 \(\sqrt n\,x_n\)（结果 \(1/\sqrt2\)），1920 问 \(n x_n^2\)（结果 \(1/2\)），平方后正好一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1918 混淆后忘记平方；② 把倒量常数记成 1，得 \(n x_n^2\to1\)；③ 不取倒量直接估计。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>本题考查「\(x_{n+1}=x_n/(1+x_n^2)\)」型压缩递推的平方主阶 \(x_n^2\sim1/(2n)\)，取倒数平方后 \(1/x_n^2\sim2n\)。考研常以 \(n x_n^2\) 形式直接考查倒量主阶，与 \(\sin\) 型、\(\arctan\) 型同属压缩递推阶估计模块。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\,x_{n+1}=\dfrac{x_n}{1+3x_n^2}\)，求 \(\lim\limits_{n\to\infty}n x_n^2\)。</p>
+  <p class="var-ans">答案：\(1/6\)。倒量 \(1/x_{n+1}^2=1/x_n^2+6+O(x_n^2)\)，得 \(x_n^2\sim1/(6n)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1921">
+  <div class="q-head">
+    <span class="qno">第 1921 题</span>
+    <span class="qtype">递推对数修正（\(x+1/x^2\) 型）</span>
+    <span class="qsrc">P959</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\,x_{n+1}=x_n+\dfrac{1}{x_n^2}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n^3-3n}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(3/2\)，复算 \(1\)（三次方展开 \(x_{n+1}^3=x_n^3+3+3/x_n^3+O(x_n^{-6})\)，主阶 \(x_k^3\sim3k\)，故 \(\sum3/x_k^3\sim\sum1/k\sim\ln n\)，对数项系数为 1 而非 \(3/2\)；数值模拟在 \(N=5\times10^7\) 时比值约 1.06 并趋于 1），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在 1905、1912 主阶 \(x_n^3\sim3n\) 之上追问对数修正。主阶给出 \(x_n^3-3n=O(\ln n)\)，本题问这个 \(O(\ln n)\) 的系数。之所以三次方后还要展开二阶项，是因为常数 3 已被主阶减去，剩下的差由 \(3/x_n^3\) 这一项经累加产生对数。</p>
+  <p>三次方展开：</p>
+  \[ x_{n+1}^3=\left(x_n+\frac{1}{x_n^2}\right)^3=x_n^3+3x_n^2\cdot\frac{1}{x_n^2}+3x_n\cdot\frac{1}{x_n^4}+\frac{1}{x_n^6}=x_n^3+3+\frac{3}{x_n^3}+O(x_n^{-6}). \]
+  <p>令 \(z_n=x_n^3\)，则 \(z_{n+1}-z_n=3+\dfrac{3}{z_n}+O(1/z_n^2)\)。累加：</p>
+  \[ z_n=3n+C+\sum_{k=1}^{n-1}\frac{3}{z_k}+O(1). \]
+  <p>由主阶 \(z_k\sim3k\)，故 \(\dfrac{3}{z_k}\sim\dfrac{3}{3k}=\dfrac1k\)，求和 \(\sum\dfrac1k\sim\ln n\)。于是</p>
+  \[ z_n-3n\sim\ln n,\qquad \frac{x_n^3-3n}{\ln n}\to1. \]
+  <p>系数 \(1\) 来自 \(3/z_k\sim1/k\)：分子的 3 与分母 \(z_k\sim3k\) 中的 3 约掉，剩 \(1/k\)。更高阶项 \(O(1/z_k^2)=O(1/k^2)\) 求和收敛，不贡献对数。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 把 \(3/z_k\) 的系数误算成 \(3/(3k)=1/k\) 后又多乘 3，得 \(3/2\)；② 漏掉三阶展开中的 \(3x_n/x_n^4\) 这一项；③ 不说明 \(O(1/k^2)\) 求和收敛。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>本题是 1905、1912 主阶的对数修正层，与 1922（\(a_n+1/a_n\) 型）对照：一类是三次方型（系数 1），一类是平方型（系数 1/2）。考研拔高题常以「主阶之外再问 \(\ln n\) 系数」形式出现。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\,x_{n+1}=x_n+\dfrac{1}{x_n^2}\)，求 \(\lim\limits_{n\to\infty}(x_n^3-3n)/\ln n\) 的系数。</p>
+  <p class="var-ans">答案：\(1\)。由 \(3/z_k\sim1/k\) 直接累加得系数 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q1922">
+  <div class="q-head">
+    <span class="qno">第 1922 题</span>
+    <span class="qtype">递推对数修正（\(a+1/a\) 型）</span>
+    <span class="qsrc">P959</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\,a_{n+1}=a_n+\dfrac{1}{a_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n^2-2n}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在 1904、1911 主阶 \(a_n^2\sim2n\) 之上追问对数修正。主阶给出 \(a_n^2-2n=O(\ln n)\)，本题问这个系数。之所以平方后展开二阶项，是因为常数 2 已被主阶减去，剩下的差由 \(1/a_n^2\) 经累加产生对数。</p>
+  <p>平方展开：</p>
+  \[ a_{n+1}^2=\left(a_n+\frac{1}{a_n}\right)^2=a_n^2+2+\frac{1}{a_n^2}. \]
+  <p>令 \(z_n=a_n^2\)，则 \(z_{n+1}-z_n=2+\dfrac{1}{z_n}\)。累加：</p>
+  \[ z_n=2n+C+\sum_{k=1}^{n-1}\frac{1}{z_k}+O(1). \]
+  <p>由主阶 \(z_k\sim2k\)，故 \(\dfrac{1}{z_k}\sim\dfrac{1}{2k}\)，求和 \(\sum\dfrac{1}{2k}\sim\dfrac12\ln n\)。于是</p>
+  \[ a_n^2-2n\sim\frac12\ln n,\qquad \frac{a_n^2-2n}{\ln n}\to\frac12. \]
+  <p>系数 \(1/2\) 来自 \(1/z_k\sim1/(2k)\)：分母 \(z_k\sim2k\) 中的 2 直接进入系数。对比 1921（三次方型系数 1），本题平方型系数为 \(1/2\)，二者都是「主阶幂次 \(p+1\) 的倒数」。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 把系数记成 1（忘记 \(z_k\sim2k\) 中的 2）；② 不说明求和 \(\sum1/(2k)\sim\ln n/2\)；③ 与 1921 的系数混淆。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>本题是 1904、1911 主阶的对数修正层，与 1921 构成「平方型—立方型」对照。对数修正系数是考研拔高题的常见考法，方法统一为：先定主阶幂次，再把二阶项换成调和级数求和。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\,a_{n+1}=a_n+\dfrac{2}{a_n}\)，求 \(\lim\limits_{n\to\infty}(a_n^2-4n)/\ln n\)。</p>
+  <p class="var-ans">答案：\(1\)。平方 \(a_{n+1}^2=a_n^2+4+4/a_n^2\)，主阶 \(a_n^2\sim4n\)，二阶 \(4/z_k\sim4/(4k)=1/k\)，求和 \(\sim\ln n\)，故对数项系数为 1。数值模拟 \(N=10^7\) 时比值约 1.02 并趋于 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q1923">
+  <div class="q-head">
+    <span class="qno">第 1923 题</span>
+    <span class="qtype">压缩递推对数修正（sin 迭代）</span>
+    <span class="qsrc">P959</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\,x_{n+1}=\sin(x_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1}{x_n^2}-\dfrac n3}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac15\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1/6\)，复算 \(1/5\)（倒量 \(y_n=1/x_n^2\) 展开到 \(x_n^2\) 一阶：\(y_{n+1}-y_n=1/3+x_n^2/15+O(x_n^4)\)，用主阶 \(x_k^2\sim3/k\) 求和 \(\sum x_k^2\sim3\ln n\)，得 \((1/15)\cdot3\ln n=\ln n/5\)，系数为 1/5），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在 1903、1913 主阶 \(1/x_n^2\sim n/3\) 之上追问对数修正。主阶给出 \(1/x_n^2-n/3=O(\ln n)\)，本题问这个系数。之所以把 \(y_n=1/x_n^2\) 展开到 \(x_n^2\) 一阶，是因为常数 \(1/3\) 已被主阶减去，剩下的差由 \(x_n^2\) 项贡献。</p>
+  <p>由 \(x_{n+1}=\sin x_n=x_n-x_n^3/6+x_n^5/120+O(x_n^7)\)，</p>
+  \[ x_{n+1}^2=x_n^2\left(1-\frac{x_n^2}{6}+\frac{x_n^4}{120}\right)^2=x_n^2\left(1-\frac{x_n^2}{3}+\frac{2x_n^4}{45}+O(x_n^6)\right). \]
+  <p>取倒数：</p>
+  \[ \frac{1}{x_{n+1}^2}=\frac{1}{x_n^2}\left(1+\frac{x_n^2}{3}+\frac{x_n^4}{15}+O(x_n^6)\right)=\frac{1}{x_n^2}+\frac13+\frac{x_n^2}{15}+O(x_n^4). \]
+  <p>令 \(y_n=1/x_n^2\)，则 \(y_{n+1}-y_n=\dfrac13+\dfrac{1}{15y_n}+O(1/y_n^2)\)。累加：</p>
+  \[ y_n=\frac n3+C+\frac{1}{15}\sum_{k=1}^{n-1}x_k^2+O(1). \]
+  <p>由主阶 \(x_k^2\sim3/k\)，故 \(\sum x_k^2\sim3\ln n\)。代入：</p>
+  \[ y_n-\frac n3\sim\frac{1}{15}\cdot3\ln n=\frac{\ln n}{5}. \]
+  <p>因此 \(\dfrac{1/x_n^2-n/3}{\ln n}\to\dfrac15\)。系数 \(1/5\) 来自 \(x_n^2/15\) 这一项与主阶 \(x_k^2\sim3/k\) 的乘积：\((1/15)\cdot3=1/5\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 把二阶项 \(x_n^2/15\) 漏展开，得 0；② 系数记成 \(1/6\)（那是 \(\sin\) 三次项系数，不是对数修正系数）；③ 忘记 \(\sum x_k^2\sim3\ln n\) 中的 3。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>本题是 \(\sin\) 型压缩递推的对数修正层，与 1915（\(\ln\) 型修正 \(-1/6\)）方法一致但系数不同。考研拔高题常以「主阶之外再问 \(\ln n\) 系数」形式出现，需把倒量展开到下一阶。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\,x_{n+1}=\sin x_n\)，求 \(\lim\limits_{n\to\infty}(1/x_n^2-n/3)/\ln n\) 的系数。</p>
+  <p class="var-ans">答案：\(1/5\)。倒量二阶项 \(x_n^2/15\) 乘主阶和 \(3\ln n\) 得系数 \(1/5\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1924">
+  <div class="q-head">
+    <span class="qno">第 1924 题</span>
+    <span class="qtype">压缩递推对数修正（ln 迭代）</span>
+    <span class="qsrc">P959</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\,a_{n+1}=\ln(1+a_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1}{a_n}-\dfrac n2}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{6}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1/6\)，复算 \(-1/6\)（与第 1915 题题面完全相同；倒量 \(b_n=1/a_n\) 满足 \(b_{n+1}-b_n=1/2-a_n/12+O(a_n^2)\)，求和 \(\sum a_k\sim2\ln n\)，得负系数 \(-1/6\)），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：本题题面与第 1915 题完全相同，递推 \(a_{n+1}=\ln(1+a_n)\)，问 \((1/a_n-n/2)/\ln n\)。按同一套方法独立推导一遍：先定主阶 \(a_n\sim2/n\)，再把倒量展开到 \(a_n\) 一阶求对数修正。</p>
+  <p>设 \(b_n=1/a_n\)。由 \(\ln(1+a)=a-a^2/2+a^3/3+O(a^4)\)，</p>
+  \[ \frac{1}{a_{n+1}}=\frac{1}{a_n}\cdot\frac{1}{1-a_n/2+a_n^2/3+O(a_n^3)}=\frac{1}{a_n}+\frac12-\frac{a_n}{12}+O(a_n^2). \]
+  <p>即 \(b_{n+1}-b_n=\dfrac12-\dfrac{1}{12b_n}+O(1/b_n^2)\)。累加：</p>
+  \[ b_n=\frac n2+C-\frac{1}{12}\sum_{k=1}^{n-1}a_k+O(1). \]
+  <p>由主阶 \(a_k\sim2/k\)，故 \(\sum a_k\sim2\ln n\)。代入：</p>
+  \[ b_n-\frac n2\sim-\frac{1}{12}\cdot2\ln n=-\frac{\ln n}{6}. \]
+  <p>因此 \(\dfrac{1/a_n-n/2}{\ln n}\to-\dfrac16\)。负号来自展开中 \(-a_n/12\)：倒量时三阶项 \(+a_n^3/3\) 与二阶项平方 \(-a_n^2/2\) 合并产生 \(-a_n/12\)，求和后为负。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 因题面与 1915 相同而直接照抄结果却把符号写反；② 只展开到 \(1/2+O(a_n)\) 漏掉对数项；③ 忘记 \(\sum a_k\sim2\ln n\) 的系数 2。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>本题考查 \(a_{n+1}=\ln(1+a_n)\) 递推倒量展开时二阶项 \(1/a_{n+1}-1/a_n=\tfrac12-\tfrac{a_n}{12}+O(a_n^2)\) 的取舍。考研拔高题常故意只给出主阶 \(n/2\) 让考生以为 \(1/a_n-n/2\) 有界，实际必须把 \(-a_n/12\) 这一项保留并求和 \(\sum a_k\sim2\ln n\)，才能得到 \(-1/6\) 的对数系数。这一倒量展开法与 \(\sin\) 型（1923）、\(\arctan\) 型对照，是判断压缩递推对数修正符号与系数的通用工具。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\,a_{n+1}=\ln(1+a_n)\)，求 \(\lim\limits_{n\to\infty}(1/a_n-n/2)/\ln n\)（独立推导符号）。</p>
+  <p class="var-ans">答案：\(-1/6\)。倒量二阶项 \(-a_n/12\) 求和 \(\sum a_k\sim2\ln n\)，得负系数 \(-1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1925">
+  <div class="q-head">
+    <span class="qno">第 1925 题</span>
+    <span class="qtype">压缩递推高阶项（ln 迭代）</span>
+    <span class="qsrc">P959</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\,a_{n+1}=\ln(1+a_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{na_n-2}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在 1907 主阶 \(a_n\sim2/n\) 与 1915 对数修正 \(b_n=1/a_n=n/2-\ln n/6+O(1)\) 之上，问 \(na_n-2\) 与 \(\ln n\) 的比值。之所以从 \(b_n\) 反推 \(a_n\)，是因为 \(a_n\) 的高阶项由 \(b_n\) 的对数项决定，直接展开 \(a_n\) 不方便。</p>
+  <p>由 1915：</p>
+  \[ \frac{1}{a_n}=\frac n2-\frac{\ln n}{6}+O(1). \]
+  <p>提出 \(n/2\)：</p>
+  \[ \frac{1}{a_n}=\frac n2\left(1-\frac{\ln n}{3n}+\frac{2C}{n}+O(1/n)\right). \]
+  <p>取倒数（用 \(1/(1-u)\approx1+u\)，\(u=\ln n/(3n)\to0\)）：</p>
+  \[ a_n=\frac{2}{n}\left(1+\frac{\ln n}{3n}+O(1/n)\right)=\frac{2}{n}+\frac{2\ln n}{3n^2}+O(1/n^2). \]
+  <p>于是</p>
+  \[ na_n=2+\frac{2\ln n}{3n}+O(1/n),\qquad na_n-2=\frac{2\ln n}{3n}+O(1/n). \]
+  <p>除以 \(\ln n\)：</p>
+  \[ \frac{na_n-2}{\ln n}=\frac{2}{3n}+O(1/(n\ln n))\to0. \]
+  <p>结果为 0 的原因是：\(na_n-2\) 本身已是 \(\ln n/n\) 量级，比 \(\ln n\) 小一个 \(n\) 的因子，除以 \(\ln n\) 后趋于 0。这说明 \(na_n\) 收敛到 2 的速度是 \(O(\ln n/n)\)，没有 \(\ln n\) 量级的常数修正。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 误以为 \(na_n-2\) 是 \(\ln n\) 量级，硬套 1915 的系数；② 不展开 \(b_n\) 就反推 \(a_n\)；③ 忽略 \(1/(1-u)\) 展开中 \(u=\ln n/(3n)\) 趋于 0。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>本题是压缩递推线的第三层：主阶 \(a_n\sim2/n\)（1907）、倒量对数修正（1915、1924）、原量高阶项（1925）。考研常三层连考，考查学生能否从倒量主阶反推原量修正。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\,a_{n+1}=\ln(1+a_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{n(na_n-2)}{\ln n}\)。</p>
+  <p class="var-ans">答案：\(2/3\)。由 \(na_n-2\sim2\ln n/(3n)\) 直接乘 \(n\) 得 \(2/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1926">
+  <div class="q-head">
+    <span class="qno">第 1926 题</span>
+    <span class="qtype">递推求阶（取倒数平方线性化）</span>
+    <span class="qsrc">P960</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\dfrac{a_n}{1+a_n^2}\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{\sqrt2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：右端在不动点 \(a=0\) 附近是 \(a_{n+1}=a_n(1-a_n^2+o(a_n^2))\)，即每一步按 \(1-a_n^2\) 衰减，属于「趋近零、衰减速度由 \(a_n^2\) 决定」的递推求阶题。这类题直接对 \(a_n\) 取极限什么都得不到（\(a_n\to0\)），必须先把「每步缩小的量」写成一个累加和，因此要做的变形是取倒数平方：令 \(b_n=1/a_n^2\)。之所以选平方，是因为把 \(a_{n+1}=a_n/(1+a_n^2)\) 两边取倒数后 \(1/a_{n+1}=(1+a_n^2)/a_n=1/a_n+a_n\)，再平方恰好把主项变成常数。</p>
+    <p>由递推式：</p>
+    \[ \frac{1}{a_{n+1}}=\frac{1+a_n^2}{a_n}=\frac{1}{a_n}+a_n, \]
+    \[ b_{n+1}=\frac{1}{a_{n+1}^2}=\left(\frac{1}{a_n}+a_n\right)^2=\frac{1}{a_n^2}+2+a_n^2=b_n+2+\frac{1}{b_n}. \]
+    <p>于是 \(b_{n+1}-b_n=2+1/b_n\)。右端主项是常数 \(2\)，余项 \(1/b_n\) 当 \(b_n\to\infty\) 时是无穷小。对 \(k=1,\dots,n-1\) 求和：</p>
+    \[ b_n=b_1+2(n-1)+\sum_{k=1}^{n-1}\frac{1}{b_k}. \]
+    <p>先看主阶：若 \(b_n\sim Cn\)，则 \(1/b_k\sim 1/(Ck)\)，其和为 \((1/C)\ln n=o(n)\)，不影响主项，自洽给出 \(C=2\)，即 \(b_n\sim2n\)。严格说，先证 \(b_n\to\infty\)（\(a_n\) 单调递减有下界 \(0\)，若 \(a_n\to l>0\) 则 \(l=l/(1+l^2)\) 矛盾），再由夹逼 \(2n+O(1)\le b_n\le2n+O(\ln n)\) 得 \(b_n/n\to2\)。</p>
+    <p>故 \(a_n=1/\sqrt{b_n}\sim1/\sqrt{2n}\)，代入得 \(\sqrt n\,a_n\to1/\sqrt2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误取倒数一次而非倒数平方：\(1/a_{n+1}-1/a_n=a_n\) 是无穷小，累加后量级不明，必须平方才能把主项变成常数。② 把 \(1/b_n\) 这一项丢掉直接得 \(b_n=2n\)，在本题求 \(\sqrt n\,a_n\) 时精度刚好够，但同一模型做「修正阶」问法（如 1936）时就会出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「取倒数平方把衰减型递推化为等差型」是本批（1926–1946）的统一手法，核心是识别 \(a_{n+1}=a_n(1-ca_n^p+\cdots)\) 的形状，再按 \(1/a_n^p\) 取倒数。考研与竞赛中常把右端换成 \(\arctan a_n\)、\(\sin a_n\)、\(\ln(1+a_n)\) 等展开，主项系数由展开中 \(a_n^3\) 的系数决定。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\dfrac{a_n}{1+2a_n^2}\)，求 \(\lim n\,a_n^2\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{4}\)。取倒数平方得 \(b_{n+1}-b_n=4+1/b_n\)，故 \(b_n\sim4n\)，\(n a_n^2=n/b_n\to1/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1927">
+  <div class="q-head">
+    <span class="qno">第 1927 题</span>
+    <span class="qtype">递推求阶（arctan 展开）</span>
+    <span class="qsrc">P960</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\arctan(x_n)\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\sqrt3}{\sqrt2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\arctan x\) 在 \(0\) 附近展开为 \(x-x^3/3+O(x^5)\)，故 \(x_{n+1}=x_n-x_n^3/3+O(x_n^5)\)，即每步按 \(x_n^3\) 的量级衰减。与 1926 同理，直接求极限是 \(x_n\to0\)，必须线性化。变形方向仍是取倒数平方：\(1/x_{n+1}^2-1/x_n^2\) 的主项将是常数，这一步的依据是 \((1-\varepsilon)^{-2}\approx1+2\varepsilon\)，把 \(x_{n+1}=x_n(1-x_n^2/3+O(x_n^4))\) 代入即可。</p>
+    <p>展开：</p>
+    \[ x_{n+1}=x_n\left(1-\frac{x_n^2}{3}+O(x_n^4)\right), \]
+    \[ \frac{1}{x_{n+1}^2}=\frac{1}{x_n^2}\left(1-\frac{x_n^2}{3}+O(x_n^4)\right)^{-2}=\frac{1}{x_n^2}\left(1+\frac{2x_n^2}{3}+O(x_n^4)\right). \]
+    <p>于是：</p>
+    \[ \frac{1}{x_{n+1}^2}-\frac{1}{x_n^2}=\frac{2}{3}+O(x_n^2). \]
+    <p>主项常数 \(2/3\) 来自 \(\arctan x\) 展开中 \(x^3\) 的系数 \(-1/3\)，再乘 \(2\)。对 \(k\) 求和：</p>
+    \[ \frac{1}{x_n^2}=\frac{2}{3}(n-1)+C+\sum O(x_k^2). \]
+    <p>其中 \(\sum O(x_k^2)=\sum O(1/k)=O(\ln n)=o(n)\)，不影响主项。故 \(1/x_n^2\sim2n/3\)，即 \(x_n\sim\sqrt{3/(2n)}\)。</p>
+    <p>代入得 \(\sqrt n\,x_n\to\sqrt{3/2}=\sqrt3/\sqrt2\)。本题与 1935（求 \(n x_n^2\)）是同一数列的两种问法，答案互为倒数。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\arctan x=x-x^3/3\) 的系数记错成 \(+1/3\)，符号反了会得到 \(x_n\) 发散的错误结论。② 取倒数后忘记乘 \(2\)：衰减率是 \(x_{n+1}=x_n(1-x_n^2/3)\)，倒数平方的增量是 \(2/3\) 而不是 \(1/3\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>反三角函数型递推的标准题，考的是「展开到三次项→取倒数平方→求和定阶」三步。与 1935、1937 同组，注意同一数列可从 \(\sqrt n x_n\)、\(n x_n^2\)、修正阶三个角度发问。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\arctan x_n\)，求 \(\lim n x_n^2\)。</p>
+    <p class="var-ans">答案：\(\dfrac{3}{2}\)。由 \(1/x_n^2\sim2n/3\) 直接得 \(n x_n^2\to3/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1928">
+  <div class="q-head">
+    <span class="qno">第 1928 题</span>
+    <span class="qtype">递推求阶（平方累加，对数修正）</span>
+    <span class="qsrc">P960</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n^2-2n}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：这是「递增发散型」递推，\(x_n\to\infty\)，每步增量 \(1/x_n\) 越来越小。直接对 \(x_n\) 本身累加得不到阶，因为增量与 \(x_n\) 成反比。关键变形是平方：\((x+\Delta)^2-x^2=2x\Delta+\Delta^2\)，而 \(\Delta=1/x_n\)，恰好把 \(2x_n\cdot(1/x_n)=2\) 变成常数。之所以平方而不是取倒数，是因为这里的发散方向与 1926 相反——主项是「每步固定增长 2」，取平方后才能把 \(1/x_n\) 的乘积消成常数。</p>
+    <p>令 \(y_n=x_n^2\)，则：</p>
+    \[ y_{n+1}=\left(x_n+\frac{1}{x_n}\right)^2=x_n^2+2+\frac{1}{x_n^2}=y_n+2+\frac{1}{y_n}. \]
+    <p>对 \(k=1,\dots,n-1\) 求和：</p>
+    \[ y_n=y_1+2(n-1)+\sum_{k=1}^{n-1}\frac{1}{y_k}. \]
+    <p>主项 \(2n\) 确定 \(y_k\sim2k\)，于是余项 \(1/y_k\sim1/(2k)\)：</p>
+    \[ \sum_{k=1}^{n-1}\frac{1}{y_k}\sim\sum_{k=1}^{n-1}\frac{1}{2k}\sim\frac{1}{2}\ln n. \]
+    <p>这里余项是对数阶，正是题目分母 \(\ln n\) 出现的原因。把主项 \(2n\) 移到分子上：</p>
+    \[ x_n^2-2n=\sum_{k=1}^{n-1}\frac{1}{y_k}+O(1)\sim\frac{1}{2}\ln n, \]
+    <p>故 \((x_n^2-2n)/\ln n\to1/2\)。系数 \(1/2\) 的来源是：平方累加的主项是 \(2n\)，而 \(1/y_k\sim1/(2k)\)，两个 \(1/2\) 相乘。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接认为 \(x_n^2=2n\) 得分子为 0：题目分母特意取 \(\ln n\)，就是要考 \(1/x_n^2\) 这一对数修正项，漏掉它会答 0。② 系数写成 1：求和时 \(1/y_k\sim1/(2k)\)，不是 \(1/k\)，差一个因子 2。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「平方化把 \(1/x_n\) 消成常数 + 对数修正」是发散型递推的经典模型，1932 与本题同构。考研中常见问法是 \((x_n^2-cn)/\ln n\)，系数由 \(1/(cn)\) 的求和给出。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{2}{x_n}\)，求 \(\lim (x_n^2-4n)/\ln n\)。</p>
+    <p class="var-ans">答案：\(1\)。平方后 \(y_{n+1}-y_n=4+4/y_n\)，主项 \(4n\)，余项 \(4/y_k\sim4/(4k)=1/k\)，和为 \(\ln n\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1929">
+  <div class="q-head">
+    <span class="qno">第 1929 题</span>
+    <span class="qtype">不动点误差比（压缩映射线性化）</span>
+    <span class="qsrc">P960</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\sqrt{a_n+1}\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1+\sqrt5}{2}-a_{n+1}}{\left(\dfrac{1+\sqrt5}{2}-a_n\right)}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{\sqrt5+1}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：右端 \(\sqrt{x+1}\) 是压缩映射，序列收敛到不动点 \(r\)，题目问的是误差 \(r-a_n\) 的相邻比，这等于在不动点处对 \(f(x)=\sqrt{x+1}\) 求导。为什么这样变形：比值 \((r-a_{n+1})/(r-a_n)\) 在 \(a_n\to r\) 时就是 \(-f'(r)\)，而 \(f'(r)\) 由隐函数求导 \(2r=1/f'(r)\) 直接得到。</p>
+    <p>先求不动点：令 \(r=\sqrt{r+1}\)，即 \(r^2=r+1\)，正根 \(r=(1+\sqrt5)/2\)。记 \(e_n=r-a_n\)，则：</p>
+    \[ e_{n+1}=r-a_{n+1}=r-\sqrt{a_n+1}=r-\sqrt{r+1-e_n}. \]
+    <p>利用 \(r+1=r^2\)：</p>
+    \[ \sqrt{r+1-e_n}=\sqrt{r^2-e_n}=r\sqrt{1-e_n/r^2}=r-\frac{e_n}{2r}+O(e_n^2). \]
+    <p>因此：</p>
+    \[ e_{n+1}=r-\left(r-\frac{e_n}{2r}+O(e_n^2)\right)=\frac{e_n}{2r}+O(e_n^2). \]
+    <p>两边除以 \(e_n\) 取极限：</p>
+    \[ \lim_{n\to\infty}\frac{e_{n+1}}{e_n}=\frac{1}{2r}=\frac{1}{1+\sqrt5}. \]
+    <p>这里 \(2r=1+\sqrt5\)，与题目分子分母中印刷的 \((1+\sqrt5)/2\) 一致。注意误差是同号收敛（\(a_n<r\)），比值为正。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把比值误算成 \(f'(r)=1/(2r)\) 的负号：误差 \(e_{n+1}/e_n\) 与 \(f'(r)\) 相等，本题 \(f'>0\)，比值为正；若换成 \(f'(r)<0\) 的映射，比值会是负的。② 直接用 \(a_{n+1}\approx a_n\) 代入比值得 0：忽略了一阶展开的系数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「误差相邻比」是压缩映射的标准考法，本质是求不动点导数。常见映射有 \(\sqrt{x+1}\)、\(\cos x\)、\(\frac12(x+c/x)\)，比值即 \(|f'(r)|\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\sqrt{a_n+2}\)，求 \(\lim (2-a_{n+1})/(2-a_n)\)。</p>
+    <p class="var-ans">答案：\(\dfrac14\)。不动点 \(r=2\) 满足 \(2=\sqrt{2+2}\)，\(f'(r)=1/(2\sqrt{r+2})=1/(2\cdot2)=1/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1930">
+  <div class="q-head">
+    <span class="qno">第 1930 题</span>
+    <span class="qtype">压缩映射误差与 \(r^n\) 的比较</span>
+    <span class="qsrc">P960</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\cos(x_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n-r}{r^n}\)，其中 \(r=\cos r\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\cos x\) 是压缩映射，\(r=\cos r\) 是其不动点（Dottie 数，约 \(0.739\)）。题目把误差 \(x_n-r\) 除以 \(r^n\)，需要比较误差的衰减速度与 \(r^n\) 哪个快。变形依据是拉格朗日中值定理：\(\cos x-\cos r=-\sin\xi(x-r)\)，从而给出误差的等比上界。</p>
+    <p>由中值定理：</p>
+    \[ |x_{n+1}-r|=|\cos x_n-\cos r|=|\sin\xi_n|\,|x_n-r|\le q\,|x_n-r|, \]
+    <p>其中 \(\xi_n\) 介于 \(x_n\) 与 \(r\) 之间，\(q=\sin r<1\)（因为 \(r\approx0.739\)，\(\sin r\approx0.674<1\)）。累乘得：</p>
+    \[ |x_n-r|\le C q^{n-1}. \]
+    <p>于是：</p>
+    \[ \left|\frac{x_n-r}{r^n}\right|\le C\frac{q^{n-1}}{r^n}=C\cdot\frac{1}{q}\left(\frac{q}{r}\right)^{n}. \]
+    <p>关键比较：\(q=\sin r\approx0.674<r\approx0.739\)，故 \(q/r<1\)，括号内是一个小于 1 的常数的 \(n\) 次方，趋于 0。由夹逼得原极限为 0。</p>
+    <p>这一步「为什么这样变形」的核心是：误差的衰减比 \(r^n\) 更快，因为压缩率 \(q=\sin r\) 严格小于不动点 \(r\) 本身；若误以为误差与 \(r^n\) 同阶，就会得到某个非零常数。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误判 \(q\) 与 \(r\) 的大小：必须验证 \(\sin r<r\) 对 \(r>0\) 成立（由 \(\sin r<r\) 恒成立），才能保证 \(q/r<1\)。② 忽略 \(r<1\)：\(r^n\) 本身是趋于 0 的，题目是在问两个无穷小谁快。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>压缩映射的误差阶比较题，考「先给误差一个等比上界，再与题目分母比较底数」。这类题在考研选择题中常以 \(\cos x\)、\(\arctan x\) 等自映射为载体，核心是比较压缩率 \(|f'(r)|\) 与分母底数 \(r\) 的大小，判断谁衰减更快。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{n+1}=\cos x_n\)，\(r=\cos r\)，问 \(\lim (x_n-r)/(\sin r)^n\) 是否存在。</p>
+    <p class="var-ans">答案：一般不等于 0。误差恰以底数 \(\sin r\) 衰减，该比值收敛到某非零常数（由 \(|x_1-r|\) 与斜率决定），本题分母选 \(r^n\) 是因为 \(r>\sin r\)，放得更宽才夹逼到 0。</p>
+  </div>
+</article>
+
+<article class="q" id="q1931">
+  <div class="q-head">
+    <span class="qno">第 1931 题</span>
+    <span class="qtype">递推求阶（四次方累加）</span>
+    <span class="qsrc">P961</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n^3}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n^4}{4n}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递增发散型，增量为 \(1/x_n^3\)。与 1928 同思路，但增量是 \(x_n^{-3}\)，需要配四次方才能把主项消成常数。为什么取四次方：\((x+\Delta)^4-x^4=4x^3\Delta+6x^2\Delta^2+\cdots\)，而 \(\Delta=1/x_n^3\)，主项 \(4x_n^3\cdot(1/x_n^3)=4\) 恰好为常数。幂次的选择原则是「让 \(x_n^p\cdot\Delta\) 为常数」，这里 \(p-3=0\) 即 \(p=4\)。</p>
+    <p>令 \(z_n=x_n^4\)：</p>
+    \[ z_{n+1}=\left(x_n+\frac{1}{x_n^3}\right)^4=x_n^4+4x_n^3\cdot\frac{1}{x_n^3}+O(x_n^2\cdot x_n^{-6})=z_n+4+O(x_n^{-4}). \]
+    <p>余项 \(O(x_n^{-4})=O(n^{-1})\)，其和收敛（\(\sum 1/k\) 换成 \(\sum 1/k\) 这里是 \(O(1/k^2)\)），为有界量。求和：</p>
+    \[ z_n=z_1+4(n-1)+O(1). \]
+    <p>故 \(x_n^4=z_n=4n+O(1)\)，代入得 \(x_n^4/(4n)\to1\)。主项系数 4 来自二项展开 \((x+\Delta)^4\) 的 \(4x^3\Delta\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 幂次选错：取平方只能得到 \(x_{n+1}^2-x_n^2=2+O(1/x_n^4)\)，主项 2 对应 \(x_n^2\sim2n\)，无法匹配题目分母 \(4n\) 的四次结构。② 忽略余项 \(O(x_n^{-4})\)：本题求和收敛，不影响答案，但同结构的 1941 多了 \(1/x_n^2\) 项就会改变结论。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「按增量幂次选择 \(p\) 次方累加」是发散型递推的通法：增量为 \(x_n^{-k}\) 时取 \(p=k+1\)，主项系数为 \(p\)。1938、1941 是同一框架的变体。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n+1/x_n^5\)，求 \(\lim x_n^6/(6n)\)。</p>
+    <p class="var-ans">答案：\(1\)。\((x+\Delta)^6-x^6\) 主项 \(6x^5\Delta=6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1932">
+  <div class="q-head">
+    <span class="qno">第 1932 题</span>
+    <span class="qtype">递推求阶（平方累加，对数修正）</span>
+    <span class="qsrc">P961</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=a_n+\dfrac{1}{a_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n^2-2n}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：与 1928 同构的递增发散型，\(a_n\to\infty\)，每步增量 \(1/a_n\)。变形仍取平方：\((a+\Delta)^2-a^2=2a\Delta+\Delta^2\)，代入 \(\Delta=1/a_n\)，主项 \(2a_n\cdot(1/a_n)=2\) 为常数。这一步的依据与 1928 完全一致，目的是把「与 \(a_n\) 成反比的增量」变成可累加的常数。</p>
+    <p>令 \(y_n=a_n^2\)：</p>
+    \[ y_{n+1}=\left(a_n+\frac{1}{a_n}\right)^2=a_n^2+2+\frac{1}{a_n^2}=y_n+2+\frac{1}{y_n}. \]
+    <p>求和：</p>
+    \[ y_n=y_1+2(n-1)+\sum_{k=1}^{n-1}\frac{1}{y_k}. \]
+    <p>主阶 \(y_k\sim2k\)，故 \(1/y_k\sim1/(2k)\)，余项和为 \(\frac12\ln n+O(1)\)。于是：</p>
+    \[ a_n^2-2n=\sum_{k=1}^{n-1}\frac{1}{y_k}+O(1)\sim\frac12\ln n, \]
+    <p>比值趋于 \(1/2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 与 1928 混淆变量名：本题用 \(a_n\)，方法完全相同，不要因为换字母重新推导。② 系数 \(1/2\) 的来源是 \(1/(2k)\) 的求和，不是主项 2 的一半。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>与 1928 互为同构题，巩固「平方化 + 对数修正」模型。考研中这类题常以 \((a_n^2-cn)/\ln n\) 形式出现，系数固定为 \(1/c\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=a_n+1/a_n\)，求 \(\lim (a_n^2-2n-\tfrac12\ln n)\)。</p>
+    <p class="var-ans">答案：某有限常数（由 \(a_1=1\) 与欧拉常数组合确定）。这是「次阶修正」问法，说明 \(1/2\ln n\) 之后还有常数项。</p>
+  </div>
+</article>
+
+<article class="q" id="q1933">
+  <div class="q-head">
+    <span class="qno">第 1933 题</span>
+    <span class="qtype">递推求阶（sin 展开，对数修正）</span>
+    <span class="qsrc">P961</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\sin(x_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1}{x_n^2}-\dfrac{n}{3}}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{5}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac16\)，复算 \(\dfrac15\)（\(\dfrac{1}{x_{n+1}^2}-\dfrac{1}{x_n^2}=\dfrac13+\dfrac{x_n^2}{15}+O(x_n^4)\)，而 \(\sum x_k^2\sim3\ln n\)，系数为 \(3/15=1/5\)），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\sin x\) 在 \(0\) 附近展开 \(x-x^3/6+x^5/120+O(x^7)\)，故 \(x_{n+1}=x_n-x_n^3/6+O(x_n^5)\)，衰减由 \(x_n^3\) 决定，与 1927 同框架。题目分子是 \(1/x_n^2-n/3\) 再除以 \(\ln n\)，说明主阶 \(1/x_n^2\sim n/3\) 已知，问的是下一级对数修正。变形仍取倒数平方：\(x_{n+1}=x_n(1-x_n^2/6+O(x_n^4))\)，用 \((1-\varepsilon)^{-2}\approx1+2\varepsilon\) 展开。</p>
+    <p>计算 \(x_{n+1}^2\)：</p>
+    \[ x_{n+1}^2=x_n^2\left(1-\frac{x_n^2}{6}+\frac{x_n^4}{120}\right)^2=x_n^2\left(1-\frac{x_n^2}{3}+\frac{2x_n^4}{45}+O(x_n^6)\right). \]
+    <p>取倒数：</p>
+    \[ \frac{1}{x_{n+1}^2}=\frac{1}{x_n^2}\left(1-\frac{x_n^2}{3}+\frac{2x_n^4}{45}\right)^{-1}=\frac{1}{x_n^2}+\frac13+\frac{x_n^2}{15}+O(x_n^4). \]
+    <p>这里 \(x_n^2/15\) 的来源是 \(1/9-2/45=3/45=1/15\)。令 \(b_n=1/x_n^2\)：</p>
+    \[ b_{n+1}-b_n=\frac13+\frac{x_n^2}{15}+O(x_n^4). \]
+    <p>主项 \(1/3\) 累加给 \(n/3\)，题目分子减掉它后，剩下 \(\sum x_k^2/15\)。由主阶 \(x_k^2\sim3/k\)：</p>
+    \[ \sum_{k=1}^{n-1}\frac{x_k^2}{15}\sim\frac{1}{15}\sum_{k=1}^{n-1}\frac{3}{k}\sim\frac{1}{5}\ln n. \]
+    <p>故 \((b_n-n/3)/\ln n\to1/5\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只展开到 \(x^3/6\) 得 \(b_{n+1}-b_n=1/3+O(x_n^2)\)，不知道 \(O(x_n^2)\) 的系数，就无法求对数修正。② 把系数算成 \(1/6\)：对数项系数是 \((1/15)\times3=1/5\)，中间两步相乘。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>这是「衰减型递推的对数修正」高级题，必须展开到 \(x^5\) 才能拿到 \(b_{n+1}-b_n\) 中的 \(x_n^2\) 系数。与 1934 对照（一个用 \(\sin\) 一个用 \(\ln\)），方法一致。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\sin x_n\)，求 \(\lim \sqrt n\,x_n\)。</p>
+    <p class="var-ans">答案：\(\sqrt3\)。由 \(1/x_n^2\sim n/3\) 直接得 \(\sqrt n\,x_n\to\sqrt3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1934">
+  <div class="q-head">
+    <span class="qno">第 1934 题</span>
+    <span class="qtype">递推求阶（ln 展开，对数修正）</span>
+    <span class="qsrc">P961</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\ln(1+a_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1}{a_n}-\dfrac{n}{2}}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{6}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac16\)，复算 \(-\dfrac16\)（\(\dfrac{1}{a_{n+1}}-\dfrac{1}{a_n}=\dfrac12-\dfrac{a_n}{12}+O(a_n^2)\)，而 \(\sum a_k\sim2\ln n\)，系数为 \(-2/12=-1/6\)，符号为负），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\ln(1+a)\) 在 \(0\) 附近展开 \(a-a^2/2+a^3/3-a^4/4+\cdots\)，故 \(a_{n+1}=a_n-a_n^2/2+O(a_n^3)\)，每步按 \(a_n^2\) 衰减。本题取的是倒数一次而非倒数平方，因为主项 \(a_n-a_n^2/2\) 代入 \(1/a_{n+1}\) 后常数项为 \(1/2\)。变形依据：\(1/(1-t)\approx1+t\)，把 \(a_{n+1}=a_n(1-a_n/2+O(a_n^2))\) 整体取倒数。</p>
+    <p>展开：</p>
+    \[ a_{n+1}=a_n\left(1-\frac{a_n}{2}+\frac{a_n^2}{3}+O(a_n^3)\right), \]
+    \[ \frac{1}{a_{n+1}}=\frac{1}{a_n}\left(1-\frac{a_n}{2}+\frac{a_n^2}{3}\right)^{-1}=\frac{1}{a_n}\left(1+\frac{a_n}{2}-\frac{a_n^2}{12}+O(a_n^3)\right). \]
+    <p>于是：</p>
+    \[ \frac{1}{a_{n+1}}-\frac{1}{a_n}=\frac12-\frac{a_n}{12}+O(a_n^2). \]
+    <p>令 \(c_n=1/a_n\)：主项 \(1/2\) 累加给 \(n/2\)，题目减掉它后剩下 \(-\sum a_k/12\)。由主阶 \(a_k\sim2/k\)：</p>
+    \[ -\frac{1}{12}\sum_{k=1}^{n-1}a_k\sim-\frac{1}{12}\sum_{k=1}^{n-1}\frac{2}{k}\sim-\frac{1}{6}\ln n. \]
+    <p>故 \((c_n-n/2)/\ln n\to-1/6\)。负号来自 \(1/(1-a/2+a^2/3)^{-1}\) 展开中 \(a^2\) 项为 \(1/4-1/3=-1/12\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 符号写错：本题修正项是负的，因为 \(\ln(1+a)\) 的 \(a^3/3\) 项使得倒数展开中 \(a^2\) 系数为负。② 与 1933 混淆：那里是倒数平方、这里是倒数一次，主项分别是 \(1/3\) 与 \(1/2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>与 1933 组成「对数修正」双题，一个衰减阶为 \(x^3\)（取倒数平方）、一个为 \(a^2\)（取倒数一次）。考的是展开到三阶项拿系数的硬功夫。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\ln(1+a_n)\)，求 \(\lim n a_n\)。</p>
+    <p class="var-ans">答案：\(2\)。由 \(1/a_n\sim n/2\) 直接得 \(n a_n\to2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1935">
+  <div class="q-head">
+    <span class="qno">第 1935 题</span>
+    <span class="qtype">递推求阶（arctan 主阶）</span>
+    <span class="qsrc">P961</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\arctan(x_n)\)，求 \(\lim\limits_{n\to\infty}n x_n^2\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{3}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\arctan x\) 在 0 附近展开为 \(x-x^3/3+O(x^5)\)，故 \(x_{n+1}=x_n-x_n^3/3+O(x_n^5)\)，每步按 \(x_n^3\) 量级衰减。序列从 \(x_1=1\) 单调递减趋于 0，直接求极限只能得到 0，必须取倒数平方把衰减率写成可累加的常数。</p>
+    <p>把 \(x_{n+1}\) 提出 \(x_n\)：</p>
+    \[ x_{n+1}=x_n\left(1-\frac{x_n^2}{3}+O(x_n^4)\right). \]
+    <p>两边平方后取倒数，用 \((1-\varepsilon)^{-2}\approx1+2\varepsilon\)：</p>
+    \[ \frac{1}{x_{n+1}^2}=\frac{1}{x_n^2}\left(1-\frac{x_n^2}{3}+O(x_n^4)\right)^{-2}=\frac{1}{x_n^2}+\frac23+O(x_n^2). \]
+    <p>常数 \(2/3\) 来自 \(\arctan\) 展开中 \(-x^3/3\) 乘 2。对 \(k=1,\dots,n-1\) 求和：</p>
+    \[ \frac{1}{x_n^2}=\frac{2}{3}(n-1)+C+\sum_{k=1}^{n-1}O(x_k^2). \]
+    <p>由主阶 \(x_k^2\sim3/(2k)\)，余项和 \(\sum O(1/k)=O(\ln n)=o(n)\)，不影响主项。故 \(1/x_n^2\sim2n/3\)，即 \(x_n^2\sim3/(2n)\)，代入 \(n x_n^2\to3/2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(2/3\) 记成 \(1/3\)：倒数平方的增量是 \(2\cdot(1/3)\)。② 与 \(\sin x\) 型混淆：\(\sin\) 的系数是 \(1/3\)，\(\arctan\) 是 \(2/3\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>同一数列的主阶问法，与 1927、1936、1937 构成一组。考研中常把主阶与修正阶分开问，先掌握主阶再练修正。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\arctan x_n\)，求 \(\lim n^{2/3}x_n\)。</p>
+    <p class="var-ans">答案：\(+\infty\)。\(x_n\sim\sqrt{3/(2n)}\) 是 \(n^{-1/2}\) 阶，乘 \(n^{2/3}\) 得 \(n^{1/6}\to+\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1936">
+  <div class="q-head">
+    <span class="qno">第 1936 题</span>
+    <span class="qtype">递推修正阶（1926 的精化）</span>
+    <span class="qsrc">P962</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\dfrac{a_n}{1+a_n^2}\)，求 \(\lim\limits_{n\to\infty}\left(\sqrt{2n}\,a_n-1\right)\sqrt n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：这是 1926 同一数列的修正阶问法。1926 已得 \(b_n=1/a_n^2\sim2n\)，本题分子 \(\sqrt{2n}\,a_n-1\) 是在测 \(a_n\) 偏离 \(1/\sqrt{2n}\) 的程度，外面再乘 \(\sqrt n\) 是要看修正项是否达到 \(1/\sqrt n\) 量级。需要把 \(b_n\) 算到对数阶。由 1926：</p>
+    \[ b_{n+1}-b_n=2+\frac{1}{b_n},\qquad b_n\sim2n. \]
+    <p>故 \(1/b_n\sim1/(2n)\)，累加：</p>
+    \[ b_n=2n+\frac12\ln n+C+o(1). \]
+    <p>这里 \(1/b_k\sim1/(2k)\)，和为 \(\frac12\ln n\)。代入：</p>
+    \[ a_n=\frac{1}{\sqrt{b_n}}=\frac{1}{\sqrt{2n+\tfrac12\ln n+C}}=\frac{1}{\sqrt{2n}}\cdot\frac{1}{\sqrt{1+\frac{\ln n}{4n}+\frac{C}{2n}}}. \]
+    <p>用 \((1+t)^{-1/2}\approx1-t/2\)：</p>
+    \[ \sqrt{2n}\,a_n=1-\frac{\ln n}{8n}-\frac{C}{4n}+o\left(\frac{\ln n}{n}\right). \]
+    <p>于是 \(\sqrt{2n}\,a_n-1=O(\ln n/n)\)，再乘 \(\sqrt n\) 得 \(O(\ln n/\sqrt n)\to0\)。修正项比 \(1/\sqrt n\) 更快衰减，故极限为 0。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 以为修正项是常数偏移，乘 \(\sqrt n\) 会发散：实际上 \(b_n\) 与 \(2n\) 的差是 \(\ln n\) 量级，相对差是 \(\ln n/n\)，乘 \(\sqrt n\) 仍为 0。② 漏掉 \(1/b_n\) 项直接 \(b_n=2n\)，会误以为 \(\sqrt{2n}a_n=1\) 精确成立。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「主阶已知后求修正阶」是本批难题的标志，标准做法是把 \(b_n\) 展开到 \(\ln n\) 项，再做 \((1+t)^{-1/2}\) 近似。与 1937 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_{n+1}=a_n/(1+a_n^2)\)，求 \(\lim (\sqrt{2n}\,a_n-1)\cdot n/\ln n\)。</p>
+    <p class="var-ans">答案：\(-\dfrac18\)。由 \(\sqrt{2n}a_n-1\sim-\ln n/(8n)\)，乘 \(n/\ln n\) 得 \(-1/8\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1937">
+  <div class="q-head">
+    <span class="qno">第 1937 题</span>
+    <span class="qtype">递推修正阶（1927 的精化）</span>
+    <span class="qsrc">P962</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\arctan(x_n)\)，求 \(\lim\limits_{n\to\infty}\left(\sqrt{\dfrac{2n}{3}}\,x_n-1\right)\sqrt n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：1927、1935 同一数列的修正阶问法。由 1935 知 \(b_n=1/x_n^2\sim2n/3\)，本题用 \(\sqrt{2n/3}\,x_n\) 归一化。需要把 \(b_n\) 展开到对数阶。在 1927 基础上把展开做高一项：</p>
+    \[ \frac{1}{x_{n+1}^2}-\frac{1}{x_n^2}=\frac23-\frac{x_n^2}{15}+O(x_n^4). \]
+    <p>其中负系数 \(-1/15\) 来自 \(\arctan\) 展开 \(x-x^3/3+x^5/5\) 后的二阶项。由主阶 \(x_n^2\sim3/(2n)\)：</p>
+    \[ b_n=\frac{2n}{3}-\frac{1}{15}\sum_{k=1}^{n-1}x_k^2+C=\frac{2n}{3}-\frac{1}{15}\sum_{k=1}^{n-1}\frac{3}{2k}+O(1)=\frac{2n}{3}-\frac{1}{10}\ln n+C. \]
+    <p>代入：</p>
+    \[ x_n^2=\frac{1}{\frac{2n}{3}-\frac{1}{10}\ln n+C}=\frac{3}{2n}\left(1+\frac{3\ln n}{20n}-\frac{3C}{2n}+o\left(\frac{\ln n}{n}\right)\right), \]
+    \[ \sqrt{\frac{2n}{3}}\,x_n=1+\frac{3\ln n}{40n}+o\left(\frac{\ln n}{n}\right). \]
+    <p>差值 \(O(\ln n/n)\) 乘 \(\sqrt n\) 得 \(O(\ln n/\sqrt n)\to0\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不知道 \(x_n^2\) 修正项的系数符号：\(\arctan\) 这里修正为负，故 \(b_n\) 比 \(2n/3\) 略小，\(x_n\) 比主阶略大。② 与 1936 的系数混淆：本题修正项系数 \(3/40\)，那题是 \(-1/8\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>与 1936 并列「修正阶」双题，考同一套展开到五阶项的能力。考研中出现概率低于主阶题，但竞赛常考。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{n+1}=\arctan x_n\)，求 \(\lim (\sqrt{2n/3}\,x_n-1)\cdot n/\ln n\)。</p>
+    <p class="var-ans">答案：\(\dfrac{3}{40}\)。由展开式直接读系数。</p>
+  </div>
+</article>
+
+<article class="q" id="q1938">
+  <div class="q-head">
+    <span class="qno">第 1938 题</span>
+    <span class="qtype">递推求阶（三次方累加，对数修正）</span>
+    <span class="qsrc">P962</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=a_n+\dfrac{1}{a_n^2}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n^3-3n}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac32\)，复算 \(1\)（\(a_{n+1}^3-a_n^3=3+3/a_n^3+O(a_n^{-6})\)，而 \(a_n^3\sim3n\)，故 \(\sum 3/a_k^3\sim\sum 1/k\sim\ln n\)，系数为 1 而非 3/2），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递增发散型，增量为 \(1/a_n^2\)。按「让 \(a_n^p\cdot\Delta\) 为常数」的原则，\(\Delta=a_n^{-2}\)，取 \(p=3\)：\((a+\Delta)^3-a^3=3a^2\Delta+3a\Delta^2+\Delta^3\)，主项 \(3a_n^2\cdot a_n^{-2}=3\) 为常数。这一步与 1931 取四次方是同一思路。</p>
+    <p>令 \(z_n=a_n^3\)：</p>
+    \[ z_{n+1}=\left(a_n+\frac{1}{a_n^2}\right)^3=a_n^3+3a_n^2\cdot\frac{1}{a_n^2}+3a_n\cdot\frac{1}{a_n^4}+\frac{1}{a_n^6}=z_n+3+\frac{3}{z_n}+\frac{1}{z_n^2}. \]
+    <p>求和：</p>
+    \[ z_n=z_1+3(n-1)+\sum_{k=1}^{n-1}\frac{3}{z_k}+\sum_{k=1}^{n-1}\frac{1}{z_k^2}. \]
+    <p>主阶 \(z_k\sim3k\)，故 \(3/z_k\sim3/(3k)=1/k\)，其和为 \(\ln n+O(1)\)；而 \(1/z_k^2=O(k^{-2})\) 求和收敛。于是：</p>
+    \[ a_n^3-3n=\sum_{k=1}^{n-1}\frac{3}{z_k}+O(1)\sim\sum_{k=1}^{n-1}\frac{1}{k}\sim\ln n. \]
+    <p>比值趋于 1。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(3/z_k\) 的系数误算成 \(3/2\)：\(z_k\sim3k\)，\(3/z_k\sim1/k\)，分子分母的 3 恰好约掉。② 漏掉 \(3a\Delta^2\) 这一项：它是 \(3/a_n^3=3/z_n\)，正是对数项来源。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「高次幂累加 + 对数修正」是 1931 的进阶版，区别在于本题多了 \(3a\Delta^2\) 这一可求和项。考研中常见 \((a_n^{p}-pn)/\ln n\)，系数由二项展开二阶项决定。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=a_n+1/a_n^2\)，求 \(\lim a_n^3/(3n)\)。</p>
+    <p class="var-ans">答案：\(1\)。主阶 \(z_n\sim3n\) 直接给出，修正项 \(\ln n\) 相对 \(n\) 可忽略。</p>
+  </div>
+</article>
+
+<article class="q" id="q1939">
+  <div class="q-head">
+    <span class="qno">第 1939 题</span>
+    <span class="qtype">不动点误差比（压缩映射线性化）</span>
+    <span class="qsrc">P962</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\sqrt{a_n+1}\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1+\sqrt5}{2}-a_{n+1}}{\left(\dfrac{1+\sqrt5}{2}-a_n\right)}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{\sqrt5+1}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(f(x)=\sqrt{x+1}\) 是压缩映射，序列收敛到不动点 \(r\)。先说明收敛性：\(f([1,2])\subset[1,2]\)，且 \(|f'(x)|\le1/(2\sqrt2)<1\)，由压缩映射原理序列收敛到唯一不动点 \(r\)。解不动点方程 \(r=\sqrt{r+1}\)，即 \(r^2=r+1\)，正根 \(r=(1+\sqrt5)/2=\varphi\)。题目问误差 \(e_n=r-a_n\) 的相邻比，这等于在不动点处对 \(f\) 求导。</p>
+    <p>记 \(e_n=r-a_n\)。由拉格朗日中值定理，存在介于 \(a_n\) 与 \(r\) 之间的 \(\xi_n\)：</p>
+    \[ e_{n+1}=r-f(a_n)=f(r)-f(a_n)=f'(\xi_n)(r-a_n)=f'(\xi_n)e_n. \]
+    <p>其中 \(f'(x)=1/(2\sqrt{x+1})\)，当 \(a_n\to r\) 时 \(\xi_n\to r\)，故：</p>
+    \[ \frac{e_{n+1}}{e_n}=f'(\xi_n)\to f'(r)=\frac{1}{2\sqrt{r+1}}=\frac{1}{2r}=\frac{1}{1+\sqrt5}. \]
+    <p>由 \(r^2=r+1\) 解出 \(r=(1+\sqrt5)/2\)，代入 \(1/(2r)\) 化简即得 \(1/(1+\sqrt5)\)，与题目印刷的分子分母形式一致。</p>
+    <p>这是线性收敛：误差每一步乘以同一常数 \(f'(r)<1\)，比值与初值无关，只由不动点处导数决定；二次收敛的误差比趋于 0，两者阶数不同。也可用展开验证：\(\sqrt{r^2-e_n}=r(1-e_n/(2r^2)+O(e_n^2))\)，得 \(e_{n+1}=e_n/(2r)+O(e_n^2)\)，与中值定理结论一致。误差同号：\(a_n<r\) 对所有 \(n\) 成立（\(f([1,r])\subset[1,r]\)），故 \(e_n>0\)，比值为正；只有映射在不动点处导数为负时，误差才会交替变号，比值带负号。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>把比值算成 \(-f'(r)\)：压缩映射 \(f'>0\) 时误差同号收敛，比值为正；只有 \(f'(r)<0\) 的映射才出现交替误差。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>压缩映射误差比是固定题型，核心是求不动点处的导数。\(\sqrt{x+c}\) 型映射的比值恒为 \(1/(2\sqrt{r+c})\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\sqrt{a_n+3}\)，求 \(\lim (2-a_{n+1})/(2-a_n)\)。</p>
+    <p class="var-ans">答案：\(1\)。不动点 \(r=(1+\sqrt{13})/2\approx2.303\neq2\)，故 \(2-a_n\to2-r\neq0\)，比值两端同取极限得 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1940">
+  <div class="q-head">
+    <span class="qno">第 1940 题</span>
+    <span class="qtype">压缩映射误差与 \(r^n\) 的比较</span>
+    <span class="qsrc">P962</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\cos(x_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n-r}{r^n}\)，其中 \(r=\cos r\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\cos x\) 是把全体实数映到 \([-1,1]\) 的压缩映射，序列收敛到唯一不动点 \(r=\cos r\)（约 \(0.739\)）。题目把误差 \(x_n-r\) 除以 \(r^n\)，本质是问误差的衰减速度与 \(r^n\) 这个等比数列相比谁快。为什么先用中值定理：只有给出误差的等比上界，才能与题目分母的 \(r^n\) 做底数比较。</p>
+    <p>第一步，对 \(\cos x\) 用拉格朗日中值定理：</p>
+    \[ |x_{n+1}-r|=|\cos x_n-\cos r|=|\sin\xi_n|\,|x_n-r|, \]
+    <p>其中 \(\xi_n\) 介于 \(x_n\) 与 \(r\) 之间。从 \(x_1=1\) 出发，前若干项 \(x_n\) 始终落在 \([\cos1,1]\subset[0,\pi/2]\) 内，故 \(\sin\xi_n\le\sin r=q\)。累乘得：</p>
+    \[ |x_n-r|\le C q^{n-1},\qquad q=\sin r<1. \]
+    <p>第二步，与题目分母比较：</p>
+    \[ \left|\frac{x_n-r}{r^n}\right|\le C\frac{q^{n-1}}{r^n}=\frac{C}{q}\left(\frac{q}{r}\right)^{n}. \]
+    <p>关键是判断 \(q/r\) 是否小于 1。由标准不等式 \(\sin r<r\) 对一切 \(r>0\) 成立（几何上弦长小于弧长），故 \(q=\sin r<r\)，从而 \(q/r<1\)。括号内是底数小于 1 的等比数列，其 \(n\) 次方趋于 0。</p>
+    <p>第三步，夹逼：左边非负，右边趋于 0，故原极限为 0。这一步说明误差的实际衰减底数是 \(q=\sin r\approx0.674\)，而题目分母用了更大的底数 \(r\approx0.739\)，相当于分母增长更快，比值自然趋于 0。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>以为误差与 \(r^n\) 同阶：题目分母特意选 \(r^n\) 而非 \((\sin r)^n\)，正是因为 \(r\) 比压缩率 \(q\) 大，放得更宽。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>与 1930 同构，压缩率底数比较是唯一考点。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(x_{n+1}=\cos x_n\)，问 \(\lim (x_n-r)/(\sin r)^n\) 是否为 0。</p>
+    <p class="var-ans">答案：否。该比值收敛到由初值决定的非零常数（误差恰好以 \(q\) 衰减）。</p>
+  </div>
+</article>
+
+<article class="q" id="q1941">
+  <div class="q-head">
+    <span class="qno">第 1941 题</span>
+    <span class="qtype">递推求阶（三次方主项，发散）</span>
+    <span class="qsrc">P962–P963</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n^2}+\dfrac{1}{x_n^3}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n^4}{4n}\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，复算 \(+\infty\)（\(x_{n+1}^3-x_n^3=3+3/x_n+O(x_n^{-2})\)，故 \(x_n^3\sim3n\)，而 \(x_n^4/(4n)=x_n\cdot x_n^3/(4n)\sim3x_n/4\to+\infty\)），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递增发散型，增量 \(\Delta=1/x_n^2+1/x_n^3\)。与 1931 不同，这里增量的主项是 \(x_n^{-2}\)，应配三次方而非四次方。为什么：\((x+\Delta)^3-x^3=3x^2\Delta+\cdots\)，主项 \(3x_n^2\cdot(1/x_n^2)=3\) 为常数。</p>
+    <p>令 \(z_n=x_n^3\)：</p>
+    \[ z_{n+1}-z_n=3x_n^2\left(\frac{1}{x_n^2}+\frac{1}{x_n^3}\right)+O(x_n\Delta^2)=3+\frac{3}{x_n}+O\left(\frac{1}{x_n^2}\right). \]
+    <p>主项 3 累加给 \(z_n\sim3n\)，即 \(x_n\sim(3n)^{1/3}\to\infty\)。题目问的是 \(x_n^4/(4n)\)：</p>
+    \[ \frac{x_n^4}{4n}=\frac{x_n\cdot x_n^3}{4n}\sim\frac{x_n\cdot3n}{4n}=\frac{3x_n}{4}\to+\infty. \]
+    <p>关键在于：四次方与 \(4n\) 的匹配是 1931（增量 \(x_n^{-3}\)）的配方；本题增量是 \(x_n^{-2}\)，主阶是三次方 \(x_n^3\sim3n\)，四次方比三次方多一个 \(x_n\) 因子，随 \(n^{1/3}\) 发散。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 机械套用 1931 的配方 \(x_n^4/(4n)\) 得 1：本题增量是 \(1/x_n^2\) 不是 \(1/x_n^3\)，幂次配错。② 忽略 \(1/x_n^3\) 这一项：它在三次方展开中贡献 \(3/x_n\)，虽不改变主阶，但说明增量结构。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「按增量幂次选配方」的反例题，专门惩罚背公式。考研中若增量是 \(x_n^{-k}\)，主阶必为 \(x_n^{k+1}\sim(k+1)n\)，问 \(x_n^p/(pn)\) 时 \(p\neq k+1\) 就发散。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n+1/x_n^2+1/x_n^3\)，求 \(\lim x_n^3/(3n)\)。</p>
+    <p class="var-ans">答案：\(1\)。正确配方下主阶为 1。</p>
+  </div>
+</article>
+
 <article class="q" id="q1942">
   <div class="q-head">
     <span class="qno">第 1942 题</span>
@@ -1932,7 +2776,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p><b>变式</b> 对比说明：为何 erf 版本的同类递推收敛到零，而 erfc 版本落入循环。</p>
     <p class="var-ans">答案：\(\mathrm{erf}\,0=0\)，\(u=\mathrm{erf}\,x/x\to2/\sqrt\pi\) 为有限值，括号倍率 \(A\approx0.5082\) 满足 \(|A|<1\)；\(\mathrm{erfc}\,0=1\)，\(u\to\infty\)，零点被排斥，轨道转入循环。</p>
   </div>
-</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 1942–2000 题</span></div>
+</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 1916–2000 题</span></div>
 </div>
 </body>
 </html>
