@@ -2927,13 +2927,14 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(\dfrac{1}{e}\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：数列 \(n\) 阶根的极限，取对数后化为 \(\frac{1}{n}\sum\ln k\) 的求和。</p>
-    <p>令 \(a_n=\dfrac{(n!)^{1/n}}{n}\)，取对数：</p>
+    <p>识别类型：数列 \(n\) 阶根的极限，底数是 \(n!\)，除以 \(n\)。直接代入无法判断，取对数是标准动作。</p>
+    <p>令 \(a_n=\dfrac{(n!)^{1/n}}{n}\)，两边取自然对数：</p>
     \[ \ln a_n=\frac1n\ln(n!)-\ln n=\frac1n\sum_{k=1}^n\ln k-\ln n=\frac1n\sum_{k=1}^n\ln\frac{k}{n}. \]
-    <p>这正是函数 \(f(x)=\ln x\) 在 \([0,1]\) 上的黎曼和（瑕积分，\(\ln x\) 在 0 处可积）：</p>
+    <p>右边是函数 \(f(x)=\ln x\) 在区间 \([0,1]\) 上的黎曼和（取右端点）。注意 \(\ln x\) 在 \(x=0\) 处是瑕积分，但 \(\lim\limits_{x\to0^+}x\ln x=0\)，积分收敛：</p>
     \[ \lim_{n\to\infty}\ln a_n=\int_0^1\ln x\,dx=\bigl[x\ln x-x\bigr]_0^1=-1. \]
-    <p>故 \(a_n\to e^{-1}=\dfrac1e\)。</p>
-    <p>也可直接用斯特林公式 \(n!\sim\sqrt{2\pi n}\left(\dfrac{n}{e}\right)^n\)，开 \(n\) 次方得 \((n!)^{1/n}\sim\dfrac{n}{e}\)，除以 \(n\) 得 \(1/e\)。</p>
+    <p>由指数连续性，\(a_n\to e^{-1}=\dfrac1e\)。</p>
+    <p>也可直接用斯特林公式 \(n!\sim\sqrt{2\pi n}\left(\dfrac{n}{e}\right)^n\)，开 \(n\) 次方得 \((n!)^{1/n}\sim\dfrac{n}{e}\)，除以 \(n\) 得 \(1/e\)。两种方法互验。</p>
+    <p>常见错解：把 \(\ln(n!)\) 近似为 \(\ln n\cdot n\) 后直接除 \(n\ln n\)，漏掉斯特林的主部 \(-n\)，得到 1。错在没有展开 \(\ln n!\) 到 \(n\ln n-n\) 这一项。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -2996,12 +2997,15 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(\dfrac{1}{2}\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(0/0\) 型，两个指数函数相减。提公因式 \(e^{\sin x}\)：</p>
+    <p>识别类型：\(0/0\) 型，两个指数函数相减。处理指数差的标准动作是「提公因式」，把 \(e^{\sin x}\) 提出来：</p>
     \[ e^{\tan x}-e^{\sin x}=e^{\sin x}\bigl(e^{\tan x-\sin x}-1\bigr). \]
-    <p>因 \(e^{\sin x}\to e^0=1\)，且 \(\tan x-\sin x\to0\)，由等价无穷小 \(e^u-1\sim u\)（\(u\to0\)）：</p>
-    \[ e^{\tan x}-e^{\sin x}\sim\tan x-\sin x. \]
-    <p>接第 586 题：\(\tan x-\sin x=\sin x\cdot\dfrac{1-\cos x}{\cos x}\sim x\cdot\dfrac{x^2/2}{1}=\dfrac{x^3}{2}\)。除以 \(x^3\) 得 \(\dfrac12\)。</p>
-    <p>关键一步：提公因式后把「指数差」化为「指数差的指数差」，再用 \(e^u-1\sim u\)，避免直接展开 \(e^{\tan x}\) 带来的高阶项管理。</p>
+    <p>当 \(x\to0\) 时 \(\tan x-\sin x\to0\)，由等价无穷小 \(e^u-1\sim u\)（\(u\to0\)），得：</p>
+    \[ e^{\tan x-\sin x}-1\sim\tan x-\sin x. \]
+    <p>而 \(e^{\sin x}\to e^0=1\)，故整体 \(e^{\tan x}-e^{\sin x}\sim\tan x-\sin x\)。</p>
+    <p>再算 \(\tan x-\sin x=\sin x\left(\dfrac{1}{\cos x}-1\right)=\dfrac{\sin x(1-\cos x)}{\cos x}\)。由 \(\sin x\sim x\)、\(1-\cos x\sim x^2/2\)、\(\cos x\to1\)，得：</p>
+    \[ \tan x-\sin x\sim x\cdot\frac{x^2/2}{1}=\frac{x^3}{2}. \]
+    <p>除以 \(x^3\) 得 \(1/2\)。</p>
+    <p>与第 586 题对照：586 是对数差 \(\ln(1+\tan x)-\ln(1+\sin x)\)，587 是指数差 \(e^{\tan x}-e^{\sin x}\)，两者都可用拉格朗日中值定理一步化为 \(f'(0)(\tan x-\sin x)\)，答案相同。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -3031,10 +3035,12 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(2\ln 2-1\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：黎曼和，\(f(x)=\ln(1+x)\)，区间 \([0,1]\)。</p>
+    <p>识别类型：数列求和型，形式为 \(\dfrac1n\sum_{k=1}^n f\left(\dfrac{k}{n}\right)\)，是函数 \(f(x)=\ln(1+x)\) 在 \([0,1]\) 上的黎曼和。</p>
     \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^n\ln\left(1+\frac{k}{n}\right)=\int_0^1\ln(1+x)\,dx. \]
-    <p>用分部积分或直接套用公式 \(\int\ln(1+x)\,dx=(1+x)\ln(1+x)-(1+x)+C\)：</p>
-    \[ \int_0^1\ln(1+x)\,dx=\bigl[(1+x)\ln(1+x)-(1+x)\bigr]_0^1=(2\ln 2-2)-(0-1)=2\ln 2-1. \]
+    <p>用分部积分或直接套公式 \(\int\ln(1+x)\,dx=(1+x)\ln(1+x)-(1+x)+C\)。代入上下限：</p>
+    \[ \int_0^1\ln(1+x)\,dx=\bigl[(1+x)\ln(1+x)-(1+x)\bigr]_0^1=(2\ln2-2)-(0-1)=2\ln2-1. \]
+    <p>常见错解：把原函数写成 \(x\ln(1+x)-x\)，求导后为 \(\ln(1+x)+\dfrac{x}{1+x}-1\neq\ln(1+x)\)，错在分部积分时令 \(u=\ln(1+x)\)、\(dv=dx\)，应得 \(v=x\)，但 \(\int\dfrac{x}{1+x}dx\) 未算完。正确做法是令 \(t=1+x\) 直接积分。</p>
+    <p>该题与「乘积开 \(n\) 次方」联动：\(\left(\prod_{k=1}^n(1+k/n)\right)^{1/n}=e^{\frac1n\sum\ln(1+k/n)}\to e^{2\ln2-1}=4/e\)，是填空题的高频变式。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -3064,11 +3070,14 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(1\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(0/0\) 型，两个根式差。有理化：</p>
+    <p>识别类型：\(0/0\) 型，两个根式差。有理化是首选动作，分子分母同乘共轭式 \(\sqrt{1+x+x^2}+\sqrt{1-x+x^2}\)：</p>
     \[ \text{分子}=\frac{(1+x+x^2)-(1-x+x^2)}{\sqrt{1+x+x^2}+\sqrt{1-x+x^2}}=\frac{2x}{\sqrt{1+x+x^2}+\sqrt{1-x+x^2}}. \]
     <p>除以 \(x\)：</p>
     \[ \frac{2}{\sqrt{1+x+x^2}+\sqrt{1-x+x^2}}\to\frac{2}{1+1}=1. \]
-    <p>也可直接展开：\(\sqrt{1+x+x^2}=1+\dfrac{x+x^2}{2}+o(x)\)，\(\sqrt{1-x+x^2}=1+\dfrac{-x+x^2}{2}+o(x)\)，差为 \(x+o(x)\)，除以 \(x\) 得 1。</p>
+    <p>也可直接展开：\(\sqrt{1+u}=1+u/2+o(u)\)，分别取 \(u_1=x+x^2\)、\(u_2=-x+x^2\)，得两式相减为 \(x+o(x)\)，除以 \(x\) 得 1。</p>
+    <p>该题本质是导数定义：令 \(f(t)=\sqrt{1+t}\)，极限为 \(f'(0)\cdot\lim\dfrac{u_1-u_2}{x}=\dfrac12\cdot2=1\)。</p>
+    <p>常见错解：展开时把 \(x^2\) 项也代入，得到多余的 \(x^2\) 贡献；分母是 \(x\)，只需展开到 \(x\) 阶。</p>
+    <p>常见错解：展开时把 \(x^2\) 项也代入，得到多余的 \(x^2\) 贡献。分母是 \(x\)，只需展开到 \(x\) 阶。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -3240,13 +3249,14 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(-\dfrac{1}{6}\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(0/0\) 型，分母 \(x^3\)。直接展开两个函数到 \(x^3\) 阶。</p>
-    <p>由标准泰勒公式：</p>
+    <p>识别类型：\(0/0\) 型，两个基本初等函数之差。直接展开到 \(x^3\) 阶：</p>
     \[ \arctan x=x-\frac{x^3}{3}+o(x^3),\qquad \sin x=x-\frac{x^3}{6}+o(x^3). \]
     <p>相减：</p>
     \[ \arctan x-\sin x=\left(-\frac{x^3}{3}\right)-\left(-\frac{x^3}{6}\right)+o(x^3)=-\frac{x^3}{6}+o(x^3). \]
-    <p>除以 \(x^3\) 得 \(-\dfrac{1}{6}\)。</p>
-    <p>关键一步：\(\arctan x\) 的 \(x^3\) 系数是 \(-1/3\)，\(\sin x\) 的 \(x^3\) 系数是 \(-1/6\)，两者相减得到 \(-1/3+1/6=-1/6\)。常见错误是把 \(\arctan x\) 的系数记成 \(+1/3\)，得到 \(1/6\)。</p>
+    <p>除以 \(x^3\) 得 \(-1/6\)。</p>
+    <p>也可用洛必达法则三次：第一次求导 \(\dfrac{1/(1+x^2)-\cos x}{3x^2}\)，仍为 \(0/0\)；第二次 \(\dfrac{-2x/(1+x^2)^2+\sin x}{6x}\)；第三次 \(\to -1/6\)。但泰勒展开一步到位，洛必达计算量大且易在二阶导数上出错。</p>
+    <p>常见错解：把 \(\arctan x\) 的 \(x^3\) 系数记成 \(+1/3\)，得到 \(1/6\)。\(\arctan x=x-x^3/3+x^5/5-\cdots\) 是交错级数，\(x^3\) 项为负。</p>
+    <p>与第 606 题对照：606 是 \(\arcsin x-x\sim x^3/6\)（正），本题是 \(\arctan x-\sin x\sim -x^3/6\)（负），符号与系数都要记清。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -3427,13 +3437,14 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(-\dfrac{1}{18}\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(0/0\) 型，两个因子都是 \(x^3\) 阶，乘积 \(x^6\) 阶，与分母匹配。分别展开到 \(x^3\) 即可。</p>
-    <p>由标准展开：</p>
+    <p>识别类型：\(0/0\) 型，两个因子都是 \(x^3\) 阶，乘积为 \(x^6\) 阶，与分母 \(x^6\) 匹配。分别展开到 \(x^3\) 即可：</p>
     \[ \tan x-x=\frac{x^3}{3}+o(x^3),\qquad \sin x-x=-\frac{x^3}{6}+o(x^3). \]
     <p>两式相乘：</p>
     \[ (\tan x-x)(\sin x-x)=\left(\frac{x^3}{3}\right)\left(-\frac{x^3}{6}\right)+o(x^6)=-\frac{x^6}{18}+o(x^6). \]
-    <p>除以 \(x^6\) 得 \(-\dfrac{1}{18}\)。</p>
-    <p>关键一步：两个因子分别是 \(x^3\) 阶，乘积为 \(x^6\) 阶，只需各展开到 \(x^3\)，更高阶项在乘积中贡献 \(x^7\) 及以上，可舍去。</p>
+    <p>除以 \(x^6\) 得 \(-1/18\)。</p>
+    <p>关键依据：两个因子各为 \(x^3\) 阶，乘积主部为 \(x^6\) 阶，更高阶项在乘积中贡献 \(x^7\) 及以上，可舍去。这是「等价无穷小相乘」的标准用法——只要每个因子只取主部，乘积主部就是各自主部之积。</p>
+    <p>常见错解：把两个因子都写成正，得到 \(1/18\)。\(\tan x-x>0\)、\(\sin x-x<0\)，乘积为负。</p>
+    <p>与第 605、602 题联动：605 给出 \(\tan x-x\sim x^3/3\)，602 给出 \(\sin x-x\sim -x^3/6\)，本题是两者乘积。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
