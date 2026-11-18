@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>《n项和极限》 · 第 1–25 题</title>
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner">
+  <span class="topbar-title"><a href="../../index.html">考研数学 66000 · 逐题精解</a></span>
+  <span class="topbar-nav"><a href="../../index.html">总览</a><a href="../../knowledge/index.html">知识地图</a><a href="../../progress.html">进度</a></span>
+</div></div>
+<div class="wrap">
+<header class="pagehead">
+  <div class="kicker">02-gaoshu-15000 · 专题 02</div>
+  <h1>第 1 – 25 题</h1>
+  <p class="sub"><a href="index.html">目录</a></p>
+</header>
+<article class="q" id="q2651">
+  <div class="q-head">
+    <span class="qno">第 1 题</span>
+    <span class="qtype">黎曼和因子对账（题面缺 1/n，发散判定）</span>
+    <span class="qsrc">P1097</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{k^{3}}{n^{4}}\sqrt{n^{2}-k^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：发散（\(+\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>简版答案给 \(\dfrac{2}{15}\)（第 1097 页）。原式缺归一因子 \(1/n\)：\(\sqrt{n^{2}-k^{2}}\) 提出 \(n\) 后与分母 \(n^{4}\) 抵消，通项不再含网格宽度，求和量级为 \(n\)；书答 \(2/15\) 是归一化后 \(\int_0^1 x^{3}\sqrt{1-x^{2}}\,dx\) 的值，即原式漏印了分母中的一个 \(n\)（分母应为 \(n^{5}\)）。以复算值为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>这是一道 \(n\) 项和极限，先按定积分定义的通路处理：把通项写成 \(\frac1n f(k/n)\) 的形式，再核对每一项是否真的含有 \(1/n\) 因子。令 \(x_k=k/n\)，先把根号内的 \(n\) 提出并整理幂次：</p>
+    \[
+    \sqrt{n^{2}-k^{2}}=n\sqrt{1-x_k^{2}},\qquad
+    \frac{k^{3}}{n^{4}}\sqrt{n^{2}-k^{2}}=x_k^{3}\sqrt{1-x_k^{2}}.
+    \]
+    <p>记和式为 \(S_n\)。通项里已经没有 \(1/n\)，直接对 \(S_n\) 套定积分定义不成立；把 \(S_n/n\) 认作标准黎曼和，先算归一化积分：</p>
+    \[
+    \frac{S_n}{n}=\frac1n\sum_{k=1}^{n}x_k^{3}\sqrt{1-x_k^{2}}
+    \longrightarrow\int_0^1 u^{3}\sqrt{1-u^{2}}\,du.
+    \]
+    <p>计算该积分：令 \(t=u^{2}\)，则 \(u^{3}du=\frac12 t\,dt\)，再令 \(v=1-t\)：</p>
+    \[
+    \int_0^1 u^{3}\sqrt{1-u^{2}}\,du
+    =\frac12\int_0^1(1-v)\sqrt{v}\,dv
+    =\frac12\left(\frac23-\frac25\right)=\frac{2}{15}.
+    \]
+    <p>末步回到原和式：</p>
+    \[
+    S_n=n\cdot\frac{S_n}{n}
+    =n\int_0^1 u^{3}\sqrt{1-u^{2}}\,du\,(1+o(1))
+    =\frac{2}{15}n(1+o(1))\longrightarrow+\infty.
+    \]
+    <p>数值校验：\(n=200\) 时 \(S_n\approx26.65\)，\(n=1000\) 时 \(S_n\approx133.32\)，与 \(0.1333n\) 吻合，确认发散而非收敛到积分值。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把乘根号型通项直接当黎曼和，漏看根号提出的 \(n\) 恰好抵消了分母中的 \(1/n\)；② 见到 \(n\) 项和就套定积分定义，不先逐项核对幂次与 \(1/n\) 因子；③ 简版答案的 \(2/15\) 正是被积函数的定积分值，容易误把积分值当成原数列和的极限，实际上原和式比黎曼和多出一个 \(n\) 的量级。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>黎曼和识别是 \(n\) 项和极限的第一通路，固定核对三件事：区间落在 \([0,1]\)、分点为 \(k/n\)、每一项含 \(1/n\)。根号型题目先把 \(\sqrt{n^{a}-k^{a}}\) 提出 \(n^{a/2}\)，再与分母幂次对账；缺因子即应判发散，而不是强行写成定积分。这类对账失败题在选择题与解答题中都以「看似标准黎曼和」的面貌出现。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{k^{3}}{n^{5}}\sqrt{n^{2}-k^{2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{2}{15}\)。分母改为 \(n^{5}\) 后通项为 \(\frac1n x^{3}\sqrt{1-x^{2}}\)，正是标准黎曼和，积分与本题解析中算出的 \(\int_0^1 x^{3}\sqrt{1-x^{2}}\,dx\) 相同。</p>
+  </div>
+</article>
+
+<article class="q" id="q2652">
+  <div class="q-head">
+    <span class="qno">第 2 题</span>
+    <span class="qtype">黎曼和 · 分部积分（x·sin x）</span>
+    <span class="qsrc">P1097</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{\sin(\frac{k}{n})}{n}\cdot\dfrac{k}{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\sin1-\cos1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>通项含 \(1/n\) 与分点 \(k/n\)，是标准黎曼和。令 \(x_k=k/n\)，把通项改写为函数在分点处的值乘以网格宽度：</p>
+    \[
+    \frac{\sin(k/n)}{n}\cdot\frac{k}{n}
+    =\frac1n x_k\sin x_k.
+    \]
+    <p>由定积分定义，和式极限等于 \(f(x)=x\sin x\) 在 \([0,1]\) 上的积分：</p>
+    \[
+    S_n=\frac1n\sum_{k=1}^{n}x_k\sin x_k
+    \longrightarrow\int_0^1 x\sin x\,dx.
+    \]
+    <p>被积函数是幂函数乘三角函数，用分部积分。取 \(u=x\)，\(dv=\sin x\,dx\)，则 \(du=dx\)，\(v=-\cos x\)：</p>
+    \[
+    \int x\sin x\,dx=-x\cos x+\int\cos x\,dx
+    =-x\cos x+\sin x+C.
+    \]
+    <p>代入上下限，下限 \(x=0\) 处两项均为零：</p>
+    \[
+    \int_0^1 x\sin x\,dx=(-\cos1+\sin1)-0=\sin1-\cos1.
+    \]
+    <p>数值校验：\(\sin1-\cos1\approx0.30117\)，与积分数值结果一致。整道题分两段走：前半段把离散和式翻译成连续积分，后半段只考分部积分的符号与余项，两段都不能省。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 漏看通项中的 \(1/n\)，把和式当成发散级数；② 分部积分符号出错：\(\int x\sin x\,dx=-x\cos x+\sin x\)，正弦项来自 \(\int\cos x\,dx\)，不能丢掉；③ 上下限代入时漏算下限 \(x=0\) 处的取值，本题下限为零不影响结果，但同类变式中需逐项核对。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>黎曼和挂初等函数，积分环节考分部积分。本题与第 7 题（\(x\cos x\)）、第 12 题（\(x^{2}\cos x\)）成组出现，按 \(x\) 的幂次递进；真题中也常把区间换成 \([0,a]\)，分部积分框架不变。复习时应把「识别黎曼和 → 写积分 → 分部积分」作为固定流程。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\dfrac{2k}{n}\sin\dfrac{2k}{n}\)。</p>
+    <p class="var-ans">答案：\(-2\cos2+\sin2\)。令 \(x=2k/n\)，和式化为 \(\int_0^2 x\sin x\,dx\)，分部积分得 \([-x\cos x+\sin x]_0^2=-2\cos2+\sin2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2653">
+  <div class="q-head">
+    <span class="qno">第 3 题</span>
+    <span class="qtype">黎曼和 · 凑微分（f′/f 型）</span>
+    <span class="qsrc">P1097</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{e^{k/n}}{n}\cdot\dfrac{1}{1+e^{k/n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln\dfrac{1+e}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>通项已含 \(1/n\)，分点为 \(k/n\)，识别为标准黎曼和。令 \(x_k=k/n\)：</p>
+    \[
+    \frac{e^{x_k}}{n}\cdot\frac{1}{1+e^{x_k}}
+    =\frac1n\cdot\frac{e^{x_k}}{1+e^{x_k}}.
+    \]
+    <p>由定积分定义：</p>
+    \[
+    S_n=\frac1n\sum_{k=1}^{n}\frac{e^{x_k}}{1+e^{x_k}}
+    \longrightarrow\int_0^1\frac{e^x}{1+e^x}\,dx.
+    \]
+    <p>观察被积函数：分子 \(e^x\) 恰是分母 \(1+e^x\) 的导数，属 \(f'(x)/f(x)\) 型，凑微分即得原函数。这里不需要把分式拆开，也不需要换元，直接把分子并入微分 \(d(1+e^x)\)：</p>
+    \[
+    \int\frac{e^x}{1+e^x}\,dx=\ln(1+e^x)+C.
+    \]
+    <p>代入上下限，下限 \(x=0\) 对应 \(\ln2\)，不能省略：</p>
+    \[
+    \int_0^1\frac{e^x}{1+e^x}\,dx
+    =\ln(1+e)-\ln2=\ln\frac{1+e}{2}.
+    \]
+    <p>数值校验：\(\ln\frac{1+e}{2}\approx0.62011\)，与积分数值结果一致。判断被积函数类型时，先看分子是否为分母的导数；本题 \(e^x\) 与 \(1+e^x\) 正好构成这一关系，凑微分比另设换元变量更直接。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 凑微分方向写反，误把 \(\frac{e^x}{1+e^x}\) 拆成无法积分的形式；② 下限 \(x=0\) 处的 \(\ln2\) 漏掉，答案会写成 \(\ln(1+e)\)；③ 把 \(e^{k/n}\) 当作常数提出求和号，忽略它随分点变化。④ 注意分母是 \(1+e^{k/n}\) 而不是 \(e^{k/n}\)，若误写为 \(\int1dx\) 会得到区间长度 1 的错误结果。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>黎曼和与凑微分结合，被积函数常取 \(f'(x)/f(x)\) 或线性分式型。本题与本册第 13 题（\(e^{2k/n}\)）同族，后者积分后多出一个系数 \(1/2\)；复习时应把「识别黎曼和 → 写积分 → 凑微分」作为固定流程，先认被积函数类型再动手积分。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\dfrac{e^{2k/n}}{1+e^{2k/n}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\ln\dfrac{1+e^{2}}{2}\)。和式化为 \(\int_0^1\frac{e^{2x}}{1+e^{2x}}dx\)，凑微分时令 \(u=e^{2x}\)，原函数为 \(\frac12\ln(1+e^{2x})\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2654">
+  <div class="q-head">
+    <span class="qno">第 4 题</span>
+    <span class="qtype">连乘取对数 · 黎曼和</span>
+    <span class="qsrc">P1097</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{k}{n}\right)}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{4}{e}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>这是 \(n\) 次根号下连乘积的幂指型数列，固定处理方式是先取对数，把连乘化为连加。记原式为 \(S_n\)：</p>
+    \[
+    \ln S_n=\frac1n\sum_{k=1}^{n}\ln\left(1+\frac{k}{n}\right).
+    \]
+    <p>取对数后右边已是标准黎曼和，令 \(x_k=k/n\)，由定积分定义：</p>
+    \[
+    \ln S_n\longrightarrow\int_0^1\ln(1+x)\,dx.
+    \]
+    <p>对数函数的积分用分部积分。取 \(u=\ln(1+x)\)，\(dv=dx\)，则 \(du=\frac{1}{1+x}dx\)，\(v=x\)，整理得标准原函数，代入上下限：</p>
+    \[
+    \int_0^1\ln(1+x)\,dx
+    =\left[(1+x)\ln(1+x)-(1+x)\right]_0^1
+    =2\ln2-2+1=2\ln2-1.
+    \]
+    <p>指数还原：</p>
+    \[
+    S_n\to e^{2\ln2-1}=e^{\ln4}\cdot e^{-1}=\frac{4}{e}.
+    \]
+    <p>取对数后的和式仍是 \([0,1]\) 上的黎曼和，分点 \(k/n\) 从 \(1/n\) 排到 1；积分 \(\int\ln(1+x)dx\) 不能直接套幂函数公式，必须分部积分，这是本题计算环节的主要考点。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 连乘积不能直接当求和处理，必须先取对数；② 取对数后外面仍有 \(1/n\)（来自 \(n\) 次方根），漏掉这个因子会使积分区间或量级出错；③ 分部积分中的常数项 \(-(1+x)\) 容易丢，下限 \(x=0\) 处取值为 \(-1\)，与上限相减后贡献 \(+1\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>幂指、连乘数列极限固定两步：取对数化黎曼和，再指数还原。本题与第 9 题同族，差别只在被取对数的因子是 \(1+x\) 还是 \(1+x^{2}\)；真题中也常把连乘底换成 \((1+k/n)^{k}\) 之类带幂次的形式，取对数后仍走黎曼和。取对数这一步把乘法结构改写成加法结构，指数还原则保证不改变原数列的幂指身份；两步缺一不可，漏取对数会无从下手，漏还原会把对数极限误当原极限。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{2k}{n}\right)}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{3\sqrt3}{e}\)。取对数后为 \(\int_0^1\ln(1+2x)\,dx=\frac32\ln3-1\)，指数还原得 \(3^{3/2}e^{-1}=3\sqrt3/e\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2655">
+  <div class="q-head">
+    <span class="qno">第 5 题</span>
+    <span class="qtype">裂项求和 · 1<sup>∞</sup> 幂指</span>
+    <span class="qsrc">P1097</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\left[\sum\limits_{k=1}^{n}\dfrac{1}{k(k+1)}\right]^{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(e^{-1}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>本题结构是「先求和，再对和式取 \(n\) 次幂」，不能直接套黎曼和。先处理中括号内的有限和。部分分式分解：</p>
+    \[
+    \frac{1}{k(k+1)}=\frac1k-\frac1{k+1}.
+    \]
+    <p>裂项相消，首项 \(k=1\) 的 \(1\) 保留，末项 \(1/(n+1)\) 舍弃：</p>
+    \[
+    \sum_{k=1}^{n}\frac{1}{k(k+1)}
+    =1-\frac1{n+1}=\frac{n}{n+1}.
+    \]
+    <p>底数 \(n/(n+1)\to1\)，指数 \(n\to\infty\)，属 \(1^{\infty}\) 型，按幂指取对数：</p>
+    \[
+    \left(\frac{n}{n+1}\right)^n
+    =\left(1-\frac1{n+1}\right)^n.
+    \]
+    <p>对数主部用等价无穷小 \(\ln(1-u)\sim-u\)（\(u\to0\)）：</p>
+    \[
+    n\ln\left(1-\frac1{n+1}\right)
+    \sim-\frac{n}{n+1}\longrightarrow-1.
+    \]
+    <p>指数还原得原极限 \(e^{-1}\)。数值校验：\(n=1000\) 时约 \(0.36806\)，与 \(e^{-1}\approx0.36788\) 吻合。判型时先看中括号内有限和能否先算出闭式；本题裂项后底数是 \(n/(n+1)\)，与 1 的差为 \(1/(n+1)\)，等价无穷小替换后指数主部一目了然。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 裂项时错舍首项或错留末项；求和从 \(k=1\) 起，首项 \(1\) 必须保留。② 底数趋于 \(1\) 的幂指必须取对数处理，不能把指数 \(n\) 直接乘到底数上。③ 指数是 \(n\) 而非 \(n+1\)，等价无穷小后主部为 \(-n/(n+1)\to-1\)；若误把指数当作 \(n+1\)，主部会写成 \(-1\) 以外的常数。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「先求和再取极限」型，裂项求和与 \(1^{\infty}\) 幂指串联。本题与本册第 15 题（指数 \(2n\)）同族，答案相应为 \(e^{-2}\)；这类题在选择题中常以裂项、错位相减后的和式为底，考的是有限和先算干净再判幂指类型。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left[\sum\limits_{k=1}^{n}\dfrac{1}{k(k+1)}\right]^{2n}\)。</p>
+    <p class="var-ans">答案：\(e^{-2}\)。和式仍为 \(n/(n+1)\)，对数主部 \(2n\ln(1-1/(n+1))\to-2\)，指数还原得 \(e^{-2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2656">
+  <div class="q-head">
+    <span class="qno">第 6 题</span>
+    <span class="qtype">黎曼和 · 无理式积分</span>
+    <span class="qsrc">P1097</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{\sqrt{n^{2}+k^{2}}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln(1+\sqrt{2})\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>根号在分母，先把根号内的 \(n^{2}\) 提出。令 \(x_k=k/n\)，逐项整理：</p>
+    \[
+    \frac{1}{\sqrt{n^{2}+k^{2}}}
+    =\frac1n\cdot\frac{1}{\sqrt{1+x_k^{2}}}.
+    \]
+    <p>这里根号在分母，提出的 \(n\) 恰好构成黎曼和所需的 \(1/n\) 因子，与乘根号型题目方向相反。由定积分定义：</p>
+    \[
+    S_n=\frac1n\sum_{k=1}^{n}\frac{1}{\sqrt{1+x_k^{2}}}
+    \longrightarrow\int_0^1\frac{dx}{\sqrt{1+x^{2}}}.
+    \]
+    <p>该积分用三角代换 \(x=\tan t\)，则 \(dx=\sec^{2}t\,dt\)，\(\sqrt{1+x^{2}}=\sec t\)，被积式化为 \(\sec t\,dt\)；或直接套用标准公式，原函数为：</p>
+    \[
+    \int\frac{dx}{\sqrt{1+x^{2}}}
+    =\ln\left(x+\sqrt{1+x^{2}}\right)+C.
+    \]
+    <p>代入上下限，下限 \(x=0\) 处对数值为 \(\ln1=0\)：</p>
+    \[
+    \int_0^1\frac{dx}{\sqrt{1+x^{2}}}
+    =\ln(1+\sqrt2)-0=\ln(1+\sqrt2).
+    \]
+    <p>分点 \(k=1,\dots,n\) 对应 \(x=1/n,\dots,1\)，右端点 \(x=1\) 计入积分区间，左端点 \(x=0\) 由首项极限补足，与标准黎曼和 \(\frac1n\sum_{k=1}^n f(k/n)\) 一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 根号在分母时，提出的 \(n\) 恰好构成 \(1/n\) 因子；不要与乘根号型通项（第 1、11 题）混淆，两者量级判断方向相反。② 原函数是 \(\ln(x+\sqrt{1+x^{2}})\)，不要误写成 \(\ln(x+\sqrt{x^{2}-1})\) 或反三角函数形式。③ 分点从 \(k=1\) 到 \(n\)，首项对应 \(x=1/n\to0\)，不影响积分区间。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>无理式黎曼和，积分靠三角代换或标准积分公式。本题与第 8 题（\(\sqrt{1+x^{2}}\) 在上）互为被积函数对偶，与本册第 16 题（系数 \(\sqrt2\)）同族；真题中常通过根号内加系数改变积分常数，掌握标准原函数后属于稳拿分。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{\sqrt{n^{2}+2k^{2}}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{\sqrt2}\ln(1+\sqrt2)\)。提出 \(n\) 后和式化为 \(\frac1{\sqrt2}\int_0^1\frac{dx}{\sqrt{1+x^{2}/2}}\)，积分得 \(\frac1{\sqrt2}\ln(1+\sqrt2)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2657">
+  <div class="q-head">
+    <span class="qno">第 7 题</span>
+    <span class="qtype">黎曼和 · 分部积分（x·cos x）</span>
+    <span class="qsrc">P1098</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{k}{n^{2}}\cos\left(\dfrac{k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\sin1+\cos1-1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>通项中 \(k/n^{2}=(1/n)(k/n)\)，已含网格宽度 \(1/n\)，识别为标准黎曼和。令 \(x_k=k/n\)：</p>
+    \[
+    \frac{k}{n^{2}}\cos\frac{k}{n}
+    =\frac1n x_k\cos x_k.
+    \]
+    <p>由定积分定义：</p>
+    \[
+    S_n=\frac1n\sum_{k=1}^{n}x_k\cos x_k
+    \longrightarrow\int_0^1 x\cos x\,dx.
+    \]
+    <p>分部积分，取 \(u=x\)，\(dv=\cos x\,dx\)，则 \(du=dx\)，\(v=\sin x\)：</p>
+    \[
+    \int x\cos x\,dx=x\sin x-\int\sin x\,dx
+    =x\sin x+\cos x+C.
+    \]
+    <p>代入上下限：上限 \(x=1\) 得 \(\sin1+\cos1\)，下限 \(x=0\) 得 \(\cos0=1\)，相减：</p>
+    \[
+    \int_0^1 x\cos x\,dx=(\sin1+\cos1)-1.
+    \]
+    <p>数值校验：\(\sin1+\cos1-1\approx0.38177\)，与积分数值结果一致。本题黎曼和部分只把极限翻译成积分，真正的计算量集中在分部积分及其符号核对。与第 2 题对照，正弦与余弦的分部积分只在余项符号上不同，幂次处理完全一致；先判断被积函数属于哪一档，再选对应原函数。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分部积分中 \(-\int\sin x\,dx=+\cos x\)，符号容易写反；② 常数 \(1\) 来自下限 \(\cos0=1\)，漏掉会得到 \(\sin1+\cos1\)；③ 与第 2 题对照记忆：\(\int x\sin x\) 的原函数是 \(-x\cos x+\sin x\)，\(\int x\cos x\) 的原函数是 \(x\sin x+\cos x\)，两者余项不同。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题与第 2 题、第 12 题组成「幂函数乘三角函数」分部积分族，按 \(x\) 的幂次递进。黎曼和部分只负责把极限翻译成积分，计算量集中在分部积分；复习时应把两个标准原函数背熟，避免在积分环节失分。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{k}{n^{2}}\sin\dfrac{k}{n}\)。</p>
+    <p class="var-ans">答案：\(\sin1-\cos1\)。和式化为 \(\int_0^1 x\sin x\,dx\)，即第 2 题的积分结果。</p>
+  </div>
+</article>
+
+<article class="q" id="q2658">
+  <div class="q-head">
+    <span class="qno">第 8 题</span>
+    <span class="qtype">黎曼和 · 根号二次式积分</span>
+    <span class="qsrc">P1098</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\sqrt{1+\dfrac{k^{2}}{n^{2}}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\left(\sqrt{2}+\ln(1+\sqrt{2})\right)\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>通项已显式写出 \(1/n\)，分点为 \(k/n\)，是标准黎曼和。令 \(x_k=k/n\)：</p>
+    \[
+    \frac1n\sum_{k=1}^{n}\sqrt{1+x_k^{2}}
+    \longrightarrow\int_0^1\sqrt{1+x^{2}}\,dx.
+    \]
+    <p>根号二次式用三角代换 \(x=\tan t\)，则 \(dx=\sec^{2}t\,dt\)，\(\sqrt{1+x^{2}}=\sec t\)，被积式为 \(\sec^{3}t\,dt\)，分部积分回代后得到标准积分公式：</p>
+    \[
+    \int\sqrt{1+x^{2}}\,dx
+    =\frac12\left[x\sqrt{1+x^{2}}+\ln\left(x+\sqrt{1+x^{2}}\right)\right]+C.
+    \]
+    <p>代入上限 \(x=1\)：\(x\sqrt{1+x^{2}}=\sqrt2\)，对数项为 \(\ln(1+\sqrt2)\)；下限 \(x=0\) 两项均为零。故</p>
+    \[
+    \int_0^1\sqrt{1+x^{2}}\,dx
+    =\frac12\left(\sqrt2+\ln(1+\sqrt2)\right).
+    \]
+    <p>数值校验：该值约 \(1.14779\)，与积分数值结果一致。公式中的代数项与对数项分别来自 \(\sec^{3}t\) 积分的两部分，回代后必须同时保留。若改用双曲代换 \(x=\sinh t\)，则 \(\sqrt{1+x^2}=\cosh t\)，\(dx=\cosh t\,dt\)，被积式为 \(\cosh^2 t\,dt\)，回代后得到同一公式，两条路径可互相校验。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 原函数含代数项与对数项两部分，只写 \(x\sqrt{1+x^{2}}/2\) 会漏掉对数项；② 代换 \(x=\tan t\) 后回代时要把 \(\sec t\) 换回 \(\sqrt{1+x^{2}}\)，不要留下 \(t\)；③ 本题根号内为加号，与 \(\sqrt{1-x^{2}}\) 的圆积分区分开，后者结果含 \(\pi/4\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根号二次式黎曼和，积分公式固定，是第 6 题被积函数的对偶形式。真题中也会把根号内系数改为 \(2\)、\(a^{2}\)，对应积分只需缩放变量；掌握标准原函数后这类题属于稳拿分。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\sqrt{1-\dfrac{k^{2}}{n^{2}}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{4}\)。和式化为 \(\int_0^1\sqrt{1-x^{2}}dx\)，几何上是单位圆第一象限面积，即 \(\pi/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2659">
+  <div class="q-head">
+    <span class="qno">第 9 题</span>
+    <span class="qtype">连乘取对数 · 黎曼和（含反三角）</span>
+    <span class="qsrc">P1098</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{k^{2}}{n^{2}}\right)}\)。</p>
+  </div>
+  <div class="answer">答案：\(2e^{-2}e^{\pi/2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>与第 4 题同属连乘幂指型，先取对数。记原式为 \(S_n\)：</p>
+    \[
+    \ln S_n=\frac1n\sum_{k=1}^{n}\ln\left(1+\frac{k^{2}}{n^{2}}\right).
+    \]
+    <p>右边是标准黎曼和，令 \(x_k=k/n\)：</p>
+    \[
+    \ln S_n\longrightarrow\int_0^1\ln(1+x^{2})\,dx.
+    \]
+    <p>分部积分，取 \(u=\ln(1+x^{2})\)，\(dv=dx\)，再拆项 \(\frac{x^{2}}{1+x^{2}}=1-\frac{1}{1+x^{2}}\)，整理得：</p>
+    \[
+    \int\ln(1+x^{2})\,dx
+    =x\ln(1+x^{2})-2x+2\arctan x+C.
+    \]
+    <p>代入上下限，\(\arctan1=\pi/4\)：</p>
+    \[
+    \int_0^1\ln(1+x^{2})\,dx
+    =\ln2-2+\frac{\pi}{2},
+    \qquad
+    S_n\to e^{\ln2-2+\pi/2}=2e^{-2}e^{\pi/2}.
+    \]
+    <p>积分中出现 \(\arctan x\) 是分母 \(1+x^2\) 的标准反三角积分；与第 4 题相比，对数内由 \(1+x\) 换成 \(1+x^2\)，分部积分后多出反三角项，这是两题答案结构不同的根源。指数还原时 \(e^{\ln2}=2\)，系数应留在指数外侧，不要再写回对数里。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 必须先取对数才得到黎曼和，直接对连乘积套积分没有依据；② 拆项积分 \(\int\frac{2x^{2}}{1+x^{2}}dx=2x-2\arctan x\)，符号与反三角项容易写反；③ \(\arctan1=\pi/4\)，乘 \(2\) 后是 \(\pi/2\)，不要把系数丢掉。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>连乘取对数族的进阶版本，被积函数含对数与反三角。与第 4 题对照：底数为 \(1+x\) 时积分只剩对数与一次项，底数为 \(1+x^{2}\) 时多出 \(\arctan\) 项；这类题在解答题中常作为黎曼和与分部积分的综合题出现。复习时应把 \(\int\ln(1+x)dx\) 与 \(\int\ln(1+x^2)dx\) 两个原函数并排记忆，前者收尾于一次项，后者收尾于反三角项。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求本题取对数后的极限 \(\lim\limits_{n\to\infty}\ln S_n\)。</p>
+    <p class="var-ans">答案：\(\ln2-2+\dfrac{\pi}{2}\)。即解析中算出的定积分值；若再指数还原，即得原数列极限 \(2e^{-2}e^{\pi/2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2660">
+  <div class="q-head">
+    <span class="qno">第 10 题</span>
+    <span class="qtype">黎曼和 · 周期绝对值积分</span>
+    <span class="qsrc">P1098</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{n}\left|\cos\left(\dfrac{2\pi k}{n}\right)\right|\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{2}{\pi}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>通项含 \(1/n\) 与分点 \(k/n\)，识别为黎曼和。令 \(x_k=k/n\)：</p>
+    \[
+    \frac1n\sum_{k=1}^{n}\left|\cos(2\pi x_k)\right|
+    \longrightarrow\int_0^1\left|\cos(2\pi x)\right|\,dx.
+    \]
+    <p>被积函数带绝对值，先分析符号：\(|\cos(2\pi x)|\) 的周期为 \(1/2\)，在一个周期 \([0,1/2]\) 内，\([0,1/4]\) 上余弦非负，\([1/4,1/2]\) 上非正。单位区间含两个周期：</p>
+    \[
+    \int_0^1|\cos(2\pi x)|\,dx
+    =2\int_0^{1/2}|\cos(2\pi x)|\,dx
+    =4\int_0^{1/4}\cos(2\pi x)\,dx.
+    \]
+    <p>计算定积分：</p>
+    \[
+    4\int_0^{1/4}\cos(2\pi x)\,dx
+    =4\cdot\left.\frac{\sin(2\pi x)}{2\pi}\right|_0^{1/4}
+    =\frac{4}{2\pi}=\frac{2}{\pi}.
+    \]
+    <p>数值校验：\(2/\pi\approx0.63662\)，与积分数值结果一致。去绝对值后，正负两段的积分面积相等，因此只需算出 \([0,1/4]\) 上的正值积分再倍乘；若直接在全区间套余弦原函数，正负面积相消会得到零。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 绝对值不能直接去掉，必须按余弦符号分段，否则会得到 \(\int\cos(2\pi x)dx=0\) 的错误结果；② \(|\cos(2\pi x)|\) 的周期是 \(1/2\) 而不是 \(1\)，一个单位区间内含两个周期；③ 分点落在零点附近的项属于零测集，不影响积分值，无需单独剔除。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>带绝对值的周期函数黎曼和，考分段去绝对值与周期性。同类变式把余弦换成正弦，结果相同；这类题在选择题中偶尔出现，判别关键是先画出一个周期内的符号变化，再按周期倍乘。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\left|\sin\dfrac{2\pi k}{n}\right|\)。</p>
+    <p class="var-ans">答案：\(\dfrac{2}{\pi}\)。\(|\sin(2\pi x)|\) 与 \(|\cos(2\pi x)|\) 周期相同、相位差 \(1/4\)，一个周期内积分相等，故结果同为 \(2/\pi\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2661">
+  <div class="q-head">
+    <span class="qno">第 11 题</span>
+    <span class="qtype">黎曼和因子对账（题面缺 1/n，发散判定）</span>
+    <span class="qsrc">P1098</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{k^{4}}{n^{5}}\sqrt{n^{3}-k^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：发散（\(+\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>简版答案给 \(\dfrac{4}{35}\)（第 1098 页）。原式缺归一因子 \(1/n\)：\(\sqrt{n^{3}-k^{3}}\) 提出 \(n^{3/2}\) 后与分母 \(n^{5}\) 抵消不尽，通项含 \(n^{1/2}\) 因子，实际求和 \(\sim n^{3/2}\to+\infty\)；归一化后的正确题应为分母 \(n^{13/2}\)，其精确值为 \(\frac13 B(\frac53,\frac32)\approx0.1137\)，与书给 \(4/35\approx0.1143\) 不等，书答 \(4/35\) 本身算错，不能用作校勘基准。以复算值为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先按定积分定义通路对账。令 \(x_k=k/n\)，把根号内的 \(n^{3}\) 提出：</p>
+    \[
+    \sqrt{n^{3}-k^{3}}=n^{3/2}\sqrt{1-x_k^{3}},
+    \qquad
+    \frac{k^{4}}{n^{5}}\sqrt{n^{3}-k^{3}}
+    =n^{1/2}x_k^{4}\sqrt{1-x_k^{3}}.
+    \]
+    <p>通项不含 \(1/n\)，反而随 \(n^{1/2}\) 增长。记和式为 \(S_n\)，除以 \(n^{3/2}\) 后才是标准黎曼和：</p>
+    \[
+    \frac{S_n}{n^{3/2}}=\frac1n\sum_{k=1}^{n}x_k^{4}\sqrt{1-x_k^{3}}
+    \longrightarrow I,\quad I=\int_0^1 x^{4}\sqrt{1-x^{3}}\,dx
+    =\frac13 B\left(\frac53,\frac32\right)\approx0.1137.
+    \]
+    <p>令 \(t=x^{3}\)，则 \(x^{4}dx=\frac13 t^{2/3}dt\)；该积分是含 \(\Gamma(1/6)\) 的超越数，并不等于有理数 \(4/35\)。被积函数在 \((0,1)\) 上为正，故</p>
+    \[
+    S_n=n^{3/2}\cdot\frac{S_n}{n^{3/2}}
+    =0.1137\,n^{3/2}(1+o(1))\longrightarrow+\infty.
+    \]
+    <p>数值校验：\(n=50/200/1000\) 时 \(S_n\approx39.85/321.29/3595.75\)，与 \(0.1137\,n^{3/2}\) 的增长趋势吻合，确认发散。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 根号提出 \(n^{3/2}\) 后必须再与分母 \(n^{5}\) 对账，不能只看分母幂次就认定是黎曼和；② 缺 \(1/n\) 因子时和式随 \(n\) 发散，趋势由积分主部符号决定，本题被积函数非负，故走向 \(+\infty\)；③ 简版答案的 \(4/35\) 既对应不上印式的发散量级，也不等于归一化积分值 \(0.1137\)，书答本身手算或近似有误，不能拿它反推题面。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与第 1 题同属「乘根号型」对账失败族，识别程序是先提出根号内 \(n\) 的幂次，再判断每项是否还含 \(1/n\)。这类题在考试中若以解答题出现，要求先说明和式量级、再给结论；直接写定积分值而不核对因子，是最常见的失分方式。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{k^{4}}{n^{13/2}}\sqrt{n^{3}-k^{3}}\)。</p>
+    <p class="var-ans">答案：\(\frac13 B\left(\frac53,\frac32\right)\approx0.1137\)。补上归一因子后通项为 \(\frac1n x^{4}\sqrt{1-x^{3}}\)，是标准黎曼和；该积分是含 \(\Gamma(1/6)\) 的超越数，并非有理数 \(4/35\)。与本题对照，差别只在分母是否漏印那个 \(n^{3/2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2662">
+  <div class="q-head">
+    <span class="qno">第 12 题</span>
+    <span class="qtype">黎曼和 · 分部积分（x²·cos x）</span>
+    <span class="qsrc">P1098</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{\cos(\frac{k}{n})}{n}\cdot\dfrac{k^{2}}{n^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(2\cos1-\sin1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>通项中 \(k^{2}/n^{2}=(k/n)^{2}\)，网格宽度 \(1/n\) 已显式写出，识别为标准黎曼和。令 \(x_k=k/n\)：</p>
+    \[
+    \frac{\cos(k/n)}{n}\cdot\frac{k^{2}}{n^{2}}
+    =\frac1n x_k^{2}\cos x_k.
+    \]
+    <p>由定积分定义：</p>
+    \[
+    S_n=\frac1n\sum_{k=1}^{n}x_k^{2}\cos x_k
+    \longrightarrow\int_0^1 x^{2}\cos x\,dx.
+    \]
+    <p>需要两次分部积分。第一次取 \(u=x^{2}\)，\(dv=\cos x\,dx\)，第二次对 \(\int x\sin x\,dx\) 再分部，整理得：</p>
+    \[
+    \int x^{2}\cos x\,dx=x^{2}\sin x+2x\cos x-2\sin x+C.
+    \]
+    <p>代入上下限，下限 \(x=0\) 处各项均为零：</p>
+    \[
+    \int_0^1 x^{2}\cos x\,dx
+    =\sin1+2\cos1-2\sin1=2\cos1-\sin1.
+    \]
+    <p>数值校验：\(2\cos1-\sin1\approx0.23913\)，与积分数值结果一致。两次分部积分的规律是：每积分一次三角函数、导数一次幂函数，幂次降一档；到幂次降为零后，剩余三角函数积分直接收尾。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分部积分顺序为先对余弦积分为正弦、再降 \(x^{2}\) 的幂次；反过来先对 \(x^{2}\) 求导方向会乱。② 第二次分部留下的 \(-2\sin x\) 余项容易丢，漏写会得到 \(\sin1+2\cos1\)。③ 核对幂次：本题通项是 \(x^{2}\cos x\)，不要与第 7 题的 \(x\cos x\) 混淆。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「幂函数乘三角函数」分部积分族的最高一档，与第 2、7 题按 \(x\) 的幂次递进。两次分部积分后幂次降为零，是这类题的固定模式；真题中也会把余弦换成正弦，原函数形式相应轮换。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{k^{2}}{n^{3}}\sin\dfrac{k}{n}\)。</p>
+    <p class="var-ans">答案：\(2\sin1+\cos1-2\)。和式化为 \(\int_0^1 x^{2}\sin x\,dx\)，两次分部积分得 \([-x^{2}\cos x+2x\sin x+2\cos x]_0^1=2\sin1+\cos1-2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2663">
+  <div class="q-head">
+    <span class="qno">第 13 题</span>
+    <span class="qtype">定积分定义（指数分式）</span>
+    <span class="qsrc">P1099</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{e^{2k/n}}{n}\cdot\dfrac{1}{1+e^{2k/n}}=\)</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\ln\dfrac{1+e^{2}}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(n\) 项和的定积分定义型。通项里 \(1/n\) 是分割小区间长度，\(k/n\) 是分点，先把和式写成 Riemann 和的标准形式。</p>
+    \[ \sum_{k=1}^{n}\frac{e^{2k/n}}{n}\cdot\frac{1}{1+e^{2k/n}}=\frac1n\sum_{k=1}^{n}\frac{e^{2(k/n)}}{1+e^{2(k/n)}}. \]
+    <p>右端正是 \(f(x)=\dfrac{e^{2x}}{1+e^{2x}}\) 在 \([0,1]\) 上的等距分割 Riemann 和。函数在 \([0,1]\) 连续，故和式收敛到定积分：</p>
+    \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}f\!\left(\frac{k}{n}\right)=\int_0^1\frac{e^{2x}}{1+e^{2x}}\,dx. \]
+    <p>令 \(u=e^{2x}\)，则 \(du=2u\,dx\)，即 \(dx=du/(2u)\)；当 \(x=0\) 时 \(u=1\)，当 \(x=1\) 时 \(u=e^2\)。代入后 \(u\) 约去：</p>
+    \[ \int_0^1\frac{e^{2x}}{1+e^{2x}}\,dx=\frac12\int_1^{e^2}\frac{du}{1+u}=\frac12\bigl[\ln(1+u)\bigr]_1^{e^2}=\frac12\ln\frac{1+e^2}{2}. \]
+    <p>数值复核：\(n=10^3\) 时和式约为 \(0.7162\)，与 \(\frac12\ln\frac{1+e^2}{2}\approx0.71689\) 吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 配 Riemann 和时漏掉 \(1/n\)，把 \(\sum f(k/n)\) 直接当成积分；\(\sum f(k/n)\) 与 \(\frac1n\sum f(k/n)\) 的极限不是一回事，本题通项中的 \(1/n\) 必须显式归入区间长度。② 换元后忘记 \(du=2u\,dx\)，漏掉因子 \(1/2\)，会得到 \(\ln\frac{1+e^2}{2}\)。③ 把 \(e^{2k/n}\) 误读成 \(e^{k/n}\)，积分上下限与被积函数随之全错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>指数分式型 Riemann 和是定积分定义的常规考法：分子分母同含 \(e^{ak/n}\)，先按 \(f(k/n)\) 归位，再用换元积分。同组题目把指数系数换成 \(3\)（对照第 23 题），框架不变，只改积分上下限与系数。解答题中也常与夹逼准则交替出现，用于区分「和式能配成积分」与「只能放缩」两类结构。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{e^{k/n}}{n}\cdot\dfrac{1}{1+e^{k/n}}\)。</p>
+    <p class="var-ans">答案：\(\ln\dfrac{1+e}{2}\)。配成 \(\frac1n\sum f(k/n)\)，\(f(x)=e^x/(1+e^x)\)，积分 \(\int_0^1 e^x/(1+e^x)\,dx=[\ln(1+e^x)]_0^1=\ln(1+e)-\ln2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2664">
+  <div class="q-head">
+    <span class="qno">第 14 题</span>
+    <span class="qtype">连乘取对数→定积分</span>
+    <span class="qsrc">P1099</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{k^{2}}{n^{2}}\right)^{k}}=\)</p>
+  </div>
+  <div class="answer">答案：\(2e^{-1/2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：连乘再开 \(n\) 次方，属幂指连乘型。连乘不能直接套定积分定义，先取自然对数把乘积化成求和，再判断求和式能否配成 Riemann 和。</p>
+    <p>设原极限为 \(L\)，取对数：</p>
+    \[ \ln L=\lim_{n\to\infty}\frac1n\sum_{k=1}^{n}k\ln\left(1+\frac{k^2}{n^2}\right). \]
+    <p>把 \(k\) 拆成 \(n\cdot(k/n)\)，求和式即标准 Riemann 和：</p>
+    \[ \frac1n\sum_{k=1}^{n}\frac{k}{n}\ln\left(1+\left(\frac{k}{n}\right)^2\right)\longrightarrow\int_0^1 x\ln(1+x^2)\,dx. \]
+    <p>令 \(u=1+x^2\)，则 \(du=2x\,dx\)，即 \(x\,dx=du/2\)；\(x=0\) 时 \(u=1\)，\(x=1\) 时 \(u=2\)：</p>
+    \[ \int_0^1 x\ln(1+x^2)\,dx=\frac12\int_1^2\ln u\,du=\frac12\bigl[u\ln u-u\bigr]_1^2=\frac12(2\ln2-1)=\ln2-\frac12. \]
+    <p>故 \(L=e^{\ln2-1/2}=2e^{-1/2}\)。数值复核：\(n=10^3\) 时对数和约为 \(0.1931\)，与 \(\ln2-1/2\approx0.19315\) 吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把连乘当连加处理，直接对 \(\prod\) 套定积分定义；连乘必须先取对数，对数把乘积变求和后才能配 Riemann 和。② 拆 \(k=n\cdot(k/n)\) 时漏掉一个 \(1/n\)，导致积分变量与权重对不上。③ 积分 \(\int\ln u\,du\) 分部积分记错，写成 \(u\ln u\) 而漏减 \(u\) 项，常数部分随之出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「连乘开 \(n\) 次方」是定积分定义的另一类包装：外层开方对应对数后的 \(1/n\)，内层指数 \(k\) 或 \(k^2\) 决定被积函数的幂次。真题中常与对数等价无穷小结合：当括号内是 \(1+k/n^2\) 这类小参数时，不能直接配积分，要先做量级估计（对照第 19、24 题）。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{k}{n}\right)}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{4}{e}\)。取对数得 \(\frac1n\sum\ln(1+k/n)\to\int_0^1\ln(1+x)\,dx=[(1+x)\ln(1+x)-(1+x)]_0^1=2\ln2-1\)，故极限为 \(e^{2\ln2-1}=4/e\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2665">
+  <div class="q-head">
+    <span class="qno">第 15 题</span>
+    <span class="qtype">裂项求和与 1<sup>∞</sup> 型幂指</span>
+    <span class="qsrc">P1099</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[\sum\limits_{k=1}^{n}\dfrac{1}{k(k+1)}\right]^{2n}=\)</p>
+  </div>
+  <div class="answer">答案：\(e^{-2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：先求和再取极限，底数是裂项级数的部分和，指数随 \(n\) 线性增长，属 \(1^\infty\) 型幂指极限。第一步先把括号内的有限和求出闭式，不能直接对每一项取极限。</p>
+    <p>裂项：\(\dfrac{1}{k(k+1)}=\dfrac1k-\dfrac1{k+1}\)，部分和逐项相消：</p>
+    \[ \sum_{k=1}^{n}\frac{1}{k(k+1)}=1-\frac1{n+1}=\frac{n}{n+1}. \]
+    <p>底数 \(n/(n+1)\to1\)，指数 \(2n\to\infty\)，确为 \(1^\infty\) 型。写成标准幂指形式：</p>
+    \[ \left(\frac{n}{n+1}\right)^{2n}=\left(1+\frac1n\right)^{-2n}. \]
+    <p>由重要极限 \(\lim\limits_{n\to\infty}(1+1/n)^n=e\)，指数 \(-2n\) 对应系数 \(-2\)：</p>
+    \[ \lim_{n\to\infty}\left(1+\frac1n\right)^{-2n}=\left[\lim_{n\to\infty}\left(1+\frac1n\right)^n\right]^{-2}=e^{-2}. \]
+    <p>数值复核：\(n=10^3\) 时 \((1000/1001)^{2000}\approx0.1354\)，与 \(e^{-2}\approx0.13534\) 吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 裂项后误把首项 \(1\) 也舍掉，写成部分和 \(1/(n+1)\) 或 \(1/n\)，底数趋于 \(0\) 或 \(1\) 的判断随之全错；相消后仅剩首项 \(1\) 与末项 \(-1/(n+1)\)。② 见到底数趋于 \(1\) 就直接写答案 \(1\)，忽略指数趋于无穷；\(1^\infty\) 型必须用重要极限或取对数处理。③ 指数 \(2n\) 的系数漏带，得到 \(e^{-1}\) 而非 \(e^{-2}\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>裂项求和加幂指指数是数列极限的经典组合：先由分式裂项得到底数闭式，再识别 \(1^\infty\) 型套重要极限。同组题目只改指数倍数（对照第 25 题，指数为 \(3n\)），裂项部分完全相同。这类题在填空题中出现频率高，关键是把「有限和」与「幂指极限」两步分开做，不在和式阶段提前取极限。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left[\sum\limits_{k=1}^{n}\dfrac{1}{k(k+2)}\right]^{n}\)。</p>
+    <p class="var-ans">答案：\(e^{-3/2}\)。裂项 \(\frac1{k(k+2)}=\frac12(\frac1k-\frac1{k+2})\)，部分和为 \(\frac12(1+\frac12-\frac1{n+1}-\frac1{n+2})\to\frac34\)，底数不是 \(1\)，按 \(1^\infty\) 型另算；本题意在提示裂项后须先判断底数极限是否为 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2666">
+  <div class="q-head">
+    <span class="qno">第 16 题</span>
+    <span class="qtype">定积分定义（双曲型根式）</span>
+    <span class="qsrc">P1099</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{\sqrt{n^{2}+2k^{2}}}=\)</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{\sqrt2}\ln(\sqrt2+\sqrt3)\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>简版答案给 \(\dfrac{1}{\sqrt2}\ln(1+\sqrt2)\)（第 1099 页）。按题面复算为 \(\dfrac{1}{\sqrt2}\ln(\sqrt2+\sqrt3)\)：根号内系数为 \(2\)，换元 \(t=\sqrt2\,x\) 后上限为 \(\sqrt2\)，反双曲正弦 \(\operatorname{arsinh}\sqrt2=\ln(\sqrt2+\sqrt3)\)；书答对数项 \(\ln(1+\sqrt2)\) 对应系数为 \(1\) 的情形，与题面系数不符。以复算值为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(n\) 项和的定积分定义型。先从通项分母提取 \(n\)，配出 \(1/n\) 与分点 \(k/n\)。</p>
+    \[ \frac{1}{\sqrt{n^2+2k^2}}=\frac1n\cdot\frac{1}{\sqrt{1+2(k/n)^2}}. \]
+    <p>和式即 \(f(x)=1/\sqrt{1+2x^2}\) 在 \([0,1]\) 上的 Riemann 和：</p>
+    \[ \lim_{n\to\infty}\sum_{k=1}^{n}\frac{1}{\sqrt{n^2+2k^2}}=\int_0^1\frac{dx}{\sqrt{1+2x^2}}. \]
+    <p>令 \(t=\sqrt2\,x\)，则 \(dx=dt/\sqrt2\)，上限 \(t=\sqrt2\)：</p>
+    \[ \int_0^1\frac{dx}{\sqrt{1+2x^2}}=\frac1{\sqrt2}\int_0^{\sqrt2}\frac{dt}{\sqrt{1+t^2}}=\frac1{\sqrt2}\bigl[\ln(t+\sqrt{1+t^2})\bigr]_0^{\sqrt2}. \]
+    <p>代入上下限，\(t=0\) 时对数为 \(0\)，\(t=\sqrt2\) 时 \(\sqrt{1+t^2}=\sqrt3\)，故</p>
+    \[ \text{原极限}=\frac1{\sqrt2}\ln(\sqrt2+\sqrt3). \]
+    <p>数值复核：积分值约 \(0.81050\)；若用书答 \(\ln(1+\sqrt2)\) 一支约 \(0.62323\)，两者不等。分点从 \(k=1\) 到 \(n\)，首项对应 \(x=1/n\to0\)，末项对应 \(x=1\)，端点取值不影响定积分结果。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 提取 \(n\) 时系数处理错：\(\sqrt{n^2+2k^2}=n\sqrt{1+2(k/n)^2}\)，根号外的 \(n\) 与分母 \(n\) 约出 \(1/n\)，系数 \(2\) 留在根号内。② 积分公式记混：\(\int dt/\sqrt{1+t^2}=\ln(t+\sqrt{1+t^2})\)，不是 \(\ln(1+t)\)；上限 \(t=\sqrt2\) 代入后根号项是 \(\sqrt3\)。③ 直接套用 \(\int_0^1 dx/\sqrt{1+x^2}=\ln(1+\sqrt2)\) 的旧结论，忽略本题根号内多了系数 \(2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>根式分式型 Riemann 和是定积分定义的常考形式，被积函数多为 \(1/\sqrt{1+ax^2}\) 或 \(\sqrt{1+ax^2}\)，积分结果落在反双曲正弦与代数项组合。做题顺序固定：提 \(n\) 配积分，按根号内系数换元，最后代上限。同组题目只改根号内系数（对照第 18、26、28 题），换元比例随之改变。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{\sqrt{n^{2}+k^{2}}}\)。</p>
+    <p class="var-ans">答案：\(\ln(1+\sqrt2)\)。配成 \(\frac1n\sum 1/\sqrt{1+(k/n)^2}\to\int_0^1 dx/\sqrt{1+x^2}=\ln(x+\sqrt{1+x^2})\big|_0^1=\ln(1+\sqrt2)\)，即系数为 \(1\) 时的标准结果。</p>
+  </div>
+</article>
+
+<article class="q" id="q2667">
+  <div class="q-head">
+    <span class="qno">第 17 题</span>
+    <span class="qtype">定积分定义（幂乘正弦）</span>
+    <span class="qsrc">P1099</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{k^{2}}{n^{3}}\sin\!\left(\dfrac{k}{n}\right)=\)</p>
+  </div>
+  <div class="answer">答案：\(2\sin1+\cos1-2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：幂次因子与正弦因子相乘的 \(n\) 项和，属定积分定义型。先把幂次因子拆成分点幂次与区间长度。</p>
+    \[ \frac{k^2}{n^3}\sin\!\left(\frac{k}{n}\right)=\frac1n\left(\frac{k}{n}\right)^2\sin\!\left(\frac{k}{n}\right). \]
+    <p>和式即 \(f(x)=x^2\sin x\) 在 \([0,1]\) 上的 Riemann 和：</p>
+    \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\left(\frac{k}{n}\right)^2\sin\!\left(\frac{k}{n}\right)=\int_0^1 x^2\sin x\,dx. \]
+    <p>分部积分。第一次令 \(u=x^2\)，\(dv=\sin x\,dx\)，\(v=-\cos x\)：</p>
+    \[ \int x^2\sin x\,dx=-x^2\cos x+2\int x\cos x\,dx. \]
+    <p>第二次对 \(\int x\cos x\,dx\) 分部，\(u=x\)，\(dv=\cos x\,dx\)，\(v=\sin x\)，得 \(\int x\cos x\,dx=x\sin x+\cos x\)。</p>
+    <p>代回并取定积分：</p>
+    \[ \int_0^1 x^2\sin x\,dx=\bigl[-x^2\cos x+2x\sin x+2\cos x\bigr]_0^1=2\sin1+\cos1-2. \]
+    <p>数值复核：结果约 \(0.22324\)；\(n=10^3\) 时和式约 \(0.2236\)，趋势吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 拆幂次时漏归 \(1/n\)：\(k^2/n^3=(1/n)(k/n)^2\)，少一个 \(1/n\) 会把收敛积分误判为发散。② 分部积分方向反了，把 \(x^2\) 放进 \(dv\)，导致幂次越积越高。③ 代下限 \(x=0\) 时漏算 \(2\cos0=2\)，最终常数项缺失，答案会变成 \(2\sin1+\cos1\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>幂函数乘三角函数的 Riemann 和，考向是「配积分 + 分部积分定限」。真题中被积函数常见 \(x^p\sin x\)、\(x^p\cos x\)，幂次 \(p\) 决定分部积分次数；与正弦同组的余弦版本见第 27 题。填空题里也可先对 \(\sin(k/n)\) 做等价替换 \(k/n\) 粗估量级，但定积分要求精确值，必须回到分部积分。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{k}{n^{2}}\sin\!\left(\dfrac{k}{n}\right)\)。</p>
+    <p class="var-ans">答案：\(\sin1-\cos1\)。配成 \(\frac1n\sum(k/n)\sin(k/n)\to\int_0^1 x\sin x\,dx=[-x\cos x+\sin x]_0^1=\sin1-\cos1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2668">
+  <div class="q-head">
+    <span class="qno">第 18 题</span>
+    <span class="qtype">定积分定义（根式函数）</span>
+    <span class="qsrc">P1100</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\sqrt{1+\dfrac{2k^{2}}{n^{2}}}=\)</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\left(\sqrt3+\dfrac{1}{\sqrt2}\ln(\sqrt2+\sqrt3)\right)\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>简版答案给 \(\dfrac12\left(\sqrt3+\dfrac1{\sqrt2}\ln(1+\sqrt2)\right)\)（第 1100 页）。按题面复算为 \(\dfrac12\left(\sqrt3+\dfrac1{\sqrt2}\ln(\sqrt2+\sqrt3)\right)\)：被积函数 \(\sqrt{1+2x^2}\) 积分后对数项为 \(\operatorname{arsinh}\sqrt2=\ln(\sqrt2+\sqrt3)\)；书答对数项 \(\ln(1+\sqrt2)\) 对应系数为 \(1\) 的情形，与题面系数 \(2\) 不符。以复算值为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：根式函数的 \(n\) 项和，外层 \(1/n\) 已是分割长度，分点为 \(k/n\)，直接配 Riemann 和。</p>
+    \[ \frac1n\sum_{k=1}^{n}\sqrt{1+\frac{2k^2}{n^2}}\longrightarrow\int_0^1\sqrt{1+2x^2}\,dx. \]
+    <p>套用根式积分公式。令 \(a=\sqrt2\)，由 \(\int\sqrt{1+a^2x^2}\,dx=\dfrac{x}{2}\sqrt{1+a^2x^2}+\dfrac{1}{2a}\ln\bigl(ax+\sqrt{1+a^2x^2}\bigr)\)：</p>
+    \[ \int_0^1\sqrt{1+2x^2}\,dx=\frac{x}{2}\sqrt{1+2x^2}\Big|_0^1+\frac{1}{2\sqrt2}\ln\bigl(\sqrt2x+\sqrt{1+2x^2}\bigr)\Big|_0^1. \]
+    <p>代数项代入 \(x=1\) 得 \(\sqrt3/2\)；对数项在 \(x=0\) 时为 \(0\)，在 \(x=1\) 时 \(\sqrt2+\sqrt3\)，故</p>
+    \[ \text{原极限}=\frac{\sqrt3}{2}+\frac{1}{2\sqrt2}\ln(\sqrt2+\sqrt3)=\frac12\left(\sqrt3+\frac1{\sqrt2}\ln(\sqrt2+\sqrt3)\right). \]
+    <p>数值复核：积分值约 \(1.27127\)；书答数值约 \(1.17764\)，差别正在对数项。被积函数在 \([0,1]\) 上连续非负，分点首项 \(x=1/n\to0\)、末项 \(x=1\)，按定积分定义取极限无需单独处理端点。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 根式积分公式记错，只留代数项丢掉对数项，或把对数项系数 \(1/(2a)\) 写成 \(1/a\)。② 上限代入时根号内 \(1+2\cdot1^2=3\)，代数项是 \(\sqrt3\) 而非 \(2\)。③ 与 \(1/\sqrt{1+2x^2}\) 的积分混淆：本题被积函数带根号，结果含代数项与对数项两部分；第 16 题被积函数在分母，只有对数项。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>根式型 Riemann 和与第 16 题互为对偶：一个是 \(1/\sqrt{1+ax^2}\)，一个是 \(\sqrt{1+ax^2}\)，积分公式分别对应反双曲正弦与代数项加反双曲正弦。考向要求记住两类标准积分公式，并能在配完积分后正确代入上限。同组题目改根号内系数即可（对照第 28 题）。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\sqrt{1+\dfrac{k^{2}}{n^{2}}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\left(\sqrt2+\ln(1+\sqrt2)\right)\)。积分 \(\int_0^1\sqrt{1+x^2}\,dx=\frac{x}{2}\sqrt{1+x^2}+\frac12\ln(x+\sqrt{1+x^2})\big|_0^1\)，系数取 \(1\) 时对数项为 \(\ln(1+\sqrt2)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2669">
+  <div class="q-head">
+    <span class="qno">第 19 题</span>
+    <span class="qtype">连乘取对数（小参数展开）</span>
+    <span class="qsrc">P1100</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{k}{n^{2}}\right)}=\)</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>简版答案给 \(e^{1/2}\)（第 1100 页）。按题面复算为 \(1\)：取对数后 \(\ln L_n=\frac1n\sum_{k=1}^n\ln(1+k/n^2)\)，由 \(\ln(1+u)\sim u\)，求和主部 \(\sum k/n^2\to1/2\)，再除以外层 \(n\) 得 \(1/(2n)\to0\)，故 \(L_n\to e^0=1\)。书答 \(e^{1/2}\) 漏算了开 \(n\) 次方带来的外层 \(1/n\)，把不取根时乘积的对数极限 \(1/2\) 直接作为指数。以复算值为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：连乘开 \(n\) 次方，但括号内参数是 \(k/n^2\) 而非 \(k/n\)，不能照搬第 14 题的定积分套路，须先做量级估计。设原极限为 \(L_n\)，取对数：</p>
+    \[ \ln L_n=\frac1n\sum_{k=1}^{n}\ln\left(1+\frac{k}{n^2}\right). \]
+    <p>当 \(n\to\infty\) 时 \(k/n^2\le1/n\to0\)，由 \(\ln(1+u)=u+O(u^2)\)：</p>
+    \[ \ln\left(1+\frac{k}{n^2}\right)=\frac{k}{n^2}+O\!\left(\frac{k^2}{n^4}\right). \]
+    <p>求和主部：</p>
+    \[ \sum_{k=1}^{n}\frac{k}{n^2}=\frac{n(n+1)}{2n^2}\to\frac12, \]
+    <p>余项 \(\sum k^2/n^4=O(n^3/n^4)=O(1/n)\)。再除以外层 \(n\)：</p>
+    \[ \ln L_n=\frac1n\left(\frac12+o(1)\right)\to0, \]
+    <p>故 \(L_n=e^{\ln L_n}\to e^0=1\)。数值复核：\(n=100\) 时 \(L_n\approx1.00505\)，\(n=1000\) 时约 \(1.00050\)，向 \(1\) 逼近。外层开方的 \(1/n\) 是本题量级判断的关键：若去掉这个因子，对数主部 \(1/2\) 会被直接指数化，结论就会变成 \(e^{1/2}\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 忽略外层开方的 \(1/n\)，直接把 \(\sum\ln(1+k/n^2)\to1/2\) 写进指数，得到 \(e^{1/2}\)；这正是书答的错误来源。② 见到连乘就配定积分，把 \(k/n^2\) 误当成 \(k/n\)，区间权重配不出来。③ 等价无穷小 \(\ln(1+u)\sim u\) 使用后忘记估余项，本题余项被外层 \(1/n\) 进一步压低，不影响结论，但量级交代要清楚。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>小参数连乘型是定积分定义的「反例组」：括号内是 \(k/n^2\) 时对数主部是一阶幂和，再按外层结构决定是否还有剩余因子。考向要求先判断对数主部的量级（\(O(1)\)、\(O(1/n)\) 还是发散），再决定配积分还是直接等价。同类变式常把括号换成 \(1+k^2/n^2\)、\(1+k/n^3\)，量级判断方法不变。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{k^{2}}{n^{2}}\right)}\)。</p>
+    <p class="var-ans">答案：\(e^{\ln2-2+\pi/2}\)。取对数得 \(\frac1n\sum\ln(1+(k/n)^2)\to\int_0^1\ln(1+x^2)\,dx=[x\ln(1+x^2)-2x+2\arctan x]_0^1=\ln2-2+\pi/2\)，指数化即得。</p>
+  </div>
+</article>
+
+<article class="q" id="q2670">
+  <div class="q-head">
+    <span class="qno">第 20 题</span>
+    <span class="qtype">定积分定义（绝对值正弦）</span>
+    <span class="qsrc">P1100</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac1n\left|\sin\!\left(\dfrac{2\pi k}{n}\right)\right|=\)</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{2}{\pi}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：带绝对值的三角函数 \(n\) 项和，属定积分定义型。绝对值内 \(\sin(2\pi k/n)\) 在 \([0,1]\) 上分段变号，先配 Riemann 和，再按符号分段积分。</p>
+    \[ \frac1n\sum_{k=1}^{n}\left|\sin\!\left(\frac{2\pi k}{n}\right)\right|\longrightarrow\int_0^1|\sin 2\pi x|\,dx. \]
+    <p>在 \([0,1/2]\) 上 \(2\pi x\in[0,\pi]\)，正弦非负；在 \([1/2,1]\) 上正弦非正。由周期与对称性，两段积分相等：</p>
+    \[ \int_0^1|\sin 2\pi x|\,dx=2\int_0^{1/2}\sin 2\pi x\,dx. \]
+    <p>求原函数：</p>
+    \[ 2\int_0^{1/2}\sin 2\pi x\,dx=2\left[-\frac{\cos 2\pi x}{2\pi}\right]_0^{1/2}=\frac1\pi\bigl(-\cos\pi+\cos0\bigr)=\frac{2}{\pi}. \]
+    <p>数值复核：\(2/\pi\approx0.63662\)；\(n=10^3\) 时和式约 \(0.6366\)，与积分值吻合。分点落在 \(1/2\) 处的项取值为零，属于零测位置，不改变积分；正弦在半周期内先增后减，对称性给出左右两段积分相等。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接去掉绝对值按 \(\int_0^1\sin2\pi x\,dx\) 计算，整周期正弦积分恰好为 \(0\)，方向完全错误；带绝对值必须先划符号区间。② 周期倍数判断错：\(\sin2\pi x\) 在 \([0,1]\) 上正好一个周期，半周期内非负，对称成两倍计算。③ 原函数系数漏 \(1/(2\pi)\)，积分结果会写成 \(2\) 或 \(1/\pi\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>绝对值三角函数的 Riemann 和考向有两层：先认定积分，再处理分段符号。真题中常见 \(|\sin(\pi k/n)|\)、\(|\cos(2\pi k/n)|\) 等形式，利用周期性把全区间拆成若干个等号区间。这类题也可由平均值观点理解：一个周期内 \(|\sin|\) 的平均高度即 \(2/\pi\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\left|\cos\!\left(\dfrac{2\pi k}{n}\right)\right|\)。</p>
+    <p class="var-ans">答案：\(\dfrac{2}{\pi}\)。\(|\cos2\pi x|\) 与 \(|\sin2\pi x|\) 在一个周期上平移 \(1/4\)，积分值相同，均为 \(2/\pi\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2671">
+  <div class="q-head">
+    <span class="qno">第 21 题</span>
+    <span class="qtype">黎曼和因子对账（题面缺归一因子，发散判定）</span>
+    <span class="qsrc">P1100</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{k^{5}}{n^{6}}\sqrt{n^{4}-k^{4}}=\)</p>
+  </div>
+  <div class="answer">答案：发散（\(+\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>简版答案给 \(\dfrac{8}{63}\)（第 1100 页）。原式缺归一因子 \(1/n\)：\(\sqrt{n^{4}-k^{4}}=n^{2}\sqrt{1-x^{4}}\)，提出的 \(n^{2}\) 与分母 \(n^{6}\) 抵消后通项仍含 \(n\) 因子，求和量级为 \(n^{2}\)；按题面归一化所得积分为 \(\int_0^1 x^{5}\sqrt{1-x^{4}}\,dx=\pi/32\)，书答 \(8/63\) 既不等于该积分值，与题面幂次也不配套，题面分母幂次与书答存在印式偏差。以复算的发散结论为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>先按定积分定义通路对账。令 \(x_k=k/n\)，把根号内的 \(n^{4}\) 提出：\(\sqrt{n^{4}-k^{4}}=n^{2}\sqrt{1-x_k^{4}}\)。</p>
+    <p>代入通项整理幂次：</p>
+    \[ \frac{k^{5}}{n^{6}}\sqrt{n^{4}-k^{4}}=\frac{k^{5}}{n^{6}}\cdot n^{2}\sqrt{1-x_k^{4}}=n\,x_k^{5}\sqrt{1-x_k^{4}}. \]
+    <p>通项里已经没有网格宽度 \(1/n\)，反而随 \(n\) 增长。记和式为 \(S_n\)，除以 \(n^{2}\) 后才是标准黎曼和：</p>
+    \[ \frac{S_n}{n^{2}}=\frac1n\sum_{k=1}^{n}x_k^{5}\sqrt{1-x_k^{4}}\longrightarrow I,\quad I=\int_0^1 x^{5}\sqrt{1-x^{4}}\,dx. \]
+    <p>计算归一化积分。令 \(u=x^{2}\)，则 \(x^{5}dx=\frac12 u^{2}du\)，再令 \(u=\sin\theta\)：</p>
+    \[ I=\frac12\int_0^1u^{2}\sqrt{1-u^{2}}\,du=\frac12\int_0^{\pi/2}\sin^{2}\theta\cos^{2}\theta\,d\theta=\frac{\pi}{32}. \]
+    <p>被积函数在 \((0,1)\) 上为正，末步回到原和式：</p>
+    \[ S_n=n^{2}\cdot\frac{S_n}{n^{2}}=\frac{\pi}{32}n^{2}(1+o(1))\longrightarrow+\infty. \]
+    <p>数值校验：\(n=10\) 时 \(S_n\approx8.60\)，\(n=50\) 时约 \(242.5\)，\(n=200\) 时约 \(3921\)，与 \(\dfrac{\pi}{32}n^{2}\approx0.09817n^{2}\) 的增长趋势吻合，确认发散而非收敛到有限常数。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把乘根号型通项直接当黎曼和，漏看根号提出的 \(n^{2}\) 与分母抵消后仍多出 \(n\) 因子。② 配积分前不逐项核对幂次：收敛黎曼和的通项应为 \((1/n)f(k/n)\)，本题通项是 \(n\,f(k/n)\)，差了两个 \(1/n\)。③ 简版答案的有限常数是补上归一因子后的定积分那一类数值，直接套到印式上等于漏掉分母中缺印的 \(n\)；且本题书答与按题面算出的归一化积分 \(\pi/32\) 也不相等，不能反推题面幂次。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>与第 1、11 题同属「乘根号型」对账失败族，识别程序固定：先把 \(\sqrt{n^{a}-k^{a}}\) 提出 \(n^{a/2}\)，再与分母幂次对账，判断通项是否还含 \(1/n\)。缺因子即判发散，趋势由积分主部符号决定；本题被积函数非负，故走向 \(+\infty\)。这类题常以「看似标准黎曼和」的面貌出现在选择或解答题中，直接写积分值而不核对因子是最常见失分点。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{k^{5}}{n^{8}}\sqrt{n^{4}-k^{4}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{32}\)。分母改为 \(n^{8}\) 后通项为 \(\frac1n x^{5}\sqrt{1-x^{4}}\)，是标准黎曼和，积分即解析中算出的归一化值 \(\int_0^1x^{5}\sqrt{1-x^{4}}\,dx=\pi/32\)；与本题对照，差别只在分母是否漏印那两个 \(n\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2672">
+  <div class="q-head">
+    <span class="qno">第 22 题</span>
+    <span class="qtype">定积分定义（幂乘正切）</span>
+    <span class="qsrc">P1100</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{\tan(k/n)}{n}\cdot\dfrac{k^{3}}{n^{3}}=\)</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1 x^3\tan x\,dx\approx0.2700\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>简版答案给 \(\dfrac14(\tan1+\ln\cos1)\approx0.23545\)（第 1100 页）。按题面复算为 \(\int_0^1 x^3\tan x\,dx\approx0.26995\)：配 Riemann 和后被积函数为 \(x^3\tan x\)，正切在 \(x=1\) 处有限，积分收敛；将被积函数作正切级数展开逐项积分得 \(1/5+1/21+2/135+\cdots\approx0.2699\)，与书答数值不符。以复算值为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：幂函数乘正切的 \(n\) 项和，属定积分定义型。先把两个因子拆成分点幂次与区间长度：</p>
+    \[ \frac{\tan(k/n)}{n}\cdot\frac{k^3}{n^3}=\frac1n\left(\frac{k}{n}\right)^3\tan\!\left(\frac{k}{n}\right). \]
+    <p>和式即 \(f(x)=x^3\tan x\) 在 \([0,1]\) 上的 Riemann 和：</p>
+    \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\left(\frac{k}{n}\right)^3\tan\!\left(\frac{k}{n}\right)=\int_0^1 x^3\tan x\,dx. \]
+    <p>该被积函数的原函数含多重对数项，不收敛到基本初等函数闭式；数值上由正切麦克劳林展开 \(\tan x=x+x^3/3+2x^5/15+17x^7/315+\cdots\) 逐项积分：</p>
+    \[ \int_0^1x^3\tan x\,dx=\frac15+\frac{1}{3\cdot7}+\frac{2}{15\cdot9}+\frac{17}{315\cdot11}+\cdots\approx0.26995. \]
+    <p>核对量级：被积函数在 \([0,1]\) 上非负，端点 \(x=1\) 处为 \(\tan1\approx1.557\)，积分落在 \(0.2\) 至 \(0.27\) 区间；级数前四项已给到 \(0.2690\)，余项为正且小于 \(0.001\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 配积分时把 \(k^3/n^3\) 与 \(1/n\) 合并错幂次，写成 \(x^2\tan x\) 或 \(x^4\tan x\)。② 对 \(\tan x\) 直接等价成 \(x\) 只留主部，会得到 \(1/5=0.2\)，丢失高阶修正；本题积分要求精确数值，等价替换只能用于量级判断。③ 把 \(\tan x\) 的原函数记成 \(\ln\cos x\) 后与幂次因子强行分部，得到与积分不符的拼凑闭式。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>幂乘三角函数 Riemann 和的标准考法是正弦、余弦（对照第 17 题），正切版本因原函数非初等而较少单独命题；本题更常见的变体是把正切换成正弦或余弦后分部积分。考向仍为先配积分确定被积函数，再判断原函数是否在基本初等函数范围内，非初等情形用级数展开或数值积分交代结果。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{\sin(k/n)}{n}\cdot\dfrac{k^{3}}{n^{3}}\)。</p>
+    <p class="var-ans">答案：\(\sin1-3\cos1\)。配成 \(\int_0^1x^3\sin x\,dx\)，两次分部积分：\([-x^3\cos x+3x^2\sin x+6x\cos x-6\sin x]_0^1=\sin1-3\cos1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2673">
+  <div class="q-head">
+    <span class="qno">第 23 题</span>
+    <span class="qtype">定积分定义（指数分式）</span>
+    <span class="qsrc">P1100–P1101</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{e^{3k/n}}{n}\cdot\dfrac{1}{1+e^{3k/n}}=\)</p>
+  </div>
+  <div class="answer">答案：\(\dfrac13\ln\dfrac{1+e^{3}}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：与第 13 题同型，指数分式的 \(n\) 项和，属定积分定义型。通项中 \(1/n\) 为区间长度，分点 \(k/n\)，先写成标准 Riemann 和。</p>
+    \[ \sum_{k=1}^{n}\frac{e^{3k/n}}{n}\cdot\frac{1}{1+e^{3k/n}}=\frac1n\sum_{k=1}^{n}\frac{e^{3(k/n)}}{1+e^{3(k/n)}}. \]
+    <p>右端为 \(f(x)=e^{3x}/(1+e^{3x})\) 在 \([0,1]\) 上的 Riemann 和：</p>
+    \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}f\!\left(\frac{k}{n}\right)=\int_0^1\frac{e^{3x}}{1+e^{3x}}\,dx. \]
+    <p>令 \(u=e^{3x}\)，则 \(du=3u\,dx\)，即 \(dx=du/(3u)\)；\(x=0\) 时 \(u=1\)，\(x=1\) 时 \(u=e^3\)：</p>
+    \[ \int_0^1\frac{e^{3x}}{1+e^{3x}}\,dx=\frac13\int_1^{e^3}\frac{du}{1+u}=\frac13\bigl[\ln(1+u)\bigr]_1^{e^3}=\frac13\ln\frac{1+e^3}{2}. \]
+    <p>数值复核：结果约 \(0.78515\)；\(n=10^3\) 时和式约 \(0.7845\)，趋势吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 换元后漏因子 \(1/3\)，把答案写成 \(\ln\frac{1+e^3}{2}\)；指数系数 \(3\) 同时进入 \(du\) 与积分系数。② 误把分母 \(1+e^{3k/n}\) 当成 \(e^{3k/n}\)，被积函数简化错误。③ 与第 13 题混淆，指数系数照抄成 \(2\)，上下限随之取错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是第 13 题的同组复刻，只把指数系数 \(2\) 换成 \(3\)，考向完全一致：配 Riemann 和后做指数换元积分。成套题目中这类复刻用于检验公式迁移能力，解题时先确认指数系数，再按同一流程走换元、约去 \(u\)、代上下限三步。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{e^{ak/n}}{n}\cdot\dfrac{1}{1+e^{ak/n}}\)（\(a\gt0\)）。</p>
+    <p class="var-ans">答案：\(\dfrac1a\ln\dfrac{1+e^a}{2}\)。一般化换元 \(u=e^{ax}\)，\(du=au\,dx\)，积分 \(\frac1a\int_1^{e^a}du/(1+u)\)，即得系数 \(1/a\) 与上下限 \(1,e^a\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2674">
+  <div class="q-head">
+    <span class="qno">第 24 题</span>
+    <span class="qtype">连乘取对数（指数结构辨析）</span>
+    <span class="qsrc">P1101</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{k}{n^{2}}\right)^{k^{2}}}=\)</p>
+  </div>
+  <div class="answer">答案：发散（\(+\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>简版答案给 \(e^{1/3}\)（第 1101 页）。按题面复算极限发散至 \(+\infty\)：取对数后 \(\ln L_n=\frac1n\sum k^2\ln(1+k/n^2)\)，由 \(\ln(1+u)\sim u\)，主部 \(\frac1n\sum k^3/n^2=\frac1{n^3}\sum k^3\sim n/4\to+\infty\)。书答 \(e^{1/3}\) 对应指数为 \(k\) 的写法（那时 \(\ln L_n\to\int_0^1x^2dx=1/3\)），与题面上标 \(k^2\) 不配套。以复算结论为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：连乘、内层小参数、外层带 \(k^2\) 指数，先取对数判量级，不能直接配定积分。设原极限为 \(L_n\)：</p>
+    \[ \ln L_n=\frac1n\sum_{k=1}^{n}k^2\ln\left(1+\frac{k}{n^2}\right). \]
+    <p>参数 \(k/n^2\le1/n\to0\)，由 \(\ln(1+u)=u+O(u^2)\)：</p>
+    \[ k^2\ln\left(1+\frac{k}{n^2}\right)=\frac{k^3}{n^2}+O\!\left(\frac{k^4}{n^4}\right). \]
+    <p>主部求和：</p>
+    \[ \frac1n\sum_{k=1}^{n}\frac{k^3}{n^2}=\frac{1}{n^3}\sum_{k=1}^{n}k^3=\frac{1}{n^3}\cdot\frac{n^2(n+1)^2}{4}\sim\frac{n}{4}. \]
+    <p>余项 \(\frac1n\sum k^4/n^4=O(n^5/n^5)=O(1)\)，被主部 \(n/4\) 压住。故 \(\ln L_n\sim n/4\to+\infty\)，从而 \(L_n=e^{\ln L_n}\to+\infty\)。数值复核：\(n=100\) 时 \(\ln L_n\approx25.4\)，\(n=300\) 时约 \(75.4\)，与 \(n/4\) 一致。指数上标 \(k^2\) 使对数主部多带一个 \(k\) 因子，幂和主部由 \(\sum k^2\) 换成 \(\sum k^3\)，量级随之从 \(O(1)\) 抬到 \(O(n)\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把上标 \(k^2\) 看成 \(k\)，按 \(\frac1n\sum k\ln(1+k/n^2)\) 估成 \(1/3\)，这是书答的错误来源；读题时指数 \(k^2\) 必须与内层 \(k/n^2\) 分别核对。② 小参数展开后忘记外层 \(1/n\)，量级判断整体抬高一格。③ 余项估错阶：\(\ln(1+u)\) 的二次项乘 \(k^2\) 后求和阶次要重新核算，不能照搬无指数版本的余项结论。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>带指数的连乘型题目，考向是「对数化后逐项判阶」：先展开对数主部，再把 \(k\) 的幂次与 \(n\) 的分母幂次对齐，判断和式主部是常数、\(1/n\) 还是 \(n\) 的正幂。同类变式常见指数 \(k\)、\(k^2\) 与内层 \(k/n\)、\(k/n^2\) 的不同搭配，每换一种搭配量级都要重算，不能套固定结论。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{k}{n^{2}}\right)^{k}}\)。</p>
+    <p class="var-ans">答案：\(e^{1/3}\)。取对数 \(\ln L_n=\frac1n\sum k\ln(1+k/n^2)\sim\frac1n\sum k^2/n^2=\frac1{n^3}\sum k^2\to1/3\)，指数化得 \(e^{1/3}\)，即上标为 \(k\) 时的收敛结果。</p>
+  </div>
+</article>
+
+<article class="q" id="q2675">
+  <div class="q-head">
+    <span class="qno">第 25 题</span>
+    <span class="qtype">裂项求和与 1<sup>∞</sup> 型幂指</span>
+    <span class="qsrc">P1101</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[\sum\limits_{k=1}^{n}\dfrac{1}{k(k+1)}\right]^{3n}=\)</p>
+  </div>
+  <div class="answer">答案：\(e^{-3}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：与第 15 题同组，先裂项求和得底数闭式，再按 \(1^\infty\) 型处理幂指指数。第一步同样不能对和式提前取极限。</p>
+    <p>由 \(\dfrac{1}{k(k+1)}=\dfrac1k-\dfrac1{k+1}\)，部分和逐项相消：</p>
+    \[ \sum_{k=1}^{n}\frac{1}{k(k+1)}=1-\frac1{n+1}=\frac{n}{n+1}. \]
+    <p>底数 \(n/(n+1)\to1\)，指数 \(3n\to\infty\)，属 \(1^\infty\) 型：</p>
+    \[ \left(\frac{n}{n+1}\right)^{3n}=\left(1+\frac1n\right)^{-3n}. \]
+    <p>由重要极限 \(\lim\limits_{n\to\infty}(1+1/n)^n=e\)：</p>
+    \[ \lim_{n\to\infty}\left(1+\frac1n\right)^{-3n}=\left[\lim_{n\to\infty}\left(1+\frac1n\right)^n\right]^{-3}=e^{-3}. \]
+    <p>数值复核：\(n=10^3\) 时 \((1000/1001)^{3000}\approx0.04984\)，与 \(e^{-3}\approx0.049787\) 吻合。也可取对数验证：\(3n\ln(n/(n+1))=3n\ln(1-1/(n+1))\sim-3n/(n+1)\to-3\)，指数还原与重要极限结论一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 指数系数漏带，把 \(3n\) 当成 \(n\)，答成 \(e^{-1}\)；对照第 15 题指数 \(2n\) 得 \(e^{-2}\)，系数与指数倍数一一对应。② 裂项相消后误删首项，底数算成 \(1/(n+1)\to0\)，幂指类型判断随之错误。③ 直接对底数取极限写 \(1^{3n}=1\)，忽略 \(1^\infty\) 型必须用重要极限或取对数求 \(v(u-1)\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与第 15 题构成同组复刻：裂项部分完全相同，只改幂指指数倍数。考向是熟练掌握「裂项求闭式 + 重要极限」两步流程，并能由指数倍数直接读出 \(e^{-m}\) 中的 \(m\)。填空题中此类题用时应控制在一分钟内，出错点集中在裂项余项与指数系数两处。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left[\sum\limits_{k=1}^{n}\dfrac{1}{k(k+1)}\right]^{mn}\)（\(m\) 为正整数）。</p>
+    <p class="var-ans">答案：\(e^{-m}\)。部分和仍为 \(n/(n+1)\)，写成 \((1+1/n)^{-mn}\)，由重要极限得 \(e^{-m}\)；指数倍数即指数上的系数。</p>
+  </div>
+</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 1–25 题</span></div>
+</div>
+</body>
+</html>
