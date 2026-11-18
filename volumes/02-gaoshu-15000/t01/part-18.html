@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>《极限》 · 第 1989–2000 题</title>
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner">
+  <span class="topbar-title"><a href="../../index.html">考研数学 66000 · 逐题精解</a></span>
+  <span class="topbar-nav"><a href="../../index.html">总览</a><a href="../../knowledge/index.html">知识地图</a><a href="../../progress.html">进度</a></span>
+</div></div>
+<div class="wrap">
+<header class="pagehead">
+  <div class="kicker">02-gaoshu-15000 · 专题 01</div>
+  <h1>第 1989 – 2000 题</h1>
+  <p class="sub"><a href="part-17.html">← 上一分页</a> <a href="index.html">目录</a></p>
+</header>
+<article class="q" id="q1989">
+  <div class="q-head">
+    <span class="qno">第 1989 题</span>
+    <span class="qtype">二阶修正型压缩递推（erf）</span>
+    <span class="qsrc">P970</span>
+  </div>
+  <div class="stem">
+    <p>设 \(i_1=1,\ i_{n+1}=i_n\left(1-\dfrac{1}{i_n}\mathrm{erf}\,i_n+\dfrac12\left(\dfrac{\mathrm{erf}\,i_n}{i_n}\right)^2\right)\)，求 \(\lim\limits_{n\to\infty}i_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推写成 \(i_{n+1}=i_n-\mathrm{erf}\,i_n+\dfrac{(\mathrm{erf}\,i_n)^2}{2i_n}\)，括号内是 \(1-u+\tfrac12u^2\) 的二阶泰勒截断形状，属带二次修正项的压缩递推。令 \(u_n=\mathrm{erf}\,i_n/i_n\)，则</p>
+    \[ i_{n+1}=i_n\left(1-u_n+\frac{u_n^2}{2}\right). \]
+    <p>零点附近 \(\mathrm{erf}\,x\sim c x\)，\(c=2/\sqrt\pi\)，故 \(u_n\to c\)。不动点方程 \(L=L(1-c+c^2/2)\) 的零解是否吸引，由括号内常数判断：</p>
+    \[ A=1-c+\frac{c^2}{2}=1-\frac{2}{\sqrt\pi}+\frac{2}{\pi}\approx0.5082. \]
+    <p>\(|A|<1\)，零点为吸引不动点。展开验证：</p>
+    \[ i_{n+1}=A\,i_n+O(i_n^3),\qquad \frac{i_{n+1}}{i_n}\to A\approx0.5082. \]
+    <p>数值轨迹：\(i_2\approx0.5124\)，\(i_3\approx0.2565\)，\(i_4\approx0.1297\)，按约 \(0.508\) 的倍率收缩，迭代 20 万步后 \(i_n\to0\)。二次修正项的作用是把一阶压缩系数从 \(1-c\approx-0.128\) 调整为正的 \(0.508\)，序列不再交替变号。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 漏掉 \(+\tfrac12u^2\) 项，直接套用 1979 的系数 \(1-c\)。② 把括号内当成 \(e^{-u}\) 全指数展开，本题只截断到二次项。③ 稳定性只看 \(A\) 的符号，本题 \(A>0\) 且小于 1，仍需比较绝对值。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>二阶修正型递推是本批后段的统一模板：在一阶压缩式后补一个 \(u^2/2\) 项，考零点处的等效压缩系数。erf、erfi、Si 三类素材分别对应不同的 \(u\to c\) 或 \(u\to1\)，系数计算方式一致。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(i_1=1,\ i_{n+1}=i_n\left(1-\dfrac{\mathrm{erf}\,i_n}{i_n}+\dfrac12\left(\dfrac{\mathrm{erf}\,i_n}{i_n}\right)^2\right)\)，求 \(\lim\limits_{n\to\infty}i_{n+1}/i_n\)。</p>
+    <p class="var-ans">答案：\(1-\dfrac{2}{\sqrt\pi}+\dfrac{2}{\pi}\approx0.5082\)。\(u_n\to2/\sqrt\pi\)，括号内常数即为该极限比值，绝对值小于 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q1990">
+  <div class="q-head">
+    <span class="qno">第 1990 题</span>
+    <span class="qtype">二阶修正型递推（erfc 周期循环）</span>
+    <span class="qsrc">P970</span>
+  </div>
+  <div class="stem">
+    <p>设 \(j_1=1,\ j_{n+1}=j_n\left(1-\dfrac{1}{j_n}\mathrm{erfc}\,j_n+\dfrac12\left(\dfrac{\mathrm{erfc}\,j_n}{j_n}\right)^2\right)\)，求 \(\lim\limits_{n\to\infty}j_n\)。</p>
+  </div>
+  <div class="answer">答案：极限不存在（落入周期 3 循环）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算极限不存在（零附近 \(\mathrm{erfc}\,x\to1\)，\(u=\mathrm{erfc}\,x/x\to\infty\)，零点被强烈排斥；数值迭代稳定在三点循环（周期 3） \(0.2301,\ 0.4408,\ 0.6912\)），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推写成 \(j_{n+1}=j_n-\mathrm{erfc}\,j_n+\dfrac{(\mathrm{erfc}\,j_n)^2}{2j_n}\)。先检查零点是否可接近：\(\mathrm{erfc}\,0=1\)，令 \(u(x)=\mathrm{erfc}\,x/x\)，则 \(x\to0^+\) 时</p>
+    \[ u(x)=\frac{\mathrm{erfc}\,x}{x}\to+\infty. \]
+    <p>括号 \(1-u+\tfrac12u^2\) 在 \(u\) 很大时主项为 \(u^2/2\)，于是</p>
+    \[ j_{n+1}\approx j_n\cdot\frac{u^2}{2}=\frac{(\mathrm{erfc}\,j_n)^2}{2j_n}\approx\frac{1}{2j_n}\to+\infty, \]
+    <p>零点不仅不吸引，反而把靠近它的序列向外推。不动点方程 \(L=L-\mathrm{erfc}\,L+\mathrm{erfc}^2L/(2L)\) 除无穷远解外，对应 \(\mathrm{erfc}\,L=2L\) 的有限根也不具备吸引性。</p>
+    <p>数值迭代 3000 步后进入稳定周期循环，三个点依次为</p>
+    \[ 0.230052\ \longmapsto\ 0.440834\ \longmapsto\ 0.691183\ \longmapsto\ 0.230052. \]
+    <p>三项反复出现，序列不收敛，极限不存在。这一结果与 erf 版本（1989）形成对照：差别只在补误差函数在零点不取零，导致 \(u\) 在零点发散。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 照搬 erf 版本的局部系数算法，忽略 erfc 在零点为 1、\(u\) 发散。② 看到二阶项 \(u^2/2\) 就认为零点更稳定，实际该项在 \(u\) 大时起放大作用。③ 只记录单次迭代数值，未观察足够步数，误把暂态下降当成收敛到零。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题考查非线性递推中的周期现象：当局部线性化失效、不动点被排斥后，轨道可能落入周期循环。判断手段是长迭代观察是否重复出现同一组数值，而不是仅靠零点附近的一阶展开。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 对递推 \(x_{n+1}=x_n-\mathrm{erfc}\,x_n+\mathrm{erfc}^2x_n/(2x_n)\)，数值写出其吸引周期的三个点。</p>
+    <p class="var-ans">答案：三点循环为 \(0.2301,\ 0.4408,\ 0.6912\)，顺序循环，序列极限不存在。</p>
+  </div>
+</article>
+
+<article class="q" id="q1991">
+  <div class="q-head">
+    <span class="qno">第 1991 题</span>
+    <span class="qtype">代数递推无不动点（单调发散）</span>
+    <span class="qsrc">P971</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=a_n+\dfrac{1}{a_n}-\dfrac12\left(\dfrac{1}{a_n}+\dfrac{1}{a_n^3}\right)+\dfrac1{24}\left(\dfrac{1}{a_n^3}+\dfrac{3}{a_n^5}\right)\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，复算 \(+\infty\)（整理增量为 \((12x^4-11x^2+3)/(24x^5)\)，分子二次式判别式 \(121-144=-23<0\)，恒正；序列单调递增且无有限不动点），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：纯代数递推，先把增量 \(\Delta(x)=p(x)-x\) 通分整理，再判断符号与不动点。合并同类项：</p>
+    \[ \Delta(x)=\frac{1}{2x}-\frac{11}{24x^3}+\frac{1}{8x^5} =\frac{12x^4-11x^2+3}{24x^5}. \]
+    <p>分子是关于 \(y=x^2\) 的二次式 \(12y^2-11y+3\)，判别式</p>
+    \[ \Delta_0=11^2-4\cdot12\cdot3=121-144=-23<0, \]
+    <p>二次项系数为正，故分子对一切 \(y>0\) 恒正；\(x>0\) 时分母 \(24x^5>0\)，因此 \(\Delta(x)>0\) 恒成立，序列单调递增。</p>
+    <p>不动点方程 \(\Delta(L)=0\) 要求分子为零，判别式为负说明无实根，也就没有有限正不动点。先验算初值并非不动点：</p>
+    \[ a_2=1+1-\frac12(1+1)+\frac1{24}(1+3)=\frac76\neq1. \]
+    <p>单调递增若有界则必收敛到某不动点，与无实根矛盾，故序列无界，\(a_n\to+\infty\)。数值轨迹：\(a_2\approx1.1667\)，\(a_3\approx1.3644\)，\(a_4\approx1.5769\)，迭代 20 万步后 \(a_n\approx447\) 并继续增长。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把初值 \(1\) 直接当不动点代入，不验算 \(a_2\)；实际 \(a_2=1+1/6\neq1\)。② 通分合并时系数算错，漏掉 \(1/24\) 带来的 \(1/(8x^5)\) 项。③ 由单调递增就默认收敛，不检查是否存在有限不动点。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>代数递推的标准判断链：通分整理增量、定号、查不动点、单调有界两端对照。判别式定号是分式多项式增量题的常用手段，与 1981 的排斥不动点题互为正反两类。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 证明对一切 \(x>0\)，该递推增量 \(\Delta(x)>0\)。</p>
+    <p class="var-ans">答案：\(\Delta(x)=(12x^4-11x^2+3)/(24x^5)\)；令 \(y=x^2>0\)，分子 \(12y^2-11y+3\) 判别式 \(-23<0\) 且首项系数为正，故分子恒正，分母亦正，\(\Delta(x)>0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1992">
+  <div class="q-head">
+    <span class="qno">第 1992 题</span>
+    <span class="qtype">二阶修正型压缩递推（Si）</span>
+    <span class="qsrc">P971</span>
+  </div>
+  <div class="stem">
+    <p>设 \(b_1=1,\ b_{n+1}=b_n\left(1-\dfrac{1}{b_n}\mathrm{Si}\,b_n+\dfrac12\left(\dfrac{\mathrm{Si}\,b_n}{b_n}\right)^2\right)\)，求 \(\lim\limits_{n\to\infty}b_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推写成 \(b_{n+1}=b_n-\mathrm{Si}\,b_n+\mathrm{Si}^2b_n/(2b_n)\)，属二阶修正型压缩递推。令 \(u_n=\mathrm{Si}\,b_n/b_n\)，则 \(b_{n+1}=b_n(1-u_n+u_n^2/2)\)。零点附近由 Si 的展开</p>
+    \[ \mathrm{Si}\,x=x-\frac{x^3}{18}+O(x^5), \]
+    <p>得 \(u_n\to1\)。括号内常数为</p>
+    \[ A=1-1+\frac{1^2}{2}=\frac12. \]
+    <p>不动点 \(L=0\) 的局部倍率即 \(A=1/2\)，\(|A|<1\)，零点为吸引不动点：</p>
+    \[ b_{n+1}=\frac12 b_n+O(b_n^3),\qquad \frac{b_{n+1}}{b_n}\to\frac12. \]
+    <p>需要说明的是，局部倍率只由 \(u(0)=\mathrm{Si}'(0)=1\) 决定，Si 展开中的三阶项 \(-x^3/18\) 属于更高阶修正，不进入常数 \(A\)；只有追问衰减的二次以上精度时才需要展开到三阶。数值轨迹：\(b_2\approx0.5015\)，\(b_3\approx0.2508\)，\(b_4\approx0.1254\)，按约 \(1/2\) 的倍率收缩，迭代 20 万步后 \(b_n\to0\)。与 1989 相比，差别只在 \(u\to1\) 而非 \(u\to2/\sqrt\pi\)，系数代入方式完全相同。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 用 Si 的三阶系数去算局部倍率，局部倍率只由 \(u(0)\) 即一阶导数决定，三阶项不进入 \(A\)。② 漏掉二次修正项，把系数误算成 \(1-1=0\)。③ 忽略 \(u_n\to1\) 的极限过程，直接在有限步取 \(u=1\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是二阶修正模板在积分型素材上的应用，考点为「先求 \(u=\varphi(x)/x\) 在零点的极限，再代入 \(1-u+u^2/2\) 算压缩倍率」。该模板可平移到任意零点导数已知的函数上。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(b_1=1,\ b_{n+1}=b_n(1-\mathrm{Si}\,b_n/b_n+\tfrac12(\mathrm{Si}\,b_n/b_n)^2)\)，求 \(\lim\limits_{n\to\infty}b_{n+1}/b_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。\(u_n\to1\)，括号内常数 \(1-1+1/2=1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1993">
+  <div class="q-head">
+    <span class="qno">第 1993 题</span>
+    <span class="qtype">二阶修正型递推（Ci 零点不动点）</span>
+    <span class="qsrc">P971</span>
+  </div>
+  <div class="stem">
+    <p>设 \(c_1=1,\ c_{n+1}=c_n\left(1-\dfrac{1}{c_n}\mathrm{Ci}\,c_n+\dfrac12\left(\dfrac{\mathrm{Ci}\,c_n}{c_n}\right)^2\right)\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0.6165\)（\(\mathrm{Ci}\) 的第一个正零点）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算 \(L\approx0.6165\)（不动点满足 \(\mathrm{Ci}\,L=0\)；该点处二次修正项为零，局部倍率与 1983 同为 \(1-\cos L/L\approx-0.3234\)，零点附近 Ci 发散、零被排斥），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推写成 \(c_{n+1}=c_n-\mathrm{Ci}\,c_n+\mathrm{Ci}^2c_n/(2c_n)\)。设 \(u_n=\mathrm{Ci}\,c_n/c_n\)，括号为 \(1-u_n+u_n^2/2\)。先找不动点：令 \(c_{n+1}=c_n=L\)，得</p>
+    \[ -\mathrm{Ci}\,L+\frac{\mathrm{Ci}^2L}{2L}=0\ \Longrightarrow\ \mathrm{Ci}\,L\left(-1+\frac{\mathrm{Ci}\,L}{2L}\right)=0. \]
+    <p>第一组解为 \(\mathrm{Ci}\,L=0\)，即余弦积分零点；第二组解 \(\mathrm{Ci}\,L=2L\) 是否吸引需单独检验。初值 \(1\) 的数值轨迹先落向第一组根：</p>
+    \[ L\approx0.616505. \]
+    <p>在该点 \(\mathrm{Ci}\,L=0\)，二次修正项消失，局部倍率退化为一阶形式：</p>
+    \[ r'(L)=1-\mathrm{Ci}'(L)=1-\frac{\cos L}{L}\approx-0.3234,\qquad |r'(L)|<1. \]
+    <p>故该根为吸引不动点。数值上 \(c_2\approx0.7195\)，\(c_3\approx0.6084\)，随后在 \(0.6165\) 两侧交替收敛，20 万步后稳定在 \(0.616505\)。零点附近 \(\mathrm{Ci}\,x\to-\infty\)，轨道不可能从 \(1\) 出发收敛到零。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 套用 1992 的 \(u\to1\) 局部倍率，Ci 在零点不取零，\(u\) 在零点发散，局部线性化只能在真正的不动点处做。② 解不动点方程时漏掉第二组根 \(\mathrm{Ci}\,L=2L\)，虽本题未被它吸引，列方程时应写全。③ 在非不动点处计算导数稳定性。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 1983 递推加二次修正项的版本，结论落在同一特殊函数零点上。二次项在 \(\mathrm{Ci}\,L=0\) 处自动消失，说明修正项只改变不动点附近以外的过渡路径，不改变吸引根的位置。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 写出该递推不动点方程的两组因子，并指出本题初值被哪一组吸引。</p>
+    <p class="var-ans">答案：方程 \(\mathrm{Ci}\,L(-1+\mathrm{Ci}\,L/(2L))=0\)，两组为 \(\mathrm{Ci}\,L=0\) 与 \(\mathrm{Ci}\,L=2L\)；数值迭代表明初值 \(1\) 被第一组的 \(L\approx0.6165\) 吸引。</p>
+  </div>
+</article>
+
+<article class="q" id="q1994">
+  <div class="q-head">
+    <span class="qno">第 1994 题</span>
+    <span class="qtype">二阶修正型递推（Ei 正向发散）</span>
+    <span class="qsrc">P971</span>
+  </div>
+  <div class="stem">
+    <p>设 \(d_1=1,\ d_{n+1}=d_n\left(1-\dfrac{1}{d_n}\mathrm{Ei}\,d_n+\dfrac12\left(\dfrac{\mathrm{Ei}\,d_n}{d_n}\right)^2\right)\)，其中 \(\mathrm{Ei}\,x=-\int_{-x}^\infty\dfrac{e^{-t}}{t}\,dt\)，求 \(\lim\limits_{n\to\infty}d_n\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算 \(+\infty\)（正侧 \(\mathrm{Ei}\,x\sim e^x/x\)，二次项 \(\mathrm{Ei}^2/(2x)\) 起放大作用；数值迭代第 10 步即溢出到 \(7\times10^2\) 以上），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推写成 \(d_{n+1}=d_n-\mathrm{Ei}\,d_n+\mathrm{Ei}^2d_n/(2d_n)\)。零点附近 Ei 为对数奇点，不能在零处做局部线性化；先看正侧大范围行为。指数积分在 \(x\to+\infty\) 时</p>
+    \[ \mathrm{Ei}\,x\sim\frac{e^x}{x}. \]
+    <p>令 \(u(x)=\mathrm{Ei}\,x/x\)，括号为 \(1-u+u^2/2\)。两项在大 \(x\) 处的量级分别为</p>
+    \[ \mathrm{Ei}\,x=O\!\left(\frac{e^x}{x}\right),\qquad \frac{\mathrm{Ei}^2x}{2x}=O\!\left(\frac{e^{2x}}{2x^3}\right), \]
+    <p>二次项指数高一倍，当 \(u\) 较大时 \(u^2/2\) 占主导：</p>
+    \[ d_{n+1}\approx d_n\cdot\frac{u_n^2}{2}=\frac{\mathrm{Ei}^2d_n}{2d_n}. \]
+    <p>正侧 \(\mathrm{Ei}\,x>0\)，该二次项为正且随 \(x\) 增长迅速，形成放大链条。数值轨迹：\(d_2\approx0.9006\)，\(d_3\approx0.7412\)，\(d_4\approx0.5020\)，\(d_5\approx0.2527\)，第 5 步后转回正侧 \(d_6\approx1.3348\)，随后 \(1.4938\to1.8182\to2.6182\to6.1845\to705.64\)，第 11 步数值溢出。</p>
+    <p>不动点方程与 1984 同属 Ei 零点问题，唯一正根 \(0.3725\) 处导数绝对值大于 1，为排斥根，轨道不会停留。整体走势为正向无界，\(d_n\to+\infty\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把二次修正项当成单纯的稳定化措施，忽略它在 \(u\) 大时是放大项。② 在零点附近做泰勒展开，Ei 的对数奇点使该展开无效。③ 前几步数值下降就误判收敛，忽略第 6 步起的放大。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 1984 对照呈现 Ei 素材的两种失效形态：一阶版本正负振荡，二阶版本正向溢出。复习时应区分「局部不收敛」与「单调发散到无穷」两类结论的数值证据。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 说明正侧 \(x\) 较大时，二次项 \(\mathrm{Ei}^2x/(2x)\) 为何主导递推。</p>
+    <p class="var-ans">答案：\(\mathrm{Ei}\,x\sim e^x/x\)，二次项量级为 \(e^{2x}/(2x^3)\)，一阶项 \(\mathrm{Ei}\,x\sim e^x/x\) 相比是低阶，括号内 \(u^2/2\) 占优，使下一步值被放大。</p>
+  </div>
+</article>
+
+<article class="q" id="q1995">
+  <div class="q-head">
+    <span class="qno">第 1995 题</span>
+    <span class="qtype">二阶修正型递推遇积分奇点</span>
+    <span class="qsrc">P971</span>
+  </div>
+  <div class="stem">
+    <p>设 \(e_1=1,\ e_{n+1}=e_n\left(1-\dfrac{1}{e_n}\mathrm{Li}\,e_n+\dfrac12\left(\dfrac{\mathrm{Li}\,e_n}{e_n}\right)^2\right)\)，其中 \(\mathrm{Li}\,x=\int_0^x\dfrac{dt}{\ln t}\)，求 \(\lim\limits_{n\to\infty}e_n\)。</p>
+  </div>
+  <div class="answer">答案：极限不存在（递推第二项在初值处无定义）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算递推在 \(e_1=1\) 处即失效（\(\mathrm{Li}\,1=\mathrm{Ei}(0)\) 发散，积分在 \(t=1\) 处为对数奇点；二次项 \(\mathrm{Li}^2/e_n\) 同为发散量），序列自第二项起无定义，以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：本题是 1985 递推加上二次修正项的版本，失效原因仍在对数积分的初值奇点。换元 \(t=e^u\)：</p>
+    \[ \mathrm{Li}\,x=\int_0^x\frac{dt}{\ln t}=\mathrm{Ei}(\ln x). \]
+    <p>初值 \(x=1\) 时 \(\ln x=0\)，\(\mathrm{Ei}(0)\) 发散：</p>
+    \[ \mathrm{Li}\,1=-\infty\ (\text{发散}). \]
+    <p>被积函数在 \(t\to1\) 时 \(1/\ln t\sim1/(t-1)\)，积分对数发散；递推中的一阶项 \(\mathrm{Li}\,e_n\) 与二次项 \(\mathrm{Li}^2e_n/e_n\) 在 \(e_1=1\) 处都不是有限实数，\(e_2\) 无法确定。</p>
+    <p>即使忽略初值问题，该模板在零点附近的压缩形态也依赖对数积分的主阶。在 \(0<x<1\) 内</p>
+    \[ \mathrm{Li}\,x\sim\frac{x}{\ln x}=o(x), \]
+    <p>二次项 \(\mathrm{Li}^2x/x=o(x)\) 才是可与一阶项比较的小量；对数积分只在该区间有限，本题初值 \(1\) 正卡在奇点上，题面条件不自洽，谈不上极限值。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 看到二次修正项就按 1989、1992 的压缩模板算倍率，跳过定义域检查。② 认为二次项能「压住」发散的一阶项，实际两者同为发散量。③ 忘记对数积分换元后对应 Ei 的发散点。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题考查二阶模板在奇异素材上的适用性：压缩系数计算的前提是 \(u(x)=\varphi(x)/x\) 在零点有有限极限，对数积分不满足这一前提。奇点判断先于倍率计算。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 若初值改为 \(e_1=1/2\)，写出 \(\mathrm{Li}(1/2)\) 的标准函数表达式。</p>
+    <p class="var-ans">答案：\(\mathrm{Li}(1/2)=\mathrm{Ei}(\ln(1/2))=\mathrm{Ei}(-\ln2)\)，为有限负值；此时递推第二项才有定义。</p>
+  </div>
+</article>
+
+<article class="q" id="q1996">
+  <div class="q-head">
+    <span class="qno">第 1996 题</span>
+    <span class="qtype">二阶修正型递推遇积分奇点</span>
+    <span class="qsrc">P971</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f_1=1,\ f_{n+1}=f_n\left(1-\dfrac{1}{f_n}\mathrm{li}\,f_n+\dfrac12\left(\dfrac{\mathrm{li}\,f_n}{f_n}\right)^2\right)\)，其中 \(\mathrm{li}\,x=\int_0^x\dfrac{dt}{\ln t}\)，求 \(\lim\limits_{n\to\infty}f_n\)。</p>
+  </div>
+  <div class="answer">答案：极限不存在（递推第二项在初值处无定义）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算递推在 \(f_1=1\) 处即失效（\(\mathrm{li}\,1=\mathrm{Ei}(0)\) 发散，积分在 \(t=1\) 处为对数奇点），序列自第二项起无定义，以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：与 1995 同一模板，函数记号为小写 \(\mathrm{li}\)，积分定义一致。先核验初值处取值。换元 \(t=e^u\)：</p>
+    \[ \mathrm{li}\,x=\int_0^x\frac{dt}{\ln t}=\mathrm{Ei}(\ln x). \]
+    <p>当 \(x=1\) 时 \(\ln x=0\)，\(\mathrm{Ei}(0)\) 对数发散：</p>
+    \[ \mathrm{li}\,1=-\infty\ (\text{发散}). \]
+    <p>被积函数 \(1/\ln t\) 在 \(t=1\) 附近与 \(1/(t-1)\) 同阶，积分发散；一阶项 \(\mathrm{li}\,f_n\) 与二次项 \(\mathrm{li}^2f_n/f_n\) 在 \(f_1=1\) 处均无有限值，\(f_2\) 不能确定，递推链条断裂。</p>
+    <p>从素材结构看，\(0<x<1\) 内 \(\mathrm{li}\,x\) 有限，主阶为</p>
+    \[ \mathrm{li}\,x\sim\frac{x}{\ln x}=o(x), \]
+    <p>二阶模板在该区间才可能讨论局部倍率；本题初值落在奇点上，极限无从谈起。换元表达式与 1985 一致，判别发散点只需解 \(\ln x=0\)；在奇点未排除之前，任何压缩倍率的计算都缺乏定义域基础，不能先套模板再补定义。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 因 \(\mathrm{Li}\)、\(\mathrm{li}\) 大小写差异误判为两种函数，实际积分定义相同。② 不做换元定位奇点，直接套用压缩倍率。③ 对发散的二次项做有限数值运算，得到无意义的中间结果。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 1995 为同素材重复排版，考点仍是积分奇点对递推定义域的影响。掌握 \(\mathrm{li}\,x=\mathrm{Ei}(\ln x)\) 后，发散点可直接由 \(\ln x=0\) 定位。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 判断 \(\mathrm{li}\,x\) 在 \(x=1\) 处的奇点类型。</p>
+    <p class="var-ans">答案：对数型奇点。\(t\to1\) 时 \(\ln t\sim t-1\)，被积函数 \(1/\ln t\sim1/(t-1)\)，积分呈对数发散，柯西主值亦不存在有限值。</p>
+  </div>
+</article>
+
+<article class="q" id="q1997">
+  <div class="q-head">
+    <span class="qno">第 1997 题</span>
+    <span class="qtype">二阶修正型压缩递推（erfi）</span>
+    <span class="qsrc">P972</span>
+  </div>
+  <div class="stem">
+    <p>设 \(g_1=1,\ g_{n+1}=g_n\left(1-\dfrac{1}{g_n}\mathrm{erfi}\,g_n+\dfrac12\left(\dfrac{\mathrm{erfi}\,g_n}{g_n}\right)^2\right)\)，其中 \(\mathrm{erfi}\,x=-i\,\mathrm{erf}\,ix\)，求 \(\lim\limits_{n\to\infty}g_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推写成 \(g_{n+1}=g_n-\mathrm{erfi}\,g_n+\mathrm{erfi}^2g_n/(2g_n)\)，二阶修正模板。令 \(u_n=\mathrm{erfi}\,g_n/g_n\)。由 1987 的复数代换，虚误差函数在零点的展开为</p>
+    \[ \mathrm{erfi}\,x=\frac{2}{\sqrt\pi}x+O(x^3), \]
+    <p>记 \(c=2/\sqrt\pi\)，故 \(u_n\to c\)。括号内局部倍率为</p>
+    \[ A=1-c+\frac{c^2}{2}=1-\frac{2}{\sqrt\pi}+\frac{2}{\pi}\approx0.5082. \]
+    <p>验证展开：</p>
+    \[ g_{n+1}=A\,g_n+O(g_n^3),\qquad \frac{g_{n+1}}{g_n}\to A\approx0.5082,\qquad |A|<1. \]
+    <p>零点为吸引不动点。二次修正项把一阶压缩系数 \(1-c\approx-0.128\) 调整为正的 \(0.508\)，序列保持同号收缩，不再交替变号。数值轨迹：\(g_2\approx0.7115\)，\(g_3\approx0.3997\)，\(g_4\approx0.2072\)，按约 \(0.508\) 倍率收缩，迭代 20 万步后 \(g_n\to0\)。本题与 1989 共用同一压缩系数，差别只在误差函数取虚版。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误用 erfi 在零点导数为 1，把 \(u\) 的极限写成 1。② 漏掉二次项，沿用一阶系数 \(1-c\approx-0.128\)。③ 不比较 \(|A|\) 与 1，只凭正号判断收敛。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是二阶模板在虚误差函数上的应用，计算路径与 1989 完全平行：先由复数定义换回实值展开求 \(u(0)\)，再代入 \(1-u+u^2/2\)。同一模板在 erf、erfi、Si 上的系数对照是本批复习重点。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(g_1=1,\ g_{n+1}=g_n(1-\mathrm{erfi}\,g_n/g_n+\tfrac12(\mathrm{erfi}\,g_n/g_n)^2)\)，求 \(\lim\limits_{n\to\infty}g_{n+1}/g_n\)。</p>
+    <p class="var-ans">答案：\(1-\dfrac{2}{\sqrt\pi}+\dfrac{2}{\pi}\approx0.5082\)。\(u_n\to2/\sqrt\pi\)，括号常数即该倍率，绝对值小于 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q1998">
+  <div class="q-head">
+    <span class="qno">第 1998 题</span>
+    <span class="qtype">二阶修正型递推（erfc 周期循环）</span>
+    <span class="qsrc">P972</span>
+  </div>
+  <div class="stem">
+    <p>设 \(h_1=1,\ h_{n+1}=h_n\left(1-\dfrac{1}{h_n}\mathrm{erfc}\,h_n+\dfrac12\left(\dfrac{\mathrm{erfc}\,h_n}{h_n}\right)^2\right)\)，求 \(\lim\limits_{n\to\infty}h_n\)。</p>
+  </div>
+  <div class="answer">答案：极限不存在（落入周期 3 循环）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算极限不存在（零附近 \(u=\mathrm{erfc}\,x/x\to\infty\)，零点被强烈排斥；数值迭代稳定在三点循环（周期 3） \(0.2301,\ 0.4408,\ 0.6912\)），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推结构与 1990 相同，右端素材为补误差函数。\(\mathrm{erfc}\,0=1\)，令 \(u(x)=\mathrm{erfc}\,x/x\)，则</p>
+    \[ \mathrm{erfc}\,0=1,\qquad u(x)=\frac{\mathrm{erfc}\,x}{x}\to+\infty\quad(x\to0^+). \]
+    <p>括号 \(1-u+u^2/2\) 在 \(u\) 大时主项为 \(u^2/2\)：</p>
+    \[ h_{n+1}\approx\frac{(\mathrm{erfc}\,h_n)^2}{2h_n}\approx\frac{1}{2h_n}, \]
+    <p>靠近零的点被向外推，零点不具吸引性。长迭代后轨道进入稳定周期循环，三点依次为</p>
+    \[ 0.230052\ \longmapsto\ 0.440834\ \longmapsto\ 0.691183\ \longmapsto\ 0.230052. \]
+    <p>三项反复出现，序列不收敛。该循环与 1990、2000 完全相同，差别仅在数列记号。判断依据是 3000 步后连续多轮数值重复出现，而非单点附近的局部展开。周期轨道的识别必须依靠足够长的迭代观察：前若干步数值下降只是暂态，局部线性化在零点失效后，不能再用一阶倍率预判走向。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 与 erf 版本对照时忽略 erfc 在零点取 1 的事实。② 把 \(u\to\infty\) 代入 \(1-u+u^2/2\) 后仍按有限 \(u\) 估算倍率。③ 短迭代看到数值下降就判定收敛到零。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>补误差函数的二阶模板在本批多次重复，结论一致为周期循环。复习时应掌握「局部线性化失效后用长迭代识别周期」的方法，并能区分循环轨道与发散轨道。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 写出该递推吸引周期的三个点，并说明极限为何不存在。</p>
+    <p class="var-ans">答案：三点为 \(0.2301,\ 0.4408,\ 0.6912\) 顺序循环；序列子列分别趋于这三个不同值，故整体极限不存在。</p>
+  </div>
+</article>
+
+<article class="q" id="q1999">
+  <div class="q-head">
+    <span class="qno">第 1999 题</span>
+    <span class="qtype">二阶修正型压缩递推（erf）</span>
+    <span class="qsrc">P972</span>
+  </div>
+  <div class="stem">
+    <p>设 \(i_1=1,\ i_{n+1}=i_n\left(1-\dfrac{1}{i_n}\mathrm{erf}\,i_n+\dfrac12\left(\dfrac{\mathrm{erf}\,i_n}{i_n}\right)^2\right)\)，求 \(\lim\limits_{n\to\infty}i_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推结构与 1989 相同，右端为误差函数。令 \(u_n=\mathrm{erf}\,i_n/i_n\)，递推为 \(i_{n+1}=i_n(1-u_n+u_n^2/2)\)。零点附近误差函数展开为</p>
+    \[ \mathrm{erf}\,x=\frac{2}{\sqrt\pi}x+O(x^3), \]
+    <p>记 \(c=2/\sqrt\pi\)，故 \(u_n\to c\)。局部压缩倍率</p>
+    \[ A=1-c+\frac{c^2}{2}=1-\frac{2}{\sqrt\pi}+\frac{2}{\pi}\approx0.5082. \]
+    <p>展开式：</p>
+    \[ i_{n+1}=A\,i_n+O(i_n^3),\qquad \frac{i_{n+1}}{i_n}\to A,\qquad |A|<1. \]
+    <p>零点为吸引不动点。二次修正项把一阶系数 \(1-c\approx-0.128\) 调整为正的 \(0.508\)，序列保持同号收缩，不再出现交替变号。数值轨迹 \(i_2\approx0.5124\)，\(i_3\approx0.2565\)，\(i_4\approx0.1297\)，按 \(0.508\) 倍率收缩，20 万步后 \(i_n\to0\)。括号内 \(1-u+u^2/2\) 是 \(e^{-u}\) 的二阶截断，本题只取到二次项，更高阶的 \(u^3/6\) 不进入局部倍率。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 漏算 \(u^2/2\) 项，使用一阶系数。② 把 \(c=2/\sqrt\pi\) 记成 \(1\)，误得倍率 \(1/2\)。③ 稳定性只看符号不看绝对值，本题倍率为正且小于 1 才收敛。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 1989 为同一递推的重复排版，压缩倍率 \(A\) 由误差函数零点导数唯一确定。复习时应能不查数值表，由 \(2/\sqrt\pi\) 直接写出 \(A\) 的解析表达式。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求该递推在零点处的局部压缩倍率 \(A\) 的解析值。</p>
+    <p class="var-ans">答案：\(A=1-\dfrac{2}{\sqrt\pi}+\dfrac{2}{\pi}\approx0.5082\)。\(u_n\to2/\sqrt\pi\)，代入 \(1-u+u^2/2\) 即得。</p>
+  </div>
+</article>
+
+<article class="q" id="q2000">
+  <div class="q-head">
+    <span class="qno">第 2000 题</span>
+    <span class="qtype">二阶修正型递推（erfc 周期循环）</span>
+    <span class="qsrc">P972</span>
+  </div>
+  <div class="stem">
+    <p>设 \(j_1=1,\ j_{n+1}=j_n\left(1-\dfrac{1}{j_n}\mathrm{erfc}\,j_n+\dfrac12\left(\dfrac{\mathrm{erfc}\,j_n}{j_n}\right)^2\right)\)，求 \(\lim\limits_{n\to\infty}j_n\)。</p>
+  </div>
+  <div class="answer">答案：极限不存在（落入周期 3 循环）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，复算极限不存在（零附近 \(u=\mathrm{erfc}\,x/x\to\infty\)，零点被排斥；数值迭代稳定在三点循环（周期 3） \(0.2301,\ 0.4408,\ 0.6912\)），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推与 1990、1998 同一模板，素材为补误差函数。\(\mathrm{erfc}\,0=1\)，令 \(u(x)=\mathrm{erfc}\,x/x\)，则</p>
+    \[ \mathrm{erfc}\,0=1,\qquad u(x)=\frac{\mathrm{erfc}\,x}{x}\to+\infty\quad(x\to0^+). \]
+    <p>括号内二次项占优：</p>
+    \[ j_{n+1}\approx j_n\cdot\frac{u_n^2}{2}=\frac{(\mathrm{erfc}\,j_n)^2}{2j_n}\approx\frac{1}{2j_n}. \]
+    <p>靠近零的轨道被向外推，零点不吸引。长迭代后进入周期 3 循环：</p>
+    \[ 0.230052\ \longmapsto\ 0.440834\ \longmapsto\ 0.691183\ \longmapsto\ 0.230052. \]
+    <p>三个子列分别趋于三个不同数值，整体极限不存在。该周期与 1990、1998 为同一吸引循环，数值点在迭代充分后不再随步数漂移。作为本批最后一题，它与 1989、1999 的 erf 版本构成完整对照：决定收敛还是循环的关键，是右端函数在零点取值为零还是为 1，以及 \(u=\varphi(x)/x\) 在零点是否有有限极限。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 erfc 当作 erf 的同义记号，沿用收敛结论。② 仅靠零点附近形式推导，不做长迭代观察循环。③ 报告循环点时只写一个数值，未列出完整周期。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题收束整个特殊函数递推板块：同一套二阶模板在零点取零的函数上收敛到零，在零点取 1 的函数上落入周期循环。掌握素材边界值与局部 \(u\) 极限，即可预判大类走向。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 对比说明：为何 erf 版本的同类递推收敛到零，而 erfc 版本落入循环。</p>
+    <p class="var-ans">答案：\(\mathrm{erf}\,0=0\)，\(u=\mathrm{erf}\,x/x\to2/\sqrt\pi\) 为有限值，括号倍率 \(A\approx0.5082\) 满足 \(|A|<1\)；\(\mathrm{erfc}\,0=1\)，\(u\to\infty\)，零点被排斥，轨道转入循环。</p>
+  </div>
+</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 1989–2000 题</span></div>
+</div>
+</body>
+</html>
