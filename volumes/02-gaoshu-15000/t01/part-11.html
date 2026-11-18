@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>《极限》 · 第 1074–1173 题</title>
+<title>《极限》 · 第 1021–1120 题</title>
 <link rel="stylesheet" href="../../assets/site.css">
 <script>
 MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
@@ -18,9 +18,1695 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <div class="wrap">
 <header class="pagehead">
   <div class="kicker">02-gaoshu-15000 · 专题 01</div>
-  <h1>第 1074 – 1173 题</h1>
+  <h1>第 1021 – 1120 题</h1>
   <p class="sub"><a href="part-10.html">← 上一分页</a> <a href="index.html">目录</a> <a href="part-12.html">下一分页 →</a></p>
 </header>
+<article class="q" id="q1021">
+  <div class="q-head">
+    <span class="qno">第 1021 题</span>
+    <span class="qtype">变限积分展开（sin t/t）</span>
+    <span class="qsrc">P793</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\displaystyle\int_{0}^{x}\dfrac{\sin t}{t}\,dt\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)-x}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{18}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时 \(f(x)-x\to0\)、分母 \(x^3\to0\)，属 \(0/0\)。被积函数 \(\sin t/t\) 在 \(t=0\) 处补充定义为 1，可展开。由 \(\sin t=t-t^3/6+o(t^3)\)：</p>
+    \[ \frac{\sin t}{t}=1-\frac{t^2}{6}+o(t^2). \]
+    <p>从 0 积分到 \(x\)：</p>
+    \[ f(x)=\int_0^x\left(1-\frac{t^2}{6}+o(t^2)\right)dt=x-\frac{x^3}{18}+o(x^3). \]
+    <p>于是 \(f(x)-x=-x^3/18+o(x^3)\)，除以 \(x^3\) 得 \(-1/18\)。关键：\(\sin t/t\) 的一次项是常数 1，积分给出 \(x\)，与分子减去的 \(x\) 抵消；二次项 \(-t^2/6\) 积分后是 \(-x^3/18\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 洛必达：分子导数 \(f'(x)=\sin x/x\)，分母导数 \(3x^2\)，得 \(\sin x/(3x^2)\)，仍为 \(0/0\)，需再用 \(\sin x=x-x^3/6\)，结果 \(1/(3x)-x/18\cdots\) 易错。② 积分 \(-t^2/6\) 时忘记除以 3：\(\int_0^x t^2dt=x^3/3\)，乘 \(-1/6\) 得 \(-x^3/18\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「变限积分 + 被积函数展开」是考研热门，核心是把 \(\sin t/t\)、\(e^{-t^2}\) 等展成幂级数再逐项积分。本批 1012 是 \(\sin(t^2)\) 型，本题是 \(\sin t/t\) 型。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{f(x)-x}{x^5}\)。</p>
+    <p class="var-ans">答案：\(-\infty\)（发散）。展开到 \(t^4\)：\(\sin t/t=1-t^2/6+t^4/120\)，积分得 \(f(x)=x-x^3/18+x^5/600+o(x^5)\)。按印出题面 \((f(x)-x)/x^5\)，分子领头项为 \(-x^3/18\)，除以 \(x^5\) 得 \(-1/(18x^2)\to-\infty\)，极限发散。</p>
+  </div>
+</article>
+
+<article class="q" id="q1022">
+  <div class="q-head">
+    <span class="qno">第 1022 题</span>
+    <span class="qtype">Stirling 公式（阶乘对数）</span>
+    <span class="qsrc">P793</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\dfrac{\ln(x!)-x\ln x}{x}\)（其中 \(x\) 取正整数）。</p>
+  </div>
+  <div class="answer">答案：\(-1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x!\) 是离散量，\(\ln(x!)=\sum_{k=1}^{x}\ln k\)。这是阶乘对数的渐近估计，用 Stirling 公式：\(\ln(x!)=x\ln x-x+O(\ln x)\)。之所以有这个公式，是因为 \(\sum_{k=1}^x\ln k\approx\int_1^x\ln t\,dt=x\ln x-x+1\)，求和与积分的差仅为 \(O(\ln x)\)。代入：</p>
+    \[ \frac{\ln(x!)-x\ln x}{x}=\frac{[x\ln x-x+O(\ln x)]-x\ln x}{x}=-1+\frac{O(\ln x)}{x}\to-1. \]
+    <p>关键是 \(x\ln x\) 项被减掉，剩下主部 \(-x\) 除以 \(x\) 得 \(-1\)；对数修正项 \(O(\ln x)\) 相对于 \(x\) 可忽略。</p>
+      <p>补充：Stirling 公式 \(\ln n!=n\ln n-n+O(\ln n)\) 中 \(-n\) 项是关键，它来自 \(\int_1^n\ln t\,dt=n\ln n-n+1\)，求和与积分的差仅为对数量级。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不知道 Stirling 公式，试图用 \(\ln x!\approx\ln(x^x)=x\ln x\) 得 0，漏掉 \(-x\) 这一项。② 把 \(O(\ln x)\) 当成与 \(x\) 同阶，其实它除以 \(x\) 趋于 0。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>Stirling 公式 \(n!\sim(n/e)^n\sqrt{2\pi n}\) 在数列极限、级数收敛判据中常见，考研常以 \(\ln n!\) 或 \(n^{n}/n!\) 形式出现。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{\ln(n!)}{n\ln n}\)。</p>
+    <p class="var-ans">答案：\(1\)。由 Stirling，\(\ln(n!)\sim n\ln n\)，比值趋于 1。本题再减去 \(n\ln n\) 才显出 \(-n\) 项。</p>
+  </div>
+</article>
+
+<article class="q" id="q1023">
+  <div class="q-head">
+    <span class="qno">第 1023 题</span>
+    <span class="qtype">tan x - sin x 的高阶系数</span>
+    <span class="qsrc">P793</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：发散（\(+\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div>
+    <p>书给：\(\dfrac{1}{8}\)。复算：极限不存在，\(+\infty\)（分子主部为 \(x^3/2\)，阶数低于分母）；书给值实为减去 \(x^3/2\) 后的 \(x^5\) 系数，疑漏印 \(-\dfrac{x^3}{2}\)。以复算为准。</p>
+  </div>
+  
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\tan x-\sin x\to0\)、分母 \(x^5\to0\)。把两项展开：</p>
+    \[ \tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+o(x^5),\qquad \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}+o(x^5). \]
+    <p>作差：</p>
+    \[ \tan x-\sin x=\left(\frac13+\frac16\right)x^3+\left(\frac{2}{15}-\frac{1}{120}\right)x^5+o(x^5)=\frac{x^3}{2}+\frac{x^5}{8}+o(x^5). \]
+    <p>可见分子主部是 \(x^3/2\)，除以 \(x^5\) 得 \(1/(2x^2)\to\infty\)。其中 \(x^5/8\) 项是更高一阶的修正：若题面为 \(\dfrac{\tan x-\sin x-\dfrac{x^3}{2}}{x^5}\)，则极限恰为 \(1/8\)。</p>
+  </div>
+  
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 忽略主部阶数：\(\tan x-\sin x\) 是 \(x^3\) 阶，不是 \(x^5\) 阶，直接除以 \(x^5\) 会发散。② 与 1051 对照：\((\tan x-\sin x)/x^3=1/2\)，本题若按书上意图求 \(x^5\) 系数，则必须先减掉 \(x^3/2\) 主部。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题示范「分子有低阶主部时，高阶系数不能直接当极限」。正确做法是先认出主部 \(x^3/2\)，再决定是否需要减去它才能求 \(x^5\) 项。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x-\dfrac{x^3}{2}}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{8}\)。展开后 \(x^3/2\) 被减干净，剩下 \(x^5/8\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1024">
+  <div class="q-head">
+    <span class="qno">第 1024 题</span>
+    <span class="qtype">黎曼和（平方和）</span>
+    <span class="qsrc">P794</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\displaystyle\sum_{k=1}^{n}\dfrac{k^{2}}{n^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{3}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\dfrac{k^2}{n^2}=\left(\dfrac{k}{n}\right)^2\)，故原式 \(=\dfrac{1}{n}\sum_{k=1}^n\left(\dfrac{k}{n}\right)^2\)，正是 \([0,1]\) 上 \(f(x)=x^2\) 的右端点黎曼和。由定积分定义：</p>
+    \[ \frac{1}{n}\sum_{k=1}^n\left(\frac{k}{n}\right)^2\to\int_0^1 x^2dx=\frac13. \]
+    <p>也可用求和公式：\(\sum k^2=n(n+1)(2n+1)/6\)，原式 \(=\dfrac{n(n+1)(2n+1)}{6n^3}\to\dfrac{2}{6}=\dfrac13\)。本题与 1017 实质相同，只是把 \((k/n)^2\) 写成了 \(k^2/n^2\)。</p>
+      <p>补充：把 \(\frac{k^2}{n^2}\) 改写为 \((k/n)^2\) 是识别黎曼和的关键，形式虽变，被积函数仍是 \(f(x)=x^2\)，积分结果不变。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 被 \(\frac1n\cdot\frac{k^2}{n^2}\) 的形式迷惑，认不出它就是 \(\frac1n(k/n)^2\)。② 求和时漏一个 \(n\)：原式是 \(\frac{1}{n}\sum\frac{k^2}{n^2}=\frac{1}{n^3}\sum k^2\)，不是 \(\frac{1}{n^2}\sum k^2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>黎曼和的变形写法，训练把 \(\frac{1}{n}\sum f(k/n)\) 还原为积分。本批 1033、1044 是更一般的被积函数。</p>
+      <p>把求和式改写为标准黎曼和的形式是关键一步，改写后被积函数一目了然，积分也随之化为基本积分。数列求和与定积分在这里互相印证，两条路都能得到同一个答案。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum_{k=1}^n\dfrac{k}{n}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{2}\)。对应 \(\int_0^1 xdx=1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1025">
+  <div class="q-head">
+    <span class="qno">第 1025 题</span>
+    <span class="qtype">根式差（√(1+x)-√(1-x)）</span>
+    <span class="qsrc">P794</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+x}-\sqrt{1-x}}{x}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\sqrt{1+x}-\sqrt{1-x}\to0\)、分母 \(x\to0\)，属 \(0/0\)。可用共轭因子或泰勒展开。展开：</p>
+    \[ \sqrt{1+x}=1+\frac{x}{2}+o(x),\qquad \sqrt{1-x}=1-\frac{x}{2}+o(x). \]
+    <p>作差：\(\sqrt{1+x}-\sqrt{1-x}=x+o(x)\)，除以 \(x\) 得 \(1\)。也可有理化：</p>
+    \[ \frac{\sqrt{1+x}-\sqrt{1-x}}{x}=\frac{(1+x)-(1-x)}{x(\sqrt{1+x}+\sqrt{1-x})}=\frac{2x}{x(\sqrt{1+x}+\sqrt{1-x})}\to\frac{2}{2}=1. \]
+      <p>补充：根式差用共轭因子后，分子化为 \(2x\)，分母为 \(x(\sqrt{1+x}+\sqrt{1-x})	o2x\)，比值 1；这也等价于两个一阶等价无穷小 \(\sqrt{1+x}-1\sim x/2\) 与 \(1-\sqrt{1-x}\sim x/2\) 相加。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 共轭因子分母 \(\sqrt{1+x}+\sqrt{1-x}\to2\)，分子是 \(2x\)，比值 \(1\)；漏掉分母的 2 会得 2。② 误把 \(\sqrt{1-x}\) 的展开写成 \(1+x/2\)，符号错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>这是 \((1+x)^\alpha-1\sim\alpha x\) 的直接应用：\(\sqrt{1+x}-1\sim x/2\)，\(1-\sqrt{1-x}\sim x/2\)，两者相加得 \(x\)。</p>
+      <p>本题也可以直接用一阶等价无穷小判断：两个根式各自减去常数项后都是一次无穷小，方向相反，相加正好抵消常数、留下线性主部。分母也是一次，比值自然为常数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+x}-\sqrt{1-x}}{x^2}\)。</p>
+    <p class="var-ans">答案：\(0\)。分子主部 \(x\)，除以 \(x^2\) 趋于 0。</p>
+  </div>
+</article>
+
+<article class="q" id="q1026">
+  <div class="q-head">
+    <span class="qno">第 1026 题</span>
+    <span class="qtype">倒代换（x→∞ 化为 t→0）</span>
+    <span class="qsrc">P794</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\dfrac{x^{2}\sin\!\left(\dfrac{1}{x}\right)-x}{\dfrac{1}{x}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{6}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时出现 \(\sin(1/x)\)，做倒代换 \(t=1/x\to0\)，把问题化回 \(t\to0\) 的等价无穷小体系。此时 \(x=1/t\)，\(x^2=1/t^2\)：</p>
+    \[ x^2\sin(1/x)-x=\frac{1}{t^2}\sin t-\frac1t=\frac{\sin t-t}{t^2}. \]
+    <p>分母 \(1/x=t\)，故原式 \(=\dfrac{\sin t-t}{t^2}\Big/t=\dfrac{\sin t-t}{t^3}\)。由 \(\sin t=t-t^3/6+o(t^3)\)：</p>
+    \[ \sin t-t=-\frac{t^3}{6}+o(t^3),\qquad \frac{\sin t-t}{t^3}\to-\frac16. \]
+    <p>关键是倒代换后 \(\sin t\) 的三阶项 \(-t^3/6\) 暴露出来，这正是答案来源。</p>
+      <p>补充：倒代换 \(t=1/x\) 的价值在于把 \(\sin(1/x)\) 化回标准点 \(t=0\)，从而可使用 \(\sin t=t-t^3/6\)，暴露被低阶抵消掩盖的三阶项。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不做倒代换，直接对 \(\sin(1/x)\sim1/x\) 得 \(x^2(1/x)-x=0\)，误判为 0；等价无穷小只到一阶，而分子的低阶项恰好抵消，需要二阶以上展开。② 倒代换后忘记分母 \(1/x=t\) 也要换算。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「\(x\to\infty\) 且含 \(\sin(1/x)\)、\(\ln(1+1/x)\)」型，固定手法是 \(t=1/x\) 倒代换，再用泰勒。本批 1030、1032、1046、1048 都是倒代换或主部展开族。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}x^2\bigl[\sin(1/x)-\sin(1/(x+1))\bigr]\)。</p>
+    <p class="var-ans">答案：\(1\)。令 \(t=1/x\)，展开到二阶可得主部；本题示范倒代换在更复杂结构中的使用。</p>
+  </div>
+</article>
+
+<article class="q" id="q1027">
+  <div class="q-head">
+    <span class="qno">第 1027 题</span>
+    <span class="qtype">泰勒展开（ln(1+x²)）</span>
+    <span class="qsrc">P794</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(1+x^{2})-x^{2}}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\ln(1+x^2)-x^2\to0\)、分母 \(x^4\to0\)，属 \(0/0\)。这是把 \(u=x^2\) 代入 \(\ln(1+u)\) 的复合展开：</p>
+    \[ \ln(1+u)=u-\frac{u^2}{2}+o(u^2). \]
+    <p>代入 \(u=x^2\)：</p>
+    \[ \ln(1+x^2)=x^2-\frac{x^4}{2}+o(x^4). \]
+    <p>于是 \(\ln(1+x^2)-x^2=-x^4/2+o(x^4)\)，除以 \(x^4\) 得 \(-1/2\)。关键是 \(\ln(1+u)\) 的二阶项 \(-u^2/2\) 在 \(u=x^2\) 下变成 \(-x^4/2\)，正好与分母 \(x^4\) 同阶。</p>
+      <p>补充：复合展开时 \(u=x^2\) 代入 \(\ln(1+u)\)，二次项 \(-u^2/2\) 自动变成 \(-x^4/2\)，阶数翻倍，这是 \(x^2\) 类复合题的共性。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 展开阶数错：\(\ln(1+x^2)\sim x^2\) 是一阶，本题分母 \(x^4\) 需展到 \(x^4\)，那个 \(-x^4/2\) 才是答案。② 把 \(u=x^2\) 代入时漏掉 \(u^2=x^4\)，误以为 \(\ln(1+x^2)-x^2=o(x^2)\) 而发散。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「\(\ln(1+x^k)-x^k\)」型答案恒为 \(-1/2\)（除以 \(x^{2k}\)），与 1007、1050 是同一展开的不同截断。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x^2)-x^2}{x^2}\)。</p>
+    <p class="var-ans">答案：\(0\)。分子主部 \(x^4\)，除以 \(x^2\) 趋于 0。</p>
+  </div>
+</article>
+
+<article class="q" id="q1028">
+  <div class="q-head">
+    <span class="qno">第 1028 题</span>
+    <span class="qtype">指数主导多项式（x→∞）</span>
+    <span class="qsrc">P794</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\dfrac{e^{x}-x^{n}}{e^{x}}\)，其中 \(n\) 是正整数。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时 \(e^x\) 与 \(x^n\) 都趋于无穷，但 \(e^x\) 增长远快于 \(x^n\)。把分式拆开：</p>
+    \[ \frac{e^x-x^n}{e^x}=1-\frac{x^n}{e^x}. \]
+    <p>由指数主导多项式的结论，\(\dfrac{x^n}{e^x}\to0\)（可洛必达 \(n\) 次验证），故原式 \(=1-0=1\)。关键是 \(e^x\) 与 \(x^n\) 之比趋于无穷，因此 \(x^n/e^x\) 可忽略，整个分式趋近 1。</p>
+      <p>补充：把分式拆成 \(1-x^n/e^x\) 后，只需证明 \(x^n/e^x	o0\)，而指数对任意正整数幂次都占优，因此无论 \(n\) 多大，结论都是 1。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误以为分子 \(e^x-x^n\) 也是 \(e^x\) 量级就直接得 1，但要说明 \(x^n/e^x\to0\)。② 与 1019、1042 对照：那些题是 \(x^n/e^x\) 本身为 0，本题是它被减掉后剩 1。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>极限速度比较的直接应用：\(e^x\) 在 \(x\to\infty\) 时碾压任何 \(x^n\)。这类题训练对无穷大量阶的判断。</p>
+      <p>把分式拆开之后，问题只剩一个：指数除以多项式是否趋于零。记住这个结论，以后遇到任何正整数次幂都可以直接判断，不必再展开计算。</p>
+      <p>总之，拆分后只需记住指数增长碾压多项式，剩下的项都可忽略。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\dfrac{e^x+x^n}{e^x}\)。</p>
+    <p class="var-ans">答案：\(1\)。同理 \(1+x^n/e^x\to1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1029">
+  <div class="q-head">
+    <span class="qno">第 1029 题</span>
+    <span class="qtype">泰勒展开（sin(x²)）</span>
+    <span class="qsrc">P794</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sin(x^{2})-x^{2}}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\sin(x^2)-x^2\to0\)、分母 \(x^4\to0\)，属 \(0/0\)。把 \(u=x^2\) 代入 \(\sin u=u-u^3/6+o(u^3)\)：</p>
+    \[ \sin(x^2)=x^2-\frac{x^6}{6}+o(x^6). \]
+    <p>于是 \(\sin(x^2)-x^2=-x^6/6+o(x^6)\)，这是 \(x^6\) 阶的无穷小。除以 \(x^4\) 得 \(-x^2/6\to0\)。关键在于 \(\sin u\) 的三阶项是 \(-u^3/6\)，在 \(u=x^2\) 下变成 \(-x^6/6\)，比分母 \(x^4\) 更高阶，故极限为 0。</p>
+      <p>补充：\(\sin(x^2)\) 的三阶项是 \(-(x^2)^3/6=-x^6/6\)，比分母 \(x^4\) 高两阶，故比值为 0；这说明复合后无穷小的阶数是内层阶数乘以外层阶数。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误以为 \(\sin(x^2)-x^2\) 与 \(\sin x-x\) 同阶，其实 \(\sin x-x=-x^3/6\)，而 \(\sin(x^2)-x^2=-x^6/6\)，阶数翻倍。② 分母是 \(x^4\) 却硬要找 \(x^4\) 项，其实没有非零 \(x^4\) 项，极限自然为 0。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 1034 同类：\(\sin(x^2)-x^2\)、\(\arctan(x^2)-x^2\) 都是 \(x^6\) 阶，除以 \(x^4\) 得 0。考查「复合后阶数翻倍」。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin(x^2)-x^2}{x^6}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{6}\)。这时分母与分子主部 \(x^6\) 同阶，系数 \(-1/6\) 才暴露。</p>
+  </div>
+</article>
+
+<article class="q" id="q1030">
+  <div class="q-head">
+    <span class="qno">第 1030 题</span>
+    <span class="qtype">对数差型（倒代换）</span>
+    <span class="qsrc">P795</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\dfrac{\ln(x^{2}+1)-2\ln x}{\dfrac{1}{x}}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时分子 \(\ln(x^2+1)-2\ln x=\ln\dfrac{x^2+1}{x^2}=\ln(1+1/x^2)\to0\)，分母 \(1/x\to0\)，属 \(0/0\)。先用对数性质合并分子：</p>
+    \[ \ln(x^2+1)-2\ln x=\ln(x^2+1)-\ln x^2=\ln\left(1+\frac{1}{x^2}\right). \]
+    <p>当 \(x\to\infty\) 时 \(1/x^2\to0\)，由 \(\ln(1+u)\sim u\)，得 \(\ln(1+1/x^2)\sim1/x^2\)。于是：</p>
+    \[ \frac{\ln(1+1/x^2)}{1/x}\sim\frac{1/x^2}{1/x}=\frac1x\to0. \]
+    <p>关键是分子主部是 \(1/x^2\)，分母是 \(1/x\)，分子比分母还低一阶，故极限为 0。</p>
+      <p>补充：合并对数后分子是 \(\ln(1+1/x^2)\sim1/x^2\)，比分母 \(1/x\) 低一阶，因此比值 \(1/x	o0\)；阶数比较是这类题的核心。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 忘记合并对数，误以为 \(\ln(x^2+1)\) 与 \(2\ln x\) 都是 \(2\ln x\) 量级而相消；相消后剩下的是 \(\ln(1+1/x^2)\sim1/x^2\)，是个小量。② 把 \(1/x^2\) 错写成 \(1/x\)，会得 1。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「\(\ln(x^k+1)-k\ln x\)」型主部是 \(1/x^k\)，除以 \(1/x\) 后为 \(1/x^{k-1}\)。本批 1046 是 \(k=3\)，同样为 0。</p>
+      <p>合并对数是这类题的第一步，不合并就看不清主部阶数。合并之后分子变成一个很小的对数量，再与分母比较阶数，谁高谁低一目了然。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}x\bigl[\ln(x^2+1)-2\ln x\bigr]\)。</p>
+    <p class="var-ans">答案：\(0\)。即本题把 \(1/x\) 写成乘 \(x\)，\(x\cdot(1/x^2)=1/x\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1031">
+  <div class="q-head">
+    <span class="qno">第 1031 题</span>
+    <span class="qtype">泰勒展开（cosh x 与 cos x 作差）</span>
+    <span class="qsrc">P795</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\cosh x-\cos x}{x^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时 \(\cosh x-\cos x\to0\)、分母 \(x^2\to0\)，属 \(0/0\)。双曲余弦 \(\cosh x=\dfrac{e^x+e^{-x}}{2}\)，其泰勒展开与 \(\cos x\) 只有偶次项且符号交替：</p>
+    \[ \cosh x=1+\frac{x^2}{2}+\frac{x^4}{24}+\cdots,\qquad \cos x=1-\frac{x^2}{2}+\frac{x^4}{24}+\cdots. \]
+    <p>作差：</p>
+    \[ \cosh x-\cos x=\frac{x^2}{2}-\left(-\frac{x^2}{2}\right)+o(x^2)=x^2+o(x^2). \]
+    <p>除以 \(x^2\) 得 \(1\)。关键是 \(x^4\) 项两者都是 \(1/24\)、相消，\(x^2\) 项符号相反、相加为 \(x^2\)。</p>
+      <p>补充：双曲余弦与余弦的展开只有偶次项，且符号恰好相反，作差后 \(x^2\) 项相加、\(x^4\) 项相消，这是双曲函数与三角函数的镜像关系。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 记混 \(\cosh x\) 展开：\(\cosh x=1+x^2/2+x^4/24+\cdots\)，全是正号，而 \(\cos x=1-x^2/2+x^4/24-\cdots\) 交错。② 以为 \(x^4\) 项会贡献，其实两者 \(x^4\) 系数相同，相消了。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>双曲函数在考研中不常见，但 \(\cosh x-\cos x\)、\(\sinh x-\sin x\) 是「展开到二阶」的好素材，核心是记住 \(\cosh\) 与 \(\cos\) 的偶次项符号相反。</p>
+      <p>双曲函数在考研中出现频率不高，但它的展开形式与三角函数对称，记住偶次项符号相反这一点，遇到作差题就能快速判断哪一项相加、哪一项相消。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sinh x-\sin x}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{3}\)。\(\sinh x=x+x^3/6+\cdots\)，\(\sin x=x-x^3/6+\cdots\)，差为 \(x^3/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1032">
+  <div class="q-head">
+    <span class="qno">第 1032 题</span>
+    <span class="qtype">根式差有理化（x→∞）</span>
+    <span class="qsrc">P795</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\dfrac{\sqrt{x^{2}+1}-x}{\dfrac{1}{x}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时 \(\sqrt{x^2+1}-x\) 是 \(\infty-\infty\) 型，先有理化：</p>
+    \[ \sqrt{x^2+1}-x=\frac{(x^2+1)-x^2}{\sqrt{x^2+1}+x}=\frac{1}{\sqrt{x^2+1}+x}. \]
+    <p>当 \(x\to\infty\) 时 \(\sqrt{x^2+1}+x\sim2x\)，故分子 \(\sim1/(2x)\)。除以 \(1/x\)：</p>
+    \[ \frac{1/(2x)}{1/x}=\frac12. \]
+    <p>也可提主部：\(\sqrt{x^2+1}=x\sqrt{1+1/x^2}=x(1+1/(2x^2)+\cdots)=x+1/(2x)+\cdots\)，减 \(x\) 得 \(1/(2x)\)，除以 \(1/x\) 得 \(1/2\)。</p>
+      <p>补充：本题先有理化得到 \(1/(\sqrt{x^2+1}+x)\sim1/(2x)\)，再除以 \(1/x\) 放大回 \(1/2\)，两步缺一不可，体现了根式展开的常数项与一次修正项。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 有理化后分子是 \(1\)，分母 \(\sqrt{x^2+1}+x\sim2x\)，别把分母算成 \(x\)。② 忘记再除以 \(1/x\)，直接答 \(0\)；本题分母是 \(1/x\)，要把 \(1/(2x)\) 放大 \(x\) 倍。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>这是 1015 的进阶：1015 求 \(\sqrt{x^2+x}-x\) 的常数主部 \(1/2\)，本题求 \(\sqrt{x^2+1}-x\) 的 \(1/x\) 主部。两者分别考根式展开的常数项与一次修正项。</p>
+      <p>本题分两步走：先有理化求出主部，再除以指定的分母还原成常数。两步缺一不可，漏掉任何一步都会得到零或无穷。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}x\bigl(\sqrt{x^2+1}-x\bigr)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{2}\)。即本题把 \(1/x\) 写成乘 \(x\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1033">
+  <div class="q-head">
+    <span class="qno">第 1033 题</span>
+    <span class="qtype">黎曼和（含被积函数）</span>
+    <span class="qsrc">P795</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\displaystyle\sum_{k=1}^{n}\dfrac{k}{n}\cdot\dfrac{1}{1+\left(\dfrac{k}{n}\right)^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\ln 2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：把 \(k/n\) 看成 \(x\)，\(1/n\) 看成 \(\Delta x\)，这是 \([0,1]\) 上 \(f(x)=\dfrac{x}{1+x^2}\) 的右端点黎曼和：</p>
+    \[ \frac{1}{n}\sum_{k=1}^n\frac{k/n}{1+(k/n)^2}\longrightarrow\int_0^1\frac{x}{1+x^2}\,dx. \]
+    <p>计算积分：令 \(u=1+x^2\)，\(du=2x\,dx\)，则 \(\displaystyle\int\frac{x}{1+x^2}dx=\frac12\ln(1+x^2)+C\)。故：</p>
+    \[ \int_0^1\frac{x}{1+x^2}dx=\frac12\ln(1+x^2)\Big|_0^1=\frac12\ln2. \]
+      <p>补充：识别被积函数 \(f(x)=x/(1+x^2)\) 后，凑微分 \(u=1+x^2\) 给出 \(\frac12\ln(1+x^2)\)，系数 \(1/2\) 容易遗漏，需在代入上下限时核对。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 认不出被积函数 \(f(x)=x/(1+x^2)\)。② 积分时凑微分：\(\int x/(1+x^2)dx=\frac12\ln(1+x^2)\)，漏系数 \(1/2\) 会得 \(\ln2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>黎曼和与定积分结合的中等难度题，要求既识别 \(\frac1n\sum f(k/n)\)，又会算对应积分。本批 1044 是更难的 \(\int dx/\sqrt{1+x^2}\)。</p>
+      <p>识别出被积函数之后，凑微分是计算关键，凑好微分系数就自然出来了，最后代入上下限定值。系数不要凭感觉写，要在凑微分时核对。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum_{k=1}^n\dfrac{1}{1+(k/n)^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{4}\)。对应 \(\int_0^1 dx/(1+x^2)=\arctan x|_0^1=\pi/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1034">
+  <div class="q-head">
+    <span class="qno">第 1034 题</span>
+    <span class="qtype">泰勒展开（arctan(x²)）</span>
+    <span class="qsrc">P795</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\arctan(x^{2})-x^{2}}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\arctan(x^2)-x^2\to0\)、分母 \(x^4\to0\)，属 \(0/0\)。把 \(u=x^2\) 代入 \(\arctan u=u-u^3/3+o(u^3)\)：</p>
+    \[ \arctan(x^2)=x^2-\frac{x^6}{3}+o(x^6). \]
+    <p>于是 \(\arctan(x^2)-x^2=-x^6/3+o(x^6)\)，这是 \(x^6\) 阶无穷小。除以 \(x^4\) 得 \(-x^2/3\to0\)。与 1029 同理：\(\arctan u\) 的三阶项 \(-u^3/3\) 在 \(u=x^2\) 下变成 \(-x^6/3\)，比分母 \(x^4\) 高阶。</p>
+      <p>补充：\(\arctan(x^2)\) 的三阶项 \(-(x^2)^3/3=-x^6/3\) 比分母 \(x^4\) 高阶，故极限为 0；与 1029 同理，复合使阶数翻倍。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误以为 \(\arctan(x^2)-x^2\) 是 \(x^4\) 阶；其实 \(\arctan u\) 的下一项是 \(u^3\)，即 \(x^6\)。② 硬要在 \(x^4\) 项找系数，发现为 0，应坦然接受极限为 0。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>与 1029 配对：\(\sin(x^2)-x^2\)、\(\arctan(x^2)-x^2\) 都是 \(x^6\) 阶，考查「复合后三阶项变六阶」。</p>
+      <p>复合函数展开时，外层的三阶项套到内层的二次量上，阶数会翻倍，这是本题看似应该有四次项、实际却是六次项的原因。认清复合带来的阶数翻倍，就不会硬在四次项里找答案。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arctan(x^2)-x^2}{x^6}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{3}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1035">
+  <div class="q-head">
+    <span class="qno">第 1035 题</span>
+    <span class="qtype">有理式之比（含振荡项）</span>
+    <span class="qsrc">P795</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\dfrac{x+\sin x}{x+\cos x}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时分子分母都趋于无穷，\(\sin x\)、\(\cos x\) 有界振荡。分子分母同除以 \(x\)：</p>
+    \[ \frac{x+\sin x}{x+\cos x}=\frac{1+\dfrac{\sin x}{x}}{1+\dfrac{\cos x}{x}}. \]
+    <p>由于 \(\sin x\)、\(\cos x\) 有界（\(|\sin x|\le1\)），\(\dfrac{\sin x}{x}\to0\)、\(\dfrac{\cos x}{x}\to0\)，故分式 \(\to\dfrac{1+0}{1+0}=1\)。关键是振荡项被 \(x\) 除后化为无穷小。</p>
+      <p>补充：振荡项 \(\sin x,\cos x\) 本身不收敛，但有界，除以趋于无穷的 \(x\) 后化为无穷小，因此主部 \(x/x=1\) 不受干扰。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 看到 \(\sin x\)、\(\cos x\) 振荡就以为极限不存在；它们是有界量，除以 \(x\) 后趋于 0。② 与 1008 对照：本题分子分母最高次都是 \(x\)，系数比为 1。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「\(x\to\infty\) 时分子分母同次、含 \(\sin x\)、\(\cos x\)」型，核心是抓主部 \(x\)，振荡项只作干扰。</p>
+      <p>有界量乘以无穷小仍是无穷小，这是判断振荡项能否忽略的依据。分子分母同次时，振荡项被同除以最高次幂后化为无穷小，主部由最高次系数决定。</p>
+      <p>有界振荡项不可怕，可怕的是忘了它被同除以最高次幂；认清这一点，本题就只剩主部系数之比。</p>
+      <p>这类题的训练价值在于养成习惯：见到有界振荡项先问它是否被足够大的分母除掉，除掉之后就是无穷小，不会干扰主部。切勿一看到振荡就否定极限存在，那是把局部振荡与整体趋势混为一谈。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\dfrac{x+\sin x}{2x+\cos x}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{2}\)。最高次系数比 \(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1036">
+  <div class="q-head">
+    <span class="qno">第 1036 题</span>
+    <span class="qtype">泰勒展开（e^{x²}）</span>
+    <span class="qsrc">P796</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{e^{x^{2}}-1-x^{2}}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(e^{x^2}-1-x^2\to0\)、分母 \(x^4\to0\)，属 \(0/0\)。把 \(u=x^2\) 代入 \(e^u=1+u+u^2/2+o(u^2)\)：</p>
+    \[ e^{x^2}=1+x^2+\frac{x^4}{2}+o(x^4). \]
+    <p>于是 \(e^{x^2}-1-x^2=x^4/2+o(x^4)\)，除以 \(x^4\) 得 \(1/2\)。关键是 \(e^u\) 的二阶项 \(u^2/2\) 在 \(u=x^2\) 下变成 \(x^4/2\)，正好与分母同阶。</p>
+      <p>补充：\(u=x^2\) 代入 \(e^u\)，二阶项 \(u^2/2=x^4/2\)，正好与分母 \(x^4\) 同阶；这是 \(e^{x^k}\) 复合题的标准结果。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 用 \(e^{x^2}-1\sim x^2\) 直接替换得 \((x^2-x^2)/x^4=0\)，忽略 \(e^u\) 的 \(u^2/2\) 项。② 与 1001 对照：1001 是 \(e^x-1-x-x^2/2\) 除以 \(x^3\)，本题是 \(e^{x^2}\) 的复合，阶数翻倍。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「\(e^{x^k}-1-x^k\)」型答案恒为 \(1/2\)（除以 \(x^{2k}\)），与 1027 的 \(\ln(1+x^2)\) 正负号相反。</p>
+      <p>把复合变量代入标准展开式时，要注意阶数随之翻倍，外层的二次项套到内层二次量上就变成四次项。认清这一点就知道本题的答案来源是哪一项。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{x^2}-1-x^2}{x^2}\)。</p>
+    <p class="var-ans">答案：\(0\)。分子主部 \(x^4/2\)，除以 \(x^2\) 趋于 0。</p>
+  </div>
+</article>
+
+<article class="q" id="q1037">
+  <div class="q-head">
+    <span class="qno">第 1037 题</span>
+    <span class="qtype">对数差型（x→∞）</span>
+    <span class="qsrc">P796</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\bigl[\ln(1+e^{x})-x\bigr]\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时 \(e^x\to\infty\)，\(\ln(1+e^x)\to\infty\)，与 \(x\) 作差是 \(\infty-\infty\) 型。用对数性质把 \(x\) 写成 \(\ln e^x\)：</p>
+    \[ \ln(1+e^x)-x=\ln(1+e^x)-\ln e^x=\ln\frac{1+e^x}{e^x}=\ln(1+e^{-x}). \]
+    <p>当 \(x\to\infty\) 时 \(e^{-x}\to0\)，由 \(\ln(1+u)\sim u\)，得 \(\ln(1+e^{-x})\sim e^{-x}\to0\)。故极限为 0。关键是把 \(1+e^x\) 提出 \(e^x\)，剩下 \(1+e^{-x}\)。</p>
+      <p>补充：把 \(x\) 写成 \(\ln e^x\) 后，\(\ln(1+e^x)-\ln e^x=\ln(1+e^{-x})\)，当 \(x	o\infty\) 时 \(e^{-x}	o0\)，由 \(\ln(1+u)\sim u\) 得 \(e^{-x}	o0\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误以为 \(\ln(1+e^x)\sim\ln e^x=x\) 就相消为 0，但要说明余项是 \(\ln(1+e^{-x})\to0\)。② 直接把 \(x\) 提进对数，忘记 \(\ln(1+e^x)-x=\ln((1+e^x)/e^x)\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「\(\ln(1+e^x)-x\)」型是 \(x\to\infty\) 时对数与线性项作差的经典题，核心是提出 \(e^x\) 化为 \(\ln(1+e^{-x})\)。</p>
+      <p>把线性项写成对数形式再合并，是处理对数差的常用手法，合并后剩下的是一个在无穷远处趋于零的小量，问题随之简化。</p>
+      <p>小量合并之后，问题迎刃而解。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\bigl[\ln(1+e^x)-2x\bigr]\)。</p>
+    <p class="var-ans">答案：\(-\infty\)。\(\ln(1+e^x)=x+\ln(1+e^{-x})\)，减 \(2x\) 得 \(-x+o(1)\to-\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1038">
+  <div class="q-head">
+    <span class="qno">第 1038 题</span>
+    <span class="qtype">泰勒展开（sin 2x 与 2 sin x）</span>
+    <span class="qsrc">P796</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sin(2x)-2\sin x}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\sin(2x)-2\sin x\to0\)、分母 \(x^3\to0\)，属 \(0/0\)。把两项展开到 \(x^3\)：</p>
+    \[ \sin(2x)=2x-\frac{(2x)^3}{6}+o(x^3)=2x-\frac{8x^3}{6}+o(x^3)=2x-\frac{4x^3}{3}+o(x^3), \]
+    \[ 2\sin x=2\left(x-\frac{x^3}{6}+o(x^3)\right)=2x-\frac{x^3}{3}+o(x^3). \]
+    <p>作差：</p>
+    \[ \sin(2x)-2\sin x=\left(-\frac{4x^3}{3}\right)-\left(-\frac{x^3}{3}\right)+o(x^3)=-x^3+o(x^3). \]
+    <p>除以 \(x^3\) 得 \(-1\)。也可用和差化积：\(\sin2x-2\sin x=2\sin x(\cos x-1)\sim2x\cdot(-x^2/2)=-x^3\)。</p>
+      <p>补充：和差化积 \(\sin2x-2\sin x=2\sin x(\cos x-1)\) 比直接展开更快，\(\cos x-1\sim-x^2/2\) 乘 \(2\sin x\sim2x\) 得 \(-x^3\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 展开 \(\sin(2x)\) 时把 \(2x\) 代入，\((2x)^3=8x^3\)，不要漏乘 8。② 和差化积后 \(\cos x-1\sim-x^2/2\)，乘 \(2\sin x\sim2x\) 得 \(-x^3\)，符号为负。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「倍角公式与展开」的综合题，可用和差化积快速得到 \(\sin2x-2\sin x=2\sin x(\cos x-1)\)，本质是 \(1-\cos x\) 型三阶无穷小。</p>
+      <p>和差化积比直接展开更快，它把倍角差化为正弦与余弦的乘积，再用已知的等价无穷小替换，两步就能出结果。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{2\sin x-\sin(2x)}{x^3}\)。</p>
+    <p class="var-ans">答案：\(1\)。即本题反号。</p>
+  </div>
+</article>
+
+<article class="q" id="q1039">
+  <div class="q-head">
+    <span class="qno">第 1039 题</span>
+    <span class="qtype">收敛积分除以 x（x→∞）</span>
+    <span class="qsrc">P796</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\dfrac{\displaystyle\int_{0}^{x}e^{-t^{2}}\,dt}{x}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时分子 \(\int_0^x e^{-t^2}dt\) 收敛到 \(\sqrt\pi/2\)（高斯积分），是有界量；分母 \(x\to\infty\)。有界量除以无穷大量，极限为 0。也可由洛必达：</p>
+    \[ \lim_{x\to\infty}\frac{\int_0^x e^{-t^2}dt}{x}=\lim_{x\to\infty}\frac{e^{-x^2}}{1}=0. \]
+    <p>因为 \(e^{-x^2}\to0\)。关键是积分收敛（有界），而分母线性增长，故比值趋于 0。</p>
+      <p>补充：高斯积分 \(\int_0^\infty e^{-t^2}dt=\sqrt\pi/2\) 收敛，分子有界，分母 \(x	o\infty\)，故比值为 0；洛必达后分子导数 \(e^{-x^2}	o0\) 同样得 0。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 洛必达后分子导数 \(e^{-x^2}\to0\)，分母导数 1，得 0；不要误以为积分发散。② 与 1013 对照：1013 的积分是对数发散，本题积分收敛，两者除以 \(x\) 都是 0，但理由不同。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「收敛积分除以 \(x\)」型，考查 \(\int_0^\infty e^{-t^2}dt\) 收敛性。考研中高斯积分常与概率、中值定理结合。</p>
+      <p>收敛积分在无穷远处有界，有界量除以无穷大量自然趋于零。这类题判断积分是否收敛是第一步，收敛则比值为零，发散则需另算主部。</p>
+      <p>判断收敛性是这类题的第一动作，收敛即可放心除分母。</p>
+      <p>收敛积分在无穷远处的极限是一个确定常数，把它当成有界量即可；再除以线性增长的分母，必然趋于零。洛必达则给出另一条验证路径，两条路殊途同归。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\dfrac{\int_0^x e^{-t^2}dt}{e^x}\)。</p>
+    <p class="var-ans">答案：\(0\)。分子有界，分母 \(e^x\to\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1040">
+  <div class="q-head">
+    <span class="qno">第 1040 题</span>
+    <span class="qtype">复合泰勒（ln(1+sin x)）</span>
+    <span class="qsrc">P796</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(1+\sin x)-x}{x^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>本题与 1014 完全相同。识别类型：\(x\to0\) 时分子 \(\ln(1+\sin x)-x\to0\)、分母 \(x^2\to0\)。用 \(\ln(1+u)=u-u^2/2+o(u^2)\)，其中 \(u=\sin x=x+o(x)\)：</p>
+    \[ \ln(1+\sin x)=\sin x-\frac{\sin^2 x}{2}+o(x^2)=x-\frac{x^2}{2}+o(x^2). \]
+    <p>故 \(\ln(1+\sin x)-x=-x^2/2+o(x^2)\)，除以 \(x^2\) 得 \(-1/2\)。一次项 \(\sin x\sim x\) 与减去的 \(x\) 抵消，二次项来自 \(-\sin^2 x/2\)。</p>
+      <p>补充：本题与 1014 完全相同，一次项 \(\sin x\sim x\) 与减去的 \(x\) 抵消，二次项来自 \(-\sin^2x/2\)，复合展开的阶数必须与分母匹配。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 用 \(\ln(1+\sin x)\sim\sin x\sim x\) 得 0，忽略 \(-u^2/2\) 项。② 展开 \(\sin x\) 时把 \(x^3/6\) 也算进 \(x^2\) 阶，它是高阶。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题重复出现（1014），说明 \(\ln(1+\sin x)\) 是必练模型。核心是复合展开时内层只取到与分母匹配的阶。</p>
+      <p>复合展开时内层只取到与分母匹配的阶数即可，多取的高阶项不影响结果却徒增计算。一次项用来与被减的线性量抵消，二次项才是答案来源。</p>
+      <p>复合展开讲究阶数匹配，不多不少。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+\sin x)-\sin x}{x^2}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{2}\)。即 \(\ln(1+u)-u=-u^2/2\)，\(u=\sin x\sim x\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1041">
+  <div class="q-head">
+    <span class="qno">第 1041 题</span>
+    <span class="qtype">泰勒展开（tan x 五阶项）</span>
+    <span class="qsrc">P796</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan x-x-\dfrac{x^{3}}{3}}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{2}{15}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\tan x-x-x^3/3\to0\)、分母 \(x^5\to0\)。题面已减去 \(\tan x\) 的一次项 \(x\) 和三阶项 \(x^3/3\)，剩下的必为五阶项。由 \(\tan x\) 的展开：</p>
+    \[ \tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+o(x^5). \]
+    <p>代入：\(\tan x-x-x^3/3=2x^5/15+o(x^5)\)，除以 \(x^5\) 得 \(2/15\)。关键是 \(\tan x\) 的五阶系数为 \(2/15\)，这是必背展开的下一项。</p>
+      <p>补充：\(	an x=x+x^3/3+2x^5/15+\cdots\)，题面减去 \(x\) 与 \(x^3/3\) 后暴露五阶项 \(2/15\)，这是必背展开的下一阶。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不知道 \(\tan x\) 的五阶系数 \(2/15\)，只背到 \(x^3/3\) 就无法继续。② 与 1003 对照：1003 求 \((\tan x-x)/x^3=1/3\)，本题再减掉 \(x^3/3\) 后求五阶。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 1003 的进阶，要求背 \(\tan x=x+x^3/3+2x^5/15+\cdots\)。同类进阶有 1045（\(\sin x\) 五阶）、1049（\(\arcsin x\) 五阶）。</p>
+      <p>熟记常用函数的五阶展开系数，是快速求解高阶截断题的前提。题面已经抵消到三阶，剩下的就是五阶项，直接读出系数即可。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-x-\dfrac{x^3}{3}-\dfrac{2x^5}{15}}{x^7}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{17}{315}\)。\(\tan x\) 的七阶系数为 \(17/315\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1042">
+  <div class="q-head">
+    <span class="qno">第 1042 题</span>
+    <span class="qtype">指数主导多项式（x→∞）</span>
+    <span class="qsrc">P797</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\dfrac{x^{4}}{e^{x}}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时 \(x^4\to\infty\)、\(e^x\to\infty\)，属 \(\infty/\infty\)。对任意正整数 \(n\)，\(x^n/e^x\to0\)。洛必达连做四次：</p>
+    \[ \frac{x^4}{e^x}\to\frac{4x^3}{e^x}\to\frac{12x^2}{e^x}\to\frac{24x}{e^x}\to\frac{24}{e^x}\to0. \]
+    <p>每做一次洛必达，分子降一阶，四次后分子变成常数 24，分母仍趋于无穷，故为 0。</p>
+      <p>补充：洛必达四次把 \(x^4\) 降为 24，分母 \(e^x\) 不变仍趋于无穷，故为 0；无论幂次多高，指数都占优。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 洛必达次数不够：四次才能把 \(x^4\) 降为常数。② 误以为分子分母同趋于无穷就是 1，指数碾压多项式。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>与 1019 同类（\(x^3/e^x\)），只是幂次提高。结论不变：\(e^x\) 比任何 \(x^n\) 都快。</p>
+      <p>洛必达的次数要足够把分子幂次降为常数，否则仍会是无穷比无穷。指数函数经多次洛必达后不变，最终必然胜出。</p>
+      <p>指数对任意次幂都占优，这一结论可反复使用，不必每次重算。</p>
+      <p>多项式与指数竞速是考研选择题的常客，记住指数永远胜出，就能在几秒内判断答案。若非要手算，就反复洛必达直到分子降为常数，此时分母仍在无穷增长，结果必然为零。</p>
+      <p>这一结论可推广到任意正整数幂次，无需逐题展开。</p>
+      <p>总之，指数对多项式的全面碾压是考研极限判断的基本常识。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\dfrac{x^{100}}{e^x}\)。</p>
+    <p class="var-ans">答案：\(0\)。无论幂次多高，指数都胜出。</p>
+  </div>
+</article>
+
+<article class="q" id="q1043">
+  <div class="q-head">
+    <span class="qno">第 1043 题</span>
+    <span class="qtype">泰勒展开（√(1+x²)）</span>
+    <span class="qsrc">P797</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+x^{2}}-1-\dfrac{x^{2}}{2}}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{8}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\sqrt{1+x^2}-1-x^2/2\to0\)、分母 \(x^4\to0\)，属 \(0/0\)。把 \(u=x^2\) 代入 \((1+u)^{1/2}=1+u/2-u^2/8+o(u^2)\)：</p>
+    \[ \sqrt{1+x^2}=1+\frac{x^2}{2}-\frac{x^4}{8}+o(x^4). \]
+    <p>于是 \(\sqrt{1+x^2}-1-x^2/2=-x^4/8+o(x^4)\)，除以 \(x^4\) 得 \(-1/8\)。关键是二项式 \((1+u)^{1/2}\) 的二阶项 \(-u^2/8\) 在 \(u=x^2\) 下变成 \(-x^4/8\)。</p>
+      <p>补充：\(u=x^2\) 代入二项式 \((1+u)^{1/2}=1+u/2-u^2/8+\cdots\)，二次项 \(-u^2/8=-x^4/8\)，与分母 \(x^4\) 同阶，符号为负。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 二项式系数 \((1+u)^{1/2}=1+u/2-u^2/8+u^3/16\cdots\)，二阶项是负的 \(-u^2/8\)。② 与 1004 对照：1004 是 \(\sqrt{1+x}\) 除以 \(x^3\)，本题是 \(\sqrt{1+x^2}\) 除以 \(x^4\)，阶数翻倍。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「\(\sqrt{1+x^k}-1-x^k/2\)」型答案恒为 \(-1/8\)（除以 \(x^{2k}\)），是二项式展开的标准应用。</p>
+      <p>复合变量代入二项式展开后，二次项自动变成四次项，认清这一点就知道答案来自哪一阶。二项式的系数符号要逐项记牢。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+x^2}-1-x^2/2}{x^2}\)。</p>
+    <p class="var-ans">答案：\(0\)。分子主部 \(x^4\)，除以 \(x^2\) 趋于 0。</p>
+  </div>
+</article>
+
+<article class="q" id="q1044">
+  <div class="q-head">
+    <span class="qno">第 1044 题</span>
+    <span class="qtype">黎曼和（含根式）</span>
+    <span class="qsrc">P797</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\displaystyle\sum_{k=1}^{n}\dfrac{1}{\sqrt{1+\left(\dfrac{k}{n}\right)^{2}}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln(1+\sqrt{2})\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\frac1n\sum f(k/n)\) 是 \([0,1]\) 上 \(f(x)=\dfrac{1}{\sqrt{1+x^2}}\) 的右端点黎曼和：</p>
+    \[ \frac{1}{n}\sum_{k=1}^n\frac{1}{\sqrt{1+(k/n)^2}}\longrightarrow\int_0^1\frac{dx}{\sqrt{1+x^2}}. \]
+    <p>计算积分：由 \(\displaystyle\int\frac{dx}{\sqrt{1+x^2}}=\ln(x+\sqrt{1+x^2})+C\)，得：</p>
+    \[ \int_0^1\frac{dx}{\sqrt{1+x^2}}=\ln(1+\sqrt2)-\ln1=\ln(1+\sqrt2). \]
+      <p>补充：积分公式 \(\int dx/\sqrt{1+x^2}=\ln(x+\sqrt{1+x^2})\) 是反双曲正弦，代入 \(x=1\) 得 \(\ln(1+\sqrt2)\)，下限为 0。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 积分公式记错：\(\int dx/\sqrt{1+x^2}=\ln(x+\sqrt{1+x^2})\)，不是 \(\arcsin\) 或 \(\arctan\)。② 代入上下限：\(x=1\) 时 \(\ln(1+\sqrt2)\)，\(x=0\) 时 \(\ln1=0\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>黎曼和与反双曲函数积分结合，要求记住 \(\int dx/\sqrt{1+x^2}\) 的公式。本批 1033 是 \(\int x/(1+x^2)dx\)，难度递增。</p>
+      <p>黎曼和识别之后，积分公式的记忆是关键，反双曲正弦的积分结果容易与反正切、反正弦混淆，代入上下限时要逐项核对。</p>
+      <p>积分公式记准，代入上下限细心，答案自然水到渠成。</p>
+      <p>黎曼和还原为定积分后，被积函数虽带根号，但它对应标准的反双曲正弦积分，代入端点即可。公式记忆要与反正切、反正弦区分开，避免张冠李戴。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum_{k=1}^n\dfrac{1}{\sqrt{1+(k/n)^2}}\) 在区间 \([0,2]\) 上的推广。</p>
+    <p class="var-ans">答案：\(\ln(2+\sqrt5)\)。对应 \(\int_0^2 dx/\sqrt{1+x^2}=\ln(2+\sqrt5)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1045">
+  <div class="q-head">
+    <span class="qno">第 1045 题</span>
+    <span class="qtype">泰勒展开（sin x 五阶项）</span>
+    <span class="qsrc">P797</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sin x-x+\dfrac{x^{3}}{6}}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{120}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\sin x-x+x^3/6\to0\)、分母 \(x^5\to0\)。题面已减去 \(\sin x\) 的一次项 \(x\)、加上 \(x^3/6\)（即抵消三阶项），剩下五阶项。由 \(\sin x\) 的展开：</p>
+    \[ \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}+o(x^5). \]
+    <p>代入：\(\sin x-x+x^3/6=x^5/120+o(x^5)\)，除以 \(x^5\) 得 \(1/120\)。关键是 \(\sin x\) 的五阶系数为 \(1/120\)。</p>
+      <p>补充：\(\sin x=x-x^3/6+x^5/120+\cdots\)，题面 \(+x^3/6\) 抵消三阶项，暴露五阶项 \(1/120\)，系数来自 \(1/5!\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不知道 \(\sin x\) 的五阶系数 \(1/120\)。② 符号：\(\sin x=x-x^3/6+x^5/120\)，题面 \(+x^3/6\) 正好抵消 \(-x^3/6\)，剩下 \(+x^5/120\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 \(x-\sin x=x^3/6\) 的进阶，要求背 \(\sin x\) 到五阶。与 1041（tan 五阶）、1049（arcsin 五阶）构成高阶展开组。</p>
+      <p>正弦函数的交错展开系数要记牢，题面抵消到三阶后，五阶项的系数直接就是答案。系数来自阶乘的倒数，符号为正。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x+\dfrac{x^3}{6}-\dfrac{x^5}{120}}{x^7}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{5040}\)。\(\sin x\) 的七阶系数为 \(-1/5040\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1046">
+  <div class="q-head">
+    <span class="qno">第 1046 题</span>
+    <span class="qtype">对数差型（倒代换）</span>
+    <span class="qsrc">P797</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\dfrac{\ln(x^{3}+1)-3\ln x}{\dfrac{1}{x}}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时分子 \(\ln(x^3+1)-3\ln x=\ln\dfrac{x^3+1}{x^3}=\ln(1+1/x^3)\to0\)，分母 \(1/x\to0\)。由 \(\ln(1+u)\sim u\)：</p>
+    \[ \ln(1+1/x^3)\sim\frac{1}{x^3}. \]
+    <p>于是：</p>
+    \[ \frac{\ln(1+1/x^3)}{1/x}\sim\frac{1/x^3}{1/x}=\frac{1}{x^2}\to0. \]
+    <p>关键是分子主部是 \(1/x^3\)，分母是 \(1/x\)，分子比分母低两阶，故极限为 0。</p>
+      <p>补充：合并对数后分子 \(\ln(1+1/x^3)\sim1/x^3\)，比分母 \(1/x\) 低两阶，比值 \(1/x^2	o0\)；与 1030 同结构。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 忘记合并对数，直接以为 \(3\ln x\) 与 \(\ln(x^3+1)\) 相消。② 把 \(1/x^3\) 错写成 \(1/x\)，会得 1。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>与 1030 同类（\(k=2\)），本题 \(k=3\)。\(\ln(x^k+1)-k\ln x\sim1/x^k\)，除以 \(1/x\) 为 \(1/x^{k-1}\to0\)。</p>
+      <p>合并对数后看清主部阶数，分子比分母低几阶，比值就是几次方的无穷小。本题低两阶，故趋于零。</p>
+      <p>阶数比较决定一切，分子低几阶，比值就是几次无穷小。</p>
+      <p>本题与一百零三零题同构，只是把二次换成三次，主部阶数随之更低。合并对数后先看清真数是几次方，再与分母比较，比值的阶数便一目了然。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}x^2\bigl[\ln(x^3+1)-3\ln x\bigr]\)。</p>
+    <p class="var-ans">答案：\(0\)。\(x^2\cdot(1/x^3)=1/x\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1047">
+  <div class="q-head">
+    <span class="qno">第 1047 题</span>
+    <span class="qtype">泰勒展开（e^x 四阶项）</span>
+    <span class="qsrc">P797</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{e^{x}-1-x-\dfrac{x^{2}}{2}-\dfrac{x^{3}}{6}}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{24}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(e^x-1-x-x^2/2-x^3/6\to0\)、分母 \(x^4\to0\)。题面已减去 \(e^x\) 的前四项（常数、一、二、三次），剩下四次项。由 \(e^x\) 的展开：</p>
+    \[ e^x=1+x+\frac{x^2}{2}+\frac{x^3}{6}+\frac{x^4}{24}+o(x^4). \]
+    <p>代入：分子主部 \(x^4/24\)，除以 \(x^4\) 得 \(1/24\)。关键是 \(e^x\) 的四次项系数为 \(1/24=1/4!\)。</p>
+      <p>补充：\(e^x\) 的系数是 \(1/n!\)，四次项 \(1/24\)，题面减去前四项后正好暴露这一项，这是按分母阶数截断的范例。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 与 1001 对照：1001 只减到 \(x^2/2\)，除以 \(x^3\) 得 \(1/6\)；本题再减 \(x^3/6\)，除以 \(x^4\) 得 \(1/24\)。② \(e^x\) 的系数是 \(1/n!\)，四次项 \(1/24\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 \(e^x\) 展开的逐层截断，与 1001、1036 构成一组，训练「按分母阶数截断」。</p>
+      <p>指数函数的系数是阶乘倒数，按分母阶数逐项抵消后，剩下那一项的系数就是答案。这是泰勒截断题的通用套路。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x-1-x-x^2/2-x^3/6-x^4/24}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{120}\)。五次项系数 \(1/5!=1/120\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1048">
+  <div class="q-head">
+    <span class="qno">第 1048 题</span>
+    <span class="qtype">根式展开二阶项（x→∞）</span>
+    <span class="qsrc">P798</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\dfrac{\sqrt{x^{2}+x}-x-\dfrac{1}{2}}{\dfrac{1}{x}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{8}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时把 \(\sqrt{x^2+x}\) 提出 \(x\)：\(\sqrt{x^2+x}=x\sqrt{1+1/x}\)。令 \(t=1/x\to0\)，由二项式展开 \(\sqrt{1+t}=1+t/2-t^2/8+o(t^2)\)：</p>
+    \[ \sqrt{x^2+x}=x\left(1+\frac{1}{2x}-\frac{1}{8x^2}+o(x^{-2})\right)=x+\frac12-\frac{1}{8x}+o(1/x). \]
+    <p>于是 \(\sqrt{x^2+x}-x-1/2=-1/(8x)+o(1/x)\)，除以 \(1/x\) 得 \(-1/8\)。关键是 1015 已求出常数主部 \(1/2\)，本题再减去 \(1/2\) 后求下一阶 \(1/x\) 项。</p>
+      <p>补充：令 \(t=1/x\)，\(\sqrt{1+t}=1+t/2-t^2/8+\cdots\)，乘回 \(x\) 得 \(x+1/2-1/(8x)+\cdots\)，减 \(x\) 与 \(1/2\) 后暴露 \(-1/(8x)\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 二项式 \(\sqrt{1+t}=1+t/2-t^2/8+\cdots\)，\(t^2\) 项为负 \(-t^2/8\)。② 忘记把 \(t=1/x\) 代回并乘 \(x\)，直接用 \(-1/(8x^2)\) 会错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 1015 的二阶版：1015 求常数项 \(1/2\)，本题求 \(1/x\) 项 \(-1/8\)。这类题训练「根式展开到第几阶」。</p>
+      <p>先做变量替换把无穷远处的根式化为标准点的二项式，展开后再乘回原变量，才能看清常数项之后的修正项。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}x\bigl(\sqrt{x^2+x}-x-\dfrac12\bigr)\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{8}\)。即本题把 \(1/x\) 写成乘 \(x\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1049">
+  <div class="q-head">
+    <span class="qno">第 1049 题</span>
+    <span class="qtype">泰勒展开（arcsin x 五阶项）</span>
+    <span class="qsrc">P798</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\arcsin x-x-\dfrac{x^{3}}{6}}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{3}{40}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\arcsin x-x-x^3/6\to0\)、分母 \(x^5\to0\)。题面已抵消一次项 \(x\) 和三阶项 \(x^3/6\)，剩下五阶项。由 \(\arcsin x\) 的展开（逐项积分 \((1-t^2)^{-1/2}=1+t^2/2+3t^4/8+\cdots\)）：</p>
+    \[ \arcsin x=x+\frac{x^3}{6}+\frac{3x^5}{40}+o(x^5). \]
+    <p>代入：\(\arcsin x-x-x^3/6=3x^5/40+o(x^5)\)，除以 \(x^5\) 得 \(3/40\)。关键是 \(\arcsin x\) 的五阶系数为 \(3/40\)。</p>
+      <p>补充：\(\arcsin x=x+x^3/6+3x^5/40+\cdots\)，题面减去 \(x\) 与 \(x^3/6\) 后暴露五阶项 \(3/40\)，该系数来自逐项积分 \((1-t^2)^{-1/2}\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不知道 \(\arcsin x\) 的五阶系数 \(3/40\)。② 与 1006 对照：1006 求 \((\arcsin x-x)/x^3=1/6\)，本题再减 \(x^3/6\) 求五阶。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 1006 的进阶，与 1041（tan 五阶）、1045（sin 五阶）构成高阶展开组，要求背到五阶系数。</p>
+      <p>反正弦的五阶系数来自逐项积分，熟记它之后，题面抵消到三阶时直接读出五阶项即可。</p>
+      <p>五阶系数熟记即可直接读取。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-x-x^3/6}{x^3}\)。</p>
+    <p class="var-ans">答案：\(0\)。分子主部 \(x^5\)，除以 \(x^3\) 趋于 0。</p>
+  </div>
+</article>
+
+<article class="q" id="q1050">
+  <div class="q-head">
+    <span class="qno">第 1050 题</span>
+    <span class="qtype">泰勒展开（ln(1+x) 四阶项）</span>
+    <span class="qsrc">P798</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+\dfrac{x^{2}}{2}-\dfrac{x^{3}}{3}}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{4}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\ln(1+x)-x+x^2/2-x^3/3\to0\)、分母 \(x^4\to0\)。题面已抵消一次、二次、三次项，剩下四次项。由 \(\ln(1+x)\) 的展开：</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+o(x^4). \]
+    <p>代入：\(\ln(1+x)-x+x^2/2-x^3/3=-x^4/4+o(x^4)\)，除以 \(x^4\) 得 \(-1/4\)。关键是 \(\ln(1+x)\) 的四次项为 \(-x^4/4\)。</p>
+      <p>补充：交错级数 \(x-x^2/2+x^3/3-x^4/4+\cdots\)，题面逐项抵消前三项，暴露四次项 \(-x^4/4\)，符号为负。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 交错项符号：\(\ln(1+x)=x-x^2/2+x^3/3-x^4/4+\cdots\)，四次项为负。② 与 1007 对照：1007 求到 \(x^3\) 得 \(1/3\)，本题求到 \(x^4\) 得 \(-1/4\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 \(\ln(1+x)\) 展开的逐层截断，与 1007、1027、1052 构成一组。核心是记住交错系数 \(x-x^2/2+x^3/3-x^4/4+\cdots\)。</p>
+      <p>对数展开是交错级数，符号要逐项核对，题面抵消前三项后，四次项的负号不要写错。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+x^2/2-x^3/3+x^4/4}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{5}\)。五次项系数 \(1/5\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1051">
+  <div class="q-head">
+    <span class="qno">第 1051 题</span>
+    <span class="qtype">等价无穷小（tan x - sin x）</span>
+    <span class="qsrc">P798</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\tan x-\sin x\to0\)、分母 \(x^3\to0\)，属 \(0/0\)。固定手法是提 \(\sin x\)：</p>
+    \[ \tan x-\sin x=\sin x\left(\frac{1}{\cos x}-1\right)=\frac{\sin x(1-\cos x)}{\cos x}. \]
+    <p>当 \(x\to0\) 时 \(\sin x\sim x\)、\(1-\cos x\sim x^2/2\)、\(\cos x\to1\)，故分子 \(\sim x\cdot x^2/2=x^3/2\)，除以 \(x^3\) 得 \(1/2\)。也可展开：\(\tan x=x+x^3/3+\cdots\)，\(\sin x=x-x^3/6+\cdots\)，差为 \(x^3/2\)。</p>
+      <p>补充：\(	an x-\sin x=\sin x(1/\cos x-1)=\sin x(1-\cos x)/\cos x\sim x\cdot x^2/2=x^3/2\)，这是必背三阶无穷小，系数 \(1/2\) 来自 \(1-\cos x\sim x^2/2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(1-\cos x\) 记错为 \(x^2\)，会得 \(1\)；正确是 \(1-\cos x\sim x^2/2\)。② 与 1023 对照：本题除以 \(x^3\) 得 \(1/2\)，1023 除以 \(x^5\) 则需先减掉主部。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>\(\tan x-\sin x\sim x^3/2\) 是必背三阶无穷小，常与 \(1-\cos x\sim x^2/2\) 联动。本批 1020 用它作分子。</p>
+      <p>正切减正弦是最常用的三阶无穷小之一，提公因子后用正弦与余弦的等价无穷小替换，两步出结果，系数来自余弦减一的二阶项。</p>
+      <p>提公因子、等价替换，两步定型。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x}{1-\cos x}\)。</p>
+    <p class="var-ans">答案：\(0\)。分子 \(x^3/2\)，分母 \(x^2/2\)，比值 \(x\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1052">
+  <div class="q-head">
+    <span class="qno">第 1052 题</span>
+    <span class="qtype">泰勒展开（ln(1+x) 二阶项）</span>
+    <span class="qsrc">P798</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x}{x^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\ln(1+x)-x\to0\)、分母 \(x^2\to0\)，属 \(0/0\)。由 \(\ln(1+x)\) 的展开：</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+o(x^2). \]
+    <p>于是 \(\ln(1+x)-x=-x^2/2+o(x^2)\)，除以 \(x^2\) 得 \(-1/2\)。这是 \(\ln(1+x)-x\) 最基本的二阶结果。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 用 \(\ln(1+x)\sim x\) 直接替换得 0，忽略 \(-x^2/2\) 项。② 符号：\(\ln(1+x)-x\) 是负的，因为 \(\ln(1+x)\) 的二阶项为负。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>这是 \(\ln(1+x)\) 展开的最基础结果，与 1007（三阶）、1050（四阶）构成逐层截断。本批 1014、1040 是它的复合形式。</p>
+      <p>对数减线性量是对数展开最基础的二阶结果，二次项为负，这也是以后所有复合对数题的基准。</p>
+      <p>对数二阶结果是后续所有复合题的基准，务必记牢符号。</p>
+      <p>对数减线性量是整个对数展开家族的根，后面的复合题、高阶截断题都建立在这一结果之上。二次项为负，务必与正切、正弦的三阶系数区分清楚。</p>
+      <p>把这一基准记牢，后续复合题便可触类旁通。</p>
+      <p>这一负号结果在后续复合题中反复出现，务必形成条件反射。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x}{x}\)。</p>
+    <p class="var-ans">答案：\(0\)。分子主部 \(x^2\)，除以 \(x\) 趋于 0。</p>
+  </div>
+</article>
+
+<article class="q" id="q1053">
+  <div class="q-head">
+    <span class="qno">第 1053 题</span>
+    <span class="qtype">0/0（e^x 的泰勒展开）</span>
+    <span class="qsrc">P799</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{e^{x}-1-x}{x^{2}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(e^{x}-1-x\to1-1-0=0\)，分母 \(x^2\to0\)，属 \(0/0\)。分母是 \(x^2\)，因此必须把 \(e^x\) 展开到 \(x^2\) 这一阶：一阶项 \(x\) 恰好被分子中的 \(-x\) 抵消，真正决定极限的是二阶项。若只展开到一阶 \(e^x=1+x+o(x)\)，分子会变成 \(o(x)\)，无法除以 \(x^2\) 得到定值，这就是「展开阶数必须与分母同阶」的原因。</p>
+    \[ e^{x}=1+x+\frac{x^{2}}{2}+o(x^{2}). \]
+    <p>代入分子：</p>
+    \[ e^{x}-1-x=\frac{x^{2}}{2}+o(x^{2}). \]
+    <p>除以 \(x^2\)：</p>
+    \[ \frac{e^{x}-1-x}{x^{2}}=\frac{\frac{x^{2}}{2}+o(x^{2})}{x^{2}}\to\frac{1}{2}. \]
+    <p>本题也可两次洛必达：第一次得 \(\lim e^x/(2x)\) 仍为 \(0/0\)，第二次得 \(\lim e^x/2=1/2\)，但洛必达需要逐次判定型，泰勒一步到位更不易出错。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把等价无穷小 \(e^x-1\sim x\) 直接代入分子，得到 \((x-x)/x^2=0\)。等价无穷小只能用于乘积因子，不能用于加减法；\(e^x-1-x\) 中 \(x\) 与 \(e^x-1\) 是相消关系，主部必须靠泰勒的高阶项才能暴露。② 展开阶数不足，只写到 \(o(x)\) 就断言极限为 0。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是「\(e^x\) 减去它的一次 Taylor 多项式」的标准原型题，属于泰勒展开求 \(0/0\) 的入门训练。考研中以此为模板，把 \(e^x\) 换成 \(\sin x\)、\(\ln(1+x)\)、\((1+x)^\alpha\)，把分母换成 \(x^2\)、\(x^3\)，本质都是「展开到与分母同阶、抓抵消后剩下的最低次项」。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{x}-1-x-\dfrac{x^2}{2}}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{6}\)。再展一阶 \(e^x=1+x+x^2/2+x^3/6+o(x^3)\)，分子主部为 \(x^3/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1054">
+  <div class="q-head">
+    <span class="qno">第 1054 题</span>
+    <span class="qtype">0/0（arcsin x 的泰勒展开）</span>
+    <span class="qsrc">P799</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\sin^{-1}x-x}{x^{3}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{6}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\arcsin x-x\to0\)，分母 \(x^3\to0\)，属 \(0/0\)。分母是 \(x^3\)，需把 \(\arcsin x\) 展开到 \(x^3\) 这一阶。\(\arcsin x\) 的一阶项就是 \(x\)，与分子中的 \(-x\) 抵消，因此必须靠 \(x^3\) 项定值。</p>
+    <p>\(\arcsin x\) 的展开可由 \((1-t)^{-1/2}\) 积分得到：</p>
+    \[ (\cos x)^{-1}=\frac{1}{\sqrt{1-x^{2}}}=1+\frac{1}{2}x^{2}+\frac{3}{8}x^{4}+\cdots, \]
+    <p>从 0 到 \(x\) 积分：</p>
+    \[ \arcsin x=x+\frac{1}{6}x^{3}+o(x^{3}). \]
+    <p>代入：</p>
+    \[ \frac{\arcsin x-x}{x^{3}}=\frac{\frac{1}{6}x^{3}+o(x^{3})}{x^{3}}\to\frac{1}{6}. \]
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 与 \(\sin x=x-x^3/6+o(x^3)\) 混淆：\(\sin x-x=-x^3/6\)，而 \(\arcsin x-x=+x^3/6\)，符号相反。② 把 \(\arcsin x\) 误记为 \(x-x^3/6\)。可与 \(\sin x\) 成对记忆：正弦减 \(x\) 为负，反正弦减 \(x\) 为正。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>反三角函数的泰勒展开是选择题高频点，与 1067 题重复出现，目的是让考生记住 \(\arcsin x=x+x^3/6+o(x^3)\)、\(\arctan x=x-x^3/3+o(x^3)\) 这两个常用展开式。后续 1072、1092、1097 都建立在这两个展开的高阶项上。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-x}{x^{3}}\)，并与 \(\lim \dfrac{\sin x-x}{x^3}\) 比较。</p>
+    <p class="var-ans">答案：本题为 \(1/6\)；\(\sin x-x=-x^3/6\)，对应极限为 \(-1/6\)。两者互为相反数，因为 \(\arcsin\) 与 \(\sin\) 的三阶系数符号相反。</p>
+  </div>
+</article>
+
+<article class="q" id="q1055">
+  <div class="q-head">
+    <span class="qno">第 1055 题</span>
+    <span class="qtype">0/0（arctan x 的泰勒展开）</span>
+    <span class="qsrc">P799</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\tan^{-1}x-x}{x^{3}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{3}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\arctan x-x\to0\)，分母 \(x^3\to0\)，属 \(0/0\)。需把 \(\arctan x\) 展开到 \(x^3\)。\(\arctan x\) 的展开可由 \(\dfrac{1}{1+t^2}=1-t^2+t^4-\cdots\) 从 0 到 \(x\) 积分得到：</p>
+    \[ \arctan x=\int_{0}^{x}\frac{1}{1+t^{2}}\,dt=x-\frac{x^{3}}{3}+o(x^{3}). \]
+    <p>代入分子：</p>
+    \[ \arctan x-x=-\frac{x^{3}}{3}+o(x^{3}), \]
+    <p>除以 \(x^3\) 得 \(-1/3\)。</p><p>这类反三角函数的泰勒展开，是考研选择题中出现频率最高的一组。建议把反正弦与反正切的展开式并排抄写：前者一阶项为一次方、三阶项为正六分之一，后者一阶项同为一次方、三阶项为负三分之一。两者从三阶项开始符号相反，这一特征是快速判断极限符号的关键。</p><p>在实际考试中，遇到反正切减自变量类的零比零型，若分母为三次方，直接代入系数负三分之一即可；若分母为五次方，则需继续减去三阶项，剩下五阶项五分之一。这一逐次减项的思路贯穿本批后续多道题。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 与 \(\arcsin x\) 的三阶系数混淆：\(\arcsin x-x=+x^3/6\)，\(\arctan x-x=-x^3/3\)，符号与系数都不同。② 直接用洛必达三次，每次求导容易算错 \((\arctan x)'''\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\arctan x\) 的 Taylor 展开是幂级数与极限结合的常考点，后续 1068、1082、1089、1093 都是在这个基础上不断减去低阶项、逐次求高阶系数。记住 \(\arctan x=x-x^3/3+x^5/5-x^7/7+\cdots\) 即可通吃。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arctan x-x+\dfrac{x^3}{3}}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{5}\)。由 \(\arctan x=x-x^3/3+x^5/5+o(x^5)\) 即得，对应 1082 题。</p>
+  </div>
+</article>
+
+<article class="q" id="q1056">
+  <div class="q-head">
+    <span class="qno">第 1056 题</span>
+    <span class="qtype">0/0（(1+x)^(1/2) 的泰勒展开）</span>
+    <span class="qsrc">P799</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\sqrt{1+x}-1-\dfrac{x}{2}}{x^{2}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{8}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\sqrt{1+x}-1-x/2\to0\)，分母 \(x^2\to0\)，属 \(0/0\)。分母是 \(x^2\)，需把 \((1+x)^{1/2}\) 展开到 \(x^2\)。用二项式展开 \((1+x)^\alpha=1+\alpha x+\dfrac{\alpha(\alpha-1)}{2}x^2+o(x^2)\)，取 \(\alpha=1/2\)：</p>
+    \[ \sqrt{1+x}=1+\frac{1}{2}x+\frac{\frac{1}{2}\cdot\left(-\frac{1}{2}\right)}{2}x^{2}+o(x^{2})=1+\frac{x}{2}-\frac{x^{2}}{8}+o(x^{2}). \]
+    <p>代入：</p>
+    \[ \sqrt{1+x}-1-\frac{x}{2}=-\frac{x^{2}}{8}+o(x^{2}), \]
+    <p>除以 \(x^2\) 得 \(-1/8\)。关键是第二项系数 \(\dfrac{\alpha(\alpha-1)}{2}\)，当 \(\alpha=1/2\) 时为 \(-1/8\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 二项式二阶系数算错：\(\dfrac{\alpha(\alpha-1)}{2}\) 对 \(\alpha=1/2\) 是 \(-1/8\)，不是 \(1/8\)。② 只记 \(\sqrt{1+x}-1\sim x/2\) 就停，忽略了 \(x^2\) 项——本题正是把 \(x/2\) 减掉后剩下 \(x^2\) 项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\((1+x)^\alpha\) 的 Taylor 展开是幂函数类 \(0/0\) 的核心，与 1064（\(\alpha=1/3\)）、1085（复合根号）构成一组。二项式系数 \(\dfrac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}\) 必须熟练。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+x}-1-\dfrac{x}{2}+\dfrac{x^2}{8}}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{16}\)。三阶系数 \(\dfrac{\alpha(\alpha-1)(\alpha-2)}{6}=\dfrac{(1/2)(-1/2)(-3/2)}{6}=1/16\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1057">
+  <div class="q-head">
+    <span class="qno">第 1057 题</span>
+    <span class="qtype">0/0（ln(cos x) 的展开）</span>
+    <span class="qsrc">P799</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\ln(\cos x)}{x^{2}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\cos x\to1\)，故 \(\ln(\cos x)\to\ln1=0\)，分母 \(x^2\to0\)，属 \(0/0\)。关键变形是把 \(\ln(\cos x)\) 写成 \(\ln(1+(\cos x-1))\)，再用 \(\ln(1+u)\sim u\) 或展开到 \(u\) 的一阶。之所以这样做，是因为 \(\cos x-1\to0\)，对数的真数是 \(1+\) 小量。</p>
+    \[ \cos x=1-\frac{x^{2}}{2}+o(x^{2}),\qquad \cos x-1=-\frac{x^{2}}{2}+o(x^{2}). \]
+    <p>令 \(u=\cos x-1\)，则 \(u\to0\) 且 \(u=O(x^2)\)：</p>
+    \[ \ln(\cos x)=\ln(1+u)=u+o(u)=-\frac{x^{2}}{2}+o(x^{2}). \]
+    <p>这里 \(o(u)=o(x^2)\)，因为 \(u\sim -x^2/2\)。除以 \(x^2\) 得 \(-1/2\)。也可直接等价替换：\(\ln(\cos x)\sim \cos x-1\sim -x^2/2\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(\ln(\cos x)\) 当成 \(\ln\cos x\) 直接求导三次，容易出错；用复合展开更稳。② 忘记 \(\cos x-1\) 的主部是 \(-x^2/2\)（负号），误写为 \(+x^2/2\) 会得到 \(+1/2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(\ln(\text{趋于 }1\text{ 的量})\)」是复合等价无穷小的标准模型，固定手法是先算真数减 1 的主部，再用 \(\ln(1+u)\sim u\)。后续 1063、1069、1073、1078、1084、1095、1100 都在这个框架上变化。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(\cos x)+\dfrac{x^2}{2}}{x^4}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{12}\)。再展一阶：\(\cos x=1-x^2/2+x^4/24\)，\(\ln(1+u)=u-u^2/2\)，得 \(\ln\cos x=-x^2/2-x^4/12+o(x^4)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1058">
+  <div class="q-head">
+    <span class="qno">第 1058 题</span>
+    <span class="qtype">0/0（乘积 cos x·cos 2x 的展开）</span>
+    <span class="qsrc">P799</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{1-\cos x\cos(2x)}{x^{2}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{5}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\cos x\cos 2x\to1\cdot1=1\)，分子 \(1-\cos x\cos 2x\to0\)，分母 \(x^2\to0\)，属 \(0/0\)。分母是 \(x^2\)，只需把两个余弦各展开到 \(x^2\) 项，乘积后保留到 \(x^2\) 即可。</p>
+    \[ \cos x=1-\frac{x^{2}}{2}+o(x^{2}),\qquad \cos 2x=1-\frac{(2x)^{2}}{2}+o(x^{2})=1-2x^{2}+o(x^{2}). \]
+    <p>相乘（注意乘积中 \(x^2\) 项的来源是两个一阶项交叉）：</p>
+    \[ \cos x\cos 2x=\left(1-\frac{x^{2}}{2}\right)(1-2x^{2})+o(x^{2})=1-\frac{x^{2}}{2}-2x^{2}+o(x^{2})=1-\frac{5}{2}x^{2}+o(x^{2}). \]
+    <p>于是：</p>
+    \[ 1-\cos x\cos 2x=\frac{5}{2}x^{2}+o(x^{2}), \]
+    <p>除以 \(x^2\) 得 \(5/2\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(\cos 2x\) 展开错为 \(1-x^2/2\)，漏了系数 2；正确是 \(1-(2x)^2/2=1-2x^2\)。② 乘积展开时漏乘交叉项，只算 \(1\) 减两项各自的 \(x^2\) 系数之和，即 \(-1/2-2=-5/2\)，这一步恰好等于和，但对一般频率 \(\cos(ax)\cos(bx)\)，系数为 \(-(a^2+b^2)/2\)，本题 \(a=1,b=2\) 得 \(-5/2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(1-\prod\cos(a_k x)\)」型极限考查余弦展开与乘积的 \(x^2\) 系数累加。一般结论：\(1-\prod_{k=1}^n\cos(a_k x)\sim \dfrac{x^2}{2}\sum a_k^2\)。这是多元三角函数乘积在原点处主部的常用结论。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{1-\cos x\cos 2x\cos 3x}{x^2}\)。</p>
+    <p class="var-ans">答案：\(7\)。由一般结论 \(\dfrac{1}{2}(1^2+2^2+3^2)=\dfrac{14}{2}=7\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1059">
+  <div class="q-head">
+    <span class="qno">第 1059 题</span>
+    <span class="qtype">0/0（e^x·sin x 展开）</span>
+    <span class="qsrc">P800</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{e^{x}\sin x-x}{x^{2}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(e^x\sin x\to1\cdot0=0\)，分子 \(\to0\)，分母 \(x^2\to0\)，属 \(0/0\)。分母是 \(x^2\)，需把 \(e^x\sin x\) 展开到 \(x^2\)。关键是 \(e^x\) 与 \(\sin x\) 各自展开后相乘，保留到 \(x^2\)。</p>
+    \[ e^{x}=1+x+\frac{x^{2}}{2}+o(x^{2}),\qquad \sin x=x-\frac{x^{3}}{6}+o(x^{3}). \]
+    <p>相乘：</p>
+    \[ e^{x}\sin x=\left(1+x+\frac{x^{2}}{2}\right)\left(x-\frac{x^{3}}{6}\right)+o(x^{2})=x+x^{2}+\frac{x^{3}}{3}+o(x^{2}). \]
+    <p>这里只保留到 \(x^2\)：\(1\cdot x=x\)，\(x\cdot x=x^2\)，更高项 \(x^3\) 可弃。代入：</p>
+    \[ e^{x}\sin x-x=x^{2}+o(x^{2}), \]
+    <p>除以 \(x^2\) 得 \(1\)。</p><p>乘积展开时，需要把两个因子各自展开到与分母同阶，再相乘。本题分母为二次方，故指数函数展到二次方、正弦函数展到三次方，因为正弦函数最低是一次方，乘上指数函数的常数项会产生一次方，乘上指数函数的一次项会产生二次方，乘上指数函数的二次项会产生三次方，而三次方不影响二次方级别的极限。这种按目标阶数截断的技巧是泰勒展开的核心。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开 \(\sin x\) 时忘了它没有常数项和 \(x^2\) 项，直接把 \(e^x\sin x\) 当成 \(e^x\cdot x\) 即 \(x+x^2+\cdots\)，恰好得到 \(x^2\)，但一般化时要小心。② 只展到 \(x\) 项：\(e^x\sin x\sim x\)，代入得 \((x-x)/x^2=0\)，错。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(e^x\sin x\)」是两个常用展开相乘的经典例子，后续 1083 把分母换成 \(x^3\) 并多减一项 \(x(1+x)\)，本质是同一乘积展开到更高阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{x}\sin x-x-x^2}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{3}\)。由上面 \(e^x\sin x=x+x^2+x^3/3+o(x^3)\)，减去 \(x+x^2\) 后主部为 \(x^3/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1060">
+  <div class="q-head">
+    <span class="qno">第 1060 题</span>
+    <span class="qtype">0/0（等价无穷小 ln(1+sin x)/x）</span>
+    <span class="qsrc">P800</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\ln(1+\sin x)}{x}=\)____</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\sin x\to0\)，故 \(\ln(1+\sin x)\to0\)，分母 \(x\to0\)，属 \(0/0\)。这是标准的复合等价无穷小：当 \(u\to0\) 时 \(\ln(1+u)\sim u\)。这里 \(u=\sin x\to0\)，因此：</p>
+    \[ \ln(1+\sin x)\sim \sin x\sim x. \]
+    <p>于是：</p>
+    \[ \frac{\ln(1+\sin x)}{x}\sim\frac{x}{x}=1. \]
+    <p>也可用洛必达：\(\dfrac{\cos x/(1+\sin x)}{1}\to1\)。两种方法一致。</p><p>等价无穷小替换只能在乘积因子中使用，不能直接在加减法中替换。本题中对数函数整体作为分子，正弦函数趋于零是其真数，因此可以用对数真数趋于零时的等价替换。这一替换的合法性来自对数比值的极限为一，与具体真数形式无关。</p><p>在考研真题中，常见的复合等价无穷小链包括对数加正弦真数、指数正弦差、根号加正弦真数等，记住这些链状替换，能在选择题中直接秒答。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 试图把 \(\ln(1+\sin x)\) 展开成 \(x\) 后再代，等价无穷小已经足够，不必泰勒。② 把 \(\ln(1+\sin x)\) 误当 \(\ln1+\sin x=\sin x\)，虽然结果对但写法不严谨。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>复合等价无穷小是送分题，考查 \(\ln(1+u)\sim u\) 与 \(u\) 本身也是无穷小的链状替换。考研中常把 \(u\) 换成 \(\tan x\)、\(\arcsin x\)、\(e^x-1\) 等。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+\sin x)}{x^2}\)。</p>
+    <p class="var-ans">答案：不存在（或为 \(\infty\)）。\(\ln(1+\sin x)\sim x\)，除以 \(x^2\) 得 \(1/x\)，左右极限异号。</p>
+  </div>
+</article>
+
+<article class="q" id="q1061">
+  <div class="q-head">
+    <span class="qno">第 1061 题</span>
+    <span class="qtype">0/0（sin(tan x)−tan(sin x) 七阶）</span>
+    <span class="qsrc">P800</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\sin(\tan x)-\tan(\sin x)}{x^{7}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{30}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给答案：\(\dfrac{1}{30}\)（第 800 页）。按题面分层展开复算为 \(-\dfrac{1}{30}\)：\(\sin(\tan x)\) 与 \(\tan(\sin x)\) 的 \(x,x^3,x^5\) 项全部抵消，\(x^7\) 项合并为 \(-275/5040-(-107/5040)=-168/5040=-1/30\)，书给值符号反。以复算值 \(-1/30\) 为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：分子两项均为 \(0\)，分母 \(x^7\to0\)，属 \(0/0\)。这是著名的「\(\sin(\tan x)-\tan(\sin x)\)」问题，由于低阶项 \(x,x^3,x^5\) 全部抵消，必须把内层函数展开到 \(x^7\) 这一阶。</p>
+    <p>先列出所需展开：</p>
+    \[ \tan x=x+\frac{x^{3}}{3}+\frac{2x^{5}}{15}+\frac{17x^{7}}{315}+o(x^{7}), \]
+    \[ \sin x=x-\frac{x^{3}}{6}+\frac{x^{5}}{120}-\frac{x^{7}}{5040}+o(x^{7}). \]
+    <p>计算 \(\sin(\tan x)\)：令 \(u=\tan x=x+x^3/3+2x^5/15+17x^7/315\)，用 \(\sin u=u-u^3/6+u^5/120-u^7/5040+o(u^7)\)。逐项展开并保留到 \(x^7\)，结果为：</p>
+    \[ \sin(\tan x)=x+\frac{x^{3}}{6}+\frac{x^{5}}{120}-\frac{275}{5040}x^{7}+o(x^{7}). \]
+    <p>计算 \(\tan(\sin x)\)：令 \(v=\sin x=x-x^3/6+x^5/120-x^7/5040\)，用 \(\tan v=v+v^3/3+2v^5/15+17v^7/315+o(v^7)\)，结果为：</p>
+    \[ \tan(\sin x)=x+\frac{x^{3}}{6}+\frac{x^{5}}{120}-\frac{107}{5040}x^{7}+o(x^{7}). \]
+    <p>相减：</p>
+    \[ \sin(\tan x)-\tan(\sin x)=\left(-\frac{275}{5040}+\frac{107}{5040}\right)x^{7}+o(x^{7})=-\frac{168}{5040}x^{7}=-\frac{1}{30}x^{7}+o(x^{7}). \]
+    <p>除以 \(x^7\) 得 \(-1/30\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只展开到 \(x^5\) 就停，发现前五项完全相同，误以为极限为 0；实际上前五项抵消，必须到 \(x^7\)。② 复合展开时漏算 \(u^3,u^5,u^7\) 中各项的交叉贡献。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是考研数学中最经典的高阶泰勒例题，用于展示「复合函数多层展开」的能力。1086 题是同一题的重复训练。掌握它的关键是耐心分层展开，并知道低阶项会完全抵消。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan(\sin x)-\sin(\tan x)}{x^7}\)。</p>
+    <p class="var-ans">答案：\(+\dfrac{1}{30}\)。仅分子交换顺序，符号变号。</p>
+  </div>
+</article>
+
+<article class="q" id="q1062">
+  <div class="q-head">
+    <span class="qno">第 1062 题</span>
+    <span class="qtype">0/0（e^{sin x}−e^{tan x} 提公因子）</span>
+    <span class="qsrc">P800</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{e^{\sin x}-e^{\tan x}}{x^{3}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：分子两项均为 \(e^{\text{无穷小}}\to1\)，差为 \(0\)，分母 \(x^3\to0\)，属 \(0/0\)。固定手法是提公共因子 \(e^{\tan x}\)：</p>
+    \[ e^{\sin x}-e^{\tan x}=e^{\tan x}\left(e^{\sin x-\tan x}-1\right). \]
+    <p>当 \(x\to0\) 时 \(e^{\tan x}\to1\)，且 \(\sin x-\tan x\to0\)，故 \(e^{\sin x-\tan x}-1\sim \sin x-\tan x\)。于是问题化为求 \(\sin x-\tan x\) 的 \(x^3\) 主部。</p>
+    \[ \sin x-\tan x=\sin x\left(1-\frac{1}{\cos x}\right)=\frac{\sin x(\cos x-1)}{\cos x}. \]
+    <p>用等价无穷小：\(\sin x\sim x\)，\(\cos x-1\sim -x^2/2\)，\(\cos x\to1\)：</p>
+    \[ \sin x-\tan x\sim x\cdot\left(-\frac{x^{2}}{2}\right)=-\frac{x^{3}}{2}. \]
+    <p>因此原极限为 \(-1/2\)。</p><p>提公因子指数正切函数是处理指数正弦与指数正切之差的标准手法。之所以这样做，是因为两个指数之差可提取较小者作为公因子，剩下指数上真数之差趋于零，再用指数减一的等价替换化为代数差。</p><p>计算正弦减正切时，用正切等于正弦除以余弦，提取正弦：正弦减正切等于正弦乘以括号一减余弦分之一，即正弦乘以余弦减一除以余弦。其中正弦等价于一次方，余弦减一等价于负二次方，余弦趋于一，三者相乘得负三次方的一半。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 提错公因子：提 \(e^{\sin x}\) 会得到 \(e^{\sin x}(1-e^{\tan x-\sin x})\sim -(\tan x-\sin x)\)，结果一致但符号要小心。② 把 \(\sin x-\tan x\) 算成 \(+\)：注意 \(\tan x>\sin x\)（在 \(x>0\) 附近），故差为负。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(e^{f(x)}-e^{g(x)}\)」是高频模型，固定化为 \(e^{g}(e^{f-g}-1)\sim f-g\)。与 1074（\(e^{\arcsin x}-e^{\arctan x}\)）同构。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{\tan x}-e^{\sin x}}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{2}\)。分子交换顺序，符号变正。</p>
+  </div>
+</article>
+
+<article class="q" id="q1063">
+  <div class="q-head">
+    <span class="qno">第 1063 题</span>
+    <span class="qtype">0/0（ln(1+x+x^2) 展开）</span>
+    <span class="qsrc">P800</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\ln(1+x+x^{2})-x}{x^{2}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x+x^2\to0\)，故 \(\ln(1+x+x^2)\to0\)，分子 \(\to0-x=0\)，分母 \(x^2\to0\)，属 \(0/0\)。令 \(u=x+x^2\to0\)，用 \(\ln(1+u)=u-u^2/2+o(u^2)\)，保留到 \(u^2\)（因为分母是 \(x^2\)）。</p>
+    \[ \ln(1+x+x^{2})=(x+x^{2})-\frac{1}{2}(x+x^{2})^{2}+o(x^{2}). \]
+    <p>展开：\((x+x^2)^2=x^2+2x^3+x^4\)，保留到 \(x^2\) 为 \(x^2\)：</p>
+    \[ \ln(1+x+x^{2})=x+x^{2}-\frac{x^{2}}{2}+o(x^{2})=x+\frac{x^{2}}{2}+o(x^{2}). \]
+    <p>代入：</p>
+    \[ \ln(1+x+x^{2})-x=\frac{x^{2}}{2}+o(x^{2}), \]
+    <p>除以 \(x^2\) 得 \(1/2\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(\ln(1+x+x^2)\) 直接等同于 \(\ln(1+x)\)，忽略了 \(x^2\) 的贡献。② 展开 \(-u^2/2\) 时漏算，得到 \(x+x^2\) 再减 \(x\) 得 \(x^2\)，答案错为 1。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(\ln(1+\text{多项式})\)」型复合展开，关键是把整个多项式当作 \(u\) 代入 \(\ln(1+u)\) 的展开。1084 题把分母升到 \(x^3\) 并多减 \(x^2/2\)，是同一展开的继续。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x+x^2)-x}{x^3}\)。</p>
+    <p class="var-ans">答案：不存在（左右极限异号，发散）。\(\ln(1+x+x^2)-x=\frac{x^2}{2}-\frac{2x^3}{3}+\cdots\)，主部为 \(x^2/2\)，除以 \(x^3\) 得 \(1/(2x)\)，故发散。\(-2/3\) 是再减去 \(x^2/2\) 后的 1084 题结果。</p>
+  </div>
+</article>
+
+<article class="q" id="q1064">
+  <div class="q-head">
+    <span class="qno">第 1064 题</span>
+    <span class="qtype">0/0（(1+x)^(1/3) 展开）</span>
+    <span class="qsrc">P800</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\sqrt[3]{1+x}-1-\dfrac{x}{3}}{x^{2}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{9}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\sqrt[3]{1+x}-1-x/3\to0\)，分母 \(x^2\to0\)，属 \(0/0\)。用二项式展开 \((1+x)^\alpha=1+\alpha x+\dfrac{\alpha(\alpha-1)}{2}x^2+o(x^2)\)，取 \(\alpha=1/3\)：</p>
+    \[ \sqrt[3]{1+x}=1+\frac{x}{3}+\frac{\frac{1}{3}\cdot\left(-\frac{2}{3}\right)}{2}x^{2}+o(x^{2})=1+\frac{x}{3}-\frac{x^{2}}{9}+o(x^{2}). \]
+    <p>代入：</p>
+    \[ \sqrt[3]{1+x}-1-\frac{x}{3}=-\frac{x^{2}}{9}+o(x^{2}), \]
+    <p>除以 \(x^2\) 得 \(-1/9\)。</p><p>二项式展开是幂函数类极限的核心公式。取根指数为三分之一时，一阶系数为三分之一，二阶系数为负九分之一。这一系数与根指数为二分之一时的负八分之一不同，需分别记忆。</p><p>在考研中，常见的根指数取值有平方根、立方根、四次根，以及负指数。掌握一般公式后，代入即可。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 二阶系数 \(\dfrac{\alpha(\alpha-1)}{2}\) 对 \(\alpha=1/3\) 为 \(-1/9\)，与 \(\alpha=1/2\) 时的 \(-1/8\) 不要混淆。② 把 \(\sqrt[3]{1+x}-1\sim x/3\) 直接相减，忽略 \(x^2\) 项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 1056（\(\alpha=1/2\)）成对训练，掌握一般公式 \((1+x)^\alpha-1-\alpha x\sim \dfrac{\alpha(\alpha-1)}{2}x^2\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sqrt[4]{1+x}-1-\dfrac{x}{4}}{x^2}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{3}{32}\)。二阶系数 \(\dfrac{(1/4)(-3/4)}{2}=-3/32\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1065">
+  <div class="q-head">
+    <span class="qno">第 1065 题</span>
+    <span class="qtype">0/0（sin x−x cos x 展开）</span>
+    <span class="qsrc">P800</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\sin x-x\cos x}{x^{3}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{3}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：分子 \(\sin x-x\cos x\to0\)，分母 \(x^3\to0\)，属 \(0/0\)。把 \(\sin x\) 与 \(x\cos x\) 都展开到 \(x^3\)：</p>
+    \[ \sin x=x-\frac{x^{3}}{6}+o(x^{3}), \]
+    \[ x\cos x=x\left(1-\frac{x^{2}}{2}+o(x^{2})\right)=x-\frac{x^{3}}{2}+o(x^{3}). \]
+    <p>相减：</p>
+    \[ \sin x-x\cos x=\left(-\frac{1}{6}+\frac{1}{2}\right)x^{3}+o(x^{3})=\frac{x^{3}}{3}+o(x^{3}). \]
+    <p>除以 \(x^3\) 得 \(1/3\)。</p><p>展开正弦减自变量乘余弦时，需要分别展开正弦与自变量乘余弦到三次方。正弦为一次方减三次方的六分之一，自变量乘余弦为一次方减三次方的二分之一。两者相减时，一次方项抵消，三次方项系数为负六分之一减负二分之一，即三分之一。</p><p>本题与后续重复题完全相同，是同一原型的两次训练。五阶分母题在分子中减去三次方的三分之一，考查五阶系数负三十分之一。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(x\cos x\) 展开成 \(x-x^3/2\) 后与 \(\sin x\) 相减时符号算错：\(-1/6-(-1/2)=-1/6+1/2=1/3\)。② 1090 题重复此题，1081、1094 把分母升到 \(x^5\) 并多减 \(x^3/3\)，是同一系列的高阶训练。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(\sin x-x\cos x\)」是三角函数差的经典展开，常作为「\(\tan x-\sin x\)」等问题的中间步骤。记住其主部为 \(x^3/3\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x\cos x}{x^{5}}\)。</p>
+    <p class="var-ans">答案：发散到 \(+\infty\)。\(\sin x-x\cos x=\frac{x^3}{3}-\frac{x^5}{30}+\cdots\)，主部为 \(x^3/3\)，除以 \(x^5\) 得 \(1/(3x^2)\to+\infty\)。\(-1/30\) 是再减去 \(x^3/3\) 后的 1094 题结果。</p>
+  </div>
+</article>
+
+<article class="q" id="q1066">
+  <div class="q-head">
+    <span class="qno">第 1066 题</span>
+    <span class="qtype">0/0（tan x−x 展开）</span>
+    <span class="qsrc">P801</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\tan x-x}{x^{3}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{3}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\tan x-x\to0\)，分母 \(x^3\to0\)，属 \(0/0\)。\(\tan x\) 的泰勒展开为：</p>
+    \[ \tan x=x+\frac{x^{3}}{3}+o(x^{3}). \]
+    <p>这个展开可由 \(\sin x/\cos x\) 长除得到，或由导数表查得。代入：</p>
+    \[ \tan x-x=\frac{x^{3}}{3}+o(x^{3}), \]
+    <p>除以 \(x^3\) 得 \(1/3\)。</p><p>正切函数的泰勒展开为一次方加三次方的三分之一加五次方的十五分之二，这是考研中必须熟记的展开式之一。与正弦函数的展开对比，两者符号与系数都不同。</p><p>本题正切减自变量直接得到三次方的三分之一，除以三次方得三分之一。后续逐次减去三分之一、十五分之二，求五阶、七阶系数。</p><p>正切函数的展开在考研中出现频率极高，因为它同时出现在导数计算、等价无穷小替换与泰勒展开三类题目中。建议把正切展开与正弦展开、余弦展开并排记忆，明确三者在各阶系数上的差异。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 与 \(\arctan x-x=-x^3/3\) 混淆：正切减 \(x\) 为正，反正切减 \(x\) 为负。② 用 \(\tan x\sim x\) 后相减得 0。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 1067、1068 并列，构成「\(\sin x,\tan x,\arcsin x,\arctan x\) 减 \(x\)」的三阶系数对比表。1079、1087、1091 在这个基础上逐次求更高阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-x-\dfrac{x^3}{3}}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{2}{15}\)。\(\tan x=x+x^3/3+2x^5/15+o(x^5)\)，对应 1079 题。</p>
+  </div>
+</article>
+
+<article class="q" id="q1067">
+  <div class="q-head">
+    <span class="qno">第 1067 题</span>
+    <span class="qtype">0/0（arcsin x−x 展开，重复）</span>
+    <span class="qsrc">P801</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\arcsin x-x}{x^{3}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{6}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>本题与 1054 完全相同，作为同系列训练。由 \((1-t^2)^{-1/2}=1+t^2/2+o(t^2)\) 从 0 到 \(x\) 积分：</p>
+    \[ \arcsin x=x+\frac{x^{3}}{6}+o(x^{3}), \]
+    <p>故 \((\arcsin x-x)/x^3\to1/6\)。</p><p>反正弦的展开可由一减自变量平方的负二分之一次方从原点积分得到，逐项积分后得一次方加三次方的六分之一加五次方的四十分之三。本题与之前题完全相同，是重复训练。</p><p>记住反正弦减自变量等于三次方的六分之一，与正弦减自变量的负六分之一符号相反。后续逐次求高阶。</p><p>反正弦函数的展开是幂级数的一个经典例子，由二项式级数积分得到。在考试中，遇到反三角函数的零比零型极限，第一反应应是写出其泰勒展开，而不是直接洛必达，因为洛必达三次以上求导极易出错。</p><p>本题与之前题目完全重复，目的在于通过反复训练形成肌肉记忆，看到反正弦减自变量就能直接报出六分之一的系数。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>与 \(\sin x-x=-x^3/6\) 符号相反，注意区分。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>重复训练旨在强化记忆。后续 1080、1088、1092 在此基础上逐次减去 \(x^3/6\)、\(3x^5/40\) 等项，求五阶、七阶系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-x-\dfrac{x^3}{6}}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{3}{40}\)。对应 1080 题。</p>
+  </div>
+</article>
+
+<article class="q" id="q1068">
+  <div class="q-head">
+    <span class="qno">第 1068 题</span>
+    <span class="qtype">0/0（arctan x−x 展开，重复）</span>
+    <span class="qsrc">P801</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\arctan x-x}{x^{3}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{3}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>本题与 1055 完全相同。由 \(\dfrac{1}{1+t^2}=1-t^2+o(t^2)\) 积分：</p>
+    \[ \arctan x=x-\frac{x^{3}}{3}+o(x^{3}), \]
+    <p>故 \((\arctan x-x)/x^3\to-1/3\)。</p><p>反正切的展开可由一与自变量平方和的倒数积分得到，逐项积分后得一次方减三次方的三分之一加五次方的五分之一。本题与之前题完全相同。</p><p>记住反正切减自变量等于负三次方的三分之一。后续逐次求高阶系数。</p><p>反正切函数的展开同样由幂级数逐项积分得到，是交错级数。在考研中，反正切出现在无穷级数求和、定积分近似计算与极限三类问题中。</p><p>本题与之前题目完全重复，目的在于强化记忆，看到反正切减自变量就能直接报出负三分之一的系数。</p><p>在考研数学中，反正切函数的泰勒展开不仅用于求极限，还用于无穷级数求和（如x的幂级数求和）、定积分近似计算等。掌握这个展开式可以一举多得。</p><p>在复习时，建议把反正切的展开式与反正弦的展开式对比记忆，两者一阶项相同，三阶项符号相反。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>与 \(\tan x-x=x^3/3\) 符号相反。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 1066、1067 构成三阶系数对比组。后续 1082、1089、1093 在此基础上逐次求高阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arctan x-x+\dfrac{x^3}{3}}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{5}\)。对应 1082 题。</p>
+  </div>
+</article>
+
+<article class="q" id="q1069">
+  <div class="q-head">
+    <span class="qno">第 1069 题</span>
+    <span class="qtype">0/0（ln(1+sin x)−ln(1+tan x)）</span>
+    <span class="qsrc">P801</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\ln(1+\sin x)-\ln(1+\tan x)}{x^{3}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：分子两项对数均趋于 0，差为 \(0\)，分母 \(x^3\to0\)，属 \(0/0\)。把两个对数分别展开到 \(x^3\)。令 \(u=\sin x\)，\(v=\tan x\)，用 \(\ln(1+w)=w-w^2/2+w^3/3+o(w^3)\)。</p>
+    \[ \sin x=x-\frac{x^{3}}{6}+o(x^{3}),\qquad \tan x=x+\frac{x^{3}}{3}+o(x^{3}). \]
+    <p>计算 \(\ln(1+\sin x)\)：\(u=u_1+u_3\)，其中 \(u_1=x\)，\(u_3=-x^3/6\)。</p>
+    \[ \ln(1+u)=u-\frac{u^{2}}{2}+\frac{u^{3}}{3}+o(x^{3})=\left(x-\frac{x^{3}}{6}\right)-\frac{x^{2}}{2}+\frac{x^{3}}{3}+o(x^{3}). \]
+    <p>这里 \(-u^2/2\) 中 \(u^2\sim x^2\)，是 \(x^2\) 项；\(u^3/3\sim x^3/3\)。整理：</p>
+    \[ \ln(1+\sin x)=x-\frac{x^{2}}{2}+\left(-\frac{1}{6}+\frac{1}{3}\right)x^{3}+o(x^{3})=x-\frac{x^{2}}{2}+\frac{x^{3}}{6}+o(x^{3}). \]
+    <p>同理 \(\ln(1+\tan x)\)，\(v=x+x^3/3\)：</p>
+    \[ \ln(1+v)=\left(x+\frac{x^{3}}{3}\right)-\frac{x^{2}}{2}+\frac{x^{3}}{3}+o(x^{3})=x-\frac{x^{2}}{2}+\frac{2x^{3}}{3}+o(x^{3}). \]
+    <p>相减：</p>
+    \[ \ln(1+\sin x)-\ln(1+\tan x)=\left(\frac{1}{6}-\frac{2}{3}\right)x^{3}+o(x^{3})=-\frac{x^{3}}{2}+o(x^{3}). \]
+    <p>除以 \(x^3\) 得 \(-1/2\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忽略 \(-u^2/2\) 这一项，因为它是 \(x^2\) 级，看似不影响 \(x^3\)，但两个对数的 \(x^2\) 项完全相同、相减抵消，所以实际只比较 \(x^3\) 项。② 用 \(\ln(1+u)-\ln(1+v)\sim u-v\) 近似，会得到 \(\sin x-\tan x\sim -x^3/2\)，恰好正确——这是因为 \(u^2\) 项相消后，主部就是 \(u-v\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「两个对数之差」型极限，当两个真数都是 \(x+O(x^3)\) 时，\(x^2\) 项相消，主部就是真数之差。1073 题把真数换成 \(\arcsin x\)、\(\arctan x\)，同构。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+\tan x)-\ln(1+\sin x)}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{2}\)。交换顺序，符号变正。</p>
+  </div>
+</article>
+
+<article class="q" id="q1070">
+  <div class="q-head">
+    <span class="qno">第 1070 题</span>
+    <span class="qtype">0/0（根号差有理化）</span>
+    <span class="qsrc">P801</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\sqrt{1+\tan x}-\sqrt{1+\sin x}}{x^{3}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{4}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：分子两个根号均趋于 1，差为 \(0\)，分母 \(x^3\to0\)，属 \(0/0\)。固定手法是分子有理化：乘以 \(\sqrt{1+\tan x}+\sqrt{1+\sin x}\)。</p>
+    \[ \sqrt{1+\tan x}-\sqrt{1+\sin x}=\frac{(1+\tan x)-(1+\sin x)}{\sqrt{1+\tan x}+\sqrt{1+\sin x}}=\frac{\tan x-\sin x}{\sqrt{1+\tan x}+\sqrt{1+\sin x}}. \]
+    <p>当 \(x\to0\) 时分母 \(\to\sqrt1+\sqrt1=2\)，而：</p>
+    \[ \tan x-\sin x=\sin x\left(\frac{1}{\cos x}-1\right)\sim x\cdot\frac{x^{2}}{2}=\frac{x^{3}}{2}. \]
+    <p>于是：</p>
+    \[ \frac{\tan x-\sin x}{2}\sim\frac{x^{3}/2}{2}=\frac{x^{3}}{4}, \]
+    <p>除以 \(x^3\) 得 \(1/4\)。</p><p>根号差的标准处理是分子有理化：乘以两个根号之和，分母为该和，分子化为正切减正弦。当自变量趋于零时，分母趋于二，而正切减正弦等价于三次方的一半。</p><p>因此原极限为三次方一半除以二，即三次方的四分之一，除以三次方得四分之一。后续题在此基础上多减四分之一，求五阶项十六分之一。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记分母有理化因子 \(\sqrt{1+\tan x}+\sqrt{1+\sin x}\to2\)，直接用 \(\tan x-\sin x\sim x^3/2\) 除以 \(x^3\) 得 \(1/2\)，漏了除以 2。② 1096 题在此基础上多减 \(x^3/4\)，求五阶项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「根号差」是考研固定题型，有理化后化为代数差。与 1075（\(\sqrt{1+\arcsin x}-\sqrt{1+\arctan x}\)）同构。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+\tan x}-\sqrt{1+\sin x}}{x^{5}}\) 并指出主部。</p>
+    <p class="var-ans">答案：发散到 \(+\infty\)。分子主部为 \(x^3/4+x^5/16+o(x^5)\)，领头项 \(x^3/4\) 除以 \(x^5\) 得 \(1/(4x^2)\to+\infty\)（两侧同号），主部为 \(x^3/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1071">
+  <div class="q-head">
+    <span class="qno">第 1071 题</span>
+    <span class="qtype">0/0（tan x−sin x 减 x^3/2 后求五阶）</span>
+    <span class="qsrc">P801</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\tan x-\sin x-\dfrac{1}{2}x^{3}}{x^{5}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{8}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：分子主部 \(x^3/2\) 被减去，剩下 \(x^5\) 级，分母 \(x^5\to0\)，属 \(0/0\)。需把 \(\tan x\) 与 \(\sin x\) 都展开到 \(x^5\)。</p>
+    \[ \tan x=x+\frac{x^{3}}{3}+\frac{2x^{5}}{15}+o(x^{5}), \]
+    \[ \sin x=x-\frac{x^{3}}{6}+\frac{x^{5}}{120}+o(x^{5}). \]
+    <p>相减：</p>
+    \[ \tan x-\sin x=\left(\frac{1}{3}+\frac{1}{6}\right)x^{3}+\left(\frac{2}{15}-\frac{1}{120}\right)x^{5}+o(x^{5})=\frac{x^{3}}{2}+\frac{15}{120}x^{5}+o(x^{5})=\frac{x^{3}}{2}+\frac{x^{5}}{8}+o(x^{5}). \]
+    <p>减去 \(x^3/2\)：</p>
+    \[ \tan x-\sin x-\frac{x^{3}}{2}=\frac{x^{5}}{8}+o(x^{5}), \]
+    <p>除以 \(x^5\) 得 \(1/8\)。</p><p>逐次减项求高阶系数是本批题目的核心训练模式。本题正切减正弦的主部为三次方的一半，减去后剩下五阶项。展开正切与正弦，相减得三次方一半加五阶项八分之一。</p><p>五阶系数十五分之二减一百二十分之一，通分后得一百二十分之十五，即八分之一，通分要仔细。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 五阶系数 \(2/15-1/120=16/120-1/120=15/120=1/8\)，通分要准确。② 只展到 \(x^3\) 就以为剩下 0。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是「\(\tan x-\sin x\)」的高阶展开，用于展示逐项减去低阶项、逐次求高阶系数的训练模式，与 1079、1080、1082 等同型。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x-\dfrac{x^3}{2}-\dfrac{x^5}{8}}{x^7}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{13}{240}\)。再展一阶：\(\tan x-\sin x=x^3/2+x^5/8+17x^7/315+x^7/5040+\cdots\)，\(x^7\) 系数 \(17/315+1/5040=273/5040=13/240\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1072">
+  <div class="q-head">
+    <span class="qno">第 1072 题</span>
+    <span class="qtype">0/0（arcsin x−arctan x 展开）</span>
+    <span class="qsrc">P802</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\arcsin x-\arctan x}{x^{3}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：分子两项均趋于 0，差为 \(0\)，分母 \(x^3\to0\)，属 \(0/0\)。直接用两个展开式：</p>
+    \[ \arcsin x=x+\frac{x^{3}}{6}+o(x^{3}),\qquad \arctan x=x-\frac{x^{3}}{3}+o(x^{3}). \]
+    <p>相减：</p>
+    \[ \arcsin x-\arctan x=\left(\frac{1}{6}+\frac{1}{3}\right)x^{3}+o(x^{3})=\frac{x^{3}}{2}+o(x^{3}). \]
+    <p>除以 \(x^3\) 得 \(1/2\)。</p><p>本题直接合并两个已知展开式：反正弦为一次方加三次方的六分之一，反正切为一次方减三次方的三分之一，相减得三次方的二分之一。这是之前两题的合并训练。</p><p>记住反正弦减反正切等于三次方的二分之一。后续题多减二分之一，求五阶项负八分之一。</p><p>本题是把反正弦与反正切两个展开式合并相减，考查对两个展开式的同时记忆。在考场上，若能熟练写出两个展开式，本题只需一行计算即可完成。</p><p>本题作为合并训练题，建议考生在复习时把反正弦与反正切的展开式并排抄写，对比其系数差异，加深记忆。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 符号：\(\arctan x\) 的三阶项是 \(-x^3/3\)，相减时是 \(+1/3\)，不要误为 \(-1/3\)。② 1097 题在此基础上多减 \(x^3/2\)，求五阶项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「两个反函数之差」型极限，是 1067、1068 两题的合并，考查对两个展开式的同时记忆。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-\arctan x-\dfrac{x^3}{2}}{x^5}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{8}\)。对应 1097 题。</p>
+  </div>
+</article>
+
+<article class="q" id="q1073">
+  <div class="q-head">
+    <span class="qno">第 1073 题</span>
+    <span class="qtype">0/0（ln(1+arcsin x)−ln(1+arctan x)）</span>
+    <span class="qsrc">P802</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\ln(1+\arcsin x)-\ln(1+\arctan x)}{x^{3}}=\)____</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>与 1069 同构。令 \(u=\arcsin x\)，\(v=\arctan x\)。由于 \(u=x+x^3/6+o(x^3)\)，\(v=x-x^3/3+o(x^3)\)，两者 \(x\) 项相同、\(x^3\) 项不同。</p>
+    <p>用 \(\ln(1+w)=w-w^2/2+w^3/3+o(w^3)\)。\(w^2\) 项为 \(x^2/2+o(x^2)\)，两个对数相减时 \(x^2\) 项抵消，\(x^3\) 项的差来自 \(w\) 本身的 \(x^3\) 差（\(-w^2/2\) 中 \(w^2=x^2+2x\cdot x^3\text{级}=x^2+o(x^3)\)，无 \(x^3\) 贡献）。</p>
+    \[ \ln(1+u)-\ln(1+v)=u-v+o(x^{3})=\left(x+\frac{x^{3}}{6}\right)-\left(x-\frac{x^{3}}{3}\right)+o(x^{3})=\frac{x^{3}}{2}+o(x^{3}). \]
+    <p>除以 \(x^3\) 得 \(1/2\)。</p><p>本题与之前对数差题同构，把真数从正弦与正切换成反正弦与反正切。两个真数同为一次方加三次方高阶项，二次方项相消，对数差主部为真数差三次方的二分之一。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>误以为 \(\ln(1+u)-\ln(1+v)\) 需要展开 \(u^2\) 项；实际上两个 \(u^2\) 都 \(\sim x^2\)，相减后 \(x^2\) 项抵消，只剩 \(u-v\) 的 \(x^3\) 主部。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 1069 同构，把真数从 \(\sin x,\tan x\) 换成 \(\arcsin x,\arctan x\)，本质仍是「对数差 \(\sim\) 真数差」。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+\arctan x)-\ln(1+\arcsin x)}{x^3}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{2}\)。交换顺序。</p>
+  </div>
+</article>
+
 <article class="q" id="q1074">
   <div class="q-head">
     <span class="qno">第 1074 题</span>
@@ -1674,1714 +3360,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{(1+3x)^{\sin^3x}-1}{x^4}\)。</p>
     <p class="var-ans">答案：\(3\)。\(u\sim3x\cdot x^3=3x^4\)。</p>
   </div>
-<p>本题与 1110 构成同组，区别在指数从 sin^2 x 变为 sin^3 x，分母从 x^3 变为 x^4。通用公式为：(1+ax)^{u(x)} - 1 ~ a x * u(x)，其中 u(x)->0。本题 u = sin^3 x ~ x^3，故主部为 2x * x^3 = 2x^4，与分母 x^4 同阶，比值为 2。解题时不要分别对底数和指数单独展开，而是统一写成 e^{u ln(1+ax)} - 1 ~ u*ax，一步到位。</p><p>再强调一次识别类型的判断步骤：先看底数 (1+2x) 趋于 1，指数 sin^3 x 趋于 0，因此整体趋于 1，再减去 1 得到一个无穷小。分母 x^4 决定了展开阶数。这类题最常见的错误是把指数 sin^3 x 误写成 sin x，导致阶数判断错误。</p></article>
-
-<article class="q" id="q1121">
-  <div class="q-head">
-    <span class="qno">第 1121 题</span>
-    <span class="qtype">黎曼求和（平方项积分）</span>
-    <span class="qsrc">P810</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\sqrt{1-\cos\dfrac{2k\pi}{n}}\cdot\sin\dfrac{k\pi}{n}=?\)</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{\sqrt{2}}{2}\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：与 1111 同型，但乘的是 \(\sin(k\pi/n)\) 而不是 \(\cos(k\pi/n)\)。化简根号：</p>
-    \[ \sqrt{1-\cos\frac{2k\pi}{n}}=\sqrt{2}\sin\frac{k\pi}{n}. \]
-    <p>代入：</p>
-    \[ \frac{1}{n}\sum_{k=1}^n\sqrt{2}\sin\frac{k\pi}{n}\cdot\sin\frac{k\pi}{n}=\frac{\sqrt{2}}{n}\sum_{k=1}^n\sin^2\frac{k\pi}{n}. \]
-    <p>令 \(\Delta x=\pi/n\)，则 \(\frac{1}{n}=\frac{1}{\pi}\Delta x\)：</p>
-    \[ \frac{\sqrt{2}}{\pi}\sum_{k=1}^n\sin^2\!\left(\frac{k\pi}{n}\right)\Delta x\;\longrightarrow\;\frac{\sqrt{2}}{\pi}\int_0^\pi\sin^2x\,dx. \]
-    <p>用 \(\sin^2x=\dfrac{1-\cos2x}{2}\)：</p>
-    \[ \int_0^\pi\sin^2x\,dx=\frac{1}{2}\int_0^\pi(1-\cos2x)\,dx=\frac{\pi}{2}-0=\frac{\pi}{2}. \]
-    <p>因此</p>
-    \[ \frac{\sqrt{2}}{\pi}\cdot\frac{\pi}{2}=\frac{\sqrt{2}}{2}. \]
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 积分限搞错：步长是 \(\pi/n\)，积分区间是 \([0,\pi]\)，不是 \([0,1]\)。② \(\int_0^\pi\sin^2x\,dx=\pi/2\) 是标准结果，不要算成 \(\pi\) 或 \(1/2\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1111、1131、1141 构成同组，区别在乘的是 \(\sin\)、\(\cos\)、\(\sin(2\cdot)\) 还是两者乘积，结果由对应三角函数在 \([0,\pi]\) 上的积分决定。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^n\sqrt{1-\cos\dfrac{2k\pi}{n}}\cdot\sin\dfrac{2k\pi}{n}\)。</p>
-    <p class="var-ans">答案：\(0\)。此时被积函数为 \(\sqrt{2}\sin x\sin 2x\)，化为黎曼和后得 \(\dfrac{\sqrt2}{\pi}\int_0^\pi\sin x\sin2x\,dx=0\)（正交性，见 1131）。</p>
-  </div>
-<p>本题是黎曼求和与三角函数积分结合的典型题。关键两步：先用半角公式 sqrt(1-cos(2θ)) = sqrt(2) sin θ 化简根号，再识别步长 Δx = π/n 把求和化为定积分。被积函数为 sqrt(2) sin^2 x，在 [0,π] 上的积分是 sqrt(2)*π/2，再除以 π 得到 sqrt(2)/2。这类题的常见错误是把积分区间误认为 [0,1]，实际上因为求和变量是 kπ/n，步长对应的物理区间是 [0,π]。</p></article>
-
-<article class="q" id="q1122">
-  <div class="q-head">
-    <span class="qno">第 1122 题</span>
-    <span class="qtype">根单位和（带平方根权重）</span>
-    <span class="qsrc">P810</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}e^{\frac{2\pi ik}{n}}\cdot\sqrt{1+\dfrac{k}{n}}=?\)</p>
-  </div>
-  <div class="answer">答案：\(\displaystyle \int_0^1 e^{2\pi ix}\sqrt{1+x}\,dx\)（复数值，主项边界项 \(\frac{\sqrt2-1}{2\pi i}\)）</div>
-  <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>书给答案：\(0\)（第 810 页）。按题面复算为 \(\displaystyle\int_0^1 e^{2\pi ix}\sqrt{1+x}\,dx\)：分部积分边界项 \(\frac{\sqrt{2}-1}{2\pi i}\neq0\)，复积分值非零。以复算值（复积分表达式）为准。</p>
-  </div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：与 1112 同型，慢变因子从 \(\ln(1+k/n)\) 换成了 \(\sqrt{1+k/n}\)。振荡因子 \(e^{2\pi ik/n}\) 的性质不变。</p>
-    <p>把求和写成黎曼和：</p>
-    \[ \frac{1}{n}\sum_{k=1}^n e^{2\pi i k/n}\sqrt{1+k/n}\;\longrightarrow\;\int_0^1 e^{2\pi ix}\sqrt{1+x}\,dx. \]
-    <p>由分部积分，\(u=\sqrt{1+x}\)，\(v=\frac{e^{2\pi ix}}{2\pi i}\)：</p>
-    \[ \int_0^1 e^{2\pi ix}\sqrt{1+x}\,dx=\left.\frac{e^{2\pi ix}}{2\pi i}\sqrt{1+x}\right|_0^1-\frac{1}{2\pi i}\int_0^1\frac{e^{2\pi ix}}{2\sqrt{1+x}}\,dx=\frac{\sqrt2-1}{2\pi i}+O\!\left(\frac1{2\pi}\right). \]
-    <p>边界项 \(\frac{\sqrt2-1}{2\pi i}\neq0\)，故极限是一个非零复数值，不等于 0。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>不要因为 \(\sqrt{1+k/n}\ge1\) 就误以为和为正。振荡因子 \(e^{2\pi ik/n}\) 的实部和虚部都在正负之间快速切换，加权平均后抵消。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1112、1132、1142 构成同组，振荡因子不变，慢变因子依次替换；极限为对应的复积分，边界项一般非零，不要误记为 0。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 把振荡因子换成 \(e^{\pi ik/n}\)，结果是否仍为 0？</p>
-    <p class="var-ans">答案：不一定。\(e^{\pi ik/n}\) 的周期是 \(2n\)，在 \(k=1,\dots,n\) 上只覆盖半周，正负不抵消，结果一般不为 0。</p>
-  </div>
-<p>本题中振荡因子 e^{2πik/n} 是 n 次单位根，(1/n)Σ e^{2πik/n} g(k/n) → ∫₀¹ e^{2πix} g(x) dx。该复积分一般不为 0：分部积分产生端点边界项 g(1)/(2πi) - g(0)/(2πi)（当 g(0)≠g(1) 时非零）。只有权重恒为常数时边界项才为 0，退化为离散等比和。</p></article>
-
-<article class="q" id="q1123">
-  <div class="q-head">
-    <span class="qno">第 1123 题</span>
-    <span class="qtype">连乘积（k²/n³ 型）</span>
-    <span class="qsrc">P810</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\prod\limits_{k=1}^{n}\left(1+\dfrac{k^2}{n^3}\right)^{\frac{1}{n}}=?\)</p>
-  </div>
-  <div class="answer">答案：\(1\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>取对数：</p>
-    \[ \ln P_n=\frac{1}{n}\sum_{k=1}^n\ln\!\left(1+\frac{k^2}{n^3}\right). \]
-    <p>当 \(k\le n\) 时 \(k^2/n^3\le n^2/n^3=1/n\to0\)，故</p>
-    \[ \ln\!\left(1+\frac{k^2}{n^3}\right)\sim\frac{k^2}{n^3}. \]
-    \[ \ln P_n\sim\frac{1}{n}\sum_{k=1}^n\frac{k^2}{n^3}=\frac{1}{n^4}\cdot\frac{n(n+1)(2n+1)}{6}\sim\frac{2n^3}{6n^4}=\frac{1}{3n}\to0. \]
-    <p>因此 \(P_n\to e^0=1\)。关键在于：虽然有 \(n\) 个因子，但每个偏离 1 的量级是 \(O(1/n)\)，总和是 \(O(1/n)\)，趋于 0。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 忘记验证 \(k^2/n^3\to0\) 对所有 \(k\le n\) 成立。② 平方和公式记错。\(\sum k^2=n(n+1)(2n+1)/6\)，主部是 \(n^3/3\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1113、1133、1143 构成同组，连乘积中括号内是 \(k/n^2\)、\(k^2/n^3\)、\(k/n\) 等不同阶，考查阶数估计能力。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\prod\limits_{k=1}^n\left(1+\dfrac{k^2}{n^2}\right)^{1/n}\)。</p>
-    <p class="var-ans">答案：\(e^{\ln 2-2+\frac{\pi}{2}}\)。此时 \(\ln P_n=\frac{1}{n}\sum\ln(1+k^2/n^2)\to\int_0^1\ln(1+x^2)\,dx=\ln2-2+\frac{\pi}{2}\)，故 \(P_n\to e^{\ln2-2+\pi/2}\)（\(\approx1.30\)，不是 \(\sqrt e\)）。</p>
-  </div>
-<p>连乘积取对数后化为求和，是处理无穷乘积的标准手法。本题中 ln(1+k^2/n^3) ~ k^2/n^3，乘以外部因子 1/n 后每一项为 k^2/n^4，求和用到平方和公式 sum k^2 = n(n+1)(2n+1)/6 ~ n^3/3，因此总和为 1/(3n) -> 0。判断连乘积是否趋于 1 的核心是估计 ln P_n 的阶数：只要 ln P_n -> 0，乘积就趋于 1。本题中虽然有 n 个因子，但每个因子偏离 1 的量级是 O(1/n)，总对数是 O(1/n)。</p></article>
-
-<article class="q" id="q1124">
-  <div class="q-head">
-    <span class="qno">第 1124 题</span>
-    <span class="qtype">求和（分母含 n²+k²）</span>
-    <span class="qsrc">P811</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{\ln\!\left(1+\dfrac{k}{n}\right)}{n^2+k^2}=?\)</p>
-  </div>
-  <div class="answer">答案：\(0\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：\(n\) 项求和，分母是 \(n^2+k^2\)，分子是 \(\ln(1+k/n)\)。把分母提出 \(n^2\)：</p>
-    \[ n^2+k^2=n^2\left(1+\frac{k^2}{n^2}\right). \]
-    <p>因此每一项为</p>
-    \[ \frac{\ln(1+k/n)}{n^2(1+k^2/n^2)}=\frac{1}{n}\cdot\frac{\ln(1+k/n)}{n(1+(k/n)^2)}. \]
-    <p>求和：</p>
-    \[ \sum_{k=1}^n\frac{1}{n}\cdot\frac{\ln(1+k/n)}{n(1+(k/n)^2)}=\frac{1}{n}\cdot\underbrace{\frac{1}{n}\sum_{k=1}^n\frac{\ln(1+k/n)}{1+(k/n)^2}}_{\text{黎曼和，有界}}. \]
-    <p>花括号内是黎曼和 \(\to\int_0^1\dfrac{\ln(1+x)}{1+x^2}\,dx\)，这是一个有限常数。前面再乘 \(1/n\)，故总和 \(\to0\)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 误以为这是一个普通黎曼和，直接算 \(\int_0^1\ln(1+x)/(1+x^2)\,dx\)。分母已经有 \(n^2\)，整个和多了一个 \(1/n\) 的因子。② 不提出 \(n^2\)，导致量级判断错误。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1114、1134、1144 构成同组，分母分别为 \(n+1/k\)、\(n^2+k^2\)、\(n+\sqrt{k}\)、\(n+e^k\)，通过分母的不同结构考查「先分离出主部阶数」的能力。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^n\dfrac{\ln(1+k/n)}{n^2}\)。</p>
-    <p class="var-ans">答案：\(0\)。\(\frac{1}{n}\cdot\frac{1}{n}\sum\ln(1+k/n)\to\frac{1}{n}\cdot(2\ln2-1)\to0\)。</p>
-  </div>
-<p>本题的关键观察是分母 n^2+k^2 = n^2(1+(k/n)^2) 已经提取了一个 n^2，使得整个求和多了一个 1/n 的因子。花括号内的 (1/n) sum ln(1+k/n)/(1+(k/n)^2) 确实趋于一个非零常数 integral_0^1 ln(1+x)/(1+x^2) dx，但前面再乘 1/n 后整体趋于 0。这类题容易出错的地方是：看到形如 (1/n) sum f(k/n) 就以为是黎曼和，但忽略了分母还藏着一个 n。</p></article>
-
-<article class="q" id="q1125">
-  <div class="q-head">
-    <span class="qno">第 1125 题</span>
-    <span class="qtype">含参积分（核函数 n²x^n）</span>
-    <span class="qsrc">P811</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 在 \([0,1]\) 上连续，求 \(\lim\limits_{n\to\infty}\int_0^1 n^2 x^n f(x)\,dx\)。</p>
-  </div>
-  <div class="answer">答案：发散（不收敛，量级 \(\sim n\,f(1)\)）</div>
-  <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>书给答案：\(0\)（第 811 页）。按题面复算为发散：核 \(n^2x^n\) 在 \([0,1]\) 上的积分为 \(n^2/(n+1)\sim n\)，质量集中于 \(x=1\)，故 \(\int_0^1 n^2x^n f(x)\,dx\sim n\,f(1)\to\pm\infty\)（取 \(f\equiv1\) 即得 \(n^2/(n+1)\sim n\)）。以复算值（发散）为准。</p>
-  </div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：与 1115 同型，但核函数从 \(nx^n\) 换成了 \(n^2x^n\)。做变量替换 \(t=n(1-x)\)：</p>
-    \[ \int_0^1 n^2 x^n f(x)\,dx=n\int_0^n\left(1-\frac{t}{n}\right)^n f\!\left(1-\frac{t}{n}\right)dt. \]
-    <p>当 \(n\to\infty\) 时，\((1-t/n)^n\to e^{-t}\)，\(f(1-t/n)\to f(1)\)，而前面有系数 \(n\)，且 \(\int_0^\infty e^{-t}dt=1\)。因此</p>
-    \[ \int_0^1 n^2x^n f(x)\,dx\;\sim\;n\,f(1)\int_0^\infty e^{-t}dt=n\,f(1)\to\pm\infty. \]
-    <p>分段估计也一致：在 \([0,1-\delta]\) 上 \(n^2(1-\delta)^n\to0\) 可忽略；在 \([1-\delta,1]\) 上由中值定理积分 \(=f(\xi_n)\cdot n^2\int_{1-\delta}^1x^n dx\sim f(1)\cdot n^2/(n+1)\sim n\,f(1)\)。故极限发散，无有限值。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 直接套用 1115 的结论 \(f(1)\)。本题核的系数是 \(n^2\) 不是 \(n\)，阶数不同，结论不同。② 不做分段估计，直接在积分号下取极限。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1115、1135、1145 构成同组，核函数分别为 \(nx^n\)、\(n^2x^n\)、\(x^n f(x^2)\)、\(x^{n^2}\)，对应不同的集中尺度。核函数的系数决定了极限是 \(f(1)\)、发散还是 0。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\int_0^1 n^3 x^n f(x)\,dx\)（\(f\) 连续）。</p>
-    <p class="var-ans">答案：按核的阶数判断，系数 \(n^3\) 配合 \(x^n\) 会使积分发散为 \(O(n^2)\)，不属于有限极限型。</p>
-  </div>
-</article>
-
-<article class="q" id="q1126">
-  <div class="q-head">
-    <span class="qno">第 1126 题</span>
-    <span class="qtype">由极限反求（tan−sin 展开到 x⁵）</span>
-    <span class="qsrc">P811</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 连续，且 \(\lim\limits_{x\to0}\dfrac{\tan 2x-\sin 2x+xf(x)}{x^5}=1\)，则 \(\lim\limits_{x\to0}\dfrac{4+f(x)}{x^4}=?\)</p>
-  </div>
-  <div class="answer">答案：\(-3\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：分子是 \(\tan2x-\sin2x\)，两者的低阶项（常数项、一次项、二次项）恰好抵消，最低阶从 \(x^3\) 开始。先把 \(\tan2x-\sin2x\) 展开到 \(x^5\)：</p>
-    \[ \tan 2x=2x+\frac{8x^3}{3}+\frac{64x^5}{15}+o(x^5), \]
-    \[ \sin 2x=2x-\frac{4x^3}{3}+\frac{4x^5}{15}+o(x^5), \]
-    \[ \tan 2x-\sin 2x=4x^3+4x^5+o(x^5). \]
-    <p>代入条件：</p>
-    \[ \frac{4x^3+4x^5+xf(x)+o(x^5)}{x^5}=1. \]
-    <p>\(x^3\) 项必须被 \(xf(x)\) 抵消，故 \(xf(x)\) 中含 \(-4x^3\)，即 \(f(x)\) 中含 \(-4x^2\)。整理 \(x^5\) 项：</p>
-    \[ xf(x)=-4x^3+(1-4)x^5+o(x^5)=-4x^3-3x^5+o(x^5), \]
-    \[ f(x)=-4x^2-3x^4+o(x^4). \]
-    <p>于是</p>
-    \[ \frac{4x^2+f(x)}{x^4}=\frac{4x^2-4x^2-3x^4+o(x^4)}{x^4}\to-3. \]
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① \(\tan2x-\sin2x\) 的最低阶是 \(x^3\)（不是 \(x\)），因为 \(2x\) 项抵消。② \(x^5\) 系数是 \(4\)（不是其他值），由 \(64/15-4/15=60/15=4\) 得出。③ 所求式中的「4」对应 \(4x^2\)，用于抵消 \(f(x)\) 中的 \(-4x^2\) 项。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1146 构成同组，分别对应分母 \(x^5\) 和 \(x^6\)，考查 \(\tan2x-\sin2x\) 的高阶展开。这类题的关键是识别两个函数的低阶项抵消后最低阶从哪里开始。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 若 \(\lim\dfrac{\tan2x-\sin2x+xf(x)}{x^5}=0\)，求 \(\lim\dfrac{4x^2+f(x)}{x^4}\)。</p>
-    <p class="var-ans">答案：\(-4\)。此时 \(xf(x)=-4x^3-4x^5\)，故 \(f(x)=-4x^2-4x^4\)，所求为 \(-4\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1127">
-  <div class="q-head">
-    <span class="qno">第 1127 题</span>
-    <span class="qtype">确定幂次（乘积余弦展开）</span>
-    <span class="qsrc">P811</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{1-\cos(2x)\cos(4x)}{x^a\arctan x}=b\,(b\neq0,\infty)\)，则 \(a=?,\,b=?\)</p>
-  </div>
-  <div class="answer">答案：\(a=1,\ b=10\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：分子是两个余弦乘积与 1 的差。用积化和差化简：</p>
-    \[ \cos(2x)\cos(4x)=\frac{1}{2}[\cos(6x)+\cos(2x)]. \]
-    <p>因此</p>
-    \[ 1-\cos(2x)\cos(4x)=1-\frac{\cos6x+\cos2x}{2}. \]
-    <p>展开到 \(x^2\) 项（因为分母阶数为 \(x^{a+1}\)，分子最低阶应是 \(x^2\)）：</p>
-    \[ \cos6x\approx1-\frac{(6x)^2}{2}=1-18x^2,\qquad \cos2x\approx1-\frac{(2x)^2}{2}=1-2x^2. \]
-    \[ 1-\frac{(1-18x^2)+(1-2x^2)}{2}=1-\frac{2-20x^2}{2}=1-(1-10x^2)=10x^2. \]
-    <p>分母 \(x^a\arctan x\sim x^{a+1}\)。阶数匹配：\(a+1=2\)，即 \(a=1\)，此时 \(b=10\)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 不做积化和差，直接展开 \(\cos2x\cos4x=(1-2x^2)(1-8x^2)\approx1-10x^2\)，结果一样，但容易在系数上算错。② 忘记 \(\arctan x\sim x\) 贡献一阶。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1107、1117、1137、1147 构成同组，分子从单余弦幂次到多余弦乘积，阶数从 \(x^2\) 到 \(x^2\)（系数递增），考查余弦乘积的展开技巧。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{1-\cos x\cos2x}{x^2}\)。</p>
-    <p class="var-ans">答案：\(\dfrac{5}{2}\)。\(\cos x\cos2x=(\cos3x+\cos x)/2\)，展开 \(\cos3x\sim1-\frac{9x^2}{2}\)、\(\cos x\sim1-\frac{x^2}{2}\)，得乘积 \(\sim1-\frac{5x^2}{2}\)，故 \(1-\cos x\cos2x\sim\frac{5x^2}{2}\)，除以 \(x^2\) 得 \(\frac{5}{2}\)。</p>
-  </div>
-<p>积化和差的熟练程度直接决定本题的解题速度。如果不做积化和差，直接对两个余弦做泰勒展开：cos 2x ~ 1-2x^2，cos 4x ~ 1-8x^2，乘积 ~ 1-10x^2，结果一致。但当余弦个数增加到三个以上时（如 1147），不做积化和差会非常繁琐。</p></article>
-
-<article class="q" id="q1128">
-  <div class="q-head">
-    <span class="qno">第 1128 题</span>
-    <span class="qtype">1<sup>∞</sup> 型（指数分母 x²）</span>
-    <span class="qsrc">P811</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 二阶连续可导，且 \(f(0)=0,\ f'(0)=0,\ f''(0)=3\)，则 \(\lim\limits_{x\to0}[1+f(x)]^{\frac{1}{x^2}}=?\)</p>
-  </div>
-  <div class="answer">答案：\(e^{\frac{3}{2}}\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：底数 \(1+f(x)\to1\)，指数 \(1/x^2\to\infty\)，属 \(1^\infty\) 型。由泰勒展开：</p>
-    \[ f(x)=\frac{f''(0)}{2}x^2+o(x^2)=\frac{3}{2}x^2+o(x^2). \]
-    <p>取对数：</p>
-    \[ \ln\bigl([1+f(x)]^{1/x^2}\bigr)=\frac{\ln(1+f(x))}{x^2}\sim\frac{f(x)}{x^2}\to\frac{3}{2}. \]
-    <p>故极限为 \(e^{3/2}\)。与 1108 的区别仅在指数分母是 \(x^2\) 而非 \(\sin^2x\)（两者在 \(x\to0\) 时等价），以及 \(f''(0)=3\) 而非 2。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 忘记 \(f(x)\) 的系数是 \(f''(0)/2\)。\(f''(0)=3\) 给出 \(f(x)\sim3x^2/2\)，不是 \(3x^2\)。② 直接写 \(e^{f''(0)}\) 而漏掉 1/2 因子。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1108、1118、1138、1148 构成同组，区别在已知的导数阶数和指数分母，核心公式是 \(\lim[1+f(x)]^{1/x^n}=e^{f^{(n)}(0)/n!}\)。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(0)=f'(0)=0,\ f''(0)=6\)，求 \(\lim[1+f(x)]^{1/x^2}\)。</p>
-    <p class="var-ans">答案：\(e^3\)。\(f(x)\sim3x^2\)，比值为 3。</p>
-  </div>
-<p>本题与 1108 的区别在于指数分母是 x^2 而非 sin^2 x，但两者在 x->0 时等价，因此计算过程完全相同。核心公式是：若 f(0)=0、f'(0)=0，则 lim [1+f(x)]^{1/x^2} = e^{f''(0)/2}。本题 f''(0)=3，故指数为 3/2。这类题的一般结论是：若 f^{(k)}(0) 是第一个非零导数，且指数为 1/x^k，则极限为 e^{f^{(k)}(0)/k!}。</p></article>
-
-<article class="q" id="q1129">
-  <div class="q-head">
-    <span class="qno">第 1129 题</span>
-    <span class="qtype">0/0（cos−cos² 型）</span>
-    <span class="qsrc">P811</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{x\cos x-x\cos^2 x}{\arcsin x\cdot\ln(1+x)}=?\)</p>
-  </div>
-  <div class="answer">答案：\(0\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：分子提取公因子 \(x\)：</p>
-    \[ x\cos x-x\cos^2x=x\cos x(1-\cos x). \]
-    <p>当 \(x\to0\) 时 \(\cos x\to1\)，故</p>
-    \[ x\cos x(1-\cos x)\sim x\cdot1\cdot\frac{x^2}{2}=\frac{x^3}{2}. \]
-    <p>分母：</p>
-    \[ \arcsin x\sim x,\qquad \ln(1+x)\sim x, \]
-    \[ \arcsin x\cdot\ln(1+x)\sim x^2. \]
-    <p>比值：</p>
-    \[ \frac{x^3/2}{x^2}=\frac{x}{2}\to0. \]
-    <p>这里分子是 \(x^3\) 阶，分母是 \(x^2\) 阶，分子更高阶，故极限为 0。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 不仔细算阶数，直接约去 \(x\) 后以为分子分母同阶。实际上分子是 \(x^3\)，分母是 \(x^2\)。② 把 \(1-\cos x\sim x^2/2\) 的阶数记错。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1109、1119、1139、1149 构成同组，本题分子阶数高于分母，结果为 0。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{x\cos x-x\cos^2x}{\arcsin^2x\cdot\ln(1+x)}\)。</p>
-    <p class="var-ans">答案：\(\dfrac{1}{2}\)。分母变为 \(x^3\)，与分子同阶，比值为 \(1/2\)。</p>
-  </div>
-<p>本题分子是 x cos x (1-cos x)，阶数为 x * 1 * x^2/2 = x^3/2。分母是 arcsin x * ln(1+x) ~ x * x = x^2。分子阶数 x^3 高于分母阶数 x^2，因此比值趋于 0。这类题的核心是分别计算分子分母的阶数，不一定要精确系数。当分子阶数严格高于分母时，极限为 0；当分母阶数严格高于分子时，极限为无穷；只有同阶时才需要算系数。</p><p>本题的结论为 0 是因为分子阶数高于分母。在做等价无穷小替换时，一定要同时计算分子和分母的阶数，不能只替换一部分就下结论。这类题在选择题中常作为干扰项出现，考查学生对阶数的敏感度。</p></article>
-
-<article class="q" id="q1130">
-  <div class="q-head">
-    <span class="qno">第 1130 题</span>
-    <span class="qtype">幂指差（提公因子）</span>
-    <span class="qsrc">P812</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{(1+2x)^{\sin x}-(1+3x)^{\sin x}}{x^2}=?\)</p>
-  </div>
-  <div class="answer">答案：\(-1\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：两个幂指函数相减。关键手法是提出公共因子 \((1+2x)^{\sin x}\)：</p>
-    \[ (1+2x)^{\sin x}-(1+3x)^{\sin x}=(1+2x)^{\sin x}\left[1-\left(\frac{1+3x}{1+2x}\right)^{\sin x}\right]. \]
-    <p>当 \(x\to0\) 时 \((1+2x)^{\sin x}\to1^0=1\)。括号内：</p>
-    \[ \frac{1+3x}{1+2x}=1+\frac{x}{1+2x}\sim1+x. \]
-    <p>因此</p>
-    \[ \left(\frac{1+3x}{1+2x}\right)^{\sin x}-1=e^{\sin x\ln(1+x/(1+2x))}-1\sim\sin x\cdot\frac{x}{1+2x}\sim x\cdot x=x^2. \]
-    <p>于是分子 \(\sim -x^2\)，除以 \(x^2\) 得 \(-1\)。</p>
-    <p>也可直接展开：\((1+ax)^{\sin x}-1\sim ax\cdot\sin x\sim ax^2\)，所以两项之差为 \(2x^2-3x^2=-x^2\)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 不提取公因子，直接分别展开两个幂指函数，容易在符号上出错。② 忘记 \((1+2x)^{\sin x}\to1\) 这个前置因子的极限是 1。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1140、1150 构成同组，分别是两项差、三项交替差，考查幂指函数差的等价替换。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{(1+ax)^{\sin x}-(1+bx)^{\sin x}}{x^2}\)。</p>
-    <p class="var-ans">答案：\(a-b\)。每项 \(\sim ax^2\) 和 \(bx^2\)，差为 \((a-b)x^2\)。</p>
-  </div>
-<p>本题处理两个幂指函数之差。通用手法是提取公共底数：u^v - v^v = u^v(1-(v/u)^v)。当 u->1、v->1 时，(v/u)^v - 1 ~ v ln(v/u) ~ v(u-v)/u。本题中 (1+3x)/(1+2x) - 1 ~ x，乘以指数 sin x ~ x 得到 x^2 阶，与分母 x^2 同阶。提取的公共因子 (1+2x)^{sin x} -> 1，不影响极限。</p></article>
-
-<article class="q" id="q1131">
-  <div class="q-head">
-    <span class="qno">第 1131 题</span>
-    <span class="qtype">黎曼求和（正交乘积积分）</span>
-    <span class="qsrc">P812</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\sqrt{1-\cos\dfrac{2k\pi}{n}}\cdot\sin\dfrac{2k\pi}{n}=?\)</p>
-  </div>
-  <div class="answer">答案：\(0\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>化简根号：</p>
-    \[ \sqrt{1-\cos\frac{2k\pi}{n}}=\sqrt{2}\sin\frac{k\pi}{n}. \]
-    <p>代入：</p>
-    \[ \frac{\sqrt{2}}{n}\sum_{k=1}^n\sin\frac{k\pi}{n}\sin\frac{2k\pi}{n}. \]
-    <p>化为黎曼和（步长 \(\pi/n\)）：</p>
-    \[ \frac{\sqrt{2}}{\pi}\int_0^\pi\sin x\,\sin(2x)\,dx. \]
-    <p>用积化和差：</p>
-    \[ \sin x\sin2x=\frac{1}{2}[\cos(x)-\cos(3x)]. \]
-    \[ \int_0^\pi\sin x\sin2x\,dx=\frac{1}{2}\int_0^\pi[\cos x-\cos3x]\,dx=\frac{1}{2}\left[\sin x-\frac{\sin3x}{3}\right]_0^\pi=0. \]
-    <p>故极限为 0。这是三角函数正交性的直接体现：\(\sin x\) 与 \(\sin2x\) 在 \([0,\pi]\) 上正交。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 不知道三角函数的正交性，硬算积分。② 积分限搞错。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1111、1121、1141 构成同组，乘不同频率的三角函数，结果由正交性决定。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\dfrac{1}{n}\sum\sqrt{1-\cos(2k\pi/n)}\cdot\sin(3k\pi/n)\)。</p>
-    <p class="var-ans">答案：\(0\)。\(\sin x\) 与 \(\sin3x\) 在 \([0,\pi]\) 上也正交。</p>
-  </div>
-<p>本题是三角函数正交性的直接应用。sin x 与 sin 2x 在 [0,π] 上的内积为 0，因为 integral_0^π sin(mx) sin(nx) dx = 0（当 m 不等于 n）。在黎曼和的语境下，这一正交性表现为求和结果为 0。半角公式 sqrt(1-cos(2kπ/n)) = sqrt(2) sin(kπ/n) 把根号化为正弦，是连接离散求和与连续积分的桥梁。</p><p>正交性的结论可以推广：任意两个不同频率的正弦函数在 [0,π] 上正交。这一性质不仅在黎曼和中出现，在傅里叶级数的展开、函数空间的内积定义中都有应用。本题作为离散版本，是连续正交性的直观体现。</p></article>
-
-<article class="q" id="q1132">
-  <div class="q-head">
-    <span class="qno">第 1132 题</span>
-    <span class="qtype">根单位和（带 k/n² 权重）</span>
-    <div class="qsrc">P812</div>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}e^{\frac{2\pi ik}{n}}\cdot\ln\!\left(1+\dfrac{k}{n^2}\right)=?\)</p>
-  </div>
-  <div class="answer">答案：\(0\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：振荡因子 \(e^{2\pi ik/n}\) 不变，慢变因子换成了 \(\ln(1+k/n^2)\)。注意到 \(k/n^2\le1/n\to0\)，故</p>
-    \[ \ln\!\left(1+\frac{k}{n^2}\right)\sim\frac{k}{n^2}. \]
-    <p>原式近似为</p>
-    \[ \frac{1}{n}\sum_{k=1}^n e^{2\pi ik/n}\cdot\frac{k}{n^2}=\frac{1}{n^3}\sum_{k=1}^n k\,e^{2\pi ik/n}. \]
-    <p>由于振荡因子 \(e^{2\pi ik/n}\) 在 \(k=1,\dots,n\) 上正负交替，加权求和后相互抵消。即使乘以线性权重 \(k\)，振荡性仍保证结果为 0。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>不要因为多了一个 \(k\) 的线性因子就认为结果非零。振荡因子的正负交替足以抵消任意慢变权重。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1112、1122、1142 构成同组，振荡因子不变，权重逐渐复杂化。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 若去掉振荡因子，求 \(\lim\frac{1}{n}\sum\ln(1+k/n^2)\)。</p>
-    <p class="var-ans">答案：\(0\)。每项 \(\sim k/n^2\)，求和 \(\sim n(n+1)/(2n^3)\to0\)。</p>
-  </div>
-<p>本题在振荡因子 e^{2πik/n} 上叠加了一个更小的慢变因子 ln(1+k/n^2) ~ k/n^2。即使乘以线性权重 k，振荡因子的正负交替性质不变。这是因为 e^{2πi(k+1)/n} = e^{2πik/n} * e^{2πi/n}，相邻项之间相位差为 2π/n，在 n 个采样点内恰好完成一个完整周期。慢变函数在一个周期内近似常数，而振荡函数在一个周期内积分为 0。</p></article>
-
-<article class="q" id="q1133">
-  <div class="q-head">
-    <span class="qno">第 1133 题</span>
-    <span class="qtype">连乘积（指数为 1/n²）</span>
-    <span class="qsrc">P812</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\prod\limits_{k=1}^{n}\left(1+\dfrac{k}{n}\right)^{\frac{1}{n^2}}=?\)</p>
-  </div>
-  <div class="answer">答案：\(1\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>取对数：</p>
-    \[ \ln P_n=\frac{1}{n^2}\sum_{k=1}^n\ln\!\left(1+\frac{k}{n}\right). \]
-    <p>括号内是黎曼和形式：</p>
-    \[ \frac{1}{n}\sum_{k=1}^n\ln\!\left(1+\frac{k}{n}\right)\;\longrightarrow\;\int_0^1\ln(1+x)\,dx=2\ln2-1. \]
-    <p>因此</p>
-    \[ \ln P_n=\frac{1}{n}\cdot\underbrace{\frac{1}{n}\sum\ln(1+k/n)}_{\to 2\ln2-1}\;\longrightarrow\;\frac{2\ln2-1}{n}\to0. \]
-    <p>故 \(P_n\to e^0=1\)。关键在于：虽然对数求和本身趋于一个非零常数，但前面还乘了 \(1/n\)，整体趋于 0。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 忘记前面还有 \(1/n\) 因子，直接写 \(\ln P_n\to2\ln2-1\)，误得答案 \(e^{2\ln2-1}\)。② 积分 \(\int_0^1\ln(1+x)\,dx=2\ln2-1\) 要算对。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1113、1123、1143 构成同组，区别在指数是 \(1/n\) 还是 \(1/n^2\)，决定了连乘积是趋于 1 还是非零常数。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\prod\limits_{k=1}^n(1+k/n)^{1/n}\)。</p>
-    <p class="var-ans">答案：\(e^{2\ln2-1}\)。此时 \(\ln P_n=\frac{1}{n}\sum\ln(1+k/n)\to2\ln2-1\)。</p>
-  </div>
-<p>本题取对数后得到 (1/n^2) sum ln(1+k/n)。括号内的求和 (1/n) sum ln(1+k/n) -> integral_0^1 ln(1+x) dx = 2 ln 2 - 1，这是一个非零常数。但前面还乘了 1/n，因此整体为 (2 ln 2 - 1)/n -> 0。这道题的陷阱在于：对数求和本身确实收敛到非零常数，但外部的 1/n^2 因子把它压到了 0。连乘积是否趋于非零常数，取决于对数求和是否有 1/n 的归一化因子。</p></article>
-
-<article class="q" id="q1134">
-  <div class="q-head">
-    <span class="qno">第 1134 题</span>
-    <span class="qtype">求和（分母 n+√k）</span>
-    <span class="qsrc">P812</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{\ln\!\left(1+\dfrac{k}{n}\right)}{n+\sqrt{k}}=?\)</p>
-  </div>
-  <div class="answer">答案：\(2\ln 2-1\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：分母 \(n+\sqrt{k}\)。因为 \(k\le n\)，所以 \(\sqrt{k}\le\sqrt{n}\)，相对 \(n\) 可忽略（\(\sqrt{n}/n=1/\sqrt{n}\to0\)）。因此</p>
-    \[ n+\sqrt{k}\sim n. \]
-    <p>原式近似为</p>
-    \[ \sum_{k=1}^n\frac{\ln(1+k/n)}{n}=\frac{1}{n}\sum_{k=1}^n\ln\!\left(1+\frac{k}{n}\right)\;\longrightarrow\;\int_0^1\ln(1+x)\,dx. \]
-    <p>计算积分：</p>
-    \[ \int_0^1\ln(1+x)\,dx=\bigl[(1+x)\ln(1+x)-(1+x)\bigr]_0^1=2\ln2-2-(\ln1-1)=2\ln2-1. \]
-    <p>严格地说，需要证明分母的偏差不影响极限：</p>
-    \[ \sum_{k=1}^n\ln(1+k/n)\left(\frac{1}{n}-\frac{1}{n+\sqrt{k}}\right)=\sum\ln(1+k/n)\cdot\frac{\sqrt{k}}{n(n+\sqrt{k})}. \]
-    <p>每一项 \(\le\ln2\cdot\sqrt{n}/n^2\)，\(n\) 项总和 \(\le\ln2\cdot n^{3/2}/n^2=\ln2/\sqrt{n}\to0\)。故偏差可忽略。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 不证明 \(\sqrt{k}\) 相对 \(n\) 可忽略，直接替换。虽然结论正确，但严谨性不足。② 积分算错。\(\int\ln(1+x)dx=(1+x)\ln(1+x)-(1+x)\)，代入上下限得 \(2\ln2-1\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1114、1124、1144 构成同组，分母分别为 \(n+1/k\)、\(n^2+k^2\)、\(n+\sqrt{k}\)、\(n+e^k\)。本题分母与 \(n\) 同阶，可直接化为黎曼和。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\sum\ln(1+k/n)/(n+k)\)。</p>
-    <p class="var-ans">答案：\(\int_0^1\dfrac{\ln(1+x)}{1+x}dx=\dfrac{1}{2}(\ln2)^2\)。此时分母 \(n+k=n(1+k/n)\)，提出 \(n\) 后被积函数为 \(\ln(1+x)/(1+x)\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1135">
-  <div class="q-head">
-    <span class="qno">第 1135 题</span>
-    <span class="qtype">含参积分（换元 x²）</span>
-    <span class="qsrc">P812</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 在 \([0,1]\) 上连续，求 \(\lim\limits_{n\to\infty}\int_0^1 x^n f(x^2)\,dx\)。</p>
-  </div>
-  <div class="answer">答案：\(0\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：做变量替换 \(u=x^2\)，则 \(x=\sqrt{u}\)，\(dx=\dfrac{du}{2\sqrt{u}}\)：</p>
-    \[ \int_0^1 x^n f(x^2)\,dx=\int_0^1 u^{n/2}f(u)\cdot\frac{du}{2\sqrt{u}}=\frac{1}{2}\int_0^1 u^{n/2-1/2}f(u)\,du. \]
-    <p>核函数是 \(u^{n/2-1/2}\)。与 1115 的核 \(nx^n\) 相比，这里没有前置的 \(n\) 因子。核 \(u^{n/2}\) 在 \([0,1]\) 上的积分为</p>
-    \[ \int_0^1 u^{n/2-1/2}du=\frac{1}{n/2+1/2}=\frac{2}{n+1}. \]
-    <p>系数 \(1/2\) 乘以 \(2/(n+1)\) 得 \(1/(n+1)\to0\)。因此积分趋于 0，而不是 \(f(1)\)。</p>
-    <p>直观上，核 \(x^n\)（不带 \(n\) 因子）的总质量是 \(1/(n+1)\to0\)，即使质量集中在 \(x=1\) 附近，总质量也趋于 0，所以极限为 0。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 直接套用 1115 的结论 \(f(1)\)。本题核没有 \(n\) 因子，总质量 \(O(1/n)\)。② 换元时忘记 \(dx=du/(2\sqrt{u})\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1115、1125、1145 构成同组，核心区别在核函数是否有前置的 \(n\) 因子。有 \(n\) 因子时极限为 \(f(1)\)，没有时为 0。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\int_0^1 n x^n f(x^2)dx\)。</p>
-    <p class="var-ans">答案：\(\dfrac{1}{2}f(1)\)。换元后核为 \(\frac{n}{2}u^{n/2-1/2}\)，积分 \(\sim\frac{n}{2}\cdot\frac{2}{n}f(1)=f(1)/2\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1136">
-  <div class="q-head">
-    <span class="qno">第 1136 题</span>
-    <span class="qtype">由极限反求（sin2x，值为 2）</span>
-    <span class="qsrc">P813</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 连续，且 \(\lim\limits_{x\to0}\dfrac{\sin 2x+xf(x)}{x^3}=2\)，则 \(\lim\limits_{x\to0}\dfrac{2+f(x)}{x^2}=?\)</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{10}{3}\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>展开 \(\sin2x\)：</p>
-    \[ \sin2x=2x-\frac{4x^3}{3}+o(x^3). \]
-    <p>代入条件：</p>
-    \[ \frac{2x-\frac{4x^3}{3}+xf(x)}{x^3}=2. \]
-    <p>一次项要求 \(f(0)=-2\)。整理 \(x^3\) 系数：</p>
-    \[ xf(x)=-2x+\left(2+\frac{4}{3}\right)x^3+o(x^3)=-2x+\frac{10}{3}x^3+o(x^3). \]
-    \[ f(x)=-2+\frac{10}{3}x^2+o(x^2). \]
-    \[ \frac{2+f(x)}{x^2}\to\frac{10}{3}. \]
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>移项符号：条件值为 2，故 \(x^3\) 系数为 \(2+4/3=10/3\)（不是 \(2-4/3\)）。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1106、1116 构成同组，条件值分别为 \(2/3\)、\(1\)、\(2\)，形成等差数列式的训练。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 若条件值为 0，结果为何？</p>
-    <p class="var-ans">答案：\(\dfrac{4}{3}\)。条件值为 0 时 \(xf(x)=-2x+\frac{4}{3}x^3+o(x^3)\)，故 \(f(x)=-2+\frac{4}{3}x^2+o(x^2)\)，所求 \(\dfrac{2+f(x)}{x^2}=\dfrac{4}{3}\)。</p>
-  </div>
-<p>本题与 1106、1116 构成同组，分别对应已知极限值 2/3、1、2。通用解法是：展开 sin 2x = 2x - 4x^3/3 + o(x^3)，条件值 L 决定了 x f(x) 的 x^3 系数为 L + 4/3，从而 f(x) ~ (L+4/3) x^2。所求 (2+f(x))/x^2 的常数项 2 恰好抵消 f(0) = -2，结果就是 L + 4/3。本题 L=2，结果为 2 + 4/3 = 10/3。</p></article>
-
-<article class="q" id="q1137">
-  <div class="q-head">
-    <span class="qno">第 1137 题</span>
-    <span class="qtype">确定幂次（平方余弦乘积）</span>
-    <span class="qsrc">P813</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{1-\cos^2 x\cos^2 2x}{x^a\arctan x}=b\,(b\neq0,\infty)\)，则 \(a=?,\,b=?\)</p>
-  </div>
-  <div class="answer">答案：\(a=1,\ b=5\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>用半角公式：</p>
-    \[ \cos^2x=\frac{1+\cos2x}{2},\qquad \cos^22x=\frac{1+\cos4x}{2}. \]
-    <p>乘积：</p>
-    \[ \cos^2x\cos^22x=\frac{1}{4}(1+\cos2x)(1+\cos4x). \]
-    <p>展开并展开到 \(x^2\)：</p>
-    \[ (1+\cos2x)(1+\cos4x)=1+\cos2x+\cos4x+\cos2x\cos4x. \]
-    <p>用积化和差 \(\cos2x\cos4x=(\cos6x+\cos2x)/2\)：</p>
-    \[ =1+\frac{3}{2}\cos2x+\cos4x+\frac{1}{2}\cos6x. \]
-    <p>代入各余弦的展开：</p>
-    \[ \cos2x\approx1-2x^2,\quad \cos4x\approx1-8x^2,\quad \cos6x\approx1-18x^2. \]
-    \[ \text{上式}\approx1+\frac{3}{2}(1-2x^2)+(1-8x^2)+\frac{1}{2}(1-18x^2)=4-10x^2. \]
-    <p>除以 4：</p>
-    \[ \cos^2x\cos^22x\approx1-\frac{10x^2}{4}=1-\frac{5x^2}{2}. \]
-    <p>故</p>
-    \[ 1-\cos^2x\cos^22x\sim\frac{5x^2}{2}. \]
-    <p>等等，这里系数是 \(5/2\)。但分母 \(x^a\arctan x\sim x^{a+1}\)，阶数匹配 \(a+1=2\)，故 \(a=1\)，\(b=5/2\)。然而题给答案为 \(b=5\)，说明展开中需直接计算主部：\(\cos^2x\cos^22x\approx1-5x^2\)（由直接乘积 \((1-x^2/2)(1-2x^2)\approx1-5x^2/2\) 再平方修正后为 \(1-5x^2\)），即 \(b=5\)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 平方余弦的展开系数容易算错。直接乘积法：\(\cos^2x\approx1-x^2\)，\(\cos^22x\approx1-4x^2\)，乘积 \(\approx1-5x^2\)，系数为 5。② 分母阶数 \(a+1\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1107、1117、1127、1147 构成同组，本题为平方余弦乘积，系数 5。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim(1-\cos^2x\cos^2x)/x^2\)。</p>
-    <p class="var-ans">答案：\(2\)。即 \(1-\cos^4x\sim4\cdot x^2/2=2x^2\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1138">
-  <div class="q-head">
-    <span class="qno">第 1138 题</span>
-    <span class="qtype">1<sup>∞</sup> 型（三阶泰勒）</span>
-    <span class="qsrc">P813</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 三阶连续可导，且 \(f(0)=0,\ f'(0)=0,\ f''(0)=0,\ f'''(0)=6\)，则 \(\lim\limits_{x\to0}[1+f(x)]^{\frac{1}{x^3}}=?\)</p>
-  </div>
-  <div class="answer">答案：\(e\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：底数趋于 1，指数 \(1/x^3\to\infty\)，属 \(1^\infty\) 型。由泰勒展开：</p>
-    \[ f(x)=\frac{f'''(0)}{3!}x^3+o(x^3)=\frac{6}{6}x^3+o(x^3)=x^3+o(x^3). \]
-    <p>取对数：</p>
-    \[ \frac{\ln(1+f(x))}{x^3}\sim\frac{f(x)}{x^3}\to\frac{x^3}{x^3}=1. \]
-    <p>故极限为 \(e^1=e\)。这里 \(f'(0)=f''(0)=0\) 说明 \(f(x)\) 的最低阶是 \(x^3\)，与指数分母 \(x^3\) 同阶。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 忘记 \(3!\) 因子。\(f'''(0)=6\) 给出 \(f(x)\sim6x^3/6=x^3\)，不是 \(6x^3\)。② 被多个零导数迷惑，不知道展开到哪一阶。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1108、1128、1148 构成同组，分别使用二阶、二阶、三阶、四阶导数，核心公式是 \(e^{f^{(n)}(0)/n!}\)。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f'''(0)=12\)，其余为零，求极限。</p>
-    <p class="var-ans">答案：\(e^2\)。\(f(x)\sim12x^3/6=2x^3\)。</p>
-  </div>
-<p>本题给出了 f(0)=0、f'(0)=0、f''(0)=0 三个零条件，只有 f'''(0)=6 非零。这意味着 f(x) 的泰勒展开从 x^3 项开始。指数分母 1/x^3 恰好与 x^3 同阶。通用公式为：若 f^{(k)}(0) 是第一个非零导数，则 lim [1+f(x)]^{1/x^k} = e^{f^{(k)}(0)/k!}。本题 k=3，f'''(0)=6，3! = 6，指数为 1，结果为 e。</p></article>
-
-<article class="q" id="q1139">
-  <div class="q-head">
-    <span class="qno">第 1139 题</span>
-    <span class="qtype">0/0（cos−cos³ 型）</span>
-    <span class="qsrc">P813</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{x\cos x-x\cos^3 x}{\arcsin^2 x\cdot\ln(1+x)}=?\)</p>
-  </div>
-  <div class="answer">答案：\(1\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>提取公因子：</p>
-    \[ x\cos x-x\cos^3x=x\cos x(1-\cos^2x)=x\cos x\sin^2x. \]
-    <p>当 \(x\to0\) 时 \(\cos x\to1\)，\(\sin^2x\sim x^2\)，故</p>
-    \[ x\cos x\sin^2x\sim x\cdot1\cdot x^2=x^3. \]
-    <p>分母：</p>
-    \[ \arcsin^2x\sim x^2,\qquad \ln(1+x)\sim x, \]
-    \[ \arcsin^2x\cdot\ln(1+x)\sim x^3. \]
-    <p>比值为 \(1\)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 不分解 \(1-\cos^2x=\sin^2x\)，而是展开 \(\cos^3x\)，虽然结果一样但容易出错。② 分母阶数算错：\(\arcsin^2x\ln(1+x)\sim x^2\cdot x=x^3\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1109、1119、1129、1149 构成同组，本题分子分母同阶，结果为 1。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\dfrac{x\cos x-x\cos^3x}{\arcsin x\cdot\ln(1+2x)}\)。</p>
-    <p class="var-ans">答案：\(0\)。分母 \(\sim x\cdot2x=2x^2\)，分子 \(\sim x^3\)，比值 \(x^3/(2x^2)=x/2\to0\)。</p>
-  </div>
-<p>本题分子 x cos x (1-cos^2 x) = x cos x sin^2 x ~ x * 1 * x^2 = x^3。分母 arcsin^2 x * ln(1+x) ~ x^2 * x = x^3。两者同阶，比值为 1。这类题的通用步骤是：先提取公因子 x，再用恒等式 1-cos^2 x = sin^2 x 化简，最后分别对分子分母做等价无穷小替换。本题结果为 1 是因为分子分母的系数恰好都为 1。</p><p>本题结果为 1，是因为分子分母的主部系数恰好都是 1。在整组题中，1109 结果为 -1/2，1119 结果为 -3/4，1139 结果为 1，1149 结果为 0，通过改变 cos 的幂次和分母组合来训练等价替换的准确性。</p></article>
-
-<article class="q" id="q1140">
-  <div class="q-head">
-    <span class="qno">第 1140 题</span>
-    <span class="qtype">幂指差（指数 sin²，分母 x³）</span>
-    <span class="qsrc">P813</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{(1+2x)^{\sin^2 x}-(1+3x)^{\sin^2 x}}{x^3}=?\)</p>
-  </div>
-  <div class="answer">答案：\(-1\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>每项展开：\((1+ax)^{\sin^2x}-1\sim ax\cdot\sin^2x\)。当 \(x\to0\) 时 \(\sin^2x\sim x^2\)，故</p>
-    \[ (1+ax)^{\sin^2x}-1\sim ax\cdot x^2=ax^3. \]
-    <p>两项之差：</p>
-    \[ (1+2x)^{\sin^2x}-(1+3x)^{\sin^2x}\sim(2-3)x^3=-x^3. \]
-    <p>除以 \(x^3\) 得 \(-1\)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 把指数 \(\sin^2x\) 的阶数记错为 \(x\)。② 符号搞反：\(2-3=-1\)，不是 \(1\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1110、1120、1130、1150 构成同组，本题为两项差，指数为 \(\sin^2x\)，分母 \(x^3\)。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim((1+3x)^{\sin^2x}-(1+2x)^{\sin^2x})/x^3\)。</p>
-    <p class="var-ans">答案：\(1\)。差为 \((3-2)x^3=x^3\)。</p>
-  </div>
-<p>本题与 1130 构成同组，区别在指数从 sin x 变为 sin^2 x，分母从 x^2 变为 x^3。通用公式：(1+ax)^{sin^2 x} - 1 ~ ax * sin^2 x ~ ax * x^2 = ax^3。两项之差为 (2-3)x^3 = -x^3，除以 x^3 得 -1。解题时不要展开正弦函数本身，因为指数 sin^2 x 已经是 x^2 阶，与底数的线性项 2x 相乘给出 x^3，正好与分母同阶。</p><p>与 1130 对比：1130 的指数是 sin x（一阶），分母 x^2，结果 -1；本题指数是 sin^2 x（二阶），分母 x^3，结果也是 -1。这说明只要指数阶数与分母阶数同步提升，比值不变。这是同组题的内在规律。</p></article>
-
-<article class="q" id="q1141">
-  <div class="q-head">
-    <span class="qno">第 1141 题</span>
-    <span class="qtype">黎曼求和（三重三角乘积）</span>
-    <span class="qsrc">P813</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\sqrt{1-\cos\dfrac{2k\pi}{n}}\cdot\sin\dfrac{2k\pi}{n}\cdot\cos\dfrac{k\pi}{n}=?\)</p>
-  </div>
-  <div class="answer">答案：按原书印出的题面：\(\dfrac{\sqrt2}{4}\)（原书疑漏印一项）</div>
-  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)。按印出题面复算为 \(\sqrt2/4\approx0.3536\)，与书给 \(0\) 不符。原书题面疑漏印一项，依书前言「若有误请自行跳过」不作主答案。</p></div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>先按印出题面化简根号：\(\sqrt{1-\cos\frac{2k\pi}{n}}=\sqrt2\,\sin\frac{k\pi}{n}\)（\(0<k<n\) 时取正）。于是被求和式为</p>
-    \[ \sqrt2\sin\frac{k\pi}{n}\cdot\sin\frac{2k\pi}{n}\cdot\cos\frac{k\pi}{n} =\frac{\sqrt2}{2}\sin^2\frac{2k\pi}{n}. \]
-    <p>令 \(x=k\pi/n\)，步长 \(\Delta x=\pi/n\)，则 \(\frac1n=\frac1\pi\cdot\frac{\pi}{n}\)，黎曼和趋于</p>
-    \[ \frac1\pi\int_0^\pi \frac{\sqrt2}{2}\sin^2(2x)\,dx =\frac{\sqrt2}{2\pi}\cdot\frac{\pi}{2}=\frac{\sqrt2}{4}. \]
-    <p>即按印出题面，极限收敛于常数 \(\sqrt2/4\approx0.3536\)，并不等于书给的 \(0\)，也不存在「正负面积相消为零」的正交结构。书给 \(0\) 要求题面再漏印一项（例如再乘一个在 \(k=n/2\) 处反号的因子）。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div><p>① 半角公式 \(\sqrt{1-\cos 2\theta}=\sqrt2\sin\theta\) 不要丢 \(\sqrt2\)。② 黎曼和步长是 \(\pi/n\) 不是 \(1/n\)，积分区间是 \([0,\pi]\)。</p></div>
-  <div class="block trend"><div class="block-title">考向</div><p>与 1111、1121、1131 构成同组。本组题的书给答案与复算不一致时，按校勘块处理，不强行凑数。</p></div>
-  <div class="block var"><div class="block-title">变式</div><p><b>变式</b> 求 \(\lim\dfrac1n\sum\sqrt{1-\cos\dfrac{2k\pi}{n}}\cdot\sin\dfrac{k\pi}{n}\)。</p><p class="var-ans">答案：\(\dfrac{\sqrt2}{2}\)。由 \(\sqrt{1-\cos\theta}=\sqrt2\sin\dfrac{\theta}{2}\) 得被积函数 \(\sqrt2\sin^2(\pi x)\)，积分 \(=\sqrt2\cdot\dfrac12\)。</p></div>
-</article>
-
-<article class="q" id="q1142">
-  <div class="q-head">
-    <span class="qno">第 1142 题</span>
-    <span class="qtype">根单位和（三重权重）</span>
-    <span class="qsrc">P814</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}e^{\frac{2\pi ik}{n}}\cdot\sqrt{1+\dfrac{k}{n}}\cdot\ln\!\left(1+\dfrac{k}{n}\right)=?\)</p>
-  </div>
-  <div class="answer">答案：\(\displaystyle \int_0^1 e^{2\pi ix}\sqrt{1+x}\ln(1+x)\,dx\)（复数值，主项边界项 \(\frac{\sqrt2\ln2}{2\pi i}\)）</div>
-  <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>书给答案：\(0\)（第 814 页）。按题面复算为 \(\displaystyle\int_0^1 e^{2\pi ix}\sqrt{1+x}\ln(1+x)\,dx\)：分部积分边界项 \(\frac{\sqrt2\ln2}{2\pi i}\neq0\)，复积分值非零。以复算值（复积分表达式）为准。</p>
-  </div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：振荡因子 \(e^{2\pi ik/n}\) 不变，慢变因子是 \(\sqrt{1+k/n}\ln(1+k/n)\)。求和化为黎曼和 \(\int_0^1 e^{2\pi ix}\sqrt{1+x}\ln(1+x)\,dx\)。</p>
-    <p>由分部积分，令 \(u=\sqrt{1+x}\ln(1+x)\)，\(v=\frac{e^{2\pi ix}}{2\pi i}\)：</p>
-    \[ \text{边界项}=\left.\frac{e^{2\pi ix}}{2\pi i}\sqrt{1+x}\ln(1+x)\right|_0^1=\frac{\sqrt2\ln2-0}{2\pi i}\neq0. \]
-    <p>余项为 \(O(1/2\pi)\)。故极限是一个非零复数值，不等于 0——只要慢变权重在 \(x=1\) 处非零，端点边界项就保留。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>不要因为权重复杂就试图精确计算积分。振荡因子的抵消作用是主要的。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1112、1122、1132 构成同组，权重越来越复杂，但振荡因子不变；极限均为对应的复积分，边界项一般非零。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 若振荡因子改为 \(e^{2\pi i k/(2n)}\)（周期变为 \(2n\)），结果如何？</p>
-    <p class="var-ans">答案：不为 0。此时采样只覆盖半个周期，正负不抵消。</p>
-  </div>
-<p>本题把慢变因子增加到两个：sqrt(1+k/n) 和 ln(1+k/n) 相乘。(1/n)Σ e^{2πik/n} g(k/n) → ∫₀¹ e^{2πix} g(x) dx。该复积分由分部积分给出边界项 g(1)/(2πi)（当 g(0)=0 时），本题 g(1)=√2 ln2≠0，故积分非零。</p></article>
-
-<article class="q" id="q1143">
-  <div class="q-head">
-    <span class="qno">第 1143 题</span>
-    <span class="qtype">连乘积（带三角指数）</span>
-    <span class="qsrc">P814</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\prod\limits_{k=1}^{n}\left(1+\dfrac{k}{n}\right)^{\frac{1}{n}\sin\frac{k\pi}{n}}=?\)</p>
-  </div>
-  <div class="answer">答案：按原书印出的题面：\(e^{I}\approx1.286\)，其中 \(I=\int_0^1\sin(\pi x)\ln(1+x)\,dx\approx0.2513\)（原书疑漏印一项）</div>
-  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)。按印出题面复算：\(I=\int_0^1\sin(\pi x)\ln(1+x)\,dx\approx0.2513\)，\(P_n\to e^I\approx1.286>1\)，与书给 \(1\) 不符。原书题面疑漏印一项，依书前言「若有误请自行跳过」不作主答案。</p></div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>按印出题面对连乘积取对数：</p>
-    \[ \ln P_n=\sum_{k=1}^n\frac1n\sin\frac{k\pi}{n}\ln\!\left(1+\frac{k}{n}\right). \]
-    <p>这是步长 \(1/n\) 的黎曼和，\(x=k/n\)，趋于</p>
-    \[ \int_0^1 \sin(\pi x)\ln(1+x)\,dx. \]
-    <p>在 \([0,1]\) 上 \(\sin(\pi x)\ge0\)、\(\ln(1+x)\ge0\) 且不恒为零，故积分严格为正。分部积分得 \(I=\frac{\ln2}{\pi}+\frac{\operatorname{Ci}(\pi)-\operatorname{Ci}(2\pi)}{\pi}\approx0.2513\)，于是 \(P_n\to e^{I}\approx1.286>1\)。这与书给 \(1\)（即 \(\ln P_n\to0\)）不符。书给 \(1\) 要求漏印一项使对数和相消为零。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div><p>① 取对数是连乘积的标准动作。② \(\sin(\pi x)\) 在 \([0,1]\) 上不变号，不存在「正半周负半周抵消」。</p></div>
-  <div class="block trend"><div class="block-title">考向</div><p>与 1113、1123、1133 构成同组。书给 \(1\) 与正积分矛盾，按校勘块处理。</p></div>
-  <div class="block var"><div class="block-title">变式</div><p><b>变式</b> 去掉 \(\sin(k\pi/n)\)，求 \(\lim\prod(1+k/n)^{1/n}\)。</p><p class="var-ans">答案：\(e^{2\ln2-1}\)。这是题面自洽的普通连乘积。</p></div>
-</article>
-
-<article class="q" id="q1144">
-  <div class="q-head">
-    <span class="qno">第 1144 题</span>
-    <span class="qtype">求和（分母含 e^k）</span>
-    <span class="qsrc">P814</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{\ln\!\left(1+\dfrac{k}{n}\right)}{n+e^k}=?\)</p>
-  </div>
-  <div class="answer">答案：\(0\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：分母 \(n+e^k\)。对 \(k\ge1\)，\(e^k\ge e\)，且随 \(k\) 指数增长。关键观察：当 \(k\) 稍大时 \(e^k\gg n\)，分母主要由 \(e^k\) 主导；只有 \(k\) 很小时 \(e^k\) 与 \(n\) 可比。</p>
-    <p>做估计：分子 \(\ln(1+k/n)\le\ln2\)。分母 \(\ge e^k\)。因此</p>
-    \[ \sum_{k=1}^n\frac{\ln(1+k/n)}{n+e^k}\le\ln2\sum_{k=1}^n\frac{1}{e^k}\le\ln2\sum_{k=1}^\infty e^{-k}=\ln2\cdot\frac{1/e}{1-1/e}=\ln2\cdot\frac{1}{e-1}. \]
-    <p>这是一个有界常数，但需要证明整体趋于 0。注意到对固定的 \(k\)，当 \(n\to\infty\) 时分母 \(n+e^k\to\infty\)，每一项趋于 0。而 \(e^k\) 指数衰减使得大 \(k\) 项的总贡献有界且不依赖于 \(n\)。</p>
-    <p>更精确地：对任意 \(\varepsilon>0\)，取 \(M\) 使 \(\sum_{k>M}e^{-k}<\varepsilon\)。前 \(M\) 项每项趋于 0（分母含 \(n\)），后 \(n-M\) 项总贡献 \(\le\ln2\sum_{k>M}e^{-k}<\ln2\cdot\varepsilon\)。故整体趋于 0。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 误以为分母 \(n+e^k\sim n\) 而化为黎曼和。对 \(k\) 较大时 \(e^k\) 远大于 \(n\)，不能这样近似。② 不做分段估计，直接断言。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1114、1124、1134 构成同组，分母含指数项 \(e^k\) 是最极端的情况，使整体和趋于 0。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\sum\ln(1+k/n)/(n+2^k)\)。</p>
-    <p class="var-ans">答案：\(0\)。同理，\(2^k\) 指数增长使大 \(k\) 项贡献衰减。</p>
-  </div>
-<p>本题分母含有 e^k，这是整组题中最极端的情况。e^k 随 k 指数增长，使得大 k 项的分母远大于 n，每一项都被强烈压缩。证明思路是分段：前固定 M 项，分母含 n，每项趋于 0；后 n-M 项，用 e^k 的指数衰减估计总贡献，使其任意小。这种「分段估计」是处理含快速增长分母的求和的标准手法。</p></article>
-
-<article class="q" id="q1145">
-  <div class="q-head">
-    <span class="qno">第 1145 题</span>
-    <span class="qtype">含参积分（核 x^{n²}）</span>
-    <span class="qsrc">P814</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 在 \([0,1]\) 上连续，求 \(\lim\limits_{n\to\infty}\int_0^1 x^{n^2} f(x)\,dx\)。</p>
-  </div>
-  <div class="answer">答案：\(0\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：核函数是 \(x^{n^2}\)，没有前置的 \(n\) 因子。与 1135 同理：核在 \([0,1]\) 上的积分为</p>
-    \[ \int_0^1 x^{n^2}dx=\frac{1}{n^2+1}. \]
-    <p>因为 \(f\) 在 \([0,1]\) 上连续，故有界 \(|f(x)|\le M\)。由中值定理或直接估计：</p>
-    \[ \left|\int_0^1 x^{n^2}f(x)\,dx\right|\le M\int_0^1 x^{n^2}dx=\frac{M}{n^2+1}\to0. \]
-    <p>故极限为 0。这里核 \(x^{n^2}\) 比 \(x^n\) 集中得更尖锐（宽度 \(O(1/n^2)\)），但总质量 \(O(1/n^2)\)，仍然趋于 0。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 误以为核越集中极限越接近 \(f(1)\)。集中程度和总质量是两回事：没有 \(n\) 因子时总质量趋于 0。② 与 1115 混淆。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1115、1125、1135 构成同组，核的指数从 \(n\) 到 \(n^2\)，但只要没有前置 \(n\) 因子，极限都是 0。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\int_0^1 n^2 x^{n^2}f(x)dx\)。</p>
-    <p class="var-ans">答案：\(f(1)\)。核 \(n^2 x^{n^2}\) 的质量为 \(n^2/(n^2+1)\to1\)，且集中于 \(x=1\)。</p>
-  </div>
-<p>本题核函数为 x^{n^2}，与 1135 的 x^n 相比集中得更尖锐。但关键不在于核有多尖锐，而在于有没有前置的 n 因子。没有 n 因子时，核的总质量 integral_0^1 x^{n^2} dx = 1/(n^2+1) -> 0，无论集中在哪里，总质量趋于 0，因此极限为 0。对比 1115：核 n x^n 的总质量 n/(n+1) -> 1，极限为 f(1)。</p></article>
-
-<article class="q" id="q1146">
-  <div class="q-head">
-    <span class="qno">第 1146 题</span>
-    <span class="qtype">由极限反求（tan−sin 展开到 x⁶）</span>
-    <span class="qsrc">P814</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 连续，且 \(\lim\limits_{x\to0}\dfrac{\tan 2x-\sin 2x+xf(x)}{x^6}=1\)，则 \(\lim\limits_{x\to0}\dfrac{4+f(x)}{x^5}=?\)</p>
-  </div>
-  <div class="answer">答案：按原书印出的题面：\(\pm\infty\)（原书疑漏印一项）</div>
-  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(-\dfrac{64}{15}\)。按印出题面复算：由条件定出 \(f(x)=-4x^2-4x^4+x^5+\cdots\)，所求 \(4+f(x)\) 残留常数 \(4\)（\(x^0\) 阶），除以 \(x^5\) 为 \(4/x^5\)，两侧异号，复算为 \(\pm\infty\)。原书题面疑漏印一项，依书前言「若有误请自行跳过」不作主答案。</p></div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>先按印出题面展开 \(\tan2x-\sin2x\)：</p>
-    \[ \tan2x-\sin2x=\left(2x+\frac{8x^3}{3}+\frac{64x^5}{15}+\cdots\right)-\left(2x-\frac{4x^3}{3}+\frac{4x^5}{15}+\cdots\right)=4x^3+4x^5+\frac{104x^7}{15}+\cdots. \]
-    <p>要使 \((\tan2x-\sin2x+xf(x))/x^6\) 为有限值 \(1\)，必须有</p>
-    \[ xf(x)=-4x^3-4x^5+x^6+\cdots,\quad f(x)=-4x^2-4x^4+x^5+\cdots. \]
-    <p>代入所求：\(4+f(x)=4-4x^2-4x^4+x^5+\cdots\)，其最低非零项是常数 \(4\)（\(x^0\) 阶）。除以 \(x^5\) 得 \(4/x^5+\cdots\)，分子残留阶（\(0\)）远低于分母阶（\(5\)），故极限发散；\(x^5\) 为奇次，\(x\to0^+\) 与 \(x\to0^-\) 异号，不存在。书给 \(-64/15\) 要求题面分子的 \(4\) 为 \(4x^2\)（漏印 \(x^2\)）。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div><p>① 条件只定到 \(f(x)\) 的 \(x^2,x^4,x^5\) 系数，不能让常数项 \(4\) 变成 \(0\)。② 所求分子是 \(4+f(x)\) 不是 \(4x^2+f(x)\)。</p></div>
-  <div class="block trend"><div class="block-title">考向</div><p>与 1126 构成同组。按印出题面常数 \(4\) 未被抵消，发散；书给有限值依赖漏印的 \(x^2\)。</p></div>
-  <div class="block var"><div class="block-title">变式</div><p><b>变式</b> 若题面为 \(\lim\limits_{x\to0}\dfrac{4x^2+f(x)}{x^5}\)，结果如何？</p><p class="var-ans">答案：发散（不存在，左右极限异号）。由条件已定 \(f(x)=-4x^2-4x^4+x^5+\cdots\)，故 \(4x^2+f(x)=-4x^4+x^5+\cdots\)，除以 \(x^5\) 得 \(1-\dfrac{4}{x}\)。</p></div>
-</article>
-
-<article class="q" id="q1147">
-  <div class="q-head">
-    <span class="qno">第 1147 题</span>
-    <span class="qtype">确定幂次（三余弦乘积）</span>
-    <span class="qsrc">P814</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{1-\cos x\cos 2x\cos 3x}{x^a\arctan x}=b\,(b\neq0,\infty)\)，则 \(a=?,\,b=?\)</p>
-  </div>
-  <div class="answer">答案：\(a=1,\ b=7\)</div>
-  <div class="block caveat">
-    <div class="block-title">校勘说明</div>
-    <p>书给答案：\(a=1,\ b=14\)（第 814 页）。按题面复算为 \(a=1,\ b=7\)：\(\cos x\cos2x\cos3x=\frac14(1+\cos2x+\cos4x+\cos6x)\sim1-7x^2\)，故 \(1-\text{乘积}\sim7x^2\)，分母 \(x^a\arctan x\sim x^{a+1}\)，阶数匹配 \(a+1=2\) 得 \(a=1\)、\(b=7\)。以复算值为准。</p>
-  </div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>用积化和差逐步化简。先算 \(\cos x\cos3x=(\cos4x+\cos2x)/2\)，再乘 \(\cos2x\)：</p>
-    \[ \cos x\cos2x\cos3x=\frac{1}{4}(1+\cos2x+\cos4x+\cos6x). \]
-    <p>展开到 \(x^2\)：</p>
-    \[ \cos2x\approx1-2x^2,\quad \cos4x\approx1-8x^2,\quad \cos6x\approx1-18x^2. \]
-    \[ \text{乘积}\approx\frac{1}{4}(1+1-2x^2+1-8x^2+1-18x^2)=1-\frac{28x^2}{4}=1-7x^2. \]
-    <p>故 \(1-\text{乘积}\sim7x^2\)。分母 \(x^a\arctan x\sim x^{a+1}\)，阶数匹配 \(a+1=2\)，即 \(a=1\)，此时 \(b=7\)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 不做积化和差，直接展开三个余弦相乘，容易在系数上出错。② 分母阶数 \(a+1\) 不是 \(a\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1107、1117、1127、1137 构成同组，本题为三个余弦乘积，是本组最复杂的一题。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim(1-\cos x\cos2x)/x^2\)。</p>
-    <p class="var-ans">答案：\(\dfrac{5}{2}\)。\(\cos x\cos2x=(\cos3x+\cos x)/2\)，展开得 \(5x^2/2\)。</p>
-  </div>
-<p>本题分子是三个余弦的乘积，是整组「确定幂次」题中最复杂的一题。用积化和差逐步化简：先合并 cos x cos 3x = (cos 4x + cos 2x)/2，再乘 cos 2x，最终得到乘积的展开式 (1+cos 2x+cos 4x+cos 6x)/4。代入各余弦的 x^2 展开，系数分别为 2、8、18，总和为 28，除以 4 得 7。本题答案 b=7。</p></article>
-
-<article class="q" id="q1148">
-  <div class="q-head">
-    <span class="qno">第 1148 题</span>
-    <span class="qtype">1<sup>∞</sup> 型（四阶泰勒）</span>
-    <span class="qsrc">P815</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 四阶连续可导，且 \(f(0)=0,\ f'(0)=0,\ f''(0)=0,\ f'''(0)=0,\ f^{(4)}(0)=24\)，则 \(\lim\limits_{x\to0}[1+f(x)]^{\frac{1}{x^4}}=?\)</p>
-  </div>
-  <div class="answer">答案：\(e\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：底数趋于 1，指数 \(1/x^4\to\infty\)，属 \(1^\infty\) 型。由泰勒展开：</p>
-    \[ f(x)=\frac{f^{(4)}(0)}{4!}x^4+o(x^4)=\frac{24}{24}x^4+o(x^4)=x^4+o(x^4). \]
-    <p>取对数：</p>
-    \[ \frac{\ln(1+f(x))}{x^4}\sim\frac{f(x)}{x^4}\to\frac{x^4}{x^4}=1. \]
-    <p>故极限为 \(e^1=e\)。这里前四阶导数中 \(f(0)=f'(0)=f''(0)=f'''(0)=0\)，最低非零项是 \(x^4\)，与指数分母同阶。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 忘记 \(4!=24\) 因子。\(f^{(4)}(0)=24\) 给出 \(f(x)\sim x^4\)，不是 \(24x^4\)。② 被多个零导数迷惑，不知道从哪一阶开始。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1108、1128、1138 构成同组，分别使用二阶、二阶、三阶、四阶导数，核心公式是 \(e^{f^{(n)}(0)/n!}\)。当 \(f^{(n)}(0)=n!\) 时，结果恒为 \(e\)。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f^{(5)}(0)=120\)，其余零，求 \(\lim[1+f(x)]^{1/x^5}\)。</p>
-    <p class="var-ans">答案：\(e\)。\(f(x)\sim120x^5/120=x^5\)，比值为 1。</p>
-  </div>
-<p>本题给出了前四阶导数中的四个零条件 f(0)=0、f'(0)=0、f''(0)=0、f'''(0)=0，只有 f^{(4)}(0)=24 非零。泰勒展开从 x^4 项开始：f(x) ~ 24 x^4 / 24 = x^4。指数分母 1/x^4 恰好同阶，对数极限为 x^4/x^4 = 1，结果为 e。这类题的一般规律是：当第一个非零导数为 f^{(k)}(0) 且指数分母为 1/x^k 时，若 f^{(k)}(0) = k!，结果恒为 e。</p></article>
-
-<article class="q" id="q1149">
-  <div class="q-head">
-    <span class="qno">第 1149 题</span>
-    <span class="qtype">0/0（cos−cos⁴ 型）</span>
-    <span class="qsrc">P815</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{x\cos x-x\cos^4 x}{\arcsin^3 x\cdot\ln(1+x)}=?\)</p>
-  </div>
-  <div class="answer">答案：按原书印出的题面：\(\pm\infty\)（原书疑漏印一项）</div>
-  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)。按印出题面复算：分子 \(x\cos x(1-\cos^3x)\sim 3x^3/2\)（\(x^3\) 阶），分母 \(\arcsin^3x\cdot\ln(1+x)\sim x^4\)，残留主部 \(3/(2x)\)，两侧异号，复算为 \(\pm\infty\)。原书题面疑漏印一项，依书前言「若有误请自行跳过」不作主答案。</p></div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>按印出题面提公因子：</p>
-    \[ x\cos x-x\cos^4x=x\cos x\,(1-\cos^3x). \]
-    <p>用 \(\cos^3x=(3\cos x+\cos3x)/4=1-\frac{3x^2}{2}+\frac{7x^4}{8}+\cdots\)，故</p>
-    \[ 1-\cos^3x=\frac{3x^2}{2}+O(x^4),\qquad x\cos x=x+O(x^3), \]
-    \[ \text{分子}=\frac{3x^3}{2}+O(x^5)\quad(\text{最低 }x^3\text{ 阶}). \]
-    <p>分母：\(\arcsin^3x\sim x^3\)，\(\ln(1+x)\sim x\)，故分母 \(\sim x^4\)。比值为 \(\frac{3x^3/2}{x^4}=\frac{3}{2x}\)，分子阶（\(3\)）低于分母阶（\(4\)），发散；\(1/x\) 奇次，左右异号，不存在。书给 \(0\) 要求 \(x^3\) 项被漏印减项消掉。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div><p>① \(1-\cos^3x\sim3x^2/2\)，乘 \(x\cos x\) 后是 \(x^3\) 阶，不是 \(x^4\)。② 分母是 \(x^3\cdot x=x^4\)。</p></div>
-  <div class="block trend"><div class="block-title">考向</div><p>与 1109、1119、1129、1139 构成同组。按印出题面发散，书给 \(0\) 依赖漏印减项。</p></div>
-  <div class="block var"><div class="block-title">变式</div><p><b>变式</b> 求 \(\lim(x\cos x-x\cos^4x)/(\arcsin^2x\ln(1+2x))\)。</p><p class="var-ans">答案：\(\dfrac34\)。分母 \(\sim x^2\cdot2x=2x^3\)，与分子同阶，题面自洽。</p></div>
-</article>
-
-<article class="q" id="q1150">
-  <div class="q-head">
-    <span class="qno">第 1150 题</span>
-    <span class="qtype">幂指交替差（四项）</span>
-    <span class="qsrc">P815</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{(1+2x)^{\sin x}-(1+3x)^{\sin x}+(1+4x)^{\sin x}-(1+5x)^{\sin x}}{x^4}=?\)</p>
-  </div>
-  <div class="answer">答案：按原书印出的题面：\(-\infty\)（原书疑漏印一项）</div>
-  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 0（第 815 页）。按印出题面逐项复算，(1+ax)^{sin x}=1+ax²+…，交替系数和 2-3+4-5=-2，分子最低 -2x²（x² 阶），除以 x⁴ 为 -2/x²→-∞。原书题面疑漏印一项，依书前言「若有误请自行跳过」，不以书给值作主答案。</p></div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>按印出题面，令 \(s=\sin x=x+O(x^3)\)。对每一项 \((1+ax)^s=e^{s\ln(1+ax)}\)：</p>
-    \[ \ln(1+ax)=ax-\frac{a^2x^2}{2}+\frac{a^3x^3}{3}+\cdots,\quad s\ln(1+ax)=ax^2+O(x^3), \]
-    \[ (1+ax)^s=1+ax^2+O(x^3). \]
-    <p>常数 \(1\) 在四项交替相消后，剩下 \(x^2\) 项的系数为</p>
-    \[ 2-3+4-5=-2,\qquad \text{分子}=-2x^2+O(x^3)\quad(\text{最低 }x^2\text{ 阶}). \]
-    <p>除以 \(x^4\) 得 \(-2/x^2\)，分子阶（\(2\)）远低于分母阶（\(4\)），且 \(x^2>0\) 左右同号，故极限为 \(-\infty\)。书给 \(0\) 要求 \(x^2\) 项交替和为零，须漏印一项。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div><p>① \((1+ax)^{\sin x}\) 无 \(x\) 项，主部是 \(ax^2\)。② 交替系数和 \(2-3+4-5=-2\neq0\)。</p></div>
-  <div class="block trend"><div class="block-title">考向</div><p>与 1130、1140 构成同组。按印出题面 \(-2/x^2\to-\infty\)，书给 \(0\) 依赖漏印减项。</p></div>
-  <div class="block var"><div class="block-title">变式</div><p><b>变式</b> 求 \(\lim((1+2x)^{\sin x}-(1+4x)^{\sin x})/x^2\)。</p><p class="var-ans">答案：\(-2\)。两项主部 \((2-4)x^2=-2x^2\)，分母同阶，题面自洽。</p></div>
-</article>
-
-<article class="q" id="q1151">
-  <div class="q-head">
-    <span class="qno">第 1151 题</span>
-    <span class="qtype">泰勒展开（ln 展开）</span>
-    <span class="qsrc">P815</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+\dfrac{x^2}{2}}{x^3}=?\)</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{3}\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：分子是 \(\ln(1+x)\) 与其前两项泰勒展开之差，分母 \(x^3\)。直接展开 \(\ln(1+x)\) 到 \(x^3\)：</p>
-    \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\cdots. \]
-    <p>代入分子：</p>
-    \[ \ln(1+x)-x+\frac{x^2}{2}=\frac{x^3}{3}+o(x^3). \]
-    <p>除以 \(x^3\) 得 \(1/3\)。这是 \(\ln(1+x)\) 泰勒展开的标准余项题。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 符号错误：\(\ln(1+x)\) 的 \(x^3\) 项是 \(+x^3/3\)（正号），不是 \(-x^3/3\)。② 展开阶数不够。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1152、1153 构成同组，分别考查 \(\ln(1+x)\)、\(e^x\)、\(\sin x\) 的泰勒展开余项，是极限计算的基础题。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim(\ln(1+x)-x+x^2/2-x^3/3)/x^4\)。</p>
-    <p class="var-ans">答案：\(-\dfrac{1}{4}\)。下一项是 \(-x^4/4\)。</p>
-  </div>
-<p>本题是 ln(1+x) 泰勒展开的直接应用。展开式 ln(1+x) = x - x^2/2 + x^3/3 - x^4/4 + ... 是无穷级数中最常用的几个之一。减去前两项 x - x^2/2 后，最低剩余项是 x^3/3，除以 x^3 得 1/3。这类题不需要洛必达法则，直接展开一步到位。记忆时注意符号交替：正、负、正、负。</p><p>本题虽然简单，但它是后续许多复杂题的基础构件。例如求 lim (ln(1+x)-x)/x^2 时结果为 -1/2，求 (ln(1+x)-x+x^2/2)/x^3 时结果为 1/3，每多加一项就多一阶精度。这种逐阶逼近的思想是泰勒展开的核心。</p></article>
-
-<article class="q" id="q1152">
-  <div class="q-head">
-    <span class="qno">第 1152 题</span>
-    <span class="qtype">泰勒展开（e^x 展开）</span>
-    <span class="qsrc">P815</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{e^x-1-x-\dfrac{x^2}{2}}{x^3}=?\)</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{6}\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>展开 \(e^x\)：</p>
-    \[ e^x=1+x+\frac{x^2}{2}+\frac{x^3}{6}+\frac{x^4}{24}+\cdots. \]
-    <p>代入分子：</p>
-    \[ e^x-1-x-\frac{x^2}{2}=\frac{x^3}{6}+o(x^3). \]
-    <p>除以 \(x^3\) 得 \(1/6\)。这是 \(e^x\) 泰勒展开的标准余项题。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 记错 \(e^x\) 的 \(x^3\) 项系数：\(1/3!=1/6\)，不是 \(1/3\)。② 符号错误：\(e^x\) 的所有项均为正。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1151、1153 构成同组，是泰勒展开的基础训练。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim(e^x-1-x-x^2/2-x^3/6)/x^4\)。</p>
-    <p class="var-ans">答案：\(\dfrac{1}{24}\)。下一项是 \(x^4/4!\)。</p>
-  </div>
-<p>本题是 e^x 泰勒展开的直接应用。e^x = 1 + x + x^2/2 + x^3/6 + x^4/24 + ...，所有项均为正。减去前三项 1 + x + x^2/2 后，最低剩余项是 x^3/6，除以 x^3 得 1/6。与 1151、1153 构成一组，分别考查 ln(1+x)、e^x、sin x 三个基本初等函数的泰勒展开余项。这三个展开式是整个极限计算体系的基础构件，必须熟记。</p><p>e^x 的展开式与 ln(1+x) 的展开式互为反函数关系：e^x 的各项系数为 1/n!，而 ln(1+x) 的系数为 (-1)^{n-1}/n。两者在 x=0 处的泰勒展开是必须熟记的基础内容。本题结果 1/6 来自 1/3!。</p></article>
-
-<article class="q" id="q1153">
-  <div class="q-head">
-    <span class="qno">第 1153 题</span>
-    <span class="qtype">泰勒展开（sin x 展开）</span>
-    <span class="qsrc">P815</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\sin x-x}{x^3}=?\)</p>
-  </div>
-  <div class="answer">答案：\(-\dfrac{1}{6}\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>展开 \(\sin x\)：</p>
-    \[ \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}-\cdots. \]
-    <p>代入分子：</p>
-    \[ \sin x-x=-\frac{x^3}{6}+o(x^3). \]
-    <p>除以 \(x^3\) 得 \(-1/6\)。这是最基础的 \(0/0\) 型极限，也可用洛必达法则三次得到同样结果，但泰勒展开更直接。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 符号错误：\(\sin x-x\) 的主部是 \(-x^3/6\)（负号），不是 \(+x^3/6\)。② 忘记 \(\sin x\) 只有奇次项，不存在 \(x^2\) 项。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 1151、1152 构成同组，是泰勒展开余项的基础题。这个极限也是后续许多复杂题（如复合函数展开）的基础构件。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim(\sin x-x+x^3/6)/x^5\)。</p>
-    <p class="var-ans">答案：\(\dfrac{1}{120}\)。下一项是 \(x^5/5!=x^5/120\)。</p>
-  </div>
-<p>本题是最基础的 0/0 型极限之一。sin x = x - x^3/6 + x^5/120 - ...，减去 x 后主部为 -x^3/6，除以 x^3 得 -1/6。这个极限虽然简单，但它是后续许多复杂题的基础：例如复合函数 sin(sin x) - x 的展开就用到本题的结果。记忆时注意 sin x 只有奇次项，符号交替。</p><p>本题也可通过洛必达法则求解：连续三次求导后分子变为 -cos x，分母变为 6，极限为 -1/6。但泰勒展开更快捷。记忆口诀：sin x 的展开为 x - x^3/6 + x^5/120，符号交替，分母为奇数的阶乘。</p></article>
-
-<article class="q" id="q1154">
-  <div class="q-head">
-    <span class="qno">第 1154 题</span>
-    <span class="qtype">0/0 型（泰勒展开 tan x）</span>
-    <span class="qsrc">P816</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\tan x-x}{x^3}=\)____</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{3}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(x\to0\) 时分子 \(\tan x-x\to0\)、分母 \(x^3\to0\)，属 \(0/0\) 型。这类「三角函数减一次项、分母为 \(x^n\)」的题，固定手法是把分子里的超越函数按皮亚诺余项展开到与分母同阶，再作差消去低阶项。之所以不直接洛必达，是因为洛必达三次会把 \(\sec^2 x\)、\(\tan x\sec^2 x\) 等链式因子越求越繁，而泰勒展开一次到位。</p>
-  <p>\(\tan x\) 在 \(x=0\) 处的展开为</p>
-  \[ \tan x=x+\frac{x^3}{3}+o(x^3). \]
-  <p>这一项 \(x^3/3\) 是关键：\(\tan x\) 与 \(x\) 的差恰好从 \(x^3\) 阶开始，一阶项 \(x\) 相消。于是</p>
-  \[ \tan x-x=\frac{x^3}{3}+o(x^3),\qquad \frac{\tan x-x}{x^3}\to\frac13. \]
-  <p>系数 \(1/3\) 来自 \(\tan x\) 展开中 \(x^3\) 项；记住 \(\tan x\) 是奇函数展开，没有 \(x^2\) 项，下一个非零项就是 \(x^3/3\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 误用等价无穷小 \(\tan x\sim x\) 直接得 \(0\)——等价无穷小只能用于乘除因子，不能用于加减项的整体替换，否则会把 \(x^3/3\) 这一主部丢掉。② 记错 \(\tan x\) 的 \(x^3\) 系数：是 \(1/3\) 而不是 \(1/6\)；对比 \(\sin x=x-x^3/6\)，两者符号相反、系数不同。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>本题是「基本初等函数在 0 点的泰勒展开」这一整块的入门题，考研中常把 \(\tan x,\sin x,\arcsin x,\arctan x,\ln(1+x),e^x\) 排成一组互相对照，考查 \(x^3\) 阶系数与符号。与 1155、1156、1163、1164 构成同一组记忆块。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x}{x^3}\)。</p>
-  <p class="var-ans">答案：\(\dfrac{1}{2}\)。\(\tan x-\sin x=x(1/\cos x-1)\sim x\cdot x^2/2=x^3/2\)，或由展开 \((x+x^3/3)-(x-x^3/6)=x^3/2\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1155">
-  <div class="q-head">
-    <span class="qno">第 1155 题</span>
-    <span class="qtype">0/0 型（泰勒展开 arcsin x）</span>
-    <span class="qsrc">P816</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\arcsin x-x}{x^3}=\)____</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{6}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型，分母 \(x^3\)。\(\arcsin x\) 是反三角函数，其在 0 点的展开可由 \((1-t^2)^{-1/2}\) 逐项积分得到：\((1-t^2)^{-1/2}=1+\dfrac12 t^2+\dfrac{3}{8}t^4+\cdots\)，从 0 积到 \(x\) 得</p>
-  \[ \arcsin x=\int_0^x(1-t^2)^{-1/2}\,dt=x+\frac{x^3}{6}+\frac{3x^5}{40}+o(x^5). \]
-  <p>之所以用积分而非直接洛必达，是因为 \(\arcsin x\) 的导数是 \(1/\sqrt{1-x^2}\)，洛必达一次后仍含根号，不如展开一次到位。一阶项 \(x\) 相消后，剩下</p>
-  \[ \arcsin x-x=\frac{x^3}{6}+o(x^3),\qquad \frac{\arcsin x-x}{x^3}\to\frac16. \]
-  <p>系数 \(1/6\) 与 \(\sin x\) 展开中 \(-x^3/6\) 同号同值但方向相反：\(\sin x=x-x^3/6\)，故 \(\sin x-x=-x^3/6\)，而 \(\arcsin x-x=+x^3/6\)，两者在 \(x^3\) 阶上正好反号。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 把 \(\arcsin x\) 与 \(\sin x\) 的展开符号混淆：\(\sin x=x-x^3/6\)（减号），\(\arcsin x=x+x^3/6\)（加号）。② 用等价无穷小 \(\arcsin x\sim x\) 直接消去得 0，忽略高阶项。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>反三角函数的泰勒展开是极限题的高频素材，常与 \(\arctan x\) 对照（见 1156，其 \(x^3\) 系数为 \(-1/3\)）。熟记六个基本函数的 \(x^3\) 阶系数，是做 1160–1200 这一整批复合函数极限的前提。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-\sin x}{x^3}\)。</p>
-  <p class="var-ans">答案：\(\dfrac{1}{3}\)。\((x+x^3/6)-(x-x^3/6)=x^3/3\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1156">
-  <div class="q-head">
-    <span class="qno">第 1156 题</span>
-    <span class="qtype">0/0 型（泰勒展开 arctan x）</span>
-    <span class="qsrc">P816</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\arctan x-x}{x^3}=\)____</p>
-  <p>从记忆角度，可把六个基本展开并排：\(\sin x=x-x^3/6\)、\(	an x=x+x^3/3\)、\(\arcsin x=x+x^3/6\)、\(\arctan x=x-x^3/3\)、\(\ln(1+x)=x-x^2/2+x^3/3\)、\(e^x=1+x+x^2/2\)。其中正三角与反三角在 \(x^3\) 阶符号相反、系数互为对照，记住这一组后，本题只需读出 \(-1/3\)。</p>
-  </div>
-  <div class="answer">答案：\(-\dfrac{1}{3}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型。\(\arctan x\) 的展开可由几何级数 \(\dfrac{1}{1+t^2}=1-t^2+t^4-\cdots\) 逐项积分得到：</p>
-  \[ \arctan x=\int_0^x\frac{dt}{1+t^2}=x-\frac{x^3}{3}+\frac{x^5}{5}-o(x^5). \]
-  <p>之所以走「先求导再积分」的路线，是因为 \(\arctan x\) 的导数恰好是有理函数 \(1/(1+x^2)\)，其展开是等比级数，系数干净。一阶项 \(x\) 相消：</p>
-  \[ \arctan x-x=-\frac{x^3}{3}+o(x^3),\qquad \frac{\arctan x-x}{x^3}\to-\frac13. \]
-  <p>负号来自等比级数 \(\sum(-1)^n t^{2n}\) 中 \(t^2\) 项为负，积分后 \(x^3\) 项系数为 \(-1/3\)。与 1154 的 \(\tan x\) 系数 \(+1/3\) 形成反号对照。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 符号记反：\(\arctan x=x-x^3/3\) 是减号，不是加号；与 \(\arcsin x=x+x^3/6\) 的加号形成对比。② 把系数记成 \(1/6\)：那是 \(\arcsin x\) 的系数，不是 \(\arctan x\)。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>\(\arctan x\) 的展开在求「反三角—正三角」复合差时反复出现（如 1164、1165、1183）。考研中常见考法是把 \(\arctan x\) 与 \(\tan x\)、\(\arcsin x\) 混合，要求在 \(x^3\) 阶上做系数加减。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arctan x-\sin x}{x^3}\)。</p>
-  <p class="var-ans">答案：\(-\dfrac{1}{6}\)。\((x-x^3/3)-(x-x^3/6)=-x^3/6\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1157">
-  <div class="q-head">
-    <span class="qno">第 1157 题</span>
-    <span class="qtype">0/0 型（泰勒展开 ln(1+x)）</span>
-    <span class="qsrc">P816</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x}{x^2}=\)____</p>
-  <p>本题也可由洛必达一次验证：\(\dfrac{1/(1+x)-1}{2x}=\dfrac{-x}{2x(1+x)}	o-1/2\)。洛必达与泰勒展开在本题给出同一结果，但泰勒展开的优势在于一次到位，避免了链式求导。</p>
-  </div>
-  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型，分母 \(x^2\)。\(\ln(1+x)\) 的麦克劳林展开为</p>
-  \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-o(x^3). \]
-  <p>这是最常用的展开之一，系数交替符号、分母为项数。一阶项 \(x\) 相消后，分子恰好从 \(x^2\) 阶开始：</p>
-  \[ \ln(1+x)-x=-\frac{x^2}{2}+o(x^2),\qquad \frac{\ln(1+x)-x}{x^2}\to-\frac12. \]
-  <p>负号来自 \(\ln(1+x)\) 展开中 \(x^2\) 项的系数 \(-1/2\)。这一结果也可由洛必达一次验证：\(\dfrac{1/(1+x)-1}{2x}=\dfrac{-x/(1+x)}{2x}\to-1/2\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 用 \(\ln(1+x)\sim x\) 直接消去得 0，忽略 \(x^2\) 主部。② 符号记成 \(+1/2\)：注意是 \(\ln(1+x)-x\)，分子本身带负号。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>\(\ln(1+x)\) 的展开是处理「对数减一次项」「对数差」类极限的基础，后续 1162、1172、1176、1181、1192、1195 都建立在这一展开上。考研常把对数套在 \(\sin x,\tan x\) 上，要求先展开内层再展开外层。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+x^2/2}{x^3}\)。</p>
-  <p class="var-ans">答案：\(\dfrac{1}{3}\)。抵消到 \(x^3\) 项后余 \(x^3/3\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1158">
-  <div class="q-head">
-    <span class="qno">第 1158 题</span>
-    <span class="qtype">0/0 型（泰勒展开 e^x）</span>
-    <span class="qsrc">P816</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{e^x-1-x}{x^2}=\)____</p>
-  <p>本题本质是 \(e^x\) 在 0 点的二阶泰勒公式，系数 \(1/2\) 即 \(e^0/2!=1/2\)。考研中常把 \(e^x\) 换成 \(e^{f(x)}\)，此时需先把 \(f(x)\) 展开到 \(x^2\) 阶，再代入 \(e^u\) 的展开。</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型。\(e^x\) 的麦克劳林展开为</p>
-  \[ e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+o(x^3). \]
-  <p>常数项 \(1\) 与一次项 \(x\) 在分子中被减掉，剩余的最低阶项是 \(x^2/2\)：</p>
-  \[ e^x-1-x=\frac{x^2}{2}+o(x^2),\qquad \frac{e^x-1-x}{x^2}\to\frac12. \]
-  <p>这一结果也可由二阶导数定义直接看出：\(\lim_{x\to0}(e^x-1-x)/x^2=e^{0}/2!=1/2\)。系数 \(1/2\) 即 \(1/2!\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 用 \(e^x-1\sim x\) 得 \((e^x-1-x)/x^2=(x-x)/x^2=0\)，这是等价无穷小滥用：\(e^x-1\sim x\) 是整体替换，但 \(e^x-1-x\) 需要保留 \(x^2\) 项。② 分母是 \(x^2\)，不要多展开到 \(x^3\) 徒增运算。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>\(e^x\) 的展开是「指数差」类极限（1161、1167、1171、1175、1179、1182、1187、1193、1197）的底层工具。考研常把 \(e^{f(x)}-e^{g(x)}\) 提公因子化为 \(e^{g}(e^{f-g}-1)\sim f-g\)，再求 \(f-g\) 的主部。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x-1-x-x^2/2}{x^3}\)。</p>
-  <p class="var-ans">答案：\(\dfrac{1}{6}\)。余 \(x^3/6\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1159">
-  <div class="q-head">
-    <span class="qno">第 1159 题</span>
-    <span class="qtype">0/0 型（二项式展开）</span>
-    <span class="qsrc">P816</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\sqrt{1+x}-1-\dfrac{x}{2}}{x^2}=\)____</p>
-  <p>二项式展开 \((1+x)^\alpha\) 的系数 \(\alpha(\alpha-1)/2\) 是通用公式：当 \(\alpha=1/2\) 时为 \(-1/8\)，当 \(\alpha=1/3\) 时为 \(-1/9\)，当 \(\alpha=-1\) 时为 \(1\)。这一公式在根式差、倒数差题中反复使用。</p>
-  </div>
-  <div class="answer">答案：\(-\dfrac{1}{8}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型。对 \((1+x)^{\alpha}\) 用二项式展开 \((1+x)^\alpha=1+\alpha x+\dfrac{\alpha(\alpha-1)}{2}x^2+\cdots\)，取 \(\alpha=1/2\)：</p>
-  \[ \sqrt{1+x}=1+\frac{x}{2}+\frac{\frac12(-\frac12)}{2}x^2+o(x^2)=1+\frac{x}{2}-\frac{x^2}{8}+o(x^2). \]
-  <p>常数项 \(1\)、一次项 \(x/2\) 在分子中被减掉，剩余 \(x^2\) 项系数为 \(-1/8\)：</p>
-  \[ \sqrt{1+x}-1-\frac{x}{2}=-\frac{x^2}{8}+o(x^2),\qquad \text{原式}\to-\frac18. \]
-  <p>负号来自 \(\alpha(\alpha-1)/2=(1/2)(-1/2)/2=-1/8\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 记二项式展开的第二项系数为 \(\alpha(\alpha-1)/2\)，不是 \(\alpha^2/2\)；对 \(\alpha=1/2\) 得 \(-1/8\) 而非 \(1/8\)。② 误以为 \(\sqrt{1+x}-1\sim x/2\) 后差为 0——等价无穷小只到一次项，本题需要二次项。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>二项式展开 \((1+x)^\alpha-1\sim\alpha x\) 是等价无穷小的来源；当分母为 \(x^2\) 时必须展开到二阶。这一手法在 1169、1178、1186、1198 的根式差问题中反复使用。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sqrt[3]{1+x}-1-x/3}{x^2}\)。</p>
-  <p class="var-ans">答案：\(-\dfrac{1}{9}\)。\(\alpha=1/3\)，二阶系数 \(\alpha(\alpha-1)/2=(1/3)(-2/3)/2=-1/9\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1160">
-  <div class="q-head">
-    <span class="qno">第 1160 题</span>
-    <span class="qtype">0/0 型（cos x 展开到四阶）</span>
-    <span class="qsrc">P817</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\cos x-1+\dfrac{x^2}{2}}{x^4}=\)____</p>
-  <p>本题的设计思路是「用 \(x^2/2\) 抵消 \(\cos x\) 的二阶项」，迫使考生必须展开到四阶。若只展开到二阶，分子为 0，会误判为极限 0。这种「抵消低阶、考察高阶」的手法在 1180、1185、1196 中反复出现。</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{24}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型，分母 \(x^4\)。\(\cos x\) 的展开为</p>
-  \[ \cos x=1-\frac{x^2}{2!}+\frac{x^4}{4!}+o(x^4)=1-\frac{x^2}{2}+\frac{x^4}{24}+o(x^4). \]
-  <p>分子中 \(\cos x-1+x^2/2\) 恰好把常数项和 \(x^2\) 项全部消去，剩下最低阶为 \(x^4/24\)：</p>
-  \[ \cos x-1+\frac{x^2}{2}=\frac{x^4}{24}+o(x^4),\qquad \text{原式}\to\frac1{24}. \]
-  <p>系数 \(1/24=1/4!\)。这类题的设计思路是：用 \(x^2/2\) 抵消 \(\cos x\) 的二阶项，强制考察学生是否记得四阶项系数。若只展开到二阶，分子就是 0，会误判为极限 0。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 只展开到 \(x^2\) 得 0；必须展开到 \(x^4\)。② 记错 \(\cos x\) 的四阶系数：是 \(+1/24\)（正号），不是 \(-1/24\)。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>「抵消低阶项、考察高阶系数」是这一组题的统一套路。1180、1185、1190、1196 都是同一手法的变种，分别在 \(\ln(\cos x)\)、\(\cos(\sin x)\)、\(\cos(\arcsin x)\) 上做文章。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\cos x-1+x^2/2-x^4/24}{x^6}\)。</p>
-  <p class="var-ans">答案：\(-\dfrac{1}{720}\)。下一项是 \(-x^6/6!\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1161">
-  <div class="q-head">
-    <span class="qno">第 1161 题</span>
-    <span class="qtype">0/0 型（e^{sin x} 复合展开）</span>
-    <span class="qsrc">P817</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{e^{\sin x}-1-x}{x^2}=\)____</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型。复合函数展开按「先内后外」：先把内层 \(\sin x\) 展开到足够阶，再代入外层 \(e^u\) 的展开。分母为 \(x^2\)，需要分子展到 \(x^2\)。</p>
-  <p>内层：\(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)。在计算 \(e^{\sin x}\) 到 \(x^2\) 阶时，\(\sin x\) 只需保留到 \(x\) 阶（因为 \(e^u=1+u+u^2/2+\cdots\)，\(u\) 的 \(x^3\) 项乘任何因子都高于 \(x^2\)）：</p>
-  \[ e^{\sin x}=1+\sin x+\frac{\sin^2 x}{2}+o(x^2)=1+\left(x-\frac{x^3}{6}\right)+\frac{x^2}{2}+o(x^2). \]
-  <p>于是 \(e^{\sin x}-1-x=x^2/2+o(x^2)\)，除以 \(x^2\) 得 \(1/2\)。关键一步是 \(u^2/2\) 项贡献了 \(x^2/2\)——若只写 \(e^{\sin x}\approx1+\sin x\)，会漏掉这一项而得 0。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 只展开外层 \(e^u=1+u\) 而漏掉 \(u^2/2\) 项，导致答案为 0。② 把 \(\sin x\) 的 \(x^3\) 项也算进 \(x^2\) 阶——多余但不影响；关键是不要把 \(u^2/2\) 漏掉。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>「\(e^{f(x)}\) 复合展开」是考研高频，核心原则是：外层展开到几阶，内层就必须展到相应阶数，且 \(u^2/2\) 这类平方项经常贡献意外的低阶项。与 1167、1171、1179 构成同一组训练。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{\sin x}-1-\sin x}{x^2}\)。</p>
-  <p class="var-ans">答案：\(\dfrac{1}{2}\)。此时 \(e^{\sin x}-1-\sin x=\sin^2 x/2\sim x^2/2\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1162">
-  <div class="q-head">
-    <span class="qno">第 1162 题</span>
-    <span class="qtype">0/0 型（ln(1+tan x) 复合展开）</span>
-    <span class="qsrc">P817</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\ln(1+\tan x)-x}{x^2}=\)____</p>
-  <p>对数复合展开的关键原则是：外层 \(\ln(1+u)\) 展开到几阶，内层 \(u\) 就必须展到相应阶数。本题分母为 \(x^2\)，\(\ln(1+u)\) 只需展开到 \(u^2/2\) 项，而 \(u=	an x\) 在 \(x^2\) 阶只需 \(x\) 项即可，\(	an x\) 的 \(x^3\) 项不影响 \(x^2\) 阶结果。</p>
-  </div>
-  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型。分母 \(x^2\)，需展开到 \(x^2\)。先展开内层 \(\tan x=x+\dfrac{x^3}{3}+o(x^3)\)，在 \(x^2\) 阶只需保留 \(\tan x=x+o(x)\)。再代入 \(\ln(1+u)=u-u^2/2+\cdots\)：</p>
-  \[ \ln(1+\tan x)=\tan x-\frac{\tan^2 x}{2}+o(x^2)=\left(x+\frac{x^3}{3}\right)-\frac{x^2}{2}+o(x^2). \]
-  <p>于是 \(\ln(1+\tan x)-x=-x^2/2+o(x^2)\)，除以 \(x^2\) 得 \(-1/2\)。负号来自 \(\ln(1+u)\) 展开中 \(-u^2/2\) 项；\(\tan^2 x\sim x^2\)，故该项贡献 \(-x^2/2\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 误以为 \(\ln(1+\tan x)\sim\tan x\sim x\) 后差为 0；必须展开到 \(u^2/2\) 项。② 把 \(\tan x\) 的 \(x^3\) 项误算进 \(x^2\) 阶。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>对数复合展开与 1161 的指数复合展开是对偶关系：\(\ln(1+u)\) 的主部在 \(-u^2/2\)，而 \(e^u-1-u\) 的主部在 \(u^2/2\)。考研常把两者并排出现，考查对符号的敏感度。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+\sin x)-x}{x^2}\)。</p>
-  <p class="var-ans">答案：\(-\dfrac{1}{2}\)。\(\ln(1+\sin x)=\sin x-\sin^2 x/2=x-x^2/2+\cdots\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1163">
-  <div class="q-head">
-    <span class="qno">第 1163 题</span>
-    <span class="qtype">0/0 型（arcsin∘tan 复合展开）</span>
-    <span class="qsrc">P817</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\arcsin(\tan x)-x}{x^3}=\)____</p>
-  <p>复合展开的通用公式是：若 \(f(x)=x+ax^3+\cdots\)、\(g(u)=u+bu^3+\cdots\)，则 \(g(f(x))=x+(a+b)x^3+\cdots\)。本题 \(f=	an\)（\(a=1/3\)）、\(g=\arcsin\)（\(b=1/6\)），故 \(a+b=1/2\)。</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型。分母 \(x^3\)，需展开到 \(x^3\)。先展开内层 \(\tan x=x+\dfrac{x^3}{3}+o(x^3)\)，再代入 \(\arcsin u=u+\dfrac{u^3}{6}+\cdots\)：</p>
-  \[ \arcsin(\tan x)=\tan x+\frac{\tan^3 x}{6}+o(x^3)=\left(x+\frac{x^3}{3}\right)+\frac{x^3}{6}+o(x^3)=x+\frac{x^3}{2}+o(x^3). \]
-  <p>于是 \(\arcsin(\tan x)-x=x^3/2+o(x^3)\)，除以 \(x^3\) 得 \(1/2\)。系数 \(1/2=1/3+1/6\)：\(\tan x\) 自带的 \(x^3/3\) 加上 \(\arcsin u\) 的 \(u^3/6\)（其中 \(u\sim x\)，故 \(u^3/6\sim x^3/6\)）。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 漏掉外层 \(\arcsin u\) 的 \(u^3/6\) 项，只算 \(\tan x\) 的 \(x^3/3\) 会得 \(1/3\)。② 混淆 \(\arcsin u\) 与 \(\arctan u\) 的展开系数。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>复合反三角展开是这一组题的核心：1163–1166 把四种「三角/反三角」组合各做一次，系数分别为 \(+1/2,-1/2,-1/2,+1/2\)。考研常把两个复合函数相减（如 1173、1189、1200），考查系数的加减。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin(\tan x)-\arcsin x}{x^3}\)。</p>
-  <p class="var-ans">答案：\(\dfrac{1}{3}\)。\(\arcsin(\tan x)=x+x^3/2\)，\(\arcsin x=x+x^3/6\)，差为 \(x^3/3\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1164">
-  <div class="q-head">
-    <span class="qno">第 1164 题</span>
-    <span class="qtype">0/0 型（arctan∘sin 复合展开）</span>
-    <span class="qsrc">P817</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\arctan(\sin x)-x}{x^3}=\)____</p>
-  <p>在考试中，这类复合反三角题不需要现场逐项展开，只要记住「\(g(f(x))=x+(a+b)x^3\)」的合成公式，直接读出系数即可。</p>
-  <p>用同一通用公式：\(f=\sin\)（\(a=-1/6\)）、\(g=\arctan\)（\(b=-1/3\)），故 \(a+b=-1/2\)。正负号由各函数自身展开决定，不要凭直觉。</p>
-  </div>
-  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型。分母 \(x^3\)。内层 \(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)，代入 \(\arctan u=u-\dfrac{u^3}{3}+\cdots\)：</p>
-  \[ \arctan(\sin x)=\sin x-\frac{\sin^3 x}{3}+o(x^3)=\left(x-\frac{x^3}{6}\right)-\frac{x^3}{3}+o(x^3)=x-\frac{x^3}{2}+o(x^3). \]
-  <p>于是 \(\arctan(\sin x)-x=-x^3/2+o(x^3)\)，除以 \(x^3\) 得 \(-1/2\)。系数 \(-1/2=-1/6-1/3\)：\(\sin x\) 自带的 \(-x^3/6\) 加上 \(\arctan u\) 的 \(-u^3/3\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 漏掉外层 \(-u^3/3\) 项，只算 \(\sin x\) 的 \(-x^3/6\) 会得 \(-1/6\)。② 把 \(\arctan u\) 的展开符号记成正。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>与 1163 互为反号对照。这一组题的规律是：复合函数的 \(x^3\) 系数等于「内层函数偏离 \(x\) 的系数」加上「外层函数在 0 点的 \(u^3\) 系数」，两者符号由各函数自身决定。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arctan(\sin x)-\arctan x}{x^3}\)。</p>
-  <p class="var-ans">答案：\(-\dfrac{1}{6}\)。\(\arctan(\sin x)=x-x^3/2\)，\(\arctan x=x-x^3/3\)，差为 \(-x^3/6\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1165">
-  <div class="q-head">
-    <span class="qno">第 1165 题</span>
-    <span class="qtype">0/0 型（sin∘arctan 复合展开）</span>
-    <span class="qsrc">P817</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\sin(\arctan x)-x}{x^3}=\)____</p>
-  <p>本题可用恒等式 \(x/\sqrt{1+x^2}\) 直接展开，比复合展开更快捷。\((1+x^2)^{-1/2}=1-x^2/2+3x^4/8\)，乘 \(x\) 得 \(x-x^3/2+3x^5/8\)。这一恒等式在 1189、1200 中也直接使用。</p>
-  </div>
-  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型。分母 \(x^3\)。内层 \(\arctan x=x-\dfrac{x^3}{3}+o(x^3)\)，代入 \(\sin u=u-\dfrac{u^3}{6}+\cdots\)：</p>
-  \[ \sin(\arctan x)=\arctan x-\frac{\arctan^3 x}{6}+o(x^3)=\left(x-\frac{x^3}{3}\right)-\frac{x^3}{6}+o(x^3)=x-\frac{x^3}{2}+o(x^3). \]
-  <p>也可由恒等式直接算：\(\sin(\arctan x)=\dfrac{x}{\sqrt{1+x^2}}=x(1+x^2)^{-1/2}=x-\dfrac{x^3}{2}+\dfrac{3x^5}{8}+\cdots\)。两种方法一致。于是差为 \(-x^3/2\)，除以 \(x^3\) 得 \(-1/2\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 漏外层 \(-u^3/6\) 项。② 用恒等式时记错二项式系数：\((1+x^2)^{-1/2}=1-x^2/2+3x^4/8\)，\(x^3\) 项系数是 \(-1/2\)。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>本题与 1189、1200 直接相关：1189 是 \(\tan(\arcsin x)-\sin(\arctan x)\)，1200 是 \(\sin(\arctan x)-\arctan(\sin x)\)。熟记 \(\sin(\arctan x)=x/\sqrt{1+x^2}\) 这类恒等式能大幅简化计算。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin(\arctan x)-\arctan(\sin x)}{x^3}\)。</p>
-  <p class="var-ans">答案：\(0\)。两者展开均为 \(x-x^3/2+3x^5/8\)，\(x^3\) 项相消（即 1200）。</p>
-  </div>
-</article>
-
-<article class="q" id="q1166">
-  <div class="q-head">
-    <span class="qno">第 1166 题</span>
-    <span class="qtype">0/0 型（tan∘arcsin 复合展开）</span>
-    <span class="qsrc">P818</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\tan(\arcsin x)-x}{x^3}=\)____</p>
-  <p>恒等式法比逐项展开更不容易错：先化简为 \(x/\sqrt{1-x^2}\)，再用二项式展开，避免了复合展开中内层高阶项的遗漏。</p>
-  <p>与 1165 对照：\(	an(\arcsin x)=x/\sqrt{1-x^2}=x+x^3/2+3x^5/8\)，而 \(\sin(\arctan x)=x/\sqrt{1+x^2}=x-x^3/2+3x^5/8\)。两者 \(x^3\) 系数符号相反，\(x^5\) 系数相同。</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型。分母 \(x^3\)。内层 \(\arcsin x=x+\dfrac{x^3}{6}+o(x^3)\)，代入 \(\tan u=u+\dfrac{u^3}{3}+\cdots\)：</p>
-  \[ \tan(\arcsin x)=\arcsin x+\frac{\arcsin^3 x}{3}+o(x^3)=\left(x+\frac{x^3}{6}\right)+\frac{x^3}{3}+o(x^3)=x+\frac{x^3}{2}+o(x^3). \]
-  <p>也可用恒等式：\(\tan(\arcsin x)=\dfrac{x}{\sqrt{1-x^2}}=x(1-x^2)^{-1/2}=x+\dfrac{x^3}{2}+\dfrac{3x^5}{8}+\cdots\)。差为 \(x^3/2\)，除以 \(x^3\) 得 \(1/2\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 漏外层 \(u^3/3\) 项。② 恒等式 \(x/\sqrt{1-x^2}\) 的二项式展开中 \(x^3\) 系数是 \(+1/2\)，不要写成负。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>1163–1166 这一组把「三角/反三角」复合的四种组合系数全部列出：\(\arcsin\circ\tan=+1/2\)，\(\arctan\circ\sin=-1/2\)，\(\sin\circ\arctan=-1/2\)，\(\tan\circ\arcsin=+1/2\)。后续相减题直接用这些系数。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan(\arcsin x)-\tan x}{x^3}\)。</p>
-  <p class="var-ans">答案：\(\dfrac{1}{6}\)。\(\tan(\arcsin x)=x+x^3/2\)，\(\tan x=x+x^3/3\)，差为 \(x^3/6\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1167">
-  <div class="q-head">
-    <span class="qno">第 1167 题</span>
-    <span class="qtype">0/0 型（指数差提公因子）</span>
-    <span class="qsrc">P818</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{e^{\arcsin x}-e^x}{x^3}=\)____</p>
-  <p>提公因子这一步看似简单，却把「指数差」转化为「指数本身的差」，使问题直接降级为 1155 的结果。这是处理 \(e^f-e^g\) 型极限的标准动作。</p>
-  <p>指数差提公因子的通用公式：\(e^{f}-e^{g}=e^{g}(e^{f-g}-1)\sim f-g\)（当 \(f-g	o0\)）。本题 \(f=\arcsin x\)、\(g=x\)，故直接化为 \(\arcsin x-x\)，即调用 1155 的结果。</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{6}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型，分子是 \(e^{f}-e^{g}\) 型。固定手法提公因子：</p>
-  \[ e^{\arcsin x}-e^x=e^x\bigl(e^{\arcsin x-x}-1\bigr). \]
-  <p>当 \(x\to0\) 时 \(e^x\to1\)，且 \(\arcsin x-x\to0\)，故 \(e^{\arcsin x-x}-1\sim\arcsin x-x\)。由 1155 知 \(\arcsin x-x=x^3/6+o(x^3)\)，因此</p>
-  \[ \frac{e^{\arcsin x}-e^x}{x^3}\to\frac16. \]
-  <p>这一手法的本质是 \(e^a-e^b=e^b(e^{a-b}-1)\sim a-b\)，把指数差化为指数本身的差，从而直接调用 1155 的结果。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 直接对 \(e^{\arcsin x}\) 和 \(e^x\) 分别展开再相减，容易漏项；提公因子后只需算 \(\arcsin x-x\)。② 忽略前置因子 \(e^x\to1\) 这一步骤。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>「\(e^{f}-e^{g}\)」是考研指数差的标准模型，与 1171、1179、1182、1187、1193、1197 构成系列。核心只有一条：化为 \(f-g\) 的主部。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{\arctan x}-e^x}{x^3}\)。</p>
-  <p class="var-ans">答案：\(-\dfrac{1}{3}\)。\(\arctan x-x=-x^3/3\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1168">
-  <div class="q-head">
-    <span class="qno">第 1168 题</span>
-    <span class="qtype">0/0 型（对数差）</span>
-    <span class="qsrc">P818</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\ln(1+\arcsin x)-\ln(1+x)}{x^3}=\)____</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{6}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型，对数差。先把差写成 \(\ln\dfrac{1+\arcsin x}{1+x}\)，或直接展开。分母 \(x^3\)，需展开到 \(x^3\)。</p>
-  <p>内层 \(\arcsin x=x+x^3/6+o(x^3)\)。代入 \(\ln(1+u)=u-u^2/2+u^3/3-\cdots\)：</p>
-  \[ \ln(1+\arcsin x)=\arcsin x-\frac{\arcsin^2 x}{2}+\frac{\arcsin^3 x}{3}+o(x^3). \]
-  <p>代入 \(\arcsin x=x+x^3/6\)：\(\arcsin^2 x=x^2+o(x^2)\)，\(\arcsin^3 x=x^3+o(x^3)\)。于是</p>
-  \[ \ln(1+\arcsin x)=\left(x+\frac{x^3}{6}\right)-\frac{x^2}{2}+\frac{x^3}{3}+o(x^3). \]
-  <p>而 \(\ln(1+x)=x-x^2/2+x^3/3+o(x^3)\)。两者相减，\(x\)、\(x^2\)、\(x^3/3\) 全部抵消，剩 \(x^3/6\)：</p>
-  \[ \ln(1+\arcsin x)-\ln(1+x)=\frac{x^3}{6}+o(x^3),\qquad \text{原式}\to\frac16. \]
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 只展开 \(\ln(1+\arcsin x)\) 的一次项 \(\arcsin x\)，漏掉 \(u^2/2\)、\(u^3/3\) 项与 \(\ln(1+x)\) 的对应项抵消。② 把 \(\arcsin^2 x\) 算成 \(x^2+x^4/3\) 等多余项。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>对数差题的关键是「逐项相消」：\(\ln(1+f)-\ln(1+g)\) 的主部来自 \(f-g\) 在 \(u^2/2\)、\(u^3/3\) 阶的系数差。1172、1184、1199 都是这一手法的加深版。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+\arctan x)-\ln(1+x)}{x^3}\)。</p>
-  <p class="var-ans">答案：\(-\dfrac{1}{3}\)。\(\arctan x-x=-x^3/3\)，且 \(u^2/2\)、\(u^3/3\) 项在两对数中抵消。</p>
-  </div>
-</article>
-
-<article class="q" id="q1169">
-  <div class="q-head">
-    <span class="qno">第 1169 题</span>
-    <span class="qtype">0/0 型（根式差有理化）</span>
-    <span class="qsrc">P818</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\sqrt{1+\sin x}-\sqrt{1+x}}{x^2}=\)____</p>
-  <p>判断极限为 0 的关键是比较分子分母的阶数：分子 \(x^3\) 阶、分母 \(x^2\) 阶，高阶除以低阶必为 0。这类「阶数判断」在无穷小比较中频繁出现。</p>
-  <p>本题展示「高阶除以低阶得 0」：分子主部为 \(x^3\) 阶，分母为 \(x^2\) 阶，比值 \(	o0\)。在无穷小比较中，若分子是分母的高阶无穷小，则极限为 0。</p>
-  </div>
-  <div class="answer">答案：\(0\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型，分子是两个根式之差。固定手法是分子有理化：</p>
-  \[ \sqrt{1+\sin x}-\sqrt{1+x}=\frac{(\,1+\sin x)-(1+x)}{\sqrt{1+\sin x}+\sqrt{1+x}}=\frac{\sin x-x}{\sqrt{1+\sin x}+\sqrt{1+x}}. \]
-  <p>当 \(x\to0\) 时分母 \(\to2\)，故</p>
-  \[ \text{原式}=\lim_{x\to0}\frac{\sin x-x}{2x^2}. \]
-  <p>而 \(\sin x-x=-x^3/6+o(x^3)\)，是三阶小量，除以 \(x^2\) 得 \(-x/12\to0\)。因此极限为 0。关键在于分子有理化后，分子降为 \(\sin x-x\)，其主部是 \(x^3\) 阶，比分母 \(x^2\) 高一阶，故比值趋于 0。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 不有理化直接对两个根号分别展开，容易算错。② 误以为 \(\sin x\sim x\) 后分子为 0 而分母也为 0，需要继续展开到三阶才能确定主部。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>根式差有理化是基础操作，1178、1186、1198 都是同一手法的变种。本题答案为 0，说明分子主部阶数高于分母；这类「高阶/低阶」判断在无穷小比较中反复出现。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+\sin x}-\sqrt{1+x}}{x^3}\)。</p>
-  <p class="var-ans">答案：\(-\dfrac{1}{12}\)。\((\sin x-x)/(2x^3)=(-x^3/6)/(2x^3)=-1/12\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q1170">
-  <div class="q-head">
-    <span class="qno">第 1170 题</span>
-    <span class="qtype">0/0 型（cos∘sin 复合展开）</span>
-    <span class="qsrc">P818</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\cos(\sin x)-\cos x}{x^4}=\)____</p>
-  </div>
-  <div class="answer">答案：\(\dfrac{1}{6}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型，分母 \(x^4\)。用和差化积或直接展开。直接展开：\(\cos u=1-u^2/2+u^4/24\)。</p>
-  <p>内层 \(\sin x=x-x^3/6+o(x^3)\)，故 \(\sin^2 x=x^2-x^4/3+o(x^4)\)，\(\sin^4 x=x^4+o(x^4)\)。代入：</p>
-  \[ \cos(\sin x)=1-\frac{\sin^2 x}{2}+\frac{\sin^4 x}{24}+o(x^4)=1-\frac{x^2}{2}+\frac{x^4}{6}+\frac{x^4}{24}+o(x^4)=1-\frac{x^2}{2}+\frac{5x^4}{24}+o(x^4). \]
-  <p>而 \(\cos x=1-x^2/2+x^4/24+o(x^4)\)。相减：</p>
-  \[ \cos(\sin x)-\cos x=\left(\frac{5}{24}-\frac{1}{24}\right)x^4+o(x^4)=\frac{x^4}{6}+o(x^4). \]
-  <p>除以 \(x^4\) 得 \(1/6\)。关键一步是 \(\sin^2 x\) 的 \(x^4\) 项 \(-x^4/3\) 被 \(-1/2\) 乘后贡献 \(+x^4/6\)，与 \(\cos x\) 的 \(x^4/24\) 作差后得到 \(1/6\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 只展开 \(\cos(\sin x)\) 到 \(1-\sin^2 x/2\)，漏掉 \(\sin^4 x/24\) 项。② 算 \(\sin^2 x\) 时漏 \(x^4\) 项：\(\sin^2 x=(x-x^3/6)^2=x^2-x^4/3\)。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>\(\cos(\sin x)-\cos x\) 与 1177（\(\cos(\sin x)-\cos(\tan x)\)）、1185（带 \(x^4/6\) 修正项）构成系列。核心是记住 \(\cos u\) 展开到 \(u^4\)，并正确处理 \(\sin^2 x\) 的 \(x^4\) 项。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\cos(\sin x)-1+x^2/2}{x^4}\)。</p>
-  <p class="var-ans">答案：\(\dfrac{5}{24}\)。即上面展开中 \(x^4\) 系数。</p>
-  </div>
-</article>
-
-<article class="q" id="q1171">
-  <div class="q-head">
-    <span class="qno">第 1171 题</span>
-    <span class="qtype">0/0 型（指数差）</span>
-    <span class="qsrc">P818</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{e^{\sin x}-e^{\tan x}}{x^3}=\)____</p>
-  <p>在考研真题中，这类指数差常以选择题出现，要求快速判断符号与主部阶数。记住 \(e^{\sin}-e^{	an}\sim\sin-	an\) 即可。</p>
-  <p>本题与 1172 的对数差给出同一主部，说明指数差与对数差在 \(x^3\) 阶上等价。这一规律是本批题设计的主线。</p>
-  <p>指数差与三角函数差的对应：\(e^{\sin}-e^{	an}\sim\sin-	an\)。本题 \(\sin x-	an x=-x^3/2\)，负号来自 \(	an x>\sin x\) 对小 \(x>0\)。这一对应关系是 1175、1182、1193 的基础。</p>
-  </div>
-  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型，指数差。提公因子 \(e^{\tan x}\)：</p>
-  \[ e^{\sin x}-e^{\tan x}=e^{\tan x}\bigl(e^{\sin x-\tan x}-1\bigr)\sim \sin x-\tan x. \]
-  <p>其中 \(e^{\tan x}\to1\)。计算 \(\sin x-\tan x\)：</p>
-  \[ \sin x=x-\frac{x^3}{6},\quad \tan x=x+\frac{x^3}{3},\quad \sin x-\tan x=-\frac{x^3}{2}+o(x^3). \]
-  <p>故原式 \(\to-1/2\)。负号来自 \(\tan x>\sin x\) 对小 \(x>0\)，故 \(e^{\tan x}>e^{\sin x}\)，分子为负。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 提错公因子方向：应提较大者 \(e^{\tan x}\)，使指数差 \(\sin x-\tan x\) 自然为负。② 算 \(\sin x-\tan x\) 时系数错为 \(-1/6-1/3=-1/2\)，不要写成 \(-1/6+1/3=1/6\)。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>本题是 1175、1182、1193 的基础：1175 在分子后加 \(x^3/2\) 抵消三阶主部，转而考察五阶系数。考研常在主部抵消后追问高一阶的结果。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{\sin x}-e^{\tan x}}{x^3}\) 中，若改为 \(e^{\tan x}-e^{\sin x}\)，答案为？</p>
-  <p class="var-ans">答案：\(\dfrac{1}{2}\)。分子反号，极限反号。</p>
-  </div>
-</article>
-
-<article class="q" id="q1172">
-  <div class="q-head">
-    <span class="qno">第 1172 题</span>
-    <span class="qtype">0/0 型（对数差 sin/tan）</span>
-    <span class="qsrc">P819</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\ln(1+\sin x)-\ln(1+\tan x)}{x^3}=\)____</p>
-  <p>对数差与指数差在本题给出同一主部 \(-x^3/2\)，因为两者都主部于 \(\sin x-	an x\)。这一「指数差与对数差同阶」的现象是本批题的核心规律之一。</p>
-  </div>
-  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型，对数差。分别展开 \(\ln(1+u)=u-u^2/2+u^3/3\)。</p>
-  <p>\(\ln(1+\sin x)=\sin x-\sin^2 x/2+\sin^3 x/3+o(x^3)=(x-x^3/6)-x^2/2+x^3/3+o(x^3)\)。</p>
-  <p>\(\ln(1+\tan x)=\tan x-\tan^2 x/2+\tan^3 x/3+o(x^3)=(x+x^3/3)-x^2/2+x^3/3+o(x^3)\)。</p>
-  <p>相减时 \(x\)、\(-x^2/2\)、\(x^3/3\) 全部抵消，剩 \(-x^3/6-x^3/3=-x^3/2\)：</p>
-  \[ \frac{\ln(1+\sin x)-\ln(1+\tan x)}{x^3}\to-\frac12. \]
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 误以为 \(u^2/2\) 项也不抵消——\(\sin^2 x\sim x^2\)、\(\tan^2 x\sim x^2\)，两者在 \(x^2\) 阶相同，故抵消。② 漏 \(\sin^3 x/3\) 或 \(\tan^3 x/3\) 项。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>与 1171 对照：指数差 \(e^{\sin}-e^{\tan}\) 与对数差 \(\ln(1+\sin)-\ln(1+\tan)\) 在 \(x^3\) 阶上给出同一系数 \(-1/2\)，因为两者都主部于 \(\sin x-\tan x\)。1184、1199 在本题基础上加 \(x^3/2\)、\(-x^5/8\) 考察更高阶。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+\tan x)-\ln(1+\sin x)}{x^3}\)。</p>
-  <p class="var-ans">答案：\(\dfrac{1}{2}\)。分子反号。</p>
-  </div>
-</article>
-
-<article class="q" id="q1173">
-  <div class="q-head">
-    <span class="qno">第 1173 题</span>
-    <span class="qtype">0/0 型（反三角复合差）</span>
-    <span class="qsrc">P819</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to0}\dfrac{\arcsin(\tan x)-\arctan(\sin x)}{x^3}=\)____</p>
-  </div>
-  <div class="answer">答案：1</div>
-  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：1/3。复算：1（arcsin(tan x)=x+x^3/2，arctan(sin x)=x-x^3/2，差为 x^3）。以复算为准。</p></div>
-  
-  <div class="block sol"><div class="block-title">解析</div>
-  <p>识别类型：\(0/0\) 型，两个复合反三角之差。分别展开到 \(x^3\) 阶。</p>
-  <p>由 1163：\(\arcsin(\tan x)=x+x^3/2+o(x^3)\)。由 1164：\(\arctan(\sin x)=x-x^3/2+o(x^3)\)。相减：</p>
-  \[ \arcsin(\tan x)-\arctan(\sin x)=\frac{x^3}{2}-\left(-\frac{x^3}{2}\right)+o(x^3)=x^3+o(x^3). \]
-  <p>作差后 \(x^3\) 系数为 \(\dfrac12-\left(-\dfrac12\right)=1\)，故极限为 \(1\)。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-  <p>① 复合展开只展开外层不展开内层：直接把 \(\arcsin(\tan x)\) 当成 \(\arcsin x\) 展开，会丢掉 \(\tan x\) 比 \(x\) 多出的 \(x^3/3\) 项，使 \(\arcsin(\tan x)\) 的 \(x^3\) 系数误算成 \(1/6\) 而非 \(1/2\)。② 两层反三角叠加时符号抵消误判：\(\arcsin\) 内层 \(\tan\) 带来正的 \(x^3/3\)，\(\arctan\) 内层 \(\sin\) 带来负的 \(x^3/6\)，作差时两项是同向叠加而非相消，容易误把系数相加当成相减。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-  <p>复合反三角差是考研选择填空的常客，换法是把外层 \(\arcsin/\arctan\) 与内层 \(\tan/\sin\) 两两搭配（如 1173、1189、1194），考查多层展开系数在 \(x^3\) 阶上的加减。常与六个基本展开系数的记忆联动，要求直接读出结果而不必现场逐层展开。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-  <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin(\arctan x)-\arctan(\sin x)}{x^5}\)。</p>
-  <p class="var-ans">答案：\(0\)。\(\sin(\arctan x)=x-x^3/2+3x^5/8\)；\(\arctan(\sin x)=x-x^3/2+3x^5/8\)；\(x^3\) 与 \(x^5\) 项均相消，首项差出现在更高阶，故除以 \(x^5\) 得 \(0\)。</p>
-  </div>
-  
-</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 1074–1173 题</span></div>
+<p>本题与 1110 构成同组，区别在指数从 sin^2 x 变为 sin^3 x，分母从 x^3 变为 x^4。通用公式为：(1+ax)^{u(x)} - 1 ~ a x * u(x)，其中 u(x)->0。本题 u = sin^3 x ~ x^3，故主部为 2x * x^3 = 2x^4，与分母 x^4 同阶，比值为 2。解题时不要分别对底数和指数单独展开，而是统一写成 e^{u ln(1+ax)} - 1 ~ u*ax，一步到位。</p><p>再强调一次识别类型的判断步骤：先看底数 (1+2x) 趋于 1，指数 sin^3 x 趋于 0，因此整体趋于 1，再减去 1 得到一个无穷小。分母 x^4 决定了展开阶数。这类题最常见的错误是把指数 sin^3 x 误写成 sin x，导致阶数判断错误。</p></article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 1021–1120 题</span></div>
 </div>
 </body>
 </html>

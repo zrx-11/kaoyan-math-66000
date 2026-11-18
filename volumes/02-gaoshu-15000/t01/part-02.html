@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>《极限》 · 第 121–225 题</title>
+<title>《极限》 · 第 121–220 题</title>
 <link rel="stylesheet" href="../../assets/site.css">
 <script>
 MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
@@ -18,7 +18,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <div class="wrap">
 <header class="pagehead">
   <div class="kicker">02-gaoshu-15000 · 专题 01</div>
-  <h1>第 121 – 225 题</h1>
+  <h1>第 121 – 220 题</h1>
   <p class="sub"><a href="part-01.html">← 上一分页</a> <a href="index.html">目录</a> <a href="part-03.html">下一分页 →</a></p>
 </header>
 <article class="q" id="q121">
@@ -508,6 +508,46 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
 </article>
 
+<article class="q" id="q133">
+  <div class="q-head">
+    <span class="qno">第 133 题</span>
+    <span class="qtype">由相邻项差求商的极限（Stolz）</span>
+    <span class="qsrc">P622</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\{a_n\}\) 为数列，且 \(\lim\limits_{n\to\infty}(a_n-a_{n-1})=L\)，则 \(\lim\limits_{n\to\infty}\dfrac{a_n}{n}=L\)。（）</p>
+    <div class="opts">
+      <p>(A) 正确</p>
+      <p>(B) 错误</p>
+      <p>(C) 不一定</p>
+      <p>(D) 仅当 \(a_n\) 有界</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：Stolz 定理（数列版洛必达）的直接应用。把 \(a_n\) 写成差的累加：\(a_n=a_0+\sum_{k=1}^{n}(a_k-a_{k-1})\)。令 \(d_k=a_k-a_{k-1}\)，已知 \(d_k\to L\)。</p>
+    <p>由柯西命题（第 129 题），收敛数列的算术平均收敛到同一极限：</p>
+    \[ \frac{a_n-a_0}{n}=\frac{1}{n}\sum_{k=1}^{n}d_k\longrightarrow L. \]
+    <p>于是 \(\dfrac{a_n}{n}=\dfrac{a_0}{n}+\dfrac{a_n-a_0}{n}\to0+L=L\)。这正是 Stolz 定理中「分母为严格递增趋于无穷的数列 \(n\)」的情形：\(\lim a_n/n=\lim(a_n-a_{n-1})/(n-(n-1))=\lim(a_n-a_{n-1})=L\)。</p>
+    <p>为什么不要求 \(a_n\) 有界：证明只用到差 \(d_k\to L\)，与 \(a_n\) 本身是否有界无关；事实上 \(a_n\) 可以像 \(Ln\) 一样线性增长，除以 \(n\) 后恰为 \(L\)。选 A。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误选 D，以为需要 \(a_n\) 有界。恰恰相反，\(a_n\) 完全可以无界（如 \(a_n=n\)，差为 1，\(a_n/n=1\to1=L\)）；Stolz 定理处理的就是无界数列。</p>
+    <p>② 误以为结论可逆：由 \(a_n/n\to L\) 推不出 \(a_n-a_{n-1}\to L\)。反例 \(a_n=(-1)^n n\)，\(a_n/n=(-1)^n\) 发散；而 \(a_n=\sqrt n\)，\(a_n/n\to0\) 但 \(a_n-a_{n-1}\to0\) 虽成立，一般情形差不一定收敛。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Stolz 定理是数列极限的核心工具，常用于「分子累加、分母线性增长」型极限，是解答题中证明 \(\frac{a_n}{n}\) 类结论的标准依据。它与柯西命题互为表里，常与 \(a_n-a_{n-1}\)、\(a_{n+1}-a_n\) 等差分形式联动命题。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim(a_n-a_{n-1})=L\)，求 \(\lim \dfrac{a_1+2a_2+\cdots+na_n}{n(n+1)}\)。</p>
+    <p class="var-ans">答案：分情形讨论。\(L\neq0\) 时发散（\(L>0\) 时 \(\to+\infty\)）；\(L=0\) 且 \(a_n\to a\) 时极限为 \(a/2\)。反例取 \(a_n=n\)（此时 \(L=1\)）：分子 \(\sum_{k=1}^{n}k^{2}=\dfrac{n(n+1)(2n+1)}6\)，除以 \(n(n+1)\) 得 \(\dfrac{2n+1}{6}\to+\infty\)，并非有限常数。当 \(L=0\) 且 \(a_n\to a\) 时，\(ka_k\sim ak\)，加权和 \(\sum_{k=1}^{n}ka_k\sim an^{2}/2\)，与分母 \(n(n+1)\sim n^{2}\) 之比为 \(a/2\)。</p>
+  </div>
+</article>
+
 <article class="q" id="q134">
   <div class="q-head">
     <span class="qno">第 134 题</span>
@@ -744,6 +784,49 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <div class="block-title">变式</div>
     <p><b>变式</b> 设 \(a_n\to a\)，能否断定 \(\lim a_n^{1/3}=a^{1/3}\)？需要 \(a\ge0\) 吗？</p>
     <p class="var-ans">答案：能，且不需要 \(a\ge0\)。三次根函数 \(t\mapsto t^{1/3}\) 在全体实数上连续（包括负数），故 \(\lim a_n^{1/3}=a^{1/3}\) 对任意实数 \(a\) 成立。区别于偶次根要求被开方数非负。</p>
+  </div>
+</article>
+
+<article class="q" id="q140">
+  <div class="q-head">
+    <span class="qno">第 140 题</span>
+    <span class="qtype">连续函数介值定理与不动点</span>
+    <span class="qsrc">P623</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \([0,1]\) 上连续，且 \(f(0)=0\)，\(f(1)=1\)，则存在 \(c\in(0,1)\) 使得 \(f(c)=c\)。（）</p>
+    <div class="opts">
+      <p>(A) 正确</p>
+      <p>(B) 错误</p>
+      <p>(C) 不一定</p>
+      <p>(D) 仅当 \(f\) 单调</p>
+    </div>
+  </div>
+  <div class="answer">答案：B（错误）</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 A。按题面复算应为 B：f(0)=0、f(1)=1 只保证端点取到端值，不保证 (0,1) 内有不动点。反例 \(f(x)=x+\tfrac12 x(1-x)\)：\(f(x)-x=\tfrac12x(1-x)>0\) 在 (0,1) 恒成立，无不动点。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：不动点问题，构造辅助函数 \(g(x)=f(x)-x\)，用连续函数零点存在定理（介值定理）。</p>
+    <p>令 \(g(x)=f(x)-x\)。由 \(f\) 在 \([0,1]\) 连续，\(g\) 也连续。代入端点：\(g(0)=f(0)-0=0\)，\(g(1)=f(1)-1=0\)。即两端点本身已是 \(g\) 的零点，对应不动点 \(c=0\) 与 \(c=1\)。</p>
+    <p>题目要求 \(c\in(0,1)\)（开区间内）的内部不动点。仅由 \(g(0)=g(1)=0\) 推不出 \((0,1)\) 内还有零点：介值定理找内部零点需要端点异号 \(g(0)\cdot g(1)<0\)，而此处两端同为零。构造反例 \(f(x)=x+\tfrac12 x(1-x)\)，它在 \([0,1]\) 连续、\(f(0)=0\)、\(f(1)=1\)，但 \(g(x)=f(x)-x=\tfrac12 x(1-x)>0\) 在整个 \((0,1)\) 恒成立，没有内部不动点。</p>
+    <p>故「存在 \(c\in(0,1)\) 使 \(f(c)=c\)」不成立，命题判定为错误，选 B。只有把结论弱化为「存在 \(c\in[0,1]\)」时才成立（端点即为不动点）。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 机械套用介值定理需要 \(g(0)\cdot g(1)<0\)。本题 \(g(0)=g(1)=0\)，两端已是零点，不需要符号相反；真正要找内部零点时需额外条件（如 \(f(0)>0\) 且 \(f(1)<1\)）。</p>
+    <p>② 不证明 \(g\) 连续就用零点定理。\(g=f-x\) 的连续性来自 \(f\) 连续与 \(x\) 连续，必须写明。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>构造辅助函数用介值定理证明「存在 \(\xi\) 使 \(f(\xi)=\xi\)」是连续函数部分的高频解答题，常与方程根的存在性、中值定理联动。关键是把待证等式移项为 \(h(\xi)=0\) 并验证 \(h\) 在端点异号。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f\) 在 \([0,1]\) 连续，\(f(0)=1\)，\(f(1)=0\)，证明存在 \(c\in(0,1)\) 使 \(f(c)=c\)。</p>
+    <p class="var-ans">答案：令 \(g(x)=f(x)-x\)，则 \(g(0)=f(0)-0=1>0\)，\(g(1)=f(1)-1=-1<0\)，由零点存在定理，存在 \(c\in(0,1)\) 使 \(g(c)=0\)，即 \(f(c)=c\)。这才是需要端点异号的标准情形。</p>
   </div>
 </article>
 
@@ -2704,6 +2787,49 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
 </article>
 
+<article class="q" id="q192">
+  <div class="q-head">
+    <span class="qno">第 192 题</span>
+    <span class="qtype">复合函数展开（高阶抵消）</span>
+    <span class="qsrc">P633</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\sin(\arcsin x)-\arcsin(\sin x)}{x^5}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>注意 \(\sin(\arcsin x)=x\)（在 \(|x|\le1\) 上恒成立），故分子为 \(x-\arcsin(\sin x)\)。</p>
+    <p><b>展开 \(\arcsin(\sin x)\) 到 \(x^5\) 阶。</b>由第 186 题的展开已知 \(\arcsin(\sin x)=x+o(x^3)\)，继续展开到 \(x^5\) 阶：</p>
+    \[ \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}+o(x^5), \]
+    \[ \arcsin u=u+\frac{u^3}{6}+\frac{3u^5}{40}+o(u^5). \]
+    <p>代入 \(u=\sin x\)：</p>
+    \[ u^3=x^3\left(1-\frac{x^2}{6}+\cdots\right)^3=x^3\left(1-\frac{x^2}{2}+\cdots\right)=x^3-\frac{x^5}{2}+o(x^5), \]
+    \[ u^5=x^5+o(x^5). \]
+    <p>因此</p>
+    \[ \arcsin(\sin x)=\left(x-\frac{x^3}{6}+\frac{x^5}{120}\right)+\frac{1}{6}\left(x^3-\frac{x^5}{2}\right)+\frac{3}{40}x^5+o(x^5). \]
+    <p>合并同类项：</p>
+    <p>\(x\) 项：\(x\)；</p>
+    <p>\(x^3\) 项：\(-1/6+1/6=0\)；</p>
+    <p>\(x^5\) 项：\(1/120-1/12+3/40=1/120-10/120+9/120=0\)。</p>
+    <p>故 \(\arcsin(\sin x)=x+o(x^5)\)，分子 \(=o(x^5)\)，原极限为 \(0\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 本题极限过程 \(x\to0\) 落在 \((-\pi/2,\,\pi/2)\) 内，而在该区间上 \(\arcsin(\sin x)=x\) 是恒等式（\(\arcsin\) 就是 \(\sin\) 在 \([-\pi/2,\pi/2]\) 上的反函数），同时 \(\sin(\arcsin x)=x\) 也恒成立，分子恒等于 \(0\)；此式为恒等式，不存在非零阶，谈不上「某一阶才出现非零项」。</p>
+    <p>② 展开阶数不够。分母是 \(x^5\)，必须展到 \(x^5\) 项，且 \(x^5\) 项系数恰好为零，需要继续检查。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>反函数复合展开是竞赛难度题型。本题与第 186 题构成一组，考查对 \(\sin\) 和 \(\arcsin\) 泰勒展开互逆性的理解。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\sin(\arcsin x)-\arcsin(\sin x)}{x^7}\)。</p>
+    <p class="var-ans">答案：\(0\)。在 \(|x|\le\pi/2\) 上 \(\arcsin(\sin x)\equiv x\)，分子恒为零，任何阶都取 \(0\)，不出现非零常数。</p>
+  </div>
+</article>
+
 <article class="q" id="q193">
   <div class="q-head">
     <span class="qno">第 193 题</span>
@@ -3050,6 +3176,53 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <div class="block-title">变式</div>
     <p><b>变式</b> 设 \(x\to0\) 时 \(\sin x-(ax+bx^3)\) 是比 \(x^5\) 高阶的无穷小，求 \(a,b\)。</p>
     <p class="var-ans">答案：\(a=1\)，\(b=-1/6\)。\(\sin x=x-x^3/6+x^5/120+\cdots\)，故 \(a=1\)，\(b=-1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q202">
+  <div class="q-head">
+    <span class="qno">第 202 题</span>
+    <span class="qtype">无穷小阶的比较（选择题）</span>
+    <span class="qsrc">P634</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，下列无穷小量中，最高阶的无穷小是（）。</p>
+    <div class="opts">
+      <p>(A) \(\ln(1+x+x^2)\)</p>
+      <p>(B) \(1-\cos^2 x\)</p>
+      <p>(C) \(\tan x-x\)</p>
+      <p>(D) \(e^{x^2}-1\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：C</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>分别计算各选项的等价无穷小阶数：</p>
+    <p><b>(A) \(\ln(1+x+x^2)\)。</b>当 \(x\to0\) 时 \(x+x^2\to0\)，故</p>
+    \[ \ln(1+x+x^2)\sim x+x^2\sim x. \]
+    <p>阶数为 \(1\)。</p>
+    <p><b>(B) \(1-\cos^2 x\)。</b></p>
+    \[ 1-\cos^2 x=\sin^2 x\sim x^2. \]
+    <p>阶数为 \(2\)。</p>
+    <p><b>(C) \(\tan x-x\)。</b>由泰勒展开 \(\tan x=x+x^3/3+o(x^3)\)，故</p>
+    \[ \tan x-x\sim\frac{x^3}{3}. \]
+    <p>阶数为 \(3\)。</p>
+    <p><b>(D) \(e^{x^2}-1\)。</b>由 \(e^{u}-1\sim u\)，取 \(u=x^2\)，得 \(e^{x^2}-1\sim x^2\)，阶数为 \(2\)。</p>
+    <p>四者中 (C) 的阶数最高（\(3\) 阶），故选 C。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① (A) 误以为 \(\ln(1+x+x^2)\sim x+x^2\) 是二阶。等价无穷小只取最低阶，\(x+x^2\sim x\)（一阶），因为 \(x^2\) 比 \(x\) 高阶。</p>
+    <p>② (B) 误以为 \(1-\cos^2 x=(1-\cos x)(1+\cos x)\sim(x^2/2)\cdot2=x^2\)，结果正确但注意 \(1+\cos x\to2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>无穷小阶的比较是选择题高频题型。需要熟记常见等价无穷小：\(\sin x\sim x\)、\(\tan x\sim x\)、\(1-\cos x\sim x^2/2\)、\(\tan x-x\sim x^3/3\)、\(x-\sin x\sim x^3/6\) 等。比较阶数时只看最低非零项的次数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，下列无穷小中最高阶的是（）。(A) \(x-\sin x\)  (B) \(1-\cos x\)  (C) \(e^{x^2}-1\)</p>
+    <p class="var-ans">答案：A。(A) \(x-\sin x\sim x^3/6\)（3阶）；(B) \(1-\cos x\sim x^2/2\)（2阶）；(C) \(e^{x^2}-1\sim x^2\)（2阶）。最高阶为 A。</p>
   </div>
 </article>
 
@@ -3631,6 +3804,52 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
 </article>
 
+<article class="q" id="q218">
+  <div class="q-head">
+    <span class="qno">第 218 题</span>
+    <span class="qtype">比较无穷小的阶（最低阶）</span>
+    <span class="qsrc">P638</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，下列无穷小量中，最低阶的无穷小是（）。</p>
+    <div class="opts">
+      <p>(A) \(x-\sin x\)</p>
+      <p>(B) \(\tan x-x\)</p>
+      <p>(C) \(x-\ln(1+x)\)</p>
+      <p>(D) \(1-\cos x\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：C、D 同为二阶无穷小且彼此等价，无唯一最低阶</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上只给 C。按题面复算，\(x-\ln(1+x)=\tfrac{x^2}2+o(x^2)\)、\(1-\cos x=\tfrac{x^2}2+o(x^2)\)，两者二阶系数相同、比值趋于 1，属等价无穷小，最低阶并列，题目本身缺少唯一答案。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：四个常见无穷小比阶，要求找出「最低阶」即幂次最小者。做法是把每个选项展开到第一个非零项，读它的幂次。这类题不需要洛必达，直接套泰勒系数即可。</p>
+    <p>(A) 由 \(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)，得 \(x-\sin x=\dfrac{x^3}{6}+o(x^3)\)，3 阶。</p>
+    <p>(B) 由 \(\tan x=x+\dfrac{x^3}{3}+o(x^3)\)，得 \(\tan x-x=\dfrac{x^3}{3}+o(x^3)\)，3 阶。</p>
+    <p>(C) 由 \(\ln(1+x)=x-\dfrac{x^2}{2}+o(x^2)\)，得 \(x-\ln(1+x)=\dfrac{x^2}{2}+o(x^2)\)，2 阶。</p>
+    <p>(D) 由 \(\cos x=1-\dfrac{x^2}{2}+o(x^4)\)，得 \(1-\cos x=\dfrac{x^2}{2}+o(x^4)\)，2 阶。</p>
+    <p>阶数：A、B 为 3 阶，C、D 为 2 阶。最低阶（幂次最小）的是 2 阶项，落在 C、D。进一步用比值法区分：\(\lim_{x\to0}\frac{x-\ln(1+x)}{1-\cos x}=\lim\frac{x^2/2}{x^2/2}=1\)，二者等价，严格说阶数相同，无法区分出唯一最低阶。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把「最低阶」理解成「最小的无穷小」（最接近 0）。阶数是相对概念：2 阶比 3 阶更「粗」（当 \(x\to0\) 时 \(x^2\) 比 \(x^3\) 大），而不是更小。题目问「最低阶」就是找幂次最小的那个。</p>
+    <p>② 误以为 \(1-\cos x\) 是 1 阶。它是 2 阶，与 \(x-\ln(1+x)\) 同阶同系数。干扰项构造：若把 D 换成 \(\sin x\)（1 阶），D 立刻成为答案；本题 C、D 同阶同系数，按题面二者并列，不存在按选项顺序择一的依据。</p>
+    <p>③ 记混 \(x-\ln(1+x)\) 的系数。它是 \(+x^2/2\)，与 \(\ln(1+x)-x\) 符号相反。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 208、228、238 同型反复出现，是「四个标准无穷小比阶」的固定训练。核心记忆组：\(x-\sin x\sim x^3/6\)、\(\tan x-x\sim x^3/3\)、\(x-\ln(1+x)\sim x^2/2\)、\(1-\cos x\sim x^2/2\)、\(e^x-1-x\sim x^2/2\)、\(\arcsin x-x\sim x^3/6\)、\(\arctan x-x\sim -x^3/3\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(x-\ln(1+x)\) 与 \(1-\cos x\) 是否等价？</p>
+    <p class="var-ans">答案：等价。两者主部均为 \(x^2/2\)，比值极限为 1。</p>
+  </div>
+</article>
+
 <article class="q" id="q219">
   <div class="q-head">
     <span class="qno">第 219 题</span>
@@ -3705,196 +3924,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p><b>变式</b> \(f(x)=ax^5+bx^4\) 与 \(g(x)=\displaystyle\int_0^{\sin x}\left(e^t-1-t-\frac{t^2}{2}-\frac{t^3}{6}\right)dt\) 等价，求 \(a,b\)。</p>
     <p class="var-ans">答案：\(b=0,\ a=\dfrac{1}{120}\)。被积函数主部 \(t^4/24\)，积分得 \(\sin^5 x/120\)。</p>
   </div>
-</article>
-
-<article class="q" id="q221">
-  <div class="q-head">
-    <span class="qno">第 221 题</span>
-    <span class="qtype">高阶无穷小反求参数（e^sin x 复合）</span>
-    <span class="qsrc">P639</span>
-  </div>
-  <div class="stem">
-    <p>设当 \(x\to0\) 时，\(e^{\sin x}-(ax^2+bx+1)\) 是比 \(x^2\) 高阶的无穷小，求 \(a,b\)。</p>
-  </div>
-  <div class="answer">答案：\(a=\dfrac{1}{2},\ b=1\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：复合函数 \(e^{\sin x}\) 的泰勒展开，需要先展开 \(\sin x\)，再代入 \(e^u\) 的展开。要求差为 \(o(x^2)\)，只需展开到 \(x^2\) 项。</p>
-    <p>先展开 \(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)，在 \(x^2\) 精度内 \(\sin x=x+o(x^2)\)。再用 \(e^u=1+u+\dfrac{u^2}{2}+o(u^2)\)，取 \(u=\sin x\)：</p>
-    \[ e^{\sin x}=1+\sin x+\frac{\sin^2 x}{2}+o(x^2). \]
-    <p>把 \(\sin x=x+o(x^2)\)、\(\sin^2 x=x^2+o(x^2)\) 代入：</p>
-    \[ e^{\sin x}=1+x+\frac{x^2}{2}+o(x^2). \]
-    <p>作差：</p>
-    \[ e^{\sin x}-(ax^2+bx+1)=(1-b)x+\left(\frac12-a\right)x^2+o(x^2). \]
-    <p>要求为 \(o(x^2)\)，即 \(1-b=0,\ \dfrac12-a=0\)，得 \(b=1,\ a=\dfrac12\)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 把 \(e^{\sin x}\) 直接写成 \(e^x\) 再展开，虽在 \(x^2\) 阶内结果相同，但理由不严谨；正确做法是先展开 \(\sin x\)。</p>
-    <p>② 忘记 \(\sin^2 x\) 这一项。只展开 \(e^{\sin x}=1+\sin x\) 会得到 \(a=0\)，漏掉 \(x^2/2\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「复合函数泰勒展开」是考研高频点。外层 \(e^u\)、\(\ln(1+u)\)、\(\sin u\)，内层 \(\sin x\)、\(\tan x\)、\(\ln(1+x)\) 的组合，需要逐层展开并控制阶数。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> \(e^{\sin x}-(ax^2+bx+1)\) 是比 \(x^3\) 高阶的无穷小，求 \(a,b\)（多项式加 \(cx^3\)）。</p>
-    <p class="var-ans">答案：\(b=1,\ a=1/2,\ c=0\)。再展一阶：\(e^{\sin x}=1+x+\dfrac{x^2}{2}+0\cdot x^3-\dfrac{x^4}{8}+\cdots\)，其中 \(x^3\) 项由 \(-x^3/6\)（来自 \(\sin x\)）与 \(+x^3/6\)（来自 \(u^3/6\)）相消，故 \(c=0\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q222">
-  <div class="q-head">
-    <span class="qno">第 222 题</span>
-    <span class="qtype">比较无穷小的阶（最高阶）</span>
-    <span class="qsrc">P639</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0\) 时，下列无穷小量中，最高阶的无穷小是（）。</p>
-    <div class="opts">
-      <p>(A) \(\arctan x-x\)</p>
-      <p>(B) \(x-\sin x\)</p>
-      <p>(C) \(\tan x-\sin x\)</p>
-      <p>(D) \(x-\sin x-\dfrac{x^3}{6}\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：D</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：四个无穷小比阶，要求找出「最高阶」即幂次最大者。前三个都是常见 3 阶小量，第四个 \(x-\sin x-\dfrac{x^3}{6}\) 故意把 \(x-\sin x\) 的 \(x^3\) 主部再减掉，是「消阶题」，必须展开到 \(x^5\) 才能看到它的真实阶数。</p>
-    <p>(A) \(\arctan x=x-\dfrac{x^3}{3}+o(x^3)\)，故 \(\arctan x-x=-\dfrac{x^3}{3}+o(x^3)\)，3 阶。</p>
-    <p>(B) \(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)，故 \(x-\sin x=\dfrac{x^3}{6}+o(x^3)\)，3 阶。</p>
-    <p>(C) \(\tan x-\sin x=\sin x\left(\dfrac{1}{\cos x}-1\right)=\dfrac{\sin x(1-\cos x)}{\cos x}\sim x\cdot\dfrac{x^2}{2}=\dfrac{x^3}{2}\)，3 阶。这里用因式分解法把 \(\tan x-\sin x\) 拆成 \(\sin x\cdot(1-\sec x)\)，否则直接展开 \(\tan x\) 与 \(\sin x\) 相减也能得到同阶结果，但系数需细心。</p>
-    <p>(D) 把 \(\sin x\) 展开到 \(x^5\)：\(\sin x=x-\dfrac{x^3}{6}+\dfrac{x^5}{120}+o(x^5)\)，故</p>
-    \[ x-\sin x-\frac{x^3}{6}=x-\left(x-\frac{x^3}{6}+\frac{x^5}{120}+o(x^5)\right)-\frac{x^3}{6}=-\frac{x^5}{120}+o(x^5). \]
-    <p>前两项 \(x-\sin x\) 本身就是 \(x^3/6+o(x^3)\)，再减 \(x^3/6\) 把 3 阶项完全抵消，剩下的主部落到 5 阶。阶数：A、B、C 均为 3 阶，D 为 5 阶。最高阶为 D。</p>
-    <p>第二解法交叉验证：对 D 用洛必达五次，\(\lim\frac{x-\sin x-x^3/6}{x^5}\) 五次求导后分子为 \(-\cos x\)，分母为 \(5!=120\)，极限 \(-1/120\)，与泰勒展开一致。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① (C) 项 \(\tan x-\sin x\) 容易凭直觉判断为高阶，实际上它是 3 阶，与 A、B 同阶。因式分解 \(\sin x(1-\cos x)/\cos x\) 后立刻看到 \(x\cdot x^2/2=x^3/2\)。</p>
-    <p>② 只展开 \(\sin x\) 到 \(x^3\) 项，会把 D 项误判为 \(o(x^3)\) 而无法定阶，或以为 D 是 0 阶。题目特意在 \(x-\sin x\) 后再减 \(x^3/6\)，就是要求展开到 \(x^5\)。</p>
-    <p>③ 把「最高阶」理解成「绝对值最大」。阶数是幂次概念，与系数大小无关。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 212、232 同型，是「三个 3 阶小量 + 一个消阶 5 阶小量」的固定套路。常见消阶对象：\(x-\sin x-x^3/6\)、\(\tan x-x-x^3/3\)、\(\arcsin x-x-x^3/6\)、\(\arctan x-x+x^3/3\)，对应主部分别为 \(-x^5/120\)、\(2x^5/15\)、\(3x^5/40\)、\(-x^5/5\)。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 下列无穷小中阶数最高的是（）。(A) \(\tan x-\sin x\) (B) \(x-\sin x\) (C) \(\tan x-x\) (D) \(x-\tan x+\frac{x^3}{3}\)。</p>
-    <p class="var-ans">答案：D。D 为 5 阶（\(\tan x=x+x^3/3+2x^5/15+\cdots\)，差为 \(-2x^5/15\)），其余均为 3 阶。</p>
-  </div>
-</article>
-
-<article class="q" id="q223">
-  <div class="q-head">
-    <span class="qno">第 223 题</span>
-    <span class="qtype">被积函数为常数型的变限积分阶数</span>
-    <span class="qsrc">P639</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0\) 时，\(f(x)=\displaystyle\int_0^x\dfrac{\ln(1+t)-t}{t^2}\,dt\) 是 \(x\) 的 \(k\) 阶无穷小，求 \(k\)。</p>
-  </div>
-  <div class="answer">答案：\(k=1\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：被积函数 \(\dfrac{\ln(1+t)-t}{t^2}\) 在 \(t=0\) 处表面是 \(\frac00\) 型，但分子 \(\ln(1+t)-t\) 与 \(t^2\) 同阶，相除后取非零常数，属可去间断点。做法与 219、229、233 一致：先把分子展开到能被 \(t^2\) 整除，再读被积函数的常数项，最后逐项积分。</p>
-    <p>展开 \(\ln(1+t)\)。由于分母是 \(t^2\)，分子至少要写到 \(t^2\) 项才能看出被积函数的常数项，为保险多写一阶：</p>
-    \[ \ln(1+t)=t-\frac{t^2}{2}+\frac{t^3}{3}-\frac{t^4}{4}+o(t^4), \]
-    \[ \ln(1+t)-t=-\frac{t^2}{2}+\frac{t^3}{3}+o(t^3). \]
-    <p>除以 \(t^2\)：</p>
-    \[ \frac{\ln(1+t)-t}{t^2}=-\frac12+\frac{t}{3}+o(t). \]
-    <p>这一步的常数项 \(-1/2\) 可独立用洛必达法则验证：\(\lim_{t\to0}\frac{\ln(1+t)-t}{t^2}=\lim_{t\to0}\frac{\frac{1}{1+t}-1}{2t}=\lim_{t\to0}\frac{-1}{2(1+t)^2}=-\frac12\)，与泰勒展开一致。</p>
-    <p>逐项积分（牛顿-莱布尼茨公式对收敛的展开式逐项成立）：</p>
-    \[ f(x)=\int_0^x\left(-\frac12+\frac{t}{3}+o(t)\right)dt=-\frac{x}{2}+\frac{x^2}{6}+o(x^2). \]
-    <p>最低次非零项是 \(-x/2\)，故 \(f(x)\sim -x/2\)，是 \(x\) 的 1 阶无穷小。「除以 \(t^2\) 后常数项幸存」正是阶数被压回 1 阶的原因。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 凭「\(\ln(1+t)-t\) 是 2 阶小量」就估积分是 3 阶。这是最常见的错法：忘了分母 \(t^2\) 把分子阶数抵消掉，被积函数实际在 \(t=0\) 取非零常数 \(-1/2\)，积分结果是 \(O(x)\) 而不是 \(O(x^3)\)。</p>
-    <p>② 展开时只写 \(\ln(1+t)=t+o(t)\)，代入后 \(\ln(1+t)-t=o(t)\)，再除以 \(t^2\) 得到 \(o(1/t)\)，发散或无法定阶。必须把分子展到 \(t^2\) 项。</p>
-    <p>③ 干扰项构造：若把被积函数误记为 \(\dfrac{\ln(1+t)-t}{t}\)（分母一次），主部会变成 \(-t/2\)，积分得 \(-x^2/4\)，误答 \(k=2\)。题目特意把分母写成 \(t^2\) 就是为了压到 1 阶。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 219（\(\frac{\cos t-1}{t^2}\)）、229（\(\frac{e^t-1-t}{t^2}\)）、233（\(\frac{\sin t-t}{t^3}\)）构成一组「可去间断型被积函数变限积分」的标准题。它们的共同套路是：分子是某个初等函数的「截尾展开」（截掉前若干项），分母恰好把分子的主部幂次抵消，使被积函数在 0 处取非零常数。考研选择题常把这四个函数混在一起让比阶，记牢每个的常数项即可秒杀。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> \(f(x)=\displaystyle\int_0^x\dfrac{\sin t-t}{t^3}\,dt\) 是 \(x\) 的几阶无穷小？</p>
-    <p class="var-ans">答案：1 阶，主部 \(-x/6\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q224">
-  <div class="q-head">
-    <span class="qno">第 224 题</span>
-    <span class="qtype">等价无穷小反求参数（sin(t^2) 型）</span>
-    <span class="qsrc">P639</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0\) 时，\(f(x)=ax^5+bx^3\) 与 \(g(x)=\displaystyle\int_0^{\tan x}\sin(t^2)\,dt\) 是等价无穷小，求 \(a,b\)。</p>
-  </div>
-  <div class="answer">答案：\(a=0,\ b=\dfrac{1}{3}\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：与 204 同型，但多项式给出 \(ax^5+bx^3\)，让低阶项 \(bx^3\) 承担主部。</p>
-    <p>被积函数 \(\sin(t^2)\sim t^2\)，积分主部：</p>
-    \[ g(x)=\int_0^{\tan x}t^2\,dt+o(x^3)=\frac{\tan^3 x}{3}+o(x^3). \]
-    <p>再用 \(\tan x=x+o(x)\)，得 \(g(x)=\dfrac{x^3}{3}+o(x^3)\)。</p>
-    <p>与 \(f(x)=ax^5+bx^3\) 比较：若 \(a\neq0\)，\(ax^5\) 是 5 阶，比 \(g\) 的 3 阶高，不影响主部；但等价要求 \(f\sim g\)，故 \(x^3\) 系数 \(b=\dfrac13\)，而 \(ax^5\) 项作为高阶余项必须为零，否则比值极限仍是 1（因为 \(ax^5/g(x)\to0\)）。严格说只要 \(b=1/3\)，\(a\) 任意都可使 \(f\sim g\)；题目给出 \(a=0\) 是让多项式最简。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 把 \(\sin(t^2)\) 等价成 \(t\)，主部错成 \(x^2\) 阶。正确是 \(\sin(t^2)\sim t^2\)。</p>
-    <p>② 积分 \(\int t^2 dt=t^3/3\)，系数 \(1/3\) 容易丢。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 204、210、214、220、230 同模板。多项式故意写成 \(ax^5+bx^3\)，让 \(a=0\) 作为「高阶项为零」的考察点。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> \(f(x)=ax^5+bx^3\) 与 \(g(x)=\displaystyle\int_0^{\sin x}\sin(t^2)\,dt\) 等价，求 \(a,b\)。</p>
-    <p class="var-ans">答案：\(a=0,\ b=1/3\)。\(\sin x\sim x\)，主部仍为 \(x^3/3\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q225">
-  <div class="q-head">
-    <span class="qno">第 225 题</span>
-    <span class="qtype">连续函数变限积分与 x^a 等价</span>
-    <span class="qsrc">P639</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 连续，\(f(0)=1\)，且当 \(x\to0\) 时，\(\displaystyle\int_0^x f(t)\,dt\) 与 \(x^a\) 为等价无穷小，求 \(a\)。</p>
-  </div>
-  <div class="answer">答案：\(a=1\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：连续函数在起点处取定值，其变限积分的主部由被积函数在起点值与上限幂次共同决定，属于「由连续条件反推等价无穷小阶」的题型。</p>
-    <p>先求 \(\displaystyle\int_0^x f(t)\,dt\) 相对于 \(x\) 的比值极限。因为 \(f\) 在 \(x=0\) 连续，当 \(x\to0\) 时这是 \(\frac{0}{0}\) 型，可由洛必达法则或积分中值定理处理：</p>
-    \[ \lim_{x\to0}\frac{\int_0^x f(t)\,dt}{x}=\lim_{x\to0}\frac{f(x)}{1}=f(0)=1. \]
-    <p>积分中值定理的写法是：在 \(0\) 与 \(x\) 之间存在 \(\xi\)，使 \(\int_0^x f(t)\,dt=f(\xi)\,x\)，当 \(x\to0\) 时 \(\xi\to0\)，由连续性 \(f(\xi)\to f(0)=1\)，同样得到比值极限为 1。两条路径等价，结论一致。</p>
-    <p>因此 \(\displaystyle\int_0^x f(t)\,dt\sim x\)。两个无穷小 \(u\) 与 \(v\) 等价的定义是 \(\lim u/v=1\)，而 \(x^a\) 在 \(x\to0\) 时的阶数由指数 \(a\) 唯一决定；要让 \(\int_0^x f(t)dt\) 与 \(x^a\) 等价，二者阶数必须相同，故 \(a=1\)。这里 \(f(0)=1\) 只影响主部系数（恰好为 1，与 \(x^a\) 本身系数一致），并不影响阶数。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 误以为 \(f(0)=1\) 就使积分恒等于 \(x\)，不需要条件。结论虽对，但推导应写「主部为 \(f(0)x\)」，不能跳过极限。</p>
-    <p>② 若上限是 \(x^2\)，答案会变成 \(a=2\)，不要混淆。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 205、215、235 同组。核心结论 \(\int_0^{g(x)}f(t)dt\sim f(0)g(x)\)。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> \(f(0)=2\)，\(\int_0^x f(t)dt\) 与 \(x^a\) 等价，求 \(a\)。</p>
-    <p class="var-ans">答案：\(a=1\)。阶数仍由上限决定，与 \(f(0)\) 的具体值无关。</p>
-  </div>
-</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 121–225 题</span></div>
+</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 121–220 题</span></div>
 </div>
 </body>
 </html>

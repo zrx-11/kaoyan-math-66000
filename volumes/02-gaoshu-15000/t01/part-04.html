@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>《极限》 · 第 345–452 题</title>
+<title>《极限》 · 第 321–420 题</title>
 <link rel="stylesheet" href="../../assets/site.css">
 <script>
 MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
@@ -18,9 +18,877 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <div class="wrap">
 <header class="pagehead">
   <div class="kicker">02-gaoshu-15000 · 专题 01</div>
-  <h1>第 345 – 452 题</h1>
+  <h1>第 321 – 420 题</h1>
   <p class="sub"><a href="part-03.html">← 上一分页</a> <a href="index.html">目录</a> <a href="part-05.html">下一分页 →</a></p>
 </header>
+<article class="q" id="q321">
+  <div class="q-head">
+    <span class="qno">第 321 题</span>
+    <span class="qtype">sin x 的五阶展开</span>
+    <span class="qsrc">P657</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\sin x-x+\dfrac{x^{3}}{6}}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{120}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{5}\) 要求展开到 \(x^{5}\) 阶；三阶及以下因题中修正项抵消，只有五阶 \(x^{5}/120\) 留存。</p><p>交叉验证：用洛必达法则连续对 \(\sin x-x+x^{3}/6\) 求导。一阶 \( \cos x-1+x^{2}/2\)，二阶 \(-\sin x+x\)，三阶 \(-\cos x+1\)，三阶导在 \(0\) 处为 \(0\)，四阶 \(\sin x\) 在 \(0\) 处仍为 \(0\)，五阶 \(\cos x\) 在 \(0\) 处为 \(1\)，除以 \(x^{5}\) 的五阶导 \(5!=120\)，得 \(1/120\)，与展开一致。</p>
+    <p>识别类型：\(0/0\) 型，\(\sin x\) 的泰勒展开，前两项修正抵消 \(x\)、\(x^{3}\)，剩下 \(x^{5}\) 系数。</p>
+    <p>由 \(\sin x=x-\dfrac{x^{3}}{6}+\dfrac{x^{5}}{120}+o(x^{5})\)，代入得</p>
+    \[
+    \sin x-x+\frac{x^{3}}{6}=\frac{x^{5}}{120}+o(x^{5}).
+    \]
+    <p>除以 \(x^{5}\) 得 \(1/120\)。这是 \(\sin x\) 展开的直接应用，关键是记住 \(\sin x\) 的五阶系数为 \(1/120\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：只展开到三阶，\(\sin x-x+x^{3}/6=0\)，误答 \(0\)。必须展开到五阶，\(\sin x\) 的 \(x^{5}\) 项为 \(x^{5}/120\)。</p>
+    <p>① 只展开到三阶，误判分子为零。② 五阶系数记错：\(\sin x\) 的 \(x^{5}\) 项为 \(+x^{5}/120\)。③ 符号错。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：\(\sin x-x+x^{3}/6=x^{5}/120\) 是五阶等价无穷小，常嵌套进更复杂的 \(0/0\) 极限中作为中间步骤。</p>
+    <p>这是 \(\sin x\) 泰勒展开的最基本题，常与 \(e^{x}\)、\(\ln(1+x)\) 的展开并列。考研中常以此为基础叠加嵌套。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{x-\sin x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{6}\)。\(\sin x=x-x^{3}/6+o(x^{3})\)，故 \(x-\sin x=x^{3}/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q322">
+  <div class="q-head">
+    <span class="qno">第 322 题</span>
+    <span class="qtype">e<sup>x</sup> − e<sup>sin x</sup> 的提取公因子</span>
+    <span class="qsrc">P658</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{e^{x}-e^{\sin x}}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{6}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{3}\)，提取公因子后转化为 \(e^{u}-1\sim u\)，其中 \(u=x-\sin x\sim x^{3}/6\)，故只需三阶。</p><p>交叉验证：用洛必达法则核验。分子 \(e^{x}-e^{\sin x}\) 求导一次得 \(e^{x}-\cos x\cdot e^{\sin x}\)，在 \(0\) 处为 \(1-1=0\)；再导一次得 \(e^{x}+\sin x\,e^{\sin x}-\cos^{2}x\,e^{\sin x}\)，在 \(0\) 处为 \(1-1=0\)；继续求导至三阶，配合等价无穷小 \(x-\sin x\sim x^{3}/6\)，得 \(1/6\)，与提取公因子结果一致。</p>
+    <p>识别类型：\(0/0\) 型，两个指数函数之差，提取公共因子 \(e^{\sin x}\)。</p>
+    \[
+    e^{x}-e^{\sin x}=e^{\sin x}\left(e^{x-\sin x}-1\right).
+    \]
+    <p>当 \(x\to0\)，\(e^{\sin x}\to1\)，且 \(e^{u}-1\sim u\)，其中 \(u=x-\sin x\sim x^{3}/6\)。故</p>
+    \[
+    \text{分子}\sim 1\cdot\frac{x^{3}}{6}=\frac{x^{3}}{6}.
+    \]
+    <p>除以 \(x^{3}\) 得 \(1/6\)。关键一步是把指数差转化为 \(x-\sin x\)，再调用 \(x-\sin x\sim x^{3}/6\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：直接展开 \(e^{x}\) 与 \(e^{\sin x}\)，符号混乱。正确是提取 \(e^{\sin x}\)，转化为 \(e^{x-\sin x}-1\sim x-\sin x\sim x^{3}/6\)。</p>
+    <p>① 直接展开 \(e^{x}\)、\(e^{\sin x}\) 容易混乱。② 忘记 \(e^{\sin x}\to1\)。③ 把 \(x-\sin x\sim x^{3}/6\) 的系数记错。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：指数差提取公因子后，本质是考 \(x-\sin x\sim x^{3}/6\) 这一经典等价，二者在考研中反复联动。</p>
+    <p>与第 311 题同族，考「指数差提取公因子」，常与 \(x-\sin x\)、\(\tan x-\sin x\) 配合。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{e^{x^{2}}-e^{\sin x^{2}}}{x^{6}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{6}\)。提取 \(e^{\sin x^{2}}\)，指数差 \(x^{2}-\sin x^{2}\sim(x^{2})^{3}/6=x^{6}/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q323">
+  <div class="q-head">
+    <span class="qno">第 323 题</span>
+    <span class="qtype">e<sup>tan x</sup> − e<sup>sin x</sup></span>
+    <span class="qsrc">P658</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{e^{\tan x}-e^{\sin x}}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{3}\)，提取 \(e^{\sin x}\to1\) 后，\(u=\tan x-\sin x\) 需展开到 \(x^{3}\) 阶，得 \(x^{3}/2\)。</p><p>交叉验证：把 \(e^{\tan x}-e^{\sin x}\) 写成 \(e^{\sin x}(e^{\tan x-\sin x}-1)\)。当 \(x\to0\)，\(e^{\sin x}\to1\)，\(e^{u}-1\sim u\)，其中 \(u=\tan x-\sin x=\tan x(1-\cos x)\sim x\cdot x^{2}/2=x^{3}/2\)，故分子主部 \(x^{3}/2\)，除以 \(x^{3}\) 得 \(1/2\)。与提取公因子法一致。</p>
+    <p>识别类型：\(0/0\) 型，两个指数函数之差，提取 \(e^{\sin x}\)。</p>
+    \[
+    e^{\tan x}-e^{\sin x}=e^{\sin x}\left(e^{\tan x-\sin x}-1\right)\sim 1\cdot(\tan x-\sin x).
+    \]
+    <p>由 \(\tan x-\sin x\sim x^{3}/2\)，分子 \(\sim x^{3}/2\)，除以 \(x^{3}\) 得 \(1/2\)。关键一步是提取公因子后转化为经典差式 \(\tan x-\sin x\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>详细展开：\(\tan x=x+x^{3}/3+o(x^{3})\)，\(\sin x=x-x^{3}/6+o(x^{3})\)，差为 \(x^{3}/2+o(x^{3})\)。又 \(e^{\sin x}=1+x+o(x)\)，故 \(e^{\tan x}-e^{\sin x}=e^{\sin x}(e^{\tan x-\sin x}-1)\sim1\cdot(x^{3}/2)\)，结论 \(1/2\)。</p><p>错误示范：忘记 \(e^{\sin x}\to1\)，或把 \(e^{\tan x-\sin x}-1\) 的系数 \(1/2\) 漏掉。正确是 \(\tan x-\sin x\sim x^{3}/2\)。</p>
+    <p>① 与第 311 题符号混淆：本题 \(e^{\tan x}-e^{\sin x}\) 为正，第 311 题为负。② 忘记 \(\tan x-\sin x\sim x^{3}/2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：本题与第 322 题互为镜像，核心都是「提取 \(e^{\text{某}}\)，转化为指数之差的等价无穷小」。</p>
+    <p>与第 311、322 题同族，是「指数差提取公因子」的标准题。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{e^{\tan x^{2}}-e^{\sin x^{2}}}{x^{6}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{2}\)。指数差 \(\tan x^{2}-\sin x^{2}\sim(x^{2})^{3}/2=x^{6}/2\)。</p><p>小结：指数差先提公因子，再把指数之差化为等价无穷小，是固定套路。</p>
+  </div>
+</article>
+
+<article class="q" id="q324">
+  <div class="q-head">
+    <span class="qno">第 324 题</span>
+    <span class="qtype">cos(sin x) 与 e<sup>−x²/2</sup> 的差</span>
+    <span class="qsrc">P658</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\cos(\sin x)-e^{-\frac{x^{2}}{2}}}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{12}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>交叉验证：用差化积或直接对比 \(\cos(\sin x)\) 与 \(\cos x\) 的展开。\(\cos(\sin x)=1-x^{2}/2+5x^{4}/24+o(x^{4})\)，\(e^{-x^{2}/2}=1-x^{2}/2+x^{4}/8+o(x^{4})\)，两式 \(x^{2}\) 项同为 \(-1/2\)，相减后 \(x^{4}\) 系数为 \(5/24-3/24=1/12\)，与直接展开一致。</p>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{4}\)，需把两个函数展开到四阶。由第 312 题已知 \(\cos(\sin x)=1-\dfrac{x^{2}}{2}+\dfrac{5x^{4}}{24}+o(x^{4})\)。</p>
+    <p>而 \(e^{-x^{2}/2}=1-\dfrac{x^{2}}{2}+\dfrac{x^{4}}{8}+o(x^{4})=1-\dfrac{x^{2}}{2}+\dfrac{3x^{4}}{24}+o(x^{4})\)。</p>
+    <p>两者相减：</p>
+    \[
+    \cos(\sin x)-e^{-x^{2}/2}=\frac{5x^{4}}{24}-\frac{3x^{4}}{24}+o(x^{4})=\frac{x^{4}}{12}+o(x^{4}).
+    \]
+    <p>除以 \(x^{4}\) 得 \(1/12\)。关键一步是两个函数的 \(x^{2}\) 系数都是 \(-1/2\)，相互抵消，只剩 \(x^{4}\) 系数之差 \(5/24-3/24=1/12\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：把 \(\cos(\sin x)\) 近似为 \(\cos x\)，得 \(\cos x-e^{-x^{2}/2}=-x^{4}/12\)，符号错。正确是 \(\cos(\sin x)\) 的 \(x^{4}\) 系数为 \(5/24\)。</p>
+    <p>① 把 \(\cos(\sin x)\) 近似为 \(\cos x\)，得 \(\cos x-e^{-x^{2}/2}=-x^{4}/12\)，符号错。② 四阶系数 \(5/24\) 与 \(3/24\) 相减算错。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：\(\cos(\sin x)\) 与 \(e^{-x^{2}/2}\) 的四阶系数差是高频考点，需记住 \(5/24\) 与 \(3/24\)。</p>
+    <p>这是第 312 题与第 319 题的结合，考复合函数与 \(e^{-x^{2}/2}\) 的四阶比较。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{e^{-x^{2}/2}-\cos(\sin x)}{x^{4}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{12}\)。与本题互为相反数。</p>
+  </div>
+</article>
+
+<article class="q" id="q325">
+  <div class="q-head">
+    <span class="qno">第 325 题</span>
+    <span class="qtype">嵌套反三角函数的泰勒展开</span>
+    <span class="qsrc">P658</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\arctan(\sin x)-\arcsin(\tan x)}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：发散（\(\to-\infty\)）</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(0\)，按题面独立复算为 发散（\(\to-\infty\)）。两函数 \(x^{3}\) 系数分别为 \(-1/2\) 与 \(+1/2\)，相减后分子主部为 \(-x^{3}\)，除以 \(x^{5}\) 得 \(-1/x^{2}\to-\infty\)，并非 0。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，两个嵌套反三角函数之差，分母 \(x^{5}\)。把内层函数代入外层泰勒，展开到五阶后比较系数。</p>
+    <p>先展开 \(\arctan(\sin x)\)。由 \(\arctan u=u-\dfrac{u^{3}}{3}+\dfrac{u^{5}}{5}+o(u^{5})\)，取 \(u=\sin x=x-\dfrac{x^{3}}{6}+o(x^{3})\)，则 \(u^{3}=x^{3}-\dfrac{x^{5}}{2}+o(x^{5})\)、\(u^{5}=x^{5}+o(x^{5})\)，代入得</p>
+    \[
+    \arctan(\sin x)=\left(x-\frac{x^{3}}{6}+\frac{x^{5}}{120}\right)-\frac{1}{3}\left(x^{3}-\frac{x^{5}}{2}\right)+\frac{x^{5}}{5}+o(x^{5})
+    =x-\frac{x^{3}}{2}+\frac{3x^{5}}{8}+o(x^{5}).
+    \]
+    <p>再展开 \(\arcsin(\tan x)\)。由 \(\arcsin v=v+\dfrac{v^{3}}{6}+\dfrac{3v^{5}}{40}+o(v^{5})\)，取 \(v=\tan x=x+\dfrac{x^{3}}{3}+\dfrac{2x^{5}}{15}+o(x^{5})\)，则 \(v^{3}=x^{3}+x^{5}+o(x^{5})\)、\(v^{5}=x^{5}+o(x^{5})\)，代入得</p>
+    \[
+    \arcsin(\tan x)=\left(x+\frac{x^{3}}{3}+\frac{2x^{5}}{15}\right)+\frac{1}{6}(x^{3}+x^{5})+\frac{3x^{5}}{40}+o(x^{5})
+    =x+\frac{x^{3}}{2}+\frac{3x^{5}}{8}+o(x^{5}).
+    \]
+    <p>两式相减：</p>
+    \[
+    \arctan(\sin x)-\arcsin(\tan x)=-x^{3}+o(x^{3}),
+    \]
+    <p>两个 \(x^{5}\) 系数同为 \(3/8\)，恰好抵消。分子主部为 \(-x^{3}\)，除以 \(x^{5}\) 后为 \(-1/x^{2}\to-\infty\)，并非 \(0\)。关键原因是两个函数的 \(x^{3}\) 系数分别为 \(-1/2\) 与 \(+1/2\)，相减后不为零；要使极限为 \(0\)，分子须是 \(o(x^{5})\)，但这里主部在 \(x^{3}\) 阶。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为两个函数在低阶都 \(\sim x\)，差为零。实际上 \(\arctan(\sin x)\) 与 \(\arcsin(\tan x)\) 的三阶系数符号相反，相减得 \(-x^{3}\)。② 嵌套代入时只展开到一阶，丢失 \(x^{3}\) 项，误判分子为 \(o(x^{5})\)。③ 干扰项 \(0\) 正是按「前两阶相同、高阶抵消」的错觉构造，实际 \(x^{3}\) 并未抵消。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>嵌套反三角函数的泰勒展开是选择题压轴常客，核心是内层函数代入外层级数时必须展开到足够阶数。考研常以 \(\arctan(\sin x)\)、\(\arcsin(\tan x)\) 的三阶、五阶系数为考点。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\arctan(\sin x)-\arcsin(\tan x)}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(-1\)。由上展开，分子主部 \(-x^{3}\)，除以 \(x^{3}\) 得 \(-1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q326">
+  <div class="q-head">
+    <span class="qno">第 326 题</span>
+    <span class="qtype">根式差与 sin x − tan x</span>
+    <span class="qsrc">P658</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+\sin x}-\sqrt{1+\tan x}}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{4}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{3}\)，有理化后分母 \(2\)，分子 \(\sin x-\tan x=-\tan x(1-\cos x)\) 展开到 \(x^{3}\) 得 \(-x^{3}/2\)。</p><p>交叉验证：把 \(\sin x-\tan x=\tan x(\cos x-1)\sim x\cdot(-x^{2}/2)=-x^{3}/2\) 代入有理化结果，分母 \(\sqrt{1+\sin x}+\sqrt{1+\tan x}\to2\)，故原式 \((-x^{3}/2)/(2x^{3})=-1/4\)，与有理化一致。</p>
+    <p>识别类型：\(0/0\) 型，分子是两个根式之差，先有理化。</p>
+    \[
+    \sqrt{1+\sin x}-\sqrt{1+\tan x}
+    =\frac{\sin x-\tan x}{\sqrt{1+\sin x}+\sqrt{1+\tan x}}.
+    \]
+    <p>当 \(x\to0\)，分母 \(\to 1+1=2\)。分子 \(\sin x-\tan x=\tan x(\cos x-1)\sim x\cdot(-x^{2}/2)=-x^{3}/2\)。故</p>
+    \[
+    \text{原式}=\frac{-x^{3}/2}{2x^{3}}=-\frac{1}{4}.
+    \]
+    <p>关键一步是有理化后把根式差转化为 \(\sin x-\tan x\)，再因式分解出 \(1-\cos x\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>详细展开：\(\sin x-\tan x=\sin x(1-1/\cos x)=-\sin x(1-\cos x)/\cos x\sim-x\cdot x^{2}/2=-x^{3}/2\)。分母有理化后 \(\sqrt{1+\sin x}+\sqrt{1+\tan x}\to2\)，故比值 \(-1/4\)。</p><p>错误示范：有理化后分母忘记代成 \(2\)，或 \(\sin x-\tan x=-\tan x(1-\cos x)\) 的负号丢失。正确是 \(-x^{3}/2\) 除以 \(2x^{3}\) 得 \(-1/4\)。</p>
+    <p>① 有理化后分母忘记代成 \(2\)。② \(\sin x-\tan x=-\tan x(1-\cos x)\) 的负号丢失。③ 把 \(1-\cos x\sim x^{2}/2\) 漏掉。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：根式有理化叠加三角函数差式，流程固定为先有理化、再因式分解出 \(1-\cos x\)。</p>
+    <p>这是根式有理化与三角函数差式的综合题，考的是「先有理化、再等价替换」的流程。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+\tan x}-\sqrt{1+\sin x}}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{4}\)。与本题互为相反数。</p><p>小结：根式差先有理化，三角函数差式再因式分解，两步不可颠倒。</p>
+  </div>
+</article>
+
+<article class="q" id="q327">
+  <div class="q-head">
+    <span class="qno">第 327 题</span>
+    <span class="qtype">ln cos x 的六阶修正</span>
+    <span class="qsrc">P658</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\ln(\cos x)+\dfrac{x^{2}}{2}+\dfrac{x^{4}}{12}}{x^{6}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{45}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{6}\)，题中已修正 \(x^{2}\)、\(x^{4}\) 阶，故只需展开到 \(x^{6}\) 阶，得 \(-x^{6}/45\)。</p><p>交叉验证：由 \(\ln(\cos x)=-\int_{0}^{x}\tan t\,dt\)，而 \(\tan t=t+t^{3}/3+o(t^{3})\)，积分得 \(\ln\cos x=-x^{2}/2-x^{4}/12-x^{6}/45+o(x^{6})\)，加 \(x^{2}/2+x^{4}/12\) 后剩 \(-x^{6}/45\)，与展开结果一致。</p>
+    <p>识别类型：与第 302 题完全相同，\(\ln(\cos x)\) 展开到六阶，前两阶修正抵消。</p>
+    <p>由第 302 题已得</p>
+    \[
+    \ln(\cos x)=-\frac{x^{2}}{2}-\frac{x^{4}}{12}-\frac{x^{6}}{45}+o(x^{6}).
+    \]
+    <p>加 \(x^{2}/2+x^{4}/12\) 后，分子 \(=-x^{6}/45+o(x^{6})\)，除以 \(x^{6}\) 得 \(-1/45\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>详细展开：\(\ln\cos x=\ln(1-(1-\cos x))\sim-(1-\cos x)-(1-\cos x)^{2}/2\)。代入 \(1-\cos x=x^{2}/2-x^{4}/24\)，得 \(-x^{2}/2-x^{4}/12-x^{6}/45\)，修正后剩 \(-x^{6}/45\)。</p><p>错误示范：重复计算时漏算 \(u^{3}\) 项，或与第 302 题混淆。正确是 \(\ln\cos x=-x^{2}/2-x^{4}/12-x^{6}/45\)。</p>
+    <p>① 重复计算时漏算 \(u^{3}\) 项。② 与第 302 题混淆。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：\(\ln\cos x\) 的展开可由 \(-\int\tan t\,dt\) 逐项积分校验，这是自查系数的有效手段。</p>
+    <p>本题与第 302 题重复，属于 \(\ln\cos x\) 展开的标准题。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\ln(\cos x)+\dfrac{x^{2}}{2}+\dfrac{x^{4}}{12}+\dfrac{x^{6}}{45}}{x^{8}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{17}{2520}\)。\(\ln\cos x\) 的 \(x^{8}\) 系数为 \(-17/2520\)。</p><p>小结：\(\ln\cos x\) 的高阶系数靠积分 \(\int\tan t\,dt\) 记忆，避免硬背出错。</p>
+  </div>
+</article>
+
+<article class="q" id="q328">
+  <div class="q-head">
+    <span class="qno">第 328 题</span>
+    <span class="qtype">e<sup>cos x</sup> − e</span>
+    <span class="qsrc">P658</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{e^{\cos x}-e}{x^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{e}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{2}\)，提取 \(e\) 后 \(u=\cos x-1\sim-x^{2}/2\)，\(e^{u}-1\sim u\)，故只需二阶。</p><p>交叉验证：把 \(e^{\cos x}=e\cdot e^{\cos x-1}\)，\(\cos x-1=-x^{2}/2+o(x^{2})\)，\(e^{u}-1\sim u\)，故 \(e^{\cos x}-e=e(e^{\cos x-1}-1)\sim e(-x^{2}/2)\)，除以 \(x^{2}\) 得 \(-e/2\)，与提取公因子法一致。</p>
+    <p>识别类型：\(0/0\) 型，分子提取公因子 \(e\)，把 \(e^{\cos x}-e\) 写成 \(e(e^{\cos x-1}-1)\)。</p>
+    <p>当 \(x\to0\)，\(\cos x-1\sim-x^{2}/2\)，由 \(e^{u}-1\sim u\)，得</p>
+    \[
+    e^{\cos x-1}-1\sim\cos x-1\sim-\frac{x^{2}}{2}.
+    \]
+    <p>故</p>
+    \[
+    \frac{e^{\cos x}-e}{x^{2}}=e\cdot\frac{e^{\cos x-1}-1}{x^{2}}\to e\cdot\left(-\frac{1}{2}\right)=-\frac{e}{2}.
+    \]
+    <p>关键一步是提取 \(e\)，把问题转化为 \(e^{\cos x-1}-1\)，再用等价无穷小。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>详细展开：\(\cos x=1-x^{2}/2+o(x^{2})\)，\(e^{\cos x-1}=1+(\cos x-1)+o(\cos x-1)=1-x^{2}/2+o(x^{2})\)。故 \(e^{\cos x}=e(1-x^{2}/2)+o(x^{2})\)，减 \(e\) 得 \(-ex^{2}/2\)。</p><p>错误示范：忘记提取 \(e\)，把 \(e^{\cos x}\) 直接展开。正确是 \(e^{\cos x}-e=e(e^{\cos x-1}-1)\sim e(-x^{2}/2)\)。</p>
+    <p>① 忘记提取 \(e\)，把 \(e^{\cos x}\) 直接展开。② 符号错：\(\cos x-1<0\)。③ 漏掉公因子 \(e\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：\(e^{\cos x}-e\) 的主部 \(-e x^{2}/2\) 可作为常用等价，在含 \(e\) 的极限题中直接套用。</p>
+    <p>这是「指数函数减常数」的标准题，提取公因子后用 \(e^{u}-1\sim u\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{e^{\cos x}-e}{x^{4}}\)。</p>
+    <p class="var-ans">答案：\(\infty\)（分子主部 \(-e x^{2}/2\)，除以 \(x^{4}\) 发散）。</p><p>小结：含 \(e\) 的差式先提取公因子 \(e\)，把问题化为 \(e^{u}-1\sim u\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q329">
+  <div class="q-head">
+    <span class="qno">第 329 题</span>
+    <span class="qtype">sin(ln(1+x)) 与 ln(1+sin x)</span>
+    <span class="qsrc">P659</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\sin(\ln(1+x))-\ln(1+\sin x)}{x^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上变式印 \(-\dfrac{1}{3}\)，按题面独立复算为 \(+\dfrac{1}{12}\)。四阶展开下 \(\sin(\ln(1+x))=x-x^{2}/2+x^{3}/6+0\cdot x^{4}\)，\(\ln(1+\sin x)=x-x^{2}/2+x^{3}/6-x^{4}/12\)，差为 \(x^{4}/12\)，除以 \(x^{4}\) 得 \(1/12\)。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{2}\)。\(\ln(1+x)=x-x^{2}/2+o(x^{2})\)，\(\sin(\ln(1+x))=\ln(1+x)-\ln^{3}(1+x)/6+o(x^{2})=x-x^{2}/2+o(x^{2})\)；\(\sin x=x-x^{3}/6+o(x^{2})\)，\(\ln(1+\sin x)=\sin x-\sin^{2}x/2+o(x^{2})=x-x^{2}/2+o(x^{2})\)，两式 \(x^{2}\) 阶相同，差为 \(o(x^{2})\)，得 \(0\)。</p>
+    <p>识别类型：\(0/0\) 型，两个嵌套函数之差，分母 \(x^{2}\)，展开到二阶即可。</p>
+    <p>令 \(u=\ln(1+x)=x-\dfrac{x^{2}}{2}+o(x^{2})\)，则 \(\sin u=u-\dfrac{u^{3}}{6}+o(u^{3})=x-\dfrac{x^{2}}{2}+o(x^{2})\)。</p>
+    <p>令 \(v=\sin x=x+o(x)\)，则 \(\ln(1+v)=v-\dfrac{v^{2}}{2}+o(v^{2})=x-\dfrac{x^{2}}{2}+o(x^{2})\)。</p>
+    <p>两者在二阶内完全相同，差为 \(o(x^{2})\)，除以 \(x^{2}\) 得 \(0\)。关键一步是两个函数的前两项展开恰好一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：只展开到一阶，两式都为 \(x\)，误以为阶数不够；实际 \(x^{2}\) 阶两式均为 \(-x^{2}/2\)，抵消，故答案 \(0\)。</p>
+    <p>① 展开阶数不够。② 误以为两个函数不同，强行计算。③ 忘记 \(u^{3}/6\) 在二阶内不出现。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是「两个嵌套函数在低阶内相同」的题型，考的是展开到足够阶数后判断主部。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\sin(\ln(1+x))-\ln(1+\sin x)}{x^{4}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{12}\)。展开到四阶：\(\sin(\ln(1+x))=x-x^{2}/2+x^{3}/6+0\cdot x^{4}\)，\(\ln(1+\sin x)=x-x^{2}/2+x^{3}/6-x^{4}/12\)，差为 \(x^{4}/12\)，除以 \(x^{4}\) 得 \(1/12\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q330">
+  <div class="q-head">
+    <span class="qno">第 330 题</span>
+    <span class="qtype">嵌套三角函数的七阶展开</span>
+    <span class="qsrc">P659</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\tan(\sin x)-\sin(\tan x)}{x^{7}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{30}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(-\dfrac{1}{30}\)，按题面独立复算为 \(+\dfrac{1}{30}\)。\(\tan(\sin x)-\sin(\tan x)\) 前六阶全部抵消，七阶系数为 \(+1/30\)，符号未翻转。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，两个嵌套三角函数之差，分母 \(x^{7}\)。前六阶系数全部抵消，必须展开到七阶。这是经典难题。</p>
+    <p>先写 \(\tan(\sin x)\)。令 \(u=\sin x=x-\dfrac{x^{3}}{6}+\dfrac{x^{5}}{120}+o(x^{7})\)，代入 \(\tan v=v+\dfrac{v^{3}}{3}+\dfrac{2v^{5}}{15}+\dfrac{17v^{7}}{315}+o(v^{7})\)。逐项整理后，\(\tan(\sin x)=x+\dfrac{x^{3}}{6}-\dfrac{x^{5}}{40}+\dfrac{x^{7}}{30}+o(x^{7})\)。</p>
+    <p>再写 \(\sin(\tan x)\)。令 \(w=\tan x=x+\dfrac{x^{3}}{3}+\dfrac{2x^{5}}{15}+\dfrac{17x^{7}}{315}+o(x^{7})\)，代入 \(\sin t=t-\dfrac{t^{3}}{6}+\dfrac{t^{5}}{120}-\dfrac{t^{7}}{5040}+o(t^{7})\)。整理得 \(\sin(\tan x)=x+\dfrac{x^{3}}{6}-\dfrac{x^{5}}{40}+o(x^{7})\)。</p>
+    <p>两式相减，前六阶抵消，七阶系数之差为 \(+\dfrac{1}{30}\)，故极限为 \(1/30\)。关键一步是必须展开到七阶，少一阶就无法定出答案；这类题不要用洛必达法则连求七次导。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开阶数低于七阶，误以为分子为零。② 嵌套代入时中间项系数算错，七阶符号极易写反。③ 干扰项 \(-1/30\) 正是按两式顺序颠倒构造，与本题 \(+1/30\) 互为相反数。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是极限中最著名的高阶嵌套题之一，竞赛与考研压轴常考。核心是「前六阶抵消、七阶定胜负」的展开意识。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\sin(\tan x)-\tan(\sin x)}{x^{7}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{30}\)。与本题互为相反数，即第 317 题。</p>
+  </div>
+</article>
+
+<article class="q" id="q331">
+  <div class="q-head">
+    <span class="qno">第 331 题</span>
+    <span class="qtype">cos(sin x²) 的四阶展开</span>
+    <span class="qsrc">P659</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\cos(\sin x^{2})-e^{-\frac{x^{4}}{2}}}{x^{8}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{12}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(-\dfrac{1}{720}\)，按题面独立复算为 \(\dfrac{1}{12}\)。换元 \(t=x^{2}\)，由第 324 题 \(\cos(\sin t)-e^{-t^{2}/2}=t^{4}/12\)，即 \(x^{8}/12\)，除以 \(x^{8}\) 得 \(1/12\)。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{8}\)，换元 \(t=x^{2}\) 后要求 \(t^{4}\) 阶，即 \(x^{8}\) 阶，得 \(x^{8}/12\)。</p><p>交叉验证：令 \(t=x^{2}\)，由第 324 题 \(\cos(\sin t)-e^{-t^{2}/2}=t^{4}/12+o(t^{4})\)，代入 \(t=x^{2}\) 得 \(x^{8}/12\)，除以 \(x^{8}\) 得 \(1/12\)。换元后阶数由 \(t^{4}\) 翻倍为 \(x^{8}\)，这是本题关键。</p>
+    <p>识别类型：\(0/0\) 型，令 \(t=x^{2}\)，问题化为 \(\dfrac{\cos(\sin t)-e^{-t^{2}/2}}{t^{4}}\)。由第 324 题，\(\cos(\sin t)-e^{-t^{2}/2}=\dfrac{t^{4}}{12}+o(t^{4})\)。</p>
+    <p>代入 \(t=x^{2}\)，得 \(\cos(\sin x^{2})-e^{-x^{4}/2}=\dfrac{x^{8}}{12}+o(x^{8})\)，除以 \(x^{8}\) 得 \(\dfrac{1}{12}\)。关键一步是换元 \(t=x^{2}\) 把内层为 \(x^{2}\) 的嵌套问题降为已熟悉的第 324 题结构。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：忘记换元 \(t=x^{2}\)，直接对 \(x^{2}\) 展开导致阶数混乱。正确是 \(t^{4}/12=x^{8}/12\)。</p>
+    <p>① 忘记换元，直接对 \(x^{2}\) 展开，阶数混乱。② 把第 324 题的 \(t^{4}/12\) 系数误写成 \(t^{4}/24\)。③ 干扰项 \(-1/720\) 是按「还需再抵消两阶」的错觉构造，实际 \(t^{4}\) 就是主部。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：换元 \(t=x^{2}\) 后阶数翻倍，是本题最易出错处；\(t^{4}/12=x^{8}/12\)。</p>
+    <p>这是第 324 题的换元变体，考内层 \(x\to x^{2}\) 后阶数翻倍。考研常以此检验「换元后阶数换算」的细致度。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\cos(\sin x^{2})-e^{-x^{4}/2}}{x^{4}}\)。</p>
+    <p class="var-ans">答案：\(0\)。分子主部 \(x^{8}/12\)，除以 \(x^{4}\) 为 \(x^{4}/12\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q332">
+  <div class="q-head">
+    <span class="qno">第 332 题</span>
+    <span class="qtype">ln(1+sin x²) 的三阶修正</span>
+    <span class="qsrc">P659</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\ln(1+\sin x^{2})-\sin x^{2}+\dfrac{\sin^{2}x^{2}}{2}}{x^{6}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{3}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(\dfrac{1}{6}\)，按题面独立复算为 \(\dfrac{1}{3}\)。\(\ln(1+u)-u+u^{2}/2=u^{3}/3\)，\(u=\sin x^{2}\sim x^{2}\)，主部 \(x^{6}/3\)，除以 \(x^{6}\) 得 \(1/3\)。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>交叉验证：令 \(u=\sin x^{2}\)，由 \(\ln(1+u)=u-u^{2}/2+u^{3}/3+o(u^{3})\)，得 \(\ln(1+u)-u+u^{2}/2=u^{3}/3+o(u^{3})\)。\(u=\sin x^{2}\sim x^{2}\)，故 \(u^{3}\sim x^{6}\)，分子主部 \(x^{6}/3\)，除以 \(x^{6}\) 得 \(1/3\)。</p>
+    <p>识别类型：令 \(u=\sin x^{2}\)，分子为 \(\ln(1+u)-u+\dfrac{u^{2}}{2}\)。由 \(\ln(1+u)=u-\dfrac{u^{2}}{2}+\dfrac{u^{3}}{3}+o(u^{3})\)，得</p>
+    \[
+    \ln(1+u)-u+\frac{u^{2}}{2}=\frac{u^{3}}{3}+o(u^{3}).
+    \]
+    <p>当 \(x\to0\)，\(u=\sin x^{2}\sim x^{2}\)，故 \(u^{3}\sim x^{6}\)，分子主部为 \(\dfrac{x^{6}}{3}\)，除以 \(x^{6}\) 得 \(\dfrac{1}{3}\)。关键一步是识别出 \(\ln(1+u)-u+u^{2}/2\) 的主部为 \(u^{3}/3\)，再用 \(u\sim x^{2}\) 换算。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：把 \(u=\sin x^{2}\) 误当作 \(u=x^{2}\) 后又漏掉 \(u^{3}/3\) 的系数。正确是 \(u^{3}/3\sim x^{6}/3\)。</p>
+    <p>① 把 \(u=\sin x^{2}\) 误当作 \(u=x^{2}\) 后又漏掉 \(u^{3}/3\) 的系数。② 修正项 \(+u^{2}/2\) 与 \(-u^{2}/2\) 抵消，误以为还剩 \(u^{2}\) 项。③ 干扰项 \(1/6\) 是按「多除一个 \(2\)」的常见错误构造。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：\(\ln(1+u)-u+u^{2}/2=u^{3}/3\) 与 \(u=\sin x^{2}\sim x^{2}\) 联合，主部 \(x^{6}/3\)。</p>
+    <p>这是 \(\ln(1+u)-u+u^{2}/2\) 型的换元题，考 \(u^{3}\) 阶系数。考研常与 \(\sin x^{2}\) 复合。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\ln(1+\sin x)-\sin x+\sin^{2}x/2}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{3}\)。\(u=\sin x\sim x\)，\(u^{3}/3\sim x^{3}/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q333">
+  <div class="q-head">
+    <span class="qno">第 333 题</span>
+    <span class="qtype">e<sup>sin x²</sup> 的二阶展开</span>
+    <span class="qsrc">P659</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{e^{\sin x^{2}}-\cos x^{2}-x^{2}}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(\dfrac{1}{2}\)，按题面独立复算为 \(1\)。换元 \(t=x^{2}\)，\(e^{\sin t}-\cos t-t=t^{2}+o(t^{2})\)，即 \(x^{4}\)，除以 \(x^{4}\) 得 \(1\)。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：令 \(t=x^{2}\)，\(e^{\sin t}-\cos t-t\)。\(\sin t=t-t^{3}/6\)，\(e^{\sin t}=1+\sin t+\sin^{2}t/2+o(t^{2})=1+t-t^{3}/6+t^{2}/2+o(t^{2})\)；\(\cos t=1-t^{2}/2+t^{4}/24\)。差为 \(e^{\sin t}-\cos t-t=t^{2}+o(t^{2})\)，即 \(x^{4}\)，除以 \(x^{4}\) 得 \(1\)。</p>
+    <p>识别类型：令 \(t=x^{2}\)，分子为 \(e^{\sin t}-\cos t-t\)，分母 \(t^{2}\)。展开到二阶。</p>
+    <p>由 \(\sin t=t-\dfrac{t^{3}}{6}+o(t^{3})\)，\(e^{w}=1+w+\dfrac{w^{2}}{2}+o(w^{2})\)，代入得 \(e^{\sin t}=1+t+\dfrac{t^{2}}{2}+o(t^{2})\)。而 \(\cos t=1-\dfrac{t^{2}}{2}+o(t^{2})\)。故</p>
+    \[
+    e^{\sin t}-\cos t-t=\left(1+t+\frac{t^{2}}{2}\right)-\left(1-\frac{t^{2}}{2}\right)-t=t^{2}+o(t^{2}).
+    \]
+    <p>除以 \(t^{2}\)（即 \(x^{4}\)）得 \(1\)。关键一步是 \(e^{\sin t}\) 的 \(t^{2}\) 系数 \(1/2\) 与 \(\cos t\) 的 \(-1/2\) 相加，得 \(t^{2}\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：把 \(e^{\sin t}-\cos t-t\) 的主部算成 \(t^{2}/2\)，得 \(1/2\)；正确是 \(e^{\sin t}\) 的 \(t^{2}/2\) 与 \(-\cos t\) 的 \(+t^{2}/2\) 合并为 \(t^{2}\)，故 \(1\)。</p>
+    <p>① 忘记换元 \(t=x^{2}\)，直接在 \(x\) 上展开导致阶数错。② 展开 \(e^{\sin t}\) 时漏算 \(w^{2}/2\)。③ 干扰项 \(1/2\) 是按「只取 \(e^{\sin t}\) 的 \(t^{2}/2\)、忘记 \(\cos t\) 贡献」构造。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是 \(e^{\sin t}\) 与 \(\cos t\) 的二阶展开题，考系数相加。考研常以此检验展开后是否合并同类项。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{e^{\sin x}-\cos x-x}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(1\)。\(e^{\sin x}=1+x+x^{2}/2+o(x^{2})\)，\(\cos x=1-x^{2}/2+o(x^{2})\)，差为 \(x^{2}+o(x^{2})\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q334">
+  <div class="q-head">
+    <span class="qno">第 334 题</span>
+    <span class="qtype">嵌套反三角函数的换元展开</span>
+    <span class="qsrc">P659</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\arctan(\sin x^{2})-\arcsin(\tan x^{2})}{x^{6}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-1\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(0\)，按题面独立复算为 \(-1\)。换元 \(t=x^{2}\)，由第 325 题主部 \(-t^{3}\)，即 \(-x^{6}\)，除以 \(x^{6}\) 得 \(-1\)。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{6}\)，换元 \(t=x^{2}\) 后要求 \(t^{3}\) 阶，即 \(x^{6}\) 阶，由第 325 题主部 \(-t^{3}\)。</p><p>交叉验证：令 \(t=x^{2}\)，由第 325 题 \(\arctan(\sin t)-\arcsin(\tan t)=-t^{3}+o(t^{3})\)，代入 \(t=x^{2}\) 得 \(-x^{6}+o(x^{6})\)，除以 \(x^{6}\) 得 \(-1\)。换元后主部系数不变，仅阶数翻倍。</p>
+    <p>识别类型：与第 325 题同族，令 \(t=x^{2}\)，问题化为 \(\dfrac{\arctan(\sin t)-\arcsin(\tan t)}{t^{3}}\)。</p>
+    <p>由第 325 题的展开，\(\arctan(\sin t)-\arcsin(\tan t)=-t^{3}+o(t^{3})\)。代入 \(t=x^{2}\)，得 \(-x^{6}+o(x^{6})\)，除以 \(x^{6}\) 得 \(-1\)。关键一步是换元后直接搬用第 325 题的主部系数。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>详细展开：由第 325 题，\(\arctan(\sin t)-\arcsin(\tan t)=-t^{3}-t^{5}/120+o(t^{5})\)。代入 \(t=x^{2}\)，主部 \(-x^{6}+o(x^{6})\)，除以 \(x^{6}\) 得 \(-1\)。</p><p>错误示范：忘记换元，在 \(x\) 上重新展开导致阶数错。正确是换元后主部 \(-t^{3}=-x^{6}\)。</p>
+    <p>① 忘记换元，在 \(x\) 上重新展开导致阶数错。② 把第 325 题的主部 \(-t^{3}\) 误记为 \(o(t^{3})\)。③ 干扰项 \(0\) 是按「低阶全部抵消」的错觉构造。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：换元后主部系数不变、仅阶数翻倍，这是嵌套反三角函数题的常见规律。</p>
+    <p>这是第 325 题的换元变体，考内层 \(x\to x^{2}\) 后阶数翻倍。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\arctan(\sin x)-\arcsin(\tan x)}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(-1\)（即第 325 题的主部）。</p><p>小结：换元 \(t=x^{2}\) 后主部系数不变，仅阶数翻倍，直接套用第 325 题结论。</p>
+  </div>
+</article>
+
+<article class="q" id="q335">
+  <div class="q-head">
+    <span class="qno">第 335 题</span>
+    <span class="qtype">二项展开 (1+x)^(1/4)</span>
+    <span class="qsrc">P660</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\sqrt[4]{1+x}-1-\dfrac{x}{4}+\dfrac{3x^{2}}{32}}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{7}{128}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(-\dfrac{5}{384}\)，按题面独立复算为 \(\dfrac{7}{128}\)。二项展开三阶系数 \((1/4)(-3/4)(-7/4)/6=21/384=7/128\)，两负一正为正。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{3}\)，只需把 \((1+x)^{1/4}\) 展到三阶。由二项展开 \((1+u)^{\alpha}=1+\alpha u+\dfrac{\alpha(\alpha-1)}{2}u^{2}+\dfrac{\alpha(\alpha-1)(\alpha-2)}{6}u^{3}+o(u^{3})\)，取 \(\alpha=1/4\)、\(u=x\)，得 \((1+x)^{1/4}=1+\dfrac{x}{4}-\dfrac{3x^{2}}{32}+\dfrac{7x^{3}}{128}+o(x^{3})\)。三阶系数 \((1/4)(-3/4)(-7/4)/6=21/384=7/128\)，减去 \(1+\dfrac{x}{4}\)、加回 \(\dfrac{3x^{2}}{32}\) 后分子主部为 \(\dfrac{7x^{3}}{128}\)，除以 \(x^{3}\) 得 \(7/128\)。</p>
+    <p>识别类型：\((1+x)^{1/4}\) 的二项展开，前两项修正抵消 \(x\)、\(x^{2}\)，剩下 \(x^{3}\) 系数。</p>
+    <p>由二项式定理 \((1+x)^{\alpha}=1+\alpha x+\dfrac{\alpha(\alpha-1)}{2}x^{2}+\dfrac{\alpha(\alpha-1)(\alpha-2)}{6}x^{3}+o(x^{3})\)，取 \(\alpha=1/4\)：</p>
+    \[
+    \frac{\alpha(\alpha-1)}{2}=\frac{(1/4)(-3/4)}{2}=-\frac{3}{32},
+    \]
+    \[
+    \frac{\alpha(\alpha-1)(\alpha-2)}{6}=\frac{(1/4)(-3/4)(-7/4)}{6}=\frac{21}{384}=\frac{7}{128}.
+    \]
+    <p>故 \(\sqrt[4]{1+x}=1+\dfrac{x}{4}-\dfrac{3x^{2}}{32}+\dfrac{7x^{3}}{128}+o(x^{3})\)。减去 \(1+\dfrac{x}{4}\)、加回 \(\dfrac{3x^{2}}{32}\)，分子主部为 \(\dfrac{7x^{3}}{128}\)，除以 \(x^{3}\) 得 \(\dfrac{7}{128}\)。关键一步是三阶系数三个因子的符号：一正两负，结果为正。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：二项展开三阶系数符号或因子算错，误得 \(-5/384\)；正确是 \((1/4)(-3/4)(-7/4)/6=21/384=7/128\)，两个负号相乘为正。</p>
+    <p>① 三阶系数符号错：三个因子 \((1/4),(-3/4),(-7/4)\) 两负一正，结果为正。② 忘记分母 \(6\)，误得 \(21/64\)。③ 干扰项 \(-5/384\) 是按「三阶系数取 \(-5/384\)」的错误记忆构造。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>二项展开是基本工具，考研常考 \(\alpha=1/4\) 的低阶系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\sqrt[4]{1+x}-1-x/4}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{3}{32}\)。\(x^{2}\) 系数为 \(-3/32\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q336">
+  <div class="q-head">
+    <span class="qno">第 336 题</span>
+    <span class="qtype">cos(tan x) 与 cos(sin x) 的差</span>
+    <span class="qsrc">P660</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\cos(\tan x)-\cos(\sin x)}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{2}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(-\dfrac{1}{6}\)，按题面独立复算为 \(-\dfrac{1}{2}\)。\(\cos(\tan x)\) 与 \(\cos(\sin x)\) 的 \(x^{4}\) 系数分别为 \(-7/24\) 与 \(5/24\)，相减 \(-12/24=-1/2\)。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\cos A-\cos B\) 型，直接用 \(\cos u=1-u^{2}/2+u^{4}/24+o(u^{4})\) 展开两个嵌套余弦。</p>
+    <p>先展开 \(\cos(\tan x)\)。取 \(u=\tan x=x+\dfrac{x^{3}}{3}+o(x^{3})\)，则 \(u^{2}=x^{2}+\dfrac{2x^{4}}{3}+o(x^{4})\)，\(u^{4}=x^{4}+o(x^{4})\)，代入得</p>
+    \[
+    \cos(\tan x)=1-\frac{x^{2}+2x^{4}/3}{2}+\frac{x^{4}}{24}+o(x^{4})=1-\frac{x^{2}}{2}-\frac{7x^{4}}{24}+o(x^{4}).
+    \]
+    <p>再展开 \(\cos(\sin x)\)。取 \(v=\sin x=x-\dfrac{x^{3}}{6}+o(x^{3})\)，则 \(v^{2}=x^{2}-\dfrac{x^{4}}{3}+o(x^{4})\)，代入得</p>
+    \[
+    \cos(\sin x)=1-\frac{x^{2}-x^{4}/3}{2}+\frac{x^{4}}{24}+o(x^{4})=1-\frac{x^{2}}{2}+\frac{5x^{4}}{24}+o(x^{4}).
+    \]
+    <p>两式相减，\(x^{2}\) 项抵消，\(x^{4}\) 系数为 \(-7/24-5/24=-12/24=-1/2\)，故极限为 \(-1/2\)。关键一步是 \(u^{2}\) 中交叉项 \(2x^{4}/3\) 必须计入。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开 \(u^{2}\) 时只算到 \(x^{2}\)，漏掉 \(2x^{4}/3\)，导致 \(x^{4}\) 系数错。② 差化积后忘记 \(\sin t-t\sim-t^{3}/6\)。③ 干扰项 \(-1/6\) 是按「\(u^{2}\) 只取 \(x^{2}\)」的错误构造。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>两个嵌套余弦的差，考四阶展开系数。考研常与 \(e^{-x^{2}/2}\) 对比。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\cos(\sin x)-\cos(\tan x)}{x^{4}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{2}\)。与本题互为相反数。</p>
+  </div>
+</article>
+
+<article class="q" id="q337">
+  <div class="q-head">
+    <span class="qno">第 337 题</span>
+    <span class="qtype">ln(1+arctan x) 的三阶修正</span>
+    <span class="qsrc">P660</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\ln(1+\arctan x)-\arctan x+\dfrac{(\arctan x)^{2}}{2}}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{3}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(\dfrac{1}{6}\)，按题面独立复算为 \(\dfrac{1}{3}\)。\(\ln(1+u)-u+u^{2}/2=u^{3}/3\)，\(u=\arctan x\sim x\)，主部 \(x^{3}/3\)，除以 \(x^{3}\) 得 \(1/3\)。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{3}\)，\(\ln(1+u)-u+u^{2}/2=u^{3}/3\)，\(u=\arctan x\sim x\)，故只需三阶。</p><p>交叉验证：令 \(u=\arctan x\)，\(\ln(1+u)-u+u^{2}/2=u^{3}/3+o(u^{3})\)。\(u=\arctan x\sim x\)，故 \(u^{3}\sim x^{3}\)，分子主部 \(x^{3}/3\)，除以 \(x^{3}\) 得 \(1/3\)。与第 332 题结构相同。</p>
+    <p>识别类型：令 \(u=\arctan x\)，分子为 \(\ln(1+u)-u+\dfrac{u^{2}}{2}\)。由 \(\ln(1+u)=u-\dfrac{u^{2}}{2}+\dfrac{u^{3}}{3}+o(u^{3})\)，得</p>
+    \[
+    \ln(1+u)-u+\frac{u^{2}}{2}=\frac{u^{3}}{3}+o(u^{3}).
+    \]
+    <p>当 \(x\to0\)，\(u=\arctan x\sim x\)，故 \(u^{3}\sim x^{3}\)，分子主部为 \(\dfrac{x^{3}}{3}\)，除以 \(x^{3}\) 得 \(\dfrac{1}{3}\)。关键一步是识别出这是 \(\ln(1+u)-u+u^{2}/2\) 型，主部为 \(u^{3}/3\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：忘记 \(u=\arctan x\sim x\)，直接用 \(u^{3}/3\) 不换算。正确是 \(u^{3}/3\sim x^{3}/3\)。</p>
+    <p>① 忘记 \(u=\arctan x\sim x\)，直接用 \(u^{3}/3\) 不换算。② 修正项 \(+u^{2}/2\) 与 \(-u^{2}/2\) 抵消，误以为还剩 \(u^{2}\) 项。③ 干扰项 \(1/6\) 是按「多除一个 \(2\)」的常见错误构造。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：本题与第 332 题结构相同，均为 \(\ln(1+u)-u+u^{2}/2=u^{3}/3\) 型。</p>
+    <p>这是 \(\ln(1+u)-u+u^{2}/2\) 型的换元题，与第 332 题同族。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\ln(1+\arcsin x)-\arcsin x+\arcsin^{2}x/2}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{3}\)。\(u=\arcsin x\sim x\)，\(u^{3}/3\sim x^{3}/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q338">
+  <div class="q-head">
+    <span class="qno">第 338 题</span>
+    <span class="qtype">e<sup>tan x</sup> − e<sup>sin x</sup></span>
+    <span class="qsrc">P660</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{e^{\tan x}-e^{\sin x}}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：与第 323 题同型，分母 \(x^{3}\)，提取公因子后 \(u=\tan x-\sin x\sim x^{3}/2\)。</p><p>交叉验证：\(e^{\tan x}-e^{\sin x}=e^{\sin x}(e^{\tan x-\sin x}-1)\)。\(e^{\sin x}\to1\)，\(e^{u}-1\sim u\)，\(u=\tan x-\sin x\sim x^{3}/2\)，故分子主部 \(x^{3}/2\)，除以 \(x^{3}\) 得 \(1/2\)。与第 323 题完全相同。</p>
+    <p>识别类型：与第 323 题完全相同，提取 \(e^{\sin x}\)。</p>
+    \[
+    e^{\tan x}-e^{\sin x}=e^{\sin x}(e^{\tan x-\sin x}-1)\sim\tan x-\sin x\sim\frac{x^{3}}{2}.
+    \]
+    <p>除以 \(x^{3}\) 得 \(1/2\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>与第 323 题对照：两题仅外层函数不同（一为 \(e^{\tan x}-e^{\sin x}\)，一为同型指数差），推导链路完全一致，均得 \(1/2\)。记住「指数差提公因子、差式等价于 \(x^{3}/2\)」即可。</p><p>详细展开：\(\tan x-\sin x=\tan x(1-\cos x)\sim x\cdot x^{2}/2=x^{3}/2\)。\(e^{\sin x}\to1\)，故 \(e^{\tan x}-e^{\sin x}=e^{\sin x}(e^{\tan x-\sin x}-1)\sim x^{3}/2\)，结论 \(1/2\)。</p><p>错误示范：与第 323 题重复，忘记 \(\tan x-\sin x\sim x^{3}/2\)。正确是提取公因子后得 \(x^{3}/2\)。</p>
+    <p>① 与第 323 题重复。② 忘记 \(\tan x-\sin x\sim x^{3}/2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：与第 323 题完全重复，考指数差提取公因子后转化为 \(\tan x-\sin x\sim x^{3}/2\)。</p>
+    <p>本题与第 323 题重复，是指数差提取公因子的标准题。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{e^{\tan x^{2}}-e^{\sin x^{2}}}{x^{6}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{2}\)。换元 \(t=x^{2}\)，指数差 \(\tan t-\sin t\sim t^{3}/2=x^{6}/2\)。</p><p>小结：本题与第 323 题同型，直接套用「提取 \(e^{\sin x}\)、\(\tan x-\sin x\sim x^{3}/2\)」。</p>
+  </div>
+</article>
+
+<article class="q" id="q339">
+  <div class="q-head">
+    <span class="qno">第 339 题</span>
+    <span class="qtype">sin(cos x) 与 cos(sin x)</span>
+    <span class="qsrc">P660</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\sin(\cos x)-\cos(\sin x)}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：发散（\(\to-\infty\)）</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(0\)，按题面独立复算为 发散（\(\to-\infty\)）。分子在 \(x=0\) 处为 \(\sin(1)-\cos 0=\sin(1)-1\neq0\)，非 \(0/0\) 型，除以 \(x^{4}\) 发散。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：先做零检验。分子在 \(x=0\) 处为 \(\sin(\cos0)-\cos(\sin0)=\sin1-\cos0=\sin1-1\neq0\)，并非 \(0/0\) 型，不能直接套用泰勒展开相消。分子趋于非零常数 \(\sin1-1<0\)，而分母 \(x^{4}\to0^{+}\)，故比值趋于 \(-\infty\)，极限发散。</p>
+    <p>识别类型：两个嵌套三角函数之差。先看分子在 \(x=0\) 的值：\(\cos 0=1\)，\(\sin 0=0\)，故分子 \(\sin(1)-\cos(0)=\sin 1-1\approx-0.1585\neq0\)，并不趋于零。</p>
+    <p>因此当 \(x\to0\) 时分子趋于非零常数 \(\sin 1-1\)，除以 \(x^{4}\) 后绝对值趋于 \(+\infty\)，而不是 \(0\)。若要得到有限极限，分子必须在 \(x=0\) 处为零；题中分子在 \(x=0\) 处并不为零，故极限发散。</p>
+    <p>关键一步是先检验分子在 \(x=0\) 是否为零，再决定能否用泰勒展开；分子不为零时，任何展开都无法得到有限比值。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：忽略常数项 \(e^{\sin0}=1\) 与 \(e\cos0=e\) 不等，直接按 \(0/0\) 求导，得 \(0\)；正确是先零检验，分子在 \(0\) 处为 \(1-e\neq0\)。</p>
+    <p>① 直接把 \(\cos x\approx1\) 代入 \(\sin(\cos x)\approx\sin 1\)，忘记 \(\sin 1\neq\cos 0=1\)。② 不检验分子在 \(x=0\) 是否为零就盲目展开。③ 干扰项 \(0\) 是按「两个函数在 \(x=0\) 处都为 1，差为零」的错觉构造。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是检验「先验零」意识的题型，核心是判断分子在极限点是否为零。考研中常以嵌套函数的非零值设卡。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\sin(\cos x)-\sin 1}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{\cos 1}{2}\)。\(\cos x=1-x^{2}/2\)，\(\sin(1-x^{2}/2)-\sin 1\approx\cos 1\cdot(-x^{2}/2)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q340">
+  <div class="q-head">
+    <span class="qno">第 340 题</span>
+    <span class="qtype">ln cos x 的八阶修正</span>
+    <span class="qsrc">P660</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\ln(\cos x)+\dfrac{x^{2}}{2}+\dfrac{x^{4}}{12}+\dfrac{x^{6}}{45}}{x^{8}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{17}{2520}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(-\dfrac{1}{2520}\)，按题面独立复算为 \(-\dfrac{17}{2520}\)。\(\ln\cos x\) 的 \(x^{8}\) 系数为 \(-17/2520\)，书答漏掉分子 \(17\)。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：\(\ln\cos x\) 需展开到八阶。由 \(\ln\cos x=-\dfrac{x^{2}}{2}-\dfrac{x^{4}}{12}-\dfrac{x^{6}}{45}-\dfrac{17x^{8}}{2520}+o(x^{8})\)，修正前七阶后剩 \(-17x^{8}/2520\)，除以 \(x^{8}\) 得 \(-17/2520\)。</p>
+    <p>识别类型：与第 302、327 题同族，\(\ln(\cos x)\) 展开到八阶，前三阶修正抵消 \(x^{2}\)、\(x^{4}\)、\(x^{6}\)，剩下 \(x^{8}\) 系数。</p>
+    <p>由已知展开 \(\ln(\cos x)=-\dfrac{x^{2}}{2}-\dfrac{x^{4}}{12}-\dfrac{x^{6}}{45}-\dfrac{17x^{8}}{2520}+o(x^{8})\)。加 \(x^{2}/2+x^{4}/12+x^{6}/45\) 后，分子主部为 \(-\dfrac{17x^{8}}{2520}\)，除以 \(x^{8}\) 得 \(-\dfrac{17}{2520}\)。关键一步是八阶系数 \(17/2520\)，它来自 \(\ln\cos x=-\int_{0}^{x}\tan t\,dt\) 的逐项积分。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>第二解法：\(\ln\cos x=\ln(1-(1-\cos x))\)，逐项展开八阶项，得 \(x^{8}\) 系数 \(-17/2520\)，与积分法一致。</p><p>错误示范：八阶系数记成 \(-1/2520\)，漏掉分子 \(17\)；正确是 \(\ln\cos x\) 的 \(x^{8}\) 系数为 \(-17/2520\)。</p>
+    <p>① 展开阶数不够。② \(x^{8}\) 系数记错为 \(1/2520\)，漏掉分子 \(17\)。③ 干扰项 \(-1/2520\) 是按「八阶系数取 \(1/2520\)」的错误记忆构造。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是 \(\ln\cos x\) 展开的最高阶版本，考八阶系数。考研中常与 \(\tan x\) 的积分关系互校。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\ln(\cos x)+x^{2}/2+x^{4}/12+x^{6}/45+17x^{8}/2520}{x^{10}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{31}{14175}\)。\(\ln\cos x\) 的 \(x^{10}\) 系数为 \(-31/14175\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q341">
+  <div class="q-head">
+    <span class="qno">第 341 题</span>
+    <span class="qtype">sin(sin x) 的五阶展开</span>
+    <span class="qsrc">P661</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\sin(\sin x)-\sin x+\dfrac{x^{3}}{6}}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{120}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：分母 \(x^{5}\)，\(\sin u-u+u^{3}/6=u^{5}/120\)，\(u=\sin x\sim x\)，故只需五阶。</p><p>交叉验证：令 \(u=\sin x\)，\(\sin u-u+u^{3}/6=u^{5}/120+o(u^{5})\)。\(u=\sin x\sim x\)，故 \(u^{5}\sim x^{5}\)，分子主部 \(x^{5}/120\)，除以 \(x^{5}\) 得 \(1/120\)。与 \(\sin u\) 的五阶展开一致。</p>
+    <p>识别类型：令 \(u=\sin x\)，分子为 \(\sin u-u+u^{3}/6\)。由 \(\sin u=u-u^{3}/6+u^{5}/120+o(u^{5})\)，得 \(\sin u-u+u^{3}/6=u^{5}/120+o(u^{5})\)。</p>
+    <p>当 \(x\to0\)，\(u=\sin x\sim x\)，故 \(u^{5}\sim x^{5}\)，分子主部为 \(x^{5}/120\)，除以 \(x^{5}\) 得 \(1/120\)。关键一步是识别出 \(\sin u-u+u^{3}/6\) 的主部为 \(u^{5}/120\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>详细展开：\(\sin u=u-u^{3}/6+u^{5}/120+o(u^{5})\)，故 \(\sin u-u+u^{3}/6=u^{5}/120+o(u^{5})\)。代入 \(u=\sin x=x-x^{3}/6+o(x^{3})\sim x\)，得 \(x^{5}/120\)。</p><p>错误示范：忘记 \(u=\sin x\sim x\)，五阶系数记错。正确是 \(\sin u-u+u^{3}/6=u^{5}/120\sim x^{5}/120\)。</p>
+    <p>① 忘记 \(u=\sin x\sim x\)。② 五阶系数记错。③ 符号错。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：\(\sin(\sin x)-\sin x+x^{3}/6=x^{5}/120\) 是五阶等价，常嵌套进复杂极限。</p>
+    <p>这是 \(\sin u-u+u^{3}/6\) 型的换元题，考的是五阶系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\sin(\sin x)-\sin x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(0\)（分子主部为 \(x^{5}\) 阶，除以 \(x^{3}\) 为 \(0\)）。</p><p>小结：嵌套 \(\sin u\) 的五阶修正，先识别 \(u=\sin x\sim x\)，再用 \(\sin u-u+u^{3}/6=u^{5}/120\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q342">
+  <div class="q-head">
+    <span class="qno">第 342 题</span>
+    <span class="qtype">e<sup>cos x</sup> 的四阶展开</span>
+    <span class="qsrc">P661</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{e^{\cos x}-e+\dfrac{e x^{2}}{2}}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{e}{6}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给答案：\(\dfrac{e}{24}\)（第 661 页）。按题面复算为 \(\dfrac{e}{6}\)：\(e^{\cos x-1}-1=-x^{2}/2+x^{4}/6\)，加 \(x^{2}/2\) 后主部 \(x^{4}/6\)，乘 \(e\) 得 \(e/6\)。以复算值 \(\dfrac{e}{6}\) 为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>交叉验证：提取公因子 \(e\)，\(e^{\cos x}-e+ex^{2}/2=e(e^{\cos x-1}-1+x^{2}/2)\)。\(\cos x-1=-x^{2}/2+x^{4}/24\)，\(e^{u}-1=u+u^{2}/2\)，代入得 \(e^{\cos x-1}-1=-x^{2}/2+x^{4}/6\)，加 \(x^{2}/2\) 后主部 \(x^{4}/6\)，除以 \(x^{4}\) 得 \(e/6\)。</p>
+    <p>识别类型：提取公因子 \(e\)，分子 \(=e\bigl(e^{\cos x-1}-1+\dfrac{x^{2}}{2}\bigr)\)。令 \(u=\cos x-1=-\dfrac{x^{2}}{2}+\dfrac{x^{4}}{24}+o(x^{4})\)，由 \(e^{u}-1=u+\dfrac{u^{2}}{2}+o(u^{2})\)。</p>
+    <p>代入得 \(e^{\cos x-1}-1=-\dfrac{x^{2}}{2}+\dfrac{x^{4}}{24}+\dfrac{x^{4}}{8}+o(x^{4})=-\dfrac{x^{2}}{2}+\dfrac{x^{4}}{6}+o(x^{4})\)。加 \(x^{2}/2\) 后，分子括号内为 \(\dfrac{x^{4}}{6}+o(x^{4})\)，故</p>
+    \[
+    \frac{e^{\cos x}-e+ex^{2}/2}{x^{4}}=e\cdot\frac{x^{4}/6+o(x^{4})}{x^{4}}\to\frac{e}{6}.
+    \]
+    <p>关键一步是 \(u^{2}/2=x^{4}/8\) 必须计入，与 \(x^{4}/24\) 合并为 \(x^{4}/6\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：忘记提取公因子 \(e\)，或 \(u^{2}/2\) 项漏算。正确是 \(e^{\cos x-1}-1=-x^{2}/2+x^{4}/6\)。</p>
+    <p>① 忘记提取公因子 \(e\)，把 \(e^{\cos x}\) 直接展开。② \(u^{2}/2\) 项漏算，得 \(x^{4}/24\) 而非 \(x^{4}/6\)。③ 干扰项 \(e/24\) 是按「只取 \(u^{2}/2\) 中的 \(x^{4}/24\)」构造。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：\(e^{\cos x}\) 的四阶展开需提取 \(e\)，再用 \(e^{u}-1=u+u^{2}/2\)，注意 \(u^{2}/2\) 项。</p>
+    <p>这是 \(e^{\cos x}\) 的高阶展开题，考四阶系数。考研常与第 328 题对照。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{e^{\cos x}-e}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{e}{2}\)。即第 328 题。</p>
+  </div>
+</article>
+
+<article class="q" id="q343">
+  <div class="q-head">
+    <span class="qno">第 343 题</span>
+    <span class="qtype">ln(1+sin x²) 的四阶修正</span>
+    <span class="qsrc">P661</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\ln(1+\sin x^{2})-\sin x^{2}+\dfrac{\sin^{2}x^{2}}{2}-\dfrac{\sin^{3}x^{2}}{3}}{x^{8}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{4}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：令 \(u=\sin x^{2}\)，分子为 \(\ln(1+u)-u+u^{2}/2-u^{3}/3\)。由 \(\ln(1+u)=u-u^{2}/2+u^{3}/3-u^{4}/4+o(u^{4})\)，得</p>
+    \[
+    \ln(1+u)-u+\frac{u^{2}}{2}-\frac{u^{3}}{3}=-\frac{u^{4}}{4}+o(u^{4}).
+    \]
+    <p>当 \(x\to0\)，\(u=\sin x^{2}=x^{2}+o(x^{2})\)，故 \(u^{4}=x^{8}+o(x^{8})\)，分子主部为 \(-x^{8}/4\)，除以 \(x^{8}\) 得 \(-1/4\)。</p>
+  </div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给答案：\(\dfrac{1}{4}\)（第 661 页）。按题面复算为 \(-\dfrac{1}{4}\)：\(\ln(1+u)-u+u^2/2-u^3/3=-u^4/4\)，而 \(u=\sin x^2\sim x^2\) 使 \(u^4\sim x^8\) 带正号，故分子主部为 \(-x^8/4\)，极限为 \(-1/4\)。以复算值 \(-1/4\) 为准。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>错误示范：忘记 \(u=\sin x^{2}\sim x^{2}\)，四阶系数符号错。正确是 \(-u^{4}/4\sim-x^{8}/4\)。</p>
+    <p>① 忘记 \(u=\sin x^{2}\sim x^{2}\)。② 四阶系数符号错。③ 展开阶数不够。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div><p>拓展：\(\ln(1+u)-u+u^{2}/2-u^{3}/3=-u^{4}/4\)，与 \(u=\sin x^{2}\sim x^{2}\) 联合得主部 \(-x^{8}/4\)。</p>
+    <p>这是 \(\ln(1+u)-u+u^{2}/2-u^{3}/3\) 型的换元题，考的是四阶系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\ln(1+\sin x)-\sin x+\sin^{2}x/2-\sin^{3}x/3}{x^{4}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{4}\)。\(u=\sin x\sim x\)，\(-u^{4}/4\sim-x^{4}/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q344">
+  <div class="q-head">
+    <span class="qno">第 344 题</span>
+    <span class="qtype">cos(sin x²) 的高阶修正</span>
+    <span class="qsrc">P661</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\cos(\sin x^{2})-e^{-\frac{x^{4}}{2}}+\dfrac{x^{8}}{24}}{x^{12}}\)。</p>
+  </div>
+  <div class="answer">答案：发散（\(\to+\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给答案：\(-\dfrac{1}{720}\)（第 661 页）。按题面复算为发散到 \(+\infty\)：换元 \(t=x^{2}\)，主部 \(t^{4}/8=x^{8}/8\)，除以 \(x^{12}\) 发散。以复算值为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：令 \(t=x^{2}\)，由第 331 题 \(\cos(\sin t)-e^{-t^{2}/2}=t^{4}/12+o(t^{4})\)。加 \(t^{4}/24\) 后，分子 \(=t^{4}/12+t^{4}/24=t^{4}/8=x^{8}/8\)，主部在 \(x^{8}\) 阶，除以 \(x^{12}\) 发散。</p>
+    <p>识别类型：令 \(t=x^{2}\)，问题化为 \(\dfrac{\cos(\sin t)-e^{-t^{2}/2}+t^{4}/24}{t^{6}}\)。由第 331 题，\(\cos(\sin t)-e^{-t^{2}/2}=\dfrac{t^{4}}{12}+o(t^{4})\)。</p>
+    <p>加 \(t^{4}/24\) 后，分子 \(=\dfrac{t^{4}}{12}+\dfrac{t^{4}}{24}+o(t^{4})=\dfrac{t^{4}}{8}+o(t^{4})\)，主部在 \(t^{4}\) 阶，即 \(x^{8}\) 阶，除以 \(t^{6}=x^{12}\) 后绝对值趋于无穷。</p>
+    <p>关键一步是修正项 \(+t^{4}/24\) 与主部 \(t^{4}/12\) 同号相加，并未抵消 \(t^{4}\) 阶，故分子主部仍为 \(x^{8}\)，除以 \(x^{12}\) 发散。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>第二解法：换元 \(t=x^{2}\)，由第 331 题主部 \(t^{4}/12\)，加 \(t^{4}/24\) 后为 \(t^{4}/8=x^{8}/8\)，除以 \(x^{12}\) 发散。</p><p>错误示范：误以为 \(+t^{4}/24\) 抵消 \(t^{4}/12\)，实际同号相加为 \(t^{4}/8\)；正确是主部 \(x^{8}\)，除以 \(x^{12}\) 发散。</p>
+    <p>① 忘记换元，在 \(x\) 上重新展开。② 误以为 \(+t^{4}/24\) 抵消 \(t^{4}/12\)，实际同号相加为 \(t^{4}/8\)。③ 干扰项 \(-1/720\) 是按「再抵消两阶后取 \(t^{6}\) 系数」的错觉构造。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是第 331 题的高阶修正版，考修正项符号是否真能抵消主部。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\cos(\sin x^{2})-e^{-x^{4}/2}}{x^{8}}\)。</p>
+    <p class="var-ans">答案：\(1/12\)（即第 331 题）。</p>
+  </div>
+</article>
+
 <article class="q" id="q345">
   <div class="q-head">
     <span class="qno">第 345 题</span>
@@ -92,6 +960,117 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <div class="block-title">变式</div>
     <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\sqrt[3]{1+x}-1-x/3+x^{2}/9}{x^{3}}\)。</p>
     <p class="var-ans">答案：\(\dfrac{5}{81}\)（即第 320 题）。</p><p>小结：本题为第 320 题换元版，\((1+u)^{1/3}\) 三阶系数 \(5/81\) 需牢记。</p>
+  </div>
+</article>
+
+<article class="q" id="q347">
+  <div class="q-head">
+    <span class="qno">第 347 题</span>
+    <span class="qtype">e<sup>sin x</sup> 的五阶展开</span>
+    <span class="qsrc">P662</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{e^{\sin x}-\cos x-x-\dfrac{x^{3}}{6}}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：发散（双侧，\(x\to0^{+}\) 为 \(+\infty\)、\(x\to0^{-}\) 为 \(-\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给答案：\(\dfrac{1}{120}\)（第 662 页）。按题面复算为发散（双侧，\(x\to0^{+}\) 为 \(+\infty\)、\(x\to0^{-}\) 为 \(-\infty\)）：\(e^{\sin x}-\cos x-x-x^{3}/6\) 主部为 \(x^{2}\)（题中只减 \(x\) 与 \(x^{3}/6\)，未减 \(x^{2}\)），除以 \(x^{5}\) 得 \(1/x^{3}\)，奇次幂左右异号。以复算值为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：\(e^{\sin x}=1+x+x^{2}/2-x^{4}/8-x^{5}/15+o(x^{5})\)，\(\cos x=1-x^{2}/2+x^{4}/24+o(x^{5})\)。相减并减 \(x+x^{3}/6\)，分子主部 \(x^{2}\) 残留，除以 \(x^{5}\) 发散。</p>
+    <p>识别类型：先展开 \(e^{\sin x}\)。由 \(\sin x=x-\dfrac{x^{3}}{6}+\dfrac{x^{5}}{120}+o(x^{5})\)，代入 \(e^{w}=1+w+\dfrac{w^{2}}{2}+\dfrac{w^{3}}{6}+\dfrac{w^{4}}{24}+\dfrac{w^{5}}{120}+o(w^{5})\)，整理得</p>
+    \[
+    e^{\sin x}=1+x+\frac{x^{2}}{2}-\frac{x^{4}}{8}-\frac{x^{5}}{15}+o(x^{5}).
+    \]
+    <p>而 \(\cos x=1-\dfrac{x^{2}}{2}+\dfrac{x^{4}}{24}+o(x^{5})\)。相减得</p>
+    \[
+    e^{\sin x}-\cos x=x+x^{2}-\frac{x^{4}}{6}-\frac{x^{5}}{15}+o(x^{5}).
+    \]
+    <p>再减去 \(x+\dfrac{x^{3}}{6}\)，分子 \(=x^{2}-\dfrac{x^{3}}{6}-\dfrac{x^{4}}{6}-\dfrac{x^{5}}{15}+o(x^{5})\)，主部为 \(x^{2}\)，除以 \(x^{5}\) 后为 \(1/x^{3}\)，奇次幂左右异号：\(x\to0^{+}\) 为 \(+\infty\)、\(x\to0^{-}\) 为 \(-\infty\)。关键一步是 \(e^{\sin x}\) 的 \(x^{2}\) 系数 \(1/2\) 与 \(\cos x\) 的 \(-1/2\) 合并为 \(x^{2}\)，题中并未减去 \(x^{2}\)，故 \(x^{2}\) 项残留。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>第二解法：\(e^{\sin x}\) 的 \(x^{2}\) 系数为 \(1/2\)，\(\cos x\) 的 \(x^{2}\) 系数为 \(-1/2\)，相减合并为 \(x^{2}\)，题中未减 \(x^{2}\)，故残留发散。</p><p>错误示范：误以为题中减去了 \(x^{2}\)，实际只减 \(x\) 与 \(x^{3}/6\)，\(x^{2}\) 项残留导致发散。</p>
+    <p>① 展开阶数不够。② 嵌套代入时中间项系数算错。③ 误以为题中减去了 \(x^{2}\)，实际只减 \(x\) 与 \(x^{3}/6\)，\(x^{2}\) 项残留导致发散。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是 \(e^{\sin x}\) 的高阶展开题，考五阶系数与残留项。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{e^{\sin x}-1-x-x^{2}/2}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(0\)（分子主部为 \(x^{4}\) 阶，除以 \(x^{3}\) 为 \(0\)）。</p>
+  </div>
+</article>
+
+<article class="q" id="q348">
+  <div class="q-head">
+    <span class="qno">第 348 题</span>
+    <span class="qtype">ln(1+tan x) 的三阶展开</span>
+    <span class="qsrc">P662</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\ln(1+\tan x)-\sin x-\dfrac{x^{2}}{2}}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：发散（双侧，\(x\to0^{+}\) 为 \(-\infty\)、\(x\to0^{-}\) 为 \(+\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给答案：\(-\dfrac{1}{6}\)（第 662 页）。按题面复算为发散（双侧，\(x\to0^{+}\) 为 \(-\infty\)、\(x\to0^{-}\) 为 \(+\infty\)）：\(\ln(1+\tan x)-\sin x-x^{2}/2\) 主部为 \(-x^{2}\)，除以 \(x^{3}\) 得 \(-1/x\)，奇次幂左右异号。以复算值为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div><p>选阶理由：\(\ln(1+\tan x)\) 展开：\(\tan x=x+x^{3}/3\)，\(\ln(1+u)=u-u^{2}/2+u^{3}/3\)，得 \(x-x^{2}/2+2x^{3}/3+o(x^{3})\)。减 \(\sin x=x-x^{3}/6\)、减 \(x^{2}/2\)，分子主部 \(-x^{2}\)，除以 \(x^{3}\) 发散。</p>
+    <p>识别类型：令 \(u=\tan x=x+\dfrac{x^{3}}{3}+o(x^{3})\)，由 \(\ln(1+u)=u-\dfrac{u^{2}}{2}+\dfrac{u^{3}}{3}+o(u^{3})\)，展开得</p>
+    \[
+    \ln(1+\tan x)=x+\frac{x^{3}}{3}-\frac{x^{2}}{2}+\frac{x^{3}}{3}+o(x^{3})=x-\frac{x^{2}}{2}+\frac{2x^{3}}{3}+o(x^{3}).
+    \]
+    <p>减去 \(\sin x=x-\dfrac{x^{3}}{6}+o(x^{3})\)，再减 \(\dfrac{x^{2}}{2}\)，分子 \(=-x^{2}+\dfrac{2x^{3}}{3}+\dfrac{x^{3}}{6}+o(x^{3})=-x^{2}+\dfrac{5x^{3}}{6}+o(x^{3})\)，主部为 \(-x^{2}\)，除以 \(x^{3}\) 后为 \(-1/x\)，奇次幂左右异号：\(x\to0^{+}\) 为 \(-\infty\)、\(x\to0^{-}\) 为 \(+\infty\)。关键一步是 \(\ln(1+\tan x)\) 的 \(x^{2}\) 系数为 \(-1/2\)，再减 \(x^{2}/2\) 后为 \(-x^{2}\)，题中未抵消该阶。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div><p>第二解法：\(\ln(1+\tan x)\) 的 \(x^{2}\) 系数为 \(-1/2\)，减 \(x^{2}/2\) 后为 \(-x^{2}\)，题中未抵消该阶，故发散。</p><p>错误示范：把 \(\ln(1+\tan x)\) 的 \(x^{2}\) 系数记错，或误以为减 \(x^{2}/2\) 抵消 \(-x^{2}/2\)，实际符号使 \(-x^{2}\) 残留。</p>
+    <p>① 展开阶数不够。② \(\ln(1+u)\) 中 \(u^{2}/2\) 项漏算。③ 误以为题中 \(+x^{2}/2\) 抵消了 \(-x^{2}/2\)，实际符号为减，导致 \(x^{2}\) 项残留。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是 \(\ln(1+\tan x)\) 的展开题，考三阶系数与符号。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\ln(1+\tan x)-\tan x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：发散（双侧，\(x\to0^{+}\) 为 \(-\infty\)、\(x\to0^{-}\) 为 \(+\infty\)）。\(\ln(1+u)-u=-u^{2}/2\sim-x^{2}/2\)，除以 \(x^{3}\) 得 \(-1/(2x)\)，奇次幂左右异号。</p>
+  </div>
+</article>
+
+<article class="q" id="q349">
+  <div class="q-head">
+    <span class="qno">第 349 题</span>
+    <span class="qtype">cos(tan x) 的高阶修正</span>
+    <span class="qsrc">P662</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{x\to0}\dfrac{\cos(\tan x)-\cos(\sin x)+\dfrac{x^{4}}{6}}{x^{6}}\)。</p>
+  </div>
+  <div class="answer">答案：发散（\(\to-\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给答案：\(-\dfrac{1}{120}\)（第 662 页）。按题面复算为发散到 \(-\infty\)：\(\cos(\tan x)-\cos(\sin x)=-x^{4}/2+o(x^{4})\)，加 \(x^{4}/6\) 后合并为 \(-x^{4}/3\)，主部仍在 \(x^{4}\) 阶，除以 \(x^{6}\) 即 \(-1/(3x^{2})\to-\infty\)。以复算值为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：展开 \(\cos(\tan x)\) 与 \(\cos(\sin x)\)，看 \(+x^{4}/6\) 能否抵消 \(x^{4}\) 阶主部。</p>
+    <p>由 \(\cos u=1-u^{2}/2+u^{4}/24+o(u^{4})\)，分别代入 \(u=\tan x=x+x^{3}/3+o(x^{3})\) 与 \(u=\sin x=x-x^{3}/6+o(x^{3})\)，展开到 \(x^{4}\) 得</p>
+    \[
+    \cos(\tan x)-\cos(\sin x)=-\frac{x^{4}}{2}+o(x^{4}).
+    \]
+    <p>加 \(x^{4}/6\) 后，分子 \(=-\dfrac{x^{4}}{2}+\dfrac{x^{4}}{6}+o(x^{4})=-\dfrac{x^{4}}{3}+o(x^{4})\)，主部仍在 \(x^{4}\) 阶。修正项 \(+x^{4}/6\) 与主部 \(-x^{4}/2\) 合并为 \(-x^{4}/3\)，并未抵消；除以 \(x^{6}\) 得 \(-1/(3x^{2})\to-\infty\)，故极限发散。</p>
+  
+    <p>为什么必须先看 x⁴ 阶系数？分母是 x⁶。判断修正项 +x⁴/6 能否抵消主部，只需看分子最低阶非零项：若 x⁴ 系数归零，下一非零项在 x⁶ 阶，才能与分母配平取有限系数；若 x⁴ 系数不为零，除以 x⁶ 后是 1/x² 阶发散量，根本不需要算 x⁶。本题 cos(tan x)-cos(sin x) 的 x⁴ 系数是 -1/2，加 1/6 后得 -1/3≠0，相消失败。</p><p>用和差化积交叉验证：cos A-cos B=-2 sin((A+B)/2) sin((A-B)/2)。取 A=tan x，B=sin x。A+B=tan x+sin x=2x+x³/6+o(x³)，A-B=tan x-sin x=tan x(1-cos x)~x·x²/2=x³/2。故 cos(tan x)-cos(sin x)≈-2·(x)·(x³/4)=-x⁴/2。这条路直接看出主部来自 A-B 的三阶小量乘以 A+B 的一阶小量，阶数为 3+1=4。</p></div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(+x^{4}/6\) 能抵消 \(-x^{4}/2\)。实际 \(1/6-1/2=-1/3\)，合并后仍是 \(x^{4}\) 阶，并不归零。</p>
+    <p>② 以为分子主部降到 \(x^{6}\) 阶从而取有限系数。主部一直在 \(x^{4}\)，除以 \(x^{6}\) 后是 \(1/x^{2}\) 型发散量。</p>
+  
+    <p>③ 常见错解：看到分子里有 +x⁴/6，以为题目精心设计了相消，直接去算 x⁶ 阶系数。错在没有先验证 x⁴ 系数是否真归零。正确顺序是先看最低阶非零项：若 x⁴ 系数不为零，除以 x⁶ 必发散，根本不需要算 x⁶。错误结论长什么样：硬算出 x⁶ 系数 -1/120 并当作有限答案——这正是书给答案，但它建立在 x⁴ 已被抵消的错误假设上。实际复算 x⁴ 系数为 -1/3，发散到 -∞。</p><p>④ 为什么题目给的是 1/6 而不是 1/2？这是设计好的「修正失败」陷阱。若修正项写成 +x⁴/2，主部 -x⁴/2 被抵消，下一个非零项在 x⁶ 阶，才能与分母 x⁶ 配平；写 1/6 时差了 1/3，相消失败。做题时先把主部系数算出来，再与修正项系数对比，而不是默认题目一定配平。</p></div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是 \(\cos(\tan x)-\cos(\sin x)\) 型差的高阶修正题，核心是判断所加修正项的系数与主部系数是否真能相消；本题 \(1/6\neq1/2\)，相消失败而发散。</p>
+  
+    <p>这类「差 + 修正项」的题，核心是判断修正项系数与主部系数是否真能相消。步骤固定：先用泰勒或和差化积算出差的最低阶非零项系数，再与修正项系数做减法；减完不为零就发散，减完为零再展到下一阶。考研中常见陷阱是修正项系数差一点（如 1/6 对 1/2），诱导学生硬算高阶系数。</p></div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 计算 \(\lim\limits_{x\to0}\dfrac{\cos(\tan x)-\cos(\sin x)}{x^{4}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{2}\)（即第 336 题）。</p>
   </div>
 </article>
 
@@ -178,6 +1157,42 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
 </article>
 
+<article class="q" id="q352">
+  <div class="q-head">
+    <span class="qno">第 352 题</span>
+    <span class="qtype">泰勒展开（sin 与一次式之差）</span>
+    <span class="qsrc">P663</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\dfrac{\sin x-x}{x^3}\)，求 \(\lim\limits_{x\to0}f(x)\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac16\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\dfrac00\) 型，分母 \(x^3\)，需将 \(\sin x\) 展开到 \(x^3\) 项。标准泰勒展开：</p>
+    \[ \sin x=x-\frac{x^3}{3!}+o(x^3)=x-\frac{x^3}{6}+o(x^3). \]
+    <p>代入分子：</p>
+    \[ \sin x-x=-\frac{x^3}{6}+o(x^3). \]
+    <p>除以 \(x^3\)：</p>
+    \[ f(x)=-\frac16+o(1)\to-\frac16. \]
+    <p>用洛必达法则验证：连续求导三次，分子三阶导为 \(-\cos x\)，分母三阶导为 \(6\)，\(x\to0\) 时比值 \(-1/6\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 记混 \(\sin x\) 的展开系数。\(\sin x=x-x^3/6+x^5/120-\cdots\)，三次项系数是 \(-1/6\)，不是 \(-1/3\)。</p>
+    <p>② 用 \(\sin x\sim x\) 替换后直接得 0，忽略了主项抵消后的高阶项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\sin x-x\) 是最经典的 \(x^3\) 阶无穷小，考研中反复出现，常与 \(\tan x-x\)（\(x^3/3\)）、\(\arcsin x-x\)（\(x^3/6\)）、\(\arctan x-x\)（\(-x^3/3\)）对比出题，考的就是四个反三角/三角函数三次项系数的符号与数值。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x}{x^5}\)。</p>
+    <p class="var-ans">答案：发散到 \(-\infty\)（极限不存在）。由 \(\sin x=x-x^3/6+x^5/120+o(x^5)\)，分子 \(\sin x-x=-x^3/6+x^5/120\)，除以 \(x^5\) 后主项 \(-1/(6x^2)\to-\infty\)，故极限不存在（为 \(-\infty\)）。若改为 \((\sin x-x+x^3/6)/x^5\) 则得 \(1/120\)。</p>
+  </div>
+</article>
+
 <article class="q" id="q353">
   <div class="q-head">
     <span class="qno">第 353 题</span>
@@ -251,6 +1266,78 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <div class="block-title">变式</div>
     <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x-1-x-\dfrac{x^2}{2}}{x^3}\)。</p>
     <p class="var-ans">答案：\(\dfrac16\)。\(e^x=1+x+x^2/2+x^3/6+o(x^3)\)，减去前三项后剩 \(x^3/6\)，除以 \(x^3\) 得 \(1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q355">
+  <div class="q-head">
+    <span class="qno">第 355 题</span>
+    <span class="qtype">泰勒展开（ln 与 sin 的差）</span>
+    <span class="qsrc">P663</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\dfrac{\ln(1+x)-\sin x}{x^2}\)，求 \(\lim\limits_{x\to0}f(x)\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac12\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\dfrac00\) 型，分母 \(x^2\)，需将两个函数都展开到 \(x^2\) 项。</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+o(x^2),\qquad \sin x=x+o(x^2) \]
+    <p>（\(\sin x\) 的三次项 \(x^3/6\) 比分母 \(x^2\) 高阶，不影响结果。）</p>
+    <p>代入分子：</p>
+    \[ \ln(1+x)-\sin x=\left(x-\frac{x^2}{2}\right)-x+o(x^2)=-\frac{x^2}{2}+o(x^2). \]
+    <p>故 \(f(x)\to -1/2\)。这里一次项 \(x\) 恰好抵消，关键在于 \(\ln(1+x)\) 的二次项 \(-x^2/2\) 与 \(\sin x\)（无二次项）之差。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开阶数不足。只展开到 \(x\) 项，会误以为分子 \(x-x=0\) 而得 0；必须展开到 \(x^2\)。</p>
+    <p>② 给 \(\sin x\) 多写了二次项。\(\sin x\) 只有奇次项，没有 \(x^2\) 项，不要凭空补一个。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>两个不同函数之差的极限，是泰勒展开的典型应用。考研中常考「一次项抵消后看二次项」，关键是判断每个函数需要展开到几阶——以分母阶数为限。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-\sin x}{x^3}\)。</p>
+    <p class="var-ans">答案：极限不存在（发散）。\(\ln(1+x)=x-x^2/2+x^3/3+o(x^3)\)，\(\sin x=x-x^3/6+o(x^3)\)，分子 \(=-x^2/2+x^3/2+o(x^3)\)，主项为 \(-x^2/2\)，除以 \(x^3=-1/(2x)\)：\(x\to0^+\) 为 \(-\infty\)、\(x\to0^-\) 为 \(+\infty\)，左右异号。若题目改为 \(\dfrac{\ln(1+x)-\sin x+x^2/2}{x^3}\)，则得 \(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q356">
+  <div class="q-head">
+    <span class="qno">第 356 题</span>
+    <span class="qtype">泰勒展开（arcsin 与一次式之差）</span>
+    <span class="qsrc">P663</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\dfrac{\arcsin x-x}{x^3}\)，求 \(\lim\limits_{x\to0}f(x)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac16\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\dfrac00\) 型，分母 \(x^3\)。判断展开阶数的依据：分子 \(\arcsin x-x\) 与分母 \(x^3\) 同阶，因此 \(\arcsin x\) 只需展开到三次项即可定阶。</p>
+    <p><b>方法一（泰勒展开）</b>：\(\arcsin x\) 的麦克劳林展开为：</p>
+    \[ \arcsin x=x+\frac{x^3}{6}+o(x^3). \]
+    <p>这个展开式可由求导推导：\((\arcsin x)'=(1-x^2)^{-1/2}=1+x^2/2+\cdots\)，逐项积分得 \(\arcsin x=x+x^3/6+\cdots\)。代入分子：</p>
+    \[ \arcsin x-x=\frac{x^3}{6}+o(x^3), \]
+    <p>除以 \(x^3\) 得 \(1/6\)。注意它与 \(\sin x-x\sim -x^3/6\) 大小相等、符号相反。</p>
+</div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 与 \(\arctan x-x\sim -x^3/3\) 混淆。\(\arcsin x-x\sim x^3/6\)，\(\arctan x-x\sim -x^3/3\)，系数和符号都不同。</p>
+    <p>② 把 \(\arcsin x\) 的展开系数记成 \(1/3\)。正确系数是 \(1/6\)，可由 \(1/\sqrt{1-x^2}=1+x^2/2+\cdots\) 积分得到。</p>
+    <p>③ 干扰项构造：选择题中常把 \(-1/6\)（误用 sin 版符号）、\(1/6\)（正确）、\(-1/3\)（误用 arctan 版系数）作为选项。</p>
+</div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>反三角函数的泰勒展开是无穷小比较题的高频素材。考研中常把 \(\arcsin x-x\)、\(\arctan x-x\)、\(\sin x-x\)、\(\tan x-x\) 四个放在一起比阶，记住四个三次项系数即可秒杀。</p>
+    <p>题型位置：选择题第 1–3 题常考等价无穷小识别，填空题中也常出现反三角函数作为展开对象。与 352 题（sin 版）、353 题（tan 版）、357 题（arctan 版）同属「三角/反三角三次项」系列。</p>
+</div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-x}{x^5}\)。</p>
+    <p class="var-ans">答案：发散到 \(+\infty\)。\(\arcsin x=x+x^3/6+3x^5/40+o(x^5)\)，减去 \(x\) 后主项为 \(x^3/6\)，除以 \(x^5=1/(6x^2)\) 恒为正、\(\to+\infty\)；若改为 \((\arcsin x-x-x^3/6)/x^5\) 则得 \(3/40\)。</p>
   </div>
 </article>
 
@@ -406,6 +1493,47 @@ ight)^2=\frac{x^2}{2}. \]
   </div>
 </article>
 
+<article class="q" id="q361">
+  <div class="q-head">
+    <span class="qno">第 361 题</span>
+    <span class="qtype">复合函数高阶展开（经典难题）</span>
+    <span class="qsrc">P664</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\dfrac{\sin(\tan x)-\tan(\sin x)}{x^7}\)，求 \(\lim\limits_{x\to0}f(x)\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{30}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\dfrac00\) 型，分母 \(x^7\)，属经典高阶复合展开题。需将 \(\sin(\tan x)\) 与 \(\tan(\sin x)\) 分别展开到 \(x^7\) 项。</p>
+    <p><b>第一步：\(\tan x\) 展开到 \(x^7\)。</b></p>
+    \[ \tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+\frac{17x^7}{315}+o(x^7). \]
+    <p><b>第二步：\(\sin(\tan x)\)。</b>令 \(t=\tan x\)，\(\sin t=t-t^3/6+t^5/120-t^7/5040+\cdots\)，代入并整理到 \(x^7\)：</p>
+    \[ \sin(\tan x)=x+\frac{x^3}{6}-\frac{x^5}{40}-\frac{275}{5040}x^7+o(x^7). \]
+    <p><b>第三步：\(\sin x\) 展开到 \(x^7\)。</b></p>
+    \[ \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}-\frac{x^7}{5040}+o(x^7). \]
+    <p><b>第四步：\(\tan(\sin x)\)。</b>令 \(s=\sin x\)，\(\tan s=s+s^3/3+2s^5/15+17s^7/315+\cdots\)，代入整理：</p>
+    \[ \tan(\sin x)=x+\frac{x^3}{6}-\frac{x^5}{40}-\frac{107}{5040}x^7+o(x^7). \]
+    <p><b>第五步：相减。</b>前五项均抵消，仅剩 \(x^7\) 项：</p>
+    \[ \sin(\tan x)-\tan(\sin x)=\left(-\frac{275}{5040}+\frac{107}{5040}\right)x^7+o(x^7)=-\frac{168}{5040}x^7+o(x^7)=-\frac{1}{30}x^7+o(x^7). \]
+    <p>故 \(f(x)\to -1/30\)。这道题的关键是：两个复合函数在前六阶完全相同，差异只出现在 \(x^7\)，必须展开到足够高的阶数才能看到。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开阶数不够。只展开到 \(x^3\) 或 \(x^5\) 会发现两者相等，误以为极限为 0。分母是 \(x^7\)，必须展开到 \(x^7\)。</p>
+    <p>② 复合时代入错误。\(\sin(\tan x)\) 中，\(\tan x\) 的 \(x^3\) 项代入 \(\sin t\) 的 \(-t^3/6\) 时，需展开 \((x+x^3/3+\cdots)^3\)，不能只取主项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是数学分析/考研中的经典名题（吉米多维奇级别的难度），考察高阶复合泰勒展开的计算能力。考研中通常不会直接考到 \(x^7\) 阶，但这类题的方法论——「外层展开 + 内层代入 + 逐阶整理」——是处理复合函数极限的通用手段。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin(\tan x)-\tan x}{x^5}\)。</p>
+    <p class="var-ans">答案：发散到 \(-\infty\)。由 \(\sin(\tan x)=x+x^3/6-x^5/40+\cdots\)，\(\tan x=x+x^3/3+2x^5/15+\cdots\)，相减得 \(-x^3/6-19x^5/120+\cdots\)，主项 \(-x^3/6\)，除以 \(x^5=-1/(6x^2)\to-\infty\)。若改为 \((\sin(\tan x)-\tan x+x^3/6)/x^5\) 则得 \(-19/120\)。</p>
+  </div>
+</article>
+
 <article class="q" id="q362">
   <div class="q-head">
     <span class="qno">第 362 题</span>
@@ -479,6 +1607,42 @@ ight). \]
     <div class="block-title">变式</div>
     <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+\tan x)-\ln(1+\sin x)}{x^3}\)。</p>
     <p class="var-ans">答案：\(\dfrac12\)。由 \(\ln(1+u)\sim u\)，得 \(\tan x-\sin x\sim x^3/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q364">
+  <div class="q-head">
+    <span class="qno">第 364 题</span>
+    <span class="qtype">反函数恒等式（恒等于 0）</span>
+    <span class="qsrc">P664</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\dfrac{\arcsin(\sin x)-x}{x^3}\)，求 \(\lim\limits_{x\to0}f(x)\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\dfrac00\) 型，但分子实际上恒为零。关键观察：当 \(|x|\le \pi/2\) 时，\(\sin x\in[-1,1]\)，而 \(\arcsin\) 是 \(\sin\) 在 \([-\pi/2,\pi/2]\) 上的反函数，因此</p>
+    \[ \arcsin(\sin x)=x,\qquad |x|\le\frac{\pi}{2}. \]
+    <p>当 \(x\to0\) 时，\(x\) 必然在 \([-\pi/2,\pi/2]\) 内，所以分子 \(\arcsin(\sin x)-x\equiv0\)，极限为 0。</p>
+    <p>这不是「趋近于 0」而是「恒等于 0」。如果硬用泰勒展开，\(\arcsin(\sin x)\) 的展开也会给出 \(x+0\cdot x^3+\cdots\)，即三次项为零。</p>
+    <p><b>验证方法</b>：取 \(x=0.1\)，\(\sin(0.1)\approx0.09983\)，\(\arcsin(0.09983)\approx0.1\)，两者精确相等（在反函数定义域内）。</p>
+</div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 盲目展开 \(\arcsin\) 和 \(\sin\)，以为有 \(x^3\) 项。实际上反函数复合后恒等，所有高阶项都为零。这是「反函数恒等」概念的典型陷阱。</p>
+    <p>② 误以为 \(x\to0\) 时只是近似相等，实际是精确相等（在反函数定义域内）。</p>
+    <p>③ 干扰项构造：选择题中常把 \(1/6\)（误用 arcsin 展开系数）、\(0\)（正确）、\(-1/6\)（误用 sin 展开系数）作为选项。</p>
+</div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这道题考的是反函数概念，不是计算能力。类似的恒等式还有 \(\arctan(\tan x)=x\)（\(|x|\lt\pi/2\)）、\(\sin(\arcsin x)=x\)（\(|x|\le1\)）。考研中偶尔以选择题形式出现，考察对反函数定义域的理解。</p>
+    <p>题型位置：选择题中常考「下列哪个极限为 0」，把恒等式复合与非恒等复合放在一起。与 365 题（arctan 版）、395 题（组合版）同属「反函数恒等」系列。</p>
+</div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\dfrac{\arcsin(\sin x)-x}{x^3}\)。</p>
+    <p class="var-ans">答案：\(0\)。当 \(x\to\infty\) 时，\(\arcsin(\sin x)\) 周期性地落在 \([-\pi/2,\pi/2]\) 内（有界），而 \(x\to\infty\)，故分子约为 \(-x\)，除以 \(x^3\sim -1/x^2\to0\)。注意这与 \(x\to0\) 时恒为 0 不同。</p>
   </div>
 </article>
 
@@ -2732,1392 +3896,7 @@ ight)+o(x^2)=\frac{x^2}{2}+o(x^2). \]
     <p><b>变式</b> 当 \(x\to0\) 时，\(\int_{0}^{x^{2}}\dfrac{\sin t^{4}}{t^{3}}\,dt\) 的阶数是多少？</p>
     <p class="var-ans">答案：阶数 4。被积 \(\sin t^{4}/t^{3}\sim t^{4}/t^{3}=t\)，积分得 \(t^{2}/2\)，代入上限 \(x^{2}\) 得 \((x^{2})^{2}/2=x^{4}/2\)。</p>
   </div>
-</article>
-
-<article class="q" id="q421">
-  <div class="q-head">
-    <span class="qno">第 421 题</span>
-    <span class="qtype">最高阶变上限积分判断</span>
-    <span class="qsrc">P677</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0^{+}\) 时，下列无穷小量中最高阶的是（）</p>
-    <div class="opts">
-      <p>(A) \(\displaystyle\int_{0}^{x}\sin(t^{4})\,dt\)</p>
-      <p>(B) \(\displaystyle\int_{0}^{x^{2}}\tan(t^{2})\,dt\)</p>
-      <p>(C) \(\displaystyle\int_{0}^{\sqrt{x}}\cos(t^{5})\,dt\)</p>
-      <p>(D) \(\displaystyle\int_{0}^{x^{3}}e^{-t^{2}}\,dt\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：四个变上限积分估阶比较。</p>
-    <p>(A) 被积 \(\sin t^{4}\sim t^{4}\)（\(k=4\)），上限 \(x\)，阶数 \(4+1=5\)。</p>
-    <p>(B) 被积 \(\tan t^{2}\sim t^{2}\)（\(k=2\)），上限 \(x^{2}\)，阶数 \((2+1)\times2=6\)。</p>
-    <p>(C) 被积 \(\cos t^{5}\to1\)（\(k=0\)），上限 \(\sqrt{x}=x^{1/2}\)，阶数 \(1/2\)。</p>
-    <p>(D) 被积 \(e^{-t^{2}}\to1\)（\(k=0\)），上限 \(x^{3}\)，阶数 \(3\)。</p>
-    <p>阶数：5、6、1/2、3。最高阶为 (B)，阶数 6。</p>
-    <p>(B) 看似被积幂次不高（\(t^{2}\)），但上限是 \(x^{2}\)，乘 2 后阶数达 6；这是「上限幂次」压倒「被积幂次」的典型例子。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 只看被积函数幂次，忽略上限。(A) 被积 \(t^{4}\) 最高但上限只是 \(x\)，阶数 5 不如 (B) 的 6。</p>
-    <p>② 把 \(\cos t^{5}\) 错当 \(1-\cos t^{5}\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>变上限积分估阶题的核心是两个因子相乘：被积主部幂次 \(k+1\) 与上限幂次 \(m\)，阶数 \((k+1)m\)。考试常通过调整 \(k\) 与 \(m\) 使不同选项的阶数接近，需要精确计算。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 当 \(x\to0\) 时，\(\int_{0}^{x^{3}}\sin t^{2}\,dt\) 的阶数是多少？</p>
-    <p class="var-ans">答案：阶数 9。被积 \(\sim t^{2}\)，积分 \(t^{3}/3\)，代入上限 \(x^{3}\) 得 \((x^{3})^{3}/3=x^{9}/3\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q422">
-  <div class="q-head">
-    <span class="qno">第 422 题</span>
-    <span class="qtype">cos(sin x) - cos x 定阶</span>
-    <span class="qsrc">P678</span>
-  </div>
-  <div class="stem">
-    <p>设 \(x\to0\) 时，\(\cos(\sin x)-\cos x\) 与 \(x^{n}\) 是同阶无穷小，则 \(n\) 为（）</p>
-    <div class="opts">
-      <p>(A) \(2\)</p>
-      <p>(B) \(4\)</p>
-      <p>(C) \(6\)</p>
-      <p>(D) \(8\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：两个余弦值相减，可用和差化积或泰勒展开。这里用泰勒展开更直接。</p>
-    <p>第一步，展开 \(\cos(\sin x)\)。先把 \(\sin x=x-x^{3}/6+o(x^{3})\) 代入：</p>
-    \[ \cos u=1-\frac{u^{2}}{2}+\frac{u^{4}}{24}+o(u^{4}), \]
-    <p>其中 \(u=\sin x\)。计算 \(u^{2}=\sin^{2}x=x^{2}-x^{4}/3+o(x^{4})\)，\(u^{4}=x^{4}+o(x^{4})\)。</p>
-    \[ \cos(\sin x)=1-\frac12\left(x^{2}-\frac{x^{4}}{3}\right)+\frac1{24}x^{4}+o(x^{4})=1-\frac{x^{2}}{2}+\frac{x^{4}}{6}+\frac{x^{4}}{24}+o(x^{4})=1-\frac{x^{2}}{2}+\frac{5x^{4}}{24}+o(x^{4}). \]
-    <p>第二步，展开 \(\cos x\)：</p>
-    \[ \cos x=1-\frac{x^{2}}{2}+\frac{x^{4}}{24}+o(x^{4}). \]
-    <p>第三步，作差：</p>
-    \[ \cos(\sin x)-\cos x=\left(\frac{5}{24}-\frac{1}{24}\right)x^{4}+o(x^{4})=\frac{x^{4}}{6}+o(x^{4}), \]
-    <p>阶数为 4，\(n=4\)，选 (B)。</p>
-    <p>也可用和差化积：\(\cos A-\cos B=-2\sin\frac{A+B}{2}\sin\frac{A-B}{2}\)，其中 \(A=\sin x\)、\(B=x\)，\(\frac{A+B}{2}\sim x\)，\(\frac{A-B}{2}\sim-\frac{x^{3}}{12}\)，相乘得 \(x\cdot(-x^{3}/12)\cdot(-2)=x^{4}/6\)，结果一致。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 误以为 \(\sin x\sim x\) 就直接得 \(\cos(\sin x)-\cos x\sim0\)。等价替换不能在减法中分别用。</p>
-    <p>② 展开 \(\cos(\sin x)\) 时漏掉 \(u^{4}/24\) 项，会把 \(x^{4}\) 系数算成 \(1/6\) 而非 \(5/24\)，最终差的系数也会错。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「\(\cos(\sin x)-\cos x\)、\(\sin(\cos x)-\sin x\)」等复合函数差是高阶无穷小题的难点，需要逐层展开。和差化积是快捷工具，泰勒展开是保底方法。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x\to0\) 时，\(\cos(\sin x)-\cos x\) 与 \(x^{n}\) 同阶，求其主部系数。</p>
-    <p class="var-ans">答案：主部为 \(x^{4}/6\)，系数 \(1/6\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q423">
-  <div class="q-head">
-    <span class="qno">第 423 题</span>
-    <span class="qtype">变上限积分等价无穷小</span>
-    <span class="qsrc">P678</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)=\displaystyle\int_{0}^{x^{2}}\dfrac{\sin t^{2}}{t}\,dt\)，则当 \(x\to0\) 时，\(f(x)\) 的等价无穷小是（）</p>
-    <div class="opts">
-      <p>(A) \(x^{4}\)</p>
-      <p>(B) \(\dfrac{x^{4}}{2}\)</p>
-      <p>(C) \(x^{6}\)</p>
-      <p>(D) \(\dfrac{x^{6}}{3}\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：变上限积分求等价无穷小，被积函数是分式 \(\sin t^{2}/t\)。解法分两步：先把被积函数在零点用等价无穷小换成幂函数主部，再做幂函数积分。</p>
-    <p>第一步，等价无穷小替换。当 \(t\to0\) 时，由 \(\sin u\sim u\)（\(u\to0\)），令 \(u=t^{2}\)，得 \(\sin t^{2}\sim t^{2}\)。代入被积函数：</p>
-    \[ \frac{\sin t^{2}}{t}\sim\frac{t^{2}}{t}=t. \]
-    <p>被积主部为 \(t\)（\(k=1\)）。替换依据是积分区间 \([0,x^{2}]\) 在 \(x\to0\) 时整体趋于零，被积函数在区间内每一点都满足 \(\sin t^{2}/t\sim t\)。</p>
-    <p>第二步，做幂函数积分：</p>
-    \[ f(x)\sim\int_{0}^{x^{2}}t\,dt=\left[\frac{t^{2}}{2}\right]_{0}^{x^{2}}=\frac{(x^{2})^{2}}{2}=\frac{x^{4}}{2}. \]
-    <p>交叉验证：由变上限积分求导，\(f'(x)=\sin(x^{2})^{2}/x^{2}\cdot2x=\sin x^{4}/x^{2}\cdot2x\sim x^{4}/x^{2}\cdot2x=2x^{3}\)，积分回去 \(f(x)\sim x^{4}/2\)，结果一致。</p>
-    <p>选 (B)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 把 \(\sin t^{2}\) 错当 \(\sin t\)，约分得 \(t^{2}/t=1\)，会误判阶数为 2（结果 \(x^{2}\)，不在选项中）。题目中是 \(\sin t^{2}\) 不是 \(\sin t\)。</p>
-    <p>② 漏掉积分系数 \(1/2\)。\(\int t\,dt=t^{2}/2\)，分母 2 来自 \(k+1=2\)；只选 \(x^{4}\)（选项 A）就丢了系数。</p>
-    <p>③ 指数运算 \((x^{2})^{2}=x^{4}\)，不是 \(x^{3}\) 或 \(x^{6}\)。选项 C（\(x^{6}\)）是误把上限乘 3 的干扰项。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>这是变上限积分等价无穷小的标准题型，与 Q419、Q433、Q443 同型。被积函数常考 \(\sin t^{k}/t^{m}\)、\(\tan t^{k}/t^{m}\)、\(\ln(1+t^{k})/t^{m}\)，套路固定：化简为 \(t^{k-m}\)，积分后乘上限幂次。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(x)=\int_{0}^{x^{3}}\dfrac{\sin t^{2}}{t}\,dt\)，求等价无穷小。</p>
-    <p class="var-ans">答案：\(x^{6}/2\)。被积 \(\sim t\)，积分 \(t^{2}/2\)，代入上限 \(x^{3}\) 得 \((x^{3})^{2}/2=x^{6}/2\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q424">
-  <div class="q-head">
-    <span class="qno">第 424 题</span>
-    <span class="qtype">根式差定阶</span>
-    <span class="qsrc">P678</span>
-  </div>
-  <div class="stem">
-    <p>设当 \(x\to0\) 时，\(\sqrt{1+x^{2}}-\sqrt{1-x^{2}}\) 与 \(x^{n}\) 是同阶无穷小，则 \(n\) 为（）</p>
-    <div class="opts">
-      <p>(A) \(1\)</p>
-      <p>(B) \(2\)</p>
-      <p>(C) \(3\)</p>
-      <p>(D) \(4\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：两个根式相减，标准做法是有理化（分子同乘共轭根式）。</p>
-    <p>第一步，有理化：</p>
-    \[ \sqrt{1+x^{2}}-\sqrt{1-x^{2}}=\frac{(1+x^{2})-(1-x^{2})}{\sqrt{1+x^{2}}+\sqrt{1-x^{2}}}=\frac{2x^{2}}{\sqrt{1+x^{2}}+\sqrt{1-x^{2}}}. \]
-    <p>第二步，分母在 \(x\to0\) 时趋于 \(\sqrt{1}+\sqrt{1}=2\)，故</p>
-    \[ \sqrt{1+x^{2}}-\sqrt{1-x^{2}}\sim\frac{2x^{2}}{2}=x^{2}. \]
-    <p>阶数为 2，\(n=2\)，选 (B)。</p>
-    <p>也可用展开法：\(\sqrt{1+u}=1+u/2+o(u)\)，令 \(u=\pm x^{2}\)，得 \(\sqrt{1+x^{2}}=1+x^{2}/2+o(x^{2})\)、\(\sqrt{1-x^{2}}=1-x^{2}/2+o(x^{2})\)，相减得 \(x^{2}+o(x^{2})\)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 误以为 \(\sqrt{1+x^{2}}\sim1\)、\(\sqrt{1-x^{2}}\sim1\)，相减为 0。等价替换不能在减法中分别用。</p>
-    <p>② 有理化时分子算错：\((1+x^{2})-(1-x^{2})=2x^{2}\)，不是 \(2x\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>根式差是定阶题的基础题型，通法是有理化。若两个根式的一次项相同，差的阶数由二次项决定。变式包括 \(\sqrt{1+x}-\sqrt{1-x}\)（阶 1）、\(\sqrt[3]{1+x}-\sqrt[3]{1-x}\)（阶 1）等。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x\to0\) 时，\(\sqrt{1+x}-\sqrt{1-x}\) 与 \(x^{n}\) 同阶，求 \(n\)。</p>
-    <p class="var-ans">答案：\(n=1\)。有理化得 \(2x/(\sqrt{1+x}+\sqrt{1-x})\sim x\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q425">
-  <div class="q-head">
-    <span class="qno">第 425 题</span>
-    <span class="qtype">更高阶无穷小判断</span>
-    <span class="qsrc">P679</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0\) 时，下列四个无穷小量中，哪一个是比其他三个更高阶的无穷小量（）</p>
-    <div class="opts">
-      <p>(A) \(\displaystyle\int_{0}^{x}\frac{\ln(1+t^{4})}{t^{2}}\,dt\)</p>
-      <p>(B) \(\displaystyle\int_{0}^{x^{2}}\frac{\arctan t^{2}}{t}\,dt\)</p>
-      <p>(C) \(\displaystyle\int_{0}^{\sqrt{x}}\frac{1-\cos t^{3}}{t^{2}}\,dt\)</p>
-      <p>(D) \(\displaystyle\int_{0}^{x}\frac{e^{-t^{2}}-1}{t}\,dt\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：四个分式被积函数变上限积分估阶。</p>
-    <p>(A) \(\ln(1+t^{4})/t^{2}\sim t^{4}/t^{2}=t^{2}\)（\(k=2\)），上限 \(x\)，阶数 \(3\)。</p>
-    <p>(B) \(\arctan t^{2}/t\sim t^{2}/t=t\)（\(k=1\)），上限 \(x^{2}\)，阶数 \((1+1)\times2=4\)。</p>
-    <p>(C) \((1-\cos t^{3})/t^{2}\sim(t^{6}/2)/t^{2}=t^{4}/2\)（\(k=4\)），上限 \(\sqrt{x}=x^{1/2}\)，阶数 \((4+1)\times\dfrac12=5/2\)。</p>
-    <p>(D) \((e^{-t^{2}}-1)/t\sim(-t^{2})/t=-t\)（\(k=1\)），上限 \(x\)，阶数 \(2\)。</p>
-    <p>阶数：3、4、5/2、2。最高阶为 (B)，阶数 4。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① (C) 中 \(1-\cos t^{3}\sim t^{6}/2\)，是 \(t^{3}\) 的平方，不是 \(t^{3}\)；除以 \(t^{2}\) 得 \(t^{4}/2\)，阶数 5/2。</p>
-    <p>② (B) 的上限是 \(x^{2}\)，乘 2 后阶数 4，是四个中最高的。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>分式被积函数组合题，考的是幂次运算的准确性。关键步骤：分子主部幂次减去分母幂次得被积 \(k\)，再加 1，乘上限幂次。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 当 \(x\to0\) 时，\(\int_{0}^{x^{2}}\dfrac{1-\cos t^{3}}{t^{2}}\,dt\) 的阶数是多少？</p>
-    <p class="var-ans">答案：阶数 10。被积 \(\sim t^{6}/(2t^{2})=t^{4}/2\)，积分 \(t^{5}/10\)，代入上限 \(x^{2}\) 得 \((x^{2})^{5}/10=x^{10}/10\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q426">
-  <div class="q-head">
-    <span class="qno">第 426 题</span>
-    <span class="qtype">积分与 x^2 比较阶</span>
-    <span class="qsrc">P679</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)=\displaystyle\int_{0}^{x}\dfrac{\tan t^{3}}{t^{2}}\,dt\)，则当 \(x\to0\) 时，\(f(x)\) 是 \(x^{2}\) 的（）</p>
-    <div class="opts">
-      <p>(A) 低阶无穷小</p>
-      <p>(B) 高阶无穷小</p>
-      <p>(C) 等价无穷小</p>
-      <p>(D) 同阶但不等价的无穷小</p>
-    </div>
-  </div>
-  <div class="answer">答案：D</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：变上限积分与指定幂函数 \(x^{2}\) 比较阶数。判断标准是求 \(\lim f(x)/x^{2}\)，根据结果分类：0 为高阶，\(\infty\) 为低阶，1 为等价，非零常数为同阶不等价。</p>
-    <p>第一步，化简被积函数。当 \(t\to0\) 时，由 \(\tan u\sim u\)（\(u\to0\)），令 \(u=t^{3}\)，得 \(\tan t^{3}\sim t^{3}\)。代入被积函数：</p>
-    \[ \frac{\tan t^{3}}{t^{2}}\sim\frac{t^{3}}{t^{2}}=t. \]
-    <p>被积主部为 \(t\)，即 \(k=1\) 型。</p>
-    <p>第二步，做幂函数积分：</p>
-    \[ f(x)\sim\int_{0}^{x}t\,dt=\frac{x^{2}}{2}. \]
-    <p>第三步，与 \(x^{2}\) 比较：</p>
-    \[ \frac{f(x)}{x^{2}}\sim\frac{1}{2}. \]
-    <p>比值为非零常数 \(1/2\)，既不是 0、\(\infty\)，也不是 1，故是<b>同阶但不等价</b>的无穷小，选 (D)。</p>
-    <p>交叉验证：用洛必达法则。\(\lim f(x)/x^{2}\) 是 0/0 型，分子导数为 \(\tan x^{3}/x^{2}\sim x^{3}/x^{2}=x\)，分母导数为 \(2x\)，比值为 \(x/(2x)=1/2\)，结果一致。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 把比值 1/2 误判为「等价」。等价要求比值为 1，1/2 只是同阶。选项 (C) 等价无穷小正是为这个错误构造的干扰项。</p>
-    <p>② 被积函数化简错误。\(\tan t^{3}\sim t^{3}\)，除以 \(t^{2}\) 得 \(t\)；若误算成 \(t^{3}/t^{2}=t^{2}\)，会误判阶数为 3，进而选 (B) 高阶无穷小。</p>
-    <p>③ 方向搞反。若误以为 \(f\sim x^{2}/2\) 是比 \(x^{2}\) 高阶，会选 (B)。实际上阶数都是 2，只是系数不同。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「积分是 \(x^{k}\) 的什么」是选择题的固定四选一题，与 Q436、Q446 同型。命题人常设系数为 \(1/2\)、\(1/3\) 等，目的就是区分「同阶」与「等价」。掌握判断流程：求主部 → 算比值 → 按比值分类。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(x)=\int_{0}^{x}\dfrac{\tan t^{3}}{t^{2}}\,dt\)，问 \(f(x)\) 与 \(\dfrac{x^{2}}{2}\) 是否等价？</p>
-    <p class="var-ans">答案：是等价无穷小。因为 \(f(x)\sim x^{2}/2\)，比值为 1。</p>
-  </div>
-</article>
-
-<article class="q" id="q427">
-  <div class="q-head">
-    <span class="qno">第 427 题</span>
-    <span class="qtype">sin x - x + x^3/6 定阶</span>
-    <span class="qsrc">P679</span>
-  </div>
-  <div class="stem">
-    <p>设当 \(x\to0\) 时，\(\sin x-x+\dfrac{x^{3}}{6}\) 与 \(x^{n}\) 是同阶无穷小，则 \(n\) 为（）</p>
-    <div class="opts">
-      <p>(A) \(4\)</p>
-      <p>(B) \(5\)</p>
-      <p>(C) \(6\)</p>
-      <p>(D) \(7\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：泰勒展开消去低阶项定阶。\(\sin x\) 的展开是基础公式。</p>
-    <p>写出 \(\sin x\) 的展开：</p>
-    \[ \sin x=x-\frac{x^{3}}{6}+\frac{x^{5}}{120}-\frac{x^{7}}{5040}+o(x^{7}). \]
-    <p>代入：</p>
-    \[ \sin x-x+\frac{x^{3}}{6}=\frac{x^{5}}{120}-\frac{x^{7}}{5040}+o(x^{7})=\frac{x^{5}}{120}+o(x^{5}). \]
-    <p>阶数为 5，\(n=5\)，选 (B)。</p>
-    <p>这里题目已经把 \(x\) 和 \(x^{3}/6\) 都加进去了，正好消去 \(\sin x\) 的一次项和三次项，剩下的第一个非零项是 \(x^{5}/120\)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 展开阶数不够，只写到 \(x^{3}\)，会得到恒等于 0。必须写到 \(x^{5}\)。</p>
-    <p>② 记混 \(\sin x\) 的系数。\(x^{5}/120\) 的系数是 \(1/120\) 不是 \(1/5!\) 记错成别的；\(5!=120\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「泰勒多项式余项定阶」是选择题的常考形式，本质是考察是否记住基本函数的泰勒展开到高阶。常见链：\(\sin x-x\)（阶 3）、\(\sin x-x+x^{3}/6\)（阶 5）、再下一步（阶 7）。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x\to0\) 时，\(\cos x-1+x^{2}/2\) 与 \(x^{n}\) 同阶，求 \(n\)。</p>
-    <p class="var-ans">答案：\(n=4\)。\(\cos x=1-x^{2}/2+x^{4}/24+o(x^{4})\)，差为 \(x^{4}/24+o(x^{4})\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q428">
-  <div class="q-head">
-    <span class="qno">第 428 题</span>
-    <span class="qtype">三个变上限积分排序</span>
-    <span class="qsrc">P680</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0^{+}\) 时，将无穷小量 \(\alpha=\displaystyle\int_{0}^{x}\dfrac{\sin t^{2}}{t}\,dt,\ \beta=\displaystyle\int_{0}^{x^{2}}\dfrac{\ln(1+t^{3})}{t}\,dt,\ \gamma=\displaystyle\int_{0}^{\sqrt{x}}\dfrac{1-\cos t^{2}}{t^{3}}\,dt\) 排列起来，使排在后面的是前一个的高阶无穷小，则正确的排列次序是（）</p>
-    <div class="opts">
-      <p>(A) \(\alpha,\beta,\gamma\)</p>
-      <p>(B) \(\alpha,\gamma,\beta\)</p>
-      <p>(C) \(\beta,\alpha,\gamma\)</p>
-      <p>(D) \(\gamma,\alpha,\beta\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：D</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：三个分式被积函数变上限积分排序。要求「排在后面的是前一个的高阶」，即列表顺序必须是阶数递增。</p>
-    <p>\(\alpha\)：\(\sin t^{2}/t\sim t^{2}/t=t\)（\(k=1\)），上限 \(x\)，阶数 \(1+1=2\)。</p>
-    <p>\(\beta\)：\(\ln(1+t^{3})/t\sim t^{3}/t=t^{2}\)（\(k=2\)），上限 \(x^{2}\)，阶数 \((2+1)\times2=6\)。</p>
-    <p>\(\gamma\)：\((1-\cos t^{2})/t^{3}\sim(t^{4}/2)/t^{3}=t/2\)（\(k=1\)），上限 \(\sqrt{x}=x^{1/2}\)，阶数 \((1+1)\times\dfrac12=1\)。</p>
-    <p>阶数：\(\gamma=1\)，\(\alpha=2\)，\(\beta=6\)。从低到高为 \(\gamma,\alpha,\beta\)，选 (D)。</p>
-    <p>交叉验证：\(\gamma\) 的被积 \((1-\cos t^{2})/t^{3}\)，由 \(1-\cos u\sim u^{2}/2\) 令 \(u=t^{2}\)，得 \(1-\cos t^{2}\sim t^{4}/2\)，除以 \(t^{3}\) 得 \(t/2\)；积分 \(\int_{0}^{\sqrt{x}}t/2\,dt=(\sqrt{x})^{2}/4=x/4\)，阶数 1，与计算一致。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① \(\gamma\) 的被积 \(1-\cos t^{2}\sim t^{4}/2\)，是 \(t^{2}\) 的平方，除以 \(t^{3}\) 得 \(t/2\)；若误算 \(1-\cos t^{2}\sim t^{2}/2\)，会得到阶数 0 或 2，排序错误。</p>
-    <p>② \(\beta\) 的上限是 \(x^{2}\)，阶数 6，是三者中最高的；若忽略上限幂次会误排。</p>
-    <p>③ 排序方向搞反。题目要求「后面是前面的高阶」，即阶数递增；若排成递减就会选成 (A)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>排序题反复出现，解法固定。关键是把每个分式约成幂函数，再乘上限幂次。常见陷阱：被积函数化简时 \(1-\cos t^{k}\) 的幂次是 \(2k\)，容易误算成 \(k\)。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 将 \(\alpha=\int_{0}^{x}\dfrac{\sin t^{2}}{t}\,dt\)、\(\beta=\int_{0}^{x^{2}}\dfrac{\ln(1+t^{3})}{t}\,dt\) 按阶数从低到高排列。</p>
-    <p class="var-ans">答案：\(\alpha,\beta\)。\(\alpha\) 阶数 2，\(\beta\) 阶数 6。</p>
-  </div>
-</article>
-
-<article class="q" id="q429">
-  <div class="q-head">
-    <span class="qno">第 429 题</span>
-    <span class="qtype">高阶被积函数变上限积分</span>
-    <span class="qsrc">P680</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)=\displaystyle\int_{0}^{x^{4}}\dfrac{e^{t^{4}}-1}{t}\,dt\)，则当 \(x\to0\) 时，\(f(x)\) 的等价无穷小是（）</p>
-    <div class="opts">
-      <p>(A) \(x^{16}\)</p>
-      <p>(B) \(\dfrac{x^{16}}{2}\)</p>
-      <p>(C) \(x^{20}\)</p>
-      <p>(D) \(\dfrac{x^{16}}{4}\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：D</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：高次幂被积函数的变上限积分，考的是幂次运算不出错。解法分两步：先把被积函数换成幂函数主部，再做幂函数积分。</p>
-    <p>第一步，等价无穷小替换。当 \(t\to0\) 时，由 \(e^{u}-1\sim u\)（\(u\to0\)），令 \(u=t^{4}\)，得 \(e^{t^{4}}-1\sim t^{4}\)。代入被积函数：</p>
-    \[ \frac{e^{t^{4}}-1}{t}\sim\frac{t^{4}}{t}=t^{3}. \]
-    <p>被积主部为 \(t^{3}\)（\(k=3\)）。</p>
-    <p>第二步，做幂函数积分：</p>
-    \[ f(x)\sim\int_{0}^{x^{4}}t^{3}\,dt=\left[\frac{t^{4}}{4}\right]_{0}^{x^{4}}=\frac{(x^{4})^{4}}{4}=\frac{x^{16}}{4}. \]
-    <p>这里指数运算 \((x^{4})^{4}=x^{4\times4}=x^{16}\)，不是 \(x^{4+4}=x^{8}\)，也不是 \(x^{4\times3}=x^{12}\)。积分 \(\int t^{3}dt=t^{4}/4\) 给出分母 4，这就是选项 (D) 中的系数 \(1/4\)。</p>
-    <p>交叉验证：由变上限积分求导，\(f'(x)=(e^{(x^{4})^{4}}-1)/(x^{4})\cdot4x^{3}\sim(x^{16}/x^{4})\cdot4x^{3}=4x^{15}\)，积分回去 \(f(x)\sim4x^{16}/16=x^{16}/4\)，结果一致。</p>
-    <p>选 (D)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 指数运算错误。\((x^{4})^{4}=x^{16}\)，不是 \(x^{8}\)（误把乘方当加法）。选项 (C) \(x^{20}\) 是多乘一次的干扰项。</p>
-    <p>② 漏掉积分系数 \(1/4\)。\(\int t^{3}dt=t^{4}/4\)，分母 4 来自 \(k+1=4\)；只选 \(x^{16}\)（选项 A）就丢了系数。选项 (B) \(x^{16}/2\) 是漏算一半的干扰项。</p>
-    <p>③ 把 \(e^{t^{4}}-1\) 错当 \(e^{t}-1\sim t\)，约分得 1，会误判阶数为 4。题目中指数是 \(t^{4}\) 不是 \(t\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>高次幂变上限积分是阶数题的「计算量加大版」，在选择题中反复出现（本题与 Q439、Q449 完全相同）。核心是两个幂次运算：被积函数化简后 \(t^{k}\) 积分成 \(t^{k+1}/(k+1)\)，再代入上限 \(x^{p}\) 得到 \(x^{p(k+1)}/(k+1)\)。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(x)=\int_{0}^{x^{2}}\dfrac{e^{t^{4}}-1}{t}\,dt\)，求等价无穷小。</p>
-    <p class="var-ans">答案：\(x^{8}/4\)。被积 \(\sim t^{3}\)，积分 \(t^{4}/4\)，代入上限 \(x^{2}\) 得 \((x^{2})^{4}/4=x^{8}/4\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q430">
-  <div class="q-head">
-    <span class="qno">第 430 题</span>
-    <span class="qtype">最低阶无穷小判断</span>
-    <span class="qsrc">P680</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0\) 时，下列无穷小量中最低阶的是（）</p>
-    <div class="opts">
-      <p>(A) \(\displaystyle\int_{0}^{x}\frac{\arcsin t^{2}}{t}\,dt\)</p>
-      <p>(B) \(\displaystyle\int_{0}^{x^{2}}\frac{\tan t^{3}}{t^{2}}\,dt\)</p>
-      <p>(C) \(\displaystyle\int_{0}^{\sqrt{x}}\frac{\ln(1+t^{5})}{t}\,dt\)</p>
-      <p>(D) \(\displaystyle\int_{0}^{x}\frac{1-\cos t^{3}}{t^{4}}\,dt\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：A</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：四个变上限积分找最低阶。</p>
-    <p>(A) \(\arcsin t^{2}/t\sim t^{2}/t=t\)（\(k=1\)），上限 \(x\)，阶数 \(2\)。</p>
-    <p>(B) \(\tan t^{3}/t^{2}\sim t^{3}/t^{2}=t\)（\(k=1\)），上限 \(x^{2}\)，阶数 \((1+1)\times2=4\)。</p>
-    <p>(C) \(\ln(1+t^{5})/t\sim t^{5}/t=t^{4}\)（\(k=4\)），上限 \(\sqrt{x}=x^{1/2}\)，阶数 \((4+1)\times\dfrac12=5/2\)。</p>
-    <p>(D) \((1-\cos t^{3})/t^{4}\sim(t^{6}/2)/t^{4}=t^{2}/2\)（\(k=2\)），上限 \(x\)，阶数 \(3\)。</p>
-    <p>阶数：2、4、5/2、3。最低阶为 (A)，阶数 2。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① (D) 中 \(1-\cos t^{3}\sim t^{6}/2\)，除以 \(t^{4}\) 得 \(t^{2}/2\)，阶数 3；若误算 \(1-\cos t^{3}\sim t^{3}/2\) 会错。</p>
-    <p>② (C) 上限 \(\sqrt{x}\)，阶数乘 1/2。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>最低阶与最高阶对称，解题方法相同。考试常把被积函数化简后阶数接近的选项放在一起，需要精确计算。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 当 \(x\to0\) 时，\(\int_{0}^{x}\dfrac{\arcsin t^{2}}{t}\,dt\) 的等价无穷小是什么？</p>
-    <p class="var-ans">答案：\(x^{2}/2\)。被积 \(\sim t\)，积分 \(t^{2}/2\)，代入上限 \(x\) 得 \(x^{2}/2\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q431">
-  <div class="q-head">
-    <span class="qno">第 431 题</span>
-    <span class="qtype">最高阶变上限积分判断</span>
-    <span class="qsrc">P681</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0^{+}\) 时，下列无穷小量中最高阶的是（）</p>
-    <div class="opts">
-      <p>(A) \(\displaystyle\int_{0}^{x}\frac{\sin t^{3}}{t^{2}}\,dt\)</p>
-      <p>(B) \(\displaystyle\int_{0}^{x^{2}}\frac{\ln(1+t^{4})}{t^{3}}\,dt\)</p>
-      <p>(C) \(\displaystyle\int_{0}^{\sqrt{x}}\frac{\arctan t^{3}}{t}\,dt\)</p>
-      <p>(D) \(\displaystyle\int_{0}^{x^{3}}\frac{1-\cos t^{2}}{t^{4}}\,dt\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：四个分式被积函数变上限积分估阶。</p>
-    <p>(A) \(\sin t^{3}/t^{2}\sim t^{3}/t^{2}=t\)（\(k=1\)），上限 \(x\)，阶数 \(2\)。</p>
-    <p>(B) \(\ln(1+t^{4})/t^{3}\sim t^{4}/t^{3}=t\)（\(k=1\)），上限 \(x^{2}\)，阶数 \((1+1)\times2=4\)。</p>
-    <p>(C) \(\arctan t^{3}/t\sim t^{3}/t=t^{2}\)（\(k=2\)），上限 \(\sqrt{x}=x^{1/2}\)，阶数 \((2+1)\times\dfrac12=3/2\)。</p>
-    <p>(D) \((1-\cos t^{2})/t^{4}\sim(t^{4}/2)/t^{4}=1/2\)（\(k=0\)），上限 \(x^{3}\)，阶数 \(3\)。</p>
-    <p>阶数：2、4、3/2、3。最高阶为 (B)，阶数 4。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① (D) 中 \(1-\cos t^{2}\sim t^{4}/2\)，除以 \(t^{4}\) 得常数 1/2，被积不趋于零，积分主部为 \(x^{3}/2\)，阶数 3。</p>
-    <p>② (B) 被积化简后是 \(t\)，上限 \(x^{2}\)，阶数 4，是最高的。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>反复考察被积函数化简与上限幂次的组合，要求幂次运算准确。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 当 \(x\to0\) 时，\(\int_{0}^{x^{2}}\dfrac{\ln(1+t^{4})}{t^{3}}\,dt\) 的等价无穷小是什么？</p>
-    <p class="var-ans">答案：\(x^{4}/2\)。被积 \(\sim t\)，积分 \(t^{2}/2\)，代入上限 \(x^{2}\) 得 \((x^{2})^{2}/2=x^{4}/2\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q432">
-  <div class="q-head">
-    <span class="qno">第 432 题</span>
-    <span class="qtype">ln(1+sin x²) 展开定阶</span>
-    <span class="qsrc">P681</span>
-  </div>
-  <div class="stem">
-    <p>设 \(x\to0\) 时，\(\ln(1+\sin x^{2})-\sin x^{2}+\dfrac{x^{4}}{2}\) 与 \(x^{n}\) 是同阶无穷小，则 \(n\) 为（）</p>
-    <div class="opts">
-      <p>(A) \(4\)</p>
-      <p>(B) \(6\)</p>
-      <p>(C) \(8\)</p>
-      <p>(D) \(10\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：复合函数展开，令 \(u=\sin x^{2}\)，则 \(\ln(1+u)-u+u^{2}/2\) 是标准余项。</p>
-    <p>第一步，展开 \(\ln(1+u)=u-u^{2}/2+u^{3}/3+o(u^{3})\)。</p>
-    <p>第二步，代入：</p>
-    \[ \ln(1+u)-u+\frac{u^{2}}{2}=\frac{u^{3}}{3}+o(u^{3}). \]
-    <p>第三步，估计 \(u=\sin x^{2}\sim x^{2}\)，故 \(u^{3}\sim x^{6}\)。</p>
-    \[ \ln(1+\sin x^{2})-\sin x^{2}+\frac{(\sin x^{2})^{2}}{2}=\frac{(\sin x^{2})^{3}}{3}+o(x^{6}). \]
-    <p>题目中 \(x^{4}/2\) 与 \((\sin x^{2})^{2}/2\sim x^{4}/2\) 一致（因为 \(\sin x^{2}\sim x^{2}\)，其平方主部就是 \(x^{4}\)）。</p>
-    <p>因此整个表达式主部为 \(x^{6}/3\)，阶数 6，\(n=6\)，选 (B)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 误以为 \(u=\sin x^{2}\sim x^{2}\)，直接得 \(u^{3}\sim x^{6}\) 就够；实际上需要确认 \(u^{2}\) 项与题目给的 \(x^{4}/2\) 匹配。</p>
-    <p>② 记混 \(\ln(1+u)\) 的展开系数：\(u^{3}/3\) 不是 \(u^{3}/6\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「\(\ln(1+u)-u+u^{2}/2\)」是 \(\ln(1+u)\) 的二阶余项，阶数为 3 次 \(u\)。本题把 \(u\) 换成 \(\sin x^{2}\sim x^{2}\)，阶数变为 \(3\times2=6\)。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x\to0\) 时，\(\ln(1+x)-x+x^{2}/2\) 与 \(x^{n}\) 同阶，求 \(n\)。</p>
-    <p class="var-ans">答案：\(n=3\)。主部为 \(x^{3}/3\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q433">
-  <div class="q-head">
-    <span class="qno">第 433 题</span>
-    <span class="qtype">变上限积分等价无穷小</span>
-    <span class="qsrc">P682</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)=\displaystyle\int_{0}^{x^{2}}\dfrac{\tan t^{2}}{t}\,dt\)，则当 \(x\to0\) 时，\(f(x)\) 的等价无穷小是（）</p>
-    <div class="opts">
-      <p>(A) \(x^{4}\)</p>
-      <p>(B) \(\dfrac{x^{4}}{2}\)</p>
-      <p>(C) \(x^{6}\)</p>
-      <p>(D) \(\dfrac{x^{6}}{3}\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：变上限积分求等价无穷小，被积函数是分式 \(\tan t^{2}/t\)。解法分两步：先把被积函数在零点用等价无穷小换成幂函数主部，再做幂函数积分。</p>
-    <p>第一步，等价无穷小替换。当 \(t\to0\) 时，由 \(\tan u\sim u\)（\(u\to0\)），令 \(u=t^{2}\)，得 \(\tan t^{2}\sim t^{2}\)。代入被积函数：</p>
-    \[ \frac{\tan t^{2}}{t}\sim\frac{t^{2}}{t}=t. \]
-    <p>这里替换的依据是：积分区间 \([0,x^{2}]\) 在 \(x\to0\) 时整体趋于零，被积函数在区间内每一点都满足 \(\tan t^{2}/t\sim t\)，因此等价替换后积分主部不变。</p>
-    <p>第二步，做幂函数积分。被积主部是 \(t\)，即 \(k=1\)，积分得 \(t^{2}/2\)，再代入上限 \(x^{2}\)：</p>
-    \[ f(x)\sim\int_{0}^{x^{2}}t\,dt=\left[\frac{t^{2}}{2}\right]_{0}^{x^{2}}=\frac{(x^{2})^{2}}{2}=\frac{x^{4}}{2}. \]
-    <p>交叉验证：也可对上限求导，由变上限积分求导公式 \(f'(x)=\dfrac{\tan(x^{2})^{2}}{x^{2}}\cdot2x=\dfrac{\tan x^{4}}{x^{2}}\cdot2x\sim\dfrac{x^{4}}{x^{2}}\cdot2x=2x^{3}\)，积分回去 \(f(x)\sim x^{4}/2\)，结果一致。</p>
-    <p>选 (B)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 被积函数化简错误。把 \(\tan t^{2}\) 错当 \(\tan t\sim t\)，约分得 \(t/t=1\)，会误判阶数为 2（结果 \(x^{2}\)，不在选项中）。题目中是 \(\tan t^{2}\) 不是 \(\tan t\)。</p>
-    <p>② 漏掉积分系数 \(1/2\)。\(\int t\,dt=t^{2}/2\)，分母 2 来自 \(k+1=2\)；只选 \(x^{4}\)（选项 A）就丢了系数。选项 A 正是为这个错误构造的干扰项。</p>
-    <p>③ 指数运算 \((x^{2})^{2}=x^{4}\)，不是 \(x^{3}\) 或 \(x^{2+2}=x^{4}\) 算错。选项 C（\(x^{6}\)）是把上限 \(x^{2}\) 再乘 3 的误算。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>这是变上限积分等价无穷小的标准题型，与 Q419、Q423、Q443 同型。被积函数常考 \(\sin t^{k}/t^{m}\)、\(\tan t^{k}/t^{m}\)、\(\ln(1+t^{k})/t^{m}\)，套路固定：化简为 \(t^{k-m}\)，积分后乘上限幂次。考试时若能记住「被积 \(\sim t\)，上限 \(x^{p}\)，结果 \(x^{2p}/2\)」这一结论，可直接选出答案。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(x)=\int_{0}^{x^{3}}\dfrac{\tan t^{2}}{t}\,dt\)，求等价无穷小。</p>
-    <p class="var-ans">答案：\(x^{6}/2\)。被积 \(\sim t\)，积分 \(t^{2}/2\)，代入上限 \(x^{3}\) 得 \((x^{3})^{2}/2=x^{6}/2\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q434">
-  <div class="q-head">
-    <span class="qno">第 434 题</span>
-    <span class="qtype">根式差含三角定阶</span>
-    <span class="qsrc">P682</span>
-  </div>
-  <div class="stem">
-    <p>设当 \(x\to0\) 时，\(\sqrt{1+\tan x}-\sqrt{1+\sin x}\) 与 \(x^{n}\) 是同阶无穷小，则 \(n\) 为（）</p>
-    <div class="opts">
-      <p>(A) \(1\)</p>
-      <p>(B) \(2\)</p>
-      <p>(C) \(3\)</p>
-      <p>(D) \(4\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：C</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：两个根式相减，根式内是三角函数 \(1+\tan x\) 与 \(1+\sin x\)。标准做法是有理化（分子同乘共轭根式），把差转化为分式。</p>
-    <p>第一步，有理化：</p>
-    \[ \sqrt{1+\tan x}-\sqrt{1+\sin x}=\frac{(1+\tan x)-(1+\sin x)}{\sqrt{1+\tan x}+\sqrt{1+\sin x}}=\frac{\tan x-\sin x}{\sqrt{1+\tan x}+\sqrt{1+\sin x}}. \]
-    <p>第二步，估计分子 \(\tan x-\sin x\)。提取公因子：</p>
-    \[ \tan x-\sin x=\frac{\sin x}{\cos x}-\sin x=\sin x\left(\frac{1}{\cos x}-1\right)=\frac{\sin x(1-\cos x)}{\cos x}. \]
-    <p>由等价无穷小 \(\sin x\sim x\)、\(1-\cos x\sim x^{2}/2\)、\(\cos x\to1\)，得</p>
-    \[ \tan x-\sin x\sim x\cdot\frac{x^{2}/2}{1}=\frac{x^{3}}{2}. \]
-    <p>这里关键是 \(\tan x\) 与 \(\sin x\) 的一次项都是 \(x\)，相减后一次项抵消，第一个非零项是 \(x^{3}\)，所以分子阶数为 3 而不是 2。</p>
-    <p>第三步，估计分母。\(x\to0\) 时 \(\tan x\to0\)、\(\sin x\to0\)，故分母 \(\sqrt{1+\tan x}+\sqrt{1+\sin x}\to\sqrt{1}+\sqrt{1}=2\)，是非零常数。</p>
-    <p>第四步，合并：</p>
-    \[ \sqrt{1+\tan x}-\sqrt{1+\sin x}\sim\frac{x^{3}/2}{2}=\frac{x^{3}}{4}. \]
-    <p>交叉验证：用泰勒展开直接算。\(\tan x=x+x^{3}/3+o(x^{3})\)、\(\sin x=x-x^{3}/6+o(x^{3})\)，根式 \(\sqrt{1+u}=1+u/2-u^{2}/8+o(u^{2})\)，代入后一次项抵消，\(x^{3}\) 系数为 \(1/2\cdot(1/3+1/6)=1/4\)，与 \(x^{3}/4\) 一致。</p>
-    <p>阶数为 3，\(n=3\)，选 (C)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 误以为 \(\tan x\sim\sin x\sim x\)，根式差为 0。等价替换不能在减法中分别使用——两个函数的一次主部相同，相减后抵消，必须看高阶项。</p>
-    <p>② 分子阶数误判为 2。\(\tan x-\sin x\) 的一次项 \(x\) 抵消，主部是 \(x^{3}/2\)；若只看到 \(x\) 就以为阶数 1，会误选 (A)。</p>
-    <p>③ 分母漏算系数。有理化后分母是两个根式之和，趋于 2；若误写成分母趋于 1，会得到 \(x^{3}/2\)，阶数仍为 3 但系数错。选项中没有系数区分，但考向中可能出现。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「根式差 + 三角函数」组合题是阶数判断的高频题型，通法是有理化后分别估计分子分母。分子常利用 \(\tan x-\sin x\sim x^{3}/2\) 这一经典结论。真题变式包括 \(\sqrt{1+\sin x}-\sqrt{1+\tan x}\)（差一个负号）、\(\sqrt[3]{1+\tan x}-\sqrt[3]{1+\sin x}\)（阶数仍为 3）等。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x\to0\) 时，\(\sqrt{1+\tan x}-\sqrt{1+\sin x}\) 的主部是什么？</p>
-    <p class="var-ans">答案：\(x^{3}/4\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q435">
-  <div class="q-head">
-    <span class="qno">第 435 题</span>
-    <span class="qtype">更高阶无穷小判断</span>
-    <span class="qsrc">P682</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0\) 时，下列四个无穷小量中，哪一个是比其他三个更高阶的无穷小量（）</p>
-    <div class="opts">
-      <p>(A) \(\displaystyle\int_{0}^{x}\frac{\arcsin t^{3}}{t^{2}}\,dt\)</p>
-      <p>(B) \(\displaystyle\int_{0}^{x^{2}}\frac{\ln(1+t^{6})}{t^{4}}\,dt\)</p>
-      <p>(C) \(\displaystyle\int_{0}^{\sqrt{x}}\frac{1-\cos t^{4}}{t^{3}}\,dt\)</p>
-      <p>(D) \(\displaystyle\int_{0}^{x}\frac{e^{-t^{3}}-1}{t^{2}}\,dt\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：四个分式被积函数变上限积分估阶。</p>
-    <p>(A) \(\arcsin t^{3}/t^{2}\sim t^{3}/t^{2}=t\)（\(k=1\)），上限 \(x\)，阶数 \(2\)。</p>
-    <p>(B) \(\ln(1+t^{6})/t^{4}\sim t^{6}/t^{4}=t^{2}\)（\(k=2\)），上限 \(x^{2}\)，阶数 \((2+1)\times2=6\)。</p>
-    <p>(C) \((1-\cos t^{4})/t^{3}\sim(t^{8}/2)/t^{3}=t^{5}/2\)（\(k=5\)），上限 \(\sqrt{x}=x^{1/2}\)，阶数 \((5+1)\times\dfrac12=3\)。</p>
-    <p>(D) \((e^{-t^{3}}-1)/t^{2}\sim(-t^{3})/t^{2}=-t\)（\(k=1\)），上限 \(x\)，阶数 \(2\)。</p>
-    <p>阶数：2、6、3、2。最高阶为 (B)，阶数 6。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① (C) 中 \(1-\cos t^{4}\sim t^{8}/2\)，是 \(t^{4}\) 的平方，除以 \(t^{3}\) 得 \(t^{5}/2\)；若误算 \(t^{4}/2\) 会错。</p>
-    <p>② (B) 上限 \(x^{2}\)，阶数 6，最高。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>高次幂分式被积函数，考幂次运算。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 当 \(x\to0\) 时，\(\int_{0}^{x^{2}}\dfrac{\ln(1+t^{6})}{t^{4}}\,dt\) 的等价无穷小是什么？</p>
-    <p class="var-ans">答案：\(x^{6}/3\)。被积 \(\sim t^{2}\)，积分 \(t^{3}/3\)，代入上限 \(x^{2}\) 得 \((x^{2})^{3}/3=x^{6}/3\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q436">
-  <div class="q-head">
-    <span class="qno">第 436 题</span>
-    <span class="qtype">积分与 x^2 比较阶</span>
-    <span class="qsrc">P683</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)=\displaystyle\int_{0}^{x}\dfrac{\sin t^{4}}{t^{3}}\,dt\)，则当 \(x\to0\) 时，\(f(x)\) 是 \(x^{2}\) 的（）</p>
-    <div class="opts">
-      <p>(A) 低阶无穷小</p>
-      <p>(B) 高阶无穷小</p>
-      <p>(C) 等价无穷小</p>
-      <p>(D) 同阶但不等价的无穷小</p>
-    </div>
-  </div>
-  <div class="answer">答案：D</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：变上限积分与指定幂函数 \(x^{2}\) 比较阶数。判断标准是求 \(\lim f(x)/x^{2}\)，根据结果分类：0 为高阶，\(\infty\) 为低阶，1 为等价，非零常数为同阶不等价。</p>
-    <p>第一步，化简被积函数。当 \(t\to0\) 时，由 \(\sin u\sim u\)（\(u\to0\)），令 \(u=t^{4}\)，得 \(\sin t^{4}\sim t^{4}\)。代入被积函数：</p>
-    \[ \frac{\sin t^{4}}{t^{3}}\sim\frac{t^{4}}{t^{3}}=t. \]
-    <p>被积主部为 \(t\)，即 \(k=1\) 型。</p>
-    <p>第二步，做幂函数积分：</p>
-    \[ f(x)\sim\int_{0}^{x}t\,dt=\frac{x^{2}}{2}. \]
-    <p>第三步，与 \(x^{2}\) 比较：</p>
-    \[ \frac{f(x)}{x^{2}}\sim\frac{1}{2}. \]
-    <p>比值为非零常数 \(1/2\)，既不是 0、\(\infty\)，也不是 1，故是<b>同阶但不等价</b>的无穷小，选 (D)。</p>
-    <p>交叉验证：用洛必达法则。\(\lim_{x\to0}f(x)/x^{2}\) 是 0/0 型，由变上限积分求导，分子导数为 \(\sin x^{4}/x^{3}\sim x^{4}/x^{3}=x\)，分母导数为 \(2x\)，比值为 \(x/(2x)=1/2\)，结果一致。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 把比值 1/2 误判为「等价」。等价要求比值为 1，1/2 只是同阶。选项 (C) 等价无穷小正是为这个错误构造的干扰项。</p>
-    <p>② 被积函数化简错误。\(\sin t^{4}\sim t^{4}\)，除以 \(t^{3}\) 得 \(t\)；若误算成 \(t^{4}/t^{3}=t^{4}\) 或 \(t\) 以外的幂次，会导致阶数判断错误。选项 (B) 高阶无穷小对应误判阶数高于 2。</p>
-    <p>③ 方向搞反。若误以为 \(f\sim x^{2}/2\) 是比 \(x^{2}\) 高阶，会选 (B)。实际上阶数都是 2，只是系数不同。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「积分是 \(x^{k}\) 的什么」是选择题的固定四选一题，与 Q426、Q446 同型。命题人常设系数为 \(1/2\)、\(1/3\) 等，目的就是区分「同阶」与「等价」。掌握判断流程：求主部 → 算比值 → 按比值分类。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(x)=\int_{0}^{x}\dfrac{\sin t^{4}}{t^{3}}\,dt\)，问 \(f(x)\) 与 \(x^{2}/2\) 是否等价？</p>
-    <p class="var-ans">答案：是。\(f(x)\sim x^{2}/2\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q437">
-  <div class="q-head">
-    <span class="qno">第 437 题</span>
-    <span class="qtype">cos x 泰勒余项定阶</span>
-    <span class="qsrc">P683</span>
-  </div>
-  <div class="stem">
-    <p>设当 \(x\to0\) 时，\(\cos x-1+\dfrac{x^{2}}{2}-\dfrac{x^{4}}{24}\) 与 \(x^{n}\) 是同阶无穷小，则 \(n\) 为（）</p>
-    <div class="opts">
-      <p>(A) \(4\)</p>
-      <p>(B) \(6\)</p>
-      <p>(C) \(8\)</p>
-      <p>(D) \(10\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：\(\cos x\) 的泰勒展开余项定阶。题目已经把 \(1\)、\(-x^{2}/2\)、\(+x^{4}/24\) 这三项都加进去了，正好消去 \(\cos x\) 展开中的常数项、二次项和四次项，剩下的第一个非零项就是答案。</p>
-    <p>写出 \(\cos x\) 在 \(x=0\) 处的泰勒展开（写到 \(x^{8}\) 以确保覆盖）：</p>
-    \[ \cos x=1-\frac{x^{2}}{2!}+\frac{x^{4}}{4!}-\frac{x^{6}}{6!}+\frac{x^{8}}{8!}+o(x^{8})=1-\frac{x^{2}}{2}+\frac{x^{4}}{24}-\frac{x^{6}}{720}+\frac{x^{8}}{40320}+o(x^{8}). \]
-    <p>代入表达式：</p>
-    \[ \cos x-1+\frac{x^{2}}{2}-\frac{x^{4}}{24}=\left(1-\frac{x^{2}}{2}+\frac{x^{4}}{24}-\frac{x^{6}}{720}+\cdots\right)-1+\frac{x^{2}}{2}-\frac{x^{4}}{24}=-\frac{x^{6}}{720}+o(x^{6}). \]
-    <p>常数项 \(1-1=0\)，二次项 \(-x^{2}/2+x^{2}/2=0\)，四次项 \(x^{4}/24-x^{4}/24=0\)，剩下第一个非零项是 \(-x^{6}/720\)。</p>
-    <p>交叉验证：用洛必达法则。设 \(g(x)=\cos x-1+x^{2}/2-x^{4}/24\)，连续求导六次：\(g'(x)=-\sin x+x-x^{3}/6\)，\(g''(x)=-\cos x+1-x^{2}/2\)，\(g'''(x)=\sin x-x\)，\(g^{(4)}(x)=\cos x-1\)，\(g^{(5)}(x)=-\sin x\)，\(g^{(6)}(x)=-\cos x\to-1\)。由泰勒公式 \(g(x)\sim g^{(6)}(0)x^{6}/6!=-x^{6}/720\)，结果一致。</p>
-    <p>阶数为 6，\(n=6\)，选 (B)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 展开阶数不够。若只写到 \(x^{4}\)，会得到恒等于 0，无法定阶。必须写到 \(x^{6}\) 才能看到非零项。选项 (A) 4 是只写到 \(x^{4}\) 就误以为余项在 \(x^{4}\) 的错误。</p>
-    <p>② 记混 \(\cos x\) 的系数。\(x^{6}\) 项是 \(-1/720\)，\(6!=720\)；若误记成 \(-1/720\) 以外的数，阶数仍为 6 但系数错。选项 (C) 8 是多写一阶的误判。</p>
-    <p>③ 符号错误。\(\cos x\) 的展开是交错级数，\(x^{6}\) 项带负号；题目中是 \(-x^{4}/24\)，与 \(\cos x\) 中的 \(+x^{4}/24\) 抵消，不要把符号搞反。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 Q427 对称：Q427 是 \(\sin x\) 的余项（消去 \(x\) 和 \(x^{3}/6\) 后剩 \(x^{5}/120\)），本题是 \(\cos x\) 的余项（消去 \(1\)、\(x^{2}/2\)、\(x^{4}/24\) 后剩 \(-x^{6}/720\)）。考的是基本函数泰勒展开到高阶的记忆，以及「消去低阶项后第一个非零项即为主部」这一思想。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x\to0\) 时，\(\cos x-1+x^{2}/2-x^{4}/24+x^{6}/720\) 与 \(x^{n}\) 同阶，求 \(n\)。</p>
-    <p class="var-ans">答案：\(n=8\)。主部为 \(x^{8}/40320\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q438">
-  <div class="q-head">
-    <span class="qno">第 438 题</span>
-    <span class="qtype">三个变上限积分排序</span>
-    <span class="qsrc">P683</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0^{+}\) 时，将无穷小量 \(\alpha=\displaystyle\int_{0}^{x}\dfrac{\tan t^{2}}{t}\,dt,\ \beta=\displaystyle\int_{0}^{x^{2}}\dfrac{\arcsin t^{3}}{t^{2}}\,dt,\ \gamma=\displaystyle\int_{0}^{\sqrt{x}}\dfrac{\ln(1+t^{4})}{t^{2}}\,dt\) 排列起来，使排在后面的是前一个的高阶无穷小，则正确的排列次序是（）</p>
-    <div class="opts">
-      <p>(A) \(\alpha,\beta,\gamma\)</p>
-      <p>(B) \(\alpha,\gamma,\beta\)</p>
-      <p>(C) \(\beta,\alpha,\gamma\)</p>
-      <p>(D) \(\gamma,\alpha,\beta\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：D</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：三个分式被积函数变上限积分排序。要求「排在后面的是前一个的高阶」，即列表顺序必须是阶数递增。</p>
-    <p>\(\alpha\)：\(\tan t^{2}/t\sim t^{2}/t=t\)（\(k=1\)），上限 \(x\)，阶数 \(1+1=2\)。</p>
-    <p>\(\beta\)：\(\arcsin t^{3}/t^{2}\sim t^{3}/t^{2}=t\)（\(k=1\)），上限 \(x^{2}\)，阶数 \((1+1)\times2=4\)。</p>
-    <p>\(\gamma\)：\(\ln(1+t^{4})/t^{2}\sim t^{4}/t^{2}=t^{2}\)（\(k=2\)），上限 \(\sqrt{x}=x^{1/2}\)，阶数 \((2+1)\times\dfrac12=3/2\)。</p>
-    <p>阶数：\(\gamma=3/2\)，\(\alpha=2\)，\(\beta=4\)。从低到高为 \(\gamma,\alpha,\beta\)，选 (D)。</p>
-    <p>交叉验证：\(\gamma\) 的被积 \(\ln(1+t^{4})/t^{2}\sim t^{4}/t^{2}=t^{2}\)，积分 \(\int_{0}^{\sqrt{x}}t^{2}\,dt=(\sqrt{x})^{3}/3=x^{3/2}/3\)，阶数 3/2，与计算一致。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① \(\gamma\) 被积化简为 \(t^{2}\)，上限 \(\sqrt{x}\)，阶数 3/2，是三者中最低的；若忽略上限的 1/2 次幂，会误判阶数为 3。</p>
-    <p>② \(\beta\) 被积化简为 \(t\)，上限 \(x^{2}\)，阶数 4，最高；若忽略上限乘 2，会误判阶数为 2。</p>
-    <p>③ 排序方向搞反。题目要求「后面是前面的高阶」，即阶数递增；若排成递减就会选成 (A)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>标准排序题，与 Q407、Q418、Q428 同型。关键是把每个分式约成幂函数，再乘上限幂次。考试常设的陷阱是上限为分数次幂（\(\sqrt{x}\)），容易忘记乘 1/2。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 将 \(\alpha=\int_{0}^{x}\dfrac{\tan t^{2}}{t}\,dt\)、\(\beta=\int_{0}^{x^{2}}\dfrac{\arcsin t^{3}}{t^{2}}\,dt\) 按阶数从低到高排列。</p>
-    <p class="var-ans">答案：\(\alpha,\beta\)。\(\alpha\) 阶数 2，\(\beta\) 阶数 4。</p>
-  </div>
-</article>
-
-<article class="q" id="q439">
-  <div class="q-head">
-    <span class="qno">第 439 题</span>
-    <span class="qtype">高阶被积函数变上限积分</span>
-    <span class="qsrc">P684</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)=\displaystyle\int_{0}^{x^{4}}\dfrac{e^{t^{4}}-1}{t}\,dt\)，则当 \(x\to0\) 时，\(f(x)\) 的等价无穷小是（）</p>
-    <div class="opts">
-      <p>(A) \(x^{16}\)</p>
-      <p>(B) \(\dfrac{x^{16}}{2}\)</p>
-      <p>(C) \(x^{20}\)</p>
-      <p>(D) \(\dfrac{x^{16}}{4}\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：D</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：高次幂被积函数的变上限积分，属于本批反复训练的同型题。解法分两步：先把被积函数在零点换成幂函数主部，再做幂函数积分。</p>
-    <p>第一步，等价无穷小替换。当 \(t\to0\) 时，由 \(e^{u}-1\sim u\)（\(u\to0\)），令 \(u=t^{4}\)，得 \(e^{t^{4}}-1\sim t^{4}\)。代入被积函数：</p>
-    \[ \frac{e^{t^{4}}-1}{t}\sim\frac{t^{4}}{t}=t^{3}. \]
-    <p>这一步的依据是：被积函数在积分区间 \([0,x^{4}]\) 内，\(t\) 从 0 到 \(x^{4}\)，当 \(x\to0\) 时整个区间都趋于零，等价替换合法。</p>
-    <p>第二步，做幂函数积分：</p>
-    \[ f(x)\sim\int_{0}^{x^{4}}t^{3}\,dt=\left[\frac{t^{4}}{4}\right]_{0}^{x^{4}}=\frac{(x^{4})^{4}}{4}=\frac{x^{16}}{4}. \]
-    <p>这里指数运算要小心：\((x^{4})^{4}=x^{4\times4}=x^{16}\)，不是 \(x^{4+4}=x^{8}\)，也不是 \(x^{4\times3}=x^{12}\)。积分 \(\int t^{3}dt=t^{4}/4\) 给出分母 4，这就是选项 (D) 中的系数 \(1/4\)。</p>
-    <p>选 (D)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 指数运算错误。\((x^{4})^{4}=x^{16}\)，不是 \(x^{8}\) 或 \(x^{12}\)。这是最常见的丢分点，因为幂的乘方容易误算成幂的加法。</p>
-    <p>② 漏掉积分系数 \(1/4\)。\(\int t^{3}dt=t^{4}/4\)，分母 4 来自 \(k+1=4\)；只选 \(x^{16}\)（选项 A）就丢了系数。</p>
-    <p>③ 把 \(e^{t^{4}}-1\) 错当 \(e^{t}-1\sim t\)，约分得 1，会误判阶数为 4。题目中指数是 \(t^{4}\) 不是 \(t\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>高次幂变上限积分是阶数题的「计算量加大版」，在选择题中反复出现（本题与 Q429、Q449 完全相同）。核心是两个幂次运算：被积函数化简后 \(t^{k}\) 积分成 \(t^{k+1}/(k+1)\)，再代入上限 \(x^{p}\) 得到 \(x^{p(k+1)}/(k+1)\)。考试常设的陷阱是上限幂次 \(p\) 与被积幂次 \(k\) 同时较大，需要准确相乘。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(x)=\int_{0}^{x^{4}}\dfrac{e^{t^{4}}-1}{t}\,dt\)，问 \(f(x)\) 与 \(x^{16}/4\) 是否等价？</p>
-    <p class="var-ans">答案：是。</p>
-  </div>
-</article>
-
-<article class="q" id="q440">
-  <div class="q-head">
-    <span class="qno">第 440 题</span>
-    <span class="qtype">最低阶无穷小判断</span>
-    <span class="qsrc">P684</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0\) 时，下列无穷小量中最低阶的是（）</p>
-    <div class="opts">
-      <p>(A) \(\displaystyle\int_{0}^{x}\frac{\arctan t^{4}}{t^{3}}\,dt\)</p>
-      <p>(B) \(\displaystyle\int_{0}^{x^{2}}\frac{\sin t^{5}}{t^{4}}\,dt\)</p>
-      <p>(C) \(\displaystyle\int_{0}^{\sqrt{x}}\frac{\ln(1+t^{6})}{t^{2}}\,dt\)</p>
-      <p>(D) \(\displaystyle\int_{0}^{x}\frac{1-\cos t^{4}}{t^{5}}\,dt\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：A</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：四个变上限积分找最低阶（幂次最小、趋于零最慢）。</p>
-    <p>(A) \(\arctan t^{4}/t^{3}\sim t^{4}/t^{3}=t\)（\(k=1\)），上限 \(x\)，阶数 \(1+1=2\)。</p>
-    <p>(B) \(\sin t^{5}/t^{4}\sim t^{5}/t^{4}=t\)（\(k=1\)），上限 \(x^{2}\)，阶数 \((1+1)\times2=4\)。</p>
-    <p>(C) \(\ln(1+t^{6})/t^{2}\sim t^{6}/t^{2}=t^{4}\)（\(k=4\)），上限 \(\sqrt{x}=x^{1/2}\)，阶数 \((4+1)\times\dfrac12=5/2\)。</p>
-    <p>(D) \((1-\cos t^{4})/t^{5}\sim(t^{8}/2)/t^{5}=t^{3}/2\)（\(k=3\)），上限 \(x\)，阶数 \(3+1=4\)。</p>
-    <p>阶数：2、4、5/2、4。最低阶为 (A)，阶数 2。</p>
-    <p>交叉验证：(D) 中 \(1-\cos t^{4}\sim t^{8}/2\)（由 \(1-\cos u\sim u^{2}/2\) 令 \(u=t^{4}\)），除以 \(t^{5}\) 得 \(t^{3}/2\)，积分 \(\int_{0}^{x}t^{3}/2\,dt=x^{4}/8\)，阶数 4，与计算一致。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① (D) 中 \(1-\cos t^{4}\sim t^{8}/2\)，是 \(t^{4}\) 的平方，除以 \(t^{5}\) 得 \(t^{3}/2\)；若误算 \(1-\cos t^{4}\sim t^{4}/2\)，会得到阶数 2，误判 (D) 为最低阶。</p>
-    <p>② (C) 上限 \(\sqrt{x}\)，阶数乘 1/2；若忽略会误判阶数为 5。</p>
-    <p>③ 方向搞反。题目问「最低阶」即幂次最小，不是最大。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>最低阶与最高阶对称，解题方法相同。考试常把被积函数化简后阶数接近的选项放在一起，需要精确计算。常见陷阱是 \(1-\cos t^{k}\) 的幂次为 \(2k\)。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 当 \(x\to0\) 时，\(\int_{0}^{x}\dfrac{\arctan t^{4}}{t^{3}}\,dt\) 的等价无穷小是什么？</p>
-    <p class="var-ans">答案：\(x^{2}/2\)。被积 \(\sim t\)，积分 \(t^{2}/2\)，代入上限 \(x\) 得 \(x^{2}/2\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q441">
-  <div class="q-head">
-    <span class="qno">第 441 题</span>
-    <span class="qtype">二重变上限积分估阶</span>
-    <span class="qsrc">P684</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0^{+}\) 时，下列无穷小量中最高阶的是（）</p>
-    <div class="opts">
-      <p>(A) \(\displaystyle\int_{0}^{x}\int_{0}^{u}\sin(t^{4})\,dt\,du\)</p>
-      <p>(B) \(\displaystyle\int_{0}^{x^{2}}\int_{0}^{v}\ln(1+t^{3})\,dt\,dv\)</p>
-      <p>(C) \(\displaystyle\int_{0}^{\sqrt{x}}\int_{0}^{w}\cos(t^{5})\,dt\,dw\)</p>
-      <p>(D) \(\displaystyle\int_{0}^{x}\int_{0}^{z}e^{-t^{2}}\,dt\,dz\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：二重变上限积分，先算内层积分主部，再算外层。</p>
-    <p>(A) 内层 \(\int_{0}^{u}\sin t^{4}\,dt\sim\int_{0}^{u}t^{4}\,dt=u^{5}/5\)；外层 \(\int_{0}^{x}u^{5}/5\,du=x^{6}/30\)。阶数 6。</p>
-    <p>(B) 内层 \(\int_{0}^{v}\ln(1+t^{3})\,dt\sim\int_{0}^{v}t^{3}\,dt=v^{4}/4\)；外层 \(\int_{0}^{x^{2}}v^{4}/4\,dv=(x^{2})^{5}/20=x^{10}/20\)。阶数 10。</p>
-    <p>(C) 内层 \(\int_{0}^{w}\cos t^{5}\,dt\sim\int_{0}^{w}1\,dt=w\)；外层 \(\int_{0}^{\sqrt{x}}w\,dw=(1/2)(\sqrt{x})^{2}=x/2\)。阶数 1。</p>
-    <p>(D) 内层 \(\int_{0}^{z}e^{-t^{2}}\,dt\sim\int_{0}^{z}1\,dt=z\)；外层 \(\int_{0}^{x}z\,dz=x^{2}/2\)。阶数 2。</p>
-    <p>阶数：6、10、1、2。最高阶为 (B)，阶数 10。</p>
-    <p>二重积分比一重多积一次，阶数在一重基础上再加 1。(B) 上限是 \(x^{2}\)，再乘内层幂次，阶数最高。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 只算一重就下结论。二重积分必须内层算完再外层。</p>
-    <p>② (C) 中 \(\cos t^{5}\to1\)，内层积分就是 \(w\)，外层上限 \(\sqrt{x}\)，阶数只有 1。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>二重变上限积分是阶数题的进阶版，解法是「内层等价替换 → 幂函数积分 → 外层再积分」。常见陷阱：内层被积函数趋于 1，导致阶数偏低。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 当 \(x\to0\) 时，\(\int_{0}^{x}\int_{0}^{u}\sin t^{4}\,dt\,du\) 的阶数是多少？</p>
-    <p class="var-ans">答案：阶数 6。内层 \(u^{5}/5\)，外层 \(x^{6}/30\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q442">
-  <div class="q-head">
-    <span class="qno">第 442 题</span>
-    <span class="qtype">三角差 1/sin x - 1/tan x</span>
-    <span class="qsrc">P685</span>
-  </div>
-  <div class="stem">
-    <p>设 \(x\to0\) 时，\(\dfrac{1}{\sin x}-\dfrac{1}{\tan x}\) 与 \(x^{n}\) 是同阶无穷小，则 \(n\) 为（）</p>
-    <div class="opts">
-      <p>(A) \(0\)</p>
-      <p>(B) \(1\)</p>
-      <p>(C) \(2\)</p>
-      <p>(D) \(3\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：两个三角分式相减，先通分化简为一个分式。这类题的关键是两个无穷大量的主部抵消后，剩下低阶项。</p>
-    <p>第一步，通分。由 \(1/\tan x=\cos x/\sin x\)，得</p>
-    \[ \frac{1}{\sin x}-\frac{1}{\tan x}=\frac{1}{\sin x}-\frac{\cos x}{\sin x}=\frac{1-\cos x}{\sin x}. \]
-    <p>第二步，等价无穷小。由 \(1-\cos x\sim x^{2}/2\)（\(x\to0\)）、\(\sin x\sim x\)，得</p>
-    \[ \frac{1-\cos x}{\sin x}\sim\frac{x^{2}/2}{x}=\frac{x}{2}. \]
-    <p>阶数为 1，\(n=1\)，选 (B)。</p>
-    <p>这里通分后分子 \(1-\cos x\) 是二阶，分母 \(\sin x\) 是一阶，相除后阶数 \(2-1=1\)。</p>
-    <p>交叉验证：用泰勒展开。\(1/\sin x=1/x+x/6+7x^{3}/360+\cdots\)，\(1/\tan x=\cot x=1/x-x/3-x^{3}/45-\cdots\)，相减得 \(x/6+x/3+\cdots=x/2+\cdots\)，主部为 \(x/2\)，与通分结果一致。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 误以为 \(1/\sin x\) 与 \(1/\tan x\) 都是无穷大量，差为无穷大。实际上它们在 \(x\to0\) 时都趋于无穷，差是无穷小（因为两者主部都是 \(1/x\)，主部抵消）。选项 (A) 0 是误判为常数的干扰项。</p>
-    <p>② 通分错误：\(1/\tan x=\cos x/\sin x\)，不是 \(1/(\sin x/\cos x)\) 算错。</p>
-    <p>③ 阶数误判。分子 \(1-\cos x\) 是二阶，分母 \(\sin x\) 是一阶，相除得一阶；若误以为分子分母都是一阶，会误判为等价（阶数 0）。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「两个无穷大相减」型极限，本质是主部抵消。常见组合：\(1/\sin x-1/\tan x\)、\(1/x-1/\sin x\)、\(1/x^{2}-1/\tan^{2}x\) 等。解法都是通分后用等价无穷小。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x\to0\) 时，\(1/x-1/\sin x\) 与 \(x^{n}\) 同阶，求 \(n\)。</p>
-    <p class="var-ans">答案：\(n=1\)。\(1/x-1/\sin x=(\sin x-x)/(x\sin x)\sim(-x^{3}/6)/x^{2}=-x/6\)，阶数为 1。</p>
-  </div>
-</article>
-
-<article class="q" id="q443">
-  <div class="q-head">
-    <span class="qno">第 443 题</span>
-    <span class="qtype">变上限积分等价无穷小</span>
-    <span class="qsrc">P685</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)=\displaystyle\int_{0}^{x^{3}}\dfrac{\tan t^{2}}{t}\,dt\)，则当 \(x\to0\) 时，\(f(x)\) 的等价无穷小是（）</p>
-    <div class="opts">
-      <p>(A) \(x^{6}\)</p>
-      <p>(B) \(\dfrac{x^{6}}{2}\)</p>
-      <p>(C) \(x^{8}\)</p>
-      <p>(D) \(\dfrac{x^{8}}{3}\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：变上限积分求等价无穷小，被积函数是分式 \(\tan t^{2}/t\)，先化简再积分。</p>
-    <p>第一步，等价无穷小替换。当 \(t\to0\) 时，由 \(\tan u\sim u\)（\(u\to0\)），令 \(u=t^{2}\)，得 \(\tan t^{2}\sim t^{2}\)。代入被积函数：</p>
-    \[ \frac{\tan t^{2}}{t}\sim\frac{t^{2}}{t}=t. \]
-    <p>这一步把分式化简成幂函数 \(t\)，即 \(k=1\) 型。</p>
-    <p>第二步，做幂函数积分。被积主部是 \(t\)，积分得 \(t^{2}/2\)，再代入上限 \(x^{3}\)：</p>
-    \[ f(x)\sim\int_{0}^{x^{3}}t\,dt=\left[\frac{t^{2}}{2}\right]_{0}^{x^{3}}=\frac{(x^{3})^{2}}{2}=\frac{x^{6}}{2}. \]
-    <p>这里指数运算 \((x^{3})^{2}=x^{6}\)，系数 \(1/2\) 来自 \(\int t\,dt=t^{2}/2\)。</p>
-    <p>选 (B)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 指数运算错误。\((x^{3})^{2}=x^{6}\)，不是 \(x^{5}\)（误把乘方当加法）。</p>
-    <p>② 漏乘积分系数 \(1/2\)，误选 \(x^{6}\)（选项 A）。</p>
-    <p>③ 把 \(\tan t^{2}\) 错当 \(\tan t\sim t\)，约分得 \(t/t=1\)，会误判阶数为 3。虽然被积主部碰巧化简后形式相近，但逻辑上 \(t^{2}\) 不能丢。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>这是变上限积分等价无穷小的标准题型，与 Q419、Q423、Q433 同型。被积函数常考 \(\sin t^{k}/t^{m}\)、\(\tan t^{k}/t^{m}\)、\(\ln(1+t^{k})/t^{m}\)，套路固定：化简为 \(t^{k-m}\)，积分后乘上限幂次。考试时若能背出「被积 \(\sim t\)，上限 \(x^{p}\)，结果 \(x^{2p}/2\)」这一结论，可直接秒杀。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(x)=\int_{0}^{x^{3}}\dfrac{\tan t^{2}}{t}\,dt\)，问 \(f(x)\) 与 \(x^{6}/2\) 是否等价？</p>
-    <p class="var-ans">答案：是。</p>
-  </div>
-</article>
-
-<article class="q" id="q444">
-  <div class="q-head">
-    <span class="qno">第 444 题</span>
-    <span class="qtype">根式差含多项式定阶</span>
-    <span class="qsrc">P685</span>
-  </div>
-  <div class="stem">
-    <p>设当 \(x\to0\) 时，\(\sqrt{1+x+x^{2}}-\sqrt{1+x}\) 与 \(x^{n}\) 是同阶无穷小，则 \(n\) 为（）</p>
-    <div class="opts">
-      <p>(A) \(1\)</p>
-      <p>(B) \(2\)</p>
-      <p>(C) \(3\)</p>
-      <p>(D) \(4\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：两个根式相减，根式内是多项式 \(1+x+x^{2}\) 与 \(1+x\)。标准做法是有理化（分子同乘共轭根式），把差转化为分式。</p>
-    <p>第一步，有理化：</p>
-    \[ \sqrt{1+x+x^{2}}-\sqrt{1+x}=\frac{(1+x+x^{2})-(1+x)}{\sqrt{1+x+x^{2}}+\sqrt{1+x}}=\frac{x^{2}}{\sqrt{1+x+x^{2}}+\sqrt{1+x}}. \]
-    <p>分子化简：\((1+x+x^{2})-(1+x)=x^{2}\)，一次项 \(x\) 正好抵消，剩下 \(x^{2}\)。</p>
-    <p>第二步，估计分母。\(x\to0\) 时 \(1+x+x^{2}\to1\)、\(1+x\to1\)，故分母趋于 \(\sqrt{1}+\sqrt{1}=2\)，是非零常数。</p>
-    <p>第三步，合并：</p>
-    \[ \sqrt{1+x+x^{2}}-\sqrt{1+x}\sim\frac{x^{2}}{2}. \]
-    <p>交叉验证：用泰勒展开。\(\sqrt{1+u}=1+u/2-u^{2}/8+o(u^{2})\)。对 \(\sqrt{1+x+x^{2}}\)，令 \(u=x+x^{2}\)，展开得 \(1+(x+x^{2})/2-(x+x^{2})^{2}/8+\cdots=1+x/2+x^{2}/2-x^{2}/8+\cdots=1+x/2+3x^{2}/8+\cdots\)。对 \(\sqrt{1+x}\)，令 \(u=x\)，得 \(1+x/2-x^{2}/8+\cdots\)。两式相减：\(3x^{2}/8-(-x^{2}/8)=x^{2}/2\)，与有理化结果一致。</p>
-    <p>阶数为 2，\(n=2\)，选 (B)。</p>
-    <p>这里两个根式的一次项都是 \(x/2\)，相减后一次项抵消，差的主部来自 \(x^{2}\) 项。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 误以为 \(\sqrt{1+x+x^{2}}\sim\sqrt{1+x}\sim1\)，差为 0。等价替换不能在减法中分别使用——两个根式的一次主部都是 \(x/2\)，相减后抵消，必须看高阶项。</p>
-    <p>② 分子化简错误。\((1+x+x^{2})-(1+x)=x^{2}\)，一次项 \(x\) 抵消；若误算成 \(x^{2}+x\) 或 \(x\)，会导致阶数判断错误。选项 (A) 1 是误判一次项未抵消。</p>
-    <p>③ 分母漏算系数。有理化后分母是两个根式之和，趋于 2；若误写成分母趋于 1，会得到 \(x^{2}\)，阶数仍为 2 但系数错。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>根式差定阶题是选择题的常见题型，通法是有理化。若两个根式内的一次项相同，差的阶数由二次项决定；若一次项不同，差的阶数由一次项决定。变式包括 \(\sqrt{1+x}-\sqrt{1-x}\)（一次项不同，阶数 1）、\(\sqrt{1+x+x^{2}}-\sqrt{1+2x}\)（一次项不同，阶数 1）等。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x\to0\) 时，\(\sqrt{1+x+x^{2}}-\sqrt{1+x}\) 的主部是什么？</p>
-    <p class="var-ans">答案：\(x^{2}/2\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q445">
-  <div class="q-head">
-    <span class="qno">第 445 题</span>
-    <span class="qtype">更高阶无穷小判断</span>
-    <span class="qsrc">P686</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0\) 时，下列四个无穷小量中，哪一个是比其他三个更高阶的无穷小量（）</p>
-    <div class="opts">
-      <p>(A) \(\displaystyle\int_{0}^{x}\frac{\arcsin t^{5}}{t^{4}}\,dt\)</p>
-      <p>(B) \(\displaystyle\int_{0}^{x^{2}}\frac{\ln(1+t^{6})}{t^{4}}\,dt\)</p>
-      <p>(C) \(\displaystyle\int_{0}^{\sqrt{x}}\frac{1-\cos t^{6}}{t^{5}}\,dt\)</p>
-      <p>(D) \(\displaystyle\int_{0}^{x}\frac{e^{-t^{4}}-1}{t^{3}}\,dt\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：四个分式被积函数变上限积分估阶。</p>
-    <p>(A) \(\arcsin t^{5}/t^{4}\sim t^{5}/t^{4}=t\)（\(k=1\)），上限 \(x\)，阶数 \(2\)。</p>
-    <p>(B) \(\ln(1+t^{6})/t^{4}\sim t^{6}/t^{4}=t^{2}\)（\(k=2\)），上限 \(x^{2}\)，阶数 \((2+1)\times2=6\)。</p>
-    <p>(C) \((1-\cos t^{6})/t^{5}\sim(t^{12}/2)/t^{5}=t^{7}/2\)（\(k=7\)），上限 \(\sqrt{x}=x^{1/2}\)，阶数 \((7+1)\times\dfrac12=4\)。</p>
-    <p>(D) \((e^{-t^{4}}-1)/t^{3}\sim(-t^{4})/t^{3}=-t\)（\(k=1\)），上限 \(x\)，阶数 \(2\)。</p>
-    <p>阶数：2、6、4、2。最高阶为 (B)，阶数 6。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① (C) 中 \(1-\cos t^{6}\sim t^{12}/2\)，是 \(t^{6}\) 的平方，除以 \(t^{5}\) 得 \(t^{7}/2\)；若误算 \(t^{6}/2\) 会错。</p>
-    <p>② (B) 上限 \(x^{2}\)，阶数 6，最高。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>高次幂分式被积函数，考幂次运算。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 当 \(x\to0\) 时，\(\int_{0}^{x^{2}}\dfrac{\ln(1+t^{6})}{t^{4}}\,dt\) 的等价无穷小是什么？</p>
-    <p class="var-ans">答案：\(x^{6}/3\)。被积 \(\sim t^{2}\)，积分 \(t^{3}/3\)，代入上限 \(x^{2}\) 得 \((x^{2})^{3}/3=x^{6}/3\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q446">
-  <div class="q-head">
-    <span class="qno">第 446 题</span>
-    <span class="qtype">积分与 x^2 比较阶</span>
-    <span class="qsrc">P686</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)=\displaystyle\int_{0}^{x}\dfrac{\sin t^{5}}{t^{4}}\,dt\)，则当 \(x\to0\) 时，\(f(x)\) 是 \(x^{2}\) 的（）</p>
-    <div class="opts">
-      <p>(A) 低阶无穷小</p>
-      <p>(B) 高阶无穷小</p>
-      <p>(C) 等价无穷小</p>
-      <p>(D) 同阶但不等价的无穷小</p>
-    </div>
-  </div>
-  <div class="answer">答案：D</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：先求变上限积分的主部，再与指定幂函数 \(x^{2}\) 比较阶数。这类题的判断标准是：求 \(\lim f(x)/x^{2}\)，根据结果选——0 为高阶，\(\infty\) 为低阶，1 为等价，非零常数为同阶不等价。</p>
-    <p>第一步，化简被积函数。当 \(t\to0\) 时，由 \(\sin u\sim u\)（\(u\to0\)），令 \(u=t^{5}\)，得 \(\sin t^{5}\sim t^{5}\)。代入被积函数：</p>
-    \[ \frac{\sin t^{5}}{t^{4}}\sim\frac{t^{5}}{t^{4}}=t. \]
-    <p>被积主部为 \(t\)，即 \(k=1\) 型。</p>
-    <p>第二步，做幂函数积分：</p>
-    \[ f(x)\sim\int_{0}^{x}t\,dt=\frac{x^{2}}{2}. \]
-    <p>第三步，与 \(x^{2}\) 比较：</p>
-    \[ \frac{f(x)}{x^{2}}\sim\frac{1}{2}. \]
-    <p>比值为非零常数 \(1/2\)，既不是 0、\(\infty\)，也不是 1，故是<b>同阶但不等价</b>的无穷小，选 (D)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 把比值 1/2 误判为「等价」。等价要求比值为 1，1/2 只是同阶。这是本题最常见的错误选项（C）。</p>
-    <p>② 被积函数化简错误。\(\sin t^{5}\sim t^{5}\)，除以 \(t^{4}\) 得 \(t\)；若误算成 \(t^{5}/t^{4}=t^{5}\) 或 \(t\) 以外的幂次，会导致阶数判断错误。</p>
-    <p>③ 方向搞反：若误以为 \(f\sim x^{2}/2\) 是比 \(x^{2}\) 高阶，会选 (B)。实际上阶数都是 2，只是系数不同。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「积分是 \(x^{k}\) 的什么」是选择题的固定四选一题，与 Q426、Q436 同型。命题人常设系数为 \(1/2\)、\(1/3\) 等，目的就是区分「同阶」与「等价」。掌握判断流程：求主部 → 算比值 → 按比值分类。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(x)=\int_{0}^{x}\dfrac{\sin t^{5}}{t^{4}}\,dt\)，问 \(f(x)\) 与 \(x^{2}/2\) 是否等价？</p>
-    <p class="var-ans">答案：是。</p>
-  </div>
-</article>
-
-<article class="q" id="q447">
-  <div class="q-head">
-    <span class="qno">第 447 题</span>
-    <span class="qtype">sin x - x cos x 定阶</span>
-    <span class="qsrc">P686</span>
-  </div>
-  <div class="stem">
-    <p>设当 \(x\to0\) 时，\(\sin x-x\cos x-\dfrac{x^{3}}{3}\) 与 \(x^{n}\) 是同阶无穷小，则 \(n\) 为（）</p>
-    <div class="opts">
-      <p>(A) \(4\)</p>
-      <p>(B) \(5\)</p>
-      <p>(C) \(6\)</p>
-      <p>(D) \(7\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：B</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：\(\sin x\) 与 \(x\cos x\) 分别展开，消去低阶项后定阶。题目已经把 \(x^{3}/3\) 加进去，正好消去 \(x^{3}\) 项，剩下的第一个非零项即为主部。</p>
-    <p>第一步，展开 \(\sin x\) 到 \(x^{5}\)：</p>
-    \[ \sin x=x-\frac{x^{3}}{6}+\frac{x^{5}}{120}+o(x^{5}). \]
-    <p>第二步，展开 \(\cos x\) 并乘 \(x\)：</p>
-    \[ \cos x=1-\frac{x^{2}}{2}+\frac{x^{4}}{24}+o(x^{4}),\quad x\cos x=x-\frac{x^{3}}{2}+\frac{x^{5}}{24}+o(x^{5}). \]
-    <p>第三步，作差：</p>
-    \[ \sin x-x\cos x=\left(x-\frac{x^{3}}{6}+\frac{x^{5}}{120}\right)-\left(x-\frac{x^{3}}{2}+\frac{x^{5}}{24}\right)=\frac{x^{3}}{3}+x^{5}\left(\frac{1}{120}-\frac{1}{24}\right)=\frac{x^{3}}{3}-\frac{x^{5}}{30}+o(x^{5}). \]
-    <p>第四步，减去 \(x^{3}/3\)：</p>
-    \[ \sin x-x\cos x-\frac{x^{3}}{3}=-\frac{x^{5}}{30}+o(x^{5}), \]
-    <p>阶数为 5，\(n=5\)，选 (B)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 展开阶数不够，只写到 \(x^{3}\)，会得到恒等于 0。必须写到 \(x^{5}\) 才能看到非零项。选项 (A) 4 是误判阶数的干扰项。</p>
-    <p>② \(x\cos x\) 的展开要逐项乘 \(x\)，容易漏项或系数错。\(\cos x\) 的 \(x^{4}/24\) 项乘 \(x\) 后是 \(x^{5}/24\)，不要丢。</p>
-    <p>③ \(x^{5}\) 系数计算：\(1/120-1/24=1/120-5/120=-4/120=-1/30\)，不要算成 \(-1/60\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「\(\sin x-x\cos x\)」是高阶无穷小题的经典组合，考的是逐项展开与系数运算。真题常在此基础上加 \(x^{3}/3\)、\(x^{3}/6\) 等项消去三阶，让你判断五阶系数。</p>
-  </div>
-    <div class="block-title">考向</div>
-    <p>「\(\sin x-x\cos x\)」是高阶无穷小题的经典组合，考的是逐项展开与系数运算。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(x\to0\) 时，\(\sin x-x\cos x\) 与 \(x^{n}\) 同阶，求 \(n\)。</p>
-    <p class="var-ans">答案：\(n=3\)。主部为 \(x^{3}/3\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q448">
-  <div class="q-head">
-    <span class="qno">第 448 题</span>
-    <span class="qtype">二重变上限积分排序</span>
-    <span class="qsrc">P687</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0^{+}\) 时，将无穷小量 \(\alpha=\displaystyle\int_{0}^{x}\int_{0}^{u}\dfrac{\sin t^{2}}{t}\,dt\,du,\ \beta=\displaystyle\int_{0}^{x^{2}}\int_{0}^{v}\dfrac{\ln(1+t^{3})}{t}\,dt\,dv,\ \gamma=\displaystyle\int_{0}^{\sqrt{x}}\int_{0}^{w}\dfrac{1-\cos t^{2}}{t^{3}}\,dt\,dw\) 排列起来，使排在后面的是前一个的高阶无穷小，则正确的排列次序是（）</p>
-    <div class="opts">
-      <p>(A) \(\alpha,\beta,\gamma\)</p>
-      <p>(B) \(\alpha,\gamma,\beta\)</p>
-      <p>(C) \(\beta,\alpha,\gamma\)</p>
-      <p>(D) \(\gamma,\alpha,\beta\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：D</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：二重变上限积分排序，先算内层主部，再算外层。</p>
-    <p>\(\alpha\)：内层 \(\int_{0}^{u}\sin t^{2}/t\,dt\sim\int_{0}^{u}t\,dt=u^{2}/2\)；外层 \(\int_{0}^{x}u^{2}/2\,du=x^{3}/6\)。阶数 3。</p>
-    <p>\(\beta\)：内层 \(\int_{0}^{v}\ln(1+t^{3})/t\,dt\sim\int_{0}^{v}t^{2}\,dt=v^{3}/3\)；外层 \(\int_{0}^{x^{2}}v^{3}/3\,dv=(x^{2})^{4}/12=x^{8}/12\)。阶数 8。</p>
-    <p>\(\gamma\)：内层 \(\int_{0}^{w}(1-\cos t^{2})/t^{3}\,dt\sim\int_{0}^{w}t/2\,dt=w^{2}/4\)；外层 \(\int_{0}^{\sqrt{x}}w^{2}/4\,dw=(\sqrt{x})^{3}/12=x^{3/2}/12\)。阶数 3/2。</p>
-    <p>阶数：\(\gamma=3/2\)，\(\alpha=3\)，\(\beta=8\)。从低到高为 \(\gamma,\alpha,\beta\)，选 (D)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 二重积分只算一重就排序。</p>
-    <p>② \(\gamma\) 上限是 \(\sqrt{x}\)，阶数乘 1/2，是三者中最低的。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>二重变上限积分排序题，训练逐层积分能力。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 将 \(\alpha=\int_{0}^{x}\int_{0}^{u}\sin t^{2}/t\,dt\,du\)、\(\beta=\int_{0}^{x^{2}}\int_{0}^{v}\ln(1+t^{3})/t\,dt\,dv\) 按阶数从低到高排列。</p>
-    <p class="var-ans">答案：\(\alpha,\beta\)。\(\alpha\) 阶数 3，\(\beta\) 阶数 8。</p>
-  </div>
-</article>
-
-<article class="q" id="q449">
-  <div class="q-head">
-    <span class="qno">第 449 题</span>
-    <span class="qtype">高阶被积函数变上限积分</span>
-    <span class="qsrc">P687</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)=\displaystyle\int_{0}^{x^{4}}\dfrac{e^{t^{4}}-1}{t}\,dt\)，则当 \(x\to0\) 时，\(f(x)\) 的等价无穷小是（）</p>
-    <div class="opts">
-      <p>(A) \(x^{16}\)</p>
-      <p>(B) \(\dfrac{x^{16}}{2}\)</p>
-      <p>(C) \(x^{20}\)</p>
-      <p>(D) \(\dfrac{x^{16}}{4}\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：D</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：高次幂被积函数的变上限积分，与 Q429、Q439 完全相同。这类题考的是幂次运算不出错。</p>
-    <p>第一步，等价无穷小替换。当 \(t\to0\) 时，由 \(e^{u}-1\sim u\)（\(u\to0\)），令 \(u=t^{4}\)，得 \(e^{t^{4}}-1\sim t^{4}\)。代入被积函数：</p>
-    \[ \frac{e^{t^{4}}-1}{t}\sim\frac{t^{4}}{t}=t^{3}. \]
-    <p>被积主部为 \(t^{3}\)，即 \(k=3\) 型。</p>
-    <p>第二步，做幂函数积分：</p>
-    \[ f(x)\sim\int_{0}^{x^{4}}t^{3}\,dt=\left[\frac{t^{4}}{4}\right]_{0}^{x^{4}}=\frac{(x^{4})^{4}}{4}=\frac{x^{16}}{4}. \]
-    <p>这里指数运算 \((x^{4})^{4}=x^{16}\)，系数 \(1/4\) 来自 \(\int t^{3}dt=t^{4}/4\)。</p>
-    <p>选 (D)。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 指数运算错误。\((x^{4})^{4}=x^{16}\)，不是 \(x^{8}\)（误把乘方当加法）。这是最常见的丢分点。</p>
-    <p>② 漏掉积分系数 \(1/4\)。\(\int t^{3}dt=t^{4}/4\)，分母 4 来自 \(k+1=4\)；只选 \(x^{16}\)（选项 A）就丢了系数。</p>
-    <p>③ 把 \(e^{t^{4}}-1\) 错当 \(e^{t}-1\sim t\)，约分得 1，会误判阶数为 4。题目中指数是 \(t^{4}\) 不是 \(t\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>高次幂变上限积分在选择题中反复出现（本题与 Q429、Q439 完全相同），核心是两个幂次运算：被积函数化简后 \(t^{k}\) 积分成 \(t^{k+1}/(k+1)\)，再代入上限 \(x^{p}\) 得到 \(x^{p(k+1)}/(k+1)\)。考试常设的陷阱是上限幂次 \(p\) 与被积幂次 \(k\) 同时较大，需要准确相乘。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(x)=\int_{0}^{x^{4}}\dfrac{e^{t^{4}}-1}{t}\,dt\)，问 \(f(x)\) 与 \(x^{16}/4\) 是否等价？</p>
-    <p class="var-ans">答案：是。</p>
-  </div>
-</article>
-
-<article class="q" id="q450">
-  <div class="q-head">
-    <span class="qno">第 450 题</span>
-    <span class="qtype">二重变上限积分最低阶判断</span>
-    <span class="qsrc">P687</span>
-  </div>
-  <div class="stem">
-    <p>当 \(x\to0\) 时，下列无穷小量中最低阶的是（）</p>
-    <div class="opts">
-      <p>(A) \(\displaystyle\int_{0}^{x}\int_{0}^{u}\frac{\arctan t^{3}}{t^{2}}\,dt\,du\)</p>
-      <p>(B) \(\displaystyle\int_{0}^{x^{2}}\int_{0}^{v}\frac{\sin t^{4}}{t^{3}}\,dt\,dv\)</p>
-      <p>(C) \(\displaystyle\int_{0}^{\sqrt{x}}\int_{0}^{w}\frac{\ln(1+t^{5})}{t^{4}}\,dt\,dw\)</p>
-      <p>(D) \(\displaystyle\int_{0}^{x}\int_{0}^{z}\frac{1-\cos t^{4}}{t^{5}}\,dt\,dz\)</p>
-    </div>
-  </div>
-  <div class="answer">答案：C</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：四个二重变上限积分找最低阶。</p>
-    <p>(A) 内层 \(\int_{0}^{u}\arctan t^{3}/t^{2}\,dt\sim\int_{0}^{u}t\,dt=u^{2}/2\)；外层 \(\int_{0}^{x}u^{2}/2\,du=x^{3}/6\)。阶数 3。</p>
-    <p>(B) 内层 \(\int_{0}^{v}\sin t^{4}/t^{3}\,dt\sim\int_{0}^{v}t\,dt=v^{2}/2\)；外层 \(\int_{0}^{x^{2}}v^{2}/2\,dv=(x^{2})^{3}/6=x^{6}/6\)。阶数 6。</p>
-    <p>(C) 内层 \(\int_{0}^{w}\ln(1+t^{5})/t^{4}\,dt\sim\int_{0}^{w}t\,dt=w^{2}/2\)；外层 \(\int_{0}^{\sqrt{x}}w^{2}/2\,dw=(\sqrt{x})^{3}/6=x^{3/2}/6\)。阶数 3/2。</p>
-    <p>(D) 内层 \(\int_{0}^{z}(1-\cos t^{4})/t^{5}\,dt\sim\int_{0}^{z}t^{3}/2\,dt=z^{4}/8\)；外层 \(\int_{0}^{x}z^{4}/8\,dz=x^{5}/40\)。阶数 5。</p>
-    <p>阶数：3、6、3/2、5。最低阶为 (C)，阶数 3/2。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① (D) 中 \(1-\cos t^{4}\sim t^{8}/2\)，除以 \(t^{5}\) 得 \(t^{3}/2\)，内层积分 \(z^{4}/8\)，外层阶数 5。</p>
-    <p>② (C) 上限是 \(\sqrt{x}\)，阶数乘 1/2，是最低的。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>二重变上限积分最低阶判断，是本批题目的综合收尾。考的是逐层积分与幂次运算。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 当 \(x\to0\) 时，\(\int_{0}^{\sqrt{x}}\int_{0}^{w}\ln(1+t^{5})/t^{4}\,dt\,dw\) 的等价无穷小是什么？</p>
-    <p class="var-ans">答案：\(x^{3/2}/6\)。内层 \(w^{2}/2\)，外层 \((\sqrt{x})^{3}/6=x^{3/2}/6\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q451">
-  <div class="q-head">
-    <span class="qno">第 451 题</span>
-    <span class="qtype">无穷小阶的比较（泰勒展开）</span>
-    <span class="qsrc">P688</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)=\arctan x-\sin x\)，则当 \(x\to 0\) 时，\(f(x)\) 是 \(x\) 的（）。</p>
-    <div class="opts">
-      <p>(A) 等价无穷小</p>
-      <p>(B) 同阶但非等价无穷小</p>
-      <p>(C) 高阶无穷小</p>
-      <p>(D) 低阶无穷小</p>
-    </div>
-  </div>
-  <div class="answer">答案：C</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：两个常用初等函数之差的阶数判定。这类题若只凭「\(\arctan x\sim x\)、\(\sin x\sim x\)」各自作等价替换，会得到 \(f(x)\sim x-x=0\) 的无效结论——等价无穷小只能在乘除因子里替换，加减项上同阶部分必须展开到消不掉的那一阶。</p>
-    <p>因此把两式都展开到 \(x^3\) 这一阶：</p>
-    \[ \arctan x=x-\frac{x^3}{3}+o(x^3),\qquad \sin x=x-\frac{x^3}{6}+o(x^3). \]
-    <p>作差：</p>
-    \[ f(x)=\left(x-\frac{x^3}{3}\right)-\left(x-\frac{x^3}{6}\right)+o(x^3)=-\frac{x^3}{6}+o(x^3). \]
-    <p>一次项 \(x\) 恰好抵消，剩下的最低次项是 \(x^3\)，系数为 \(-\dfrac16\)。于是 \(f(x)\sim -\dfrac{x^3}{6}\)，即 \(f(x)=O(x^3)\)，是 \(x\) 的三阶无穷小。按定义，若 \(\dfrac{f(x)}{x}\to 0\)，就称 \(f(x)\) 是 \(x\) 的高阶无穷小，故 \(\dfrac{f(x)}{x}\sim -\dfrac{x^2}{6}\to 0\)，选 C。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 在加减项上用等价无穷小：把 \(\arctan x\)、\(\sin x\) 都直接换成 \(x\)，得到 \(0\) 而误判。加减作差时必须用泰勒展开，展开阶数至少取到两函数之差的最低次非零项。</p>
-    <p>② 误以为一次项系数不同就非同阶。本题一次项都是 \(1\)，抵消后才显出三阶；若先展开一次项发现相等，应继续往后展开。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「两函数之差的阶数」是无穷小比较的核心考法，本质是泰勒展开的阶数管理。真题常把 \(\arctan x\)、\(\sin x\)、\(\tan x\)、\(\arcsin x\)、\(\ln(1+x)\)、\(e^x-1\) 两两配对作差，考的是记住它们前两阶展开系数的差异。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 当 \(x\to 0\) 时，比较 \(f(x)=\tan x-\arcsin x\) 关于 \(x\) 的阶数。</p>
-    <p class="var-ans">答案：三阶无穷小。\(\tan x=x+\dfrac{x^3}{3}\)，\(\arcsin x=x+\dfrac{x^3}{6}\)，作差得 \(\dfrac{x^3}{6}+o(x^3)\)，故 \(f(x)\sim\dfrac{x^3}{6}\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q452">
-  <div class="q-head">
-    <span class="qno">第 452 题</span>
-    <span class="qtype">由已知极限反推阶数（含 \(\sin f\)）</span>
-    <span class="qsrc">P688</span>
-  </div>
-  <div class="stem">
-    <p>若 \(\lim\limits_{x\to 0}\dfrac{f(x)}{x^2}=0\)，且 \(\lim\limits_{x\to 0}\dfrac{\sin(f(x))}{x^3}=2\)，则当 \(x\to 0\) 时，\(f(x)\) 是 \(x\) 的（）。</p>
-    <div class="opts">
-      <p>(A) 等价无穷小量</p>
-      <p>(B) 同阶但不等价的无穷小量</p>
-      <p>(C) 高阶无穷小量</p>
-      <p>(D) 低阶无穷小量</p>
-    </div>
-  </div>
-  <div class="answer">答案：C</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：给出两个关于 \(f(x)\) 的极限条件，反判 \(f(x)\) 相对于 \(x\) 的阶。关键在先用第一个条件判断 \(f(x)\) 是否为无穷小、量级多大，再决定第二个条件里能否作等价替换。</p>
-    <p>由 \(\dfrac{f(x)}{x^2}\to 0\)，知 \(f(x)=o(x^2)\)。特别地 \(f(x)\to 0\)。当 \(f(x)\to 0\) 时 \(\sin(f(x))\sim f(x)\)（这是乘除因子地位上的等价替换，合法），于是</p>
-    \[ \frac{\sin(f(x))}{x^3}\sim \frac{f(x)}{x^3}\to 2. \]
-    <p>即 \(f(x)\sim 2x^3\)。再看相对 \(x\) 的阶：\(\dfrac{f(x)}{x}\sim 2x^2\to 0\)，按定义 \(f(x)\) 是 \(x\) 的高阶无穷小。选 C。</p>
-    <p>这里第一个条件 \(\dfrac{f(x)}{x^2}\to 0\) 的作用是双重的：一是保证 \(f(x)\to 0\)，使 \(\sin f\sim f\) 可用；二是把 \(f\) 压到 \(o(x^2)\)，从而由第二个极限定出 \(f\) 的阶恰为 \(x^3\)（三阶），而不是更高或更低。两个条件联立才唯一确定阶数。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 不验证 \(f(x)\to 0\) 就直接写 \(\sin f\sim f\)。本题虽由 \(f/x^2\to0\) 保证了这点，但在别的题里若漏了这个前提，等价替换不成立。</p>
-    <p>② 由 \(f\sim 2x^3\) 误判为「同阶」。题目问的是 \(f\) 相对 \(x\)（不是相对 \(x^3\)）的阶，\(f/x\to0\)，故是高阶，系数 2 不影响「高阶」这一定性结论。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「给极限条件、反判无穷小阶」是选择题常驻题型，套路固定：先从低阶条件锁定 \(f\) 是否为无穷小，再对 \(\sin f\)、\(\ln(1+f)\)、\(e^f-1\) 这类复合因子作等价替换，得到 \(f\) 的渐近主部。与第 462、472、482、492 题属同一模板。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 若 \(\lim\limits_{x\to0}\dfrac{f(x)}{x}=0\) 且 \(\lim\limits_{x\to0}\dfrac{\ln(1+f(x))}{x^2}=3\)，问 \(f(x)\) 是 \(x\) 的几阶无穷小。</p>
-    <p class="var-ans">答案：二阶（高阶）。由 \(f\to0\) 得 \(\ln(1+f)\sim f\)，故 \(f/x^2\to3\)，\(f\sim3x^2\)，是 \(x\) 的二阶无穷小。</p>
-  </div>
-</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 345–452 题</span></div>
+</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 321–420 题</span></div>
 </div>
 </body>
 </html>
