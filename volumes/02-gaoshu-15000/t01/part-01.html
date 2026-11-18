@@ -2441,8 +2441,8 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x+e^{-x}-2\cos x}{x^4}\)。</p>
-    <p class="var-ans">答案：常数 \(1+1-2=0\)，二次 \(1/2+1/2-1=0\)，四次 \(1/24+1/24+2/24=4/24=1/6\)，极限为 \(1/6\)。</p>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x+e^{-x}-2-x^2}{x^4}\)。</p>
+    <p class="var-ans">答案：\(e^x+e^{-x}=2+x^2+\dfrac{x^4}{12}+o(x^4)\)，故分子 \(=x^4/12+o(x^4)\)，极限为 \(\dfrac1{12}\)。</p>
   </div>
   <!-- 存疑：按所印题干，二次项 (a+b-d)/2 取 d=-2 时为 (1+1+2)/2=2≠0，分子残留 x^2 阶，商在 x=0.001 时已达约 2e6；使二次项抵消应取 d=+2，此时 e=1/6。书上 d=-2,e=1/12 与所印题干不自洽。 -->
 </article>
@@ -2485,8 +2485,8 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac1x-\dfrac1{\sin x}\right)x^3\)。</p>
-    <p class="var-ans">答案：\(1/\sin x=1/x+x/6+\cdots\)，故 \((1/x-1/\sin x)x^3\to-1/6\)。</p>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\dfrac1x-\dfrac1{\sin x}}{x}\)。</p>
+    <p class="var-ans">答案：\(1/\sin x=1/x+x/6+\cdots\)，故 \(1/x-1/\sin x=-x/6+o(x)\)，除以 \(x\) 得 \(-1/6\)。</p>
   </div>
   <!-- 存疑：按所印题干展开得 H=1/x - x/2 + ...，故 q=lim xH=1（数值验证 x=0.001 时为 0.9999995），书上 q=1/3 与之不符。 -->
 </article>
@@ -3377,12 +3377,13 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：A</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型为等比数列的通项极限。等比数列通项为 \(a_n=a_1q^{n-1}\)。当 \(|q|<1\) 时，指数函数 \(q^{n-1}\to0\)（这是因为 \(|q|^{n-1}=e^{(n-1)\ln|q|}\)，而 \(\ln|q|<0\)）。</p>
-    <p>因此：</p>
+    <p>识别类型为等比数列通项的极限，核心是指数型无穷小 \(q^{n-1}\) 的判定。等比数列由首项 \(a_1\) 与公比 \(q\) 唯一确定，通项公式为 \(a_n=a_1q^{n-1}\)。由于 \(a_1\) 是常数，\(\lim a_n\) 与 \(\lim q^{n-1}\) 仅差一个常数因子，问题归结为判断 \(q^{n-1}\) 的趋势。</p>
+    <p>当 \(|q|<1\) 时，记 \(r=|q|\in[0,1)\)，则 \(|q^{n-1}|=r^{n-1}\)。取对数得 \(\ln r^{n-1}=(n-1)\ln r\)，而 \(0\le r<1\) 推出 \(\ln r<0\)，记 \(\alpha=-\ln r>0\)，则 \(r^{n-1}=e^{-\alpha(n-1)}\)。指数函数 \(e^{-\alpha(n-1)}\) 随 \(n\) 增大按指数速率衰减，故 \(r^{n-1}\to0\)。这一结论也可由 \(\varepsilon\)-\(N\) 语言直接验证：对任意 \(\varepsilon>0\)，取 \(N>1+\dfrac{\ln\varepsilon}{\ln r}\)，当 \(n>N\) 时 \(|q^{n-1}|=r^{n-1}<\varepsilon\)。</p>
+    <p>于是：</p>
     \[
     \lim_{n\to\infty}a_n=a_1\cdot\lim_{n\to\infty}q^{n-1}=a_1\cdot0=0.
     \]
-    <p>关键一步在于：\(|q|<1\) 是 \(q^n\to0\) 的充要条件；与首项 \(a_1\) 无关。即使 \(a_1\) 很大，乘以趋于零的 \(q^{n-1}\) 后仍趋于零。</p>
+    <p>关键一步在于：\(|q|<1\) 是 \(q^n\to0\) 的充要条件，且该极限与首项 \(a_1\) 无关。即使 \(a_1\) 很大，乘以趋于零的 \(q^{n-1}\) 后仍趋于零；对照之下，\(q=1\) 时 \(a_n=a_1\) 为常数列、\(q=-1\) 时 \(a_n=(-1)^{n-1}a_1\) 振荡，都不趋于零，这正说明条件 \(|q|<1\) 不可少。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -4101,7 +4102,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block var">
     <div class="block-title">变式</div>
     <p><b>变式</b> 设 \(f(x)=\int_0^x\dfrac{1-\cos t}{t}\,dt\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)}{x^2}\)。</p>
-    <p class="var-ans">答案：\(1/4\)。洛必达两次：\(\lim (1-\cos x)/x = 0\)，再洛必达：\(\lim \sin x/(2x)=1/2\)？不对。直接用 \(1-\cos t\sim t^2/2\)，被积函数 \(\sim t/2\)，\(f(x)\sim x^2/4\)，故极限 \(=1/4\)。</p>
+    <p class="var-ans">答案：\(1/4\)。因 \(1-\cos t\sim t^2/2\)，被积函数 \(\sim t/2\)，故 \(f(x)\sim\int_0^x t/2\,dt=x^2/4\)，极限 \(=1/4\)。</p>
   </div>
 </article>
 
