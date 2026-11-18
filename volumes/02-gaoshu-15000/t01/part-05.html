@@ -3364,23 +3364,29 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：B</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：与 458、468 同模板，被减函数换成 \(\arcsin x\)。只要 \(\arcsin x\sim x\)，答案就是 1。</p>
-    <p>拆分：</p>
+    <p>识别类型：「已知一个高阶（分母 \(x^3\)）的差商极限，反求低阶（分母 \(x\)）极限」型选择题。这类题不需要知道 \(f\) 的具体表达式，只要把待求式与已知条件通过代数拆分拼到一起，再看已知条件贡献的项在除以 \(x\) 后是否还剩非零主部。</p>
+    <p>第一步，把待求式拆成已知差商与被减函数两项之和：</p>
     \[ \frac{f(x)}{x}=\frac{f(x)-\arcsin x}{x}+\frac{\arcsin x}{x}. \]
-    <p>第一项：</p>
-    \[ \frac{f(x)-\arcsin x}{x}=\frac{f(x)-\arcsin x}{x^3}\cdot x^2\to 3\cdot 0=0. \]
-    <p>第二项：\(\arcsin x\sim x\)，故 \(\dfrac{\arcsin x}{x}\to1\)。</p>
-    <p>合计为 \(0+1=1\)。选 B。</p>
-    <p>本质：已知条件只给出 \(f(x)-\arcsin x=O(x^3)\)，即 \(f(x)=\arcsin x+O(x^3)\)。除以 \(x\) 后 \(O(x^3)/x=O(x^2)\to0\)，低阶项由 \(\arcsin x/x\) 决定，其值为 1。差商常数 3 不进入答案。</p>
+    <p>第二步，把第一项改写成已知条件的形式。乘以、除以同一个 \(x^2\)：</p>
+    \[ \frac{f(x)-\arcsin x}{x}=\frac{f(x)-\arcsin x}{x^3}\cdot x^2. \]
+    <p>由题设 \(\dfrac{f(x)-\arcsin x}{x^3}\to3\)（这是一个有界量），乘以 \(x^2\to0\)，故第一项整体 \(\to3\cdot0=0\)。</p>
+    <p>第三步，算第二项。由 \(\arcsin x=x+\dfrac{x^3}{6}+o(x^3)\)，其一阶主部为 \(x\)，故</p>
+    \[ \frac{\arcsin x}{x}\to1. \]
+    <p>第四步，相加：\(\dfrac{f(x)}{x}\to0+1=1\)。选 B。</p>
+    <p>交叉验证（泰勒展开法）：由已知条件直接写出 \(f(x)\) 的渐近式</p>
+    \[ f(x)=\arcsin x+3x^3+o(x^3)=x+\frac{x^3}{6}+3x^3+o(x^3)=x+\frac{19}{6}x^3+o(x^3). \]
+    <p>除以 \(x\) 得 \(1+\dfrac{19}{6}x^2+o(x^2)\to1\)。与拆分法结论一致。</p>
+    <p>本质结论：若 \(\dfrac{f(x)-g(x)}{x^k}\to c\) 且 \(k>1\)，则 \(\dfrac{f(x)}{x}\) 的极限完全由 \(g(x)/x\) 决定，差商常数 \(c\) 不进入答案。本题 \(g(x)=\arcsin x\)，\(g/x\to1\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 把差商常数 3 加进答案。它乘的是 \(x^2\)，趋于 0。</p>
-    <p>② 记错 \(\arcsin x\) 的一阶主部。\(\arcsin x=x+\dfrac{x^3}{6}+\cdots\)，一阶主部是 \(x\)，故 \(\arcsin x/x\to1\)。</p>
+    <p>① 把差商常数 3 直接加进答案，误选 C（2）或臆造其他值。这个 3 在拆分时乘的是 \(x^2\)，趋于 0，不贡献。这是本题干扰项 C 的构造来源。</p>
+    <p>② 记错 \(\arcsin x\) 的一阶主部。\(\arcsin x=x+\dfrac{x^3}{6}+\dfrac{3x^5}{40}+\cdots\)，一阶主部是 \(x\)，故 \(\arcsin x/x\to1\)；不是 \(\arcsin x\sim1\)，也不是 \(\arcsin x\sim x/2\)。</p>
+    <p>③ 误以为分母 \(x^3\) 与待求分母 \(x\) 幂次差两档会让结论改变。只要差商分母幂次严格大于 1，结论就只由被减函数的一阶主部决定；这是干扰项 D（不存在）的构造来源。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>458、468、478、488、498 题循环同一模板，被减函数在 0 处一阶主部均为 \(x\)，故答案恒为 B（1）。</p>
+    <p>458、468、478、488、498 题构成同一模板的循环，被减函数依次为 \(\sin x\)、\(\tan x\)、\(\arcsin x\)、\(\ln(1+x)\)、\(\sinh x\)，它们在 0 处的一阶主部都是 \(x\)，故答案恒为 B（1）。真题中常把被减函数换成 \(e^x-1\)、\(\ln(1-x)\) 等，解题流程不变：拆分 \(\to\) 把差商凑回已知形式 \(\to\) 看差商乘的 \(x^{k-1}\to0\) \(\to\) 剩下被减函数的一阶主部比值。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -3493,27 +3499,36 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：C</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：被积函数 \(\sin(t^4)/t^3\)，化简主部再积分升阶。</p>
-    <p>当 \(t\to0\)，\(\sin(t^4)\sim t^4\)，故</p>
+    <p>识别类型：变限积分 \(\int_0^x h(t)\,dt\) 的无穷小阶判定。这类题不必硬算积分，只需把被积函数 \(h(t)\) 在 \(t\to0\) 时的主部求出来，再利用「被积函数主部为 \(t^\alpha\) 时积分主部为 \(\dfrac{x^{\alpha+1}}{\alpha+1}\)」的升阶规律。</p>
+    <p>第一步，化简被积函数主部。当 \(t\to0\)，由 \(\sin u\sim u\) 取 \(u=t^4\)：</p>
+    \[ \sin(t^4)\sim t^4. \]
+    <p>于是</p>
     \[ \frac{\sin(t^4)}{t^3}\sim\frac{t^4}{t^3}=t. \]
-    <p>被积函数主部为 \(t\)。积分：</p>
-    \[ f(x)\sim\int_0^x t\,dt=\frac{x^2}{2}. \]
-    <p>于是 \(\dfrac{f(x)}{x}\sim\dfrac{x}{2}\to0\)，\(f(x)\) 是 \(x\) 的二阶无穷小，属高阶。选 C。</p>
-    <p>统一公式：被积函数 \(\dfrac{\sin(t^m)}{t^r}\) 的主部为 \(t^{m-r}\)，积分后主部为 \(\dfrac{x^{m-r+1}}{m-r+1}\)。本题 \(m=4,r=3\)，\(m-r+1=2\)。</p>
+    <p>分子幂 4、分母幂 3，相除后幂次为 \(4-3=1\)，即被积函数主部是 \(t\)（一阶），不是常数、也不是 \(t^2\)。</p>
+    <p>第二步，积分升阶。被积函数主部 \(t\) 在区间 \([0,x]\) 上积分：</p>
+    \[ f(x)\sim\int_0^x t\,dt=\left[\frac{t^2}{2}\right]_0^x=\frac{x^2}{2}. \]
+    <p>升阶原理：若 \(h(t)\sim c\,t^\alpha\)（\(\alpha>-1\)），则 \(\int_0^x h(t)\,dt\sim\dfrac{c}{\alpha+1}x^{\alpha+1}\)。本题 \(c=1,\alpha=1\)，主部由 \(t\) 升到 \(x^2/2\)。</p>
+    <p>第三步，与 \(x\) 比较。</p>
+    \[ \frac{f(x)}{x}\sim\frac{x^2/2}{x}=\frac{x}{2}\to0. \]
+    <p>按定义，若 \(\dfrac{f(x)}{x}\to0\)，则 \(f(x)\) 是 \(x\) 的高阶无穷小。故 \(f(x)\sim x^2/2\) 是二阶无穷小，属高阶，选 C。</p>
+    <p>交叉验证（洛必达法则）：\(f(0)=0\)，\(f'(x)=\dfrac{\sin(x^4)}{x^3}\)。由洛必达</p>
+    \[ \lim_{x\to0}\frac{f(x)}{x^2}=\lim_{x\to0}\frac{f'(x)}{2x}=\lim_{x\to0}\frac{\sin(x^4)/x^3}{2x}=\lim_{x\to0}\frac{\sin(x^4)}{2x^4}=\frac12. \]
+    <p>与 \(f(x)\sim x^2/2\) 一致。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 分子分母幂次算错：\(\sin(t^4)\sim t^4\)，除以 \(t^3\) 得 \(t\)，不是 \(t^2\)。</p>
-    <p>② 忘记积分升阶。</p>
+    <p>① 分子分母幂次算错。\(\sin(t^4)\sim t^4\)，除以 \(t^3\) 得 \(t^{4-3}=t\)，主部一阶；常见错误是把 \(t^3\) 看成 \(t^4\)，误以为被积函数主部为常数 1，从而判 \(f(x)\sim x\)、误选 A 等价。</p>
+    <p>② 忘记积分升阶。被积函数主部是 \(t\)（一阶），积分一次后幂次加一得 \(x^2/2\)；若直接把被积函数主部当积分主部，会错判为与 \(x\) 同阶（选项 B）。这是干扰项 B 的构造来源。</p>
+    <p>③ 把 \(f(x)\sim x^2/2\) 误判为「与 \(x^2\) 同阶」而忽略题目问的是与 \(x\) 的关系。选项按与 \(x\) 的阶分类：等价（\(f\sim x\)）、同阶不等价（\(f\sim cx, c\neq1\)）、高阶（\(f=o(x)\)）、低阶。\(f\sim x^2/2\) 属第三类。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>461、471、481、491 题循环模板，分子幂次依次为 2、3、4、5，分母幂次依次为 1、2、3、4，差值恒为 1，故积分主部恒为 \(x^2/2\)。答案恒为 C。</p>
+    <p>变限积分判阶是本套题的常驻题型，461、471、481、491 四题构成循环：被积函数形式依次为 \(\sin(t^2)/t\)、\(\sin(t^3)/t^2\)、\(\sin(t^4)/t^3\)、\(\sin(t^5)/t^4\)，分子幂次与分母幂次之差恒为 1，故被积函数主部恒为 \(t\)，积分主部恒为 \(x^2/2\)，答案恒为 C。掌握「分子幂减分母幂得被积主部阶，再加一得积分主部阶」即可。真题中常与洛必达法则、泰勒展开联合命题。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(x)=\int_0^x\dfrac{\sin(t^5)}{t^3}dt\)，判断 \(x\to0\) 时 \(f(x)\) 关于 \(x\) 的阶。</p>
-    <p class="var-ans">答案：三阶无穷小。被积 \(\sim t^2\)，积分后 \(\sim x^3/3\)。</p>
+    <p><b>变式</b> 设 \(f(x)=\int_0^x\dfrac{\sin(t^5)}{t^3}\,dt\)，判断 \(x\to0\) 时 \(f(x)\) 关于 \(x\) 的阶，并求 \(\lim\limits_{x\to0}\dfrac{f(x)}{x^3}\)。</p>
+    <p class="var-ans">答案：三阶无穷小（高阶），比值 \(\dfrac13\)。被积主部 \(\sin(t^5)/t^3\sim t^5/t^3=t^2\)，积分 \(\sim\int_0^x t^2\,dt=x^3/3\)，故 \(f(x)/x^3\to1/3\)。</p>
   </div>
 </article>
 
@@ -3602,7 +3617,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <article class="q" id="q484">
   <div class="q-head">
     <span class="qno">第 484 题</span>
-    <span class="qtype">\(e^{nx}/(1+e^{nx})\) 的分段极限</span>
+    <span class="qtype">\(e^{nx}/(1+e^{nx})\) 的分段极限与间断点</span>
     <span class="qsrc">P698</span>
   </div>
   <div class="stem">
@@ -3617,28 +3632,31 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：B</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：指数函数 \(e^{nx}\) 随 \(n\to\infty\) 的走向完全由 \(x\) 的符号决定。</p>
-    <p>分区间：</p>
-    <p>① 当 \(x>0\)：\(e^{nx}\to+\infty\)，分子分母同除 \(e^{nx}\)：</p>
-    \[ h(x)=\frac{1}{e^{-nx}+1}\to1. \]
-    <p>② 当 \(x<0\)：\(e^{nx}\to0\)，故</p>
+    <p>识别类型：含 \(e^{nx}\) 的数列极限。底数 \(e>1\)，指数 \(nx\) 随 \(n\to\infty\) 的走向完全由 \(x\) 的符号决定，必须按 \(x>0\)、\(x=0\)、\(x<0\) 三段讨论。</p>
+    <p>① 当 \(x>0\)：\(nx\to+\infty\)，\(e^{nx}\to+\infty\)。分子分母同除以 \(e^{nx}\)：</p>
+    \[ h(x)=\frac{1}{e^{-nx}+1}\to\frac{1}{0+1}=1. \]
+    <p>② 当 \(x<0\)：\(nx\to-\infty\)，\(e^{nx}\to0\)。直接代入：</p>
     \[ h(x)=\frac{0}{1+0}=0. \]
-    <p>③ 当 \(x=0\)：\(e^0=1\)，\(h(0)=\dfrac{1}{1+1}=\dfrac12\)。</p>
-    <p>综合：\(x\to0^+\) 时 \(h\to1\)，\(x\to0^-\) 时 \(h\to0\)，\(h(0)=\frac12\)。左右极限不相等，故 \(x=0\) 是跳跃间断点。选 B。</p>
+    <p>③ 当 \(x=0\)：\(e^0=1\)，</p>
+    \[ h(0)=\frac{1}{1+1}=\frac12. \]
+    <p>综合三段：\(x\to0^+\) 时 \(h(x)\to1\)，\(x\to0^-\) 时 \(h(x)\to0\)，而函数值 \(h(0)=\frac12\)。左右极限不相等（1 与 0），且都不等于函数值，故 \(x=0\) 是跳跃间断点。选 B。</p>
+    <p>交叉验证（作变量代换）：令 \(y=e^{nx}\)，则 \(\dfrac{y}{1+y}\) 在 \(y>0\) 上单调递增。\(x>0\) 时 \(y\to+\infty\)，\(y/(1+y)\to1\)；\(x<0\) 时 \(y\to0^+\)，比值 \(\to0\)；\(x=0\) 时 \(y=1\)，比值 \(1/2\)。与分段讨论一致。</p>
+    <p>本题的几何意义：\(h(x)\) 是一个在 \(x=0\) 处从 0 阶跃到 1 的单位阶梯函数，跳跃幅度为 1，函数值取在跃变中点 \(1/2\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① \(x<0\) 时 \(e^{nx}\to0\)（不是 \(\infty\)）。底数 \(e>1\)，指数 \(nx\) 为负时趋于 0。</p>
-    <p>② 忘记 \(x=0\) 单独代入得 \(\frac12\)。</p>
+    <p>① \(x<0\) 时误以为 \(e^{nx}\to+\infty\)。底数 \(e>1\)，指数 \(nx\) 为负时 \(e^{nx}\to0\)，比值 \(\to0\)；这是干扰项 D（\(x=-1\) 是间断点）的构造来源——把 \(x=-1\) 当成分段点是错的，分段点只在 \(x=0\)。</p>
+    <p>② 忘记 \(x=0\) 单独代入。\(e^{0}=1\)，比值为 \(1/2\)；若不单独算，会以为两侧极限 0 与 1 已经覆盖，漏掉「函数值不匹配」这一关键事实。</p>
+    <p>③ 误以为 \(x=1\) 是间断点。指数 \(nx\) 在 \(x=1\) 处连续地趋于 \(+\infty\)，\(h\) 在 \(x=1\) 附近恒为 1，无间断。这是干扰项 C 的构造来源。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 474、494 题同模板，含 \(e^{nx}\)、\(n^{|x|}\)、\(\ln(1+n^x)\) 的数列极限，间断点几乎都在 \(x=0\)。</p>
+    <p>与 474（\(n^x/(1+n^{|x|})\)）、494（\(\ln(1+n^x)/(1+n^{|x|})\)）同组，含 \(e^{nx}\)、\(n^{|x|}\)、\(\ln(1+n^x)\) 的数列极限，间断点几乎都在 \(x=0\)。真题常以「先求极限再找间断点」的选择题形式出现，关键是按 \(x\) 的正负分区间，并把 \(x=0\) 单独代入。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(h(x)=\lim\limits_{n\to\infty}\dfrac{1-e^{nx}}{1+e^{nx}}\)，求间断点。</p>
-    <p class="var-ans">答案：\(x=0\)。\(x>0\) 时 \(h=-1\)，\(x<0\) 时 \(h=1\)，\(x=0\) 时 \(h=0\)。</p>
+    <p><b>变式</b> 设 \(h(x)=\lim\limits_{n\to\infty}\dfrac{1-e^{nx}}{1+e^{nx}}\)，求 \(h(x)\) 的分段表达式并指出间断点。</p>
+    <p class="var-ans">答案：\(x>0\) 时 \(h=-1\)；\(x=0\) 时 \(h=0\)；\(x<0\) 时 \(h=1\)。间断点为 \(x=0\)（跳跃间断点，跃度为 2）。</p>
   </div>
 </article>
 
@@ -3733,7 +3751,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <article class="q" id="q487">
   <div class="q-head">
     <span class="qno">第 487 题</span>
-    <span class="qtype">含 \((\arcsin x-x)/x^3\) 的变限积分</span>
+    <span class="qtype">含 \((\arcsin x-x)/x^3\) 的变限积分判阶</span>
     <span class="qsrc">P700</span>
   </div>
   <div class="stem">
@@ -3748,25 +3766,35 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：B</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：与 457、467、477 同模板。</p>
-    <p>由 \(\arcsin x=x+\dfrac{x^3}{6}+o(x^3)\)，得</p>
-    \[ \frac{\arcsin x-x}{x^3}=\frac{x^3/6+o(x^3)}{x^3}\to\frac16. \]
-    <p>题目补充 \(f(0)=\frac16\)，与极限一致，\(f\) 在 0 处连续。</p>
-    <p>于是 \(g(x)\sim\dfrac{x}{6}\)，即 \(\dfrac{g(x)}{x}\to\dfrac16\)。比值为 \(\frac16\)，既非 0 也非 1，故同阶但不等价。选 B。</p>
+    <p>识别类型：与 457、467、477、497 同模板——被积函数 \(f(t)\) 在 0 处有定义值，先求 \(f(t)\) 在 0 附近的极限 \(c\)，再判断积分主部 \(cx\) 与 \(x\) 的比值是否为 1。</p>
+    <p>第一步，求被积函数在 0 处的极限。由 \(\arcsin x\) 的泰勒展开</p>
+    \[ \arcsin x=x+\frac{x^3}{6}+\frac{3x^5}{40}+o(x^5), \]
+    <p>得</p>
+    \[ \frac{\arcsin x-x}{x^3}=\frac{x^3/6+3x^5/40+o(x^5)}{x^3}=\frac16+\frac{3x^2}{40}+o(x^2)\to\frac16. \]
+    <p>题目补充 \(f(0)=\frac16\)，与极限一致，故 \(f\) 在 0 处连续。</p>
+    <p>第二步，积分主部。被积函数在 0 附近极限为 \(c=\frac16\)，故</p>
+    \[ g(x)=\int_0^x f(t)\,dt\sim\frac16\,x. \]
+    <p>严格说：\(\dfrac{g(x)}{x}=\dfrac{1}{x}\int_0^x f(t)\,dt\) 是 \(f\) 在 \([0,x]\) 上的平均值，由 \(f(t)\to\frac16\) 知该平均值 \(\to\frac16\)。</p>
+    <p>第三步，定性判断。比值 \(\dfrac{g(x)}{x}\to\frac16\)，既不是 0（高阶）也不是 1（等价），故 \(g(x)\) 与 \(x\) 同阶但不等价。选 B。</p>
+    <p>交叉验证（洛必达法则）：\(g(0)=0\)，\(g'(x)=f(x)\)。由洛必达</p>
+    \[ \lim_{x\to0}\frac{g(x)}{x}=\lim_{x\to0}\frac{g'(x)}{1}=f(0)=\frac16. \]
+    <p>与积分主部法结论一致。</p>
+    <p>本组题的系数依次为：457 题 \(f(0)=1\)（等价）；467 题 \(f(0)=\frac12\)；477 题 \(f(0)=\frac13\)；本题 \(f(0)=\frac16\)；497 题 \(f(0)=-\frac13\)。非 1 的系数都对应「同阶不等价」。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 记错 \(\arcsin x\) 展开系数：\(\arcsin x=x+\frac{x^3}{6}+\frac{3x^5}{40}\)，那个 \(\frac16\) 正是 \(f(0)\)。</p>
-    <p>② 由 \(g\sim x/6\) 误判为等价或高阶。比值是 \(1/6\)，定性为同阶不等价。</p>
+    <p>① 记错 \(\arcsin x\) 展开系数。\(\arcsin x=x+\dfrac{x^3}{6}+\dfrac{3x^5}{40}+\cdots\)，那个 \(\frac16\) 正是 \(f(0)\)；常见错误是把系数记成 \(1/3\)（那是 \(\tan x-x\) 的系数），从而误判 \(g\sim x/3\) 仍选 B 但理由错。</p>
+    <p>② 由 \(g\sim x/6\) 误判为等价（A）或高阶（C）。比值 \(1/6\) 既不等于 1 也不等于 0，定性为同阶不等价。</p>
+    <p>③ 把 \(f(0)=1/6\) 这一人为补充当作不连续点。实际上 \(\lim_{t\to0}f(t)=1/6\)，补充值与极限一致，\(f\) 连续；即使不补充，积分主部仍由极限决定。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>本类题系数依次为 1、1/2、1/3、1/6、-1/3，非 1 即「同阶不等价」。</p>
+    <p>457、467、477、487、497 题循环同一模板：被积函数由一个经典无穷小差商构成，在 0 处的极限是某个常数 \(c\)。判 \(g(x)\) 与 \(x\) 的关系只需算 \(f(0)\)：\(c=1\) 则等价，\(c\neq0,1\) 则同阶不等价，\(c=0\) 则高阶。真题常把 \(f(0)\) 设为不连续的可去间断点，单点赋值不影响积分主部。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(f(x)=\dfrac{\arcsin x-x}{x^3}\)，\(g(x)=\int_0^x f(t)dt\)，求 \(\lim\limits_{x\to0}\dfrac{g(x)}{x}\)。</p>
-    <p class="var-ans">答案：\(\dfrac16\)。</p>
+    <p><b>变式</b> 设 \(f(x)=\dfrac{\arcsin x-x}{x^3}\)，\(g(x)=\int_0^x f(t)\,dt\)，求 \(\lim\limits_{x\to0}\dfrac{g(x)}{x}\) 并判断 \(g(x)\) 与 \(x\) 的关系。</p>
+    <p class="var-ans">答案：\(\dfrac16\)，同阶但不等价。由洛必达 \(\dfrac{g(x)}x\to g'(0)=f(0)=\dfrac16\)。</p>
   </div>
 </article>
 
@@ -4042,7 +4070,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <article class="q" id="q494">
   <div class="q-head">
     <span class="qno">第 494 题</span>
-    <span class="qtype">\(\ln(1+n^x)/(1+n^{|x|})\) 的分段极限</span>
+    <span class="qtype">\(\ln(1+n^x)/(1+n^{|x|})\) 的分段极限与间断点</span>
     <span class="qsrc">P702</span>
   </div>
   <div class="stem">
@@ -4057,30 +4085,32 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：B</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：分子含 \(\ln(1+n^x)\)、分母含 \(n^{|x|}\)，按 \(x\) 正负分区间。</p>
-    <p>分区间：</p>
-    <p>① 当 \(x>0\)：\(n^x\to+\infty\)，故 \(\ln(1+n^x)\sim x\ln n\)；分母 \(n^{|x|}=n^x\to+\infty\)。比值</p>
-    \[ h(x)=\frac{x\ln n}{n^x}(1+o(1))\to0 \]
-    <p>（因 \(n^x\) 比 \(\ln n\) 增长快得多）。</p>
-    <p>② 当 \(x<0\)：\(n^x\to0\)，故 \(\ln(1+n^x)\sim n^x\to0\)；分母 \(n^{|x|}=n^{-x}\to+\infty\)。比值</p>
-    \[ h(x)\sim\frac{n^x}{n^{-x}}=n^{2x}\to0 \]
-    <p>（因 \(2x<0\)）。</p>
-    <p>③ 当 \(x=0\)：\(n^0=1\)，分子 \(\ln2\)，分母 \(2\)，故 \(h(0)=\dfrac{\ln2}{2}\)。</p>
-    <p>综合：两侧极限均为 0，而 \(h(0)=\frac{\ln2}{2}\neq0\)，故 \(x=0\) 是可去间断点。选 B。</p>
+    <p>识别类型：分子含 \(\ln(1+n^x)\)、分母含 \(n^{|x|}\)，需按 \(x\) 正负分区间，因为 \(|x|\) 在 0 两侧有不同解析表达式，且 \(n^x\) 的走向由 \(x\) 符号决定。</p>
+    <p>① 当 \(x>0\)：\(n^x\to+\infty\)，故 \(\ln(1+n^x)\sim\ln(n^x)=x\ln n\)；分母 \(n^{|x|}=n^x\to+\infty\)。比值</p>
+    \[ h(x)\sim\frac{x\ln n}{n^x}. \]
+    <p>由于 \(n^x\) 是指数级增长（对固定 \(x>0\)），\(\ln n\) 只是对数级，\(\dfrac{\ln n}{n^x}\to0\)，故 \(h(x)\to0\)。</p>
+    <p>② 当 \(x<0\)：\(n^x\to0\)，故 \(\ln(1+n^x)\sim n^x\to0\)；分母 \(n^{|x|}=n^{-x}\to+\infty\)（因 \(-x>0\)）。比值</p>
+    \[ h(x)\sim\frac{n^x}{n^{-x}}=n^{2x}. \]
+    <p>由于 \(2x<0\)，\(n^{2x}\to0\)，故 \(h(x)\to0\)。</p>
+    <p>③ 当 \(x=0\)：\(n^0=1\)，分子 \(\ln(1+1)=\ln2\)，分母 \(1+1=2\)，故</p>
+    \[ h(0)=\frac{\ln2}{2}. \]
+    <p>综合：\(x\to0^+\) 时 \(h\to0\)，\(x\to0^-\) 时 \(h\to0\)，但 \(h(0)=\frac{\ln2}{2}\neq0\)。两侧极限相等（都是 0）但不等于函数值，故 \(x=0\) 是可去间断点。选 B。</p>
+    <p>交叉验证（量级比较）：对 \(x>0\)，\(\dfrac{x\ln n}{n^x}\) 中分子是 \(\ln n\)、分母是 \(n^x\)；对任意固定 \(a>0\)，\(\dfrac{\ln n}{n^a}\to0\)（指数函数比对数函数增长快）。对 \(x<0\)，\(n^{2x}=n^{-|2x|}\to0\)。两侧都趋于 0 是本题与 484 题（左右极限 1 与 0）的区别。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① \(x>0\) 时误以为 \(\ln(1+n^x)\sim x\ln n\) 除以 \(n^x\) 后不是 0。\(n^x\) 是指数级增长，\(\ln n\) 是对数级，比值确实 \(\to0\)。</p>
-    <p>② \(x<0\) 时忘记 \(n^{|x|}=n^{-x}\to+\infty\) 而分子 \(\to0\)。</p>
+    <p>① \(x>0\) 时误以为 \(\ln(1+n^x)\sim x\ln n\) 除以 \(n^x\) 后是某个非零常数。\(n^x\) 是指数级、\(\ln n\) 是对数级，比值确实 \(\to0\)。这是干扰项 C（\(x=1\) 是间断点）的构造来源——把 \(x=1\) 当成分段点是错的，分段点只在 \(x=0\)。</p>
+    <p>② \(x<0\) 时忘记 \(n^{|x|}=n^{-x}\to+\infty\) 而分子 \(\to0\)，误以为比值为某个正数。实际 \(n^x/n^{-x}=n^{2x}\to0\)。</p>
+    <p>③ 把本题的间断点类型误判为跳跃。本题左右极限都是 0，只是函数值 \(\ln2/2\neq0\)，属可去间断点；但题目问的是「间断点有」，可去间断点也是间断点，仍选 B。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>与 454、464、474、484 同组，含 \(n^x\)、\(e^{nx}\) 的数列极限，间断点通常在 \(x=0\)。</p>
+    <p>与 454、464、474、484 同组，含 \(n^x\)、\(e^{nx}\)、\(\ln(1+n^x)\) 的数列极限，间断点通常在 \(x=0\)。本题的特点是分子分母增长率悬殊（\(\ln n\) 对 \(n^x\)），导致两侧都趋于 0，仅靠 \(x=0\) 处的函数值与极限不符形成可去间断。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b> 设 \(h(x)=\lim\limits_{n\to\infty}\dfrac{\ln(1+n^x)}{1+n^x}\)，求 \(h(x)\) 的分段表达式。</p>
-    <p class="var-ans">答案：\(x>0\) 时 \(h=0\)；\(x=0\) 时 \(h=\ln2/2\)；\(x<0\) 时 \(h=0\)。间断点 \(x=0\)。</p>
+    <p><b>变式</b> 设 \(h(x)=\lim\limits_{n\to\infty}\dfrac{\ln(1+n^x)}{1+n^x}\)，求 \(h(x)\) 的分段表达式并指出间断点。</p>
+    <p class="var-ans">答案：\(x>0\) 时 \(h\to\dfrac{\ln(n^x)}{n^x}\to0\)；\(x=0\) 时 \(h=\ln2/2\)；\(x<0\) 时 \(\ln(1+n^x)\sim n^x\to0\) 且 \(1+n^x\to1\)，故 \(h\to0\)。间断点为 \(x=0\)（可去）。</p>
   </div>
 </article>
 
@@ -4228,23 +4258,31 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：B</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：与 458、468、478、488 同模板，被减函数换成双曲正弦 \(\sinh x\)。</p>
-    <p>拆分：</p>
+    <p>识别类型：与 458、468、478、488 同模板——已知一个高阶（分母 \(x^3\)）的差商极限，反求低阶（分母 \(x\)）极限。被减函数换成双曲正弦 \(\sinh x\)。</p>
+    <p>第一步，拆分待求式：</p>
     \[ \frac{f(x)}{x}=\frac{f(x)-\sinh x}{x}+\frac{\sinh x}{x}. \]
-    <p>第一项：</p>
-    \[ \frac{f(x)-\sinh x}{x}=\frac{f(x)-\sinh x}{x^3}\cdot x^2\to5\cdot0=0. \]
-    <p>第二项：\(\sinh x=x+\dfrac{x^3}{6}+\cdots\)，故 \(\dfrac{\sinh x}{x}\to1\)。</p>
-    <p>合计为 \(0+1=1\)。选 B。</p>
+    <p>第二步，把第一项凑回已知条件。乘以、除以同一个 \(x^2\)：</p>
+    \[ \frac{f(x)-\sinh x}{x}=\frac{f(x)-\sinh x}{x^3}\cdot x^2. \]
+    <p>由题设 \(\dfrac{f(x)-\sinh x}{x^3}\to5\)（有界量），乘以 \(x^2\to0\)，故第一项 \(\to5\cdot0=0\)。</p>
+    <p>第三步，算第二项。由 \(\sinh x\) 的泰勒展开</p>
+    \[ \sinh x=\frac{e^x-e^{-x}}{2}=x+\frac{x^3}{6}+\frac{x^5}{120}+\cdots, \]
+    <p>一阶主部为 \(x\)，故</p>
+    \[ \frac{\sinh x}{x}\to1. \]
+    <p>第四步，相加：\(\dfrac{f(x)}{x}\to0+1=1\)。选 B。</p>
+    <p>交叉验证（泰勒展开法）：由已知条件直接写出</p>
+    \[ f(x)=\sinh x+5x^3+o(x^3)=x+\frac{x^3}{6}+5x^3+o(x^3)=x+\frac{31}{6}x^3+o(x^3). \]
+    <p>除以 \(x\) 得 \(1+\dfrac{31}{6}x^2+o(x^2)\to1\)。与拆分法一致。</p>
     <p>本质：\(f(x)-\sinh x=O(x^3)\)，即 \(f(x)=\sinh x+O(x^3)\)。除以 \(x\) 后 \(O(x^3)/x=O(x^2)\to0\)，剩下 \(\sinh x/x\to1\)。差商常数 5 不进入答案。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 把差商常数 5 加进答案。</p>
-    <p>② 记错 \(\sinh x\) 的一阶主部。\(\sinh x=x+x^3/6+\cdots\)，一阶主部是 \(x\)。</p>
+    <p>① 把差商常数 5 直接加进答案，误选 C（2）或臆造其他值。这个 5 在拆分时乘的是 \(x^2\)，趋于 0，不贡献。这是干扰项 C 的构造来源。</p>
+    <p>② 记错 \(\sinh x\) 的一阶主部。\(\sinh x=x+\dfrac{x^3}{6}+\cdots\)，一阶主部是 \(x\)；不是 \(\sinh x\sim1\)，也不是 \(\sinh x\sim x/2\)。注意 \(\sinh x\) 与 \(\sin x\) 的三阶系数符号相反（\(\sin x\) 是 \(-x^3/6\)，\(\sinh x\) 是 \(+x^3/6\)），但一阶主部相同，故本题结论与 458 题（被减 \(\sin x\)）一致。</p>
+    <p>③ 误以为差商分母 \(x^3\) 与待求分母 \(x\) 幂次差两档会让结论变化。只要差商分母幂次严格大于 1，结论就只由被减函数的一阶主部决定；这是干扰项 D（不存在）的构造来源。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>458、468、478、488、498 题循环，被减函数依次为 \(\sin x,\tan x,\arcsin x,\ln(1+x),\sinh x\)，一阶主部均为 \(x\)，答案恒为 B。</p>
+    <p>458、468、478、488、498 题构成同一模板的循环，被减函数依次为 \(\sin x\)、\(\tan x\)、\(\arcsin x\)、\(\ln(1+x)\)、\(\sinh x\)，它们在 0 处的一阶主部都是 \(x\)，故答案恒为 B（1）。真题中常把被减函数换成 \(e^x-1\)、\(\ln(1-x)\) 等，解题流程不变：拆分 \(\to\) 凑回已知差商 \(\to\) 看差商乘 \(x^{k-1}\to0\) \(\to\) 剩下被减函数的一阶主部比值。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
