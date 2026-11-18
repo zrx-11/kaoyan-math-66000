@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>《极限》 · 第 882–996 题</title>
+<title>《极限》 · 第 876–993 题</title>
 <link rel="stylesheet" href="../../assets/site.css">
 <script>
 MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
@@ -18,9 +18,125 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <div class="wrap">
 <header class="pagehead">
   <div class="kicker">02-gaoshu-15000 · 专题 01</div>
-  <h1>第 882 – 996 题</h1>
+  <h1>第 876 – 993 题</h1>
   <p class="sub"><a href="part-08.html">← 上一分页</a> <a href="index.html">目录</a> <a href="part-10.html">下一分页 →</a></p>
 </header>
+<article class="q" id="q876">
+  <div class="q-head">
+    <span class="qno">第 876 题</span>
+    <span class="qtype">乘积展开 e^x cos x</span>
+    <span class="qsrc">P767</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{e^x\cos x-1-x}{x^2}=\)</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^2\)。题目形式是两个泰勒级数的乘积，需要乘到 \(x^2\) 这一阶。</p>
+    <p>写出两个展开（到 \(x^2\) 即可）：</p>
+    \[ e^x=1+x+\frac{x^2}{2}+o(x^2),\quad \cos x=1-\frac{x^2}{2}+o(x^2). \]
+    <p>相乘：</p>
+    \[ e^x\cos x=\left(1+x+\frac{x^2}{2}\right)\left(1-\frac{x^2}{2}\right)+o(x^2). \]
+    <p>逐项乘：常数 \(1\)；一次 \(x\)；二次 \(\frac{x^2}{2}-\frac{x^2}{2}=0\)。故</p>
+    \[ e^x\cos x=1+x+0\cdot x^2+o(x^2). \]
+    <p>代入分子：</p>
+    \[ e^x\cos x-1-x=o(x^2). \]
+    <p>除以 \(x^2\) 取极限得 \(0\)。</p>
+    <p>关键一步：本题的二次项恰好抵消。\(e^x\) 的二次项 \(+\frac{x^2}{2}\) 与 \(\cos x\) 的二次项 \(-\frac{x^2}{2}\) 在乘积中直接相加为零，这正是题目的巧思。若只保留到一次，会误以为分子 \(\sim x\)，除以 \(x^2\) 发散。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 用等价无穷小 \(e^x-1\sim x\)、\(\cos x-1\sim -x^2/2\) 分别替换，再乘起来，得到 \((1+x)(1-x^2/2)\approx 1+x-\frac{x^3}{2}\)，于是分子 \(\sim 0\)，除以 \(x^2\) 得 \(0\)。结果对，但这是巧合——因为二次项恰好抵消。换一道乘积题（比如 \(e^x\sin x\)），等价替换就会漏掉三次项交叉贡献。</p>
+    <p>② 不展开二次项，直接说 \(e^x\cos x-1-x=o(x^2)\)，方向正确但未说清为什么。必须写清交叉项抵消。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>两个基本初等函数乘积的展开，是「泰勒级数乘法」的标准考法。常见组合：\(e^x\cos x\)、\(e^x\sin x\)、\(\sin x\cos x\)、\(\ln(1+x)\cos x\)。乘的时候只要按「次数相加」规则，逐项配对到分母阶数即可。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x\sin x-x}{x^2}\)。</p>
+    <p class="var-ans">答案：\(1\)。\(e^x\sin x=(1+x+\frac{x^2}{2}+\cdots)(x-\frac{x^3}{6}+\cdots)=x+x^2+O(x^3)\)，分子 \(=x^2+O(x^3)\)，除以 \(x^2\) 得 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q878">
+  <div class="q-head">
+    <span class="qno">第 878 题</span>
+    <span class="qtype">复合展开 ln(1+x+x²)</span>
+    <span class="qsrc">P767</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\ln(1+x+x^2)-x}{x^2}=\)</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^2\)。令 \(u=x+x^2\)，则 \(\ln(1+u)\) 中 \(u\to0\)。</p>
+    <p>第一步：展开 \(\ln(1+u)=u-\dfrac{u^2}{2}+o(u^2)\)。</p>
+    <p>第二步：把 \(u=x+x^2\) 代入。因为分母是 \(x^2\)，\(u^2\) 的最低次是 \(x^2\)，必须保留：</p>
+    \[ \ln(1+u)=(x+x^2)-\frac12(x+x^2)^2+o(x^2). \]
+    <p>计算：\((x+x^2)^2=x^2+2x^3+\cdots\)，在 \(o(x^2)\) 精度下只取 \(x^2\)。</p>
+    \[ \ln(1+x+x^2)=x+x^2-\frac{x^2}{2}+o(x^2)=x+\frac{x^2}{2}+o(x^2). \]
+    <p>第三步：</p>
+    \[ \ln(1+x+x^2)-x=\frac{x^2}{2}+o(x^2). \]
+    <p>除以 \(x^2\) 取极限得 \(\frac{1}{2}\)。</p>
+    <p>关键一步：本题若直接用 \(\ln(1+u)\sim u\) 等价替换，会得到 \(\ln(1+x+x^2)\sim x+x^2\)，分子 \(\sim x^2\)，答案 \(1\)——这是错的。因为减法中 \(\ln(1+u)-u\) 的主部是 \(-u^2/2\)，等价替换只取主部 \(u\)，丢掉了 \(u^2/2\) 项。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 在减法中用等价无穷小替换：\(\ln(1+u)\sim u\) 在「整体等价」下是对的，但本题问的是 \(\ln(1+u)-x\)，\(u\) 中含 \(x\) 已被减去，剩下的是 \(-u^2/2\)，等价替换看不到这一项。</p>
+    <p>② 把 \(u=x+x^2\) 代入 \(u^2\) 时忘记展开：\((x+x^2)^2=x^2+2x^3+x^4\)，在 \(x^2\) 精度下只取 \(x^2\)，与题目分母匹配。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(\ln(1+\text{含 }x\text{ 的多项式})\) 减 \(x\)」是考研中值类极限的典型题。考的是「等价无穷小在减法中失效，必须用泰勒展开」这一原则。变体：\(\ln(1+x+x^2+x^3)\)、\(\ln(1+\sin x)\)、\(\ln(1+e^x-1)\) 等。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x+x^2)-x-\dfrac{x^2}{2}}{x^3}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{2}{3}\)。令 \(u=x+x^2\)，展开 \(\ln(1+u)=u-\dfrac{u^2}{2}+\dfrac{u^3}{3}+o(u^3)\)。代入 \(u=x+x^2\)：\(u^2=x^2+2x^3+O(x^4)\)，\(u^3=x^3+O(x^4)\)。于是 \(\ln(1+u)=x+x^2-\dfrac{x^2}{2}-x^3+\dfrac{x^3}{3}+O(x^4)=x+\dfrac{x^2}{2}-\dfrac{2x^3}{3}+O(x^4)\)。减去 \(x+\dfrac{x^2}{2}\) 后剩 \(-\dfrac{2x^3}{3}+O(x^4)\)，除以 \(x^3\) 得 \(-\dfrac{2}{3}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q880">
+  <div class="q-head">
+    <span class="qno">第 880 题</span>
+    <span class="qtype">复合展开 arctan(x+x²)</span>
+    <span class="qsrc">P768</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{x\to0}\dfrac{\arctan(x+x^2)-x}{x^2}=\)</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^2\)。令 \(u=x+x^2\)，则 \(\arctan u\) 中 \(u\to0\)。</p>
+    <p>第一步：\(\arctan u=u-\dfrac{u^3}{3}+o(u^3)\)。</p>
+    <p>第二步：代入 \(u=x+x^2\)。因为分母是 \(x^2\)，\(u^3=O(x^3)\) 高于 \(x^2\)，只保留到二阶即可：</p>
+    \[ \arctan u=u+o(u)=x+x^2+o(x^2). \]
+    <p>第三步：</p>
+    \[ \arctan(x+x^2)-x=x^2+o(x^2). \]
+    <p>除以 \(x^2\) 取极限得 \(1\)。</p>
+    <p>关键一步：本题与第 878 题（ln(1+x+x²)）形成对照。\(\ln(1+u)\) 的下一项是 \(-u^2/2\)，与 \(u\) 中的 \(x^2\) 同阶，必须保留；而 \(\arctan u\) 的下一项是 \(-u^3/3\)，高于 \(x^2\)，只保留到二阶即可。这就是「外层展开次项的阶数决定要不要展开到二阶」。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(\arctan(x+x^2)\sim x+x^2\) 等价替换后分子就是 \(x^2\)，答案 \(1\)。结果对，但要注意：在「\(\arctan u - x\)」中，\(\arctan u\sim u\) 是合法的，因为 \(\arctan u-u=O(u^3)\) 高于分母 \(x^2\)。换一道分母是 \(x^3\) 的题，这个等价替换就会出错。</p>
+    <p>② 把 \(\arctan u\) 展开到二阶，发现 \(\arctan u\) 没有二阶项（奇函数），以为漏写。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>反三角函数作为外层的复合展开题，常与对数、指数并列出现。判据是「\(\arctan u-u=O(u^3)\)」——这决定了在分母为 \(x^2\) 的题中可以直接替换，在分母为 \(x^3\) 的题中必须展开。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arctan(x+x^2)-x-x^2}{x^3}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{1}{3}\)。令 \(u=x+x^2\)，展开 \(\arctan u=u-\dfrac{u^3}{3}+o(u^3)\)。代入 \(u=x+x^2\)，并注意 \(u^3=(x+x^2)^3=x^3+3x^4+\cdots\)，故 \(\arctan u=(x+x^2)-\dfrac{x^3}{3}+o(x^3)\)。分子减去 \(x+x^2\) 后剩 \(-\dfrac{x^3}{3}+o(x^3)\)，除以 \(x^3\) 得 \(-\dfrac{1}{3}\)。与原题对照：原题分母是 \(x^2\)，主部来自 \(u\) 中的 \(x^2\) 项；变式把这一 \(x^2\) 项也减掉，主部就落到 \(-u^3/3\) 上，正好是 \(x^3\) 阶，与新分母匹配。</p>
+  </div>
+</article>
+
 <article class="q" id="q882">
   <div class="q-head">
     <span class="qno">第 882 题</span>
@@ -3738,124 +3854,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p><b>变式</b> 设 \(\lim\dfrac{1}{x^{a}}\int_0^{x}\sqrt[2]{1+t^{2}}dt=b\)，求 \(a,b\)。</p>
     <p class="var-ans">答案：\(a=2,\ b=1/2\)。被积函数 \(\sim t\)，积分 \(\sim x^{2}/2\)。</p>
   </div>
-</article>
-
-<article class="q" id="q994">
-  <div class="q-head">
-    <span class="qno">第 994 题</span>
-    <span class="qtype">无穷小的阶与变限积分</span>
-    <span class="qsrc">P787</span>
-  </div>
-  <div class="stem">
-    <p>设 \(f(x)\) 和 \(g(x)\) 为连续函数，当 \(x\to0\) 时，\(f(x)\sim x^{6}\)，\(g(x)\sim x^{7}\)，\(F(x)=\int_0^{x}f(t)\,dt\)，\(G(x)=\int_0^{x}g(t)\,dt\)。则当 \(x\to0\) 时，\(F(x)\) 是 \(G(x)\) 的什么无穷小？</p>
-  </div>
-  <div class="answer">答案：低阶无穷小</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>与 974、984 同型。由 \(f(t)\sim t^{6}\)：</p>
-    \[
-    F(x)=\int_0^{x}f(t)dt\sim\int_0^{x}t^{6}dt=\frac{x^{7}}{7}.
-    \]
-    <p>由 \(g(t)\sim t^{7}\)：</p>
-    \[
-    G(x)=\int_0^{x}g(t)dt\sim\int_0^{x}t^{7}dt=\frac{x^{8}}{8}.
-    \]
-    <p>比较：\(F\sim x^{7}/7\)，\(G\sim x^{8}/8\)。当 \(x\to0\)，\(x^{7}\) 比 \(x^{8}\) 量级大（\(x^{7}/x^{8}=1/x\to\infty\)），即 \(F\) 趋于 0 的速度比 \(G\) 慢，故 \(F\) 是 \(G\) 的<b>低阶无穷小</b>。</p>
-    <p>一般规律：被积函数 \(f\sim x^{p}\)，积分后 \(F\sim x^{p+1}/(p+1)\)。本题 \(p=6<q=7\)，积分阶数 \(7<8\)，故为低阶。</p>
-  
-    <p>与第 969、980 题对照：969 用 \(\sin x\)、980 用 \(\tan x\)、本题用 \(\arcsin x\)，结构完全平行，只是 \(x^{5}\) 项系数分别为 \(1/120\)、\(2/15\)、\(3/40\)。</p>
-    <p>与第 971、981 题同型：分母都是幂函数之和，分子都是 \(e^{-1/x^{2}}\)，结论恒为 0。差别只在分母幂次高低，但无论多高，\(e^{-t}\) 最终都占优。</p>
-    <p>与第 982 题对照：982 是二重积分，本题是三重积分，剥皮多一层，主部多乘一个 \(1/(6x^{5})\)。两者均为 \(\infty/\infty\) 型，结论都是 0。</p>
-    <p>与第 973、983 题对照：三题仅 \(p,q\) 递增，公式 \(a=1+p/q,b=q/(p+q)\) 通用。本题 \(p=10,q=7\) 即得 \(a=17/7,b=7/17\)。</p>
-    <p>与第 969、980 题对照：969 用 \(\sin x\)、980 用 \(\tan x\)、本题用 \(\arcsin x\)，结构完全平行，只是 \(x^{5}\) 项系数分别为 \(1/120\)、\(2/15\)、\(3/40\)。</p>
-    <p>与第 971、981 题同型：分母都是幂函数之和，分子都是 \(e^{-1/x^{2}}\)，结论恒为 0。差别只在分母幂次高低，但无论多高，\(e^{-t}\) 最终都占优。</p>
-    <p>与第 982 题对照：982 是二重积分，本题是三重积分，剥皮多一层，主部多乘一个 \(1/(6x^{5})\)。两者均为 \(\infty/\infty\) 型，结论都是 0。</p>
-    <p>与第 973、983 题对照：三题仅 \(p,q\) 递增，公式 \(a=1+p/q,b=q/(p+q)\) 通用。本题 \(p=10,q=7\) 即得 \(a=17/7,b=7/17\)。</p></div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 方向搞反：趋于 0 更慢的是低阶。\(x^{7}\) 比 \(x^{8}\) 低阶。</p>
-    <p>② 忘记积分后幂次加 1，直接用 \(x^{6}\) 与 \(x^{7}\) 比较。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>无穷小比较与变限积分结合，反复出现。核心结论：积分后阶数加 1，被积函数阶数小的积分仍低阶。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 若 \(f\sim x^{3}\)，\(g\sim x^{9}\)，问 \(F=\int_0^x f\) 是 \(G=\int_0^x g\) 的高阶还是低阶无穷小？</p>
-    <p class="var-ans">答案：低阶。\(F\sim x^{4}/4\)，\(G\sim x^{10}/10\)，\(F/G\sim 10/(4x^{6})\to\infty\)。</p>
-  </div>
-</article>
-
-<article class="q" id="q995">
-  <div class="q-head">
-    <span class="qno">第 995 题</span>
-    <span class="qtype">极限（原书公式缺失）</span>
-    <span class="qsrc">P788</span>
-  </div>
-  <div class="stem">
-    <p>计算（原书本题表达式在生成时编译失败，页面图像与 PDF 文本层均只显示「Tex translation failed」，题干公式缺失）。</p>
-  </div>
-  <div class="answer">答案：0</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>本题原表达式在源文档中未能渲染：页面 P788 与 PDF 文本层对应位置均为「Tex translation failed」，无法从现有材料恢复原式。按该组题型分布，相邻 slot10 为 \(\arctan x\) 等单函数 Taylor 截断极限，所给结果为 0，可判断本题为某种 \(0/0\) 型或无穷小比较题，答案为 0。</p>
-    <p>这类题若答案为 0，通常意味着分子（或某部分）是比分母高阶的无穷小。例如常见结构：分子为某函数与其 Taylor 主部之差，且差的阶数高于分母；或分子为 \(e^{-1/x^{2}}\) 类比一切幂函数高阶的项。判断方法是先识别类型，再用等价无穷小或 Taylor 展开到足够阶数比较阶数。由于原式缺失，无法写出唯一确定的逐步推导；所给简版答案 0 按记录保留。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 在原式缺失时凭印象补写表达式，易与同组其他题混淆。</p>
-    <p>② 对答案为 0 的题，常见错误是展开阶数不足，误把高阶无穷小当成同阶，导致算出非零值。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>答案为 0 的极限题在考研中常以「无穷小比较」「Taylor 余项」形式出现。复习时应熟记基本初等函数展开系数，能快速判断分子分母阶数关系。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{-1/x^{2}}}{x^{k}}\)（\(k\) 为任意正整数）。</p>
-    <p class="var-ans">答案：0。换元 \(t=1/x^{2}\) 后为 \(t^{k/2}e^{-t}\to0\)。这是答案恒为 0 的典型结构。</p>
-  </div>
-</article>
-
-<article class="q" id="q996">
-  <div class="q-head">
-    <span class="qno">第 996 题</span>
-    <span class="qtype">不等式证明（符号估计）</span>
-    <span class="qsrc">P788</span>
-  </div>
-  <div class="stem">
-    <p>证明：对于正整数 \(n\)，有 \(\dfrac{1}{6n}-\ln\!\left(1+\dfrac1n\right)<\dfrac{1}{7n^{7}}\)。</p>
-  </div>
-  <div class="answer">答案：成立</div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>与 976、986 同型，先判断左端符号。由 \(\ln(1+x)>x/(1+x)\)（\(x>0\)，对 \(g(x)=\ln(1+x)-x/(1+x)\) 求导 \(g'(x)=x/(1+x)^{2}>0\) 且 \(g(0)=0\) 可得），取 \(x=1/n\)：</p>
-    \[
-    \ln(1+1/n)>\frac{1/n}{1+1/n}=\frac{1}{n+1}.
-    \]
-    <p>当 \(n\ge1\) 时 \(1/(n+1)>1/(6n)\)（即 \(6n>n+1\)，亦即 \(n>1/5\)），故</p>
-    \[
-    \ln(1+1/n)>\frac{1}{n+1}>\frac{1}{6n}\quad\Longrightarrow\quad \frac{1}{6n}-\ln(1+1/n)<0.
-    \]
-    <p>右端 \(1/(7n^{7})>0\)，负小于正，不等式成立。</p>
-    <p>若精细展开，左端 \(=-5/(6n)+1/(2n^{2})-1/(3n^{3})+\cdots<0\)，主项 \(-5/(6n)\) 确为负，与符号判断一致。典型错解是舍近求远，把对数展开到 \(n^{-7}\) 再与 \(1/(7n^{7})\) 比较，忽略左端整体为负；这类题的取巧之处正在于符号判断一步到位。</p>
-    <p>与第 976、986 题构成同一不等式模板：左端 \(1/(mn)-\ln(1+1/n)\) 恒为负，右端恒为正，符号判断即证。这类题的取巧之处在于不必展开到右端的幂次。</p>
-  <p>这类不等式在考研中常以夹逼或级数余项估计的形式出现，本题属于符号估计型，考查对 \(\ln(1+x)\) 与有理式大小关系的掌握。</p>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 舍近求远，试图把 \(\ln(1+1/n)\) 展开到 \(n^{-7}\) 再与 \(1/(7n^{7})\) 比较。</p>
-    <p>② 记错 \(\ln(1+x)>x/(1+x)\) 的方向。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>与 976、986 同型，符号估计型不等式。同组题把系数按规律递推，本质都是判断左端为负。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 证明 \(\ln(1+1/n)>\dfrac{1}{n+1}\)。</p>
-    <p class="var-ans">答案：令 \(g(x)=\ln(1+x)-x/(1+x)\)，\(g'(x)=x/(1+x)^{2}>0\)，\(g(0)=0\)，故 \(x>0\) 时 \(g>0\)。</p>
-  </div>
-</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 882–996 题</span></div>
+</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 876–993 题</span></div>
 </div>
 </body>
 </html>
