@@ -295,13 +295,14 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(-\dfrac12\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(\cos x\to1\)，故 \(\ln(\cos x)\to0\)，分母 \(x^2\to0\)，属 \(\dfrac00\) 型。凡是 \(\ln f(x)\) 且 \(f(x)\to1\)，一律写成 \(\ln(1+u)\) 的形式，其中 \(u=f(x)-1\to0\)，再用 \(\ln(1+u)\sim u\)。</p>
-    <p>取 \(u=\cos x-1\)，则</p>
+    <p>识别类型：\(x\to0\) 时 \(\cos x\to1\)，故 \(\ln(\cos x)\to0\)，分母 \(x^2\to0\)，属 \(\dfrac00\) 型。凡是 \(\ln f(x)\) 且 \(f(x)\to1\)，一律写成 \(\ln(1+u)\) 的形式，其中 \(u=f(x)-1\to0\)，再用等价无穷小 \(\ln(1+u)\sim u\)，不能把对数整体拿去等价。</p>
+    <p>关键代换：取 \(u=\cos x-1\)，则</p>
     \[ \ln(\cos x)=\ln\bigl(1+(\cos x-1)\bigr)\sim\cos x-1. \]
-    <p>而 \(\cos x-1\sim-\dfrac{x^2}{2}\)（这是 \(1-\cos x\sim\dfrac{x^2}{2}\) 加负号），故</p>
-    \[ \ln(\cos x)\sim-\frac{x^2}{2},\qquad \frac{\ln(\cos x)}{x^2}\to-\frac12. \]
-    <p>这一步的关键是认清 \(\ln(1+u)\sim u\) 里的 \(u\) 是"趋于 0 的增量"，不是被取对数的整体 \(\cos x\)。写成 \(\ln(\cos x)\sim\cos x\) 是错的，因为 \(\cos x\to1\) 而不是 0。</p>
-    <p>也可用洛必达验证：\(\dfrac{(\cos x)'/\cos x}{2x}=\dfrac{-\tan x}{2x}\to-\dfrac12\)，方法对但绕远。</p>
+    <p>逐步代入：\(\cos x-1\) 与 \(1-\cos x\) 互为相反数，由 \(1-\cos x\sim\dfrac{x^2}{2}\) 得</p>
+    \[ \cos x-1\sim-\frac{x^2}{2},\qquad \ln(\cos x)\sim-\frac{x^2}{2}. \]
+    <p>阶数校验：分子主部是二阶 \(-x^2/2\)，分母也是 \(x^2\)，同阶相除得常数，代入即</p>
+    \[ \frac{\ln(\cos x)}{x^2}\to-\frac12. \]
+    <p>与答案对齐：极限为 \(-\dfrac12\)。这里 \(\ln(1+u)\sim u\) 中的 \(u\) 是趋于 0 的增量 \(\cos x-1\)，不是被取对数的整体 \(\cos x\)；写成 \(\ln(\cos x)\sim\cos x\) 是错的，因为 \(\cos x\to1\) 而不是 0。也可用洛必达复核：分子导数为 \((\cos x)'/\cos x=-\tan x\)，分母导数 \(2x\)，得 \(\dfrac{-\tan x}{2x}\to-\dfrac12\)，两条路径结果一致。常见错法是把 \(\cos x-1\) 的负号丢掉，得到 \(+\dfrac12\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -405,12 +406,12 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(\dfrac13\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：分子是变上限积分，\(x\to0\) 时趋于 0，分母 \(x^3\to0\)，属 \(\dfrac00\) 型。与第 501 题同一套路：先对分子用变限积分求导脱掉积分号，再在商式里用等价无穷小。</p>
-    <p>记 \(F(x)=\int_0^x\sin(t^2)\,\mathrm{d}t\)，由微积分基本定理 \(F'(x)=\sin(x^2)\)。洛必达一次：</p>
+    <p>识别类型：分子是变上限积分，\(x\to0\) 时积分区间缩到一点，分子趋于 0，分母 \(x^3\to0\)，属 \(\dfrac00\) 型。处理变限积分的第一动作是用微积分基本定理脱掉积分号，再在商式里用等价无穷小定阶。</p>
+    <p>记 \(F(x)=\int_0^x\sin(t^2)\,\mathrm{d}t\)，由变上限积分求导公式 \(F'(x)=\sin(x^2)\)。洛必达一次：</p>
     \[ \lim_{x\to0}\frac{\int_0^x\sin(t^2)\mathrm{d}t}{x^3}=\lim_{x\to0}\frac{\sin(x^2)}{3x^2}. \]
-    <p>而 \(u\to0\) 时 \(\sin u\sim u\)，取 \(u=x^2\) 得 \(\sin(x^2)\sim x^2\)，代入得</p>
-    \[ \frac{x^2}{3x^2}=\frac13. \]
-    <p>定阶视角：被积函数 \(\sin(t^2)\sim t^2\)，主部阶数 \(k=2\)，积分后升一阶为 \(x^3/3\)，与分母 \(x^3\) 同阶，比值就是系数 \(1/3\)。这与 501 的 \(e^{t^2}-1\sim t^2\) 结构完全一致，答案也同为 \(1/3\)。</p>
+    <p>逐步代入等价：\(u\to0\) 时 \(\sin u\sim u\)，取 \(u=x^2\to0\)，得 \(\sin(x^2)\sim x^2\)，代入商式</p>
+    \[ \frac{\sin(x^2)}{3x^2}\sim\frac{x^2}{3x^2}=\frac13. \]
+    <p>阶数校验：被积函数 \(\sin(t^2)\sim t^2\)，主部阶数 \(k=2\)，积分一次升一阶，分子主部为 \(x^3/3\)，与分母 \(x^3\) 同阶，比值正是系数 \(1/3\)。求导时只把被积函数里的 \(t\) 换成上限 \(x\)，上限是 \(x\)、导数为 1，不再乘链式因子。与答案对齐：极限为 \(\dfrac13\)。常见错法是把 \(\sin(t^2)\) 按 \(\sin t\sim t\) 误写成 \(t\)，低估一阶，导致分子阶数判断错误。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -440,12 +441,12 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(1\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(x\to+\infty\) 时两个根式都趋于 \(+\infty\)，相减属 \(\infty-\infty\) 型。根式差在无穷远处的第一反应仍是有理化，乘共轭根式把"差"变成"商"。</p>
-    <p>乘 \(\sqrt{x^2+x}+\sqrt{x^2-x}\)：</p>
+    <p>识别类型：\(x\to+\infty\) 时两个根式都趋于 \(+\infty\)，相减属 \(\infty-\infty\) 型。无穷远处的根式差第一反应是有理化，乘共轭根式把「差」变成「商」，避免两个无穷大直接相减。</p>
+    <p>关键代换：乘 \(\sqrt{x^2+x}+\sqrt{x^2-x}\)，分子用平方差公式：</p>
     \[ \sqrt{x^2+x}-\sqrt{x^2-x} =\frac{(x^2+x)-(x^2-x)}{\sqrt{x^2+x}+\sqrt{x^2-x}}=\frac{2x}{\sqrt{x^2+x}+\sqrt{x^2-x}}. \]
-    <p>现在分子分母都是无穷大，同除 \(x\)（注意 \(x\to+\infty\)，\(x>0\)，\(\sqrt{x^2}=x\)）：</p>
+    <p>逐步代入：分子分母都是无穷大，同除 \(x\)。注意 \(x\to+\infty\) 时 \(x>0\)，\(\sqrt{x^2}=x\)，故</p>
     \[ \frac{2x}{\sqrt{x^2+x}+\sqrt{x^2-x}} =\frac{2}{\sqrt{1+\frac1x}+\sqrt{1-\frac1x}}\to\frac{2}{1+1}=1. \]
-    <p>也可用提取 \(x\) 加二项式展开验证：\(\sqrt{x^2+x}=x\sqrt{1+\frac1x}=x\left(1+\frac{1}{2x}-\frac{1}{8x^2}+\cdots\right)=x+\frac12-\frac{1}{8x}+\cdots\)，同理 \(\sqrt{x^2-x}=x-\frac12+\frac{1}{8x}+\cdots\)，相减得 \(1+o(1)\)。</p>
+    <p>阶数校验：根号内 \(\frac1x\to0\)，两个根式分别趋于 1，分母极限为 2，分子极限对应系数 2，商为常数 1，不再含 \(x\)。二项式展开复核：\(\sqrt{x^2+x}=x+\frac12-\frac{1}{8x}+\cdots\)，\(\sqrt{x^2-x}=x-\frac12+\frac{1}{8x}+\cdots\)，相减得 \(1+o(1)\)，与有理化结果一致。与答案对齐：极限为 \(1\)。常见错法是方向看反：若极限过程为 \(x\to-\infty\)，则 \(\sqrt{x^2}=|x|=-x\)，同除 \(x\) 要变号，结果为 \(-1\)；本题 \(x\to+\infty\)，符号取正。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -545,13 +546,14 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(-\dfrac13\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(\arctan x\) 与 \(x\) 一阶项相同，相减后一阶抵消，分母 \(x^3\to0\)，属 \(\dfrac00\) 型、三阶无穷小比较。直接背展开公式：</p>
+    <p>识别类型：\(\arctan x\) 与 \(x\) 的一阶项都是 \(x\)，相减后一阶抵消，分母 \(x^3\to0\)，属 \(\dfrac00\) 型、三阶无穷小比较。一阶抵消之后必须补到三阶才能定值。</p>
+    <p>关键展开：反正切的麦克劳林展开为</p>
     \[ \arctan x=x-\frac{x^3}{3}+o(x^3), \]
-    <p>故</p>
-    \[ \frac{\arctan x-x}{x^3}=\frac{-\frac{x^3}{3}+o(x^3)}{x^3}\to-\frac13. \]
-    <p>若不背公式，用洛必达推导：分子导数 \(\dfrac{1}{1+x^2}-1=\dfrac{-x^2}{1+x^2}\)，分母导数 \(3x^2\)，得</p>
+    <p>逐步代入分子：</p>
+    \[ \arctan x-x=-\frac{x^3}{3}+o(x^3),\qquad \frac{\arctan x-x}{x^3}=\frac{-\frac{x^3}{3}+o(x^3)}{x^3}\to-\frac13. \]
+    <p>阶数校验：\(\arctan x\) 没有二阶项，三阶主部就是 \(-x^3/3\)，与分母 \(x^3\) 同阶，比值为系数 \(-1/3\)。洛必达复核：分子导数 \(\dfrac{1}{1+x^2}-1=\dfrac{-x^2}{1+x^2}\)，分母导数 \(3x^2\)，得</p>
     \[ \lim_{x\to0}\frac{-x^2/(1+x^2)}{3x^2}=\lim_{x\to0}\frac{-1}{3(1+x^2)}=-\frac13. \]
-    <p>洛必达一次就出结果，因为导数化简后 \(x^2\) 约掉了，这是比展开公式更直接的验证。</p>
+    <p>洛必达一次即出结果，因为导数化简后 \(x^2\) 约掉。与答案对齐：极限为 \(-\dfrac13\)。常见错法是把 \(\arctan x\) 与 \(\arcsin x\) 的三阶系数记混：\(\arcsin x-x\sim+\dfrac{x^3}{6}\)，\(\arctan x-x\sim-\dfrac{x^3}{3}\)，符号与系数都不同；\(\arctan\) 在 0 附近比 \(x\) 略小，故系数为负。化简导数时负号来自分子 \(1-(1+x^2)\)，漏掉会得 \(+\dfrac13\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -581,13 +583,14 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(\dfrac13\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：分子 \(\sin x\) 与 \(x\cos x\) 一阶项都是 \(x\)，相减后一阶抵消，分母 \(x^3\to0\)，属 \(\dfrac00\) 型、三阶比较。两块分别展开到三阶：</p>
+    <p>识别类型：分子 \(\sin x\) 与 \(x\cos x\) 的一阶项都是 \(x\)，相减后一阶抵消，分母 \(x^3\to0\)，属 \(\dfrac00\) 型、三阶比较。两块分别展开到三阶，再合并同类项。</p>
+    <p>关键展开：正弦函数</p>
     \[ \sin x=x-\frac{x^3}{6}+o(x^3). \]
     <p>对 \(x\cos x\)，先展 \(\cos x=1-\dfrac{x^2}{2}+o(x^2)\)，再乘 \(x\)：</p>
     \[ x\cos x=x\left(1-\frac{x^2}{2}+o(x^2)\right)=x-\frac{x^3}{2}+o(x^3). \]
-    <p>相减：</p>
+    <p>逐步代入分子相减：</p>
     \[ \sin x-x\cos x=\left(-\frac{x^3}{6}\right)-\left(-\frac{x^3}{2}\right)=\left(\frac12-\frac16\right)x^3=\frac{x^3}{3}+o(x^3). \]
-    <p>除以 \(x^3\) 得 \(\dfrac13\)。注意 \(x\cos x\) 里乘了一个 \(x\)，所以 \(\cos x\) 只需展开到 \(x^2\) 项，乘完才对应三阶；若只展 \(\cos x\) 到常数项，会丢掉 \(-\dfrac{x^3}{2}\) 这一块。</p>
+    <p>阶数校验：\(\cos x\) 前面乘了 \(x\)，它的二阶项 \(-x^2/2\) 乘 \(x\) 后变成三阶 \(-x^3/2\)，所以 \(\cos x\) 必须展开到 \(x^2\) 才出三阶项；若只展到常数项，这一块就会丢失。除以 \(x^3\) 得 \(\dfrac13\)，与答案对齐。常见错法有两处：一是把 \(x\cos x\) 只看到一阶 \(x\) 就停手，与 \(\sin x=x\) 对消成 0；二是符号带错，\(-x\cos x\) 贡献 \(-x+x^3/2\)，与 \(-x^3/6\) 相加才得到 \(+x^3/3\)，把余弦展开符号记反会得到 \(-1/3\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -617,13 +620,14 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(-\dfrac19\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：分子是 \((1+x)^{1/3}\) 减去它的一阶泰勒多项式，剩下的是二阶余项，分母 \(x^2\to0\)，属 \(\dfrac00\) 型。根式题用广义二项式展开最直接：</p>
+    <p>识别类型：分子是 \((1+x)^{1/3}\) 减去它的一阶泰勒多项式，剩下的是二阶余项，分母 \(x^2\to0\)，属 \(\dfrac00\) 型。根式题用广义二项式展开最直接，题目特意减掉 \(x/3\)，目的就是「留二阶」，让分母 \(x^2\) 测出二阶系数。</p>
+    <p>关键展开公式：</p>
     \[ (1+x)^\alpha=1+\alpha x+\frac{\alpha(\alpha-1)}{2}x^2+o(x^2). \]
-    <p>取 \(\alpha=\dfrac13\)：</p>
+    <p>取 \(\alpha=\dfrac13\)，代入：</p>
     \[ \sqrt[3]{1+x}=1+\frac13 x+\frac{\frac13\left(\frac13-1\right)}{2}x^2+o(x^2)=1+\frac{x}{3}+\frac{\frac13\cdot\left(-\frac23\right)}{2}x^2+o(x^2). \]
-    <p>算二阶系数：\(\dfrac{-\frac{2}{9}}{2}=-\dfrac19\)。故</p>
+    <p>二阶系数计算：\(\alpha-1=-\dfrac23\)，分子 \(\dfrac13\cdot\left(-\dfrac23\right)=-\dfrac29\)，再除以 2 得 \(-\dfrac19\)，故</p>
     \[ \sqrt[3]{1+x}=1+\frac{x}{3}-\frac{x^2}{9}+o(x^2). \]
-    <p>减去 \(1+\dfrac{x}{3}\) 得 \(-\dfrac{x^2}{9}\)，除以 \(x^2\) 得 \(-\dfrac19\)。题目特意减掉 \(\dfrac{x}{3}\)，目的就是"留二阶"，让分母 \(x^2\) 能测出二阶系数。</p>
+    <p>阶数校验：减去 \(1+\dfrac{x}{3}\) 后常数项与一阶项全部消掉，分子主部为 \(-x^2/9\)，与分母 \(x^2\) 同阶，相除得 \(-\dfrac19\)，与答案对齐。常见错法有两处：一是二阶系数符号算错，\(\alpha-1\lt0\)，结果必为负；二是只记 \(\sqrt[3]{1+x}-1\sim x/3\)，忽略题目已减掉 \(x/3\)，不展开二阶会漏掉答案来源 \(-x^2/9\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -653,12 +657,14 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(\dfrac13\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(\tan x\) 与 \(x\) 一阶项相同，相减后一阶抵消，分母 \(x^3\to0\)，属 \(\dfrac00\) 型、三阶比较。直接用展开：</p>
+    <p>识别类型：\(\tan x\) 与 \(x\) 一阶项相同，相减后一阶抵消，分母 \(x^3\to0\)，属 \(\dfrac00\) 型、三阶比较。先用展开式给出主部，再现场推导系数，避免死记硬背记错。</p>
+    <p>关键展开：</p>
     \[ \tan x=x+\frac{x^3}{3}+o(x^3), \]
     <p>故 \(\dfrac{\tan x-x}{x^3}\to\dfrac13\)。</p>
-    <p>这个三阶系数可以现场推：由 \(\tan x=\dfrac{\sin x}{\cos x}\)，两边乘 \(\cos x\) 得 \(\tan x\cdot\cos x=\sin x\)。把 \(\cos x=1-\dfrac{x^2}{2}+o(x^2)\)、\(\sin x=x-\dfrac{x^3}{6}+o(x^3)\) 代入，设 \(\tan x=x+ax^3+o(x^3)\)（一阶必为 \(x\)）：</p>
+    <p>三阶系数的现场推导：由 \(\tan x=\dfrac{\sin x}{\cos x}\)，两边乘 \(\cos x\) 得 \(\tan x\cdot\cos x=\sin x\)。设 \(\tan x=x+ax^3+o(x^3)\)（一阶必为 \(x\)），代入 \(\cos x=1-\dfrac{x^2}{2}+o(x^2)\)、\(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)：</p>
     \[ (x+ax^3)\left(1-\frac{x^2}{2}\right)=x-\frac{x^3}{6}. \]
-    <p>左边展开 \(x-\dfrac{x^3}{2}+ax^3+o(x^3)=x+\left(a-\dfrac12\right)x^3\)，与右边 \(x-\dfrac{x^3}{6}\) 比较系数，得 \(a-\dfrac12=-\dfrac16\)，即 \(a=\dfrac13\)。</p>
+    <p>左边展开为 \(x-\dfrac{x^3}{2}+ax^3+o(x^3)=x+\left(a-\dfrac12\right)x^3\)，与右边 \(x-\dfrac{x^3}{6}\) 比较系数，得 \(a-\dfrac12=-\dfrac16\)，即 \(a=\dfrac13\)。</p>
+    <p>阶数校验：推导时 \(\cos x\) 必须展到二阶项，只展到常数 1 则方程解不出 \(a\)。与答案对齐：极限为 \(\dfrac13\)。常见错法是把 \(\tan x-x\) 与 \(x-\sin x\) 的系数记反：前者主部 \(+x^3/3\)，后者主部 \(+x^3/6\)；第一象限内 \(\tan x>x\)、\(\sin x\lt{}x\)，可凭大小关系判断符号。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -688,12 +694,12 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(\dfrac12\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(e^{\sin x}\) 与 \(1+x\) 的一阶项都是 \(x\)，相减后一阶抵消，分母 \(x^2\to0\)，属 \(\dfrac00\) 型、二阶比较。复合函数先内后外：外层 \(e^u\) 展开到二阶，内层 \(u=\sin x\) 代入。</p>
-    <p>外层 \(e^u=1+u+\dfrac{u^2}{2}+o(u^2)\)，取 \(u=\sin x\)：</p>
+    <p>识别类型：\(e^{\sin x}\) 与 \(1+x\) 的一阶项都是 \(x\)，相减后一阶抵消，分母 \(x^2\to0\)，属 \(\dfrac00\) 型、二阶比较。复合函数先内后外：外层 \(e^u\) 展开到二阶，内层 \(u=\sin x\) 代入后合并同类项。</p>
+    <p>关键展开：外层 \(e^u=1+u+\dfrac{u^2}{2}+o(u^2)\)，取 \(u=\sin x\)：</p>
     \[ e^{\sin x}=1+\sin x+\frac{\sin^2x}{2}+o(x^2). \]
-    <p>内层 \(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)，在二阶主部意义下 \(\sin x=x+o(x)\)，而 \(\sin^2x=(x+o(x))^2=x^2+o(x^2)\)。代入：</p>
+    <p>逐步代入内层：\(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)，在二阶主部意义下 \(\sin x=x+o(x)\)，而 \(\sin^2x=(x+o(x))^2=x^2+o(x^2)\)。于是</p>
     \[ e^{\sin x}=1+x+\frac{x^2}{2}+o(x^2). \]
-    <p>减去 \(1+x\) 得 \(\dfrac{x^2}{2}+o(x^2)\)，除以 \(x^2\) 得 \(\dfrac12\)。真正决定答案的是外层的 \(\dfrac{u^2}{2}=\dfrac{\sin^2x}{2}\sim\dfrac{x^2}{2}\)，内层 \(\sin x\) 的三阶项在二阶比值中不起作用。</p>
+    <p>阶数校验：减去 \(1+x\) 后一阶项抵消，分子主部为 \(x^2/2\)，与分母 \(x^2\) 同阶，相除得 \(\dfrac12\)，与答案对齐。真正决定答案的是外层 \(\dfrac{u^2}{2}=\dfrac{\sin^2x}{2}\sim\dfrac{x^2}{2}\)；内层 \(\sin x\) 的三阶项在二阶比值中不起作用。常见错法是用 \(e^{\sin x}-1\sim\sin x\sim x\) 后直接与 \(-x\) 相消得 0；等价替换只在整体作为乘除因子时可用，这里 \(e^{\sin x}-1\) 加在分子里，一阶抵消后必须补二阶。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -712,37 +718,34 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 </article>
 
 <article class="q" id="q520">
-  <div class="q-head">
-    <span class="qno">第 520 题</span>
-    <span class="qtype">对数复合（f→1，一阶小量）</span>
-    <span class="qsrc">P708</span>
-  </div>
-  <div class="stem">
-    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(\cos x+\sin x)}{x}\)。</p>
-  </div>
+  <div class="q-head"><span class="qno">第 520 题</span><span class="qtype">对数复合（0/0）</span><span class="qsrc">P708</span></div>
+  <div class="stem"><p>求 \(\lim\limits_{x\to0}\dfrac{\ln(\cos x+\sin x)}{x}\)。</p></div>
   <div class="answer">答案：\(1\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(\cos x+\sin x\to1\)，故 \(\ln(\cos x+\sin x)\to0\)，分母 \(x\to0\)，属 \(\dfrac00\) 型。凡是 \(\ln f(x)\) 且 \(f(x)\to1\)，一律写成 \(\ln(1+u)\)，其中 \(u=f(x)-1\to0\)，再用 \(\ln(1+u)\sim u\)。</p>
-    <p>取 \(u=\cos x+\sin x-1\)：</p>
+    <p>识别类型：\(x\to0\) 时 \(\cos x+\sin x\to1\)，对数真数趋于 1，分母是一阶的 \(x\)；先把对数拆成 \(\ln(1+u)\)，再按分母阶数展开 \(u\)。</p>
+    <p>关键代换：取 \(u=\cos x+\sin x-1\)，当 \(x\to0\) 时 \(u\to0\)，由 \(\ln(1+u)\sim u\)：</p>
     \[ \ln(\cos x+\sin x)\sim\cos x+\sin x-1. \]
-    <p>展开 \(u\)：\(\sin x\sim x\)，\(\cos x-1\sim-\dfrac{x^2}{2}\)。在除以 \(x\) 的意义下，\(\cos x-1\) 是二阶小量，比 \(x\) 低一阶，故主部只有 \(\sin x\sim x\)：</p>
-    \[ \cos x+\sin x-1=x-\frac{x^2}{2}+o(x^2)\sim x. \]
-    <p>于是 \(\dfrac{\ln(\cos x+\sin x)}{x}\sim\dfrac{x}{x}=1\)。这一步说明：分母是一阶时，分子里的二阶项 \(\cos x-1\) 不影响比值，只需要 \(u\) 的一阶主部。</p>
+    <p>逐步代入：分别展开两块，\(\sin x=x+o(x)\)，\(\cos x=1-\frac{x^2}{2}+o(x^2)\)，代入：</p>
+    \[ \cos x+\sin x-1=\left(1-\frac{x^2}{2}\right)+x-1+o(x)=x-\frac{x^2}{2}+o(x). \]
+    <p>与分母 \(x\) 比较，\(-\frac{x^2}{2}\) 是二阶小量，一阶主部为 \(x\)：</p>
+    \[ \frac{\ln(\cos x+\sin x)}{x}\sim\frac{x}{x}=1. \]
+    <p>主部与结论：分子一阶主部系数为 1，与分母同阶，极限为 \(1\)；二阶项 \(-\frac{x^2}{2}\) 除以 \(x\) 后趋于 0，不影响结果。</p>
+    <p>最易错那步：一是把对数拆成 \(\ln\cos x+\ln\sin x\)，对数没有这种分配律，且 \(\ln\sin x\to-\infty\)；二是只看真数趋于 1 就断言 \(\ln(\cdot)\to0\)，忽略分子本身是一阶小量、分母也是一阶，错值为 \(0\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 把 \(\ln(\cos x+\sin x)\) 错当成 \(\ln\cos x+\ln\sin x\)。对数没有这种分配律，且 \(\ln\sin x\to-\infty\)，会把题做崩。</p>
-    <p>② 只看 \(\cos x+\sin x\to1\) 就断言极限为 \(\ln1=0\)。忽略了分子本身是一阶小量、分母也是一阶，比值是有限的 1，不是 0。</p>
+    <p>① 把 \(\ln(\cos x+\sin x)\) 当成 \(\ln\cos x+\ln\sin x\)（对数没有这种分配律，且 \(\ln\sin x\to-\infty\)）。</p>
+    <p>② 只看 \(\cos x+\sin x\to1\) 就断言极限为 \(\ln1=0\)，忽略了分子本身是一阶小量、分母也是一阶。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>\(\ln f(x)\) 且 \(f(x)\to1\) 的题，一律写成 \(\ln(1+(f-1))\)，再把 \(f-1\) 展开到与分母同阶。这是对数型题的通用入口。分母阶数决定 \(f-1\) 要展开到几阶。</p>
+    <p>\(\ln f(x)\) 且 \(f(x)\to1\) 的题，一律写成 \(\ln\left(1+(f-1)\right)\)，再把 \(f-1\) 展开到与分母同阶。这是「对数型」题目的通用入口。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b>（升一阶，考二阶）求 \(\lim\limits_{x\to0}\dfrac{\ln(\cos x)}{x\sin x}\)。</p>
-    <p class="var-ans">答案：\(-\dfrac12\)。分子 \(\ln(\cos x)\sim\cos x-1\sim-\dfrac{x^2}{2}\)，分母 \(x\sin x\sim x^2\)，比值 \(-\dfrac12\)。</p>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(\cos x)}{x\sin x}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac12\)。分子 \(\ln(\cos x)\sim-\dfrac{x^2}{2}\)，分母 \(x\sin x\sim x^2\)。</p>
   </div>
 </article>
 
@@ -799,11 +802,12 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(-\dfrac12\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(x\to+\infty\) 时 \(x\) 与 \(\sqrt{x^2+x}\) 都趋于 \(+\infty\)，相减属 \(\infty-\infty\) 型。根式差一律有理化，乘共轭式 \(x+\sqrt{x^2+x}\)：</p>
+    <p>识别类型：\(x\to+\infty\) 时 \(x\) 与 \(\sqrt{x^2+x}\) 都趋于 \(+\infty\)，相减属 \(\infty-\infty\) 型。根式差一律有理化，乘共轭式 \(x+\sqrt{x^2+x}\)，把两个无穷大之差转化为可直接代入的商式。</p>
+    <p>关键代换：分子分母同乘共轭式，分子用平方差：</p>
     \[ x-\sqrt{x^2+x}=\frac{x^2-(x^2+x)}{x+\sqrt{x^2+x}}=\frac{-x}{x+\sqrt{x^2+x}}. \]
-    <p>分子分母同除 \(x\)（\(x>0\)）：</p>
-    \[ \frac{-1}{1+\sqrt{1+\frac1x}}\to\frac{-1}{1+1}=-\frac12. \]
-    <p>也可提取 \(x\) 后用二项式展开验证：\(\sqrt{x^2+x}=x\sqrt{1+\dfrac1x}=x\left(1+\dfrac{1}{2x}-\dfrac{1}{8x^2}+\cdots\right)=x+\dfrac12-\dfrac{1}{8x}+\cdots\)，故 \(x-\sqrt{x^2+x}=-\dfrac12+\dfrac{1}{8x}+o(x^{-1})\to-\dfrac12\)。两种方法结果一致，说明有理化并非唯一路径，但它把无穷远问题一步化成可直接代入的商式，最不易错。</p>
+    <p>逐步代入：分子分母同除 \(x\)（\(x>0\)）：</p>
+    \[ \frac{-x}{x+\sqrt{x^2+x}}=\frac{-1}{1+\sqrt{1+\frac1x}}\to\frac{-1}{1+1}=-\frac12. \]
+    <p>阶数校验：根号内 \(\frac1x\to0\)，\(\sqrt{1+1/x}\to1\)，分母极限为 2，分子极限对应系数 \(-1\)，商为常数 \(-1/2\)。二项式展开复核：\(\sqrt{x^2+x}=x\left(1+\dfrac{1}{2x}-\dfrac{1}{8x^2}+\cdots\right)=x+\dfrac12-\dfrac{1}{8x}+\cdots\)，故 \(x-\sqrt{x^2+x}=-\dfrac12+\dfrac{1}{8x}+o(x^{-1})\to-\dfrac12\)，两条路径一致。与答案对齐：极限为 \(-\dfrac12\)。常见错法有两处：一是符号错，有理化后分子是 \(x^2-(x^2+x)=-x\)，答案带负号；二是直接把 \(\sqrt{x^2+x}\approx x\)，忽略 \(1/2\) 这一常数项，主部抵消后的差正是答案。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -833,13 +837,14 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(1\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：分子三块在 \(x=0\) 处都展开到 \(x^2\) 项，分母 \(x^2\to0\)，属 \(\dfrac00\) 型。多个函数混合相加减，一律"全部展开到分母阶"再合并，不要试图两两等价替换。</p>
+    <p>识别类型：分子由三个函数相加减构成，分母 \(x^2\to0\)，属 \(\dfrac00\) 型。多个函数混合相加减时，一律全部展开到分母阶再合并同类项，不要试图两两等价替换。</p>
+    <p>关键展开（均到二阶）：</p>
     \[ e^x=1+x+\frac{x^2}{2}+o(x^2),\qquad \cos x=1-\frac{x^2}{2}+o(x^2). \]
-    <p>代入分子：</p>
+    <p>逐步代入分子：</p>
     \[ e^x-\cos x-x=\left(1+x+\frac{x^2}{2}\right)-\left(1-\frac{x^2}{2}\right)-x. \]
-    <p>常数项 \(1-1=0\)，一次项 \(x-x=0\)，剩下 \(\dfrac{x^2}{2}+\dfrac{x^2}{2}=x^2\)。故</p>
-    \[ \frac{e^x-\cos x-x}{x^2}\to\frac{x^2}{x^2}=1. \]
-    <p>这里 \(e^x\) 的二阶项 \(+\dfrac{x^2}{2}\) 与 \(-\cos x\) 贡献的 \(-(-\dfrac{x^2}{2})=+\dfrac{x^2}{2}\) 恰好相加为 \(x^2\)，是答案的来源。</p>
+    <p>逐项合并：常数项 \(1-1=0\)，一次项 \(x-x=0\)，二阶项剩下 \(\dfrac{x^2}{2}+\dfrac{x^2}{2}=x^2\)，即</p>
+    \[ e^x-\cos x-x=x^2+o(x^2),\qquad \frac{e^x-\cos x-x}{x^2}\to1. \]
+    <p>阶数校验：\(e^x\) 的二阶项 \(+x^2/2\) 与 \(-\cos x\) 贡献的 \(-(-x^2/2)=+x^2/2\) 恰好相加为 \(x^2\)，是答案来源；两块在常数、一阶都先抵消，真正定值靠二阶。与答案对齐：极限为 \(1\)。常见错法有两处：一是展开只到 \(x\) 阶，\(e^x\approx1+x\)、\(\cos x\approx1\)，分子约成 0，看不出二阶项；二是把 \(-\cos x\) 的符号带错，\(-\cos x\) 贡献 \(+x^2/2\)，若写成 \(-x^2/2\) 会得 0。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -869,10 +874,11 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(1\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：记 \(u=x+x^2\)，则 \(\sin u\) 与 \(x\) 的一阶项都是 \(x\)，相减后一阶抵消，分母 \(x^2\to0\)，属 \(\dfrac00\) 型。内层不是单项式，先整体换元 \(u=x+x^2\) 再展开。</p>
-    <p>外层 \(\sin u=u-\dfrac{u^3}{6}+o(u^3)\)。分母是 \(x^2\)，而 \(u=x+x^2\)，\(u^3\) 是 \(x^3\) 阶（除以 \(x^2\) 后趋于 0），所以只需保留一阶：</p>
+    <p>识别类型：记 \(u=x+x^2\)，则 \(\sin u\) 与 \(x\) 的一阶项都是 \(x\)，相减后一阶抵消，分母 \(x^2\to0\)，属 \(\dfrac00\) 型。内层不是单项式，先整体换元 \(u=x+x^2\) 再展开外层，换回 \(x\) 后合并。</p>
+    <p>关键展开：外层 \(\sin u=u-\dfrac{u^3}{6}+o(u^3)\)。分母是 \(x^2\)，而 \(u=x+x^2=O(x)\)，\(u^3\) 是 \(x^3\) 阶，除以 \(x^2\) 后趋于 0，所以外层只需保留一阶：</p>
     \[ \sin(x+x^2)=u+o(u)=x+x^2+o(x^2). \]
-    <p>减去 \(x\) 得 \(x^2+o(x^2)\)，除以 \(x^2\) 得 \(1\)。关键是内层的 \(+x^2\) 这一项：它被外层 \(\sin u\approx u\) 直接保留下来，成为分子二阶主部。若把内层当成纯 \(x\)，就会漏掉这 \(x^2\)。</p>
+    <p>逐步代入分子：减去 \(x\) 得 \(x^2+o(x^2)\)，除以 \(x^2\) 得 \(1\)。</p>
+    <p>阶数校验：内层的 \(+x^2\) 被外层 \(\sin u\approx u\) 原样保留下来，成为分子的二阶主部；外层三阶项 \(-u^3/6\) 是 \(x^3\) 阶，在二阶比值中不起作用。与答案对齐：极限为 \(1\)。常见错法有两处：一是只把内层当 \(x\)，写成 \(\sin x-x\)，分子主部变成 \(-x^3/6\)，除以 \(x^2\) 得 0；二是展开过头，把 \((x+x^2)^3\) 的细节也算进来，徒增计算量。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -902,10 +908,11 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(-\dfrac13\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：复合函数 \(\sin(\sin x)\) 与 \(x\) 一阶项相同，相减后一阶抵消，分母 \(x^3\to0\)，属 \(\dfrac00\) 型、三阶比较。复合展开"先内后外"：先展内层 \(\sin x\)，再代入外层 \(\sin u\)。</p>
-    <p>内层：\(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)。外层：\(\sin u=u-\dfrac{u^3}{6}+o(u^3)\)。把 \(u=\sin x\) 代入，注意 \(u^3\) 只需取主部 \(x^3\)（更高阶舍去）：</p>
+    <p>识别类型：复合函数 \(\sin(\sin x)\) 与 \(x\) 一阶项相同，相减后一阶抵消，分母 \(x^3\to0\)，属 \(\dfrac00\) 型、三阶比较。复合展开先内后外：先展内层 \(\sin x\)，再代入外层 \(\sin u\)，三阶系数由内外两层叠加。</p>
+    <p>关键展开：内层 \(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)；外层 \(\sin u=u-\dfrac{u^3}{6}+o(u^3)\)。把 \(u=\sin x\) 代入，\(u^3\) 只需取主部 \(x^3\)，更高阶舍去：</p>
     \[ \sin(\sin x)=\left(x-\frac{x^3}{6}\right)-\frac{1}{6}\left(x-\frac{x^3}{6}\right)^3+o(x^3)=x-\frac{x^3}{6}-\frac{x^3}{6}+o(x^3)=x-\frac{x^3}{3}+o(x^3). \]
-    <p>其中两个 \(-\dfrac{x^3}{6}\) 分别来自内层自身的三阶项和外层的 \(-\dfrac{u^3}{6}\)，相加得 \(-\dfrac{x^3}{3}\)。减去 \(x\) 后除以 \(x^3\) 得 \(-\dfrac13\)。</p>
+    <p>逐步代入分子：减去 \(x\) 得 \(-x^3/3+o(x^3)\)，除以 \(x^3\) 得 \(-\dfrac13\)。</p>
+    <p>阶数校验：两个 \(-x^3/6\) 分别来自内层自身的三阶项和外层的 \(-u^3/6\)，相加为 \(-x^3/3\)；\((x-x^3/6)^3\) 只取主部 \(x^3\)，高次项不参与定值。与答案对齐：极限为 \(-\dfrac13\)。常见错法是以为 \(\sin(\sin x)\sim\sin x\sim x\) 而得 0；外层 \(-u^3/6\) 与内层 \(-x^3/6\) 是两个独立来源，必须真正展开，不能用一阶等价整体代替。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -935,10 +942,11 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(-\dfrac12\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：复合函数 \(\arctan(\sin x)\) 与 \(x\) 一阶项相同，相减后一阶抵消，分母 \(x^3\to0\)，属 \(\dfrac00\) 型、三阶比较。先内后外展开。</p>
-    <p>外层 \(\arctan u=u-\dfrac{u^3}{3}+o(u^3)\)，内层 \(u=\sin x=x-\dfrac{x^3}{6}+o(x^3)\)。代入：</p>
+    <p>识别类型：复合函数 \(\arctan(\sin x)\) 与 \(x\) 一阶项相同，相减后一阶抵消，分母 \(x^3\to0\)，属 \(\dfrac00\) 型、三阶比较。流程仍是先内后外：内层展开代入外层，三阶系数两层叠加。</p>
+    <p>关键展开：外层 \(\arctan u=u-\dfrac{u^3}{3}+o(u^3)\)，内层 \(u=\sin x=x-\dfrac{x^3}{6}+o(x^3)\)。代入，\(u^3\) 取主部 \(x^3\)：</p>
     \[ \arctan(\sin x)=\left(x-\frac{x^3}{6}\right)-\frac{1}{3}\left(x-\frac{x^3}{6}\right)^3+o(x^3)=x-\frac{x^3}{6}-\frac{x^3}{3}+o(x^3)=x-\frac{x^3}{2}+o(x^3). \]
-    <p>两个三阶来源：内层 \(\sin x\) 自带的 \(-\dfrac{x^3}{6}\)，外层 \(\arctan\) 的 \(-\dfrac{u^3}{3}\sim-\dfrac{x^3}{3}\)，相加为 \(-\dfrac{x^3}{2}\)。减去 \(x\) 除以 \(x^3\) 得 \(-\dfrac12\)。</p>
+    <p>逐步代入分子：减去 \(x\) 得 \(-x^3/2+o(x^3)\)，除以 \(x^3\) 得 \(-\dfrac12\)。</p>
+    <p>阶数校验：两个三阶来源分别是内层 \(\sin x\) 自带的 \(-x^3/6\)，以及外层 \(\arctan\) 的 \(-u^3/3\sim-x^3/3\)，相加为 \(-x^3/2\)；高次项不影响三阶比值。与答案对齐：极限为 \(-\dfrac12\)。常见错法有两处：一是漏掉内层三阶项，只算外层 \(-x^3/3\)，会答 \(-1/3\)；二是把外层系数记成 \(+1/3\)，正确展开是 \(\arctan u=u-u^3/3\)，负号来自反正切在 0 附近比 \(u\) 略小。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -957,36 +965,32 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 </article>
 
 <article class="q" id="q527">
-  <div class="q-head">
-    <span class="qno">第 527 题</span>
-    <span class="qtype">根式差有理化 + 三角差</span>
-    <span class="qsrc">P709</span>
-  </div>
-  <div class="stem">
-    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+\tan x}-\sqrt{1+\sin x}}{x^3}\)。</p>
-  </div>
+  <div class="q-head"><span class="qno">第 527 题</span><span class="qtype">根式差 + 有理化</span><span class="qsrc">P709</span></div>
+  <div class="stem"><p>求 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+\tan x}-\sqrt{1+\sin x}}{x^3}\)。</p></div>
   <div class="answer">答案：\(\dfrac14\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：分子是两个根式相减，分母 \(x^3\to0\)，属 \(\dfrac00\) 型。根式差先有理化，把"差"变成"商"，内部再露出三角差。乘共轭式 \(\sqrt{1+\tan x}+\sqrt{1+\sin x}\)：</p>
+    <p>识别类型：分子是两个根式之差，分母 \(x^3\)；根式差先有理化，把根号去掉，内部转化为三角差，再套三阶等价。</p>
+    <p>关键代换：乘以共轭式 \(\sqrt{1+\tan x}+\sqrt{1+\sin x}\)，分子变平方差：</p>
     \[ \frac{\sqrt{1+\tan x}-\sqrt{1+\sin x}}{x^3}=\frac{\tan x-\sin x}{x^3\left(\sqrt{1+\tan x}+\sqrt{1+\sin x}\right)}. \]
-    <p>分子三角差用三阶等价 \(\tan x-\sin x\sim\dfrac{x^3}{2}\)（见第 505 题）。括号里两块在 \(x\to0\) 时都趋于 \(\sqrt1=1\)，故括号整体 \(\to2\)。于是</p>
-    \[ \frac{\frac{x^3}{2}}{x^3\cdot 2}=\frac14. \]
-    <p>这是一条完整链条：根式差 → 有理化 → 内部三角差 → 三阶等价 → 常数因子 \(1/2\)。每一环都不能漏。其中括号 \(\sqrt{1+\tan x}+\sqrt{1+\sin x}\) 之所以可直接代入，是因为它在 \(x=0\) 处连续且值为 \(2\)，不属于未定式，用极限四则运算单独提出即可。</p>
+    <p>逐步代入：三角差 \(\tan x-\sin x=\sin x\left(\frac{1}{\cos x}-1\right)\sim x\cdot\frac{x^2}{2}=\frac{x^3}{2}\)；分母中的括号在 \(x\to0\) 时 \(\sqrt{1+\tan x}\to1\)、\(\sqrt{1+\sin x}\to1\)，趋于常数 2，不再含 \(x\)。</p>
+    <p>主部与结论：</p>
+    \[ \lim=\frac{\frac12}{2}=\frac14. \]
+    <p>最易错那步：一是不有理化就对两个根式分别用 \(\sqrt{1+u}\approx1+\frac u2\)，得到 \(\frac{\tan x-\sin x}{2}\) 后忘记再除以括号常数 2，错值为 \(\frac12\)；二是记得三角差 \(\sim\frac{x^3}{2}\)，却漏掉分母 \(\sqrt{}+\sqrt{}\to2\) 这个因子。阶数上，\(\tan x-\sin x\) 正好三阶，与分母 \(x^3\) 对齐，若内层只差一阶则比值会趋于 0 或发散。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
-    <p>① 不有理化，直接对两个根式用 \(\sqrt{1+u}\approx1+\dfrac{u}{2}\)，得 \(\dfrac{\tan x-\sin x}{2}\sim\dfrac{x^3}{4}\)，再除以 \(x^3\) 得 \(\dfrac14\)——结论碰巧对，但过程绕过了有理化，在更复杂的根式嵌套里会漏常数因子。</p>
-    <p>② 记得 \(\tan x-\sin x\sim\dfrac{x^3}{2}\)，却忘了分母括号 \(\sqrt{}+\sqrt{}\to2\)，会得 \(\dfrac12\)。</p>
+    <p>① 不有理化就对两个根式分别用 \(\sqrt{1+u}\approx1+\frac u2\)，得 \(\frac{\tan x-\sin x}{2}\)，忽略了除以 \(2\) 后的阶数。正确做法是有理化后把极限中的常数因子 \(1/2\) 提出。</p>
+    <p>② 记得 \(\tan x-\sin x\sim\frac{x^3}{2}\)，却忘了分母的 \(\sqrt{}+\sqrt{}\to2\)。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>"根式差 → 有理化 → 内部三角差 → 三阶等价"是一条完整链条，考研中多次出现同一构造。核心是把无理结构通过共轭式转化为已知的三角差等价。</p>
+    <p>「根式差 → 有理化 → 内部三角差 → 三阶等价」是一条完整链条，考研中多次出现同一构造。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
-    <p><b>变式</b>（降低分母阶，考高阶无穷小）求 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+x}-\sqrt{1+\sin x}}{x^2}\)。</p>
-    <p class="var-ans">答案：\(0\)。有理化后分子 \(x-\sin x\sim\dfrac{x^3}{6}\)，分母含 \(x^2\)，比值 \(\sim\dfrac{x}{6}\to0\)。</p>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+x}-\sqrt{1+\sin x}}{x^2}\)。</p>
+    <p class="var-ans">答案：\(0\)。有理化后分子 \(x-\sin x\sim\dfrac{x^3}{6}\)，分母含 \(x^2\)，故比值趋于 \(0\)。</p>
   </div>
 </article>
 
@@ -1002,14 +1006,14 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(\dfrac12\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：分子是两个同底指数相减，分母 \(x^3\to0\)，属 \(\dfrac00\) 型。与第 504 题同一套路：提公因子把"两个指数相减"改成"一个指数减 1"。</p>
-    <p>提 \(e^{\sin x}\)：</p>
+    <p>识别类型：分子是两个同底指数相减，分母 \(x^3\to0\)，属 \(\dfrac00\) 型。处理同底指数差的固定动作是提公因子，把「两个指数相减」改写成「一个指数减 1」，再套 \(e^u-1\sim u\)。</p>
+    <p>关键代换：提 \(e^{\sin x}\)：</p>
     \[ e^{\tan x}-e^{\sin x}=e^{\sin x}\left(e^{\tan x-\sin x}-1\right). \]
-    <p>\(e^{\sin x}\to1\) 是有界非零因子，可提出。括号里 \(u=\tan x-\sin x\to0\)，由 \(e^u-1\sim u\) 得</p>
+    <p>逐步代入：\(e^{\sin x}\to1\) 是有界非零因子，可单独提出；括号里 \(u=\tan x-\sin x\to0\)，由 \(e^u-1\sim u\) 得</p>
     \[ e^{\tan x-\sin x}-1\sim\tan x-\sin x. \]
-    <p>而 \(\tan x-\sin x\sim\dfrac{x^3}{2}\)，故</p>
+    <p>底层三角差定阶：\(\tan x-\sin x=\sin x(\sec x-1)\)，其三阶主部为 \(\dfrac{x^3}{2}\)，故</p>
     \[ \frac{e^{\tan x}-e^{\sin x}}{x^3}\sim\frac{x^3/2}{x^3}=\frac12. \]
-    <p>提公因子后，问题从"两个指数各自展到三阶"降为"一次三角差的三阶主部"，计算量显著减小。</p>
+    <p>阶数校验：提公因子后，问题从「两个指数各自展到三阶」降为「一次三角差的三阶主部」，外面的 \(e^{\sin x}\) 极限为 1，不贡献系数。与答案对齐：极限为 \(\dfrac12\)。常见错法有两处：一是直接说 \(e^{\tan x}\sim e^{\sin x}\) 故为 0，两者一阶相同但三阶不同，差值正是 \(x^3/2\)，加减法里同阶无穷小不能整体等价；二是提公因子方向反，括号内主部变负，外面因子极限仍为 1，符号会翻成负，提谁、括号里谁减谁必须一致。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1039,12 +1043,12 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(1\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(\sin^2x\to0\)，故 \(\ln(1+\sin^2x)\to0\)，分母 \(x^2\to0\)，属 \(\dfrac00\) 型。凡是 \(\ln(1+u)\) 且 \(u\to0\)，直接用 \(\ln(1+u)\sim u\)。</p>
-    <p>取 \(u=\sin^2x\)：</p>
+    <p>识别类型：\(\sin^2x\to0\)，故 \(\ln(1+\sin^2x)\to0\)，分母 \(x^2\to0\)，属 \(\dfrac00\) 型。凡是 \(\ln(1+u)\) 且 \(u\to0\)，直接用 \(\ln(1+u)\sim u\)，先认清 \(u\) 是哪个整体，再对 \(u\) 比阶。</p>
+    <p>关键代换：取 \(u=\sin^2x\)：</p>
     \[ \ln(1+\sin^2x)\sim\sin^2x. \]
-    <p>而 \(\sin x\sim x\)，故 \(\sin^2x\sim x^2\)。于是</p>
+    <p>逐步代入：\(\sin x\sim x\)，两边平方得 \(\sin^2x\sim x^2\)，于是</p>
     \[ \frac{\ln(1+\sin^2x)}{x^2}\sim\frac{x^2}{x^2}=1. \]
-    <p>这里 \(u=\sin^2x\) 是一个整体，\(\ln(1+u)\sim u\) 把对数直接脱掉，剩下的就是 \(\sin^2x\sim x^2\) 与分母 \(x^2\) 比阶。需要强调：等价无穷小 \(\ln(1+u)\sim u\) 成立的前提是 \(u\to0\)，本题 \(u=\sin^2x\to0\)，满足；而 \(u\) 是带平方的复合量，不能因为里面有 \(\sin x\) 就拆开。脱掉对数后，题目退化为最基本的 \(\sin^2x/x^2\to1\)。</p>
+    <p>阶数校验：等价成立的前提是 \(u=\sin^2x\to0\)，本题满足；\(u\) 是带平方的复合量，脱掉对数后题目退化为最基本的 \(\sin^2x/x^2\to1\)，分子分母同为二阶，比值为常数 1。与答案对齐：极限为 \(1\)。常见错法有两处：一是把 \(\ln(1+\sin^2x)\) 拆成 \(\ln1+\ln\sin^2x\)，对数的加法性质只在乘积上成立，这里是 \(\ln(1+u)\)，不能拆；二是把 \(\sin^2x\) 只写成 \(\sin x\sim x\) 漏掉平方，虽然最终阶数都是 \(x^2\)，表述上必须写成 \(\sin^2x\sim x^2\)，不能含糊带过。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
@@ -1074,12 +1078,13 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="answer">答案：\(\dfrac12\)</div>
   <div class="block sol">
     <div class="block-title">解析</div>
-    <p>识别类型：\(\sin x\) 与 \(\ln(1+x)\) 的一阶项都是 \(x\)，相减后一阶抵消，分母 \(x^2\to0\)，属 \(\dfrac00\) 型、二阶比较。两块分别展开到二阶：</p>
+    <p>识别类型：\(\sin x\) 与 \(\ln(1+x)\) 的一阶项都是 \(x\)，相减后一阶抵消，分母 \(x^2\to0\)，属 \(\dfrac00\) 型、二阶比较。两块分别展开到二阶，再合并同类项。</p>
+    <p>关键展开：</p>
     \[ \sin x=x-\frac{x^3}{6}+o(x^3)=x+o(x^2), \]
     \[ \ln(1+x)=x-\frac{x^2}{2}+o(x^2). \]
-    <p>相减：</p>
+    <p>逐步代入分子相减：</p>
     \[ \sin x-\ln(1+x)=\left(x+o(x^2)\right)-\left(x-\frac{x^2}{2}+o(x^2)\right)=\frac{x^2}{2}+o(x^2). \]
-    <p>除以 \(x^2\) 得 \(\dfrac12\)。注意 \(\sin x\) 没有二阶项（它的下一项是 \(x^3\)），所以二阶主部完全来自 \(\ln(1+x)\) 的 \(-\dfrac{x^2}{2}\)，前面有个负号，相减后变正。</p>
+    <p>阶数校验：\(\sin x\) 没有二阶项，下一项是三阶 \(x^3\)，在二阶比值中不起作用；二阶主部完全来自 \(\ln(1+x)\) 的 \(-x^2/2\)，前面有个负号，相减后变正。分子主部 \(x^2/2\) 与分母 \(x^2\) 同阶，相除得 \(\dfrac12\)，与答案对齐。常见错法有两处：一是只写 \(\sin x\sim x\)、\(\ln(1+x)\sim x\) 就相减得 0，一阶抵消后必须补二阶；二是符号错，\(\ln(1+x)\) 的二阶项是 \(-x^2/2\)，相减后是 \(-(-x^2/2)=+x^2/2\)，若把 \(\ln(1+x)\) 展成 \(x+x^2/2\) 就会得 \(-1/2\)。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
