@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>《极限》 · 第 801–901 题</title>
+<title>《极限》 · 第 801–900 题</title>
 <link rel="stylesheet" href="../../assets/site.css">
 <script>
 MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
@@ -18,7 +18,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <div class="wrap">
 <header class="pagehead">
   <div class="kicker">02-gaoshu-15000 · 专题 01</div>
-  <h1>第 801 – 901 题</h1>
+  <h1>第 801 – 900 题</h1>
   <p class="sub"><a href="part-08.html">← 上一分页</a> <a href="index.html">目录</a> <a href="part-10.html">下一分页 →</a></p>
 </header>
 <article class="q" id="q801">
@@ -3268,22 +3268,25 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   <div class="block sol">
     <div class="block-title">解析</div>
     <p>识别类型：\(0/0\) 型。被积函数 \(e^t-1-t\sim t^2/2\)，是二阶无穷小，积分后是三阶。</p>
-    <p>方法一（展开）：</p>
-    \[ e^t-1-t=\frac{t^2}{2}+o(t^2). \]
+    <p>方法一（展开）：由 \(e^t=1+t+\frac{t^2}{2}+\frac{t^3}{6}+\cdots\)，减 \(1+t\) 后剩</p>
+    \[ e^t-1-t=\frac{t^2}{2}+\frac{t^3}{6}+o(t^3). \]
+    <p>\(t^2/2\) 积出 \(x^3/6\)，\(t^3/6\) 积出 \(x^4/24\)，高于 \(x^3\) 可舍：</p>
     \[ \int_0^x(e^t-1-t)\,dt=\frac{x^3}{6}+o(x^3). \]
     <p>除以 \(x^3\) 得 \(\frac{1}{6}\)。</p>
     <p>方法二（洛必达）：</p>
     \[ \lim_{x\to0}\frac{\int_0^x(e^t-1-t)\,dt}{x^3}=\lim_{x\to0}\frac{e^x-1-x}{3x^2}=\frac{\frac{x^2}{2}}{3x^2}=\frac16. \]
-    <p>关键一步：被积函数主部是 \(t^2/2\)，积分后 \(x^3/6\)。洛必达一次后还需要对 \(e^x-1-x\) 用泰勒展开。</p>
+    <p>关键一步：主部系数 \(1/2\) 经积分抬一阶，洛必达后分母因子 3 一并计入，\((1/2)/3=1/6\)；被积函数二阶，积分成三阶，与分母 \(x^3\) 匹配。</p>
   </div>
   <div class="block pit">
     <div class="block-title">易错点</div>
     <p>① 漏因子 3：分母求导后是 \(3x^2\)。</p>
     <p>② 洛必达一次后，分子 \(e^x-1-x\) 仍是 \(0/0\)，需要再展开或再洛必达；只洛必达一次而不展开，会得到 \(\frac{0}{0}\)。</p>
+    <p>③ 主部阶数看错：\(e^t-1\) 才 \(\sim t\)，再减 \(t\) 后主部升到 \(t^2/2\)；两项抵消使阶数抬高一次。</p>
+    <p>④ 积分抬阶与分母因子重复扣除：被积函数二阶 → 积分三阶；分母 \(x^3\) 求导为 \(3x^2\)，因子 3 只出现在分母。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
-    <p>「被积函数由 \(e^t\) 构造」类题。常见形式：\(e^t-1\)、\(e^t-1-t\)、\(e^t-1-t-t^2/2\)，对应被积函数阶数从一阶到三阶。</p>
+    <p>「被积函数由 \(e^t\) 构造」类题。常见形式：\(e^t-1\)、\(e^t-1-t\)、\(e^t-1-t-t^2/2\)，对应被积函数阶数从一阶到三阶。对照三档：\(e^t-1\sim t\)、\(e^t-1-t\sim t^2/2\)、\(e^t-1-t-t^2/2\sim t^3/6\)，每多抵消一项阶数抬一次。</p>
   </div>
   <div class="block var">
     <div class="block-title">变式</div>
@@ -3501,6 +3504,46 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
   </div>
 </article>
 
+<article class="q" id="q893">
+  <div class="q-head">
+    <span class="qno">第 893 题</span>
+    <span class="qtype">1^∞ 型（有理式底数）</span>
+    <span class="qsrc">P770</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left(\dfrac{n^2+1}{n^2-1}\right)^{n^2}=\)</p>
+  </div>
+  <div class="answer">答案：\(e^2\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：底数 \(\frac{n^2+1}{n^2-1}\to1\)，指数 \(n^2\to\infty\)，属 \(1^\infty\) 型；考察指数与分母主部同阶时常数的提取。</p>
+    <p>第一步：化简底数与 1 的差。</p>
+    \[ u-1=\frac{n^2+1}{n^2-1}-1=\frac{2}{n^2-1}. \]
+    <p>第二步：计算 \(v(u-1)\)，指数 \(v=n^2\)，</p>
+    \[ v(u-1)=n^2\cdot\frac{2}{n^2-1}=\frac{2}{1-\frac{1}{n^2}}\to2. \]
+    <p>第三步：套 \(1^\infty\) 公式，原极限 \(=e^2\)。</p>
+    <p>关键一步：一般公式 \(\left(\frac{n^p+a}{n^p+b}\right)^{n^p}\to e^{a-b}\)；本题 \(a=1,b=-1\)，差为 \(2\)。</p>
+    <p>常见错解：指数误读为 \(n\)；\(n\cdot\frac{2}{n^2-1}\sim\frac2n\to0\)，极限为 \(1\)。题目用 \(n^2\) 正是与分母同阶。</p>
+    <p>对照 892：方法一致，阶数升级；差为常数 \(c\) 时结果 \(e^c\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把差写成 \(1\) 或 \(4\)：分子 \(n^2+1\)，分母 \(n^2-1\)，差为 \(2\)。</p>
+    <p>② 指数错看：题目是 \(n^2\) 次方，不是 \(n\) 次方。若是 \(n\) 次方，则 \(n\cdot\frac{2}{n^2-1}\to0\)，极限为 \(1\)。</p>
+    <p>③ 常数项符号带错：分母 \(n^2-1\) 的常数项是 \(-1\)，常数差 \(a-b=1-(-1)=2\)；把 \(b\) 当成 \(+1\) 会算成 0。</p>
+    <p>④ 先把底数当 1 取幂：\(\frac{n^2+1}{n^2-1}=1+\frac{2}{n^2-1}\)，不能省略小量后直接对 \(n^2\) 取极限，必须先乘指数再取极限。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>把 \(n\) 换成 \(n^2\) 的 \(1^\infty\) 型题，考察「指数与分母主部同阶」时的常数提取。通用公式：\(\left(\frac{n^p+a}{n^p+b}\right)^{n^p}\to e^{a-b}\)。若指数与分母不同阶（如指数 \(n\)），乘积趋 0，极限为 1；只有同阶才提取出非平凡常数 \(e^{a-b}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(\dfrac{n^2+2}{n^2-1}\right)^{n^2}\)。</p>
+    <p class="var-ans">答案：\(e^3\)。常数差 \(2-(-1)=3\)，指数 \(n^2\) 与分母同阶，故 \(e^3\)。</p>
+  </div>
+</article>
+
 <article class="q" id="q894">
   <div class="q-head">
     <span class="qno">第 894 题</span>
@@ -3684,6 +3727,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <div class="block-title">易错点</div>
     <p>① 不会把 \(1/n^2\) 拆成 \(1/n\cdot 1/n\)：原式形式上不是标准的黎曼和，但变形后就是。</p>
     <p>② 求和公式记错：\(\sum k=n(n+1)/2\)，不是 \(n^2/2\) 或 \(n(n-1)/2\)。</p>
+    <p>③ 拆分系数对不上：\(1/n^2=(1/n)\cdot(1/n)\)，一个 \(1/n\) 作区间长度，另一个随 \(k/n\) 进入被积函数，不要两个都留在积分号外。</p>
   </div>
   <div class="block trend">
     <div class="block-title">考向</div>
@@ -3773,45 +3817,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}2^{k/n}\)。</p>
     <p class="var-ans">答案：\(\dfrac{1}{\ln 2}\)。\(\int_0^1 2^x\,dx=\frac{2^x}{\ln 2}\Big|_0^1=\frac{1}{\ln 2}\)。</p>
   </div>
-</article>
-
-<article class="q" id="q901">
-  <div class="q-head">
-    <span class="qno">第 901 题</span>
-    <span class="qtype">幂指极限（指数趋零）</span>
-    <span class="qsrc">P771</span>
-  </div>
-  <div class="stem">
-    <p>\(\lim\limits_{x\to\infty}\left(\dfrac{x^2+\ln x}{x^2-\ln x}\right)^{\frac{1}{\sqrt{x}}}=\)</p>
-  </div>
-  <div class="answer">答案：\(1\)</div>
-  <div class="block sol">
-    <div class="block-title">解析</div>
-    <p>识别类型：底数 \(\frac{x^2+\ln x}{x^2-\ln x}\to1\)（因为 \(\ln x\) 相对于 \(x^2\) 是高阶小），指数 \(\frac{1}{\sqrt{x}}\to0\)。</p>
-    <p>这是 \(1^0\) 型而非 \(1^\infty\) 型。对 \(1^0\) 型，直接取对数：</p>
-    \[ \ln L=\frac{1}{\sqrt{x}}\ln\frac{x^2+\ln x}{x^2-\ln x}. \]
-    <p>化简对数：</p>
-    \[ \ln\frac{x^2+\ln x}{x^2-\ln x}=\ln\left(1+\frac{2\ln x}{x^2-\ln x}\right)\sim\frac{2\ln x}{x^2}. \]
-    <p>于是</p>
-    \[ \ln L\sim\frac{1}{\sqrt{x}}\cdot\frac{2\ln x}{x^2}=\frac{2\ln x}{x^{5/2}}\to0. \]
-    <p>故 \(L=e^0=1\)。</p>
-    <p>关键一步：指数趋零时，对数项的极限只需看「指数 × ln(底数)」。本题指数 \(1/\sqrt{x}\) 已经趋于零，而 ln(底数) 也是趋于零的小量，乘积更快趋于零。</p>
-  </div>
-  <div class="block pit">
-    <div class="block-title">易错点</div>
-    <p>① 误当 \(1^\infty\) 型套用公式：指数是 \(1/\sqrt{x}\)，不是 \(x\) 或 \(x^2\)。本题指数趋于零，不是无穷。</p>
-    <p>② 直接说「底数趋于 1，任何数趋于 0 次方为 1」：这是直觉答案，但严格说要验证 \(1^0\) 确实为 1，需要证明 \(\ln L\to0\)。</p>
-  </div>
-  <div class="block trend">
-    <div class="block-title">考向</div>
-    <p>「\(1^0\) 型」幂指极限。与 \(1^\infty\) 型对比记忆：前者答案几乎总是 \(1\)，后者答案通常是 \(e^c\)。判据是指数是否趋于无穷。</p>
-  </div>
-  <div class="block var">
-    <div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\dfrac{x^2+1}{x^2-1}\right)^{x^2}\)。</p>
-    <p class="var-ans">答案：\(e^2\)。底数 \(\to1\)，指数 \(x^2\to\infty\)，属 \(1^\infty\) 型。\(u-1=\frac{2}{x^2-1}\)，\(v(u-1)=x^2\cdot\frac{2}{x^2-1}\to2\)，故极限为 \(e^2\)。</p>
-  </div>
-</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 801–901 题</span></div>
+</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 801–900 题</span></div>
 </div>
 </body>
 </html>

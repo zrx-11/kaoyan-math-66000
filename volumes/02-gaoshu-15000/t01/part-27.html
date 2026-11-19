@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>《极限》 · 第 2602–2650 题</title>
+<title>《极限》 · 第 2601–2650 题</title>
 <link rel="stylesheet" href="../../assets/site.css">
 <script>
 MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
@@ -18,9 +18,49 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <div class="wrap">
 <header class="pagehead">
   <div class="kicker">02-gaoshu-15000 · 专题 01</div>
-  <h1>第 2602 – 2650 题</h1>
+  <h1>第 2601 – 2650 题</h1>
   <p class="sub"><a href="part-26.html">← 上一分页</a> <a href="index.html">目录</a></p>
 </header>
+<article class="q" id="q2601">
+  <div class="q-head">
+    <span class="qno">第 2601 题</span>
+    <span class="qtype">泰勒相消（三块指数差，五阶分母）</span>
+    <span class="qsrc">P1085</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{e^{\sin x}-e^{\tan x}+e^{x}(\tan x-\sin x)}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac18\)，复算 \(0\)：分子三块在 \(x^5\) 阶精确相消，首阶残留为 \(x^6\)，除以 \(x^5\) 后趋于 0，以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型为 0/0 型，分子由两个指数差与一个线性括号项拼成，低阶项相互抵消。记 \(a=\sin x-x\)，\(b=\tan x-x\)，提取公因子 \(e^x\)：</p>
+    \[
+    N(x)=e^x(e^a-e^b)+e^x(b-a)=e^x\bigl[(e^a-1-a)-(e^b-1-b)\bigr].
+    \]
+    <p>两个角度函数在原点附近的展开为：</p>
+    \[
+    a=-\frac{x^3}{6}+\frac{x^5}{120}+O(x^7),\qquad
+    b=\frac{x^3}{3}+\frac{2x^5}{15}+O(x^7).
+    \]
+    <p>按 \(e^u-1-u=u^2/2+O(u^3)\) 分别代入：</p>
+    \[
+    e^a-1-a=\frac{a^2}{2}+O(a^3)=\frac{x^6}{72}+O(x^8),\quad
+    e^b-1-b=\frac{b^2}{2}+O(b^3)=\frac{x^6}{18}+O(x^8).
+    \]
+    <p>相减后 \(N(x)=e^x(-x^6/24+O(x^7))=-x^6/24+O(x^7)\)，原式 \(-x/24+O(x^2)\to0\)。数值三档 \(x=10^{-2}/10^{-3}/10^{-4}\) 分别得 \(-4.2090\times10^{-4}\)、\(-4.1708\times10^{-5}\)、\(-4.1671\times10^{-6}\)，与 \(-x/24\) 吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(e^{\sin x}-e^{\tan x}\) 只取一阶 \(e^x[-(b-a)]\)，丢掉 \(u^2/2\) 及以上阶，相消直接失败。② 误把 \(\tan x-\sin x=x^3/2+x^5/8+O(x^7)\) 里的 \(x^5\) 系数 \(1/8\) 当作整个分子的极限，这正是书答错值的来源。③ 展开阶数不足：\(a,b\) 本身是 \(x^3\) 量级，其平方才到 \(x^6\)，只展到 \(x^3\) 根本看不到残留主部。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2611 是同一分子、只改分母阶数与所减项的对照素材，核心判据是「分子级数的最低次项次数决定极限是否存在」。这类多块指数差极限常以 0/0 面貌出现在选择题中，正确路径是把级数算到比分母高两阶，先确认最低次项落在第几阶，再决定取系数还是判发散。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{\sin x}-e^{\tan x}+e^{x}(\tan x-\sin x)}{x^{6}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac1{24}\)。由 \(N(x)=-x^6/24+O(x^7)\)，除以 \(x^6\) 得 \(-1/24\)；这是 2611 去掉所减 \(x^5/2\) 项后的对照值。</p>
+  </div>
+</article>
+
 <article class="q" id="q2602">
   <div class="q-head">
     <span class="qno">第 2602 题</span>
@@ -1976,7 +2016,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\cosh(ax)-1}{x^2}\)。</p>
     <p class="var-ans">答案：\(a^2/2\)。双曲余弦二次系数为正，与本题余弦款符号相反；两式并排记忆可避免负号串位。</p>
   </div>
-</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 2602–2650 题</span></div>
+</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 2601–2650 题</span></div>
 </div>
 </body>
 </html>

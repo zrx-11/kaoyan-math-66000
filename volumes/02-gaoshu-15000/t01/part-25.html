@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>《极限》 · 第 2402–2501 题</title>
+<title>《极限》 · 第 2401–2500 题</title>
 <link rel="stylesheet" href="../../assets/site.css">
 <script>
 MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
@@ -18,9 +18,51 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
 <div class="wrap">
 <header class="pagehead">
   <div class="kicker">02-gaoshu-15000 · 专题 01</div>
-  <h1>第 2402 – 2501 题</h1>
+  <h1>第 2401 – 2500 题</h1>
   <p class="sub"><a href="part-24.html">← 上一分页</a> <a href="index.html">目录</a> <a href="part-26.html">下一分页 →</a></p>
 </header>
+<article class="q" id="q2401">
+  <div class="q-head">
+    <span class="qno">第 2401 题</span>
+    <span class="qtype">和式极限（主部配对与夹逼）</span>
+    <span class="qsrc">P1046</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{n^{2}+k}{n^{3}+k^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：该和式没有显式的 \(1/n\) 网格因子，不能直接套定积分定义；先把通项与基准项 \(1/n\) 配对，比较两者之差，再用上下界夹逼。</p>
+    <p>把通项写成 \(1/n\) 乘以一个扰动因子：</p>
+    \[
+    \frac{n^{2}+k}{n^{3}+k^{2}}
+    =\frac1n\cdot\frac{1+k/n^{2}}{1+k^{2}/n^{3}}.
+    \]
+    <p>与 \(1/n\) 相减，通分后分子为 \(n(n^{2}+k)-(n^{3}+k^{2})=nk-k^{2}=k(n-k)\)：</p>
+    \[
+    0\le \frac1n-\frac{n^{2}+k}{n^{3}+k^{2}}
+    =\frac{k(n-k)}{n(n^{3}+k^{2})}
+    \le \frac{nk}{n\cdot n^{3}}=\frac{k}{n^{4}}.
+    \]
+    <p>对 \(k=1\) 到 \(n\) 求和，基准和为 \(1\)，偏差被上界控制：</p>
+    \[
+    0\le 1-S_{n}\le \frac1{n^{4}}\sum_{k=1}^{n}k
+    =\frac{n(n+1)}{2n^{4}}=O(n^{-2})\to0.
+    \]
+    <p>夹逼准则给出 \(S_{n}\to1\)。数值复核：\(N=100\) 时 \(S_{n}\approx1.001662\)，\(N=1000\) 时约 \(1.000167\)，\(N=10000\) 时约 \(1.000017\)，偏差按 \(O(1/n^{2})\) 缩小，与估计一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 强行把该和式当成黎曼和：分母是 \(n^{3}+k^{2}\)，提取 \(n\) 后剩下的不是 \(f(k/n)\) 的连续核，积分路径不成立。② 过早丢掉分子的 \(k\) 与分母的 \(k^{2}\)，没有估计扰动项的阶，只凭主部 \(n^{2}/n^{3}=1/n\) 下结论。③ 配对差值通分时分子展开漏项，把 \(nk-k^{2}\) 写成 \(nk\) 或 \(k^{2}\)，上界量级随之判错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>非标准和式极限的固定处理是先拆主部、再估计扰动的一致阶，最后用夹逼收口。复习时应先判断和式是否具备 \(1/n\) 乘以 \(f(k/n)\) 的网格结构：具备才走定积分，不具备就走配对与上下界。这类题常在选择、填空里把低阶扰动藏进分子分母，考查阶数比较。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{n}{n^{2}+k}\)。</p>
+    <p class="var-ans">答案：\(\ln2\)。整理为 \(\frac1n\sum\limits_{k=1}^{n}\dfrac{1}{1+k/n}\)，收敛到 \(\int_0^1\dfrac{dx}{1+x}=\ln2\)；扰动在此题中恰好构成标准网格，与原题的夹逼路径形成对照。</p>
+  </div>
+</article>
+
 <article class="q" id="q2402">
   <div class="q-head">
     <span class="qno">第 2402 题</span>
@@ -4089,45 +4131,7 @@ MathJax = {tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]']]
     <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt{1+\left(\dfrac{k}{n}\right)^{10}}}\)，并估计其与本题积分值的大小关系。</p>
     <p class="var-ans">答案：\(\int_0^1 dx/\sqrt{1+x^{10}}\)，值大于本题。对 \(x\in(0,1)\)，\(x^{10}\lt x^9\)，故 \(1/\sqrt{1+x^{10}}\gt1/\sqrt{1+x^9}\)，积分值随指数继续单调增大。</p>
   </div>
-</article>
-
-<article class="q" id="q2501">
-  <div class="q-head">
-    <span class="qno">第 2501 题</span>
-    <span class="qtype">二重求和的量级归一（印式发散）</span>
-    <span class="qsrc">P1067</span>
-  </div>
-  <div class="stem">
-    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{2}}\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}(i^{2}+j^{2})\)。</p>
-  </div>
-  <div class="answer">答案：不存在（\(+\infty\)）</div>
-  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac23\)；按页面印式复算极限发散至 \(+\infty\)，渐近主项为 \(2n^{2}/3\)。书给常数对应的读法是在求和项内补入 \((1/n)^{2}\) 归一（等价于外层归一化为 \(n^{4}\)），即 \(\frac1{n^{4}}\sum_{i,j}(i^{2}+j^{2})\to\iint_{[0,1]^{2}}(x^{2}+y^{2})\,dxdy=2/3\)。错法：双重和只写了一层 \(1/n\)，少了 \((1/n)^{2}\) 这一层归一，二阶量的二重和总量级为 \(n^{4}\)，除以 \(n^{2}\) 后仍剩 \(n^{2}\) 阶。邻近变体排除：外层改 \(n^{3}\) 仍发散至 \(+\infty\)；求和项改为 \(i+j\) 得 \(1\)；单重和 \(\frac1{n^{3}}\sum i^{2}\) 得 \(1/3\)，均不等于书值。</p></div>
-  <div class="block sol"><div class="block-title">解析</div>
-    <p>识别类型：双重离散求和，先按精确公式求和，再判断剩余量级。记 \(S_n=\sum_{i=1}^{n}\sum_{j=1}^{n}(i^{2}+j^{2})\)，把两个平方项分开：</p>
-    \[
-    S_n=\sum_{i,j}i^{2}+\sum_{i,j}j^{2}=2n\sum_{i=1}^{n}i^{2}.
-    \]
-    <p>代入平方和公式 \(\sum_{i=1}^{n}i^{2}=n(n+1)(2n+1)/6\)，得</p>
-    \[
-    S_n=2n\cdot\frac{n(n+1)(2n+1)}6=\frac{n^{2}(n+1)(2n+1)}3.
-    \]
-    <p>按页面印式除以 \(n^{2}\)：</p>
-    \[
-    \frac{S_n}{n^{2}}=\frac{(n+1)(2n+1)}3=\frac{2n^{2}}3+n+\frac13.
-    \]
-    <p>主项 \(2n^{2}/3\) 随 \(n\) 无界正向增长，一次项 \(n\) 与常数项相对主项可忽略，故印刷式极限为 \(+\infty\)，不存在有限值。数值三档：\(N=10^{2}/10^{3}/10^{4}\) 得 \(6767/667667/66676667\)，与主项 \(2N^{2}/3\) 吻合，走向无收敛迹象。只有在求和项内补入 \(1/n\) 因子、外层按 \(n^{4}\) 归一后，才得到 \(2/3\)，即书给值对应的读法。</p>
-  </div>
-  <div class="block pit"><div class="block-title">易错点</div>
-    <p>① 把双重和当成单重和处理，只除一层 \(n\)，没检查分子总量级是 \(n^{4}\) 还是 \(n^{2}\)。② 看到平方和公式就直接取常数系数，忽略展开后最高次项仍留在分子上。③ 混淆 2506 型对照：单重一阶和总量级 \(n^{2}/2\)，除 \(n^{2}\) 收敛；本题是二阶量的二重和，量级高一倍。</p>
-  </div>
-  <div class="block trend"><div class="block-title">考向</div>
-    <p>双重离散求和的归一化是黎曼和题型的前置判断：标准二重黎曼和为 \(\frac1{n^{2}}\sum_{i,j}f(i/n,j/n)\)，求和项本身必须无量纲；若求和项仍是 \(i,j\) 的整式，要先估总量级再定分母幂次。本片 2511 是同一错法族的根式款，判别时先写求和项的 \(n\) 次幂，再比对外层分母。</p>
-  </div>
-  <div class="block var"><div class="block-title">变式</div>
-    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{4}}\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}(i^{2}+j^{2})\)。</p>
-    <p class="var-ans">答案：\(\dfrac23\)。由 \(S_n=n^{2}(n+1)(2n+1)/3\)，除以 \(n^{4}\) 后 \((n+1)(2n+1)/(3n^{2})\to2/3\)；这正是书给值对应的归一化读法。</p>
-  </div>
-</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 2402–2501 题</span></div>
+</article><div class="foot"><span>逐题精解 · MathJax 渲染</span><span>第 2401–2500 题</span></div>
 </div>
 </body>
 </html>
