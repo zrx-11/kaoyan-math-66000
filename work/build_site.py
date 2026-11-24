@@ -66,13 +66,43 @@ FOOT = """<div class="foot"><span>{left}</span><span>{right}</span></div>
 
 
 def parse_topics(v):
-    """抽专题：优先全部取书名号内层标题；一个都没有时退回二级节点标题。"""
+    """抽专题。
+
+    优先读冻结表 work/plan/topics.json（专题编号一旦分配不得变，否则 tNN 目录错位）；
+    表里没有这册时才回退到标题解析（下面那段）。
+    """
+    tf = os.path.join(WORK, "plan", "topics.json")
+    if os.path.exists(tf):
+        try:
+            data = json.load(open(tf, encoding="utf-8"))
+            vv = (data.get("volumes") or {}).get(SLUG.get(v["idx"], f"{v['idx']:02d}"))
+            if vv:
+                return [{"name": t["name"], "page": t["page"], "count": t.get("count")}
+                        for t in vv["topics"]]
+        except Exception:
+            pass
+    return _parse_topics_by_title(v)
+
+
+def _parse_topics_by_title(v):
     def clean(n):
         n = re.sub(r"[（(]\s*(副本|已自动恢复|修复的)\s*[)）]", "", n)
+        n = re.sub(r"\s*[-–]\s*副本\s*(?:[（(]\s*\d+\s*[)）])?", "", n)
+        n = re.sub(r"[（(]\s*\d+\s*[)）]", "", n)
         n = re.sub(r"\s*(副本|已自动恢复|修复的)\s*$", "", n)
         return n.strip(" -_·")
 
-    seen, out = set(), []
+    def dedupe(items):
+        seen, out = set(), []
+        for t in items:
+            key = re.sub(r"\s+", "", t["name"])
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            out.append(t)
+        return out
+
+    named = []
     for s in v["sections"]:
         title = s["title"]
         ms = re.findall(r"《([^《》]{2,40})》", title)
@@ -81,29 +111,34 @@ def parse_topics(v):
         name = ms[-1].strip()
         pos = title.rfind(name) + len(name)
         m = re.search(r"(\d{2,5})\s*题", title[pos:])
-        cnt = int(m.group(1)) if m else None
-        key = re.sub(r"\s+", "", name)
-        if not key or key in seen:
-            continue
-        seen.add(key)
-        out.append({"name": name, "page": s["page"], "count": cnt})
+        named.append({"name": name, "page": s["page"],
+                      "count": int(m.group(1)) if m else None})
+    named = dedupe(named)
 
-    if out:
-        return out
-
+    lvl2 = []
     for s in v["sections"]:
         if s["level"] != 2:
             continue
         name = clean(re.sub(r"^[\d.、\s]+", "", s["title"]))
-        if len(name) < 4 or re.search(r"副本|自动恢复|空白", name):
+        if len(name) < 4:
             continue
         m = re.search(r"(\d{2,5})\s*题", s["title"])
-        key = re.sub(r"\s+", "", name)
-        if key in seen:
-            continue
-        seen.add(key)
-        out.append({"name": name, "page": s["page"], "count": int(m.group(1)) if m else None})
-    return out
+        lvl2.append({"name": name, "page": s["page"],
+                     "count": int(m.group(1)) if m else None})
+
+    # 同名加序：Ⅰ Ⅱ Ⅲ → （二）（三）
+    counts, out = {}, []
+    for t in lvl2:
+        k = re.sub(r"\s+", "", t["name"])
+        counts[k] = counts.get(k, 0) + 1
+        out.append(dict(t, name=t["name"] if counts[k] == 1 else f"{t['name']}（{counts[k]}）"))
+    lvl2 = out
+
+    if len(named) >= 2:
+        return named
+    if len(lvl2) >= 2:
+        return lvl2
+    return named or lvl2
 
 
 def load_cards(frag_dir):

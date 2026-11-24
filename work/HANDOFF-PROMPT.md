@@ -141,3 +141,43 @@
 
 同样的模板可以用，但把「验收贴输出」换成「跑这五条命令并截图/粘结果」；
 再说清一句：**所有改动都会进 git，所以任何时候都能看 `git log -1 --stat` 知道上一轮改了什么。**
+
+---
+
+## 七、要铺满 6 万题时，用两阶段模式（不是逐段精核）
+
+背景与机制见 **`work/plan/README.md`**。一句话：先把每道题都有一张结构完整的卡，
+全部铺完后再统一核验。计划由磁盘事实推导，`python3 work/plan/build_plan.py` 随时刷新。
+
+### 模板 A · 阶段一（覆盖，只求结构完整）
+
+```
+本轮任务：推进阶段一（覆盖）。只保证结构完整，不做数值核验、不判 fixed/skip。
+
+  python3 work/plan/next_batch.py <N> [--vol <X>]      # 取 N 个单元，含页图命令与目标分片路径
+  python3 work/plan/scaffold_topic.py <slug> <t>        # 仅当讲解页缺失时跑
+  pdftoppm -png -r 150 -gray -f <起> -l <止> "$PDF_PATH" work/pages/<slug>/p
+  # 先出题干转录稿 work/drafts/stems-<起>-<止>.md，再按 work/spec/CARD-FORMAT.md 写卡
+  python3 work/qa/gate_lite.py work/fragments/<slug>/t<NN>/seg-<起>-<止>.html
+        # 必须 fail=0；这是阶段一闸门（六块齐/答案非空/无禁词/sol≥150/有行间公式）
+  台账：verdict 一律 pass，note 写「[cover] 结构闸门通过；待阶段二复算」
+  python3 work/plan/build_plan.py && python3 work/build_site.py && bash work/publish.sh
+
+禁止：不要 --refreeze（会让专题编号全部错位）；不要按题号切派活范围（按分片文件切）；
+      不要跳号或重号（id 全局连续，从 next_batch 给的起始 id 起；qno 是专题内编号）。
+```
+
+### 模板 B · 阶段二（核验）
+
+```
+本轮任务：核验阶段一的 cover 卡。
+
+  python3 work/plan/verify_queue.py --limit <N> [--vol <X>]
+  逐题回页面图核题干 → 独立复算 → 按 work/spec/LEDGER.md 判 pass / fixed / skip
+  改判一律走 work/verify/rerecord.py；结束 python3 work/qa/ledger_audit.py 三类告警必须为 0
+
+验收：verify_queue.py 输出条数下降（最终为 0）、ledger_audit 无告警、gate.py failed=0。
+```
+
+**怎么区分两阶段**：台账 note 里带 `[cover]` 的是「只过结构闸门」；不带的是核过的。
+`verify_queue.py` 就是按这个标记取的，所以阶段一入账时**必须写这个前缀**，否则那道题永远不会被核。
