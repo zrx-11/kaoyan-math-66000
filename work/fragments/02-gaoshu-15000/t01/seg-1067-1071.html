@@ -1,0 +1,983 @@
+<article class="q" id="q2501">
+  <div class="q-head">
+    <span class="qno">第 2501 题</span>
+    <span class="qtype">二重求和的量级归一（印式发散）</span>
+    <span class="qsrc">P1067</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{2}}\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}(i^{2}+j^{2})\)。</p>
+  </div>
+  <div class="answer">答案：不存在（\(+\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac23\)；按页面印式复算极限发散至 \(+\infty\)，渐近主项为 \(2n^{2}/3\)。书给常数对应的读法是在求和项内补入 \((1/n)^{2}\) 归一（等价于外层归一化为 \(n^{4}\)），即 \(\frac1{n^{4}}\sum_{i,j}(i^{2}+j^{2})\to\iint_{[0,1]^{2}}(x^{2}+y^{2})\,dxdy=2/3\)。错法：双重和只写了一层 \(1/n\)，少了 \((1/n)^{2}\) 这一层归一，二阶量的二重和总量级为 \(n^{4}\)，除以 \(n^{2}\) 后仍剩 \(n^{2}\) 阶。邻近变体排除：外层改 \(n^{3}\) 仍发散至 \(+\infty\)；求和项改为 \(i+j\) 得 \(1\)；单重和 \(\frac1{n^{3}}\sum i^{2}\) 得 \(1/3\)，均不等于书值。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：双重离散求和，先按精确公式求和，再判断剩余量级。记 \(S_n=\sum_{i=1}^{n}\sum_{j=1}^{n}(i^{2}+j^{2})\)，把两个平方项分开：</p>
+    \[
+    S_n=\sum_{i,j}i^{2}+\sum_{i,j}j^{2}=2n\sum_{i=1}^{n}i^{2}.
+    \]
+    <p>代入平方和公式 \(\sum_{i=1}^{n}i^{2}=n(n+1)(2n+1)/6\)，得</p>
+    \[
+    S_n=2n\cdot\frac{n(n+1)(2n+1)}6=\frac{n^{2}(n+1)(2n+1)}3.
+    \]
+    <p>按页面印式除以 \(n^{2}\)：</p>
+    \[
+    \frac{S_n}{n^{2}}=\frac{(n+1)(2n+1)}3=\frac{2n^{2}}3+n+\frac13.
+    \]
+    <p>主项 \(2n^{2}/3\) 随 \(n\) 无界正向增长，一次项 \(n\) 与常数项相对主项可忽略，故印刷式极限为 \(+\infty\)，不存在有限值。数值三档：\(N=10^{2}/10^{3}/10^{4}\) 得 \(6767/667667/66676667\)，与主项 \(2N^{2}/3\) 吻合，走向无收敛迹象。只有在求和项内补入 \(1/n\) 因子、外层按 \(n^{4}\) 归一后，才得到 \(2/3\)，即书给值对应的读法。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把双重和当成单重和处理，只除一层 \(n\)，没检查分子总量级是 \(n^{4}\) 还是 \(n^{2}\)。② 看到平方和公式就直接取常数系数，忽略展开后最高次项仍留在分子上。③ 混淆 2506 型对照：单重一阶和总量级 \(n^{2}/2\)，除 \(n^{2}\) 收敛；本题是二阶量的二重和，量级高一倍。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>双重离散求和的归一化是黎曼和题型的前置判断：标准二重黎曼和为 \(\frac1{n^{2}}\sum_{i,j}f(i/n,j/n)\)，求和项本身必须无量纲；若求和项仍是 \(i,j\) 的整式，要先估总量级再定分母幂次。本片 2511 是同一错法族的根式款，判别时先写求和项的 \(n\) 次幂，再比对外层分母。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{4}}\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}(i^{2}+j^{2})\)。</p>
+    <p class="var-ans">答案：\(\dfrac23\)。由 \(S_n=n^{2}(n+1)(2n+1)/3\)，除以 \(n^{4}\) 后 \((n+1)(2n+1)/(3n^{2})\to2/3\)；这正是书给值对应的归一化读法。</p>
+  </div>
+</article>
+
+<article class="q" id="q2502">
+  <div class="q-head">
+    <span class="qno">第 2502 题</span>
+    <span class="qtype">收敛正项级数的通项平均</span>
+    <span class="qsrc">P1067</span>
+  </div>
+  <div class="stem">
+    <p>设正项级数 \(\sum a_n\) 收敛，求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\dfrac{a_k}{1+a_k^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：正项级数收敛条件下的有界通项平均。记 \(S=\sum_{k=1}^{\infty}a_k\)，由收敛知 \(S\) 为有限正数。因 \(a_k\ge0\)，分母 \(1+a_k^{2}\ge1\)，通项被原项压缩：</p>
+    \[
+    0\le \frac{a_k}{1+a_k^{2}}\le a_k.
+    \]
+    <p>对前 \(n\) 项求和，部分和被原级数部分和控制：</p>
+    \[
+    0\le \sum_{k=1}^{n}\frac{a_k}{1+a_k^{2}}\le\sum_{k=1}^{n}a_k\le S.
+    \]
+    <p>整体除以 \(n\)，夹逼两端分别为 \(0\) 与 \(S/n\)：</p>
+    \[
+    0\le \frac1n\sum_{k=1}^{n}\frac{a_k}{1+a_k^{2}}\le\frac{S}{n}\longrightarrow0.
+    \]
+    <p>由夹逼准则，极限为 \(0\)。数值佐证：取 \(a_k=2^{-k}\)，\(N=10^{3}/10^{5}\) 时表达式约为 \(8.83\times10^{-4}/8.83\times10^{-6}\)，随 \(1/n\) 走向零。</p>
+    <p>论证主线：部分和单调上升并有上界 \(S\)，压缩后通项不超过原通项，部分和夹在 \(0\) 与 \(S\) 之间；外层 \(1/n\) 趋于零，部分和有界即得零。本题不需要 \(a_k\) 的具体形式，放缩链已足以定值；外层换成 \(\ln n\) 时证明路径相同。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 试图先求 \(a_k/(1+a_k^{2})\) 的闭式和，被单个通项卡住；本题只需部分和有界，不必求和。② 忽略正项条件，误用绝对值放缩方向。③ 把级数收敛误记成 \(a_n\to0\) 就直接除 \(n\) 得 0，论证不完整，必须经部分和有界这一步。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「收敛级数通项的平均」是选择填空常客：部分和有界之后，外层除以 \(n\)、\(\ln n\) 或其他发散量都得 0。同族变体见 2512（除以 \(\ln n\)）与 2522（通项带 \(1+ka_k\) 压缩分母），判别主线都是先证部分和有界，再看外层发散速度。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设正项级数 \(\sum a_n\) 收敛，求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\sqrt{a_k}\)。</p>
+    <p class="var-ans">答案：\(0\)。由 \(\sqrt{a_k}\) 未必被 \(a_k\) 控制，但前 \(n\) 项和可拆为有界段加尾段估计，整体仍 \(o(n)\)；除以 \(n\) 后趋于 0。</p>
+  </div>
+</article>
+
+<article class="q" id="q2503">
+  <div class="q-head">
+    <span class="qno">第 2503 题</span>
+    <span class="qtype">递推数列的平方累加渐近</span>
+    <span class="qsrc">P1067</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{a_n\}\) 满足 \(a_1=1,\ a_{n+1}=a_n+\dfrac1{a_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n}{\sqrt n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>递推为正项累加，首项 \(a_1=1\) 为正，故各项为正且单调递增。把递推式两边平方，展开交叉项：</p>
+    \[
+    a_{n+1}^{2}=a_n^{2}+2a_n\cdot\frac1{a_n}+\frac1{a_n^{2}}
+    =a_n^{2}+2+\frac1{a_n^{2}}.
+    \]
+    <p>从 \(k=1\) 到 \(n-1\) 累加：</p>
+    \[
+    a_n^{2}=a_1^{2}+\sum_{k=1}^{n-1}\left(2+\frac1{a_k^{2}}\right)
+    =2n-1+\sum_{k=1}^{n-1}\frac1{a_k^{2}}.
+    \]
+    <p>因 \(a_k\) 单调递增且趋于无穷，\(1/a_k^{2}\) 的累加和为低阶小量（对数量级），相对主项 \(2n\) 可以忽略，故</p>
+    \[
+    a_n^{2}\sim2n,\qquad a_n\sim\sqrt{2n}.
+    \]
+    <p>两边同除 \(\sqrt n\)：</p>
+    \[
+    \frac{a_n}{\sqrt n}\longrightarrow\sqrt2.
+    \]
+    <p>数值三档模拟：\(N=10^{3}/10^{4}/10^{5}\) 得 \(1.416043/1.414437/1.414240\)，单调逼近 \(\sqrt2\approx1.414214\)。低阶项 \(\sum 1/a_k^{2}\) 只影响 \(\ln n\) 量级修正，不改变 \(a_n\) 与 \(\sqrt n\) 的比值。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只看递推 \(a_{n+1}-a_n=1/a_n\)，误以为差分趋于 0 则 \(a_n\) 有界；实际上差分随 \(a_n\) 减小，但累加仍驱动 \(a_n\) 按 \(\sqrt n\) 增长。② 平方展开漏掉交叉项 \(2\)，主项系数会算错。③ 直接对 \(a_n\) 用 Stolz 定理时没先证 \(a_n\to\infty\)，条件不完整。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「差分含自身倒数」型递推是渐近估计的标准素材：平方累加得 \(\sqrt n\) 阶，立方累加得 \(n^{1/3}\) 阶（见 2523），平方递推求和得 \(\sqrt{\ln n}\) 阶（见 2513）。复习时应按驱动项的幂次把三种阶梯排成对照表。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=a_n+\dfrac1{a_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n^{2}}{n}\)。</p>
+    <p class="var-ans">答案：\(2\)。由 \(a_n^{2}=2n-1+\sum 1/a_k^{2}\)，低阶项剔除后 \(a_n^{2}/n\to2\)；本题是上题平方形式的直接改写。</p>
+  </div>
+</article>
+
+<article class="q" id="q2504">
+  <div class="q-head">
+    <span class="qno">第 2504 题</span>
+    <span class="qtype">等价无穷小（tan−sin 乘积型）</span>
+    <span class="qsrc">P1067</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子拆成正弦与半角差的乘积，再分别用等价无穷小。先提取 \(\sin x\)：</p>
+    \[
+    \tan x-\sin x=\sin x\cdot\frac{1-\cos x}{\cos x}.
+    \]
+    <p>在 \(x\to0\) 时，\(\sin x\sim x\)，\(1-\cos x\sim x^{2}/2\)，\(\cos x\to1\)，代入得首阶：</p>
+    \[
+    \tan x-\sin x\sim x\cdot\frac{x^{2}}2=\frac{x^{3}}2.
+    \]
+    <p>除以 \(x^{3}\)：</p>
+    \[
+    \frac{\tan x-\sin x}{x^{3}}\longrightarrow\frac12.
+    \]
+    <p>系数校验：\(\sin x=x-x^{3}/6+O(x^{5})\)，\(1-\cos x=x^{2}/2-x^{4}/24+O(x^{6})\)，相乘首阶确为 \(x^{3}/2\)，余弦因子趋于 1 不参与首阶系数。数值 \(x=10^{-3}\) 时商约 \(0.50025\)，逼近 \(1/2\)。</p>
+    <p>方法对照：本题也可对分子两次用洛必达法则，但求导过程中三角函数分式会越化越繁；乘积拆项加等价无穷小是更短的路径。首阶系数只由两个一阶、二阶等价量决定，余弦因子趋于 1，不参与首阶比例。需要留意，等价替换只能用于乘除因子，不能直接用于加减项，因此不能先把 \(\tan x\) 与 \(\sin x\) 分别等价成 \(x\) 再相减。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误用 \(\tan x\sim x\)、\(\sin x\sim x\) 直接相减，分子被整体判为 \(o(x^{3})\)，丢掉首阶。② 把 \(1-\cos x\) 的等价写成 \(x^{2}\)，系数差一倍。③ 忘记除以 \(\cos x\) 这一项趋于 1，在更复杂的题里把余弦因子当成修正项。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>三角函数减主部是泰勒系数提取的基础款：\(\tan x-\sin x\) 的首阶为 \(x^{3}/2\)，同族还有 \(\tan x-x\)（三次项 \(x^{3}/3\)，见 2514）、\(\sin x-x\)（三次项 \(-x^{3}/6\)，见 2509）。分母幂次决定需要展开到哪一阶。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x}{x\sin^{2}x}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。分母 \(x\sin^{2}x\sim x^{3}\)，与本题分母同阶，分子首阶 \(x^{3}/2\)，比值仍为 \(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2505">
+  <div class="q-head">
+    <span class="qno">第 2505 题</span>
+    <span class="qtype">根式差有理化（单项减 x）</span>
+    <span class="qsrc">P1067</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\bigl(\sqrt{x^{2}+x}-x\bigr)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\infty-\infty\) 型根式差，先乘共轭根式有理化：</p>
+    \[
+    \sqrt{x^{2}+x}-x
+    =\frac{(\sqrt{x^{2}+x}-x)(\sqrt{x^{2}+x}+x)}{\sqrt{x^{2}+x}+x}
+    =\frac{x}{\sqrt{x^{2}+x}+x}.
+    \]
+    <p>分子分母同除以 \(x\)（\(x\to+\infty\)，\(x\) 为正）：</p>
+    \[
+    \frac{x}{\sqrt{x^{2}+x}+x}
+    =\frac{1}{\sqrt{1+1/x}+1}.
+    \]
+    <p>令 \(1/x\to0\)：</p>
+    \[
+    \longrightarrow\frac{1}{1+1}=\frac12.
+    \]
+    <p>也可提公因子 \(x\) 后按 \(\sqrt{1+u}\sim1+u/2\) 展开：\(\sqrt{x^{2}+x}=x\sqrt{1+1/x}\sim x+1/2\)，减去 \(x\) 得 \(1/2\)。数值 \(x=10^{4}\) 时原式约 \(0.500025\)，与结果一致。</p>
+    <p>方法对照：有理化与提主部展开两条路径可以互相校验。提主部时 \(\sqrt{x^{2}+x}=x\sqrt{1+1/x}\)，按 \(\sqrt{1+u}=1+u/2+O(u^{2})\) 展开，一阶修正恰为 \(1/2\)，与有理化结果相同。需要注意 \(x\to\infty\) 按正无穷理解；若沿负无穷方向，\(\sqrt{x^{2}}=|x|=-x\)，根式主部符号改变，不能直接套用本题结论。根式差题型的共同步骤是先消去 \(\infty-\infty\) 未定式，再分离常数主部与趋于零的修正项。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接把 \(\sqrt{x^{2}+x}\) 等价成 \(x\)，差值被判为 0；根式的一阶修正项 \(1/2\) 正是答案来源。② 有理化后同除 \(x\) 时符号或平方根提取出错，\(\sqrt{x^{2}}=|x|\)，负无穷方向需另行讨论。③ 与 2515 两项根式差混淆：本题分子有理化后为 \(x\)，2515 为 \(2x\)，结果相差一倍。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>根式差是 \(x\to\infty\) 极限的固定题型，两条路径：共轭根式有理化，或提主部后用 \(\sqrt{1+u}\)、\(\sqrt[3]{1+u}\) 的一阶展开。同族见 2515（二次根式两项相减）与 2525（四次根式两项相减），差别只在分子系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\bigl(\sqrt{x^{2}+2x}-x\bigr)\)。</p>
+    <p class="var-ans">答案：\(1\)。有理化后分子为 \(2x\)，\(\frac{2x}{\sqrt{x^{2}+2x}+x}\to1\)；常数项在根号内的系数直接决定极限值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2506">
+  <div class="q-head">
+    <span class="qno">第 2506 题</span>
+    <span class="qtype">等差求和的归一化</span>
+    <span class="qsrc">P1067</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{2}}\sum\limits_{k=1}^{n}k\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：单重等差求和，先代入求和公式再看归一化。等差数列前 \(n\) 项和为：</p>
+    \[
+    \sum_{k=1}^{n}k=\frac{n(n+1)}2.
+    \]
+    <p>除以 \(n^{2}\)：</p>
+    \[
+    \frac1{n^{2}}\sum_{k=1}^{n}k=\frac{n+1}{2n}=\frac12+\frac1{2n}.
+    \]
+    <p>令 \(n\to\infty\)，余项 \(1/(2n)\) 趋于零：</p>
+    \[
+    \longrightarrow\frac12.
+    \]
+    <p>量级对照：分子是一阶量 \(k\) 的和，总量级 \(n^{2}/2\)，除以 \(n^{2}\) 后留存常数 \(1/2\)。数值 \(N=10^{3}/10^{5}\) 得 \(0.5005/0.500005\)，随 \(1/n\) 逼近 \(1/2\)。</p>
+    <p>黎曼和视角：原式即 \(\frac1n\sum(k/n)\)，对应 \(\int_0^1 x\,dx=1/2\)，与求和公式一致。两类读法等价：离散路径先套等差求和公式再归一，连续路径先还原定积分再算原函数。量级上，\(k\) 的一次和总量级 \(n^{2}/2\)，\(k^{2}\) 的一次和总量级 \(n^{3}/3\)，判断分母幂次先估分子总量级，此对照可作 2501 归一化判断的基准。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 求和公式写成 \(n(n-1)/2\)，首项系数偏差不影响极限但过程不严谨。② 把分母 \(n^{2}\) 看成 \(n\)，会误得发散。③ 不会用黎曼和视角复述：\(\frac1n\sum(k/n)\to\int_0^1 x\,dx=1/2\)，两种写法等价。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>这是黎曼和最基础的一次款，与幂函数积分族（2510 的 \(\sqrt x\)、2520 的半圆）同属「先求和或先积分」的路线。复习时应把 \(\sum k\)、\(\sum k^{2}\) 的总量级记牢，便于在双重和题里判断分母幂次。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{2}}\sum\limits_{k=1}^{n}(2k-1)\)。</p>
+    <p class="var-ans">答案：\(1\)。分子为前 \(n\) 个奇数之和 \(n^{2}\)，除以 \(n^{2}\) 得 1；等差系数直接决定极限。</p>
+  </div>
+</article>
+
+<article class="q" id="q2507">
+  <div class="q-head">
+    <span class="qno">第 2507 题</span>
+    <span class="qtype">泰勒展开（e^x 二阶系数）</span>
+    <span class="qsrc">P1068</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{e^{x}-1-x}{x^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母为二次幂，把 \(e^{x}\) 在原点展开到二阶：</p>
+    \[
+    e^{x}=1+x+\frac{x^{2}}2+O(x^{3}).
+    \]
+    <p>代入分子，常数项与一次项被减掉：</p>
+    \[
+    e^{x}-1-x=\frac{x^{2}}2+O(x^{3}).
+    \]
+    <p>除以 \(x^{2}\)：</p>
+    \[
+    \frac{e^{x}-1-x}{x^{2}}\longrightarrow\frac12.
+    \]
+    <p>洛必达路径亦可：分子分母连续两次求导后得 \(e^{x}/2\to1/2\)，展开路径计算量更小。数值 \(x=10^{-3}\) 时商约 \(0.50017\)，与二阶系数一致。展开阶数刚好匹配分母幂次，无需写到 \(x^{3}\) 项。</p>
+    <p>方法对照：洛必达路径要求分子分母同时趋于零，第一次求导后分子 \(e^{x}-1\)、分母 \(2x\) 仍为零比零型，第二次求导后得 \(e^{x}/2\)，代入 \(x=0\) 为 \(1/2\)。泰勒展开路径一步写出二次系数，省去逐次求导。系数记忆上，\(e^{x}\) 的级数各项系数均为正，\(\ln(1+x)\) 则正负交替，两者二次项符号相反。若分母换成 \(x\)，分子首阶为 \(x\)，极限为 1；换成 \(x^{3}\)，则需写到三次项 \(x^{3}/6\)。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只记 \(e^{x}-1\sim x\)，把分子整体判为 \(o(x^{2})\)，丢掉二次项。② 洛必达使用前未验证 \(0/0\) 型，或求导次数不足。③ 与 \(\ln(1+x)-x\) 的二次项符号记混：\(e^{x}\) 为 \(+x^{2}/2\)，\(\ln(1+x)\) 为 \(-x^{2}/2\)（见 2517）。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>指数函数减主部是泰勒系数提取的常考款，与对数型、三角型并列。同类变体：分母换 \(x^{3}\) 时提取 \(x^{3}/6\) 系数，换 \(x\) 时极限为 0；判据始终是分母幂次决定展开阶数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{x}-1-x-\dfrac{x^{2}}2}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac16\)。扣除二阶项后分子首阶为 \(x^{3}/6\)，除以 \(x^{3}\) 得 \(1/6\)；这是逐阶剥取系数的标准练习。</p>
+  </div>
+</article>
+
+<article class="q" id="q2508">
+  <div class="q-head">
+    <span class="qno">第 2508 题</span>
+    <span class="qtype">黎曼和（对数函数积分）</span>
+    <span class="qsrc">P1068</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\ln\Bigl(1+\dfrac{k}{n}\Bigr)\)。</p>
+  </div>
+  <div class="answer">答案：\(2\ln2-1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：右端点黎曼和，分点 \(x_k=k/n\)，小区间长度 \(\Delta x=1/n\)，被积函数 \(f(x)=\ln(1+x)\) 在 \([0,1]\) 连续：</p>
+    \[
+    \frac1n\sum_{k=1}^{n}\ln\Bigl(1+\frac{k}{n}\Bigr)\longrightarrow\int_0^1\ln(1+x)\,dx.
+    \]
+    <p>对对数函数分部积分，取 \(u=\ln(1+x)\)，\(dv=dx\)：</p>
+    \[
+    \int\ln(1+x)\,dx=(1+x)\ln(1+x)-(1+x)+C.
+    \]
+    <p>代入上下限 \(0\) 与 \(1\)：</p>
+    \[
+    I=\bigl[(1+x)\ln(1+x)-(1+x)\bigr]_0^1
+    =2\ln2-2+1=2\ln2-1.
+    \]
+    <p>数值三档：\(N=10^{3}/10^{4}\) 离散和得 \(0.386641/0.386329\)，逼近 \(2\ln2-1\approx0.386294\)，与 quad 积分值一致。被积函数在 \(x=0\) 处取值为 0，右端点和与积分的偏差来自首末小区间，随 \(1/n\) 消失。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 分部积分后常数项算错：原函数在 \(x=0\) 处为 \(-1\)，代入下限要做减法。② 把积分误写成 \(\int_0^1\ln x\,dx=-1\)，漏去 \(1+\)。③ 不会辨认黎曼和，试图对 \(\ln(1+k/n)\) 直接求和。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数核的黎曼和是积分计算题的常客，分部积分后常出现 \(\ln2\) 与常数的组合。同族变体有 2518（核为 \(\ln(1+x^{2})\)，结果带 \(\arctan\) 项）；复习时应熟练 \(\ln(1+x)\)、\(\ln(1+x^{2})\) 的原函数。同一对数核在书内其他位置曾出现 \(\ln2-1\) 的写法，那是代入下限时常数项漏算所致，定值以 \(2\ln2-1\) 为准。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\ln\Bigl(1+\dfrac{2k}{n}\Bigr)\)。</p>
+    <p class="var-ans">答案：\(3\ln3-2\)。换元后为 \(\int_0^2\ln(1+x)\,dx=3\ln3-2\)；区间放大到 \([0,2]\)，原函数代入上限 2。</p>
+  </div>
+</article>
+
+<article class="q" id="q2509">
+  <div class="q-head">
+    <span class="qno">第 2509 题</span>
+    <span class="qtype">泰勒展开（sin x 三阶系数）</span>
+    <span class="qsrc">P1068</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sin x-x}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac16\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母三次幂，把 \(\sin x\) 展开到三阶：</p>
+    \[
+    \sin x=x-\frac{x^{3}}6+O(x^{5}).
+    \]
+    <p>减去主部 \(x\)，一次项抵消：</p>
+    \[
+    \sin x-x=-\frac{x^{3}}6+O(x^{5}).
+    \]
+    <p>除以 \(x^{3}\)：</p>
+    \[
+    \frac{\sin x-x}{x^{3}}\longrightarrow-\frac16.
+    \]
+    <p>符号对照：\(\tan x-x\) 的三次项为 \(+x^{3}/3\)（见 2514），\(\sin x-x\) 为负；二者方向相反，记忆时以正弦级数逐项符号为准。数值 \(x=10^{-3}\) 时商约 \(-0.166666\)，与 \(-1/6\) 一致。余项 \(O(x^{5})\) 除以 \(x^{3}\) 后为 \(O(x^{2})\)，趋于零不影响系数。</p>
+    <p>方法对照：洛必达三次求导，正弦第三次为 \(-\cos x\)，代入 0 配合分母系数同样得 \(-1/6\)；展开路径直接读取级数系数，计算量更小。\(\sin x\) 级数只含奇次项且正负交替，三次项为负；\(\arcsin x\) 三次项为正，绝对值相同。等价无穷小 \(\sin x\sim x\) 只能用于乘除，不能用于加减结构；分母换成 \(x^{5}\) 时需补到五次项 \(x^{5}/120\)。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 等价替换 \(\sin x\sim x\) 后分子判为零，丢掉三次修正项。② 三次项符号写反，误得 \(+1/6\)。③ 展开只写到一阶，无法定出三次系数；分母 \(x^{3}\) 要求至少写到 \(x^{3}\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正弦减主部是系数提取族的基础款，常与 \(\arcsin x-x\)（三次项 \(+x^{3}/6\)，见 2519）配对出现，一正一负。真题也会把分母换成 \(x^{5}\)，要求继续展开到五次项。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x+\dfrac{x^{3}}6}{x^{5}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac1{120}\)。正弦五次项为 \(+x^{5}/120\)，扣除三次项后除以 \(x^{5}\) 得 \(1/120\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2510">
+  <div class="q-head">
+    <span class="qno">第 2510 题</span>
+    <span class="qtype">黎曼和（幂函数积分）</span>
+    <span class="qsrc">P1068</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\sqrt{\dfrac{k}{n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac23\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：右端点黎曼和，被积函数 \(f(x)=\sqrt x\) 在 \([0,1]\) 连续：</p>
+    \[
+    \frac1n\sum_{k=1}^{n}\sqrt{\frac{k}{n}}\longrightarrow\int_0^1\sqrt{x}\,dx.
+    \]
+    <p>按幂函数积分公式 \(x^{\alpha}\) 的原函数为 \(x^{\alpha+1}/(\alpha+1)\)，这里 \(\alpha=1/2\)：</p>
+    \[
+    \int_0^1 x^{1/2}\,dx=\frac23x^{3/2}\Big|_0^1=\frac23.
+    \]
+    <p>数值三档：\(N=10^{3}/10^{4}/10^{5}\) 得 \(0.667160/0.666716/0.666672\)，单调逼近 \(2/3\approx0.666667\)。端点 \(x=0\) 处被积函数为 0，不影响积分存在性；右端点和随加密收敛到积分值。</p>
+    <p>幂函数积分的一般公式为 \(\int_0^1 x^{\alpha}dx=1/(\alpha+1)\)，本题 \(\alpha=1/2\)：</p>
+    \[
+    \int_0^1 x^{1/2}\,dx=\frac{x^{3/2}}{3/2}\Big|_0^1=\frac23.
+    \]
+    <p>方法对照：离散路径先估计求和量级，连续路径还原积分；端点 \(x=0\) 处核为零，不影响积分存在。若核换成其他幂次 \(x^{\alpha}\)，只需替换 \(\alpha\) 代入公式。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 幂次积分公式记反，把 \(x^{1/2}\) 积成 \(x^{3/2}/2\)。② 把根号看成 \(k/n\) 的一次方，误得 \(1/2\)。③ 不会从黎曼和还原积分，停留在对离散根号求和。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>幂函数核是黎曼和最简单的一族：核为 \(x^{\alpha}\) 时极限 \(1/(\alpha+1)\)。同族对照有 2506（\(\alpha=1\)，得 \(1/2\)）、2520（半圆核，得 \(\pi/4\)）；复习时应能从求和式直接读出积分区间与核函数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\Bigl(\dfrac{k}{n}\Bigr)^{1/3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac34\)。积分 \(\int_0^1 x^{1/3}\,dx=3/4\)；一般公式 \(1/(\alpha+1)\) 直接套用。</p>
+  </div>
+</article>
+
+<article class="q" id="q2511">
+  <div class="q-head">
+    <span class="qno">第 2511 题</span>
+    <span class="qtype">二重求和的量级归一（印式发散）</span>
+    <span class="qsrc">P1068</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{2}}\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}\sqrt{i^{2}+j^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：不存在（\(+\infty\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{\sqrt2+\ln(1+\sqrt2)}{3}=0.7651957165\)；按页面印式复算极限发散至 \(+\infty\)，渐近主项为 \(A n\)，其中 \(A=\iint_{[0,1]^{2}}\sqrt{x^{2}+y^{2}}\,dxdy\)。书给值正是 \(A\)，对应外层归一化为 \(n^{3}\)（求和项无量纲化）的标准二重黎曼和读法。错法：双重和只写一层 \(1/n\)，少了 \((1/n)^{2}\) 归一；根式求和项总量级 \(n^{3}A\)，除以 \(n^{2}\) 后仍剩 \(n\) 阶。邻近变体排除：外层改 \(n^{4}\) 则趋于 0；核改为 \(1/\sqrt{i^{2}+j^{2}}\) 数值不落在 \(A\) 附近；其余幂次款均不等于书值。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：双重离散求和，求和项 \(\sqrt{i^{2}+j^{2}}\) 不含 \(1/n\) 因子，先把它写成无量纲形式：</p>
+    \[
+    \sqrt{i^{2}+j^{2}}=n\sqrt{\Bigl(\frac{i}{n}\Bigr)^{2}+\Bigl(\frac{j}{n}\Bigr)^{2}}.
+    \]
+    <p>记 \(A=\iint_{[0,1]^{2}}\sqrt{x^{2}+y^{2}}\,dxdy\)，二重和总量级为 \(n^{3}A\)，除以 \(n^{2}\) 后剩余 \(n\) 阶：</p>
+    \[
+    \sum_{i,j}\sqrt{i^{2}+j^{2}}\sim n^{3}A,\qquad
+    \frac1{n^{2}}\sum_{i,j}\sqrt{i^{2}+j^{2}}\sim nA.
+    \]
+    <p>书给常数 \(A\) 的闭式由极坐标分块求得：正方形按 \(\theta\in[0,\pi/4]\) 与 \([\pi/4,\pi/2]\) 分为两块，对称相消后</p>
+    \[
+    A=\frac23\int_0^{\pi/4}\sec^{3}\theta\,d\theta
+    =\frac13\bigl(\sqrt2+\ln(1+\sqrt2)\bigr)=0.7651957165.
+    \]
+    <p>故印刷式随 \(n\) 线性增长至 \(+\infty\)。离散两档：\(N=10^{2}/10^{3}\) 得 \(77.167/765.844\)，与 \(A\cdot N=76.520/765.196\) 吻合，比值趋于 1。只有外层按 \(n^{3}\) 归一（或求和项内补入 \(1/n\) 因子），极限才是 \(A\)，即书给值对应的读法。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接套用二重黎曼和公式 \(\frac1{n^{2}}\sum f(i/n,j/n)\)，没发现求和项里少了 \(1/n\)。② 估计总量级时把根式当成一阶量，误判分子为 \(n^{2}\) 阶。③ 极坐标分块时漏掉 \(\theta=\pi/4\) 的对角线，两块半径上限分别为 \(\sec\theta\)、\(\csc\theta\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2501 同属双重和归一化错法族：2501 求和项为二次多项式、总量级 \(n^{4}\)，本题为齐次一次根式、总量级 \(n^{3}\)。判别主线一致：先写求和项关于 \(n\) 的齐次次数，再加和提升两阶，比对外层分母幂次。二重积分的极坐标分块是计算 \(A\) 的配套技能。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{3}}\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}\sqrt{i^{2}+j^{2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\sqrt2+\ln(1+\sqrt2)}{3}\)。外层按 \(n^{3}\) 归一后即标准二重黎曼和，极限为 \(A\)；这正是书给值对应的读法。</p>
+  </div>
+</article>
+
+<article class="q" id="q2512">
+  <div class="q-head">
+    <span class="qno">第 2512 题</span>
+    <span class="qtype">收敛正项级数除以 ln n</span>
+    <span class="qsrc">P1069</span>
+  </div>
+  <div class="stem">
+    <p>设正项级数 \(\sum a_n\) 收敛，求 \(\lim\limits_{n\to\infty}\dfrac{1}{\ln n}\sum\limits_{k=1}^{n}\dfrac{a_k}{k}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：正项级数收敛条件下的加权通项和，外层除以发散量 \(\ln n\)。记 \(S=\sum a_k<\infty\)。因 \(k\ge1\)，通项被原项控制：</p>
+    \[
+    0\le\frac{a_k}{k}\le a_k.
+    \]
+    <p>前 \(n\) 项部分和有界：</p>
+    \[
+    0\le\sum_{k=1}^{n}\frac{a_k}{k}\le\sum_{k=1}^{n}a_k\le S.
+    \]
+    <p>除以 \(\ln n\)，夹逼两端为 0 与 \(S/\ln n\)：</p>
+    \[
+    0\le\frac1{\ln n}\sum_{k=1}^{n}\frac{a_k}{k}\le\frac{S}{\ln n}\longrightarrow0.
+    \]
+    <p>由夹逼准则极限为 0。数值佐证：取 \(a_k=2^{-k}\)，\(N=10^{3}/10^{5}\) 得 \(0.100343/0.060206\)，随 \(1/\ln n\) 下降。权重 \(1/k\) 只让通项更小，不改变部分和有界的结论；外层发散量换成 \(n\)（见 2502）同样得 0。</p>
+    <p>论证主线复述：正项条件保证放缩方向成立，\(1/k\le1\) 使加权通项不超过原通项；部分和被原级数和 \(S\) 控制在有限区间内。\(\ln n\) 趋于无穷的速度慢于 \(n\)，但无论快慢，只要分母趋于无穷而分子部分和有界，商就趋于零。本题不需要估计 \(\sum a_k/k\) 的具体数值，也不需要用到 \(a_k\) 的单调性。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 试图先求 \(\sum a_k/k\) 的闭式和，题目只需要有界性。② 忽略正项条件，放缩方向不成立。③ 把 \(\ln n\) 当成有界量，或误判 \(S/\ln n\) 不趋于零。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「收敛级数部分和有界，除以发散量得 0」是同族主线：2502 除以 \(n\)，本题除以 \(\ln n\)，2522 通项再带压缩分母。复习时应区分两类背景：级数收敛型靠部分和有界，递推数列型（2513、2523）靠累加求渐近阶。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设正项级数 \(\sum a_n\) 收敛，求 \(\lim\limits_{n\to\infty}\dfrac{1}{\ln n}\sum\limits_{k=1}^{n}a_k\)。</p>
+    <p class="var-ans">答案：\(0\)。部分和趋于 \(S\)，本身有界，除以 \(\ln n\) 趋于 0；权重 \(1/k\) 去掉后结论不变。</p>
+  </div>
+</article>
+
+<article class="q" id="q2513">
+  <div class="q-head">
+    <span class="qno">第 2513 题</span>
+    <span class="qtype">平方递推求和的对数渐近</span>
+    <span class="qsrc">P1069</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{a_n\}\) 满足 \(a_1=1,\ a_{n+1}=\sqrt{a_n^{2}+\dfrac1n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n}{\sqrt{\ln n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推式带根号，先平方去掉根号，再累加求平方项渐近。两边平方：</p>
+    \[
+    a_{n+1}^{2}=a_n^{2}+\frac1n.
+    \]
+    <p>从 \(k=1\) 到 \(n-1\) 累加：</p>
+    \[
+    a_n^{2}=a_1^{2}+\sum_{k=1}^{n-1}\frac1k=1+H_{n-1}.
+    \]
+    <p>调和数渐近 \(H_{n-1}=\ln n+\gamma+o(1)\)，其中 \(\gamma\) 为欧拉常数，故</p>
+    \[
+    a_n^{2}=\ln n+\gamma+1+o(1)\sim\ln n.
+    \]
+    <p>两边开方后同除 \(\sqrt{\ln n}\)：</p>
+    \[
+    \frac{a_n}{\sqrt{\ln n}}\longrightarrow1.
+    \]
+    <p>数值三档模拟：\(N=10^{3}/10^{4}/10^{5}\) 得 \(1.10827/1.08224/1.06630\)，比值按 \(\sqrt{1+(\gamma+1)/\ln n}\) 缓慢降至 1。常数项 \(\gamma+1\) 只影响 \(1/\ln n\) 阶修正，不改变 \(a_n\) 与 \(\sqrt{\ln n}\) 的比值。</p>
+    <p>方法对照：平方后递推退化为平方项累加，这是求出渐近阶的关键；欧拉常数 \(\gamma\) 与初值 1 归入常数项，开方时相对 \(\ln n\) 可忽略。数值比值下降偏慢，正是常数项按 \(1/\ln n\) 衰减的体现。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不对递推平方，直接对 \(a_n\) 估计，被根号结构卡住。② 调和数累加后只记得 \(H_n\sim\ln n\)，忽略常数项不影响主阶判断。③ 与 2503 混淆：2503 驱动项是 \(1/a_n\)、平方累加得 \(\sqrt n\)；本题驱动项是 \(1/n\)、得 \(\sqrt{\ln n}\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>递推渐近族按驱动项分三档：\(1/a_n\) 驱动得 \(\sqrt n\)（2503），\(1/n\) 驱动得 \(\sqrt{\ln n}\)（本题），\(1/a_n^{2}\) 驱动得 \(n^{1/3}\)（2523）。复习时应把递推平方或立方展开后的累加主项排成对照表。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\sqrt{a_n^{2}+\dfrac1{n^{2}}}\)，求 \(a_n\) 的渐近阶。</p>
+    <p class="var-ans">答案：\(a_n\) 收敛于有限常数。累加 \(\sum 1/k^{2}\) 收敛，\(a_n^{2}\) 有上界，不再随 \(\ln n\) 增长；驱动项幂次改变直接改变渐近阶。</p>
+  </div>
+</article>
+
+<article class="q" id="q2514">
+  <div class="q-head">
+    <span class="qno">第 2514 题</span>
+    <span class="qtype">泰勒展开（tan x 三阶系数）</span>
+    <span class="qsrc">P1069</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan x-x}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac13\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母三次幂，把 \(\tan x\) 展开到三阶：</p>
+    \[
+    \tan x=x+\frac{x^{3}}3+O(x^{5}).
+    \]
+    <p>减去主部 \(x\)，一次项抵消：</p>
+    \[
+    \tan x-x=\frac{x^{3}}3+O(x^{5}).
+    \]
+    <p>除以 \(x^{3}\)：</p>
+    \[
+    \frac{\tan x-x}{x^{3}}\longrightarrow\frac13.
+    \]
+    <p>系数可由导数法复核：\(\tan'x|_0=1\)，\(\tan''x|_0=0\)，三阶导数在 0 处为 2，故三阶项为 \(2x^{3}/3!=x^{3}/3\)。数值 \(x=10^{-3}\) 时商约 \(0.3335\)，逼近 \(1/3\)。对照 \(\sin x-x\) 三次项为 \(-x^{3}/6\)（见 2509），正切为正号。</p>
+    <p>方法对照：洛必达路径需三次求导，正切导数为 \(\sec^{2}x\)，继续求导涉及正割平方与正切乘积，过程较繁；泰勒展开直接读取三次系数更直接。系数记忆表中，\(\tan x-x\) 为 \(+x^{3}/3\)，\(\sin x-x\) 为 \(-x^{3}/6\)，\(\arcsin x-x\) 为 \(+x^{3}/6\)，\(\arctan x-x\) 为 \(-x^{3}/3\)。若分母换成 \(x^{5}\)，需补正切五次项 \(2x^{5}/15\)。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 等价替换 \(\tan x\sim x\) 后分子判零，丢掉三次项。② 三次系数记成 \(1/6\) 或 \(2/3\)，与正弦、反正切系数混同。③ 展开阶数不足，只写到一阶无法定值。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正切减主部是系数提取族的标准款，常与 \(\sin x-x\)、\(\arcsin x-x\)、\(\arctan x-x\) 排成系数表。真题变体多为换分母幂次：分母 \(x^{5}\) 时继续展开到 \(x^{5}\) 项（\(\tan x\) 五次项为 \(2x^{5}/15\)）。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-x-\dfrac{x^{3}}3}{x^{5}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{2}{15}\)。正切五次项为 \(2x^{5}/15\)，扣除三次项后除以 \(x^{5}\) 得 \(2/15\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2515">
+  <div class="q-head">
+    <span class="qno">第 2515 题</span>
+    <span class="qtype">根式差有理化（两项二次根式）</span>
+    <span class="qsrc">P1069</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\bigl(\sqrt{x^{2}+x}-\sqrt{x^{2}-x}\bigr)\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\infty-\infty\) 型两项根式差，乘共轭式有理化，分子相减后常数项抵消：</p>
+    \[
+    \sqrt{x^{2}+x}-\sqrt{x^{2}-x}
+    =\frac{(x^{2}+x)-(x^{2}-x)}{\sqrt{x^{2}+x}+\sqrt{x^{2}-x}}
+    =\frac{2x}{\sqrt{x^{2}+x}+\sqrt{x^{2}-x}}.
+    \]
+    <p>分子分母同除以 \(x\)（\(x\to+\infty\)）：</p>
+    \[
+    =\frac{2}{\sqrt{1+1/x}+\sqrt{1-1/x}}.
+    \]
+    <p>令 \(1/x\to0\)：</p>
+    \[
+    \longrightarrow\frac{2}{1+1}=1.
+    \]
+    <p>对照 2505：单项根式差有理化后分子为 \(x\)，得 \(1/2\)；本题两项相减分子为 \(2x\)，结果翻倍。数值 \(x=10^{4}\) 时原式约 \(0.999975\)，与 1 一致。根号内 \(1-1/x\) 在 \(x\to+\infty\) 下为正，开方合法。</p>
+    <p>方法对照：提主部展开，两根式分别为 \(x(1\pm1/x)^{1/2}\)，一阶修正项之差为 1，与有理化一致；分子系数 2 来自根号内 \(+x\) 与 \(-x\) 相减，分母两根式趋于同一主部 \(x\)。单项根式差（2505）分子为 \(x\)，两项根式差为 \(2x\)，需区分。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 分别把两个根式等价成 \(x\)，差值判为 0；一阶修正项之差正是答案来源。② 有理化后分子算成 \(x\)，与 2505 混同得 \(1/2\)。③ 同除 \(x\) 时 \(\sqrt{x^{2}-x}\) 提取 \(x\) 的符号出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>两项根式差是 \(x\to\infty\) 根式题型的主力：分子系数由根号内常数项之差决定。同族有 2525（四次根式差，提公因子 \(x^{2}\) 后结构相同）；复习时应先提主部，再用一阶展开或有理化定值。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\bigl(\sqrt{x^{2}+3x}-\sqrt{x^{2}-x}\bigr)\)。</p>
+    <p class="var-ans">答案：\(2\)。有理化后分子为 \(4x\)，\(\frac{4x}{\sqrt{x^{2}+3x}+\sqrt{x^{2}-x}}\to2\)；根号内系数之差直接决定极限。</p>
+  </div>
+</article>
+
+<article class="q" id="q2516">
+  <div class="q-head">
+    <span class="qno">第 2516 题</span>
+    <span class="qtype">二重黎曼和（可分离负指数）</span>
+    <span class="qsrc">P1069</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{2}}\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}e^{-\frac{i+j}{n}}\)。</p>
+  </div>
+  <div class="answer">答案：\((1-e^{-1})^{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：二重黎曼和，负指数按 \(e^{-(i+j)/n}=e^{-i/n}e^{-j/n}\) 分离，二重和拆成两个单重和之积：</p>
+    \[
+    \frac1{n^{2}}\sum_{i,j}e^{-(i+j)/n}
+    =\left(\frac1n\sum_{k=1}^{n}e^{-k/n}\right)^{2}.
+    \]
+    <p>单重和为右端黎曼和，趋于指数函数在 \([0,1]\) 上的积分：</p>
+    \[
+    \frac1n\sum_{k=1}^{n}e^{-k/n}\longrightarrow\int_0^1 e^{-x}\,dx=1-e^{-1}.
+    \]
+    <p>平方后得极限：</p>
+    \[
+    L=(1-e^{-1})^{2}=0.3995764009.
+    \]
+    <p>数值三档：\(N=10^{3}/10^{4}/10^{5}\) 得 \(0.399177/0.399536/0.399572\)，单调逼近书值。符号校验：若指数取正号 \(e^{(i+j)/n}\)，单重和趋于 \(\int_0^1 e^{x}\,dx=e-1\)，极限为 \((e-1)^{2}\approx2.95249\)，与本题不符；页面印式指数为负。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 指数符号读反，把负指数当成正指数，得到 \((e-1)^{2}\)。② 不会分离变量，把二重和当成无法化简的耦合和。③ 积分 \(\int_0^1 e^{-x}\,dx\) 漏算负号，写成 \(1-e\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>可分离核是多重黎曼和的第一类：乘积核给出乘积积分。同族有 2521（三重和，核为正弦、余弦、负指数三者乘积）；判别时先看求和项能否按指标拆成各单指标函数之积，再分别归一成一维黎曼和。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{2}}\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}e^{\frac{i+j}{n}}\)。</p>
+    <p class="var-ans">答案：\((e-1)^{2}\)。正指数单重和趋于 \(\int_0^1 e^{x}\,dx=e-1\)，平方后为 \((e-1)^{2}\)；与本题仅指数符号不同。</p>
+  </div>
+</article>
+
+<article class="q" id="q2517">
+  <div class="q-head">
+    <span class="qno">第 2517 题</span>
+    <span class="qtype">泰勒展开（ln(1+x) 二阶系数）</span>
+    <span class="qsrc">P1069</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x}{x^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母二次幂，把 \(\ln(1+x)\) 展开到二阶：</p>
+    \[
+    \ln(1+x)=x-\frac{x^{2}}2+O(x^{3}).
+    \]
+    <p>减去主部 \(x\)，一次项抵消：</p>
+    \[
+    \ln(1+x)-x=-\frac{x^{2}}2+O(x^{3}).
+    \]
+    <p>除以 \(x^{2}\)：</p>
+    \[
+    \frac{\ln(1+x)-x}{x^{2}}\longrightarrow-\frac12.
+    \]
+    <p>符号对照：\(e^{x}-1-x\) 的二次项为 \(+x^{2}/2\)（见 2507），对数型为负号；记忆以 \(\ln(1+x)\) 级数逐项符号为准。数值 \(x=10^{-3}\) 时商约 \(-0.4999\)，逼近 \(-1/2\)。余项 \(O(x^{3})\) 除以 \(x^{2}\) 后趋于零，不影响二次系数。</p>
+    <p>方法对照：洛必达两次求导后分子为 \(-1/(1+x)\)、分母为 2，代入 0 得 \(-1/2\)；展开路径直接读取对数级数二次系数。\(\ln(1+x)=x-x^{2}/2+x^{3}/3-\cdots\) 正负交替，\(e^{x}-1-x\) 二次项为正，两者方向相反；分母换 \(x^{3}\) 时提取三次系数 \(1/3\)。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 等价替换 \(\ln(1+x)\sim x\) 后分子判零，丢掉二次修正项。② 二次项符号写反，误得 \(+1/2\)。③ 与 \(e^{x}\) 的二次系数混同，两者一负一正。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数减主部是系数提取族的基础款，常与指数型配对。真题变体多为提高分母幂次：分母 \(x^{3}\) 时提取 \(+x^{3}/3\) 系数；或把 \(\ln(1+x)\) 换成 \(\ln(1+\sin x)\) 等复合形式，先对内层展开。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+\dfrac{x^{2}}2}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。对数三次项为 \(+x^{3}/3\)，扣除二次项后除以 \(x^{3}\) 得 \(1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2518">
+  <div class="q-head">
+    <span class="qno">第 2518 题</span>
+    <span class="qtype">黎曼和（对数二次型积分）</span>
+    <span class="qsrc">P1070</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\ln\Bigl(1+\dfrac{k^{2}}{n^{2}}\Bigr)\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln2-2+\dfrac{\pi}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：右端点黎曼和，核函数 \(f(x)=\ln(1+x^{2})\)，分点 \(x_k=k/n\)：</p>
+    \[
+    \frac1n\sum_{k=1}^{n}\ln\Bigl(1+\frac{k^{2}}{n^{2}}\Bigr)\longrightarrow\int_0^1\ln(1+x^{2})\,dx.
+    \]
+    <p>分部积分，取 \(u=\ln(1+x^{2})\)，\(dv=dx\)，导数 \(u'=2x/(1+x^{2})\)：</p>
+    \[
+    \int\ln(1+x^{2})\,dx=x\ln(1+x^{2})-2x+2\arctan x+C.
+    \]
+    <p>代入上下限 \(0\) 与 \(1\)，\(\arctan1=\pi/4\)：</p>
+    \[
+    I=\ln2-2+2\cdot\frac{\pi}{4}=\ln2-2+\frac{\pi}{2}=0.2639435074.
+    \]
+    <p>数值两档：\(N=10^{3}/10^{4}\) 离散和得 \(0.264290/0.263978\)，逼近闭式值，与 quad 积分一致。原函数中的 \(2\arctan x\) 项是二次型对数核区别于 \(\ln(1+x)\) 的关键，不能漏写。</p>
+    <p>方法对照：分部积分取对数为 \(u\)、多项式为 \(dv\)，求导后留下有理函数 \(2x/(1+x^{2})\)，其积分恰为 \(\arctan x\)。闭式值 \(0.26394\) 为正，与被积函数在 \([0,1]\) 上取正值一致；漏去反三角项会变成负的 \(\ln2-2\)。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 分部积分后漏掉 \(\arctan\) 项，只剩 \(\ln2-2\)。② 把核看成 \(\ln(1+x)\)，积分误用 2508 的原函数。③ 代入上限时 \(x\ln(1+x^{2})\) 算成 \(2\ln2\)，系数出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>二次型对数核的积分是积分计算的中等难度款，分部积分后自然出现反三角函数。同族对照 2508（一次型对数核，结果纯 \(\ln2\) 与常数组合）；复习时应熟记 \(\ln(1+x^{2})\) 的原函数结构。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\ln\Bigl(1+4\Bigl(\dfrac{k}{n}\Bigr)^{2}\Bigr)\)。</p>
+    <p class="var-ans">答案：\(\ln5-2+\arctan2\)。积分 \(\int_0^1\ln(1+4x^{2})dx\) 分部积分得 \(x\ln(1+4x^{2})-2x+\arctan(2x)\)，代入上下限即得。</p>
+  </div>
+</article>
+
+<article class="q" id="q2519">
+  <div class="q-head">
+    <span class="qno">第 2519 题</span>
+    <span class="qtype">泰勒展开（arcsin x 三阶系数）</span>
+    <span class="qsrc">P1070</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\arcsin x-x}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac16\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母三次幂，把 \(\arcsin x\) 展开到三阶。由导数 \((\arcsin x)'=1/\sqrt{1-x^{2}}=(1-x^{2})^{-1/2}\) 逐项积分得：</p>
+    \[
+    \arcsin x=x+\frac{x^{3}}6+O(x^{5}).
+    \]
+    <p>减去主部 \(x\)，一次项抵消：</p>
+    \[
+    \arcsin x-x=\frac{x^{3}}6+O(x^{5}).
+    \]
+    <p>除以 \(x^{3}\)：</p>
+    \[
+    \frac{\arcsin x-x}{x^{3}}\longrightarrow\frac16.
+    \]
+    <p>系数对照：\(\arctan x-x\) 三次项为 \(-x^{3}/3\)，方向相反；\(\arcsin x\) 与 \(\sin x\) 的三次系数绝对值同为 \(1/6\)，一正一负。数值 \(x=10^{-3}\) 时商约 \(0.16675\)，逼近 \(1/6\)。余项 \(O(x^{5})\) 不参与三次系数。</p>
+    <p>方法对照：反三角级数可由导数二项式展开逐项积分得到，不必死记系数。\((1-x^{2})^{-1/2}=1+x^{2}/2+3x^{4}/8+\cdots\)，积分后 \(\arcsin x=x+x^{3}/6+3x^{5}/40+\cdots\)。系数对照上，\(\arcsin x\) 与 \(\sin x\) 三次系数绝对值同为 \(1/6\)，方向相反；\(\arctan x\) 三次项为负。若分母换成 \(x^{5}\)，扣除三次项后提取五次系数 \(3/40\)。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 记混反三角系数，把 \(\arcsin\) 三次项写成负号或 \(1/3\)。② 不会从导数二项式展开推级数，靠背系数出错。③ 展开阶数不足，只写到一阶无法定值。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>反三角减主部是系数提取族的配对款：\(\arcsin x\)、\(\arctan x\)、\(\sin x\)、\(\tan x\) 的前四阶系数应排成对照表。真题也会把反三角放进复合函数，先对内层做等价替换再展开。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-x-\dfrac{x^{3}}6}{x^{5}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{3}{40}\)。\(\arcsin x\) 五次项为 \(3x^{5}/40\)，扣除三次项后除以 \(x^{5}\) 得 \(3/40\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2520">
+  <div class="q-head">
+    <span class="qno">第 2520 题</span>
+    <span class="qtype">黎曼和（四分之一圆面积）</span>
+    <span class="qsrc">P1070</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\sqrt{1-\Bigl(\dfrac{k}{n}\Bigr)^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\pi}{4}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：右端点黎曼和，核函数 \(f(x)=\sqrt{1-x^{2}}\) 在 \([0,1]\) 连续：</p>
+    \[
+    \frac1n\sum_{k=1}^{n}\sqrt{1-\Bigl(\frac{k}{n}\Bigr)^{2}}\longrightarrow\int_0^1\sqrt{1-x^{2}}\,dx.
+    \]
+    <p>几何意义：被积函数是单位圆在上半平面的方程，积分即第一象限四分之一圆面积：</p>
+    \[
+    \int_0^1\sqrt{1-x^{2}}\,dx=\frac{\pi}{4}.
+    \]
+    <p>三角代换复核：令 \(x=\sin t\)，\(dx=\cos t\,dt\)，\(t\in[0,\pi/2]\)，</p>
+    \[
+    I=\int_0^{\pi/2}\cos^{2}t\,dt=\frac{\pi}{4}.
+    \]
+    <p>数值两档：\(N=10^{3}/10^{4}\) 得 \(0.784889/0.785348\)，逼近 \(\pi/4\approx0.785398\)。核在 \(x=1\) 处为 0，不影响积分存在性；右端点和随加密收敛到四分之一圆面积。</p>
+    <p>方法对照：代数路径用 \(x=\sin t\) 复核，\(\cos^{2}t=(1+\cos2t)/2\) 在 \([0,\pi/2]\) 积分得 \(\pi/4\)，与几何路径一致。核在 \(x=1\) 处导数趋于无穷，但函数本身连续，黎曼和收敛不受影响。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把半圆面积公式记错，误得 \(\pi/2\) 或 \(\pi/8\)。② 三角代换后 \(\cos^{2}t\) 的积分公式不熟，没拆成 \((1+\cos2t)/2\)。③ 看不出几何意义，停留在离散根号求和。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>半圆核是黎曼和里少见的非初等代数核，结果直接出 \(\pi\)。同族变体：核换 \(\sqrt{a^{2}-x^{2}}\) 对应半径 \(a\) 的扇形面积；复习时应把几何面积与代数积分两条路径都能互相验证。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\sqrt{4-\Bigl(\dfrac{k}{n}\Bigr)^{2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\sqrt3}{2}+\dfrac{\pi}{3}\)。积分 \(\int_0^1\sqrt{4-x^{2}}\,dx\) 的原函数为 \(\frac{x}{2}\sqrt{4-x^{2}}+2\arcsin\frac{x}{2}\)，代入上下限 \(0\) 与 \(1\) 得 \(\frac{\sqrt3}{2}+\frac{\pi}{3}\)；区间为 \([0,1]\)，并非半径 2 的整段四分之一圆（后者对应 \(\int_0^2\)，面积才是 \(\pi\)）。</p>
+  </div>
+</article>
+
+<article class="q" id="q2521">
+  <div class="q-head">
+    <span class="qno">第 2521 题</span>
+    <span class="qtype">三重黎曼和（可分离乘积）</span>
+    <span class="qsrc">P1070</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{3}}\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}\sum\limits_{k=1}^{n}\sin\dfrac{i}{n}\cos\dfrac{j}{n}e^{-\frac{k}{n}}\)。</p>
+  </div>
+  <div class="answer">答案：\((1-\cos1)\sin1(1-e^{-1})\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：三重黎曼和，求和项按指标分离为三个单指标函数之积，三重和拆成三个一维黎曼和相乘：</p>
+    \[
+    \frac1{n^{3}}\sum_{i,j,k}\sin\frac{i}{n}\cos\frac{j}{n}e^{-k/n}
+    =\left(\frac1n\sum\sin\frac{k}{n}\right)
+    \left(\frac1n\sum\cos\frac{k}{n}\right)
+    \left(\frac1n\sum e^{-k/n}\right).
+    \]
+    <p>三个因子分别对应 \([0,1]\) 上的积分：</p>
+    \[
+    \int_0^1\sin x\,dx=1-\cos1,\quad
+    \int_0^1\cos x\,dx=\sin1,\quad
+    \int_0^1 e^{-x}\,dx=1-e^{-1}.
+    \]
+    <p>相乘得极限：</p>
+    \[
+    L=(1-\cos1)\sin1(1-e^{-1})=0.2445183104.
+    \]
+    <p>离散两档：\(N=100/1000\) 得 \(0.244850/0.244553\)，逼近闭式。归一化 \(n^{3}\) 与三个一维和各带 \(1/n\) 匹配；若核不可分离，三重和需先化简或换序，本题乘积结构使计算退化为三个定积分。</p>
+    <p>数值复核：三个因子约 \(0.4597\times0.8415\times0.6321\approx0.2445\)，与离散两档一致。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不会分离变量，把三重和当成耦合和无法下手。② 某个积分上下限或原函数记错，如 \(\int\sin x\,dx=-\cos x\) 代入上限漏负号。③ 归一化幂次误写成 \(n^{2}\)，与二重和混淆。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>多重黎曼和的第一类是可分离乘积核，解法与二重款（2516）同构：逐项读出各指标对应的核函数，分别积分再相乘。真题也会在乘积中混入不可分离项，那一类需要换序或利用对称性化简。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{3}}\sum\limits_{i,j,k}\dfrac{i}{n}\cdot\dfrac{j}{n}\cdot\dfrac{k}{n}\)。</p>
+    <p class="var-ans">答案：\(\dfrac18\)。三个因子各为 \(\int_0^1 x\,dx=1/2\)，相乘得 \((1/2)^{3}=1/8\)；分离积分逐个计算后相乘。</p>
+  </div>
+</article>
+
+<article class="q" id="q2522">
+  <div class="q-head">
+    <span class="qno">第 2522 题</span>
+    <span class="qtype">收敛级数压缩通项除以 ln n</span>
+    <span class="qsrc">P1070</span>
+  </div>
+  <div class="stem">
+    <p>设正项级数 \(\sum a_n\) 收敛，且 \(\lim\limits_{n\to\infty}na_n=0\)，求 \(\lim\limits_{n\to\infty}\dfrac{1}{\ln n}\sum\limits_{k=1}^{n}\dfrac{a_k}{1+ka_k}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：收敛正项级数的压缩通项和，外层除以 \(\ln n\)。记 \(S=\sum a_k<\infty\)。因 \(ka_k\ge0\)，分母大于 1，通项被原项压缩：</p>
+    \[
+    0\le\frac{a_k}{1+ka_k}\le a_k.
+    \]
+    <p>前 \(n\) 项部分和有界：</p>
+    \[
+    0\le\sum_{k=1}^{n}\frac{a_k}{1+ka_k}\le\sum_{k=1}^{n}a_k\le S.
+    \]
+    <p>除以 \(\ln n\)，夹逼两端为 0 与 \(S/\ln n\)：</p>
+    \[
+    0\le\frac1{\ln n}\sum_{k=1}^{n}\frac{a_k}{1+ka_k}\le\frac{S}{\ln n}\longrightarrow0.
+    \]
+    <p>由夹逼准则极限为 0。数值佐证：取 \(a_k=2^{-k}\)，\(N=10^{3}/10^{5}\) 得 \(0.100941/0.060565\)，随 \(1/\ln n\) 下降。条件 \(na_n\to0\) 是加强约束；本题结论只依赖部分和有界，压缩分母 \(1+ka_k\) 只让通项更小，不改变收敛性。</p>
+    <p>论证主线复述：分母 \(1+ka_k\ge1\)，故压缩后的通项不超过 \(a_k\)；部分和被原级数和 \(S\) 控制，除以趋于无穷的 \(\ln n\) 后夹逼到零。题目给出的 \(na_n\to0\) 在其他题型中常用于估计 \(ka_k\) 的量级，本题放缩并未使用它，属于加强条件。与 2512 相比，本题通项多一层压缩，判据仍是部分和有界。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 被压缩分母干扰，误以为需要用到 \(na_n\to0\) 才能放缩。② 忽略正项条件，放缩方向不成立。③ 不会辨认部分和有界这一主线，试图求压缩通项的闭式和。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 2512 的加难款：通项多了压缩分母，判据仍是部分和有界后除以发散量。同族条件 \(na_n\to0\) 常服务于其他题型（如乘积、对数展开），在本题中不参与极限论证；复习时应区分「题目给了但用不上」的加强条件。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设正项级数 \(\sum a_n\) 收敛，求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\dfrac{a_k}{1+a_k}\)。</p>
+    <p class="var-ans">答案：\(0\)。通项仍被 \(a_k\) 控制，部分和有界，除以 \(n\) 趋于 0；压缩分母形式改变，主线不变。</p>
+  </div>
+</article>
+
+<article class="q" id="q2523">
+  <div class="q-head">
+    <span class="qno">第 2523 题</span>
+    <span class="qtype">递推数列的立方累加渐近</span>
+    <span class="qsrc">P1071</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{a_n\}\) 满足 \(a_1=1,\ a_{n+1}=a_n+\dfrac1{a_n^{2}}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n}{\sqrt[3]{n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt[3]{3}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推为正项累加，各项为正。把递推式两边立方，按二项式展开：</p>
+    \[
+    a_{n+1}^{3}=a_n^{3}+3a_n^{2}\cdot\frac1{a_n^{2}}
+    +3a_n\cdot\frac1{a_n^{4}}+\frac1{a_n^{6}}
+    =a_n^{3}+3+\frac3{a_n^{3}}+\frac1{a_n^{6}}.
+    \]
+    <p>从 \(k=1\) 到 \(n-1\) 累加：</p>
+    \[
+    a_n^{3}=1+3(n-1)+\sum_{k=1}^{n-1}\left(\frac3{a_k^{3}}+\frac1{a_k^{6}}\right).
+    \]
+    <p>后两项随 \(a_k\) 增大而衰减，累加值相对主项 \(3n\) 为低阶，故</p>
+    \[
+    a_n^{3}\sim3n,\qquad a_n\sim\sqrt[3]{3n}.
+    \]
+    <p>两边同除 \(\sqrt[3]{n}\)：</p>
+    \[
+    \frac{a_n}{\sqrt[3]{n}}\longrightarrow\sqrt[3]3=1.442249570.
+    \]
+    <p>数值三档模拟：\(N=10^{3}/10^{4}/10^{5}\) 得 \(1.444018/1.442463/1.442275\)，逼近 \(\sqrt[3]3\)。对照 2503：平方累加主项系数为 2、得 \(\sqrt n\)；本题立方累加主项系数为 3、得 \(n^{1/3}\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 立方展开漏掉交叉项 \(3\)，主项系数算成 1。② 与 2503 的平方阶梯混淆，把答案写成 \(\sqrt2\)。③ 不对 \(a_n^{3}\) 累加，直接对 \(a_n\) 估计，被 \(1/a_n^{2}\) 卡住。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>差分含自身负幂次的递推，按幂次分档：\(1/a_n\) 驱动平方累加得 \(\sqrt n\)（2503），\(1/a_n^{2}\) 驱动立方累加得 \(n^{1/3}\)（本题），一般地 \(1/a_n^{p}\) 驱动 \((p+1)\) 次方累加。复习时应把展开主项系数与最终幂次对应记牢。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=a_n+\dfrac1{a_n^{2}}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n^{3}}{n}\)。</p>
+    <p class="var-ans">答案：\(3\)。由 \(a_n^{3}\sim3n\)，比值趋于 3；本题是上题立方形式的直接改写。</p>
+  </div>
+</article>
+
+<article class="q" id="q2524">
+  <div class="q-head">
+    <span class="qno">第 2524 题</span>
+    <span class="qtype">泰勒展开（tan−sin 五阶系数）</span>
+    <span class="qsrc">P1071</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x-\dfrac{x^{3}}{2}}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac18\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母五次幂，必须展开到 \(x^{5}\) 阶。拆成正弦与半角差的乘积：</p>
+    \[
+    \tan x-\sin x=\sin x\cdot\frac{1-\cos x}{\cos x}.
+    \]
+    <p>两个因子分别展开到五次相关阶：</p>
+    \[
+    \sin x=x-\frac{x^{3}}6+\frac{x^{5}}{120}+O(x^{7}),\quad
+    \frac{1-\cos x}{\cos x}=\frac{x^{2}}2+\frac{5x^{4}}{24}+O(x^{6}).
+    \]
+    <p>相乘后整理各阶：</p>
+    \[
+    \tan x-\sin x=\frac{x^{3}}2+\left(\frac5{24}-\frac1{12}\right)x^{5}+O(x^{7})
+    =\frac{x^{3}}2+\frac{x^{5}}8+O(x^{7}).
+    \]
+    <p>扣除 \(x^{3}/2\) 后除以 \(x^{5}\)：</p>
+    \[
+    \frac{\tan x-\sin x-x^{3}/2}{x^{5}}\longrightarrow\frac18.
+    \]
+    <p>五阶系数来自两个因子各自修正项的交叉：\(5/24\) 是半角差因子的四次项系数，\(1/12\) 来自正弦三次项与 \(x^{2}/2\) 的乘积，相减得 \(1/8\)。只算到 \(x^{3}\) 阶无法得到本题答案。</p>
+    <p>方法对照：若直接对 \(\tan x\)、\(\sin x\) 分别展开到五次再相减，同样可得 \(x^{3}/2+x^{5}/8+13x^{7}/240+\cdots\)；乘积拆项路径把两个因子的低阶修正分开列出，五阶系数来源更清楚。五阶系数 \(1/8\) 不是任一因子的单独系数，而是两组交叉贡献的差。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 展开只到 \(x^{3}\) 就停，看不到五阶修正项。② 五阶系数漏算交叉项，把 \(5/24\) 直接当成答案。③ 余弦因子 \(1/\cos x\) 未展开，四次项系数取错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>高阶系数提取是泰勒题的拉难题型：分母幂次提高后，低阶修正项要逐项扣除，五阶系数来自多个低阶项的交叉乘积。复习时应把 \(\sin x\)、\(\cos x\)、\(\tan x\)、\(1/\cos x\) 到五阶的系数排表备查。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x-\dfrac{x^{3}}2-\dfrac{x^{5}}8}{x^{7}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{13}{240}\)。补到七阶：\(\tan x-\sin x=x^{3}/2+x^{5}/8+13x^{7}/240+O(x^{9})\)，扣除前三阶后除以 \(x^{7}\) 得 \(13/240\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2525">
+  <div class="q-head">
+    <span class="qno">第 2525 题</span>
+    <span class="qtype">根式差有理化（四次根式两项）</span>
+    <span class="qsrc">P1071</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\bigl(\sqrt{x^{4}+x^{2}}-\sqrt{x^{4}-x^{2}}\bigr)\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\infty-\infty\) 型四次根式差，乘共轭式有理化，分子相减：</p>
+    \[
+    \sqrt{x^{4}+x^{2}}-\sqrt{x^{4}-x^{2}}
+    =\frac{(x^{4}+x^{2})-(x^{4}-x^{2})}{\sqrt{x^{4}+x^{2}}+\sqrt{x^{4}-x^{2}}}
+    =\frac{2x^{2}}{\sqrt{x^{4}+x^{2}}+\sqrt{x^{4}-x^{2}}}.
+    \]
+    <p>分子分母同除以 \(x^{2}\)（\(x\to+\infty\)，\(x^{2}\) 为正）：</p>
+    \[
+    =\frac{2}{\sqrt{1+1/x^{2}}+\sqrt{1-1/x^{2}}}.
+    \]
+    <p>令 \(1/x^{2}\to0\)：</p>
+    \[
+    \longrightarrow\frac{2}{1+1}=1.
+    \]
+    <p>对照 2515：二次根式差提主部 \(x\)，本题四次根式提主部 \(x^{2}\)，有理化后分子同为两倍主部，极限结构一致。数值 \(x=10^{4}\) 时原式约 \(0.99999975\)，与 1 一致。根号内 \(1-1/x^{2}\) 在 \(x\to+\infty\) 下为正，开方合法。</p>
+    <p>方法对照：提主部 \(x^{2}\) 后，两个根式为 \(x^{2}\sqrt{1\pm1/x^{2}}\)，一阶展开修正项之差为 1，与有理化结果一致。本题与 2515 结构同构，只是主部从 \(x\) 换成 \(x^{2}\)；分子系数 2 来自根号内 \(+x^{2}\) 与 \(-x^{2}\) 相减。有理化后分母两个根式趋于同一主部 \(x^{2}\)，分母极限为 \(2x^{2}\)，与分子约去后得 1。</p>
+    </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 分别把两个根式等价成 \(x^{2}\)，差值判为 0；一阶修正项之差正是答案来源。② 有理化后分子算成 \(x^{2}\)，系数少一倍。③ 同除 \(x^{2}\) 时平方根提取出错，或误把四次根式当成二次根式处理。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>高次根式差与二次根式差同构：先提主部 \(x^{m}\)，再有理化，分子系数由根号内常数项之差决定。复习时可把 2505（单项）、2515（二次两项）、本题（四次两项）排成一族，对比分子系数与极限值。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\bigl(\sqrt{x^{4}+2x^{2}}-\sqrt{x^{4}-2x^{2}}\bigr)\)。</p>
+    <p class="var-ans">答案：\(2\)。有理化后分子为 \(4x^{2}\)，\(\frac{4x^{2}}{\sqrt{x^{4}+2x^{2}}+\sqrt{x^{4}-2x^{2}}}\to2\)；根号内系数之差直接决定极限。</p>
+  </div>
+</article>

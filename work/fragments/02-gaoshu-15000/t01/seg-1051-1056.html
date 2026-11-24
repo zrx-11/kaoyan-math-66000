@@ -1,0 +1,961 @@
+<article class="q" id="q2426">
+  <div class="q-head">
+    <span class="qno">第 2426 题</span>
+    <span class="qtype">黎曼和（根式函数定积分）</span>
+    <span class="qsrc">P1051</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\sqrt{1+\left(\dfrac{k}{n}\right)^2}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\sqrt2}{2}+\dfrac12\ln(1+\sqrt2)\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和。取分点 \(x_k=k/n\)，小区间长度 \(\Delta x=1/n\)，被积函数 \(f(x)=\sqrt{1+x^2}\) 在 \([0,1]\) 上连续，和式收敛到该区间上的定积分。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\sqrt{1+\left(\frac{k}{n}\right)^2}
+    =\int_0^1\sqrt{1+x^2}\,dx.
+    \]
+    <p>作换元 \(x=\tan t\)，则 \(dx=\sec^2t\,dt\)，\(\sqrt{1+x^2}=\sec t\)，\(t\in[0,\pi/4]\)，积分化为正切立方型：</p>
+    \[
+    I=\int_0^{\pi/4}\sec^3t\,dt
+    =\left[\frac12\left(\sec t\tan t+\ln|\sec t+\tan t|\right)\right]_0^{\pi/4}.
+    \]
+    <p>代入上下限：\(\sec(\pi/4)=\sqrt2\)，\(\tan(\pi/4)=1\)，下限处 \(\sec0=1,\tan0=0\)，对数项为 0，故</p>
+    \[
+    I=\frac{\sqrt2}{2}+\frac12\ln(1+\sqrt2)\approx1.1477935747.
+    \]
+    <p>数值复核：被积函数从 \(x=0\) 处的 1 单调增至 \(x=1\) 处的 \(\sqrt2\)，积分值落在 \([1,\sqrt2]\) 区间内；自适应积分与符号求值两档一致。端点 \(k=n\) 对应 \(x=1\)，不能把根号整体近似为 1。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\sqrt{1+x^2}\) 用二项展开 \(1+x^2/2\) 近似再逐项积分，丢掉高阶交叉项，结果偏小。② 记混 \(\int\sec^3t\,dt\) 的分部积分系数，对数项与正切项前的 \(1/2\) 容易漏写。③ 逐项取 \(k/n\to0\) 得被积函数恒为 1，这是黎曼和最典型的错误读法：右端点对应 \(x=1\)，整段区间不能按原点附近取值。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>黎曼和识别后接基本根式积分，考点是定积分公式 \(\int\sqrt{1+x^2}\,dx\) 的套用与双曲型原函数。同组对照 2431 题的 \(1/\sqrt{1+x^2}\) 版本：前者原函数含 \(\sec t\tan t\) 项，后者原函数退化为对数形式。复习时应把 \(\sqrt{1\pm x^2}\)、\(1/\sqrt{1\pm x^2}\) 四类原函数成对记牢。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\sqrt{1-\left(\dfrac{k}{n}\right)^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{4}\)。积分 \(\int_0^1\sqrt{1-x^2}\,dx\) 即单位圆第一象限面积，几何意义直接给出 \(\pi/4\approx0.7853981634\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2427">
+  <div class="q-head">
+    <span class="qno">第 2427 题</span>
+    <span class="qtype">黎曼和（有理分式积分，部分分式）</span>
+    <span class="qsrc">P1051</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\ln2}{3}+\dfrac{\pi}{3\sqrt3}\approx0.8356488483\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\ln2\)，复算 \(\dfrac{\ln2}{3}+\dfrac{\pi}{3\sqrt3}\approx0.8356488483\)。按页面印式分母为 \(1+(k/n)^3\)，部分分式积分得上述值；若分母指数本应为 1，则 \(\int_0^1\dfrac{dx}{1+x}=\ln2\)，即书给值。两种读法并列，以页面印式为准。邻近变体排除：\(p=2\) 时 \(\int_0^1\dfrac{dx}{1+x^2}=\dfrac{\pi}{4}\approx0.7854\)，\(p=1\) 时为 \(\ln2\approx0.6931\)，均与复算值不同。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和。取 \(x_k=k/n\)，被积函数 \(f(x)=1/(1+x^3)\)，极限化为定积分：</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\frac{1}{1+(k/n)^3}
+    =\int_0^1\frac{dx}{1+x^3}.
+    \]
+    <p>分母分解 \(1+x^3=(1+x)(x^2-x+1)\)，部分分式：</p>
+    \[
+    \frac{1}{1+x^3}=\frac{1/3}{1+x}+\frac{-x/3+2/3}{x^2-x+1}.
+    \]
+    <p>第二项分子改写为 \(-x/3+2/3=-\frac16(2x-1)+\frac12\)，分别配导数与配成平方：</p>
+    \[
+    I=\frac13\int_0^1\frac{dx}{1+x}
+    -\frac16\int_0^1\frac{2x-1}{x^2-x+1}\,dx
+    +\frac12\int_0^1\frac{dx}{(x-1/2)^2+3/4}.
+    \]
+    <p>第一项得 \(\frac13\ln2\)；第二项对数在两端同为 \(\ln1=0\)，贡献为 0；第三项套 \(\int du/(u^2+a^2)\) 公式：</p>
+    \[
+    I=\frac{\ln2}{3}+\frac{1}{\sqrt3}\left[\arctan\frac{2x-1}{\sqrt3}\right]_0^1
+    =\frac{\ln2}{3}+\frac{\pi}{3\sqrt3}.
+    \]
+    <p>数值三档复核：黎曼和 \(N=10^3\) 约 0.835399，\(N=10^4\) 约 0.835624，\(N=10^5\) 约 0.835646，单调逼近积分值 0.8356488483。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把指数 3 误看成 1，直接套 \(\int_0^1 dx/(1+x)=\ln2\)，这正是书给值的来源；落笔前应先放大分母指数确认。② 部分分式的二次项分子配平方时，常数项 \(2/3\) 拆错，导致反正切系数偏差。③ 以为 \(1+x^3\) 与 \(1+x\) 同型可直接凑微分，漏掉二次因子带来的反正切项。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 \(\int_0^1 dx/(1+x^p)\) 族的 \(p=3\) 款：\(p=1\) 得 \(\ln2\)，\(p=2\) 得 \(\pi/4\)，\(p=3\) 由部分分式给出对数加反正切的混合闭式。该族在选择题中常以黎曼和面貌出现，先读准分母幂次 \(p\)，再选积分路径；三次因式分解后必须拆成一次因子与二次不可约因子分别积分。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{4}\)。积分 \(\int_0^1 dx/(1+x^2)=\arctan1=\pi/4\)，与 \(p=1\) 的 \(\ln2\)、\(p=3\) 的混合闭式构成同族三档。</p>
+  </div>
+</article>
+
+<article class="q" id="q2428">
+  <div class="q-head">
+    <span class="qno">第 2428 题</span>
+    <span class="qtype">黎曼和（根式核非初等积分）</span>
+    <span class="qsrc">P1051</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt[3]{1+\left(\dfrac{k}{n}\right)^2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{1}{\sqrt[3]{1+x^2}}\,dx\approx0.9181133309\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和。取 \(x_k=k/n\)，被积函数 \(f(x)=(1+x^2)^{-1/3}\) 在 \([0,1]\) 上连续，和式收敛到定积分：</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\frac{1}{\sqrt[3]{1+(k/n)^2}}
+    =\int_0^1(1+x^2)^{-1/3}\,dx.
+    \]
+    <p>判断原函数类型：被积函数是二次式的三次方根倒数，既不满足幂函数积分公式，也无法用三角换元化成 \(\sec t\) 的可积幂次；展开成二项级数后逐项积分可估值。由 \((1+u)^\alpha=\sum\limits_{m=0}^{\infty}\binom{\alpha}{m}u^m\)，取 \(u=x^2,\alpha=-1/3\)：</p>
+    \[
+    (1+x^2)^{-1/3}=\sum_{m=0}^{\infty}\binom{-1/3}{m}x^{2m}.
+    \]
+    <p>幂级数在 \([0,1]\) 上逐项积分：</p>
+    \[
+    I=\sum_{m=0}^{\infty}\frac{\binom{-1/3}{m}}{2m+1}.
+    \]
+    <p>自适应数值积分、sympy 数值积分与大 \(n\) 黎曼和三档互证：\(N=10^3\) 部分和约 0.918010，\(N=10^4\) 约 0.918103，积分值 \(I\approx0.9181133309\)。被积函数从 1 单调递减到 \(2^{-1/3}\approx0.7937\)，积分值落在该取值区间内。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把三次方根误读成平方根或四次方根，核的幂次改变后积分值随之改变；根指数应先裁切放大确认。② 强行找初等原函数，在换元与分部积分之间反复打转；此类二项根式积分应直接走级数或数值路径。③ 逐项把 \((k/n)^2\) 当成 0，得被积函数恒为 1，丢掉区间内的衰减部分。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>黎曼和遇上非初等根式核时，考点不在求原函数，而在准确读出被积函数并判断可积性，再用级数或数值手段定值。三次、四次方根核在本组 2438、2443、2447 题反复出现，套路一致：先写积分表达式，再校验核的根指数与分子因子。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt{1+\left(\dfrac{k}{n}\right)^2}}\)。</p>
+    <p class="var-ans">答案：\(\ln(1+\sqrt2)\approx0.8813735870\)。根指数退化为 2 后原函数为对数型，\(\int_0^1 dx/\sqrt{1+x^2}=\ln(x+\sqrt{1+x^2})|_0^1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2429">
+  <div class="q-head">
+    <span class="qno">第 2429 题</span>
+    <span class="qtype">黎曼和（反正弦积分）</span>
+    <span class="qsrc">P1051</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt{4-\left(\dfrac{k}{n}\right)^2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\pi}{6}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和。取 \(x_k=k/n\)，被积函数 \(f(x)=1/\sqrt{4-x^2}\) 在 \([0,1]\) 上连续，极限化为定积分：</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\frac{1}{\sqrt{4-(k/n)^2}}
+    =\int_0^1\frac{dx}{\sqrt{4-x^2}}.
+    \]
+    <p>套用标准积分公式 \(\int dx/\sqrt{a^2-x^2}=\arcsin(x/a)+C\)，这里 \(a=2\)：</p>
+    \[
+    \int_0^1\frac{dx}{\sqrt{4-x^2}}
+    =\left[\arcsin\frac{x}{2}\right]_0^1.
+    \]
+    <p>代入上下限：\(\arcsin(1/2)=\pi/6\)，下限 \(\arcsin0=0\)，故</p>
+    \[
+    I=\frac{\pi}{6}\approx0.5235987756.
+    \]
+    <p>换元路径复核：令 \(x=2\sin t\)，则 \(dx=2\cos t\,dt\)，\(\sqrt{4-x^2}=2\cos t\)，因子 2 恰好约去，\(t\in[0,\pi/6]\)，积分化为 \(\int_0^{\pi/6}dt=\pi/6\)，与反正弦公式结果一致。</p>
+    <p>数值复核：被积函数从 \(1/2\) 增至 \(1/\sqrt3\approx0.5774\)，积分值落在 \([0.5,0.5774]\) 区间内，\(\pi/6\approx0.5236\) 与该区间一致。大 \(n\) 黎曼和随 \(N\) 增大向此值逼近；端点 \(k=n\) 对应 \(x=1\)，被积函数有限，和式取 \(k=1,\dots,n\) 无需剔除末项。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 公式记成 \(\arcsin x/2\) 时漏写括号，误代成 \((\arcsin1)/2\)。② 把根号内 \(4-x^2\) 与 \(1-x^2\) 混淆，直接得 \(\pi/2\) 量级；常数因子 \(a=2\) 必须在反正切/反正弦自变量中除到位。③ 换元 \(x=2\sin t\) 时漏写 \(dx=2\cos t\,dt\)，约掉因子 2 后仍漏看积分限从 0 到 \(\pi/6\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题考查根式 \(\sqrt{a^2-x^2}\) 的标准积分公式在黎曼和框架下的套用，属于「先识别和式、再套基本积分表」的基础款。同类素材还有 \(\sqrt{a^2+x^2}\)、\(1/(a^2+x^2)\) 两种核，分别对应双曲型与反正切型原函数，复习时应连同常数因子的处理一起记。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt{1-(k/n)^2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{2}\)。积分 \(\int_0^1 dx/\sqrt{1-x^2}=\arcsin1=\pi/2\)；端点 \(x=1\) 处被积函数无界，但瑕积分收敛，黎曼和取 \(k=1,\dots,n-1\) 仍收敛到该值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2430">
+  <div class="q-head">
+    <span class="qno">第 2430 题</span>
+    <span class="qtype">黎曼和（三角因子与有理核乘积）</span>
+    <span class="qsrc">P1052</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^2}\sin\left(\dfrac{\pi k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\sin(\pi x)}{1+x^2}\,dx\approx0.5043987790\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(2/\pi\)，复算 \(0.5043987790\)。书值恰为 \(\int_0^1\sin(\pi x)\,dx=2/\pi\)，系把 \(1/(1+x^2)\) 因子整个丢弃；按印式乘积积分得复算值。邻近变体排除：\(\int_0^1\sin(\pi x)/(1+x)\,dx\)、\(\int_0^1\sin(\pi x)/(1+x^3)\,dx\) 均不等于 \(2/\pi\)。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数是有理核与正弦因子的乘积。取 \(x_k=k/n\)，\(\sin(\pi k/n)\to\sin(\pi x)\)，极限化为：</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\frac{\sin(\pi k/n)}{1+(k/n)^2}
+    =\int_0^1\frac{\sin(\pi x)}{1+x^2}\,dx.
+    \]
+    <p>判断可积性：分子正弦与分母二次有理式相乘，分部积分后会出现 \(x\cos(\pi x)/(1+x^2)\) 型项，反复分部无法闭合到初等函数，属非初等乘积积分，需自适应数值积分定值。</p>
+    \[
+    I=\int_0^1\frac{\sin(\pi x)}{1+x^2}\,dx.
+    \]
+    <p>数值口径：mpmath 40 位自适应积分给 \(I\approx0.5043987790\)；大 \(n\) 黎曼和 \(N=20000\) 时约 0.504374，属网格误差量级。区间估计：\(\sin(\pi x)\) 在 \([0,1]\) 上非负，分母 \(1+x^2\in[1,2]\)，故 \(I\) 介于 \(\frac12\int_0^1\sin(\pi x)\,dx=1/\pi\approx0.3183\) 与 \(\int_0^1\sin(\pi x)\,dx=2/\pi\approx0.6366\) 之间，复算值落在此带内。</p>
+    \[
+    \frac{1}{\pi}\lt I\lt\frac{2}{\pi}.
+    \]
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把乘积积分拆成 \(\int\sin(\pi x)\,dx\cdot\int dx/(1+x^2)\)，两个积分相乘不是乘积的积分。② 丢掉有理核只算正弦积分，得到 \(2/\pi\)，这是书给值的错误路径；黎曼和中每个因子都随 \(k/n\) 变化，必须整体进入被积函数。③ 误以为分部积分能积出初等闭式，反复分部后余项不消失。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>三角因子与代数核相乘的黎曼和是本组高频款，2433、2443、2446、2448 题均为同框架换核。判题顺序固定：先确认和式是黎曼和，再把每个 \(k/n\) 因子译成 \(x\)，最后判断乘积是否有初等原函数；无初等闭式时以自适应积分数值定值，并给出夹逼区间校核。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{\sin(\pi k/n)}{1+(k/n)}\)。</p>
+    <p class="var-ans">答案：\(\displaystyle\int_0^1\dfrac{\sin(\pi x)}{1+x}\,dx\approx0.4337854759\)（自适应积分数值；该积分亦非初等，分部后留余项）。因 \(1+x\ge1+x^2\) 在 \([0,1]\) 上成立，分母更大，积分值略小于 2430 题。</p>
+  </div>
+</article>
+
+<article class="q" id="q2431">
+  <div class="q-head">
+    <span class="qno">第 2431 题</span>
+    <span class="qtype">黎曼和（提公因子后根式积分）</span>
+    <span class="qsrc">P1052</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^n\dfrac{1}{\sqrt{n^2+k^2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln(1+\sqrt2)\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：黎曼和的变形写法。和式外层没有显式的 \(1/n\)，先从根号内提出公因子 \(n\)：</p>
+    \[
+    \frac{1}{\sqrt{n^2+k^2}}=\frac{1}{n}\cdot\frac{1}{\sqrt{1+(k/n)^2}}.
+    \]
+    <p>于是原和式改写为标准黎曼和，步长 \(1/n\)，被积函数 \(f(x)=1/\sqrt{1+x^2}\)：</p>
+    \[
+    \lim_{n\to\infty}\sum_{k=1}^n\frac{1}{\sqrt{n^2+k^2}}
+    =\lim_{n\to\infty}\frac1n\sum_{k=1}^n\frac{1}{\sqrt{1+(k/n)^2}}
+    =\int_0^1\frac{dx}{\sqrt{1+x^2}}.
+    \]
+    <p>套用标准积分公式 \(\int dx/\sqrt{1+x^2}=\ln(x+\sqrt{1+x^2})+C\)，代入上下限：</p>
+    \[
+    I=\left[\ln(x+\sqrt{1+x^2})\right]_0^1=\ln(1+\sqrt2)\approx0.8813735870.
+    \]
+    <p>数值复核：被积函数从 1 递减到 \(1/\sqrt2\approx0.7071\)，积分值落在该取值区间内；大 \(n\) 黎曼和随 \(N\) 增大向此值逼近。下限 \(x=0\) 处 \(\ln1=0\)，对数项无常数残留。</p>
+    <p>取值界定：\(f(x)=1/\sqrt{1+x^2}\) 在 \([0,1]\) 上单调递减，取值区间为 \([1/\sqrt2,1]\)，由定积分估值定理，积分值介于 \(1/\sqrt2\) 与 1 之间，闭式结果 \(0.8814\) 落在该带内。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 看不出根号内可提公因子 \(n\)，误以为和式不是黎曼和而尝试夹逼或 Stirling。② 提因子时把 \(1/\sqrt{n^2+k^2}\) 写成 \(1/\sqrt{1+(k/n)^2}\) 而漏掉外层 \(1/n\)，积分区间或被积函数随之出错。③ 原函数写成 \(\ln|x+\sqrt{x^2-1}|\)，把 \(1+x^2\) 与 \(x^2-1\) 的公式套混。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题考「伪装黎曼和」：外层不显式写 \(1/n\)，需要从通项中提取 \(n\) 的幂次凑出步长。同类变形还会以 \(\sum n/(n^2+k^2)\)、\(\sum 1/\sqrt{n^2-k^2}\) 等面貌出现；提公因子后仍是读被积函数、套基本积分表的老框架。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n-1}\dfrac{1}{\sqrt{n^2-k^2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{2}\)。提因子后为 \(\frac1n\sum 1/\sqrt{1-(k/n)^2}\)，积分 \(\int_0^1 dx/\sqrt{1-x^2}=\arcsin1=\pi/2\)；端点 \(k=n\) 为瑕点，故求和到 \(n-1\)，瑕积分仍收敛。</p>
+  </div>
+</article>
+
+<article class="q" id="q2432">
+  <div class="q-head">
+    <span class="qno">第 2432 题</span>
+    <span class="qtype">黎曼和（对数核与余弦因子乘积）</span>
+    <span class="qsrc">P1052</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\ln\left(1+\dfrac{k^2}{n^2}\right)\cos\left(\dfrac{\pi k}{2n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\ln(1+x^2)\cos\left(\dfrac{\pi x}{2}\right)\,dx\approx0.1018313327\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{2}{\pi}\left(\ln2-2+\dfrac{\pi}{2}\right)\approx0.1680316556\)，复算 \(0.1018313327\)。书值相当于 \(\dfrac{2}{\pi}\int_0^1\ln(1+x^2)\,dx\)，把乘积积分误拆成两个积分相乘；\(\int fg\neq\int f\cdot\int g\)。按印式 \(\int_0^1\ln(1+x^2)\cos(\pi x/2)\,dx\) 分部后数值定值。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数是对数核与余弦因子的乘积。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\ln(1+x^2)\cos\frac{\pi x}{2}\,dx.
+    \]
+    <p>先判断原函数类型：对数因子与余弦因子相乘，用分部积分试一次。取 \(u=\ln(1+x^2)\)，\(dv=\cos(\pi x/2)\,dx\)，则 \(v=\frac{2}{\pi}\sin(\pi x/2)\)，\(du=\frac{2x}{1+x^2}\,dx\)：</p>
+    \[
+    I=\left[\frac{2}{\pi}\ln(1+x^2)\sin\frac{\pi x}{2}\right]_0^1
+    -\frac{4}{\pi}\int_0^1\frac{x\sin(\pi x/2)}{1+x^2}\,dx.
+    \]
+    <p>边界项为 \(\frac{2}{\pi}\ln2\)；剩余积分的分子是 \(x\sin(\pi x/2)\)、分母 \(1+x^2\)，再分部会让余弦与有理核继续纠缠，无法闭合到初等函数，故保留自适应数值积分定值。</p>
+    \[
+    I\approx0.1018313327.
+    \]
+    <p>区间校核：\(\ln(1+x^2)\in[0,\ln2]\)，\(\cos(\pi x/2)\in[0,1]\)，乘积积分介于 0 与 \(\ln2\approx0.6931\) 之间；大 \(n\) 黎曼和 \(N=20000\) 时约 0.1018313，与自适应积分一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把乘积积分写成两个定积分相乘，这是书给值的错误根源；\(\ln(1+x^2)\) 与 \(\cos(\pi x/2)\) 是同一个 \(x\) 的两个因子，不能分开积分再乘。② 分部积分时 \(v\) 的系数 \(2/\pi\) 漏写，边界项与余项同时出错。③ 误以为分部两次后能得到闭式，实际余项中的有理核乘三角因子仍然非初等。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数核配三角因子的乘积积分，考的是分部积分的边界项处理与非初等判断。2444、2447、2449 题把对数因子与余弦、根式核再次组合，框架不变：先分部降对数，余项按非初等数值处理。复习时应明确哪些乘积组合（对数乘三角、有理式乘三角）通常积不出初等原函数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\ln\left(1+\dfrac{k^2}{n^2}\right)\)。</p>
+    <p class="var-ans">答案：\(\ln2-2+\dfrac{\pi}{2}\approx0.2639435074\)。积分 \(\int_0^1\ln(1+x^2)\,dx=x\ln(1+x^2)-2x+2\arctan x\big|_0^1\)；去掉余弦因子后才是这个单对数积分，书给值恰为它再乘 \(2/\pi\) 的误算。</p>
+  </div>
+</article>
+
+<article class="q" id="q2433">
+  <div class="q-head">
+    <span class="qno">第 2433 题</span>
+    <span class="qtype">黎曼和（三角因子与三次有理核乘积）</span>
+    <span class="qsrc">P1052</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^3}\sin\left(\dfrac{\pi k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\sin(\pi x)}{1+x^3}\,dx\approx0.5453626990\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{2}{\pi}\ln2\approx0.4412712003\)，复算 \(0.5453626990\)。该值不等于任何自然读法：\(\int_0^1\sin(\pi x)\,dx=2/\pi\)，\(\int_0^1 dx/(1+x^3)=\ln2/3+\pi/(3\sqrt3)\)，二者乘积亦不等于书值；按印式乘积积分定值。邻近变体排除：分母换 \(1+x\) 得约 0.433785，换 \(1+x^2\) 得约 0.504399，均与书值不同。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数是三次有理核与正弦因子的乘积。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\sin(\pi x)}{1+x^3}\,dx.
+    \]
+    <p>分母 \(1+x^3\) 虽可部分分式分解，但分子还带着 \(\sin(\pi x)\)，分解后得到正弦乘一次分式、正弦乘二次分式两类余项，均无法积出初等闭式；因此不走部分分式，直接用自适应数值积分定值。</p>
+    \[
+    I\approx0.5453626990.
+    \]
+    <p>区间校核：在 \([0,1]\) 上 \(\sin(\pi x)\ge0\)，分母 \(1+x^3\in[1,2]\)，故</p>
+    \[
+    \frac12\int_0^1\sin(\pi x)\,dx\le I\le\int_0^1\sin(\pi x)\,dx,
+    \qquad \frac{1}{\pi}\le I\le\frac{2}{\pi}.
+    \]
+    <p>复算值 0.5454 落在 \([0.3183,0.6366]\) 内；大 \(n\) 黎曼和与自适应积分两档一致。分母随 \(x\) 增大而增大，核的衰减比 \(1+x^2\) 更快，积分值应略小于 2430 题的同框架结果，量级关系自洽。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 再次把乘积积分拆成正弦积分与有理核积分相乘，得到 \(2/\pi\) 与某个对数的乘积；两个因子同属一个积分变量，不可分离。② 对 \(1+x^3\) 做完部分分式就以为正弦项可以跟着分别积分，忽略三角因子后余项仍非初等。③ 分母幂次读错：把 \(x^3\) 看成 \(x\) 或 \(x^2\)，核的衰减速度判断错误，区间估计随之偏差。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2430 题构成同族对照：同一正弦因子 \(\sin(\pi x)\)，分母依次取 \(1+x^2\)、\(1+x^3\)。复习时应把同族题串起来横向比较核的衰减方向与积分值大小，而不是逐题孤立套公式。三次有理核乘三角因子在解答题中若出现，通常允许保留积分表达式后附数值。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{\sin(\pi k/n)}{1+(k/n)}\)。</p>
+    <p class="var-ans">答案：\(\displaystyle\int_0^1\dfrac{\sin(\pi x)}{1+x}\,dx\approx0.4337854759\)。分母降为一次式后整体偏大的幅度有限，数值略小于 2430、2433 两题；该积分同样非初等，自适应积分定值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2434">
+  <div class="q-head">
+    <span class="qno">第 2434 题</span>
+    <span class="qtype">黎曼和（对数与倒数复合积分）</span>
+    <span class="qsrc">P1052</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\ln\left(1+\dfrac{k}{n}\right)\dfrac{1}{1+\dfrac{k}{n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12(\ln 2)^2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数 \(f(x)=\ln(1+x)/(1+x)\) 在 \([0,1]\) 上连续。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\frac{\ln(1+k/n)}{1+k/n}
+    =\int_0^1\frac{\ln(1+x)}{1+x}\,dx.
+    \]
+    <p>观察到分子对数的导数恰为分母：令 \(u=\ln(1+x)\)，则 \(du=dx/(1+x)\)，积分变量替换后</p>
+    \[
+    I=\int_{u=0}^{u=\ln2}u\,du=\frac12u^2\Big|_0^{\ln2}.
+    \]
+    <p>代回即得：</p>
+    \[
+    I=\frac12(\ln2)^2\approx0.2402265070.
+    \]
+    <p>结果辨析：换元后被积变量是 \(u\) 本身，\(\int_0^{\ln2}u\,du\) 是一次函数在 \([0,\ln2]\) 上的三角形面积，故结果为上限平方的一半；若误按 \(\ln(1+x)-1\) 型线性函数积分，会得到 \(\ln2-1\) 量级的负值，与被积函数非负的事实矛盾。</p>
+    <p>数值复核：被积函数从 0 单调增至 \(\ln2/2\approx0.3466\)，积分值不超过该上界；sympy 符号求值与 mpmath 自适应积分两档一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误用分部积分，把 \(\ln(1+x)\) 当 \(u\)、\(1/(1+x)\) 当 \(dv\)，得到多余的 \(\ln(1+x)\ln(1+x)\) 项后方向混乱；凑微分一步即可闭合。② 换元后忘记更换积分限，上限 \(u=\ln2\) 写成 1。③ 把 \(\ln(1+x)/(1+x)\) 误读成 \(\ln(1+x)\) 与 \(1/(1+x)\) 的两个积分相乘。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>凑微分定积分是黎曼和下少数能直接出闭式的款，考点集中在 \(u=\ln(1+x)\)、\(u=(1+x)^m\) 这类「导数就在分母」的复合结构。同组 2437 题把分母换成 \(1+x^2\)，换元路径随之变为 \(x=\tan t\)；复习时应按分母类型判断凑微分还是三角换元。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{\ln^2(1+k/n)}{1+k/n}\)。</p>
+    <p class="var-ans">答案：\(\dfrac13(\ln2)^3\approx0.1110082173\)。仍取 \(u=\ln(1+x)\)，\(du=dx/(1+x)\)，积分 \(\int_0^{\ln2}u^2\,du=\frac13(\ln2)^3\)，幂次随分子对数次数递增。</p>
+  </div>
+</article>
+
+<article class="q" id="q2435">
+  <div class="q-head">
+    <span class="qno">第 2435 题</span>
+    <span class="qtype">黎曼和（余弦因子与二次有理核乘积）</span>
+    <span class="qsrc">P1053</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^2}\cos\left(\dfrac{\pi k}{2n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\cos\left(\dfrac{\pi x}{2}\right)}{1+x^2}\,dx\approx0.5491221632\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1/2\)，复算 \(0.5491221632\)。\(1/2\) 与被积函数的任何单项积分都不对应：\(\int_0^1 dx/(1+x^2)=\pi/4\approx0.7854\)，\(\int_0^1\cos(\pi x/2)\,dx=2/\pi\approx0.6366\)，均不等于 \(1/2\)；按印式乘积积分定值。邻近变体排除：余弦换 \(\sin(\pi x/2)\)、分母换 \(1+x\) 的组合数值亦不等于 \(1/2\)。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数是二次有理核与余弦因子的乘积。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\cos(\pi x/2)}{1+x^2}\,dx.
+    \]
+    <p>判断原函数类型：分母 \(1+x^2\) 提示 \(x=\tan t\) 换元，但换上后余弦因子变成 \(\cos(\pi\tan t/2)\)，无法化简；分部积分则让正弦因子配 \(1/(1+x^2)\) 的导数 \(2x/(1+x^2)^2\)，余项继续纠缠，属非初等乘积积分，走自适应数值积分。</p>
+    \[
+    I\approx0.5491221632.
+    \]
+    <p>区间校核：\(\cos(\pi x/2)\in[0,1]\)，分母 \(1+x^2\in[1,2]\)，乘积非负，故</p>
+    \[
+    0\le I\le\int_0^1\cos\frac{\pi x}{2}\,dx=\frac{2}{\pi}\approx0.6366.
+    \]
+    <p>复算值 0.5491 落在该上界之内；大 \(n\) 黎曼和 \(N=20000\) 时约 0.549097，与自适应积分两档一致。余弦因子在 \(x=1\) 处降为 0，右端附近被积函数衰减明显。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 看到 \(1+x^2\) 就条件反射写 \(\arctan x\)，忽略分子还乘了余弦因子；单独积分分母才得 \(\pi/4\)，乘积不能这样拆。② 把余弦因子近似为常数 1 或 1/2，直接取核的某个端点值当答案。③ 分部积分时选错 \(u\)：应对三角因子取导数，有理核留作 \(dv\) 的对象，顺序反了会增加幂次。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2430 题是同一框架的余弦款：2430 用 \(\sin(\pi x)\) 配 \(1+x^2\)，本题用 \(\cos(\pi x/2)\) 配 \(1+x^2\)。复习时应按「三角因子—代数核」的配对记忆，并注意余弦因子在区间右端取 0、正弦因子在两端取 0 的不同衰减位置。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\cos\left(\dfrac{\pi k}{2n}\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{2}{\pi}\approx0.6366197724\)。去掉有理核后仅剩余弦积分 \(\int_0^1\cos(\pi x/2)\,dx=\frac{2}{\pi}\sin(\pi/2)=2/\pi\)；与本题对照可见核因子使积分值从 0.6366 降到 0.5491。</p>
+  </div>
+</article>
+
+<article class="q" id="q2436">
+  <div class="q-head">
+    <span class="qno">第 2436 题</span>
+    <span class="qtype">黎曼和（端点瑕点与三角因子）</span>
+    <span class="qsrc">P1053</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt{1-\left(\dfrac{k}{n}\right)^2}}\sin\left(\dfrac{\pi k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\sin(\pi x)}{\sqrt{1-x^2}}\,dx\approx0.8133982687\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\pi/2\)，复算 \(0.8133982687\)。书值恰为 \(\int_0^1 dx/\sqrt{1-x^2}=\pi/2\)，系把 \(\sin(\pi x)\) 因子丢弃；按印式乘积积分，换元 \(x=\sin t\) 得 \(\int_0^{\pi/2}\sin(\pi\sin t)\,dt\)。被积函数 \(\sin(\pi x)\le1\) 且在区间内部严格小于 1，积分严格小于 \(\pi/2\)，书值只是该瑕积分的上界，不是极限值。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：带端点瑕点的黎曼和。分母 \(\sqrt{1-x^2}\) 在 \(x=1\) 处趋于 0，但分子 \(\sin(\pi x)\) 在 \(x\to1\) 时也趋于 0，二者乘积为可积瑕积分。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\sin(\pi x)}{\sqrt{1-x^2}}\,dx.
+    \]
+    <p>作换元 \(x=\sin t\)，则 \(dx=\cos t\,dt\)，\(\sqrt{1-x^2}=\cos t\)，\(t\in[0,\pi/2]\)，瑕点被换元吸收：</p>
+    \[
+    I=\int_0^{\pi/2}\sin(\pi\sin t)\,dt.
+    \]
+    <p>该积分是第一类贝塞尔函数型积分，不存在初等原函数，用自适应数值积分定值：</p>
+    \[
+    I\approx0.8133982687.
+    \]
+    <p>上界校核：\(\sin(\pi\sin t)\le1\)，故 \(I\le\int_0^{\pi/2}dt=\pi/2\approx1.5708\)；又 \(\sin(\pi x)\) 仅在 \(x=1/2\) 处取 1，其余位置严格小于 1，积分严格小于上界。离散口径：和式取 \(k=1,\dots,n-1\) 避开端点，大 \(n\) 部分和向此值收敛。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 看到瑕点就判定积分发散；本题分子在端点同步趋于 0，瑕积分收敛，不能只看分母无界。② 丢掉正弦因子直接套 \(\int dx/\sqrt{1-x^2}=\pi/2\)，这是书给值的错误路径。③ 换元后忘记约掉 \(\cos t\)，被积函数多出一个分母；或积分限仍写成 \([0,1]\) 而未换成 \([0,\pi/2]\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>瑕点核配三角因子是本组 2439、2445、2449 题的共同骨架：分母 \(1/\sqrt{1-x^2}\) 先经 \(x=\sin t\) 吸收瑕点，再判断剩余被积函数是否初等。贝塞尔型积分在真题中一般只要求写出积分表达式或数值，不要求闭式；复习重点是瑕点收敛性判断与换元操作。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n-1}\dfrac{1}{\sqrt{1-(k/n)^2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{2}\)。去掉正弦因子后积分 \(\int_0^1 dx/\sqrt{1-x^2}=\arcsin1=\pi/2\)；这正是本题书给值对应的被积函数，对照可见因子 \(\sin(\pi x)\) 把积分从 1.5708 降到 0.8134。</p>
+  </div>
+</article>
+
+<article class="q" id="q2437">
+  <div class="q-head">
+    <span class="qno">第 2437 题</span>
+    <span class="qtype">黎曼和（经典对数-反正切积分）</span>
+    <span class="qsrc">P1053</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^2}\ln\left(1+\dfrac{k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\pi}{8}\ln 2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数 \(f(x)=\ln(1+x)/(1+x^2)\) 在 \([0,1]\) 上连续。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\ln(1+x)}{1+x^2}\,dx.
+    \]
+    <p>分母 \(1+x^2\) 提示三角换元：令 \(x=\tan t\)，则 \(dx=\sec^2t\,dt\)，\(1+x^2=\sec^2t\)，\(t\in[0,\pi/4]\)，于是</p>
+    \[
+    I=\int_0^{\pi/4}\ln(1+\tan t)\,dt.
+    \]
+    <p>化简 \(1+\tan t=\dfrac{\sin t+\cos t}{\cos t}=\dfrac{\sqrt2\cos(t-\pi/4)}{\cos t}\)，取对数：</p>
+    \[
+    \ln(1+\tan t)=\frac12\ln2+\ln\cos\left(t-\frac{\pi}{4}\right)-\ln\cos t.
+    \]
+    <p>后两项在 \([0,\pi/4]\) 上的积分相等：令 \(u=\pi/4-t\) 即可见 \(\int_0^{\pi/4}\ln\cos(t-\pi/4)\,dt=\int_0^{\pi/4}\ln\cos u\,du\)，二者相消，故</p>
+    \[
+    I=\frac12\ln2\cdot\frac{\pi}{4}=\frac{\pi}{8}\ln2\approx0.2721982613.
+    \]
+    <p>数值复核：mpmath 自适应积分与符号闭式两档一致；被积函数从 0 单调增至 \(\ln2/2\approx0.3466\)，积分值落在该区间内。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 换元 \(x=\tan t\) 后忘记把 \(dx/(1+x^2)\) 约成 \(dt\)，多留一个 \(\sec^2t\) 因子。② 拆对数时 \(\sin t+\cos t=\sqrt2\cos(t-\pi/4)\) 的系数 \(\sqrt2\) 漏掉，常数项 \(\frac12\ln2\) 随之变成 \(\ln2\)。③ 看不出两个对数余弦积分相消，硬算 \(\int\ln\cos t\,dt\) 误入含 Catalan 常数的非初等路径。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>这是 \(\int_0^1\ln(1+x)/(1+x^2)\,dx\) 的经典闭式题，三角换元加区间对称消去是标准套路，选择题与解答题都出现过。同族变体把对数换成 \(\ln(1-x)\) 时会引入 Catalan 常数，不再有简洁闭式；复习时应记住本题消去的前提是区间恰好为 \([0,\pi/4]\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+(k/n)^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{4}\)。去掉对数因子后积分 \(\int_0^1 dx/(1+x^2)=\arctan1=\pi/4\)；与本题对照可见对数因子把积分值从 0.7854 降到 0.2722。</p>
+  </div>
+</article>
+
+<article class="q" id="q2438">
+  <div class="q-head">
+    <span class="qno">第 2438 题</span>
+    <span class="qtype">黎曼和（三次方根核与余弦因子）</span>
+    <span class="qsrc">P1053</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt[3]{1+\left(\dfrac{k}{n}\right)^2}}\cos\left(\dfrac{\pi k}{2n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\cos\left(\dfrac{\pi x}{2}\right)}{\sqrt[3]{1+x^2}}\,dx\approx0.6044086761\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数是三次方根核与余弦因子的乘积。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\cos(\pi x/2)}{(1+x^2)^{1/3}}\,dx.
+    \]
+    <p>判断原函数类型：方根核 \((1+x^2)^{-1/3}\) 本身已非初等，再乘余弦因子后分部积分只会让正弦因子配幂次核的导数，余项无法闭合；该积分属非初等乘积积分，以自适应数值积分定值。</p>
+    \[
+    I\approx0.6044086761.
+    \]
+    <p>区间校核：余弦因子 \(\cos(\pi x/2)\in[0,1]\)，方根核 \((1+x^2)^{-1/3}\in[2^{-1/3},1]\approx[0.7937,1]\)，乘积非负，故</p>
+    \[
+    0.7937\cdot\frac{2}{\pi}\le I\le\frac{2}{\pi},
+    \]
+    <p>即 \(0.5052\le I\le0.6366\)，复算值落在此带内。大 \(n\) 黎曼和 \(N=20000\) 时约 0.604384，与自适应积分两档一致；余弦在右端趋于 0，核在右端衰减，两者同向下降。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把方根核与余弦因子分开积分再相乘，乘积积分不满足这种分离。② 根指数读错：\(\sqrt[3]{}\) 与 \(\sqrt{}\)、\(\sqrt[4]{}\) 核的取值范围不同，区间估计会随之偏差。③ 尝试对 \((1+x^2)^{-1/3}\) 套幂函数积分公式，忘记底数是 \(1+x^2\) 而非单独的 \(x\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 2428 题方根核配余弦因子的扩展款，2443、2447 题分别把根指数换成 4 与 3 并继续叠加对数因子。判题时先固定核的类型（幂次、根指数），再登记附加的三角或对数因子；非初等组合一律走数值路径，解析中写清积分表达式与区间校核即可。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt[3]{1+(k/n)^2}}\)。</p>
+    <p class="var-ans">答案：\(\displaystyle\int_0^1(1+x^2)^{-1/3}\,dx\approx0.9181133309\)。去掉余弦因子后方根核单调衰减，积分值明显大于本题；该积分同属非初等，二项级数逐项积分或自适应积分定值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2439">
+  <div class="q-head">
+    <span class="qno">第 2439 题</span>
+    <span class="qtype">黎曼和（端点瑕点对数积分）</span>
+    <span class="qsrc">P1054</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt{1-\left(\dfrac{k}{n}\right)^2}}\ln\left(1+\dfrac{k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\ln(1+x)}{\sqrt{1-x^2}}\,dx\approx0.7431381432\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：带端点瑕点的黎曼和。分母 \(\sqrt{1-x^2}\) 在 \(x=1\) 处无界，分子 \(\ln(1+x)\) 在该处为 \(\ln2\) 有限，瑕点强度为 \(1/\sqrt{1-x}\)，瑕积分收敛。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\ln(1+x)}{\sqrt{1-x^2}}\,dx.
+    \]
+    <p>作换元 \(x=\sin t\)，\(dx=\cos t\,dt\)，\(\sqrt{1-x^2}=\cos t\)，瑕点被吸收：</p>
+    \[
+    I=\int_0^{\pi/2}\ln(1+\sin t)\,dt.
+    \]
+    <p>利用恒等式 \(1+\sin t=(\sin\frac t2+\cos\frac t2)^2=2\cos^2(\frac t2-\frac\pi4)\)，对数拆成常数项与 \(\ln\cos\) 项；后者在对称区间上的积分涉及 \(\int_0^{\pi/4}\ln\cos u\,du\)（含 Catalan 常数），不展开初等化简，直接数值定值：</p>
+    \[
+    I=2G-\frac{\pi}{2}\ln2\approx0.7431381432,
+    \]
+    <p>其中 \(G\) 为 Catalan 常数。自适应积分与解析公式两档一致；被积函数非负，上界 \(\ln2\cdot\int_0^1 dx/\sqrt{1-x^2}=\frac{\pi}{2}\ln2\approx1.0888\)，复算值落在其内。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 见到 \(1/\sqrt{1-x^2}\) 就直接写 \(\arcsin1=\pi/2\)，把对数因子整体丢弃；核与对数必须同处被积函数。② 换元 \(x=\sin t\) 后忘记约掉 \(\cos t\)，瑕点没有被真正吸收。③ 误以为 \(\ln(1+\sin t)\) 有初等原函数，强行分部积分陷入非初等对数余弦积分。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>瑕点核配对数因子，考换元吸收瑕点后的积分判断。2445、2449 题沿用同一 \(1/\sqrt{1-x^2}\) 核，分别配正切因子、余弦乘对数。复习时先确认瑕积分收敛（比较 \(1/\sqrt{1-x}\) 的强度），再换元到 \(t\in[0,\pi/2]\)，最后判断剩余被积函数是否需要数值处理。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n-1}\dfrac{1}{\sqrt{1-(k/n)^2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{2}\)。去掉对数因子后即标准瑕积分 \(\int_0^1 dx/\sqrt{1-x^2}=\arcsin1=\pi/2\)；与本题对照，对数因子使积分从 1.5708 降到 0.7431。</p>
+  </div>
+</article>
+
+<article class="q" id="q2440">
+  <div class="q-head">
+    <span class="qno">第 2440 题</span>
+    <span class="qtype">黎曼和（正切因子与二次有理核）</span>
+    <span class="qsrc">P1054</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^2}\tan\left(\dfrac{\pi k}{4n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\tan\left(\dfrac{\pi x}{4}\right)}{1+x^2}\,dx\approx0.3016928670\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数是二次有理核与正切因子的乘积。取 \(x_k=k/n\)，正切自变量 \(\pi k/(4n)\to\pi x/4\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\tan(\pi x/4)}{1+x^2}\,dx.
+    \]
+    <p>判断收敛性：\(x\in[0,1]\) 时 \(\pi x/4\in[0,\pi/4]\)，正切有限且单调递增，端点 \(\tan(\pi/4)=1\)，无无穷间断。两个因子都提示换元：\(1+x^2\) 配 \(x=\tan t\)，但换上后正切因子变成 \(\tan(\pi\tan t/4)\)，无法化简；分部积分同样不能闭合，属非初等乘积积分。</p>
+    \[
+    I\approx0.3016928670.
+    \]
+    <p>区间校核：\(\tan(\pi x/4)\in[0,1]\)，\(1/(1+x^2)\in[1/2,1]\)，乘积非负，故</p>
+    \[
+    0\le I\le\int_0^1\frac{dx}{1+x^2}=\frac{\pi}{4}\approx0.7854.
+    \]
+    <p>复算值 0.3017 落在该上界之内；大 \(n\) 黎曼和与自适应积分两档一致。正切因子在左端为 0，右端才升到 1，积分贡献主要集中在区间后半段。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把正切因子近似为线性 \(\pi x/4\) 再积分，低估或高估需另行展开，不能直接换。② 两个换元提示（\(1+x^2\) 与正切）互相冲突时强行套用 \(x=\tan t\)，导致正切嵌套正切无法处理。③ 忘记正切在 \(\pi/4\) 处有限，误判为瑕积分。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正切因子配代数核是 2445、2450 题的共同素材：本题配 \(1+x^2\)，2445 配瑕点核 \(1/\sqrt{1-x^2}\)，2450 再叠加对数因子。复习时应先确认正切自变量的端点不超过 \(\pi/2\)（本题端点为 \(\pi/4\)），再按核的类型选择换元或数值路径。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\tan\left(\dfrac{\pi k}{4n}\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{2}{\pi}\ln2\approx0.4412712003\)。去掉有理核后积分 \(\int_0^1\tan(\pi x/4)\,dx=-\frac4\pi\ln\cos(\pi x/4)\big|_0^1=\frac4\pi\ln\sqrt2=\frac2\pi\ln2\)；正切单独可积，配核后才变为非初等。</p>
+  </div>
+</article>
+
+<article class="q" id="q2441">
+  <div class="q-head">
+    <span class="qno">第 2441 题</span>
+    <span class="qtype">黎曼和（对数核与双曲根式）</span>
+    <span class="qsrc">P1054</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt{1+\left(\dfrac{k}{n}\right)^2}}\ln\left(1+\dfrac{k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\ln(1+x)}{\sqrt{1+x^2}}\,dx\approx0.3226282540\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\ln\dfrac{\sqrt2+1}{\sqrt2}\approx0.5347999967\)，复算 \(0.3226282540\)。书值既不等于 \(\int_0^1 dx/\sqrt{1+x^2}=\ln(1+\sqrt2)\approx0.8814\)，也不等于 \(\int_0^1\ln(1+x)\,dx=2\ln2-1\approx0.3863\)；按印式乘积积分定值。邻近变体排除：核换 \(1/\sqrt{1-x^2}\)、对数换 \(\ln(1+x^2)\) 的组合数值均与书值不同。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数 \(f(x)=\ln(1+x)/\sqrt{1+x^2}\) 在 \([0,1]\) 上连续。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\ln(1+x)}{\sqrt{1+x^2}}\,dx.
+    \]
+    <p>根式核提示换元 \(x=\tan t\)，则 \(dx/\sqrt{1+x^2}=\sec t\,dt\)，\(t\in[0,\pi/4]\)：</p>
+    \[
+    I=\int_0^{\pi/4}\ln(1+\tan t)\sec t\,dt.
+    \]
+    <p>换上后对数内是 \(1+\tan t\)、外层还乘 \(\sec t\)，既不能像 2437 题那样借区间对称消去，也凑不出微分形式，原函数非初等，走自适应数值积分：</p>
+    \[
+    I\approx0.3226282540.
+    \]
+    <p>区间校核：\(\ln(1+x)\in[0,\ln2]\)，\(1/\sqrt{1+x^2}\in[1/\sqrt2,1]\)，乘积非负，故 \(0\le I\le\ln2\approx0.6931\)；大 \(n\) 黎曼和 \(N=20000\) 时约 0.322641，与自适应积分一致。对照 2437 题：分母换成 \(1+x^2\) 后对数因子可消去得闭式，本题根式核破坏了这个对称结构。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把根式核单独积分得 \(\ln(1+\sqrt2)\)，再乘对数的某个端点值，乘积不是积分结果。② 套用 2437 题的消去套路，忽略本题外层多了 \(\sec t\) 因子，对称相消不再成立。③ 对数因子在 \(x=0\) 处为 0，不能按 \(\ln2\) 整体提出来当常数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2437 题共用对数核、更换根式分母，是检验「闭式套路是否有适用前提」的对照款。复习时应分清：\(\ln(1+x)/(1+x^2)\) 借 \(x=\tan t\) 与区间 \([0,\pi/4]\) 消去，而 \(\ln(1+x)/\sqrt{1+x^2}\) 不具备该对称性，只能数值定值。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt{1+(k/n)^2}}\)。</p>
+    <p class="var-ans">答案：\(\ln(1+\sqrt2)\approx0.8813735870\)。去掉对数因子后即标准根式积分 \(\int_0^1 dx/\sqrt{1+x^2}\)；与本题对照，对数因子把积分值从 0.8814 降到 0.3226。</p>
+  </div>
+</article>
+
+<article class="q" id="q2442">
+  <div class="q-head">
+    <span class="qno">第 2442 题</span>
+    <span class="qtype">黎曼和（根式分子与三次有理核）</span>
+    <span class="qsrc">P1054</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^3}\sqrt{1+\dfrac{k}{n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\sqrt{1+x}}{1+x^3}\,dx\approx1.0006137953\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数是根式分子与三次有理核的乘积。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\sqrt{1+x}}{1+x^3}\,dx.
+    \]
+    <p>判断原函数类型：分母 \(1+x^3\) 可部分分式分解，但分子带 \(\sqrt{1+x}\)；令 \(u=\sqrt{1+x}\)，则 \(x=u^2-1\)，\(dx=2u\,du\)，分母 \(1+(u^2-1)^3\) 展开后为 \(u^2\) 乘一个二次多项式，被积函数化为有理函数，分解后含多个真分式，闭式冗长且非本题要求。</p>
+    \[
+    I\approx1.0006137953.
+    \]
+    <p>区间校核：\(\sqrt{1+x}\in[1,\sqrt2]\)，\(1/(1+x^3)\in[1/2,1]\)，乘积非负，故</p>
+    \[
+    \frac12\le I\le\sqrt2\approx1.4142.
+    \]
+    <p>复算值 1.0006 落在该带内；大 \(n\) 黎曼和 \(N=20000\) 时约 1.000606，与自适应积分两档一致。分子根式随 \(x\) 增大而增大，分母三次式衰减更快，区间后半段仍有明显贡献。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 分子 \(\sqrt{1+x}\) 与分母 \(1+x^3\) 没有公因子可约，误写成 \((1+x)^{1/3}\) 型幂次合并。② 部分分式后把根式因子当常数提出积分号，漏掉分子随 \(x\) 的变化。③ 区间估计时只看分母衰减，忽略分子根式从 1 升到 \(\sqrt2\)，上下界取窄。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>根式分子配有理分母是黎曼和里的混合核款，2448 题把分母换成 \(1+x^4\) 并叠加正弦因子。判题顺序仍是先读准分子幂次与分母幂次，再判断换元（根式整体换 \(u\)）后是否化为有理函数；若闭式冗长，解析中保留积分表达式并给数值即可。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+(k/n)^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\ln2}{3}+\dfrac{\pi}{3\sqrt3}\approx0.8356488483\)。去掉根式分子后即 2427 题的三次有理核积分；分子 \(\sqrt{1+x}\ge1\)，故本题积分值 1.0006 大于该值，量级关系自洽。</p>
+  </div>
+</article>
+
+<article class="q" id="q2443">
+  <div class="q-head">
+    <span class="qno">第 2443 题</span>
+    <span class="qtype">黎曼和（四次方根核与正弦因子）</span>
+    <span class="qsrc">P1055</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt[4]{1+\left(\dfrac{k}{n}\right)^2}}\sin\left(\dfrac{\pi k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\sin(\pi x)}{\sqrt[4]{1+x^2}}\,dx\approx0.5991272992\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数是四次方根核与正弦因子的乘积。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\sin(\pi x)}{(1+x^2)^{1/4}}\,dx.
+    \]
+    <p>判断原函数类型：方根核 \((1+x^2)^{-1/4}\) 本身非初等，乘正弦因子后分部积分只会让余弦因子配幂次核导数，余项继续纠缠；该积分无初等闭式，以自适应数值积分定值。</p>
+    \[
+    I\approx0.5991272992.
+    \]
+    <p>区间校核：\(\sin(\pi x)\ge0\)，方根核 \((1+x^2)^{-1/4}\in[2^{-1/4},1]\approx[0.8409,1]\)，故</p>
+    \[
+    2^{-1/4}\cdot\frac{2}{\pi}\le I\le\frac{2}{\pi},
+    \qquad 0.5353\le I\le0.6366.
+    \]
+    <p>复算值 0.5991 落在该带内；大 \(n\) 黎曼和 \(N=20000\) 时约 0.5991273，与自适应积分两档一致。根指数为 4 时核的衰减比三次方根更慢，积分值高于 2438 题同位置的余弦款，方向自洽。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 根指数放大前误判为 3 或 2，核的取值范围与积分值随之改变；本题根指数经放大确认为 4。② 把正弦因子单独积分得 \(2/\pi\) 后再乘核的某个端点值，乘积积分不可分离。③ 以为四次方根可套 \(\int(1+x^2)^{1/4}\) 的幂函数公式，底数结构不满足直接积分条件。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2438 题构成方根核族：根指数 3 配余弦、根指数 4 配正弦，2447 题再回到三次方根并叠加对数。复习时按「核的根指数—三角因子—对数因子」三个标签登记每道题，数值校核用核的取值范围乘三角因子的积分上下界。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt[4]{1+(k/n)^2}}\)。</p>
+    <p class="var-ans">答案：\(\displaystyle\int_0^1(1+x^2)^{-1/4}\,dx\approx0.9374897507\)。去掉正弦因子后方根核单调衰减，积分值明显大于本题；该积分非初等，二项级数逐项积分或自适应积分定值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2444">
+  <div class="q-head">
+    <span class="qno">第 2444 题</span>
+    <span class="qtype">黎曼和（三因子乘积积分）</span>
+    <span class="qsrc">P1055</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^2}\cos\left(\dfrac{\pi k}{2n}\right)\ln\left(1+\dfrac{k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\cos\left(\dfrac{\pi x}{2}\right)\ln(1+x)}{1+x^2}\,dx\approx0.1482359521\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数由有理核、余弦因子、对数因子三部分相乘。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\cos(\pi x/2)\ln(1+x)}{1+x^2}\,dx.
+    \]
+    <p>判断原函数类型：三因子中对数可经分部积分降阶，但 \(u=\ln(1+x)\) 求导后留下 \(1/(1+x)\)，与 \(1/(1+x^2)\)、余弦因子继续组合；\(x=\tan t\) 换元后余弦变为 \(\cos(\pi\tan t/2)\)，同样无法化简。该积分非初等，走自适应数值积分。</p>
+    \[
+    I\approx0.1482359521.
+    \]
+    <p>区间校核：三因子在 \([0,1]\) 上均非负，\(\ln(1+x)\le\ln2\)，\(\cos(\pi x/2)\le1\)，\(1/(1+x^2)\le1\)，故</p>
+    \[
+    0\le I\le\ln2\int_0^1\frac{dx}{1+x^2}=\frac{\pi}{4}\ln2\approx0.5444.
+    \]
+    <p>复算值 0.1482 落在该上界之内；大 \(n\) 黎曼和 \(N=20000\) 时约 0.1482360，与自适应积分一致。对照 2437 题：去掉余弦因子后对数配 \(1+x^2\) 可得闭式 \(\pi\ln2/8\)，本题余弦因子破坏了区间对称结构。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 三因子中任意两个先积分再与第三个相乘，乘积积分不允许这种分离。② 分部积分选错 \(u\)：应对对数取导数，有理核与余弦留在余项，顺序反了会增加有理式幂次。③ 余弦因子在右端趋于 0，估计上界时仍按 1 满乘，上界取宽虽不算错，但会掩盖数值校核的偏差。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>三因子乘积是本组后段的标准复杂度：2446、2447、2448、2449、2450 题均在「代数核—三角因子—对数/根式因子」三件套上换核。解析模板固定为：写积分表达式、判断非初等、给区间夹逼、报数值；选择题若出现同类题，优先用夹逼区间排除明显偏离的选项。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{\ln(1+k/n)}{1+(k/n)^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{8}\ln2\approx0.2721982613\)。去掉余弦因子后即 2437 题的经典闭式；余弦因子在区间内不超过 1，故本题积分值 0.1482 小于该闭式值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2445">
+  <div class="q-head">
+    <span class="qno">第 2445 题</span>
+    <span class="qtype">黎曼和（端点瑕点与正切因子）</span>
+    <span class="qsrc">P1055</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt{1-\left(\dfrac{k}{n}\right)^2}}\tan\left(\dfrac{\pi k}{4n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\tan\left(\dfrac{\pi x}{4}\right)}{\sqrt{1-x^2}}\,dx\approx0.9201675687\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：带端点瑕点的黎曼和。分母 \(\sqrt{1-x^2}\) 在 \(x=1\) 处无界，分子 \(\tan(\pi x/4)\) 在该处为 1 有限，瑕点强度 \(1/\sqrt{1-x}\)，瑕积分收敛。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\tan(\pi x/4)}{\sqrt{1-x^2}}\,dx.
+    \]
+    <p>作换元 \(x=\sin t\)，\(dx=\cos t\,dt\)，\(\sqrt{1-x^2}=\cos t\)，瑕点被吸收，\(t\in[0,\pi/2]\)：</p>
+    \[
+    I=\int_0^{\pi/2}\tan\left(\frac{\pi}{4}\sin t\right)\,dt.
+    \]
+    <p>换上后正切自变量为 \(\sin t\)，不存在可积的初等原函数，以自适应数值积分定值：</p>
+    \[
+    I\approx0.9201675687.
+    \]
+    <p>上界校核：\(\tan(\pi\sin t/4)\le\tan(\pi/4)=1\)，故 \(I\le\int_0^{\pi/2}dt=\pi/2\approx1.5708\)；正切在 \(t\) 接近 \(\pi/2\) 时才接近 1，前半段较小，复算值 0.9202 与该分布一致。离散口径和式取到 \(n-1\) 避开端点，大 \(n\) 部分和向此值收敛。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只看分母无界就判定发散，忽略分子有限、瑕点强度可积。② 丢掉正切因子直接套 \(\int dx/\sqrt{1-x^2}=\pi/2\)，核与因子必须同处被积函数。③ 换元后忘记约掉 \(\cos t\)，或把正切自变量仍写成 \(x\) 而未换成 \(\sin t\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 2436 题瑕点核配三角因子的正切款，2449 题再叠加对数与余弦。复习时先做瑕点收敛性判断，再用 \(x=\sin t\) 吸收分母，最后登记剩余三角因子是否初等；贝塞尔型、正切嵌套型积分在考试中一般保留表达式加数值。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n-1}\dfrac{1}{\sqrt{1-(k/n)^2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{2}\)。去掉正切因子后即标准瑕积分 \(\int_0^1 dx/\sqrt{1-x^2}=\pi/2\)；与本题对照，正切因子在区间前半段小于 1，积分值从 1.5708 降到 0.9202。</p>
+  </div>
+</article>
+
+<article class="q" id="q2446">
+  <div class="q-head">
+    <span class="qno">第 2446 题</span>
+    <span class="qtype">黎曼和（三因子乘积，三次有理核）</span>
+    <span class="qsrc">P1055</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^3}\ln\left(1+\dfrac{k}{n}\right)\sin\left(\dfrac{\pi k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\ln(1+x)\sin(\pi x)}{1+x^3}\,dx\approx0.2043153200\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数由三次有理核、对数因子、正弦因子三部分相乘。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\ln(1+x)\sin(\pi x)}{1+x^3}\,dx.
+    \]
+    <p>判断原函数类型：分母 \(1+x^3\) 虽可部分分式分解，但分子同时带对数与正弦，分解后得到对数乘正弦乘一次/二次分式的余项，分部积分无法闭合；该积分非初等，以自适应数值积分定值。</p>
+    \[
+    I\approx0.2043153200.
+    \]
+    <p>区间校核：三因子在 \([0,1]\) 上均非负，\(\ln(1+x)\le\ln2\)，\(1/(1+x^3)\le1\)，故</p>
+    \[
+    0\le I\le\ln2\int_0^1\sin(\pi x)\,dx=\frac{2\ln2}{\pi}\approx0.4413.
+    \]
+    <p>复算值 0.2043 落在该上界之内；大 \(n\) 黎曼和 \(N=20000\) 时约 0.2043153，与自适应积分两档一致。正弦因子在两端为 0，对数因子在左端为 0，积分贡献集中在区间中段。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 三因子分离成三个积分相乘，乘积积分不允许。② 分母幂次读错：本题为 \(x^3\)，与 \(x\)、\(x^2\) 款的衰减速度不同，区间估计随之偏差。③ 对数因子在 \(x=0\) 处为 0，不能按 \(\ln2\) 整体提出积分号。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 2433 题叠加对数因子的升级款：2433 为正弦配三次核，本题再加 \(\ln(1+x)\)。同族演进路径清晰：先单核配三角，再叠加对数或根式。复习时可沿这条路径横向比较积分值被新增因子压低的幅度，选择题中用夹逼区间定位选项。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{\sin(\pi k/n)}{1+(k/n)^3}\)。</p>
+    <p class="var-ans">答案：\(\displaystyle\int_0^1\dfrac{\sin(\pi x)}{1+x^3}\,dx\approx0.5453626990\)。去掉对数因子后即 2433 题；\(\ln(1+x)\in[0,\ln2]\) 不超过 1，故本题积分值小于该款，方向自洽。</p>
+  </div>
+</article>
+
+<article class="q" id="q2447">
+  <div class="q-head">
+    <span class="qno">第 2447 题</span>
+    <span class="qtype">黎曼和（三因子乘积，三次方根核）</span>
+    <span class="qsrc">P1055</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt[3]{1+\left(\dfrac{k}{n}\right)^2}}\cos\left(\dfrac{\pi k}{2n}\right)\ln\left(1+\dfrac{k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\cos\left(\dfrac{\pi x}{2}\right)\ln(1+x)}{\sqrt[3]{1+x^2}}\,dx\approx0.1729575775\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数由三次方根核、余弦因子、对数因子三部分相乘。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\cos(\pi x/2)\ln(1+x)}{(1+x^2)^{1/3}}\,dx.
+    \]
+    <p>判断原函数类型：方根核本身非初等，对数因子分部降阶后留下 \(1/(1+x)\)，与方根核、余弦因子继续组合；\(x=\tan t\) 换元后余弦嵌套正切，无法化简。该积分非初等，以自适应数值积分定值。</p>
+    \[
+    I\approx0.1729575775.
+    \]
+    <p>区间校核：三因子非负，\(\ln(1+x)\le\ln2\)，余弦不超过 1，方根核 \((1+x^2)^{-1/3}\le1\)，故</p>
+    \[
+    0\le I\le\ln2\int_0^1\frac{dx}{(1+x^2)^{1/3}}.
+    \]
+    <p>右端核积分约 0.9181，上界约 0.6364；复算值 0.1730 落在此带内。大 \(n\) 黎曼和 \(N=20000\) 时约 0.1729576，与自适应积分两档一致。对照 2438 题：去掉对数因子后同核配余弦为 0.6044，对数因子使积分明显降低。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把方根核、余弦、对数任意两个先积分再相乘，分离不成立。② 根指数误读为 2 或 4，核的取值区间改变，夹逼上界随之偏差。③ 分部积分时对余弦取导数而留对数作 \(u\)，顺序颠倒后对数无法降阶，余项幂次增加。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 2438 题方根核配余弦再叠加对数的三因子款，与 2444 题共享「对数—余弦—代数核」结构，仅核的形式不同。复习时应把同结构题目归组：先比较核的衰减速度，再比对三角因子的端点取值，最后用对数因子的上界 \(\ln2\) 做数值校核。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{\ln(1+k/n)}{\sqrt[3]{1+(k/n)^2}}\)。</p>
+    <p class="var-ans">答案：\(\displaystyle\int_0^1\dfrac{\ln(1+x)}{(1+x^2)^{1/3}}\,dx\approx0.3422050488\)。去掉余弦因子后方根核配对数，积分值约为本题的两倍；余弦因子在区间内不超过 1，压低了本题结果。</p>
+  </div>
+</article>
+
+<article class="q" id="q2448">
+  <div class="q-head">
+    <span class="qno">第 2448 题</span>
+    <span class="qtype">黎曼和（三因子乘积，四次有理核）</span>
+    <span class="qsrc">P1056</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^4}\sqrt{1+\dfrac{k}{n}}\sin\left(\dfrac{\pi k}{2n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\sqrt{1+x}\sin\left(\dfrac{\pi x}{2}\right)}{1+x^4}\,dx\approx0.6455689509\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数由四次有理核、根式分子、正弦因子三部分相乘。取 \(x_k=k/n\)，正弦自变量 \(\pi k/(2n)\to\pi x/2\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\sqrt{1+x}\sin(\pi x/2)}{1+x^4}\,dx.
+    \]
+    <p>判断原函数类型：分母 \(1+x^4\) 的部分分式已含二次不可约因子，再乘根式分子与正弦因子后，余项无法闭合到初等函数；根式换元 \(u=\sqrt{1+x}\) 也不能把四次分母化为可分解的有理式。该积分非初等，走自适应数值积分。</p>
+    \[
+    I\approx0.6455689509.
+    \]
+    <p>区间校核：三因子非负，\(\sqrt{1+x}\le\sqrt2\)，\(1/(1+x^4)\le1\)，故</p>
+    \[
+    0\le I\le\sqrt2\int_0^1\sin(\pi x/2)\,dx=\sqrt2\cdot\frac{2}{\pi}\approx0.9003.
+    \]
+    <p>复算值 0.6456 落在该上界之内；大 \(n\) 黎曼和 \(N=20000\) 时约 0.645587，与自适应积分两档一致。四次分母在右端衰减很快，根式分子在右端增大，两者部分抵消，积分贡献仍以中段为主。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 分母幂次读错：本题为 \(x^4\)，与 \(x^3\)、\(x^2\) 款的右端衰减速度差异明显，上界估计需重新取。② 根式分子与四次分母误认为可约，写出 \((1+x)^{-7/2}\) 型合并。③ 正弦因子取 \(\pi x/2\) 而非 \(\pi x\)，端点处前者为 1、后者为 0，衰减位置不同。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 2442 题根式分子配有理分母叠加正弦因子的四款升级款，分母从 \(x^3\) 换到 \(x^4\)。四次分母 \(1+x^4\) 在部分分式中给出共轭二次因子，本身已是有理积分的较难款；再叠三角与根式因子后，考试中一般只要求写出积分表达式并数值校核。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{\sin(\pi k/2n)}{1+(k/n)^4}\)。</p>
+    <p class="var-ans">答案：\(\displaystyle\int_0^1\dfrac{\sin(\pi x/2)}{1+x^4}\,dx\approx0.5131145197\)。去掉根式分子后四次核配正弦；\(\sqrt{1+x}\ge1\)，故本题积分值 0.6456 大于该款，量级关系自洽。</p>
+  </div>
+</article>
+
+<article class="q" id="q2449">
+  <div class="q-head">
+    <span class="qno">第 2449 题</span>
+    <span class="qtype">黎曼和（端点瑕点三因子乘积）</span>
+    <span class="qsrc">P1056</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\sqrt{1-\left(\dfrac{k}{n}\right)^2}}\ln\left(1+\dfrac{k}{n}\right)\cos\left(\dfrac{\pi k}{2n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\ln(1+x)\cos\left(\dfrac{\pi x}{2}\right)}{\sqrt{1-x^2}}\,dx\approx0.2419112120\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：带端点瑕点的黎曼和。分母 \(\sqrt{1-x^2}\) 在 \(x=1\) 处无界，分子对数与余弦在该处有限，瑕点强度 \(1/\sqrt{1-x}\)，瑕积分收敛。取 \(x_k=k/n\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\ln(1+x)\cos(\pi x/2)}{\sqrt{1-x^2}}\,dx.
+    \]
+    <p>作换元 \(x=\sin t\)，\(dx=\cos t\,dt\)，\(\sqrt{1-x^2}=\cos t\)，瑕点被吸收，\(t\in[0,\pi/2]\)：</p>
+    \[
+    I=\int_0^{\pi/2}\ln(1+\sin t)\cos\left(\frac{\pi}{2}\sin t\right)\,dt.
+    \]
+    <p>换上后对数与余弦嵌套 \(\sin t\)，不存在初等原函数，以自适应数值积分定值：</p>
+    \[
+    I\approx0.2419112120.
+    \]
+    <p>区间校核：三因子非负，\(\ln(1+\sin t)\le\ln2\)，余弦不超过 1，故</p>
+    \[
+    0\le I\le\ln2\cdot\frac{\pi}{2}\approx1.0888.
+    \]
+    <p>复算值 0.2419 落在该带内；余弦因子在 \(t=\pi/2\)（即 \(x=1\)）处趋于 0，恰好压在瑕点附近，缓解了分母无界带来的发散趋势。对照 2439 题：去掉余弦因子后同核配对数为 0.7431，余弦使积分明显降低。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只看分母无界判发散，未检查分子在端点的有界性。② 丢掉余弦或对数因子直接套瑕积分 \(\pi/2\)，三因子必须整体进入被积函数。③ 换元后未约掉 \(\cos t\)，或余弦自变量仍按 \(x\) 积分而未换成 \(\sin t\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是瑕点核族的三因子款：2439 配对数，2445 配正切，本题再叠余弦。复习时固定流程为收敛性判断、\(x=\sin t\) 换元、登记剩余因子、数值定值。余弦因子压在瑕点附近这一结构，也是判断积分是否可能发散的直观线索。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n-1}\dfrac{\ln(1+k/n)}{\sqrt{1-(k/n)^2}}\)。</p>
+    <p class="var-ans">答案：\(\displaystyle\int_0^1\dfrac{\ln(1+x)}{\sqrt{1-x^2}}\,dx\approx0.7431381432\)。去掉余弦因子后即 2439 题；余弦在区间内不超过 1，故本题积分值小于该款。</p>
+  </div>
+</article>
+
+<article class="q" id="q2450">
+  <div class="q-head">
+    <span class="qno">第 2450 题</span>
+    <span class="qtype">黎曼和（三因子乘积，正切与对数）</span>
+    <span class="qsrc">P1056</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\left(\dfrac{k}{n}\right)^2}\tan\left(\dfrac{\pi k}{4n}\right)\ln\left(1+\dfrac{k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1\dfrac{\tan\left(\dfrac{\pi x}{4}\right)\ln(1+x)}{1+x^2}\,dx\approx0.1448737012\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数由二次有理核、正切因子、对数因子三部分相乘。取 \(x_k=k/n\)，正切自变量 \(\pi k/(4n)\to\pi x/4\)，极限化为：</p>
+    \[
+    I=\int_0^1\frac{\tan(\pi x/4)\ln(1+x)}{1+x^2}\,dx.
+    \]
+    <p>判断原函数类型：分母 \(1+x^2\) 提示 \(x=\tan t\)，换上后正切变为 \(\tan(\pi\tan t/4)\)、对数变为 \(\ln(1+\tan t)\)，两者均嵌套正切，无法化简；分部积分对对数降阶后，余项仍带正切与有理核。该积分非初等，以自适应数值积分定值。</p>
+    \[
+    I\approx0.1448737012.
+    \]
+    <p>区间校核：三因子在 \([0,1]\) 上非负，\(\tan(\pi x/4)\le1\)，\(\ln(1+x)\le\ln2\)，\(1/(1+x^2)\le1\)，故</p>
+    \[
+    0\le I\le\ln2\int_0^1\frac{dx}{1+x^2}=\frac{\pi}{4}\ln2\approx0.5444.
+    \]
+    <p>复算值 0.1449 落在该上界之内；大 \(n\) 黎曼和 \(N=20000\) 时约 0.144882，与自适应积分两档一致。正切与对数都在左端取 0，积分贡献集中在区间后半段，与 2440 题相比叠加对数后数值进一步降低。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 三因子分离成三个积分相乘，乘积积分不允许。② 正切自变量端点为 \(\pi/4\) 有限，不要误判为瑕积分；若自变量写成 \(\pi k/(2n)\)，端点将触及 \(\pi/4\) 以上需重新校验。③ 分部积分应对数取导数，把正切留在余项；顺序反了会同时增加正切与有理式的复杂度。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是本组最后一道三因子款，由 2440 题正切配有理核叠加对数而来。整组题目的演进线索可归纳为：单核黎曼和 → 核配三角因子 → 再叠加对数或根式因子。复习收尾时应回到黎曼和的识别动作本身：提步长、读被积函数、判断初等性、夹逼校核、数值定值。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{\tan(\pi k/4n)}{1+(k/n)^2}\)。</p>
+    <p class="var-ans">答案：\(\displaystyle\int_0^1\dfrac{\tan(\pi x/4)}{1+x^2}\,dx\approx0.3016928670\)。去掉对数因子后即 2440 题；\(\ln(1+x)\in[0,\ln2]\) 不超过 1，故本题积分值 0.1449 小于该款。</p>
+  </div>
+</article>

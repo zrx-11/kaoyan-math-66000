@@ -1,0 +1,1431 @@
+<article class="q" id="q90">
+  <div class="q-head">
+    <span class="qno">第 90 题</span>
+    <span class="qtype">由极限反求参数（泰勒配阶）</span>
+    <span class="qsrc">P613</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{a\sin x+b\cos x+ce^x}{x^3}=d\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=0,\ b=0,\ c=0,\ d=0\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给答案：\(a=1,\ b=-1,\ c=0,\ d=-\dfrac16\)（第613页）。按题面复算为 \(a=b=c=d=0\)：展开后常数项 \(b+c\)、一次项 \(a+c\)、二次项 \((c-b)/2\) 必须同时为零，联立得 \(b=c=0,\ a=0\)，残余三次项 \((c-a)/6=0\)；书值对应第二项为 \(bx\) 而非 \(\cos x\) 的版本。以复算值 \(a=b=c=d=0\) 为准。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为 \(0/0\) 型、分母 \(x^3\) 的配阶问题。标准做法是把分子在 \(x=0\) 泰勒展开到 \(x^3\)，令低于 \(x^3\) 的各项系数为零，剩下的 \(x^3\) 系数即极限 \(d\)。</p>
+    <p>展开到三阶：</p>
+    \[
+    \sin x=x-\frac{x^3}{6}+o(x^3),\quad
+    \cos x=1-\frac{x^2}{2}+o(x^2),\quad
+    e^x=1+x+\frac{x^2}{2}+\frac{x^3}{6}+o(x^3).
+    \]
+    <p>代入分子 \(N=a\sin x+b\cos x+ce^x\)，按幂次合并：</p>
+    \[
+    N=(b+c)+(a+c)x+\frac{-b+c}{2}x^2+\frac{-a+c}{6}x^3+o(x^3).
+    \]
+    <p>要使 \(\dfrac{N}{x^3}\) 在 \(x\to0\) 时收敛到有限值 \(d\)，常数项、一次项、二次项系数必须分别为零，这是因为只要其中任一项非零，\(N\) 就比 \(x^3\) 低阶，除以 \(x^3\) 后必趋于无穷。于是得方程组：</p>
+    \[
+    b+c=0,\quad a+c=0,\quad -b+c=0.
+    \]
+    <p>由后两式 \(c=b\) 与 \(c=-b\) 同时成立得 \(b=c=0\)，再得 \(a=0\)，最后 \(d=(-a+c)/6=0\)。这是使有限极限存在的唯一解：分子恒为零。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 配阶时漏写 \(e^x\) 的常数项 \(c\)：只要 \(b+c\neq0\)，分子在 \(x=0\) 处就不为零，极限直接是无穷，谈不上 \(d\)。② 误以为「极限存在」只要求分子是 \(x^3\) 的同阶量，实际上必须把低于 \(x^3\) 的每一项都消干净，这是配阶题的核心约束。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是选择题与解答题中反复出现的「由极限值反求参数」模型，本质是泰勒展开的系数比对。近年真题常把分子做成 \(\sin x\)、\(e^x\)、\(\ln(1+x)\) 的线性组合，分母固定为 \(x^n\)，要求解出使极限存在的参数，再读出残余项系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求常数 \(a,b,c\)，使 \(\lim\limits_{x\to0}\dfrac{a\sin x+bx+ce^x}{x^3}=-\dfrac16\)。</p>
+    <p class="var-ans">答案：展开得 \(c+(a+b+c)x+\dfrac{c}{2}x^2+\dfrac{-a+c}{6}x^3\)，令 \(c=0,\ a+b=0\)，残余 \(-a/6=-1/6\)，得 \(a=1,b=-1,c=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q91">
+  <div class="q-head">
+    <span class="qno">第 91 题</span>
+    <span class="qtype">由极限反求参数（五阶泰勒配阶）</span>
+    <span class="qsrc">P613</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to0}\dfrac{\sin(ax)-\tan(bx)+\arcsin(cx)-\arctan(dx)}{x^5}=e\)，求 \(a,b,c,d,e\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=1,\ d=1,\ e=-\dfrac14\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给答案：\(a=1,\ b=1,\ c=1,\ d=1,\ e=-\dfrac1{15}\)（第613页）。按题面复算为 \(e=-\dfrac14\)：四次消项后五次系数为 \(\dfrac1{120}-\dfrac2{15}+\dfrac3{40}-\dfrac15=\dfrac{1-16+9-24}{120}=-\dfrac{30}{120}=-\dfrac14\)，书值 \(-1/15\) 系算术误差。以复算值 \(-1/4\) 为准。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为 \(0/0\) 型、分母为 \(x^5\) 的高阶配阶题。四个函数的奇偶性一致（都是奇函数），故分子自动不含常数项与偶次项，只需逐一把一次、三次项系数消为零，五次项系数即为 \(e\)。</p>
+    <p>用到的泰勒展开（都展开到五阶）：</p>
+    \[
+    \sin u=u-\frac{u^3}{6}+\frac{u^5}{120}+o(u^5),\quad
+    \tan u=u+\frac{u^3}{3}+\frac{2u^5}{15}+o(u^5),
+    \]
+    \[
+    \arcsin u=u+\frac{u^3}{6}+\frac{3u^5}{40}+o(u^5),\quad
+    \arctan u=u-\frac{u^3}{3}+\frac{u^5}{5}+o(u^5).
+    \]
+    <p>一次项系数为 \(a-b+c-d\)，三次项系数为 \(-\dfrac{a^3}{6}-\dfrac{b^3}{3}+\dfrac{c^3}{6}+\dfrac{d^3}{3}\)。取对称解 \(a=b=c=d=1\)：一次项 \(1-1+1-1=0\)，三次项 \(-\frac16-\frac13+\frac16+\frac13=0\)，低阶项全部消去。</p>
+    <p>五次项系数即极限：</p>
+    \[
+    e=\frac1{120}-\frac{2}{15}+\frac{3}{40}-\frac15
+    =\frac{1-16+9-24}{120}=-\frac{30}{120}=-\frac14.
+    \]
+    <p>这一步的关键是四个函数在同一点、同阶展开，再按幂次对齐；由于一次、三次项被对称参数抵消，五次项直接决定极限值。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\tan u\) 与 \(\arcsin u\) 的五阶系数容易记错：\(\tan\) 是 \(2/15\)、\(\arcsin\) 是 \(3/40\)，张冠李戴会直接算错 \(e\)。② 只消到三次项就停止，忽略五次项，会以为极限为零。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是「多函数高阶组合」配阶题，综合考查 \(\sin,\tan,\arcsin,\arctan\) 的泰勒系数记忆与奇偶项抵消规律。真题中常把其中一两个换成 \(\ln(1+u)\)、\(e^u-1\)，考点不变：展开到与分母同阶并比对系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-\arctan x}{x^3}\)。</p>
+    <p class="var-ans">答案：展开得 \(\big(x+\frac{x^3}{6}\big)-\big(x-\frac{x^3}{3}\big)=\frac{x^3}{2}\)，极限为 \(\dfrac12\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q92">
+  <div class="q-head">
+    <span class="qno">第 92 题</span>
+    <span class="qtype">∞−∞ 型根式差（抓主部）</span>
+    <span class="qsrc">P613</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to\infty}\left(\sqrt{x^2+ax+b}-\sqrt[3]{x^3+cx^2+dx}\right)=e\)，求 \(a,b,c,d,e\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=0,\ c=1,\ d=0,\ e=\dfrac16\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给答案：\(a=1,\ b=0,\ c=1,\ d=0,\ e=0\)（第613页）。按题面复算为 \(e=\dfrac16\)：二次根式展开常数项 \(a/2\)、三次根式展开常数项 \(c/3\)，相减得 \(e=a/2-c/3=\dfrac12-\dfrac13=\dfrac16\)，书值 \(e=0\) 系误算。以复算值 \(1/6\) 为准。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为 \(x\to\infty\) 时的 \(\infty-\infty\) 型根式差。两项都是关于 \(x\) 的同次多项式开方，主部都等于 \(x\)，故最高阶 \(x\) 项必然相消，极限由次阶常数项决定。处理手法是把根号内提出 \(x^n\)，用 \((1+u)^\alpha\approx1+\alpha u\) 展开。</p>
+    <p>对第一个根式：</p>
+    \[
+    \sqrt{x^2+ax+b}=x\sqrt{1+\frac{a}{x}+\frac{b}{x^2}}
+    =x\left(1+\frac{a}{2x}+o\!\left(\frac1x\right)\right)
+    =x+\frac a2+o(1).
+    \]
+    <p>对第二个三次根式：</p>
+    \[
+    \sqrt[3]{x^3+cx^2+dx}=x\sqrt[3]{1+\frac{c}{x}+\frac{d}{x^2}}
+    =x\left(1+\frac{c}{3x}+o\!\left(\frac1x\right)\right)
+    =x+\frac c3+o(1).
+    \]
+    <p>两式相减，主部 \(x\) 抵消，极限为常数项之差：</p>
+    \[
+    e=\lim_{x\to\infty}\left[\left(x+\frac a2\right)-\left(x+\frac c3\right)\right]=\frac a2-\frac c3.
+    \]
+    <p>这里的关键判断是：只要两个根式的最高次都等于 \(x\)，\(x\) 项就自动抵消，无须额外条件；真正决定极限的是两个一次修正系数 \(a/2\) 与 \(c/3\)。而 \(b,d\) 只出现在 \(1/x\) 阶，随 \(x\to\infty\) 趋于零，不影响极限。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 通分有理化时只对二次根式操作、忘了三次根式也有同样的一次修正 \(c/3\)。② 误以为要求 \(a/2-c/3=0\) 才有极限——实际上 \(e\) 本身就等于这个差值，它有限即可。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(x\to\infty\) 时不同次根多项式之差是抓主部（等价无穷大替换）的经典题型，核心是「同次主部相消、次阶常数项决定结果」。常与 \(n\) 次根式、多项式带余项结合考查。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\sqrt{x^2+x}-\sqrt[3]{x^3+x^2}\right)\)。</p>
+    <p class="var-ans">答案：\(a/2-c/3=1/2-1/3=1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q93">
+  <div class="q-head">
+    <span class="qno">第 93 题</span>
+    <span class="qtype">由极限反求参数（四阶配阶）</span>
+    <span class="qsrc">P613</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{e^{ax}-\cos(bx)-\sin(cx)+dx^2}{x^4}=e\)，求 \(a,b,c,d,e\)。</p>
+  </div>
+  <div class="answer">答案：\(a=0,\ b=1,\ c=0,\ d=-\dfrac12,\ e=-\dfrac1{24}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给答案：\(a=1,\ b=1,\ c=1,\ d=-\dfrac12,\ e=\dfrac1{24}\)（第613页）。按题面复算为 \(a=0,\ c=0,\ e=-\dfrac1{24}\)：一次项 \(a-c=0\) 与三次项 \((a^3+c^3)/6=0\) 联立迫使 \(a=c=0\)，四次项为 \(-b^4/24=-1/24\)；书值取 \(a=c=1\) 时三次项为 \(1/3\neq0\)，极限根本不存在。以复算值 \(a=0,\ b=1,\ c=0,\ d=-1/2,\ e=-1/24\) 为准。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为 \(0/0\) 型、分母 \(x^4\) 的配阶题。分子 \(e^{ax}-\cos(bx)-\sin(cx)+dx^2\) 展开到四阶，低阶项系数为零，四阶项系数即 \(e\)。</p>
+    \[
+    e^{ax}=1+ax+\frac{a^2x^2}{2}+\frac{a^3x^3}{6}+\frac{a^4x^4}{24},
+    \]
+    \[
+    -\cos(bx)=-1+\frac{b^2x^2}{2}-\frac{b^4x^4}{24},\quad
+    -\sin(cx)=-cx+\frac{c^3x^3}{6},\quad +dx^2.
+    \]
+    <p>逐项合并：常数 \(1-1=0\)；一次 \((a-c)x\)；二次 \(\big(\frac{a^2+b^2}{2}+d\big)x^2\)；三次 \(\frac{a^3+c^3}{6}x^3\)；四次 \(\frac{a^4-b^4}{24}x^4\)。</p>
+    <p>配阶要求一次、二次、三次系数为零：\(a=c\)、\(d=-(a^2+b^2)/2\)、\(a^3+c^3=0\)。由 \(a=c\) 代入第三式得 \(2a^3=0\)，故 \(a=c=0\)；取 \(b=1\) 得 \(d=-1/2\)，四次项 \(-b^4/24=-1/24\) 即极限 \(e\)。</p>
+    \[ \frac{1-\cos x-x^{2}/2}{x^{4}}\Big|_{x=0.05}\approx-0.04166,\quad \frac{1-\cos x-x^{2}/2}{x^{4}}\Big|_{x=0.02}\approx-0.04167\to-\frac1{24}. \]
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(-\cos(bx)\) 展开后二次项是 \(+b^2x^2/2\)，符号容易写错，直接影响 \(d\) 的求解。② 三次项 \(a^3/6+c^3/6\) 不可遗漏，只消到二次仍会发散。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>指数、三角、多项式混合的配阶题，考查四阶泰勒展开的完整系数表。真题常以选择题形式问「使极限存在的参数取值」，或反过来给定极限值反求参数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x-\cos x-x}{x^2}\)。</p>
+    <p class="var-ans">答案：展开 \(e^x-\cos x-x=(1+x+x^2/2)-(1-x^2/2)-x=x^2+o(x^2)\)，极限为 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q94">
+  <div class="q-head">
+    <span class="qno">第 94 题</span>
+    <span class="qtype">由极限反求参数（ln 泰勒配阶）</span>
+    <span class="qsrc">P613</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to1}\dfrac{\ln(x)-a(x-1)-b(x-1)^2-c(x-1)^3-d(x-1)^4}{(x-1)^5}=e\)，求 \(a,b,c,d,e\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=-\dfrac12,\ c=\dfrac13,\ d=-\dfrac14,\ e=\dfrac15\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为 \(x\to1\) 的 \(0/0\) 型配阶题。令 \(t=x-1\)，则 \(\ln x=\ln(1+t)\)，问题化为在 \(t=0\) 处把 \(\ln(1+t)\) 展开到五阶，与后面的多项式逐项对齐。</p>
+    <p>标准展开：</p>
+    \[
+    \ln(1+t)=t-\frac{t^2}{2}+\frac{t^3}{3}-\frac{t^4}{4}+\frac{t^5}{5}+o(t^5).
+    \]
+    <p>分子 \(N=\ln(1+t)-at-bt^2-ct^3-dt^4\)，代入后：</p>
+    \[
+    N=(1-a)t+\left(-\frac12-b\right)t^2+\left(\frac13-c\right)t^3+\left(-\frac14-d\right)t^4+\frac{t^5}{5}+o(t^5).
+    \]
+    <p>要使 \(N/t^5\) 收敛，\(t,t^2,t^3,t^4\) 的系数必须依次为零：</p>
+    \[
+    1-a=0,\quad -\frac12-b=0,\quad \frac13-c=0,\quad -\frac14-d=0.
+    \]
+    <p>解得 \(a=1,\ b=-\frac12,\ c=\frac13,\ d=-\frac14\)，恰好把 \(\ln(1+t)\) 的前四项全部减掉，剩下的最高项就是 \(t^5/5\)，故 \(e=1/5\)。这一步的本质是「用泰勒多项式逐阶逼近 \(\ln(1+t)\)，残余误差即为下一项」，配阶过程就是把逼近多项式的系数一一取成泰勒系数。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\ln(1+t)\) 的符号交替易写错：奇数项正、偶数项负，\(b,c,d\) 的符号跟着反号。② 直接令 \(t=x-1\) 而不换元，在原式里容易把 \(x\) 的幂次与 \(t\) 混淆。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是「用泰勒多项式逼近对数函数、求高阶余项」的标准模型，与 \(\ln(1+x)\) 的麦克劳林级数直接挂钩。真题常以此考查高阶无穷小的识别与系数比对。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+\dfrac{x^2}{2}}{x^3}\)。</p>
+    <p class="var-ans">答案：展开残余为 \(x^3/3+o(x^3)\)，极限为 \(\dfrac13\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q95">
+  <div class="q-head">
+    <span class="qno">第 95 题</span>
+    <span class="qtype">1^∞ 型幂指极限</span>
+    <span class="qsrc">P614</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to0}\left(\dfrac{\tan(ax)}{x}\right)^{1/x^2}=e^d\)，求 \(a\) 和 \(d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ d=\dfrac13\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>底数 \(\dfrac{\tan(ax)}{x}\xrightarrow{x\to0}a\)（因为 \(\tan(ax)\sim ax\)），指数 \(1/x^2\to\infty\)。要使底数趋于 \(1\)，必须 \(a=1\)，否则底数趋于非零常数 \(a\)，整体要么发散要么趋于 \(1\)，无法写成 \(e^d\) 的有限形式。故先定 \(a=1\)。</p>
+    <p>此时为 \(1^\infty\) 型，取对数：</p>
+    \[
+    \ln L=\lim_{x\to0}\frac{1}{x^2}\ln\frac{\tan x}{x}.
+    \]
+    <p>由 \(\tan x=x+\dfrac{x^3}{3}+o(x^3)\)，得 \(\dfrac{\tan x}{x}=1+\dfrac{x^2}{3}+o(x^2)\)，再用 \(\ln(1+u)\sim u\)：</p>
+    \[
+    \ln\frac{\tan x}{x}\sim\frac{x^2}{3}+o(x^2),\qquad
+    \ln L=\lim_{x\to0}\frac{x^2/3}{x^2}=\frac13.
+    \]
+    <p>故 \(L=e^{1/3}\)，即 \(d=1/3\)。关键一步是先由底数极限等于 \(1\) 锁定参数 \(a\)，再用 \(1^\infty\) 的对数法与 \(\ln(1+u)\sim u\) 把幂指函数化为商的极限。</p>
+    <p>数值两档互证：\(x=0.05\)、\(0.02\) 下 \(L\) 分别约 \(1.3959\)、\(1.3957\)，随 \(x\) 减小趋近 \(e^{1/3}\approx1.3956\)。</p>
+    \[ \left(\frac{\tan x}{x}\right)^{1/x^{2}}\Big|_{x=0.05}\approx1.3959,\quad \left(\frac{\tan x}{x}\right)^{1/x^{2}}\Big|_{x=0.02}\approx1.3957. \]
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记先由「底数必须趋于 \(1\)」定出 \(a=1\)，直接对任意 \(a\) 取对数。② 把 \(\tan x/x\) 展开只写到一阶 \(1\)，漏掉 \(x^2/3\) 这一决定 \(d\) 的关键项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(1^\infty\) 型幂指函数极限是每年必考模型，标准流程是「取对数 → 等价无穷小替换 → 定指数」。当底数含待定参数时，常先用「底数极限为 \(1\)」这一隐含条件锁定参数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{\sin x}{x}\right)^{1/x^2}\)。</p>
+    <p class="var-ans">答案：\(\sin x/x=1-x^2/6+o(x^2)\)，对数极限为 \(-1/6\)，结果为 \(e^{-1/6}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q96">
+  <div class="q-head">
+    <span class="qno">第 96 题</span>
+    <span class="qtype">由极限反求参数（五阶配阶）</span>
+    <span class="qsrc">P614</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\arcsin(ax)-\arctan(bx)+cx^3}{x^5}=d\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=-\dfrac12,\ d=-\dfrac18\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给答案：\(a=1,\ b=1,\ c=\dfrac16,\ d=-\dfrac1{40}\)（第614页）。按题面复算为 \(c=-\dfrac12,\ d=-\dfrac18\)：三次项须为零，即 \(c=-(\frac16+\frac13)=-\frac12\)；五次项 \(d=\frac3{40}-\frac15=-\frac18\)。书值 \(c=1/6\) 使三次项残留 \(1/2\)、\(d=-1/40\) 亦与展开系数不符。以复算值为准。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为 \(0/0\)、分母 \(x^5\) 的配阶题。把 \(\arcsin(ax)\)、\(\arctan(bx)\) 展开到五阶，与 \(cx^3\) 合并，令一次、三次项系数为零，五次项即为 \(d\)。</p>
+    \[
+    \arcsin(ax)=ax+\frac{a^3x^3}{6}+\frac{3a^5x^5}{40}+o(x^5),
+    \]
+    \[
+    -\arctan(bx)=-bx+\frac{b^3x^3}{3}-\frac{b^5x^5}{5}+o(x^5).
+    \]
+    <p>合并：一次项 \((a-b)x\)；三次项 \(\left(\frac{a^3}{6}+\frac{b^3}{3}+c\right)x^3\)；五次项 \(\left(\frac{3a^5}{40}-\frac{b^5}{5}\right)x^5\)。</p>
+    <p>配阶要求 \(a=b\)（一次项为零），取 \(a=b=1\)；三次项 \(\frac16+\frac13+c=0\) 得 \(c=-\frac12\)；五次项即极限 \(d=\frac3{40}-\frac15=-\frac18\)。这一类题的关键是：\(cx^3\) 这一人工加项正是用来抵消 \(\arcsin\) 与 \(\arctan\) 在三次项上的差值，加项系数必须等于两者三次系数之差的相反数。</p>
+    \[ \frac{\arcsin x-\arctan x-x^{3}/2}{x^{5}}\Big|_{x=0.05}\approx-0.1245,\quad \frac{\arcsin x-\arctan x-x^{3}/2}{x^{5}}\Big|_{x=0.02}\approx-0.1249\to-\frac18. \]
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(-\arctan(bx)\) 的三次项是 \(+b^3/3\)（负负得正），符号易错。② 忘记用 \(cx^3\) 去抵消三次项，导致分子残留 \(x^3\) 阶、除以 \(x^5\) 后发散。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>反三角函数的高阶配阶题，综合考查 \(\arcsin\) 与 \(\arctan\) 的泰勒系数。真题常以「添加一个多项式项抵消低阶余项」的形式出现。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-\arctan x-x^3/2}{x^5}\)。</p>
+    <p class="var-ans">答案：三次项 \(1/6+1/3-1/2=0\)，五次项 \(3/40-1/5=-1/8\)，极限为 \(-1/8\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q97">
+  <div class="q-head">
+    <span class="qno">第 97 题</span>
+    <span class="qtype">1^∞ 型（x→∞ 有理式底数）</span>
+    <span class="qsrc">P614</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to\infty}\left(1+\dfrac{a}{x}+\dfrac{b}{x^2}+\dfrac{c}{x^3}+\dfrac{d}{x^4}\right)^x=e^e\)，求 \(a,b,c,d,e\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=1,\ d=1,\ e=1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>底数在 \(x\to\infty\) 时趋于 \(1\)，指数 \(x\to\infty\)，属 \(1^\infty\) 型。用标准公式 \(\lim u^v=e^{\lim v(u-1)}\)，其中 \(u=1+a/x+b/x^2+\cdots\)、\(v=x\)。</p>
+    <p>取对数后由 \(\ln(1+u-1)\sim u-1\)：</p>
+    \[ \ln L=\lim_{x\to\infty}x\ln u=\lim_{x\to\infty}x(u-1)=a. \]
+    <p>计算指数部分：</p>
+    \[
+    x(u-1)=x\left(\frac a x+\frac b{x^2}+\frac c{x^3}+\frac d{x^4}\right)
+    =a+\frac b x+\frac c{x^2}+\frac d{x^3}\xrightarrow{x\to\infty}a.
+    \]
+    <p>因此原极限 \(=e^a\)，要等于 \(e^e\) 只需 \(a=e\)。只有 \(1/x\) 项（即 \(a/x\)）乘 \(x\) 后留下常数，更高阶项乘 \(x\) 后趋零，故 \(b,c,d\) 取任何有限值都不影响极限；代表值 \(a=b=c=d=1\) 对应 \(e^1=e\)，即参数 \(e=1\)。</p>
+    <p>数值互证：取代表值 \(a=b=c=d=1\)，\(x=1000\)、\(10000\) 下 \(x(u-1)\) 约 \(1.0010\)、\(1.0001\)，向 \(1\) 收敛。</p>
+    \[ x(u-1)\big|_{x=1000}\approx1.0010,\quad x(u-1)\big|_{x=10000}\approx1.0001. \]
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(b/x^2,c/x^3\) 也会影响极限——实际上它们乘以指数 \(x\) 后分别为 \(b/x,c/x^2\)，全部趋于零。② 把 \(e^e\) 中的两个 \(e\) 混淆：第一个 \(e\) 是自然常数，第二个是题目要求的极限值变量。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(x\to\infty\) 时 \(\left(1+\frac{a}{x}+\cdots\right)^x\) 型极限，结论是只由 \(1/x\) 项系数决定。这是重要极限 \(\lim(1+1/x)^x=e\) 的直接推广，选择题常考「高阶项是否影响结果」。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(1+\dfrac{2}{x}+\dfrac{5}{x^2}\right)^x\)。</p>
+    <p class="var-ans">答案：\(x(u-1)\to2\)，结果为 \(e^2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q98">
+  <div class="q-head">
+    <span class="qno">第 98 题</span>
+    <span class="qtype">由极限反求参数（三阶配阶）</span>
+    <span class="qsrc">P614</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to0}\dfrac{\ln(1+ax)-\sin(bx)+\cos(cx)-1}{x^3}=d\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=0,\ b=0,\ c=0,\ d=0\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给答案：\(a=1,\ b=1,\ c=1,\ d=-\dfrac12\)（第614页）。按题面复算为 \(a=b=c=d=0\)：二次项 \(-(a^2+c^2)/2\) 仅在 \(a=c=0\) 时为零，一次项 \(a-b=0\) 迫使 \(b=0\)，三次项随之归零、\(d=0\)；书值取 \(a=c=1\) 时二次项为 \(-1\neq0\)，极限发散。以复算值全零为准。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为 \(0/0\)、分母 \(x^3\) 的配阶题。把分子在 \(x=0\) 展开到三阶：</p>
+    \[
+    \ln(1+ax)=ax-\frac{a^2x^2}{2}+\frac{a^3x^3}{3}+o(x^3),
+    \]
+    \[
+    -\sin(bx)=-bx+\frac{b^3x^3}{6}+o(x^3),\quad
+    \cos(cx)-1=-\frac{c^2x^2}{2}+o(x^2).
+    \]
+    <p>合并：一次项 \((a-b)x\)；二次项 \(-\dfrac{a^2+c^2}{2}x^2\)；三次项 \(\left(\dfrac{a^3}{3}+\dfrac{b^3}{6}\right)x^3\)。</p>
+    <p>配阶要求一次、二次项分别为零。二次项系数是 \(-\frac{a^2+c^2}{2}\)，它恒为非正，仅当 \(a=c=0\) 时为零；再由一次项 \(a-b=0\) 得 \(b=0\)。此时三次项 \(\frac{a^3}{3}+\frac{b^3}{6}=0\)，故 \(d=0\)。唯一解为 \(a=b=c=d=0\)，分子恒为零。</p>
+    <p>反看书值 \(a=b=c=1\)：二次项系数 \(-(1+1)/2=-1\neq0\)，分子残留 \(x^{2}\) 阶量，除以 \(x^{3}\) 后以 \(1/x\) 阶发散，极限不存在。</p>
+    \[ -\frac{a^{2}+c^{2}}2\Big|_{a=c=1}=-1\neq0,\qquad \frac{a^{3}}3+\frac{b^{3}}6\Big|_{a=b=0}=0. \]
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忽略 \(\cos(cx)-1\) 的二次项 \(-c^2x^2/2\)，它与 \(\ln(1+ax)\) 的二次项同为负，无法相互抵消。② 只令一次项为零就下结论，忘了二次项是否为零。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数、正弦、余弦混合的三阶配阶题，考查各函数低阶泰勒系数的符号。这类题常在「判断极限是否存在」类选择中出现。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-\sin x}{x^2}\)。</p>
+    <p class="var-ans">答案：一次项 \(x-x=0\)，二次项 \(-x^2/2\)，极限为 \(-1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q99">
+  <div class="q-head">
+    <span class="qno">第 99 题</span>
+    <span class="qtype">由极限反求参数（四阶配阶）</span>
+    <span class="qsrc">P614</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{ae^x+be^{-x}+c\sin x+d\cos x}{x^4}=e\)，求 \(a,b,c,d,e\)。</p>
+  </div>
+  <div class="answer">答案：\(a=0,\ b=0,\ c=0,\ d=0,\ e=0\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给答案：\(a=1,\ b=1,\ c=0,\ d=-2,\ e=\dfrac1{12}\)（第614页）。按题面复算为 \(a=b=c=d=e=0\)：四组配阶方程 \(a+b+d=0\)、\(a-b+c=0\)、\(a+b-d=0\)、\(a-b-c=0\) 联立唯一解为全零；书值取 \(d=-2\) 时二次项 \((a+b-d)/2=2\neq0\)，极限发散。以复算值全零为准。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为 \(0/0\)、分母 \(x^4\) 的配阶题。把四个函数都展开到四阶：</p>
+    \[
+    e^x=1+x+\frac{x^2}{2}+\frac{x^3}{6}+\frac{x^4}{24},\quad
+    e^{-x}=1-x+\frac{x^2}{2}-\frac{x^3}{6}+\frac{x^4}{24},
+    \]
+    \[
+    \sin x=x-\frac{x^3}{6}+o(x^3),\quad
+    \cos x=1-\frac{x^2}{2}+\frac{x^4}{24}+o(x^4).
+    \]
+    <p>合并分子 \(N=ae^x+be^{-x}+c\sin x+d\cos x\)：</p>
+    \[
+    \text{常数 }a+b+d,\ \text{一次 }(a-b+c)x,\ \text{二次 }\left(\frac{a+b}{2}-\frac d2\right)x^2,
+    \]
+    \[
+    \text{三次 }\left(\frac{a-b}{6}-\frac c6\right)x^3,\ \text{四次 }\left(\frac{a+b+d}{24}\right)x^4.
+    \]
+    <p>配阶要求常数、一次、二次、三次项依次为零，即 \(a+b+d=0\)、\(a-b+c=0\)、\(a+b-d=0\)、\(a-b-c=0\)。由第一、三式相加得 \(2(a+b)=0\)，由第二、四式相加得 \(2(a-b)=0\)，联立得 \(a=b=0\)，进而 \(c=d=0\)。四次项 \((a+b+d)/24=0\)，故 \(e=0\)。唯一解为全零。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\cos x\) 的二次项是 \(-x^2/2\)，故 \(d\cos x\) 对二次项的贡献是 \(-d/2\)，与 \(e^x,e^{-x}\) 的正二次项相加时符号要对。② 忘记常数项 \(a+b+d=0\)，它决定了 \(d\) 与 \(a,b\) 的关系。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>双曲型组合 \(ae^x+be^{-x}\) 配阶题，利用奇偶项分离求解参数。这是选择题中「配阶反求参数」的高频形式，核心是奇偶项分别成组抵消。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x+e^{-x}-2-x^2}{x^4}\)。</p>
+    <p class="var-ans">答案：\(e^x+e^{-x}=2+x^2+\dfrac{x^4}{12}+o(x^4)\)，故分子 \(=x^4/12+o(x^4)\)，极限为 \(\dfrac1{12}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q100">
+  <div class="q-head">
+    <span class="qno">第 100 题</span>
+    <span class="qtype">∞−∞ 型三角组合（定阶数）</span>
+    <span class="qsrc">P614</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to0}\left(\dfrac1x-\dfrac1{\sin x}+\dfrac1{\tan x}\right)x^p=q\)，求 \(p\) 和 \(q\)。</p>
+  </div>
+  <div class="answer">答案：\(p=1,\ q=1\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给答案：\(p=1,\ q=\dfrac13\)（第614页）。按题面复算为 \(q=1\)：展开得 \(H=\frac1x-\frac{x}{2}+o(x)\)，故 \(q=\lim_{x\to0}xH=1\)，书值 \(1/3\) 系误算。以复算值 \(q=1\) 为准。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为 \(x\to0\) 时的 \(\infty-\infty\) 型，三项都是 \(1/x\) 量级，需先通分或展开判断其主部阶数。把 \(\dfrac1{\sin x}\) 与 \(\cot x=\dfrac1{\tan x}\) 都展开：</p>
+    \[
+    \frac1{\sin x}=\frac1x+\frac x6+\frac{7x^3}{360}+o(x^3),\quad
+    \cot x=\frac1x-\frac x3-\frac{x^3}{45}+o(x^3).
+    \]
+    <p>代入括号 \(H=\dfrac1x-\dfrac1{\sin x}+\cot x\)：</p>
+    \[
+    H=\frac1x-\left(\frac1x+\frac x6+\cdots\right)+\left(\frac1x-\frac x3-\cdots\right)
+    =\frac1x-\frac x2+o(x).
+    \]
+    <p>可见 \(H\) 的主部是 \(1/x\)（一次项 \(x\) 是修正项）。要使 \(H\cdot x^p\) 有有限非零极限，需 \(p=1\)，此时：</p>
+    \[
+    q=\lim_{x\to0}xH=\lim_{x\to0}\left(1-\frac{x^2}{2}+o(x^2)\right)=1.
+    \]
+    <p>关键一步是先把三个 \(1/x\) 量级的函数作泰勒展开，看清 \(H\) 究竟是 \(1/x\)、\(1/x^3\) 还是其他阶，再反推 \(p\)；不能凭直觉认为三角差会给出 \(x^3\) 阶小量。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(\dfrac1{\sin x}-\dfrac1{\tan x}\) 误认为是 \(1/x\) 量级相消后变成高阶小量——实际上 \(\dfrac1{\sin x}-\cot x=\dfrac{1-\cos x}{\sin x}\sim\dfrac{x^2/2}{x}=x/2\)，是一阶项，不是高阶项。② 直接令 \(p=3\) 套用常见的 \((1/x-1/\sin x)\) 结论。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「判断组合式无穷小的阶数并反求指数 \(p\)」是选择题高频题型，核心是用泰勒展开确定主部。常与 \(\dfrac1x-\dfrac1{\ln(1+x)}\)、\(1/x-1/(e^x-1)\) 等组合并列考查。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\dfrac1x-\dfrac1{\sin x}}{x}\)。</p>
+    <p class="var-ans">答案：\(1/\sin x=1/x+x/6+\cdots\)，故 \(1/x-1/\sin x=-x/6+o(x)\)，除以 \(x\) 得 \(-1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q101">
+  <div class="q-head">
+    <span class="qno">第 101 题</span>
+    <span class="qtype">递推隐含极限（数列）</span>
+    <span class="qsrc">P615</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_n\}\) 满足 \(\lim\limits_{n\to\infty}\bigl(x_n+\ln(1+x_n)\bigr)=0\)，则 \(\lim\limits_{n\to\infty}x_n=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(-1\)</p>
+      <p>(D) 不存在</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为「由极限方程反求数列极限」。设 \(L=\lim x_n\)（先假设极限存在），由于 \(y+\ln(1+y)\) 在 \(y=0\) 附近连续，对等式两边取极限得：</p>
+    \[
+    L+\ln(1+L)=0.
+    \]
+    <p>解方程：令 \(g(y)=y+\ln(1+y)\)，定义域 \(y>-1\)。\(g(0)=0\)，且 \(g'(y)=1+\dfrac1{1+y}=\dfrac{2+y}{1+y}>0\)，故 \(g\) 严格单调递增；两端 \(g(-1^{+})=-\infty\)、\(g(+\infty)=+\infty\)，方程 \(g(y)=0\) 有且仅有一个根 \(y=0\)，于是 \(L=0\)。</p>
+    <p>进一步验证极限存在：题设给出 \(g(x_n)\to0=g(0)\)。由于 \(g\) 连续且严格递增，若 \(x_n\not\to0\)，则有子列远离 \(0\)，由严格单调性其 \(g\) 值也远离 \(0\)，与 \(g(x_{n_k})\to0\) 矛盾。故 \(x_n\) 只能被拉向 \(0\)，不存在其他聚点。数值夹逼：\(g(-0.5)\approx-1.193<0\)，\(g(0.5)\approx0.905>0\)，根落在 \(0\) 附近。故选 A。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 想当然地把 \(x_n\) 与 \(\ln(1+x_n)\) 分别令为某值，忽略二者在同一点求和。② 忽略 \(g(y)\) 的单调性，误以为方程可能有多个解。③ 忽视定义域：\(\ln(1+x_n)\) 要求 \(1+x_n>0\)，即 \(x_n>-1\)，选项 (C) 的 \(-1\) 本身不在定义域内，可先行排除。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「设极限存在，对递推式取极限解不动点」是数列极限的标准思路，再结合单调有界定理或连续性验证存在性。常与 \(\ln\)、\(e^x\) 等连续函数复合。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim_{n\to\infty}(x_n+e^{x_n})=1\)，求 \(\lim x_n\)。</p>
+    <p class="var-ans">答案：\(L+e^L=1\)，观察 \(L=0\) 满足，且严格单调，故 \(L=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q102">
+  <div class="q-head">
+    <span class="qno">第 102 题</span>
+    <span class="qtype">函数极限与数列极限的关系（海涅定理）</span>
+    <span class="qsrc">P615</span>
+  </div>
+  <div class="stem">
+    <p>设函数 \(f(x)\) 在 \((-\infty,+\infty)\) 上连续，且 \(\lim\limits_{x\to\infty}f(x)=A\)，则对于任意数列 \(\{x_n\}\) 满足 \(\lim\limits_{n\to\infty}x_n=\infty\)，有 \(\lim\limits_{n\to\infty}f(x_n)=\)</p>
+    <div class="opts">
+      <p>(A) \(A\)</p>
+      <p>(B) \(0\)</p>
+      <p>(C) 不一定存在</p>
+      <p>(D) \(\infty\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为海涅定理（归结原则）的直接应用。函数极限 \(\lim_{x\to\infty}f(x)=A\) 的定义是：对任意 \(\varepsilon>0\)，存在 \(X>0\)，当 \(|x|>X\) 时 \(|f(x)-A|\lt{}\varepsilon\)。</p>
+    <p>由于 \(x_n\to\infty\)（即 \(|x_n|\to\infty\)），对上述 \(X\)，存在 \(N\)，当 \(n>N\) 时 \(|x_n|>X\)，于是 \(|f(x_n)-A|\lt{}\varepsilon\)。这正是 \(\lim_{n\to\infty}f(x_n)=A\) 的定义。注意这里的 \(X\) 按 \(|x|>X\) 取，左右两侧无穷远都被同一条门槛覆盖，不要求 \(x_n\) 单调，也不要求它只向 \(+\infty\) 或只向 \(-\infty\) 发散。</p>
+    <p>题目中「\(f\) 连续」这一条件其实多余：海涅定理只要求函数极限存在，不要求连续；连续条件是干扰项。关键一步在于把 \(x\to\infty\) 的 \(\varepsilon\)-\(X\) 定义与 \(x_n\to\infty\) 的 \(\varepsilon\)-\(N\) 定义对接，中间桥梁就是「\(x_n\) 足够大时必然落入 \(|x|>X\)」。反过来用这条定理：若能找到两列都趋于无穷的数列，使 \(f(x_n)\) 趋于不同值，则函数极限不存在，这是判断发散的标准构造法。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为需要 \(f\) 连续才能保证 \(f(x_n)\to A\)——实际上归结原则只要求函数极限本身存在。② 把 \(x_n\to\infty\) 理解成 \(x_n\) 单调发散，归结原则对任意趋于无穷的数列都成立。③ 把有限点附近的间断或振荡带入 \(x\to\infty\) 的判断：函数在某个有限点处不连续，并不影响它在无穷远处的极限，两者考察的是不同位置。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>海涅定理是连接函数极限与数列极限的核心定理，真题常考其逆否命题：若能找到两个趋于同一点的数列使函数值趋于不同极限，则函数极限不存在。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明 \(\lim_{x\to\infty}\sin x\) 不存在。</p>
+    <p class="var-ans">答案：取 \(x_n=2n\pi\to\infty\) 得 \(\sin x_n=0\)，取 \(y_n=2n\pi+\pi/2\to\infty\) 得 \(\sin y_n=1\)，两个子列极限不同，由海涅定理知函数极限不存在。</p>
+  </div>
+</article>
+
+<article class="q" id="q103">
+  <div class="q-head">
+    <span class="qno">第 103 题</span>
+    <span class="qtype">正项数列比值与根值（柯西命题）</span>
+    <span class="qsrc">P615</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\{a_n\}\) 为正项数列，且 \(\lim\limits_{n\to\infty}\dfrac{a_{n+1}}{a_n}=L\)，则 \(\lim\limits_{n\to\infty}\sqrt[n]{a_n}=\)</p>
+    <div class="opts">
+      <p>(A) \(L\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(0\)</p>
+      <p>(D) 不一定存在</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为「比值极限存在时根值极限必存在且相等」的经典结论。证明思路是把 \(\sqrt[n]{a_n}\) 写成连乘积：</p>
+    \[
+    \sqrt[n]{a_n}=\sqrt[n]{a_1\cdot\frac{a_2}{a_1}\cdot\frac{a_3}{a_2}\cdots\frac{a_n}{a_{n-1}}}
+    =a_1^{1/n}\cdot\prod_{k=1}^{n-1}\left(\frac{a_{k+1}}{a_k}\right)^{1/n}.
+    \]
+    <p>由于 \(\dfrac{a_{k+1}}{a_k}\to L\)，对其取对数后是一个趋于 \(\ln L\) 的数列；再由「若 \(b_k\to b\)，则算术平均 \(\dfrac{b_1+\cdots+b_n}{n}\to b\)」这一平均值定理（柯西命题），得：</p>
+    \[
+    \frac1n\sum_{k=1}^{n-1}\ln\frac{a_{k+1}}{a_k}\to\ln L,
+    \]
+    <p>而 \(a_1^{1/n}\to1\)。两边取指数，得 \(\sqrt[n]{a_n}\to L\)。当 \(L=0\) 时对数趋于 \(-\infty\)，不能照搬平均论证，改用夹逼：比值充分小后连乘被常数乘 \(\varepsilon^{n-N}\) 夹住，开 \(n\) 次方仍趋于 \(0\)，结论不变。</p>
+    <p>关键一步在于把根值转化为比值的算术平均，用平均值定理传递极限；这是比值判别法与根值判别法关系的基础，且该蕴含是单向的：比值极限存在能推出根值极限存在且相等，反之不成立。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为反过来「根值存在则比值存在」也成立——这是错的，反例 \(a_n=2+(-1)^n\)。② 忽略 \(a_n>0\) 这一前提，否则取对数无意义。③ 比值极限 \(L=0\) 时根值极限同样为 \(0\)，不要凭印象误选「不一定存在」；本结论对 \(L=0\) 与 \(L>0\) 都成立。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>比值与根值的关系是级数判别法与数列极限的交叉点，常以选择题形式考查「比值存在 ⇒ 根值存在且相等」这一单向蕴含。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_n=\dfrac{n!}{n^n}\)，求 \(\lim\sqrt[n]{a_n}\)。</p>
+    <p class="var-ans">答案：\(a_{n+1}/a_n=(n/(n+1))^n\to e^{-1}\)，故根值极限为 \(e^{-1}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q104">
+  <div class="q-head">
+    <span class="qno">第 104 题</span>
+    <span class="qtype">递推数列求极限（不动点）</span>
+    <span class="qsrc">P615</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_n\}\) 满足 \(x_1=1,\ x_{n+1}=\sqrt{2+x_n}\)，则 \(\lim\limits_{n\to\infty}x_n=\)</p>
+    <div class="opts">
+      <p>(A) \(1\)</p>
+      <p>(B) \(2\)</p>
+      <p>(C) \(\sqrt2\)</p>
+      <p>(D) \(0\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：B</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为递推数列求极限。第一步先求不动点：若极限存在设为 \(L\)，则 \(L=\sqrt{2+L}\)，两边平方 \(L^2=2+L\)，即 \(L^2-L-2=0\)，解得 \(L=2\) 或 \(L=-1\)。由于 \(x_n\ge0\)，舍去 \(-1\)，候选 \(L=2\)。</p>
+    <p>第二步验证存在性：用单调有界定理。先证有上界 \(2\)：若 \(x_n\le2\)，则 \(x_{n+1}=\sqrt{2+x_n}\le\sqrt{4}=2\)，而 \(x_1=1\le2\)，归纳成立。再证单调递增：</p>
+    \[
+    x_{n+1}-x_n=\sqrt{2+x_n}-x_n=\frac{2+x_n-x_n^2}{\sqrt{2+x_n}+x_n}
+    =\frac{(2-x_n)(1+x_n)}{\sqrt{2+x_n}+x_n}\ge0,
+    \]
+    <p>因 \(x_n\le2\)。故 \(\{x_n\}\) 单调递增有上界，极限存在，且等于不动点 \(2\)。选 B。</p>
+    <p>换用压缩映射视角交叉验证：令 \(f(x)=\sqrt{2+x}\)，在区间 \([0,2]\) 上 \(f'(x)=\dfrac{1}{2\sqrt{2+x}}\le\dfrac{1}{2\sqrt3}\approx0.289<1\)，映射压缩，迭代必收敛到唯一不动点。数值迭代也吻合：\(x_1=1\)，\(x_2=\sqrt3\approx1.732\)，\(x_3\approx1.932\)，\(x_4\approx1.983\)，从下方逐步逼近 \(2\)。另一根 \(-1\) 被舍去，还因为算术平方根本身非负，递推式 \(x_{n+1}=\sqrt{2+x_n}\) 不可能取到负值。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只求不动点不验证存在性，直接写答案——若递推不收敛会出错。② 平方后忘舍去负根 \(-1\)。③ 用归纳法证上界时，起点必须先验证：本题 \(x_1=1\le2\)，归纳链条才能成立；若初值落在候选区间之外，单调有界论证要另行论证。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「递推数列求极限」是解答题高频题型，标准流程是「先求不动点 → 再用单调有界定理证明收敛 → 代回得极限」。根式递推是最常见形式。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\sqrt{1+x_n}\)，求 \(\lim x_n\)。</p>
+    <p class="var-ans">答案：不动点 \(L=(1+\sqrt5)/2\)，单调有界成立，极限为黄金分割比 \((1+\sqrt5)/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q105">
+  <div class="q-head">
+    <span class="qno">第 105 题</span>
+    <span class="qtype">连续函数与极限交换</span>
+    <span class="qsrc">P615</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{n\to\infty}x_n=a\)，且 \(x_n>0\)，则 \(\lim\limits_{n\to\infty}\sqrt{x_n}=\)</p>
+    <div class="opts">
+      <p>(A) \(\sqrt a\)</p>
+      <p>(B) \(a\)</p>
+      <p>(C) \(0\)</p>
+      <p>(D) 不一定存在</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>第一步：确定 \(a\) 的符号。</b>由极限的保号性：若 \(x_n>0\) 且 \(x_n\to a\)，则 \(a\ge0\)，保证 \(\sqrt a\) 在实数范围内有意义。</p>
+    <p><b>第二步：应用复合函数极限定理。</b>函数 \(g(t)=\sqrt t\) 在 \(t\ge0\) 上连续，且在 \(t=0\) 处右连续，即使 \(a=0\) 结论仍成立。由连续函数的极限等于极限的函数值：</p>
+    \[ \lim_{n\to\infty}g(x_n)=g\!\left(\lim_{n\to\infty}x_n\right)=g(a)=\sqrt a. \]
+    <p>条件上还有两点需要分清：其一，\(x_n>0\) 只保证 \(a\ge0\)，极限本身可能取到 \(0\)，不必要求 \(a>0\)；其二，能交换顺序的前提是外层函数连续，若外层函数在 \(a\) 处间断，交换一般不成立，例如取整函数或符号函数，收敛数列映过去的极限未必等于 \(g(a)\)。本题 \(g(t)=\sqrt t\) 在非负半轴连续，交换合法。</p>
+    <p><b>第三步：排除其他选项。</b>(B) \(a\) 仅当 \(a=0\) 或 \(a=1\) 时与 \(\sqrt a\) 相等；(C) \(0\) 仅当 \(a=0\) 时成立；(D) 不成立：由于 \(g\) 连续，极限一定存在且等于 \(\sqrt a\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 担心 \(a\lt{}0\) 时 \(\sqrt a\) 无意义。但题目给出 \(x_n>0\)，由极限保号性必然 \(a\ge0\)，这个担心是多余的。干扰项 (D)「不一定存在」正是利用了这种顾虑。</p>
+    <p>② 忽略连续性条件，误以为任何函数都能与极限交换。若 \(g\) 在 \(a\) 处不连续（如取整函数、符号函数），则 \(\lim g(x_n)\) 不一定等于 \(g(a)\)。本题 \(g(t)=\sqrt t\) 连续，所以可以交换。</p>
+    <p>③ 混淆数列极限与函数极限的交换条件。复合函数极限定理要求内层函数极限存在且外层函数连续，两者缺一不可。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「连续函数保持极限」是数列极限的基本性质，常与根式、指数、对数、三角函数等结合考查。它也是海涅定理与函数连续性的直接推论。在考研中，这类题通常以选择题形式出现，考查对连续性与极限交换条件的理解。常见变体：\(\lim x_n=a\) 时求 \(\lim e^{x_n}\)、\(\lim\ln x_n\)（需 \(x_n>0\)）、\(\lim\arctan x_n\) 等。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(x_n\to2\)，求 \(\lim\ln(x_n^2+1)\)。</p>
+    <p class="var-ans">答案：\(\ln(4+1)=\ln5\)，由 \(\ln\) 连续直接交换。</p>
+  </div>
+</article>
+
+<article class="q" id="q106">
+  <div class="q-head">
+    <span class="qno">第 106 题</span>
+    <span class="qtype">相邻项差趋于零（柯西条件辨析）</span>
+    <span class="qsrc">P616</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_n\}\) 满足 \(\lim\limits_{n\to\infty}(x_n-x_{n-1})=0\)，则 \(\{x_n\}\)</p>
+    <div class="opts">
+      <p>(A) 收敛</p>
+      <p>(B) 发散</p>
+      <p>(C) 不一定收敛</p>
+      <p>(D) 有界</p>
+    </div>
+  </div>
+  <div class="answer">答案：C</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为柯西收敛准则的条件辨析。「相邻项差 \(x_n-x_{n-1}\to0\)」是一个很弱的条件，它只说明步子越来越小，不说明数列最终收敛到某点。</p>
+    <p>反例（发散但相邻差趋于零）：取 \(x_n=\sqrt n\)，则</p>
+    \[
+    x_n-x_{n-1}=\sqrt n-\sqrt{n-1}=\frac{1}{\sqrt n+\sqrt{n-1}}\to0,
+    \]
+    <p>但 \(x_n=\sqrt n\to\infty\)，发散。这说明相邻差趋于零既不能推出收敛（否 A），也不能推出有界（否 D）。</p>
+    <p>另一方面，\(x_n=1/n\) 满足相邻差趋于零且收敛。故两种情形都存在，数列「不一定收敛」，选 C。关键一步在于区分「相邻两项接近」与「任意两项都接近（柯西条件）」——前者弱得多。</p>
+    <p>把弱条件写清楚：相邻差 \(x_n-x_{n-1}\to0\) 只保证跨度为 \(1\) 的两段足够接近；柯西准则却要求对任意 \(m>n\)，只要 \(m,n\) 足够大就有 \(|x_m-x_n|\) 任意小，跨度可以任意长。另一反例 \(x_n=\ln n\)，差 \(\ln(1+1/n)\sim1/n\to0\)，但 \(\ln n\to\infty\)，同样说明慢步子推不出收敛与有界。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把「相邻差趋于零」误认为柯西条件。柯西要求对任意 \(m>n\)，\(|x_m-x_n|\) 都小，而不只是相邻两项。② 看到步子变小就直觉认为收敛。③ 误选「有界」：相邻差趋于零并不保证有界，\(\sqrt n\) 与 \(\ln n\) 都无界；有界而发散的反例 \( (-1)^n\) 则说明有界本身也不足以保证收敛。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是柯西收敛准则的经典反例题，真题常考「相邻差趋于零能否推出收敛」，答案一律为不能。反例 \(x_n=\sqrt n\) 或 \(x_n=\ln n\) 必须熟记。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 举出发散但 \(x_{n+1}-x_n\to0\) 的另一个例子。</p>
+    <p class="var-ans">答案：\(x_n=\ln n\)，差 \(\ln(n+1)-\ln n=\ln(1+1/n)\sim1/n\to0\)，但 \(\ln n\to\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q107">
+  <div class="q-head">
+    <span class="qno">第 107 题</span>
+    <span class="qtype">介值定理与数列极限</span>
+    <span class="qsrc">P616</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \([0,1]\) 上连续，且 \(f(0)=0,\ f(1)=1\)，则存在数列 \(\{x_n\}\subset[0,1]\) 使得 \(\lim\limits_{n\to\infty}f(x_n)=0.5\)。</p>
+    <div class="opts">
+      <p>(A) 正确</p>
+      <p>(B) 错误</p>
+      <p>(C) 不一定</p>
+      <p>(D) 仅当 \(f\) 单调</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为介值定理的直接应用。由 \(f\) 在 \([0,1]\) 上连续、\(f(0)=0\lt{}0.5\lt{}1=f(1)\)，根据介值定理，至少存在一点 \(x_0\in(0,1)\) 使 \(f(x_0)=0.5\)。</p>
+    <p>取常数列 \(x_n=x_0\)（对所有 \(n\)），则 \(x_n\subset[0,1]\)，且 \(\lim_{n\to\infty}f(x_n)=f(x_0)=0.5\)。命题成立。这里 \(\mu=0.5\) 严格落在 \(f(0)=0\) 与 \(f(1)=1\) 之间，端点不等号方向不影响介值定理使用；常数列当然也满足「\(\{x_n\}\subset[0,1]\)」的集合归属要求。</p>
+    <p>关键一步在于：题目只要求「存在某个数列」使函数值极限为 \(0.5\)，并不要求数列 \(x_n\) 变化或收敛到某点；一旦由介值定理找到 \(x_0\)，常数列就是最简单的满足条件的数列。因此不需要 \(f\) 单调，也不存在「不一定」。若题目改成要求 \(x_n\) 严格递增或 \(x_n\to\) 内点，才需要另行构造；按当前题面，常数列已足够。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为需要构造一个收敛到某点的数列，把问题复杂化。② 担心 \(f\) 不单调时 \(0.5\) 是否被取到——介值定理不要求单调。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>介值定理（零点存在定理）是连续函数性质的核心考点，常以「存在某点使 \(f(c)=\mu\)」形式出现，再与数列极限、最值定理结合。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f\) 在 \([0,1]\) 连续，\(f(0)=f(1)=0\)，证明存在 \(c\in(0,1)\) 使 \(f(c)=f(c+1/2)\)。</p>
+    <p class="var-ans">答案：令 \(g(x)=f(x)-f(x+1/2)\)，\(g(0)=f(0)-f(1/2)\)，\(g(1/2)=f(1/2)-f(1)=f(1/2)\)，\(g(0)+g(1/2)=0\)，由零点定理得证。</p>
+  </div>
+</article>
+
+<article class="q" id="q108">
+  <div class="q-head">
+    <span class="qno">第 108 题</span>
+    <span class="qtype">算术平均的极限（柯西命题）</span>
+    <span class="qsrc">P616</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{n\to\infty}x_n=a\)，则 \(\lim\limits_{n\to\infty}\dfrac{x_1+x_2+\cdots+x_n}{n}=\)</p>
+    <div class="opts">
+      <p>(A) \(a\)</p>
+      <p>(B) \(0\)</p>
+      <p>(C) \(\infty\)</p>
+      <p>(D) 不一定存在</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为柯西命题（数列平均保持极限）。这是数列极限理论中的经典定理：若 \(x_n\to a\)，则其算术平均也趋于 \(a\)。</p>
+    <p><b>证明（\(\varepsilon\)-\(N\) 论证）。</b>对任意 \(\varepsilon>0\)，由 \(x_n\to a\)，存在 \(N_0\)，当 \(n>N_0\) 时 \(|x_n-a|\lt{}\varepsilon/2\)。把平均拆成前 \(N_0\) 项与后 \(n-N_0\) 项：</p>
+    \[ \frac{x_1+\cdots+x_n}{n}-a=\frac{(x_1-a)+\cdots+(x_n-a)}{n}. \]
+    <p>前 \(N_0\) 项 \(x_1-a,\cdots,x_{N_0}-a\) 是固定有限个数，其和记为 \(M\)（常数），当 \(n\to\infty\) 时 \(M/n\to0\)。故存在 \(N_1\)，当 \(n>N_1\) 时 \(|M|/n\lt{}\varepsilon/2\)。</p>
+    <p>后 \(n-N_0\) 项每项绝对值都小于 \(\varepsilon/2\)，故其平均绝对值 \(\le\dfrac{n-N_0}{n}\cdot\dfrac{\varepsilon}{2}\lt{}\dfrac{\varepsilon}{2}\)。</p>
+    <p>取 \(N=\max(N_0,N_1)\)，当 \(n>N\) 时两部分相加 \(\lt{}\varepsilon\)。因此极限为 \(a\)，选 A。</p>
+    <p>关键一步是「前有限项被 \(n\) 稀释、后尾项被 \(\varepsilon\) 控制」，这是柯西命题的标准证明结构。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为平均的极限依赖于前几项——前几项在 \(n\to\infty\) 时被稀释为零，不影响最终结果。干扰项 \(0\) 正是只看了前几项就误以为平均趋于零。</p>
+    <p>② 忽略 \(x_n\) 本身收敛这一前提。对发散数列平均不一定收敛。例如 \(x_n=(-1)^n\) 不收敛，但平均在 \(-1/n\) 到 \(1/n\) 之间摆动，仍趋于零；而 \(x_n=n\) 发散到无穷，平均 \(=(n+1)/2\to\infty\)。</p>
+    <p>③ 混淆方向。柯西命题说的是「收敛→平均收敛到同一值」，反过来不成立——平均收敛不代表原数列收敛。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>柯西命题是数列极限的重要定理，常用于证明「比值极限存在则根值极限存在」（第 103 题）以及处理各类算术平均、几何平均问题。考研中常以选择题形式出现，考查对定理条件和结论的理解。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(x_n\to a\)，求 \(\lim\dfrac{x_1+2x_2+\cdots+nx_n}{n^2}\)。</p>
+    <p class="var-ans">答案：权重和 \(\sum k/n^2\to1/2\)，结果为 \(a/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q109">
+  <div class="q-head">
+    <span class="qno">第 109 题</span>
+    <span class="qtype">零数列的算术平均（柯西命题）</span>
+    <span class="qsrc">P616</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\{a_n\}\) 为数列，且 \(\lim\limits_{n\to\infty}a_n=0\)，则 \(\lim\limits_{n\to\infty}\dfrac{a_1+a_2+\cdots+a_n}{n}=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) 不一定为 \(0\)</p>
+      <p>(D) \(\infty\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为柯西命题的特殊情形。由第 108 题的结论：若 \(a_n\to a\)，则其算术平均 \(\dfrac{a_1+\cdots+a_n}{n}\to a\)。本题 \(a_n\to0\)，直接套用该命题得平均极限为 \(0\)。</p>
+    <p>这一结论的证明与第 108 题完全一致：任取 \(\varepsilon>0\)，由 \(a_n\to0\)，存在 \(N_0\)，其后 \(|a_k|\lt{}\varepsilon\)；前 \(N_0\) 项是固定有限个数，其和除以 \(n\) 后随 \(n\to\infty\) 趋于零，后段平均被 \(\varepsilon\) 控制，故整体平均趋于 \(0\)。例如 \(a_n=1/n\)，平均 \(\dfrac{H_n}{n}\sim\dfrac{\ln n}{n}\to0\)；再如 \(a_n=1/\sqrt n\)，虽每一项衰减很慢，平均仍被 \(n\) 稀释到零。</p>
+    <p>关键一步在于：柯西命题是双向的吗？不是——它只说「收敛数列的平均必收敛到同一极限」，而不要求平均有其他性质。本题正是该命题的直接推论，结论应是 \(0\)。选项 (C)「不一定为 \(0\)」与同页第 108 题的命题相冲突：第 108 题已证明收敛到 \(a\) 的数列其平均收敛到 \(a\)，取 \(a=0\) 即得本题结论，不存在反例。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为「零数列的平均」可能因为前几项大而发散——前有限项在 \(n\to\infty\) 时被稀释。② 混淆柯西命题的方向。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题是柯西命题的直接考查，与第 108 题同源。真题中常把收敛值取为 \(0\)，问平均是否为 \(0\)，答案是确定为 \(0\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(a_n\to0\)，证明 \(\dfrac{a_1+2a_2+\cdots+na_n}{n^2}\to0\)。</p>
+    <p class="var-ans">答案：对尾项 \(|a_k|\lt{}\varepsilon\)，加权和 \(\le\varepsilon\cdot\sum k/n^2\le\varepsilon\)，前有限项被 \(n^2\) 稀释为零，故极限为 \(0\)。</p>
+  </div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给答案：C（不一定为0）（第616页）。按题面复算为 A（0）：由柯西命题（同页第108题），若 \(a_n\to a\) 则算术平均 \(\frac{a_1+\cdots+a_n}{n}\to a\)；本题 \(a_n\to0\)，故平均必为 \(0\)。书答 C 与同页第108题自相矛盾。以复算值 A 为准。</p>
+  </div>
+</article>
+
+<article class="q" id="q110">
+  <div class="q-head">
+    <span class="qno">第 110 题</span>
+    <span class="qtype">调和平均的极限（稀释论证）</span>
+    <span class="qsrc">P617</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_n\}\) 满足 \(x_n=\dfrac1n\sum\limits_{k=1}^{n}\dfrac1k\)，则 \(\lim\limits_{n\to\infty}x_n=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(\infty\)</p>
+      <p>(D) 不存在</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为调和级数前 \(n\) 项的算术平均。记 \(H_n=\sum_{k=1}^n\dfrac1k\)，这是调和级数部分和。</p>
+    <p><b>方法一：渐近估计。</b>已知 \(H_n\sim\ln n\)（更精确地 \(H_n=\ln n+\gamma+o(1)\)，其中 \(\gamma\approx0.5772\) 为欧拉常数）。于是</p>
+    \[ x_n=\frac{H_n}{n}\sim\frac{\ln n+\gamma}{n}\to0. \]
+    <p>因为 \(\ln n\) 增长远慢于 \(n\)，所以比值趋于零。</p>
+    <p><b>方法二：稀释论证（不用渐近估计）。</b>任取固定 \(K\)，前 \(K\) 项和 \(H_K\) 为常数，除以 \(n\) 后趋于零。后 \(n-K\) 项每项 \(1/k\le1/(K+1)\)，故其平均不超过 \(\dfrac{n-K}{n}\cdot\dfrac1{K+1}\lt{}\dfrac1{K+1}\)。先令 \(K\) 足够大使 \(1/(K+1)\) 任意小，再令 \(n\to\infty\) 使前 \(K\) 项贡献趋于零，故极限为 \(0\)。</p>
+    <p>关键一步在于区分 \(H_n\to\infty\) 与其平均 \(H_n/n\to0\)：虽然调和级数本身发散，但发散速度仅为 \(\ln n\)，远慢于线性增长的 \(n\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 看到 \(H_n\to\infty\) 就误以为平均也发散，忘了还要除以 \(n\)。干扰项 \(\infty\) 正是这样构造的。</p>
+    <p>② 把 \(H_n/n\) 与 \(H_n\) 混淆。\(H_n\) 本身发散到无穷，但 \(H_n/n\) 趋于零，两者性质不同。</p>
+    <p>③ 误以为调和级数收敛。\(p=1\) 时 \(p\) 级数发散，这是常识；但发散不代表平均发散。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>调和级数部分和的渐近行为是高频考点，\(H_n\sim\ln n\) 是常识级结论。常以此出「发散级数的算术平均是否收敛」类选择题。与第 108 题（柯西命题）结合：虽然 \(1/k\to0\)，直接由柯西命题也得平均趋于零，本题是柯西命题的具体应用。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\dfrac{1+\frac12+\cdots+\frac1n}{\ln n}\)。</p>
+    <p class="var-ans">答案：由 \(H_n\sim\ln n\)，极限为 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q111">
+  <div class="q-head">
+    <span class="qno">第 111 题</span>
+    <span class="qtype">分式递推求极限</span>
+    <span class="qsrc">P617</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_n\}\) 满足 \(x_1=1,\ x_{n+1}=\dfrac1{1+x_n}\)，则 \(\lim\limits_{n\to\infty}x_n=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(\dfrac{\sqrt5-1}{2}\)</p>
+      <p>(D) \(\dfrac12\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：C</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为分式递推求极限（黄金分割型）。</p>
+    <p><b>第一步：求不动点。</b>若 \(L=\lim x_n\)，则 \(L=\dfrac1{1+L}\)，即 \(L^2+L-1=0\)，解得 \(L=\dfrac{-1\pm\sqrt5}{2}\)。由于 \(x_n>0\)（\(x_1=1>0\)，若 \(x_n>0\) 则 \(x_{n+1}=1/(1+x_n)>0\)），舍去负根 \(L=(-1-\sqrt5)/2\lt{}0\)，得 \(L=\dfrac{\sqrt5-1}{2}\approx0.618\)，即黄金分割比的倒数。</p>
+    <p><b>第二步：验证收敛性（压缩映射）。</b>令 \(f(x)=\dfrac1{1+x}\)，则 \(f'(x)=-\dfrac1{(1+x)^2}\)。当 \(x\in[1/2,1]\) 时，\(|f'(x)|=\dfrac1{(1+x)^2}\le\dfrac1{(3/2)^2}=\dfrac49\lt{}1\)。由迭代数列 \(x_1=1,x_2=1/2,x_3=2/3,x_4=3/5,\cdots\) 可见 \(x_n\in[1/2,1]\) 对所有 \(n\ge2\) 成立，故映射在该区间上压缩，数列收敛。</p>
+    <p><b>第三步：观察摆动。</b>数列在不动点两侧摆动但幅度递减：\(x_1=1>L\)，\(x_2=0.5\lt{}L\)，\(x_3=0.667>L\)，\(x_4=0.6\lt{}L\)，\(\cdots\)，逐渐逼近 \(L\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 解二次方程后忘舍去负根。方程 \(L^2+L-1=0\) 有两个根，正根 \(0.618\) 和负根 \(-1.618\)。由 \(x_n>0\) 必须舍去负根。干扰项 \(0\) 或 \(1\) 正是随意取根而构造的。</p>
+    <p>② 不验证收敛性就直接代不动点。虽然本题结果正确，但方法上不完整——必须先证明数列收敛（压缩映射或单调有界），才能对递推式两边取极限。</p>
+    <p>③ 混淆不动点方程。\(L=1/(1+L)\) 展开为 \(L^2+L-1=0\)，不是 \(L^2+L+1=0\)（无实根）。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>分式线性递推 \(x_{n+1}=\dfrac{a}{b+x_n}\) 是黄金分割相关的经典题型，常考不动点求解与存在性论证。考研中这类题常以解答题形式出现，要求写出完整的收敛性证明和极限计算。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\dfrac{2}{1+x_n}\)，求 \(\lim x_n\)。</p>
+    <p class="var-ans">答案：不动点 \(L=2/(1+L)\) 即 \(L^2+L-2=0\)，正根 \(L=1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q112">
+  <div class="q-head">
+    <span class="qno">第 112 题</span>
+    <span class="qtype">连续性定义（数列形式）</span>
+    <span class="qsrc">P617</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{n\to\infty}x_n=a\)，且 \(f(x)\) 在 \(x=a\) 处连续，则 \(\lim\limits_{n\to\infty}f(x_n)=f(a)\)。</p>
+    <div class="opts">
+      <p>(A) 正确</p>
+      <p>(B) 错误</p>
+      <p>(C) 不一定</p>
+      <p>(D) 仅当 \(f\) 有界</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为连续性的数列刻画（海涅定理在连续点上的形式）。题目要求判断：若 \(x_n\to a\) 且 \(f\) 在 \(a\) 连续，则 \(\lim f(x_n)=f(a)\) 是否成立。</p>
+    <p><b>定义对接。</b>\(f\) 在 \(a\) 连续意味着：对任意 \(\varepsilon>0\)，存在 \(\delta>0\)，当 \(|x-a|\lt{}\delta\) 时 \(|f(x)-f(a)|\lt{}\varepsilon\)。由于 \(x_n\to a\)，对上述 \(\delta\) 存在 \(N\)，当 \(n>N\) 时 \(|x_n-a|\lt{}\delta\)，于是 \(|f(x_n)-f(a)|\lt{}\varepsilon\)。这正是 \(\lim f(x_n)=f(a)\) 的 \(\varepsilon\)-\(N\) 定义，命题正确，选 (A)。</p>
+    <p><b>关键理解与排除。</b>两个定义通过同一个 \(\delta\) 对接：先由连续性找到 \(\delta\)，再由数列收敛找到 \(N\)，不需要额外条件，这正是「连续函数把收敛数列映成收敛数列」的来源。(B)(C) 错误：只要 \(f\) 在 \(a\) 连续，结论必然成立；(D) 错误：逐点连续即可，不需要全局有界，例如 \(f(x)=1/x\) 在 \(x=1\) 连续，\(x_n=1+1/n\to1\)，\(f(x_n)\to1=f(1)\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为需要 \(f\) 有界或一致连续。逐点连续就足够，不需要全局有界或一致连续。干扰项 (D)「仅当 \(f\) 有界」正是利用了这种误解。</p>
+    <p>② 忽略 \(f\) 在 \(a\) 连续这一前提。若 \(f\) 在 \(a\) 不连续（如跳跃间断点），则 \(\lim f(x_n)\) 可能不等于 \(f(a)\)，甚至不存在。例如 \(f(x)=\text{sgn}(x)\) 在 \(x=0\) 不连续，取 \(x_n=(-1)^n/n\to0\)，则 \(f(x_n)\) 振荡不收敛。</p>
+    <p>③ 混淆海涅定理的方向。海涅定理说的是 \(\lim_{x\to a}f(x)=A\) 当且仅当对任意 \(x_n\to a\)（\(x_n\neq a\)）有 \(\lim f(x_n)=A\)。本题是海涅定理在连续点处的特例（\(A=f(a)\)），方向不要搞反。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>连续性的等价刻画（\(\varepsilon\)-\(\delta\) 定义与数列形式）是概念题高频考点，常与间断点分类、海涅定理结合考查。考研中常见的问法：给出一个分段函数和一个收敛数列，判断 \(f(x_n)\) 的极限是否存在、是否等于 \(f(a)\)。解题的关键是：先看 \(f\) 在极限点处是否连续，连续则直接交换，不连续则需具体分析左右极限。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 举例说明 \(f\) 在 \(a\) 不连续时结论可能不成立。</p>
+    <p class="var-ans">答案：\(f(x)=\begin{cases}1,&x\ge0\\0,&x\lt{}0\end{cases}\)，取 \(x_n=-1/n\to0\)，则 \(f(x_n)=0\)，但 \(f(0)=1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q113">
+  <div class="q-head">
+    <span class="qno">第 113 题</span>
+    <span class="qtype">等差数列求和与极限</span>
+    <span class="qsrc">P617</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\{a_n\}\) 为等差数列，公差 \(d\neq0\)，则 \(\lim\limits_{n\to\infty}\dfrac{a_1+a_2+\cdots+a_n}{n^2}=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(\dfrac d2\)</p>
+      <p>(C) \(\infty\)</p>
+      <p>(D) 不存在</p>
+    </div>
+  </div>
+  <div class="answer">答案：B</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为等差数列求和后求极限。等差数列前 \(n\) 项和为：</p>
+    \[ S_n=a_1+a_2+\cdots+a_n=\frac{n(a_1+a_n)}{2}=\frac{n}{2}\bigl[2a_1+(n-1)d\bigr]. \]
+    <p>代入被求极限式：</p>
+    \[ \frac{S_n}{n^2}=\frac{n[2a_1+(n-1)d]}{2n^2}=\frac{2a_1+(n-1)d}{2n}=\frac{d}{2}+\frac{2a_1-d}{2n}. \]
+    <p>当 \(n\to\infty\) 时第二项 \(\dfrac{2a_1-d}{2n}\to0\)，极限为 \(d/2\)，选 B。</p>
+    <p><b>交叉验证。</b>由 \(a_n=a_1+(n-1)d\)，求和 \(\sum_{k=1}^n a_k = na_1+d\sum_{k=1}^{n-1}k = na_1+d\cdot\dfrac{n(n-1)}{2}\)。除以 \(n^2\) 得 \(\dfrac{a_1}{n}+\dfrac{d(n-1)}{2n}\to\dfrac d2\)，结果一致。</p>
+    <p>关键一步在于：\(S_n\) 是关于 \(n\) 的二次多项式（因为公差 \(d\neq0\)），除以 \(n^2\) 后只留下二次项系数，一次项与常数项都被稀释。这个二次项系数正是 \(d/2\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 用错求和公式，把 \(a_n=a_1+(n-1)d\) 写成 \(a_1+nd\)，导致 \(S_n\) 的二次项系数偏差。</p>
+    <p>② 忘记 \(d\neq0\) 时 \(S_n\) 是二次的，误以为极限为零。若 \(d=0\)（常数列），\(S_n=na_1\)，除以 \(n^2\) 后确实趋于零；但题目明确 \(d\neq0\)，极限不为零。干扰项 \(0\) 正是忽略了 \(d\neq0\) 这一条件。</p>
+    <p>③ 把 \(S_n/n^2\) 与 \(S_n/n\) 混淆。前者趋于 \(d/2\)，后者趋于 \(a_1+\dfrac{d}{2}\)（数列平均），两者不同。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等差、等比数列求和后除以 \(n^k\) 的极限是基础题型，核心是抓最高次项系数。常与幂和公式 \(\sum k^2\sim n^3/3\) 等结合。解题关键是先写出 \(S_n\) 的精确表达式，再除以 \(n^2\) 看最高次项。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 等差数列公差 \(d=2\)，求 \(\lim\dfrac{a_1+\cdots+a_n}{n^2}\)。</p>
+    <p class="var-ans">答案：\(d/2=1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q114">
+  <div class="q-head">
+    <span class="qno">第 114 题</span>
+    <span class="qtype">p 级数的和（巴塞尔问题）</span>
+    <span class="qsrc">P617</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_n\}\) 满足 \(x_n=\sum\limits_{k=1}^{n}\dfrac1{k^2}\)，则 \(\lim\limits_{n\to\infty}x_n=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(\dfrac{\pi^2}{6}\)</p>
+      <p>(D) \(\infty\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：C</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为 \(p=2\) 的 \(p\) 级数求和（巴塞尔问题）。级数 \(\sum_{k=1}^{\infty}\dfrac1{k^2}\) 是著名的巴塞尔问题，欧拉证明其和为 \(\pi^2/6\)。</p>
+    <p><b>收敛性确认。</b>由比较判别法：\(\dfrac1{k^2}\le\dfrac1{k(k-1)}=\dfrac1{k-1}-\dfrac1k\)（\(k\ge2\)），裂项后部分和 \(\sum_{k=2}^n1/[k(k-1)]=1-1/n\lt{}1\)，有上界，故级数收敛。</p>
+    <p><b>精确值。</b>利用正弦函数的 Weierstrass 乘积展开 \(\sin z/z=\prod(1-z^2/(k^2\pi^2))\)，与泰勒展开 \(\sin z/z=1-z^2/6+O(z^4)\) 比较 \(z^2\) 项系数，得 \(\sum 1/k^2=\pi^2/6\)。数值上 \(\pi^2/6\approx9.8696/6\approx1.6449\)。</p>
+    <p>关键一步在于记住这个经典结果：\(\sum1/k^2=\pi^2/6\)。它不需要在考场上推导，是常识级常数；选择题直接选 C。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(p=2\) 级数像 \(p=1\) 那样发散——\(p>1\) 时 \(p\) 级数收敛。干扰项 \(\infty\) 正是混淆了 \(p=1\)（调和级数发散）和 \(p=2\)（收敛）。</p>
+    <p>② 把和误记为 \(\pi^2/12\) 或 \(2\pi^2/6\)。正确值是 \(\pi^2/6\approx1.6449\)。</p>
+    <p>③ 只判断收敛而不选具体值。题目要求求极限，必须选 \(\pi^2/6\)，不能只选「收敛」。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\sum1/k^2=\pi^2/6\) 是级数部分的标志性结果，常以选择题形式直接考查其数值，也可在傅里叶级数题中作为结论出现。与 seg-628-634 中第 194 题同源。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\sum_{k=1}^{\infty}\dfrac1{(2k-1)^2}\)。</p>
+    <p class="var-ans">答案：奇数项和为 \(\sum1/k^2-\sum1/(2k)^2=\pi^2/6-\pi^2/24=\pi^2/8\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q115">
+  <div class="q-head">
+    <span class="qno">第 115 题</span>
+    <span class="qtype">导数定义的数列形式</span>
+    <span class="qsrc">P618</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{n\to\infty}x_n=a\)，且 \(x_n\neq a\) 对于所有 \(n\)，则 \(\lim\limits_{n\to\infty}\dfrac{f(x_n)-f(a)}{x_n-a}=f'(a)\)，如果 \(f\) 在 \(x=a\) 处可导。</p>
+    <div class="opts">
+      <p>(A) 正确</p>
+      <p>(B) 错误</p>
+      <p>(C) 不一定</p>
+      <p>(D) 仅当 \(f\) 连续</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为导数定义的海涅形式（数列极限与函数极限的对接）。</p>
+    <p><b>第一步：写出导数定义。</b>\(f\) 在 \(a\) 可导的定义是：</p>
+    \[ \lim_{x\to a}\frac{f(x)-f(a)}{x-a}=f'(a). \]
+    <p>这是一个函数极限，自变量 \(x\) 以任意方式趋于 \(a\)。</p>
+    <p><b>第二步：应用海涅定理。</b>海涅定理（Heine）指出：函数极限 \(\lim_{x\to a}g(x)=A\) 当且仅当对任意满足 \(x_n\to a,\ x_n\neq a\) 的数列，都有 \(\lim_{n\to\infty}g(x_n)=A\)。</p>
+    <p>题目中正给出了 \(x_n\to a\) 且 \(x_n\neq a\)，令 \(g(x)=\dfrac{f(x)-f(a)}{x-a}\)，则直接套用海涅定理：</p>
+    \[ \lim_{n\to\infty}\frac{f(x_n)-f(a)}{x_n-a}=f'(a). \]
+    <p><b>关键条件。</b>\(x_n\neq a\) 是必要的，否则分母为零无意义；题目已明确给出。\(f\) 可导本身已蕴含连续，不需要额外条件。选项 (D)「仅当 \(f\) 连续」是多余的——可导比连续更强。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忽略 \(x_n\neq a\) 这一条件。若某 \(x_n=a\)，则分式 \(\dfrac{f(x_n)-f(a)}{x_n-a}\) 无定义。题目已排除这种情况，但解题时应注意。</p>
+    <p>② 误以为需要 \(f\) 连续——可导已蕴含连续。选项 (D)「仅当 \(f\) 连续」看似合理，实则多余：可导比连续更强，既然已知可导，连续性自动满足。</p>
+    <p>③ 混淆海涅定理的方向。海涅定理说的是「函数极限存在 ↔ 沿任意数列极限存在且相等」，本题是正向应用。反过来，若已知沿某一条数列极限存在，不能推出函数极限存在。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>导数定义的数列形式是海涅定理与导数定义的结合，常用于证明「若导数存在则沿任意路径逼近都得到同一值」。考研中常以选择题形式出现，考查对海涅定理条件和结论的理解。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f'(a)\) 存在，求 \(\lim\limits_{n\to\infty}n\bigl[f(a+1/n)-f(a)\bigr]\)。</p>
+    <p class="var-ans">答案：令 \(x_n=a+1/n\to a\)，则该极限即 \(f'(a)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q116">
+  <div class="q-head">
+    <span class="qno">第 116 题</span>
+    <span class="qtype">零数列的根值极限（辨析）</span>
+    <span class="qsrc">P618</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\{a_n\}\) 为正项数列，且 \(\lim\limits_{n\to\infty}a_n=0\)，则 \(\lim\limits_{n\to\infty}\sqrt[n]{a_n}=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) 不一定存在</p>
+      <p>(D) \(\infty\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：C</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为「零数列的 \(n\) 次根」行为辨析。直觉上 \(a_n\to0\) 时 \(\sqrt[n]{a_n}\) 应该趋于某值，但这个值依赖于 \(a_n\) 趋于零的速度，并非确定。</p>
+    <p>正例 1（趋于 1）：取 \(a_n=1/n\to0\)，则 \(\sqrt[n]{a_n}=n^{-1/n}\to1\)（因为 \(\ln n/n\to0\)）。</p>
+    <p>正例 2（趋于 0）：取 \(a_n=e^{-n^2}\to0\)，则 \(\sqrt[n]{a_n}=e^{-n}\to0\)。</p>
+    <p>两个例子都满足 \(a_n\to0\)，但 \(\sqrt[n]{a_n}\) 分别趋于 \(1\) 和 \(0\)，故根值极限「不一定存在（为某固定值）」，选 C。</p>
+    <p>关键一步在于区分「\(a_n\to0\)」与「\(\sqrt[n]{a_n}\to1\)」：后者只在 \(a_n\) 以指数级慢于 \(e^{-n}\) 的速度趋于零时成立；若 \(a_n\) 趋于零的速度快于 \(e^{-n}\)，根值仍可趋于零。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 由 \(a_n\to0\) 直接套「\(n\) 次根把指数压平」的经验，误以为必趋于 1。② 忽略 \(a_n\) 趋于零的速度差异。③ 把根值极限是否存在与根值极限等于几混为一谈：两个例子里根值极限都存在，分别是 1 和 0，题目选项 (C) 的含义是「根值极限不被题面锁定为某个固定值」，而不是说极限一定振荡不存在。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是根值判别法的概念题：\(\lim a_{n+1}/a_n=L\) 能推出 \(\sqrt[n]{a_n}\to L\)，但单独的 \(a_n\to0\) 推不出根值的确定极限。常与级数收敛速度结合考查。按衰减速度分层：\(a_n=e^{-cn}\) 时根值趋于 \(e^{-c}\)，\(c\) 可取任意正数；多项式或对数型慢衰减时根值趋于 \(1\)；分界正是指数速率 \(e^{-n}\)，题面只给 \(a_n\to0\)，落在哪一层无法判断。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_n=q^n\)，\(|q|\lt{}1\)，求 \(\sqrt[n]{a_n}\)。</p>
+    <p class="var-ans">答案：\(\sqrt[n]{q^n}=q\)，极限为 \(q\)（可为 \(-1,1\) 之间任意值）。</p>
+  </div>
+</article>
+
+<article class="q" id="q117">
+  <div class="q-head">
+    <span class="qno">第 117 题</span>
+    <span class="qtype">余弦递推求极限</span>
+    <span class="qsrc">P618</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_n\}\) 满足 \(x_1=1,\ x_{n+1}=\cos x_n\)，则 \(\lim\limits_{n\to\infty}x_n=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(\dfrac{\pi}{2}\)</p>
+      <p>(D) 不存在</p>
+    </div>
+  </div>
+  <div class="answer">答案：\(L\approx0.739085\)（Dottie 数，四个选项均不成立）</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先求不动点：若 \(L=\lim x_n\)，则 \(L=\cos L\)。该方程的根称为 Dottie 数，数值约为 \(0.739\)，不是 \(0\)、\(1\)、\(\pi/2\) 中的任何一个。</p>
+    <p>存在性：函数 \(f(x)=\cos x\) 在 \([0,1]\) 上满足 \(|f'(x)|=|\sin x|\le\sin1\lt{}1\)，是压缩映射，故迭代收敛到唯一不动点 \(L\approx0.739\)。因此极限确实存在，但不是选项中列出的 \(0,1,\pi/2\)。</p>
+    <p>数值迭代：\(x_1=1\)，\(x_2=\cos1\approx0.5403\)，\(x_3\approx0.8576\)，\(x_4\approx0.6543\)，摆动幅度逐轮缩小，收敛到 \(0.7391\) 附近。在不动点处 \(|f'(L)|=\sin L\approx0.674\lt{}1\)，为吸引型不动点。逐项排除：\(L=0\) 是 \(L=\sin L\) 的根，属正弦递推；\(\pi/2\) 处 \(\cos(\pi/2)=0\neq\pi/2\)，均不满足 \(L=\cos L\)。</p>
+    <p>关键一步在于：不动点方程 \(L=\cos L\) 是超越方程，其根不能用初等函数表示，只能数值求解；选择题中若选项不包含这个数值，应意识到题目考查的是「极限是否存在」而非具体数值。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(x_1=1\) 后 \(x_2=\cos1\approx0.54\) 会趋于 \(0\)——实际上迭代在 \(0.739\) 附近收敛，不会到 \(0\)。② 误以为振荡不收敛——压缩性保证收敛。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>压缩映射递推是证明数列收敛的高级工具，常考 \(x_{n+1}=\sin x_n\)、\(x_{n+1}=\cos x_n\) 等。真题更关注「收敛性」而非具体不动点数值。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\sin x_n\)，证明 \(\lim x_n=0\)。</p>
+    <p class="var-ans">答案：\(0\lt{}\sin x\lt{}x\) 对 \(x>0\)，故 \(x_n\) 单调递减有下界 \(0\)，极限 \(L\) 满足 \(L=\sin L\)，唯一解 \(L=0\)。</p>
+  </div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书给答案：A（0）（第618页）。按题面复算：\(f(x)=\cos x\) 在 \([0,1]\) 上为压缩映射，迭代收敛到不动点方程 \(x=\cos x\) 的唯一根 \(L\approx0.739085\)（Dottie 数），并非 \(0\)；极限确实存在，故 D（不存在）亦不对，B（1）、C（\(\pi/2\)）同样不符。四个选项均不成立，属选项设计缺陷；书答 \(A=0\) 对应递推 \(x_{n+1}=\sin x_n\) 的版本，与所印 \(\cos x_n\) 不符，疑原题应为 \(\sin\)，即与 q127 同型。</p>
+  </div>
+</article>
+
+<article class="q" id="q118">
+  <div class="q-head">
+    <span class="qno">第 118 题</span>
+    <span class="qtype">绝对值与极限交换</span>
+    <span class="qsrc">P618</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{n\to\infty}x_n=a\)，则 \(\lim\limits_{n\to\infty}|x_n|=|a|\)。</p>
+    <div class="opts">
+      <p>(A) 正确</p>
+      <p>(B) 错误</p>
+      <p>(C) 不一定</p>
+      <p>(D) 仅当 \(a\ge0\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为连续函数与极限交换（绝对值函数的连续性）。</p>
+    <p><b>方法一：复合函数极限定理。</b>函数 \(g(t)=|t|\) 在整个实数轴上连续。由反三角不等式 \(||u|-|v||\le|u-v|\) 直接验证：对任意 \(\varepsilon>0\)，取 \(\delta=\varepsilon\)，当 \(|u-v|\lt{}\delta\) 时 \(||u|-|v||\lt{}\varepsilon\)。故 \(g\) 处处连续。</p>
+    <p>由复合函数极限定理：</p>
+    \[ \lim_{n\to\infty}|x_n|=\lim_{n\to\infty}g(x_n)=g\!\left(\lim_{n\to\infty}x_n\right)=|a|. \]
+    <p><b>方法二：直接用不等式夹逼。</b>由反三角不等式 \(||x_n|-|a||\le|x_n-a|\)，而 \(|x_n-a|\to0\)，由夹逼准则得 \(||x_n|-|a||\to0\)，即 \(\lim|x_n|=|a|\)。</p>
+    <p>关键一步在于：绝对值函数处处连续，因此极限符号可以自由穿入；这一结论对 \(a\) 的正负没有任何限制，不需要 \(a\ge0\)。反过来，由 \(|x_n|\to|a|\) 推不出 \(x_n\to a\)（可能趋于 \(-a\)），但本题是正向，成立。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为需要 \(a\ge0\)——绝对值函数在负半轴也连续。选项 (D)「仅当 \(a\ge0\)」正是利用了这种误解：\(a=-1\) 时 \(x_n\to-1\)，则 \(|x_n|\to1=|-1|\)，结论仍成立。</p>
+    <p>② 混淆正向与反向：\(|x_n|\to|a|\) 推不出 \(x_n\to a\)。例如 \(x_n=(-1)^n\)，\(|x_n|\to1\) 但 \(x_n\) 发散。</p>
+    <p>③ 误以为绝对值函数不连续。实际上 \(|x|\) 是最常见的处处连续函数之一，虽然在 \(x=0\) 处不可导，但连续。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>绝对值与极限的关系是基础概念题，常与「保号性」结合：若 \(x_n\to a>0\)，则充分大时 \(x_n>0\)。考研中常以选择题形式考查连续函数与极限交换顺序的条件。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 举例说明 \(|x_n|\to|a|\) 但 \(x_n\not\to a\)。</p>
+    <p class="var-ans">答案：\(x_n=(-1)^n\)，\(|x_n|=1\to1=|a|\)（取 \(a=1\)），但 \(x_n\) 发散。</p>
+  </div>
+</article>
+
+<article class="q" id="q119">
+  <div class="q-head">
+    <span class="qno">第 119 题</span>
+    <span class="qtype">柯西收敛准则的充要条件</span>
+    <span class="qsrc">P619</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\{a_n\}\) 为数列，且 \(\lim\limits_{n\to\infty}(a_n-a_{n-1})=0\)，则 \(\{a_n\}\) 收敛的充要条件是</p>
+    <div class="opts">
+      <p>(A) \(\{a_n\}\) 有界</p>
+      <p>(B) \(\{a_n\}\) 单调</p>
+      <p>(C) \(\{a_n\}\) 是 Cauchy 序列</p>
+      <p>(D) \(\lim\limits_{n\to\infty}a_n\) 存在</p>
+    </div>
+  </div>
+  <div class="answer">答案：C</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为柯西收敛准则的直接陈述。在实数域中，数列收敛的充要条件就是它是柯西序列：对任意 \(\varepsilon>0\)，存在 \(N\)，当 \(m,n>N\) 时 \(|a_m-a_n|\lt{}\varepsilon\)。这一条件不预先假定极限存在，只刻画数列自身各项之间的接近程度，因此可作为证明收敛的起点。</p>
+    <p>题目给出的条件「相邻项差 \(a_n-a_{n-1}\to0\)」是一个弱条件（见第 106 题反例 \(a_n=\sqrt n\)），它本身不能保证收敛。要补足收敛性，最本质的充要条件就是柯西条件：要求任意两项（不只是相邻项）都能任意接近。</p>
+    <p>逐项排除：(A) 有界不够——反例 \(a_n=(-1)^n\) 有界但发散；(B) 单调不够——单调有界才行，单独单调无界仍发散；(D)「\(\lim a_n\) 存在」就是「收敛」的同义反复，不是条件；(C) 是实数域中收敛的刻画定理。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 选 (A) 有界——有界数列不一定收敛。② 选 (D)——这是循环定义，不是「条件」。③ 忽略相邻差趋于零只是必要条件的一部分。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>柯西收敛准则是实数完备性的核心定理，选择题常考其与「有界」「单调」「相邻差」的关系。理解「任意两项接近」比「相邻两项接近」强得多。准则在实数域上成立；若放在有理数域，柯西列可能收敛到无理数而无有理数极限，这也是完备性一词的含义。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明 \(a_n=\sum_{k=1}^n1/k\) 不是柯西序列。</p>
+    <p class="var-ans">答案：取 \(m=2n\)，\(|a_{2n}-a_n|=\sum_{k=n+1}^{2n}1/k\ge n\cdot1/(2n)=1/2\)，不能任意小，故非柯西、发散。</p>
+  </div>
+</article>
+
+<article class="q" id="q120">
+  <div class="q-head">
+    <span class="qno">第 120 题</span>
+    <span class="qtype">零点存在定理（介值定理）</span>
+    <span class="qsrc">P619</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \([a,b]\) 上连续，且 \(f(a)f(b)\lt{}0\)，则存在 \(c\in(a,b)\) 使得 \(f(c)=0\)。</p>
+    <div class="opts">
+      <p>(A) 正确</p>
+      <p>(B) 错误</p>
+      <p>(C) 不一定</p>
+      <p>(D) 仅当 \(f\) 单调</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为零点存在定理（介值定理的特例）。定理内容：若 \(f\) 在 \([a,b]\) 上连续，且 \(f(a)\) 与 \(f(b)\) 异号（即 \(f(a)f(b)\lt{}0\)），则至少存在一点 \(c\in(a,b)\) 使 \(f(c)=0\)。</p>
+    <p><b>证明思路（二分法）。</b>取中点 \(m=(a+b)/2\)：若 \(f(m)=0\) 则已找到零点；若 \(f(a)f(m)\lt{}0\) 则零点在左半区间，否则在右半区间。重复这一过程得到长度趋于零的区间套 \([a_n,b_n]\)，由区间套定理存在 \(c\) 属于所有区间，再由连续性 \(f(c)=0\)。</p>
+    <p><b>关键区分。</b>定理只要求连续性和端点异号，不要求 \(f\) 单调。单调是唯一性的条件——若 \(f\) 单调递增且 \(f(a)\lt{}0\lt{}f(b)\)，则零点唯一；否则可能有多个零点。即使函数振荡多次穿过零点，定理仍保证至少存在一个。题目只问存在性，故命题正确，选 A。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为需要 \(f\) 单调——单调是唯一性的条件，不是存在性的。选项 (D)「仅当 \(f\) 单调」正是这样构造的干扰项。</p>
+    <p>② 把 \(f(a)f(b)\lt{}0\) 误读为 \(f(a),f(b)\) 同号。同号时不一定有零点（如 \(f(x)=x^2+1\) 在 \([-1,1]\) 上恒正）。</p>
+    <p>③ 忽略闭区间条件。若 \(f\) 在开区间 \((a,b)\) 连续，端点异号但 \(f(a)\) 或 \(f(b)\) 不存在（如无穷型间断），定理不适用。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>零点存在定理是证明方程根存在、构造辅助函数的核心工具，常与最值定理、介值定理结合出证明题。考研中常见的问法：给出一个方程 \(f(x)=0\)，要求证明在某区间内有根，解题步骤就是构造 \(f(x)\) 并验证端点异号和连续性。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明 \(x^3-3x+1=0\) 在 \((1,2)\) 内有根。</p>
+    <p class="var-ans">答案：令 \(f(x)=x^3-3x+1\)，\(f(1)=-1\lt{}0\)，\(f(2)=3>0\)，由零点定理得证。</p>
+  </div>
+</article>
+
+<article class="q" id="q121">
+  <div class="q-head">
+    <span class="qno">第 121 题</span>
+    <span class="qtype">分式递推（倒数变换）</span>
+    <span class="qsrc">P619</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_n\}\) 满足 \(x_1=1,\ x_{n+1}=\dfrac{x_n}{1+x_n}\)，则 \(\lim\limits_{n\to\infty}x_n=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(\dfrac12\)</p>
+      <p>(D) 不存在</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为可线性化的分式递推（取倒数化等差）。</p>
+    <p><b>第一步：取倒数。</b>对递推式 \(x_{n+1}=\dfrac{x_n}{1+x_n}\) 两边取倒数（注意 \(x_n>0\)，故可倒）：</p>
+    \[ \frac1{x_{n+1}}=\frac{1+x_n}{x_n}=\frac1{x_n}+1. \]
+    <p><b>第二步：化为等差数列。</b>令 \(y_n=1/x_n\)，则 \(y_{n+1}=y_n+1\)，这是公差为 \(1\) 的等差数列，且 \(y_1=1/x_1=1\)。故 \(y_n=1+(n-1)\cdot1=n\)，从而 \(x_n=1/n\)。</p>
+    <p><b>第三步：求极限。</b></p>
+    \[ \lim_{n\to\infty}x_n=\lim_{n\to\infty}\frac1n=0. \]
+    <p><b>交叉验证（不动点法）。</b>令 \(L=\lim x_n\)，则 \(L=L/(1+L)\)，即 \(L(1+L)=L\)，\(L^2=0\)，得 \(L=0\)。与取倒数法结果一致。</p>
+    <p>关键一步在于：递推式 \(x_{n+1}=\dfrac{x_n}{1+x_n}\) 取倒数后变成加法，这是处理 \(x_{n+1}=\dfrac{x_n}{a+bx_n}\) 型递推的标准手法。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不取倒数直接猜极限，误选 \(1/2\)。常见错误是以为 \(x_n\to1/2\)（因为 \(1/(1+1)=1/2\)），但实际上数列是递减的：\(x_1=1\)，\(x_2=1/2\)，\(x_3=1/3\)，\(\cdots\)，趋于零。干扰项 \(1/2\) 正是这样构造的。</p>
+    <p>② 解不动点方程 \(L=L/(1+L)\) 得 \(L=0\)，但不验证收敛性。虽然本题结果正确，但方法上应说明 \(x_n=1/n\) 显式收敛到零。</p>
+    <p>③ 取倒数时忘记加 \(1\)。\(1/x_{n+1}=(1+x_n)/x_n=1/x_n+1\)，不是 \(1/x_{n+1}=1/x_n\)（那样就变成常数列了）。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「取倒数化等差」是递推数列的常用技巧，常与不动点法、压缩映射法并列考查。一般形式 \(x_{n+1}=\dfrac{x_n}{a+bx_n}\) 取倒数后变为 \(1/x_{n+1}=a/x_n+b\)，可进一步化为等比数列。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\dfrac{x_n}{2+x_n}\)，求 \(\lim x_n\)。</p>
+    <p class="var-ans">答案：取倒数 \(1/x_{n+1}=2/x_n+1\)，令 \(y_n=1/x_n+1\)，\(y_{n+1}=2y_n\)，解得 \(x_n\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q122">
+  <div class="q-head">
+    <span class="qno">第 122 题</span>
+    <span class="qtype">导数定义的数列形式（条件辨析）</span>
+    <span class="qsrc">P619</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{n\to\infty}x_n=a\)，且 \(f(x)\) 在 \(x=a\) 处可导，则 \(\lim\limits_{n\to\infty}\dfrac{f(x_n)-f(a)}{x_n-a}=f'(a)\)。</p>
+    <div class="opts">
+      <p>(A) 正确</p>
+      <p>(B) 错误</p>
+      <p>(C) 不一定</p>
+      <p>(D) 仅当 \(x_n\neq a\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：D</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为导数定义的海涅形式的条件辨析。\(f\) 在 \(a\) 可导定义为 \(\lim_{x\to a}\dfrac{f(x)-f(a)}{x-a}=f'(a)\)，由海涅定理，对任意满足 \(x_n\to a\) 且 \(x_n\neq a\) 的数列，该极限都等于 \(f'(a)\)。</p>
+    <p>关键在于分母 \(x_n-a\) 不能为零。若数列中某项 \(x_n=a\)，则对应的分式 \(\dfrac{f(x_n)-f(a)}{x_n-a}=\dfrac00\) 无定义，整个极限式失去意义。因此必须附加条件「\(x_n\neq a\) 对所有 \(n\)」，命题才能成立。</p>
+    <p>题目给出的条件只有 \(x_n\to a\) 与 \(f\) 可导，没有排除 \(x_n=a\) 的情形，故命题的成立需要额外条件，选 D。这与第 115 题形成对照：第 115 题已明确给出 \(x_n\neq a\)，故正确；本题未给，故需附加条件。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忽略分母为零的情形，误选 A。② 认为可导性本身能保证 \(x_n\neq a\)——可导性只约束函数值，不约束数列取值。③ 区分出现次数：若只有有限项 \(x_n=a\)，删去这有限项后剩余数列仍趋于 \(a\)，极限式仍可理解；但若有无穷多项取到 \(a\)，差商在这些项上无定义，整个极限式失去意义。题目未排除任何一种，故必须附加 \(x_n\neq a\) 的条件。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>导数定义中「\(x\neq a\)」这一细节是选择题常设陷阱，常与海涅定理结合考查。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f\) 在 \(a\) 可导，\(x_n=a+1/n\)，求 \(\lim n[f(a+1/n)-f(a)]\)。</p>
+    <p class="var-ans">答案：\(x_n-a=1/n\neq0\)，故极限为 \(f'(a)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q123">
+  <div class="q-head">
+    <span class="qno">第 123 题</span>
+    <span class="qtype">等比数列极限</span>
+    <span class="qsrc">P619</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\{a_n\}\) 为等比数列，公比 \(q\) 满足 \(|q|\lt{}1\)，则 \(\lim\limits_{n\to\infty}a_n=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(a_1\)</p>
+      <p>(D) 不一定</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型为等比数列通项的极限，核心是指数型无穷小 \(q^{n-1}\) 的判定。通项公式为 \(a_n=a_1q^{n-1}\)，\(a_1\) 是常数，问题归结为判断 \(q^{n-1}\) 的趋势。</p>
+    <p>当 \(|q|\lt{}1\) 时，记 \(r=|q|\in[0,1)\)，则 \(|q^{n-1}|=r^{n-1}\)。取对数 \(\ln r^{n-1}=(n-1)\ln r\)，而 \(\ln r\lt{}0\)，记 \(\alpha=-\ln r>0\)，则 \(r^{n-1}=e^{-\alpha(n-1)}\)，按指数速率衰减，故 \(r^{n-1}\to0\)。于是：</p>
+    \[
+    \lim_{n\to\infty}a_n=a_1\cdot\lim_{n\to\infty}q^{n-1}=a_1\cdot0=0.
+    \]
+    <p>关键一步在于：\(|q|\lt{}1\) 是 \(q^n\to0\) 的充要条件，且该极限与首项 \(a_1\) 无关。对照边界情形：\(q=1\) 时 \(a_n=a_1\) 为常数列，\(q=-1\) 时 \(a_n=(-1)^{n-1}a_1\) 振荡，\(|q|>1\) 时 \(|a_n|\to\infty\)，都不趋于零，这正说明条件 \(|q|\lt{}1\) 不可少。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为极限依赖首项 \(a_1\)。即使 \(a_1\) 很大（如 \(a_1=10^{100}\)），乘以趋于零的 \(q^{n-1}\) 后仍趋于零。干扰项 \(a_1\) 正是这样构造的。</p>
+    <p>② 把 \(|q|\lt{}1\) 与 \(|q|=1\) 混淆：\(|q|=1\) 时 \(q=1\) 则 \(a_n=a_1\) 为常数列，\(q=-1\) 则 \(a_n=(-1)^{n-1}a_1\) 振荡，都不趋于零。</p>
+    <p>③ 忽略 \(q=0\) 的边界情形。\(q=0\) 时 \(a_n=a_1\cdot0^{n-1}\)，从第二项起全为零，极限也是零，包含在 \(|q|\lt{}1\) 内。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等比数列极限是基础常识，常作为级数收敛（\(\sum aq^n\) 收敛当 \(|q|\lt{}1\)）的铺垫。考研中常与几何级数求和、等比数列递推结合考查。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{2^n+3^n}{4^n}\)。</p>
+    <p class="var-ans">答案：\((2/4)^n+(3/4)^n\to0+0=0\)，因为 \(2/4,3/4\) 都小于 1。</p>
+  </div>
+</article>

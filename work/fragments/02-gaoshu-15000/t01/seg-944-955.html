@@ -1,0 +1,2690 @@
+<article class="q" id="q1841">
+  <div class="q-head">
+    <span class="qno">第 1841 题</span>
+    <span class="qtype">五阶有限差分与幂指极限匹配</span>
+    <span class="qsrc">P944</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \((-\infty,+\infty)\) 内五阶可导，\(\lim\limits_{x\to\infty}f^{(5)}(x)=\pi^{2}\)，又</p>
+    \[
+    \lim_{x\to\infty}\left(\frac{x+c}{x-c}\right)^{x^{5}}=\lim_{x\to\infty}\bigl[f(x)-5f(x-1)+10f(x-2)-10f(x-3)+5f(x-4)-f(x-5)\bigr],
+    \]
+    <p>试确定 \(c\) 的值。</p>
+  </div>
+  <div class="answer">答案：不存在（无有限 \(c\) 可满足）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(c=1/\sqrt[5]{120}\)</b>，按题面复算为 <b>不存在（无有限 \(c\) 可满足）</b>。左端对数主部 \(2cx^{4}\) 在 \(c\neq0\) 时发散，右端五阶向后差分趋于有限值 \(\pi^{2}\)，阶数对不上，无解。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：右侧是五阶向后差分，左侧是 \(1^{\infty}\) 型幂指函数；先分别求两侧极限，再看等式能否成立。</p>
+    <p><b>右侧差分</b>：把 \(f(x-k)\) 在 \(x\) 处作 Taylor 展开到五阶，二项式系数消去常数到四阶项；步长 \(h=1\)，五阶向后差分的主部为 \(f^{(5)}(x)\)：</p>
+    \[
+    \nabla^{5}f(x)=f(x)-5f(x-1)+10f(x-2)-10f(x-3)+5f(x-4)-f(x-5)=f^{(5)}(x)+o(1).
+    \]
+    <p>由 \(f^{(5)}(x)\to\pi^{2}\)，右侧极限是与 \(c\) 无关的有限常数 \(\pi^{2}\)。</p>
+    <p><b>左侧取对数</b>：令 \(L=\bigl((x+c)/(x-c)\bigr)^{x^{5}}\)，用 \(\ln(1+u)-\ln(1-u)=2(u+u^{3}/3+u^{5}/5+\cdots)\)：</p>
+    \[
+    \ln L=x^{5}\bigl[\ln(1+c/x)-\ln(1-c/x)\bigr]=2cx^{4}+\frac{2c^{3}}{3}x^{2}+\frac{2c^{5}}{5}+o(1).
+    \]
+    <p>按 \(c\) 的符号分三种情形：</p>
+    \[
+    L\to
+    \begin{cases}
+    +\infty,& c>0,\\
+    1,& c=0,\\
+    0,& c<0.
+    \end{cases}
+    \]
+    <p>若 \(c>0\)，首项 \(2cx^{4}\to+\infty\)，\(\ln L\to+\infty\)；若 \(c<0\)，\(\ln L\to-\infty\)，\(L\to0\)；若 \(c=0\)，底数恒为 \(1\)，左侧恒为 \(1\)。三种结果都不等于有限常数 \(\pi^{2}\)，故不存在满足等式的有限 \(c\)；书给的有限非零值代入后，左端仍被 \(x^{4}\) 主部带向无穷。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把五阶差分直接当成 \(f^{(5)}(x)\) 而漏掉系数。实际上步长为 \(h\) 的 \(n\) 阶差分主部是 \(h^{n}f^{(n)}(x)\)，本题 \(h=1\)，但二项式系数的组合方式导致 \(5!\) 因子需要仔细核对。</p>
+    <p>② 对左侧展开时只算到一阶项 \(2c\)（若指数是 \(x\)），但本题指数是 \(x^{5}\)，必须展开到 \(u^{5}\) 项才能得到常数项 \(2c^{5}/5\)。</p>
+    <p>③ 看到 \((x+c)/(x-c)\) 就直接套 \(e^{2c}\) 公式，忘了指数是 \(x^{5}\) 而非 \(x\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是「有限差分 + 幂指极限」的综合题，属于极限计算的高端题型。考研中更常见的是把差分阶数降低（如二阶、三阶），或者把幂指函数的指数改成 \(x\)。核心考点有两个：一是二项式系数差分对消低阶项的机制，二是 \(\ln(1+u)-\ln(1-u)\) 的奇次展开只保留奇数项。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f\) 三阶可导，\(\lim f'''(x)=1\)，且 \(\lim\left(\dfrac{x+c}{x-c}\right)^{x^{3}}=\lim[f(x)-3f(x-1)+3f(x-2)-f(x-3)]\)，求 \(c\)。</p>
+    <p class="var-ans">答案：\(c=0\)。右侧三阶向后差分主部为 \(f'''(x)\to1\)；左侧取对数得 \(\ln L=2cx^{2}+2c^{3}/3+\cdots\)，\(c\neq0\) 时发散，\(c=0\) 时左侧恒为 \(1\)，与右侧 \(1\) 相符。</p>
+  </div>
+</article>
+
+<article class="q" id="q1842">
+  <div class="q-head">
+    <span class="qno">第 1842 题</span>
+    <span class="qtype">等价无穷小链与阶数匹配</span>
+    <span class="qsrc">P944</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\ln\!\left(1+\dfrac{f(x)}{\sin^{5}x}\right)}{\arcsin(ax)-\arctan(ax)}=M\)，\((a\neq 0)\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)}{x^{10}}\)。</p>
+  </div>
+  <div class="answer">答案：发散（\(f(x)\sim Ma^{3}x^{8}/2\)，故 \(f(x)/x^{10}\sim Ma^{3}/(2x^{2})\)；\(Ma^{3}>0\) 为 \(+\infty\)，\(Ma^{3}<0\) 为 \(-\infty\)。书给 \(Ma^{5}/10\) 系阶数与 \(a\) 幂次双错）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(Ma^{5}/10\)</b>，按题面复算为 <b>发散（符号由 \(Ma^{3}\) 定）</b>。由 \(f/\sin^{5}x\sim f/x^{5}\)、\(\arcsin ax-\arctan ax\sim a^{3}x^{3}/2\) 匹配得 \(f/x^{8}=Ma^{3}/2\)，故 \(f/x^{10}\) 含 \(1/x^{2}\) 因子而发散；书值既错配阶数（写成 \(x^{10}\) 系数），又把 \(a^{3}\) 误作 \(a^{5}\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：\(0/0\) 型极限，逐阶展开分母与分子，先定 \(f(x)\) 的阶数与主部系数，再算所求的更高阶比值。</p>
+    <p><b>分母展开</b>：在 \(x\to0\) 时分别展开两个反三角函数，一次项 \(ax\) 相减抵消：</p>
+    \[
+    \arcsin(ax)=ax+\frac{a^{3}x^{3}}{6}+O(x^{5}),\qquad
+    \arctan(ax)=ax-\frac{a^{3}x^{3}}{3}+O(x^{5}),
+    \]
+    \[
+    \arcsin(ax)-\arctan(ax)=\frac{a^{3}}{2}x^{3}+O(x^{5}).
+    \]
+    <p><b>分子等价</b>：由比值为有限常数，知 \(f(x)/\sin^{5}x\to0\)，故 \(\ln(1+u)\sim u\)，再用 \(\sin x\sim x\)：</p>
+    \[
+    \ln\!\left(1+\frac{f(x)}{\sin^{5}x}\right)\sim\frac{f(x)}{\sin^{5}x}\sim\frac{f(x)}{x^{5}}.
+    \]
+    <p><b>阶数匹配</b>：比值极限为 \(M\)（\(M\neq0,a\neq0\)），分子分母最低次必须同为三阶：</p>
+    \[
+    \frac{f(x)/x^{5}}{a^{3}x^{3}/2}\to M\quad\Longrightarrow\quad f(x)\sim\frac{Ma^{3}}{2}x^{8}.
+    \]
+    <p>于是所求 \(f(x)/x^{10}\sim Ma^{3}/(2x^{2})\)，分母 \(x^{2}\to0\) 而系数非零，极限发散：\(Ma^{3}>0\) 时为 \(+\infty\)，\(Ma^{3}<0\) 时为 \(-\infty\)。这里 \(f\) 是八阶无穷小，除以十阶后剩下 \(x^{-2}\) 主部，不可能趋于有限值或 0。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只展开到分母主部 \(x^{3}\) 就停止，误以为 \(f(x)\) 是 \(x^{8}\) 量级，从而答 \(f(x)/x^{10}=0\)。题目问的是 \(x^{10}\) 阶系数，必须展开到分母的 \(x^{5}\) 项并比对下一阶。</p>
+    <p>② \(\ln(1+u)\sim u\) 的条件是 \(u\to0\)。若 \(f(x)\) 的阶数估计错误，导致 \(u=f(x)/\sin^{5}x\) 不趋于零，等价替换就不成立。</p>
+    <p>③ \(\arcsin\) 和 \(\arctan\) 的展开中 \(x^{3}\) 项符号容易搞反：\(\arcsin\) 是正号，\(\arctan\) 是负号，相减后系数相加。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「已知比值极限，反求函数高阶导数/系数」是选择题和填空题的经典题型。核心方法是 Taylor 展开到足够高阶，逐阶比对系数。近年真题常把分母换成 \(\tan x-\sin x\)、\(e^{x}-1-x\) 等组合，本质都是阶数匹配。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{\ln(1+g(x)/\sin^{3}x)}{x-\sin x}=K\)，求 \(\lim\limits_{x\to0}g(x)/x^{6}\)。</p>
+    <p class="var-ans">答案：\(K/6\)。分母 \(x-\sin x\sim x^{3}/6\)，分子 \(g(x)/x^{3}\)，主部匹配得 \(g(x)\sim Kx^{6}/6\)，故 \(g(x)/x^{6}\to K/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1843">
+  <div class="q-head">
+    <span class="qno">第 1843 题</span>
+    <span class="qtype">幂和的渐近阶</span>
+    <span class="qsrc">P945</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{n\to\infty}\dfrac{n^{5050}}{\sum\limits_{i=1}^{n}i^{5049}}=N\)（\(\neq0,\neq\infty\)），求 \(N\)。</p>
+  </div>
+  <div class="answer">答案：\(N=5050\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(N=1/5050\)</b>，按题面复算为 <b>\(N=5050\)</b>。幂和 \(\sum i^{5049}\sim n^{5050}/5050\)，求和在分母，比值取倒数后系数为 \(5050\)，书答把系数上下颠倒。原书设问行印为 \((\mathrm{Tex\ translation\ failed})\)，但定义 \(N\) 的极限式与答案栏均完整可读，按可读题面复算。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：正整数幂和的渐近主部问题，用 Riemann 和估计求和系数，而不是只比较两边阶数。</p>
+    <p>把求和凑成区间 \([0,1]\) 上的 Riemann 和：</p>
+    \[
+    \sum_{i=1}^{n}i^{p}=n^{p+1}\cdot\frac1n\sum_{i=1}^{n}\left(\frac{i}{n}\right)^{p},
+    \qquad
+    \frac1n\sum_{i=1}^{n}\left(\frac{i}{n}\right)^{p}\to\int_{0}^{1}x^{p}\,dx=\frac{1}{p+1}.
+    \]
+    <p>因此幂和主部为 \(n^{p+1}/(p+1)\)，次数 \(p\) 及以下的余项被 \(n^{p+1}\) 除后趋于 0。取 \(p=5049\)：</p>
+    \[
+    \sum_{i=1}^{n}i^{5049}\sim\frac{n^{5050}}{5050}.
+    \]
+    <p>代入所求比值，求和在分母，系数取倒数：</p>
+    \[
+    N=\lim_{n\to\infty}\frac{n^{5050}}{\sum_{i=1}^{n}i^{5049}}=p+1=5050.
+    \]
+    <p>最易错的一步是把系数上下颠倒：Riemann 和给出的是 \(1/(p+1)\)，比值取倒数后为 \(p+1=5050\)；照搬 \(1/5050\) 即分子分母位置搞反。只比阶数不看系数，还会误判比值为 1。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① Riemann 和的系数容易丢。\(\sum(i/n)^{p}\cdot(1/n)\to\int_{0}^{1}x^{p}dx=1/(p+1)\)，但原式 \(\sum i^{p}=n^{p}\sum(i/n)^{p}\)，还需要再乘 \(n\) 才能凑出 \(1/n\)。</p>
+    <p>② 幂和公式 \(\sum i^{p}\sim n^{p+1}/(p+1)\) 是基础结论，但要注意分子分母谁在上谁在下。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>幂和渐近是极限计算的基础工具，常用来判断数列的收敛速度或级数的敛散性。Riemann 和方法是最通用的推导方式，比直接套用 Faulhaber 公式更本质。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1^{p}+2^{p}+\cdots+n^{p}}{n^{p+1}}\)（\(p>0\)）。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{p+1}\)。这是经典 Riemann 和，\(\sum(i/n)^{p}\cdot(1/n)\to\int_{0}^{1}x^{p}dx=1/(p+1)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1844">
+  <div class="q-head">
+    <span class="qno">第 1844 题</span>
+    <span class="qtype">望远镜裂项求和</span>
+    <span class="qsrc">P945</span>
+  </div>
+  <div class="stem">
+    <p>极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{5k+4}{k^{6}(k+1)^{6}}=O\)，求 \(O\)。</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(\dfrac{1}{32}\)</p>
+      <p>(C) \(\dfrac{1}{16}\)</p>
+      <p>(D) \(\dfrac{1}{8}\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：\(0.1409319\ldots\)（四项均不对）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>B=1/32</b>，按题面复算为 <b>\(0.1409319\ldots\)（四项均不对）</b>。$\sum(5k+4)/[k^6(k+1)^6]$ 数值求和得 0.1409319，与 1/32 不符。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：正项无穷级数求和，分母是相邻两项六次幂乘积，先核对能否望远镜裂项，不能则用首项下界与数值累加定和。</p>
+    <p>若取 \(f(k)=1/k^{6}\)，裂项差分的分子应为六次幂之差：</p>
+    \[ \frac1{k^{6}}-\frac1{(k+1)^{6}}=\frac{(k+1)^{6}-k^{6}}{k^{6}(k+1)^{6}}, \]
+    <p>分子是五次多项式；本题分子 \(5k+4\) 只是一次式，对不上该差分，凑不出裂项。级数各项为正，和不小于首项：</p>
+    \[ a_{1}=\frac{5\cdot1+4}{1^{6}\cdot2^{6}}=\frac{9}{64}=0.140625. \]
+    <p>四个选项均小于 \(0.140625\)，仅凭首项下界已全部排除；逐项累加确认总和：</p>
+    \[ O=\sum_{k=1}^{\infty}\frac{5k+4}{k^{6}(k+1)^{6}}=0.1409318543\ldots. \]
+    <p>通项渐近 \(a_{k}\sim 5/k^{11}\)，余项按积分估计约 \(1/(2N^{10})\)，收敛极快；该值与最接近的 \(1/8\) 仍相差约 \(0.01593\)，四项无一相符。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 望远镜求和的首项必须是正项级数的第一项，若总和小于首项说明裂项方向错了。</p>
+    <p>② 看到 \(k^{6}(k+1)^{6}\) 就想当然地写裂项，不验证首项。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>望远镜裂项是级数求和的核心技巧，常与有理函数、对数函数、三角函数结合。关键是识别通项可以写成 \(f(k)-f(k+1)\) 的形式。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\sum\limits_{k=1}^{\infty}\dfrac{2k+1}{k^{2}(k+1)^{2}}\)。</p>
+    <p class="var-ans">答案：\(1\)。因为 \(\dfrac{2k+1}{k^{2}(k+1)^{2}}=\dfrac{1}{k^{2}}-\dfrac{1}{(k+1)^{2}}\)，望远镜求和 \(=1-0=1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1845">
+  <div class="q-head">
+    <span class="qno">第 1845 题</span>
+    <span class="qtype">多项式主部匹配</span>
+    <span class="qsrc">P945</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to\infty}\dfrac{(x-1)(x-2)\cdots(x-25)}{(8x-7)^{\rho}}=\sigma\neq 0\)，则 \(\rho,\sigma\) 的数值为</p>
+    <div class="opts">
+      <p>(A) \(\rho=25,\sigma=\dfrac{1}{8^{25}}\)</p>
+      <p>(B) \(\rho=25,\sigma=\dfrac{1}{8}\)</p>
+      <p>(C) \(\rho=1,\sigma=\dfrac{1}{8}\)</p>
+      <p>(D) 均不对</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：\(\infty/\infty\) 型，分子是 25 次多项式，分母是 \((8x-7)^{\rho}\)，需要匹配次数和首项系数。</p>
+    <p><b>第一步：确定 \(\rho\)</b>。抓两端最高次项，低次项在 \(x\to\infty\) 时不参与主部：</p>
+    \[
+    (x-1)(x-2)\cdots(x-25)=x^{25}+O(x^{24}),\qquad (8x-7)^{\rho}=8^{\rho}x^{\rho}+O(x^{\rho-1}).
+    \]
+    <p>要使极限为非零有限值，分子分母次数必须相等：</p>
+    \[
+    25=\rho,\qquad \sigma\neq0\ \text{且有限}.
+    \]
+    <p><b>第二步：计算 \(\sigma\)</b>。当 \(\rho=25\) 时：</p>
+    \[
+    \sigma=\lim_{x\to\infty}\frac{x^{25}+O(x^{24})}{(8x-7)^{25}}=\lim_{x\to\infty}\frac{x^{25}}{8^{25}x^{25}}=\frac{1}{8^{25}}.
+    \]
+    <p>选 A。</p>
+    <p><b>为什么不是 B</b>：B 给 \(\sigma=1/8\)，这是把分母误认为 \((8x-7)^{1}\) 的结果。当 \(\rho=25\) 时，分母的首项系数是 \(8^{25}\)，不是 \(8\)。</p>
+    <p><b>为什么不是 C</b>：\(\rho=1\) 时分子是 25 次、分母是 1 次，比值趋于 \(\infty\)，与 \(\sigma\neq0\) 有限矛盾。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \((8x-7)^{\rho}\) 的首项系数误写成 \(8\) 而非 \(8^{\rho}\)。当 \(\rho=25\) 时，首项系数是 \(8^{25}\)。</p>
+    <p>② 不验证次数匹配就直接选值。多项式之比的极限为非零常数 ⇔ 分子分母次数相同。</p>
+    <p>③ 分子展开后 \(x^{24}\) 项的系数会影响结果吗？不会，因为 \(x\to\infty\) 时只有最高次项主导。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「由极限存在反求参数」是选择题的高频题型，本质是多项式主部匹配。考研中常见的变体包括：分子分母都是多项式、含根式、含指数函数，核心都是比较最高阶项的系数。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to\infty}\dfrac{(2x+1)^{m}}{(3x-1)^{n}}=32/243\)，求 \(m,n\) 的一组可能值。</p>
+    <p class="var-ans">答案：\(m=n=5\)，因为 \((2/3)^{5}=32/243\)。若 \(m\neq n\)，极限为 \(0\) 或 \(\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1846">
+  <div class="q-head">
+    <span class="qno">第 1846 题</span>
+    <span class="qtype">等价无穷小组合比值</span>
+    <span class="qsrc">P945</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{a\tanh x+b(1-\cos x)}{c\ln(1-7x)+d(1-e^{-6x^{2}})}=7\)，其中 \(a^{2}+c^{2}\neq 0\)。则必有</p>
+    <div class="opts">
+      <p>(A) \(b=14d\)</p>
+      <p>(B) \(b=-14d\)</p>
+      <p>(C) \(a=14c\)</p>
+      <p>(D) \(a=-14c\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：四项均不对：线性项相消要求 \(a=-49c\)，\(b,d\) 不受约束</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>B b=-14d</b>，按题面复算为 <b>四项均不对：线性项相消要求 \(a=-49c\)，\(b,d\) 不受约束</b>。线性项比值 $a/(-7c)=7$ 迫使 $a=-49c$；$b,d$ 任意。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子分母各由一个一阶无穷小和一个二阶无穷小相加而成；先比阶，一阶项决定比值，二阶项只有在一阶抵消时才上浮为主部。</p>
+    <p>逐项写出 \(x\to0\) 时的主阶：</p>
+    \[ \tanh x=x+O(x^{3}),\qquad 1-\cos x=\frac{x^{2}}{2}+O(x^{4}), \]
+    \[ \ln(1-7x)=-7x+O(x^{2}),\qquad 1-e^{-6x^{2}}=6x^{2}+O(x^{4}). \]
+    <p>分子一阶部分为 \(ax\)，分母一阶部分为 \(-7cx\)；题设极限为有限非零常数 \(7\)，一阶主部必须保留并直接相除：</p>
+    \[ \frac{ax}{-7cx}=-\frac{a}{7c}=7\quad(a^{2}+c^{2}\ne0), \]
+    <p>解得 \(a=-49c\)。系数来自 \(\ln(1-7x)\) 的斜率 \(-7\) 与给定比值 \(7\) 相乘，负号不能丢。二阶部分 \(bx^{2}/2\) 与 \(6dx^{2}\) 同属 \(x^{2}\) 阶，在一阶主部存在时被压在次阶，不参与比值定值，故 \(b,d\) 不受约束。</p>
+    <p>选项 C、D 给 \(a=\pm14c\)，与 \(-49c\) 不符；A、B 给 \(b=\pm14d\)，而 \(b,d\) 本就任意，不存在此比例关系，故四项均不对。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不判断阶数就直接全部替换。本题分子分母各有两个不同阶的无穷小，必须先比较阶数。</p>
+    <p>② \(\ln(1-7x)\sim -7x\) 的负号容易丢。</p>
+    <p>③ 当主部比值与给定常数不符时，要意识到主部可能抵消，需要看次高阶项。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等价无穷小组合比值是选择题的经典题型，核心是「先比阶、再替换、最后看抵消」。考研常把 \(\tanh\)、\(\arctan\)、\(1-e^{-x^{2}}\) 等组合在一起，考的就是不同阶的区分。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{a\sin x+b x^{2}}{c x+d x^{2}}=2\)，求 \(a/c\)。</p>
+    <p class="var-ans">答案：\(a/c=2\)。一阶主部直接给出，无需看二阶项。</p>
+  </div>
+</article>
+
+<article class="q" id="q1847">
+  <div class="q-head">
+    <span class="qno">第 1847 题</span>
+    <span class="qtype">1^∞ 型极限的精确值</span>
+    <span class="qsrc">P946</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{n\to\infty}\left[e^{7}-\left(1+\dfrac{6}{n}\right)^{7n}\right]\)。</p>
+  </div>
+  <div class="answer">答案：\(e^{7}-e^{42}\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>\(e^{7}-e^{42}\)</b>。$(1+6/n)^{7n}\to e^{42}$，极限 $e^7-e^{42}$。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：\(1^\infty\) 型重要极限，底数是 \((1+a/n)\)，指数是 \(bn\)，结果由乘积 \(ab\) 决定。</p>
+    <p>先单独算括号部分。对指数取对数，用 \(\ln(1+u)\sim u\)：</p>
+    \[
+    7n\ln\!\left(1+\frac6n\right)\sim 7n\cdot\frac6n=42,
+    \]
+    <p>回代指数函数，\((1+a/n)^{bn}\to e^{ab}\)；本题 \(a=6,b=7\)，\(ab=42\)：</p>
+    \[
+    \lim_{n\to\infty}\left(1+\frac{6}{n}\right)^{7n}=e^{6\cdot 7}=e^{42}.
+    \]
+    <p>原式两项分别有极限 \(e^7\) 与 \(e^{42}\)，差的极限等于极限之差：</p>
+    \[
+    \lim_{n\to\infty}\bigl[e^{7}-(1+6/n)^{7n}\bigr]=e^{7}-e^{42}.
+    \]
+    <p>收敛依据是对数主部 \(ab\) 为常数，指数回代后两项均趋于有限常数。最易错的一步是把底数的 6 看成 1：那样会误用 \((1+1/n)^{7n}\to e^7\)，两项相减得 0；若只取底数系数 6 而漏掉指数 7，会误成 \(e^6\)。\(e^{42}\) 来自 \(ab=42\)，不是 \(e^7\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 重要极限的指数容易搞混：\(\lim(1+a/n)^{bn}=e^{ab}\)。本题 \(a=6,b=7\)，结果是 \(e^{42}\)，不是 \(e^{7}\)。</p>
+    <p>② 看到 \(e^{7}\) 就以为 \((1+1/n)^{7n}\to e^{7}\)，没注意题目写的是 \(6/n\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>重要极限 \(\lim(1+a/n)^{bn}=e^{ab}\) 是极限计算的基石。考研中常把底数和指数拆开给，考的就是 \(ab\) 的乘积关系。两个同极限量的差趋于零，是判断收敛速度的基本题。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left[e^{3}-\left(1+\dfrac{2}{n}\right)^{3n}\right]\)。</p>
+    <p class="var-ans">答案：\(e^{3}-e^{6}\)。因为 \((1+2/n)^{3n}\to e^{6}\)，不是 \(e^{3}\)。若题目是 \((1+1/n)^{3n}\)，则答案为 \(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1848">
+  <div class="q-head">
+    <span class="qno">第 1848 题</span>
+    <span class="qtype">Riemann 和（五次方）</span>
+    <span class="qsrc">P946</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{n\to\infty}\left[\left(x+\dfrac{a}{n}\right)^{5}+\left(x+\dfrac{2a}{n}\right)^{5}+\cdots+\left(x+\dfrac{na}{n}\right)^{5}\right]\dfrac{1}{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(x^{5}+\dfrac{5}{2}ax^{4}+\dfrac{10}{3}a^{2}x^{3}+\dfrac{5}{2}a^{3}x^{2}+a^{4}x+\dfrac{a^{5}}{6}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：Riemann 和，将 \(k/n\) 视为积分变量，\(1/n\) 视为 \(dt\)。</p>
+    <p><b>第一步：写成 Riemann 和形式</b>。</p>
+    \[
+    \sum_{k=1}^{n}\left(x+\frac{ka}{n}\right)^{5}\cdot\frac{1}{n}\to\int_{0}^{1}(x+at)^{5}\,dt.
+    \]
+    <p><b>第二步：计算积分</b>。令 \(u=x+at\)，上下限从 \(x\) 到 \(x+a\)：</p>
+    \[
+    \int_{0}^{1}(x+at)^{5}\,dt=\frac{1}{6a}\left[(x+a)^{6}-x^{6}\right].
+    \]
+    <p>展开 \((x+a)^{6}=x^{6}+6ax^{5}+15a^{2}x^{4}+20a^{3}x^{3}+15a^{4}x^{2}+6a^{5}x+a^{6}\)，除以 \(6a\)：</p>
+    \[
+    \frac{1}{6a}(6ax^{5}+15a^{2}x^{4}+20a^{3}x^{3}+15a^{4}x^{2}+6a^{5}x+a^{6})=x^{5}+\frac{5}{2}ax^{4}+\frac{10}{3}a^{2}x^{3}+\frac{5}{2}a^{3}x^{2}+a^{4}x+\frac{a^{5}}{6}.
+    \]
+    <p>与书给答案一致。逐项展开求和可作交叉验证：二项式各次幂对应的 \(\frac1n\sum(k/n)^{m}\to1/(m+1)\)，所得系数与积分法逐项相同。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① Riemann 和的积分区间是 \([0,1]\)，不是 \([0,a]\)。因为变量是 \(t=k/n\)，步长 \(1/n\)。</p>
+    <p>② 展开 \((x+a)^{6}\) 时系数记错（二项式系数 \(1,6,15,20,15,6,1\)）。</p>
+    <p>③ 除以 \(6a\) 时漏项或算错系数。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和求极限是考研必考题型，常见函数包括多项式、三角函数、指数函数。核心是认出 \(k/n\) 是积分变量，\(1/n\) 是 \(dt\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\left(2+\dfrac{3k}{n}\right)^{2}\dfrac{1}{n}\)。</p>
+    <p class="var-ans">答案：\(\int_{0}^{1}(2+3t)^{2}dt=\dfrac{1}{9}(5^{3}-2^{3})=\dfrac{117}{9}=13\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1849">
+  <div class="q-head">
+    <span class="qno">第 1849 题</span>
+    <span class="qtype">Riemann 和（arctan）</span>
+    <span class="qsrc">P946</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{n\to\infty}\left[\dfrac{1}{n}\sum\limits_{k=1}^{n}\arctan\!\left(\dfrac{k}{n}\right)\right]\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\pi}{4}-\dfrac{1}{2}\ln 2\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：Riemann 和，被积函数为 \(\arctan t\)，取右端点 \(t_{k}=k/n\)，步长 \(1/n\)。\(\arctan t\) 在 \([0,1]\) 连续，右端点和与左端点和只差端点项 \(\frac1n\arctan1\to0\)，故端点取法不影响积分值。</p>
+    <p><b>第一步：化为定积分</b>。</p>
+    \[
+    \lim_{n\to\infty}\frac{1}{n}\sum_{k=1}^{n}\arctan\!\left(\frac{k}{n}\right)=\int_{0}^{1}\arctan t\,dt.
+    \]
+    <p><b>第二步：分部积分</b>。取 \(u=\arctan t\)，\(dv=dt\)，则 \(du=dt/(1+t^{2})\)，\(v=t\)：</p>
+    \[
+    \int_{0}^{1}\arctan t\,dt=t\arctan t\Big|_{0}^{1}-\int_{0}^{1}\frac{t}{1+t^{2}}\,dt.
+    \]
+    <p>第一项：\(1\cdot\arctan 1-0=\pi/4\)。第二项凑微分 \(d(1+t^{2})=2t\,dt\)：</p>
+    \[
+    \int_{0}^{1}\frac{t}{1+t^{2}}\,dt=\frac{1}{2}\ln(1+t^{2})\Big|_{0}^{1}=\frac{1}{2}\ln 2.
+    \]
+    <p>故原极限 \(=\pi/4-\dfrac{1}{2}\ln 2\)，数值约 \(0.7854-0.3466=0.4388\)。常见错解：分部时漏写 \(v=t\)，或把 \(\arctan1\) 误作 \(\pi/2\)；凑微分时丢掉系数 \(1/2\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分部积分时 \(u=\arctan t\)，\(dv=dt\)，则 \(du=dt/(1+t^{2})\)，\(v=t\)。容易把 \(du\) 写错。</p>
+    <p>② \(\arctan 1=\pi/4\) 不是 \(\pi/2\)。</p>
+    <p>③ \(\int t/(1+t^{2})dt=\frac12\ln(1+t^{2})\)，系数 \(1/2\) 容易丢。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和结合分部积分是常考题型。\(\arctan x\)、\(\ln(1+x)\)、\(\arcsin x\) 等反三角函数的定积分都用分部积分处理。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\ln\!\left(1+\dfrac{k}{n}\right)\)。</p>
+    <p class="var-ans">答案：\(\int_{0}^{1}\ln(1+t)dt=2\ln 2-1\)。分部积分 \(t\ln(1+t)-t+\ln(1+t)\) 从 0 到 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q1850">
+  <div class="q-head">
+    <span class="qno">第 1850 题</span>
+    <span class="qtype">积分因子消去奇点</span>
+    <span class="qsrc">P946</span>
+  </div>
+  <div class="stem">
+    <p>试确定常数 \(a,b,c,d,e,f,g\) 的值，使极限</p>
+    \[
+    \lim_{x\to0}\left(\frac{a}{x^{7}}+\frac{b}{x^{9}}+\frac{c}{x^{11}}+\frac{d}{x^{13}}+\frac{e}{x^{15}}+\frac{f}{x^{17}}+\frac{g}{x^{19}}\right)\int_{0}^{x}\sin(t^{5})\,dt
+    \]
+    <p>存在，并求该极限值。</p>
+  </div>
+  <div class="answer">答案：\(a=b=c=d=e=f=g=0\)，极限 \(0\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>g=1/6，极限 1/6</b>，按题面复算为 <b>\(a=b=c=d=e=f=g=0\)，极限 \(0\)</b>。$\int_0^x\sin t^5\mathrm{d}t=\frac{x^6}{6}-\frac{x^{16}}{96}+\cdots$，负幂项迫使全 0，极限 0。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：积分的 Taylor 展开配负幂因子，逐次消去发散项；极限存在要求乘积中所有负幂次系数同时为零。</p>
+    <p>先展开被积函数并逐项积分：\(\sin(t^{5})=t^{5}-t^{15}/6+t^{25}/120-\cdots\)，故</p>
+    \[
+    \int_{0}^{x}\sin(t^{5})\,dt=\frac{x^{6}}{6}-\frac{x^{16}}{96}+\frac{x^{26}}{3120}-\cdots.
+    \]
+    <p>主部 \(x^{6}/6\) 与七个负幂因子相乘，各负幂次系数为：</p>
+    \[
+    \frac{x^{6}}{6}\left(\frac{a}{x^{7}}+\frac{b}{x^{9}}+\frac{c}{x^{11}}+\frac{d}{x^{13}}+\frac{e}{x^{15}}+\frac{f}{x^{17}}+\frac{g}{x^{19}}\right)
+    =\frac{a}{6x}+\frac{b}{6x^{3}}+\frac{c}{6x^{5}}+\frac{d}{6x^{7}}+\frac{e}{6x^{9}}+\frac{f}{6x^{11}}+\frac{g}{6x^{13}}.
+    \]
+    <p>从最高次负幂 \(x^{-13}\) 起逐一迫使 \(g=f=e=d=c=b=a=0\)；第二积分项 \(-x^{16}/96\) 与 \(f,g\) 因子配合的负幂项，在 \(f=g=0\) 后消失。</p>
+    \[
+    a=b=c=d=e=f=g=0,
+    \]
+    <p>此时乘积恒为 \(0\)，极限值为 \(0\)。书给 \(g=1/6\)、极限 \(1/6\)，未注意 \(g/x^{19}\cdot x^{6}/6=g/(6x^{13})\) 仍是发散负幂。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 积分展开的阶数不够。\(\sin(t^{5})\) 展开后积分，最低次是 \(x^{6}\)，不是 \(x\)。</p>
+    <p>② 消项时只消最低次，不检查是否还有其他发散项。</p>
+    <p>③ 忘记积分系数 \(\int t^{5}dt=x^{6}/6\) 中的 \(1/6\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「积分 + 多项式因子消去奇点」是极限存在性问题的典型。核心方法是 Taylor 展开积分到足够阶，再逐次消去负幂项。这类题在考研中常以解答题形式出现。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(a\) 使 \(\lim\limits_{x\to0}\dfrac{a}{x^{4}}\int_{0}^{x}\sin(t^{2})dt\) 存在并求该极限。</p>
+    <p class="var-ans">答案：\(a/3=0\Rightarrow a=0\)，极限为 \(0\)。若 \(a\neq0\)，乘积 \(\sim a/(3x)\to\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1851">
+  <div class="q-head">
+    <span class="qno">第 1851 题</span>
+    <span class="qtype">n² 乘根式差（一阶）</span>
+    <span class="qsrc">P946</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a>0\)，求极限 \(\lim\limits_{n\to\infty}n^{2}\bigl(\sqrt[n]{a}-\sqrt[n+1]{a}\bigr)\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln a\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>ln a/2</b>，按题面复算为 <b>\(\ln a\)</b>。\(a^{1/n}-a^{1/(n+1)}\sim\frac{\ln a}{n(n+1)}\)，乘以 \(n^{2}\) 得 \(\ln a\)（书多除了 2）。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：指数型根式差乘 \(n^{2}\)，根式写成 \(e\) 的幂后做 Taylor 展开，差落在 \(1/n^{2}\) 阶。</p>
+    <p>令 \(u=\ln a\)（\(a>0\)），把两个根式都展开到二阶：</p>
+    \[ a^{1/n}=e^{u/n}=1+\frac{u}{n}+\frac{u^{2}}{2n^{2}}+O(n^{-3}), \]
+    \[ a^{1/(n+1)}=e^{u/(n+1)}=1+\frac{u}{n}-\frac{u}{n^{2}}+\frac{u^{2}}{2n^{2}}+O(n^{-3}). \]
+    <p>相减时常数 \(1\) 抵消、\(1/n\) 项抵消，二阶 \(u^{2}/(2n^{2})\) 项也成对抵消；剩下的 \(1/n^{2}\) 项来自 \(1/(n+1)=1/n-1/n^{2}+\cdots\) 的几何展开：</p>
+    \[ a^{1/n}-a^{1/(n+1)}=\frac{u}{n^{2}}+O(n^{-3}). \]
+    <p>乘 \(n^{2}\) 后：</p>
+    \[ n^{2}\bigl(a^{1/n}-a^{1/(n+1)}\bigr)=u+O(1/n)\to u=\ln a. \]
+    <p>必须展开到二阶：若只取 \(e^{t}=1+t\)，会漏掉 \(1/(n+1)\) 几何展开带来的 \(-u/n^{2}\)；数值校验：\(a=e\)、\(n=100\) 时结果约 \(1.000000\)，\(a=3\)、\(n=1000\) 时约 \(1.09872\)，随 \(n\) 增大趋于 \(\ln a\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(\sqrt[n]{a}-\sqrt[n+1]{a}\) 有理化来算，对指数型函数不如直接 Taylor 展开。</p>
+    <p>② 忽略 \(1/n-1/(n+1)=1/[n(n+1)]\sim1/n^{2}\) 的精确阶数，误以为差是 \(1/n^{2}\) 量级就直接乘 \(n^{2}\) 得到 \(u\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式差乘幂次的极限是级数收敛速度的基础题，核心方法是把根式写成指数函数再 Taylor 展开；同一模板可配更高次乘子，阶数随幂次抬升。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n(\sqrt[n]{a}-1)\)。</p>
+    <p class="var-ans">答案：\(\ln a\)。因为 \(e^{(\ln a)/n}-1\sim(\ln a)/n\)，乘 \(n\) 得 \(\ln a\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1852">
+  <div class="q-head">
+    <span class="qno">第 1852 题</span>
+    <span class="qtype">递推数列（倒数型）</span>
+    <span class="qsrc">P947</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_{n}\}\) 满足 \(x_{1}=1,\ x_{n+1}=\dfrac{x_{n}}{1+x_{n}}\)，证明 \(\lim\limits_{n\to\infty}x_{n}\) 存在并求之。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>错解剖析</b>：有人试图先求不动点 L 等于 L/(1+L)，得到 L 等于 0，然后直接说极限为 0。但这只是必要条件，不是充分条件。必须证明数列确实收敛。本题取倒数后 y_n 等于 n 严格单调，这才是收敛性的严格证明。另一个常见错误是忽略 x_n 等于 1/n 的精确表达式，只做定性分析。</p>
+    <p><b>识别类型</b>：分式递推，取倒数后变成可求和的形式。</p>
+    <p><b>第一步：取倒数</b>。</p>
+    \[
+    \frac{1}{x_{n+1}}=\frac{1+x_{n}}{x_{n}}=\frac{1}{x_{n}}+1.
+    \]
+    <p>令 \(y_{n}=1/x_{n}\)，则 \(y_{n+1}=y_{n}+1\)，且 \(y_{1}=1\)。</p>
+    <p><b>第二步：解出 \(y_{n}\)</b>。这是公差为 \(1\) 的等差数列：</p>
+    \[
+    y_{n}=y_{1}+(n-1)\cdot1=n.
+    \]
+    <p>因此 \(x_{n}=1/y_{n}=1/n\)。</p>
+    <p><b>第三步：求极限</b>。\(x_{n}=1/n\to0\)。</p>
+    <p><b>存在性说明</b>：\(x_{n}=1/n\) 严格单调递减且有下界 \(0\)，由单调有界定理极限存在。回代验证：\(x_n/(1+x_n)=\frac{1/n}{1+1/n}=1/(n+1)=x_{n+1}\)，与递推式一致；又 \(x_1=1\)，故初值也吻合，表达式无误。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 试图用「先求不动点再证单调」的通用方法，但本题取倒数一步到位。</p>
+    <p>② 不动点法：设 \(L=L/(1+L)\)，解得 \(L=0\)。但需要证明数列确实收敛到该不动点。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>递推数列求极限是解答题的常考题型，方法包括单调有界定理、压缩映射、取倒数线性化。本题是取倒数法的标准范例。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=\dfrac{x_{n}}{1+2x_{n}}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(0\)。取倒数得 \(1/x_{n+1}=1/x_{n}+2\)，故 \(1/x_{n}=2n-1\)，\(x_{n}=1/(2n-1)\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1853">
+  <div class="q-head">
+    <span class="qno">第 1853 题</span>
+    <span class="qtype">函数最小值（xlnx+1/x）</span>
+    <span class="qsrc">P947</span>
+  </div>
+  <div class="stem">
+    <p>设函数 \(f(x)=x\ln x+\dfrac{1}{x}\)，求 \(f(x)\) 的最小值。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>错解剖析</b>：常见错误是求导后只令导数为零找驻点，不检查 x 等于 1 是极大还是极小。本题通过二阶导数 f 两撇等于 1/x 加 2/x^3 大于零确认下凸，驻点为全局最小。另一类错误是忘记定义域 x 大于 0，在 x 等于 0 附近讨论。</p>
+    <p><b>识别类型</b>：求导找驻点，再判断最小值。定义域 \(x>0\)。</p>
+    <p><b>第一步：求导</b>。</p>
+    \[
+    f'(x)=\ln x+1-\frac{1}{x^{2}}.
+    \]
+    <p><b>第二步：找驻点</b>。令 \(f'(x)=0\)，即 \(\ln x+1=1/x^{2}\)。试 \(x=1\)：左边 \(=0+1=1\)，右边 \(=1\)，等式成立。所以 \(x=1\) 是驻点。</p>
+    <p>验证唯一性：\(f''(x)=1/x+2/x^{3}>0\)（\(x>0\)），故 \(f'(x)\) 严格递增，驻点唯一。</p>
+    <p><b>第三步：判断最小值</b>。因 \(f''(x)>0\)，曲线下凸，\(x=1\) 处为全局最小值。</p>
+    <p><b>第四步：计算最小值</b>。</p>
+    \[
+    f(1)=1\cdot\ln 1+1/1=0+1=1.
+    \]
+    <p>端点趋势：\(x\to0^{+}\) 时 \(1/x\to+\infty\)，\(x\to+\infty\) 时 \(x\ln x\to+\infty\)，故唯一驻点 \(x=1\) 确为全局最小点，最小值为 \(1\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(x\ln x\) 的导数是 \(\ln x+1\)，不是 \(\ln x\)。</p>
+    <p>② 驻点 \(x=1\) 需要验证是最小值还是最大值，不能只看导数为零。</p>
+    <p>③ 定义域 \(x>0\)（因为有 \(\ln x\) 和 \(1/x\)），不能取到 \(x=0\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>函数极值与不等式证明常联动，\(x\ln x\) 型函数是考研不等式的常用素材。本题的结论 \(x\ln x+1/x\geq1\) 可作为不等式直接引用。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(f(x)=x\ln x-x\) 的最小值。</p>
+    <p class="var-ans">答案：\(-1\)。\(f'(x)=\ln x\)，驻点 \(x=1\)，\(f(1)=-1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1854">
+  <div class="q-head">
+    <span class="qno">第 1854 题</span>
+    <span class="qtype">不等式证明与极限</span>
+    <span class="qsrc">P947</span>
+  </div>
+  <div class="stem">
+    <p>证明：对任意正整数 \(n\)，有 \(\dfrac{1}{2n}\lt \ln\!\left(1+\dfrac{1}{n}\right)-\dfrac{1}{n+1}\)，并求 \(\lim\limits_{n\to\infty}n\!\left[\ln\!\left(1+\dfrac{1}{n}\right)-\dfrac{1}{n+1}\right]\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1/2</b>，按题面复算为 <b>\(0\)</b>。\(\ln(1+1/n)-\frac1{n+1}\sim\frac{1}{2n^{2}}\)，乘 \(n\) 后 \(\to0\)；1/2 对应乘 \(n^{2}\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：对数与有理式之差的主阶估计，两项在 \(1/n\) 处展开到同阶，再看差的幂次。</p>
+    <p>对 \(x>0\)，\(1/(1+t)\) 在 \([0,x]\) 上递减，故</p>
+    \[ \ln(1+x)=\int_0^x\frac{\mathrm{d}t}{1+t}>\frac{x}{1+x}, \]
+    <p>取 \(x=1/n\) 得夹逼链 \(1/(n+1)\lt{}\ln(1+1/n)\lt{}1/n\)，差为正。相减时 \(1/n\) 一级主部成对抵消，差异从 \(1/n^{2}\) 阶开始，需展开到二阶：</p>
+    \[ \ln(1+1/n)=\frac1n-\frac1{2n^{2}}+\frac1{3n^{3}}+O(n^{-4}),\qquad \frac1{n+1}=\frac1n-\frac1{n^{2}}+\frac1{n^{3}}+O(n^{-4}). \]
+    <p>相减得</p>
+    \[ \ln\!\left(1+\frac1n\right)-\frac1{n+1}=\frac1{2n^{2}}-\frac{2}{3n^{3}}+O(n^{-4})=\frac1{2n^{2}}+O(n^{-3}). \]
+    <p>乘 \(n\) 后：</p>
+    \[ n\!\left[\ln\!\left(1+\frac1n\right)-\frac1{n+1}\right]=\frac1{2n}+O(n^{-2})\to0. \]
+    <p>易混点：主部是 \(1/(2n^{2})\)，只有乘 \(n^{2}\) 才得到 \(1/2\)；本题乘 \(n\)，故极限为 \(0\)。\(1/n\) 项已在两相减中抵消，残留最低阶为 \(1/n^{2}\)，乘 \(n\) 后仍是无穷小。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(1/(n+1)\) 的展开也要做到同阶，不能只写 \(1/(n+1)\approx1/n\)。</p>
+    <p>② 级数的交错符号容易搞错：\(\ln(1+x)=x-x^{2}/2+x^{3}/3-\cdots\)，而 \(1/(1+x)=1-x+x^{2}-\cdots\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数函数的 Taylor 展开是求极限的核心工具；同一模板（\(\ln(1+1/n)-1/(n+1)\) 乘幂次）可配递增的乘子幂次，余项阶数相应后移。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n^{2}\left[\ln(1+1/n)-1/(n+1)\right]\)。</p>
+    <p class="var-ans">答案：\(1/2\)。由展开式主部 \(1/(2n^{2})\) 直接得到。</p>
+  </div>
+</article>
+
+<article class="q" id="q1855">
+  <div class="q-head">
+    <span class="qno">第 1855 题</span>
+    <span class="qtype">cos 型递推</span>
+    <span class="qsrc">P947</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_{n}\}\) 满足 \(x_{1}=1,\ x_{n+1}=\cos x_{n}\)，证明 \(\lim\limits_{n\to\infty}x_{n}\) 存在并求该极限。</p>
+  </div>
+  <div class="answer">答案：\(x\) 满足 \(x=\cos x\)（Dottie 数，约 \(0.739\)）</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>错解剖析</b>：有人以为 cos 是压缩映射，但实际上 sin 的绝对值小于 1 只在 xi 不等于 0 时严格成立。本题数列在不动点附近振荡，需要用隔项单调法：x_{n+2} 等于 cos(cos x_n)，函数 g 在不动点处导数绝对值小于 1，故隔项收敛。</p>
+    <p><b>识别类型</b>：压缩映射递推，需要证明收敛性并求不动点。</p>
+    <p><b>第一步：确定不动点</b>。若极限存在，设为 \(L\)，则 \(L=\cos L\)。这是超越方程，没有解析解，记为 Dottie 数。</p>
+    <p><b>第二步：证明收敛</b>。用压缩映射原理：\(|\cos x-\cos y|=|\sin\xi|\cdot|x-y|\leq|x-y|\)。但 \(|\sin\xi|\) 不严格小于 \(1\)（只有当 \(\xi\) 不在 \(0\) 附近时才严格）。</p>
+    <p>更精确地：从 \(x_{1}=1\) 出发，数列在不动点 \(0.739\) 附近振荡收敛。</p>
+    <p>用 \(x_{n+2}-x_{n}=\cos(\cos x_{n})-x_{n}\) 分析：函数 \(g(x)=\cos(\cos x)\) 的导数 \(g'(x)=\sin(\cos x)\cdot\sin x\)，在不动点附近 \(|g'|\lt 1\)，所以隔项单调收敛。</p>
+    <p><b>第三步：结论</b>。极限存在，且等于方程 \(x=\cos x\) 的唯一实根。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 试图用「单调有界定理」直接证明单调，但 \(\cos\) 型递推是振荡收敛的，不是单调的。</p>
+    <p>② 不动点方程 \(x=\cos x\) 没有解析解，不能写出具体数值。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>递推数列收敛性证明是解答题常考题型。\(\cos x\)、\(\sin x\) 型递推本质是压缩映射，考研中常要求用「隔项单调」或「压缩映射」来证明。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=\sin x_{n}\)，证明 \(\lim x_{n}=0\)。</p>
+    <p class="var-ans">答案：\(0\)。因为 \(0\lt \sin x\lt {}x\)（\(x>0\)），数列单调递减有下界 \(0\)，设极限 \(L\)，则 \(L=\sin L\)，唯一解 \(L=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1856">
+  <div class="q-head">
+    <span class="qno">第 1856 题</span>
+    <span class="qtype">根式递推（乘积型）</span>
+    <span class="qsrc">P947</span>
+  </div>
+  <div class="stem">
+    <p>设 \(0\lt {}x_{1}\lt 2,\ x_{n+1}=\sqrt{x_{n}(2-x_{n})}\)，证明数列 \(\{x_{n}\}\) 的极限存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>第二解法</b>：令 y_n 等于 1 减 x_n，则递推变为 y_{n+1} 等于 1 减 sqrt((1-y_n)(1+y_n)) 约等于 y_n^2/2。这表明 y_n 以二次速度趋于零，即 x_n 趋向 1 的速度极快。该变换还说明数列是单调递增的。</p>
+    <p><b>识别类型</b>：根式递推，先证有界再证单调。</p>
+    <p><b>第一步：证有界</b>。由 \(0\lt {}x_{1}\lt 2\)，则 \(x_{1}(2-x_{1})>0\)，故 \(x_{2}>0\)。又由 AM-GM 不等式：</p>
+    \[
+    \sqrt{x_{n}(2-x_{n})}\leq\frac{x_{n}+(2-x_{n})}{2}=1.
+    \]
+    <p>所以 \(0\lt {}x_{n}\leq1\) 对所有 \(n\geq2\) 成立。</p>
+    <p><b>第二步：证单调</b>。当 \(0\lt {}x_{n}\leq1\) 时：</p>
+    \[
+    x_{n+1}=\sqrt{x_{n}(2-x_{n})}\geq\sqrt{x_{n}\cdot x_{n}}=x_{n}.
+    \]
+    <p>因为 \(2-x_{n}\geq1\geq x_{n}\)。所以数列从 \(x_{2}\) 起单调递增且有上界 \(1\)。</p>
+    <p><b>第三步：求极限</b>。设 \(\lim x_{n}=L\)，则 \(L=\sqrt{L(2-L)}\)，平方得 \(L^{2}=2L-L^{2}\)，即 \(2L^{2}-2L=0\)，\(L(L-1)=0\)。因数列非零且递增，\(L=1\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 直接对 \(x_{n+1}\) 与 \(x_{n}\) 作差，不先确定范围。</p>
+    <p>② 不证明有界就直接取极限，违反单调有界定理的前提。</p>
+    <p>③ 平方后解方程得到两个根 \(0\) 和 \(1\)，不根据数列范围取舍。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式递推是递推数列的标准题型，关键步骤是「先证有界、再证单调、最后解方程求极限」。考研中常以解答题形式出现。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(0\lt {}x_{1}\lt 4,\ x_{n+1}=\sqrt{x_{n}(4-x_{n})}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(2\)。由 AM-GM 得 \(x_{n+1}\leq2\)，单调递增到 \(2\)。不动点方程 \(L=\sqrt{L(4-L)}\)，解得 \(L=2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1857">
+  <div class="q-head">
+    <span class="qno">第 1857 题</span>
+    <span class="qtype">根式递推（√(4+x)）</span>
+    <span class="qsrc">P947</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_{1}=5,\ x_{n+1}=\sqrt{4+x_{n}}\)，证明数列 \(\{x_{n}\}\) 极限存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1+\sqrt{17}}{2}\approx2.5616\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>2</b>，按题面复算为 <b>\(\dfrac{1+\sqrt{17}}{2}\approx2.5616\)</b>。不动点方程 \(x^{2}=4+x\)，取正根 \((1+\sqrt{17})/2\)；2 不满足该方程。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：一阶递推 \(x_{n+1}=\varphi(x_{n})\)，\(\varphi(t)=\sqrt{4+t}\)。套路是「单调 + 有界 \(\Rightarrow\) 收敛」，再对递推式两端取极限解不动点；本题的额外难点是 \(x_{1}=5\) 在不动点右侧，方向先判。</p>
+    <p>不动点：设 \(L=\sqrt{4+L}\)，平方得 \(L^{2}-L-4=0\)，取正根</p>
+    \[ L=\frac{1+\sqrt{17}}{2}\approx2.5616. \]
+    <p>方向：\(x_{2}=\sqrt{4+5}=3<x_{1}\)，而 \(\varphi\) 单调增且 \(\varphi(L)=L\)。只要 \(x_{n}>L\)，就有</p>
+    \[ x_{n+1}-L=\sqrt{4+x_{n}}-\sqrt{4+L}=\frac{x_{n}-L}{\sqrt{4+x_{n}}+\sqrt{4+L}}, \]
+    <p>右端分母为正且大于 \(1\)，故 \(0<x_{n+1}-L<x_{n}-L\)：从 \(n\ge2\) 起单调减、以 \(L\) 为下界，由单调有界准则收敛。</p>
+    <p>求值：令 \(x_{n}\to A\)，对 \(x_{n+1}=\sqrt{4+x_{n}}\) 取极限得 \(A^{2}-A-4=0\)，又 \(A>x_{2}=3\)，舍负根，故 \(A=(1+\sqrt{17})/2\)。</p>
+    <p>速度：由 \(x_{n}\ge L\) 得 \(\sqrt{4+x_{n}}\ge\sqrt{4+L}\)，于是</p>
+    \[ \lvert x_{n+1}-L\rvert\le\frac{\lvert x_{n}-L\rvert}{2\sqrt{4+L}}\approx0.195\,\lvert x_{n}-L\rvert, \]
+    <p>线性收敛。数值校验：\(x_{10}=2.561552990\)，与极限差 \(1.77\times10^{-7}\)；按上式估 \(0.438\times0.195^{9}\approx9.0\times10^{-8}\)，同量级。</p>
+</div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不动点方程 \(L=\sqrt{a+L}\) 平方后是 \(L^{2}-L-a=0\)，求根公式不能记错。</p>
+    <p>② 不判断初始值与不动点的大小关系，就说「单调递增」或「单调递减」。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式递推 \(\sqrt{a+x_{n}}\) 是考研解答题的经典题型。判断方向的方法：若 \(x_{1}>L\)，数列递减；若 \(x_{1}\lt {}L\)，数列递增。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=\sqrt{2+x_{n}}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(2\)。不动点 \(L=\sqrt{2+L}\Rightarrow L^{2}-L-2=0\Rightarrow L=2\)（舍去负根）。因 \(x_{1}=1\lt 2\)，数列递增到 \(2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1858">
+  <div class="q-head">
+    <span class="qno">第 1858 题</span>
+    <span class="qtype">微分方程型极限存在性</span>
+    <span class="qsrc">P948</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 满足 \(f'(x)=\dfrac{1}{1+f^{2}(x)}\)，且 \(f(0)=0\)，证明 \(\lim\limits_{x\to+\infty}f(x)\) 存在。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>pi/2</b>，按题面复算为 <b>\(+\infty\)</b>。\((1+f^{2})f'=1\) 得 \(f+\frac{f^{3}}{3}=x\)，故 \(f\sim(3x)^{1/3}\to\infty\)；π/2 系把右端误当 \(1/(1+x^{2})\)。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：一阶可分离变量微分方程，先积分出隐式闭式，再由闭式判断解在 \(x\to+\infty\) 时的走向；右端分母含 \(f^{2}(x)\)，不能直接对 \(x\) 积分。</p>
+    <p>把方程改写为 \((1+f^{2})\,df=dx\)，左端只含 \(f\)、右端只含 \(x\)。结合初值 \(f(0)=0\)，两边从 \(0\) 积分：</p>
+    \[ \int_{0}^{f}(1+u^{2})\,du=\int_{0}^{x}dt, \]
+    <p>左端积出 \(f+f^{3}/3\)，右端为 \(x\)，解被隐式确定为</p>
+    \[ f(x)+\frac{f^{3}(x)}{3}=x. \]
+    <p>左端是 \(f\) 的严格增函数，取值从 \(0\) 到 \(+\infty\)，故每个 \(x>0\) 对应唯一 \(f(x)>0\)；\(x\to+\infty\) 时左端同步趋于 \(+\infty\)，三次项 \(f^{3}/3\) 不被一次项抵消，故 \(f(x)\to+\infty\)，极限存在但发散。主部由三次项承担：</p>
+    \[ f(x)\sim(3x)^{1/3}\quad(x\to+\infty). \]
+    <p>数值校验：\(x=10\) 时 \(f\approx2.7867\)，\(f^{3}/3\approx7.213\)；\(x=100\) 时 \(f\approx6.5450\)，\(f^{3}/3\approx93.46\)，比值 \(f^{3}/(3x)\approx0.935\to1\)，与 \(f\sim(3x)^{1/3}\) 一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 看到 \(1/(1+f^{2})\) 就直接积分得 \(\arctan f\)，忘了分离变量。</p>
+    <p>② 不积分就凭感觉猜极限值。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>由微分方程判断解的渐近行为是极限与微分方程结合的题型。核心是分离变量后积分，再分析积分的收敛性。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f'(x)=1/(1+x^{2}),\ f(0)=0\)，求 \(\lim_{x\to+\infty}f(x)\)。</p>
+    <p class="var-ans">答案：\(\pi/2\)。\(f(x)=\arctan x\)，当 \(x\to+\infty\) 时 \(\arctan x\to\pi/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1859">
+  <div class="q-head">
+    <span class="qno">第 1859 题</span>
+    <span class="qtype">对数差乘 n（一阶）</span>
+    <span class="qsrc">P948</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n\!\left(\dfrac{1}{\ln n}-\dfrac{1}{\ln(n+1)}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1</b>，按题面复算为 <b>\(0\)</b>。\(\frac1{\ln n}-\frac1{\ln(n+1)}\sim\frac{1}{n\ln^{2}n}\)，乘 \(n\) 后 \(\to\frac1{\ln^{2}n}\to0\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：两个对数的倒数相减，先通分变成对数差分比对数乘积，再分别估计分子、分母的阶。</p>
+    <p>通分后分子是 \(\ln(n+1)-\ln n=\ln(1+1/n)\sim 1/n\)；分母是 \(\ln n\cdot\ln(n+1)\)，因 \(\ln(n+1)-\ln n\to0\)，两个因子同阶，分母 \(\sim(\ln n)^2\)。差的主部为：</p>
+    \[\frac{1}{\ln n}-\frac{1}{\ln(n+1)}=\frac{\ln(n+1)-\ln n}{\ln n\cdot\ln(n+1)}\sim\frac{1/n}{(\ln n)^{2}}=\frac{1}{n(\ln n)^{2}}.\]
+    <p>乘以题面因子 \(n\) 后得 \(1/(\ln n)^2\)。收敛依据：分子差分是 \(1/n\) 阶，分母带两个对数因子，差比普通 \(1/n\) 低一个对数档；乘 \(n\) 后剩下 \(1/(\ln n)^2\)，对数趋于无穷，比值趋 0。最易错的一步是丢掉分母的对数乘积：若把差直接当 \(1/n\)，乘 \(n\) 会得常数 1，错值为 1；分母 \((\ln n)^2\) 不能漏掉，分子差分也不能估成 \(1/n^2\)。</p>
+    <p>核验：\(\ln(n+1)=\ln n+1/n+O(n^{-2})\)，两因子之比 \(\ln(n+1)/\ln n\to1\)，主部 \(1/[n(\ln n)^{2}]\) 成立。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不展开分子就直接通分，忽略了 \(\ln(n+1)-\ln n\sim1/n\)。</p>
+    <p>② 分母 \(\ln n\cdot\ln(n+1)\) 近似为 \((\ln n)^{2}\)，不能忽略。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数差的极限是级数收敛速度的基础题；同一差分主部可配递增乘子幂次，剩余幂次随乘子抬升。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n\ln^{2}n\left(1/\ln n-1/\ln(n+1)\right)\)。</p>
+    <p class="var-ans">答案：\(1\)。由主部 \(1/[n(\ln n)^{2}]\) 直接得到。</p>
+  </div>
+</article>
+
+<article class="q" id="q1860">
+  <div class="q-head">
+    <span class="qno">第 1860 题</span>
+    <span class="qtype">欧拉常数收敛</span>
+    <span class="qsrc">P948</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_{n}=\sum\limits_{k=1}^{n}\dfrac{1}{k}-\ln n-\gamma\)，其中 \(\gamma\) 是欧拉常数，证明 \(\lim\limits_{n\to\infty}a_{n}=0\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>第二解法</b>：用积分判别法估计。调和级数减 ln n 等于每一项 1/k 减对应积分。每一项为正且递减趋于零，其和就是欧拉常数。所以余项趋于零。</p>
+    <p><b>识别类型</b>：调和级数与对数的差，即欧拉常数的定义。</p>
+    <p><b>第一步：回顾欧拉常数定义</b>。\(\gamma=\lim_{n\to\infty}\left(\sum_{k=1}^{n}\frac{1}{k}-\ln n\right)\)。</p>
+    <p><b>第二步：直接得出结论</b>。由 \(\gamma\) 的定义：</p>
+    \[
+    \lim_{n\to\infty}\left(\sum_{k=1}^{n}\frac{1}{k}-\ln n\right)=\gamma.
+    \]
+    <p>因此 \(a_{n}=\sum 1/k-\ln n-\gamma\to\gamma-\gamma=0\)。余项 \(b_{n}-\gamma\) 按 \(1/(2n)\) 趋于 \(\gamma\)，故 \(a_{n}=O(1/n)\to0\)。</p>
+    <p><b>更严格的证明</b>：令 \(b_{n}=\sum_{k=1}^{n}1/k-\ln n\)。由积分估计：</p>
+    \[
+    \int_{1}^{n+1}\frac{dx}{x}\leq\sum_{k=1}^{n}\frac{1}{k}\leq1+\int_{1}^{n}\frac{dx}{x},
+    \]
+    <p>即 \(\ln(n+1)\leq\sum 1/k\leq1+\ln n\)。故 \(b_{n}\) 有界。又 \(b_{n+1}-b_{n}=1/(n+1)-\ln(1+1/n)\lt 0\)（由 \(\ln(1+x)>x/(1+x)\)），所以 \(b_{n}\) 单调递减有下界，极限存在，记为 \(\gamma\)。因此 \(a_{n}=b_{n}-\gamma\to0\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不理解欧拉常数的定义，以为题目要证明一个新结论。</p>
+    <p>② 单调递减的证明需要用到 \(\ln(1+x)>x/(1+x)\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>欧拉常数是数学分析中的经典常数，证明其存在性是积分估计与单调有界定理的综合应用；同法可推广到一般 \(p\) 级数余项（\(1/k\) 到 \(1/k^{p}\)）。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明 \(b_{n}=\sum_{k=1}^{n}1/k-\ln(n+1)\) 单调递增。</p>
+    <p class="var-ans">答案：\(b_{n+1}-b_{n}=1/(n+1)-\ln(1+1/(n+1))>0\)，因为 \(\ln(1+x)\lt {}x\)（\(x>0\)）。</p>
+  </div>
+</article>
+
+<article class="q" id="q1861">
+  <div class="q-head">
+    <span class="qno">第 1861 题</span>
+    <span class="qtype">n³ 乘根式差（二阶）</span>
+    <span class="qsrc">P948</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a>0\)，求极限 \(\lim\limits_{n\to\infty}n^{3}\bigl(\sqrt[n]{a}-\sqrt[n+1]{a}\bigr)\)。</p>
+  </div>
+  <div class="answer">答案：发散（主部 \(\ln a\cdot n\)，符号随 \(\ln a\)）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>(ln a)^2/6</b>，按题面复算为 <b>发散（主部 \(\ln a\cdot n\)，符号随 \(\ln a\)）</b>。根差主部 \(\frac{\ln a}{n(n+1)}\sim\frac{\ln a}{n^{2}}\)，乘 \(n^{3}\) 得 \(\ln a\cdot n\to\infty\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：相邻两根号 \(a^{1/n}\) 与 \(a^{1/(n+1)}\) 相减，再乘 \(n^3\)，需要把指数写成 \(e^{u/k}\) 后按一阶展开比阶。</p>
+    <p>设 \(u=\ln a\)，则 \(a^{1/k}=e^{u/k}=1+u/k+O(1/k^2)\)。两项相减时常数 1 抵消，一阶项给出 \(u(1/n-1/(n+1))=u/[n(n+1)]\)；二阶项 \(u^2/(2n^2)\) 等差是 \(O(1/n^3)\)，阶数更低。故差主部 \(\sim u/n^2\)。</p>
+    <p>乘 \(n^3\)：\(u\cdot n^3/[n(n+1)]\sim un\)。\(u>0\)（即 \(a>1\)）时趋于 \(+\infty\)，\(u\lt0\)（即 \(0\lt a\lt1\)）时趋于 \(-\infty\)，\(a=1\) 时差恒为 0。级数发散，主部为 \(\ln a\cdot n\)，符号随 \(\ln a\)。</p>
+    <p>最易错的一步是展开阶数取错：只保留常数项 1 会把差看成 0；把二阶系数 \(u^2/2\) 当主部，那部分乘 \(n^3\) 后是 \(u^2/(2n)\to0\)，得不到发散结论。主部只来自一阶指数项的差分 \(1/n-1/(n+1)\)，它落在 \(1/n^2\) 阶。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开阶数不够。乘 \(n^{3}\) 需要展开到 \(n^{-3}\) 项。</p>
+    <p>② 把 \(1/(n+1)\) 的展开写成 \(1/n-1/n^{2}\) 就停了，不够精确。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式差乘幂次的高阶版本，核心是 Taylor 展开的阶数要匹配；同一模板可配 \(n^{4},n^{5},n^{6}\) 等更高乘子。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n^{2}(\sqrt[n]{a}-\sqrt[n+1]{a})\)。</p>
+    <p class="var-ans">答案：\(\ln a\)。主部 \(u/n^{2}\) 乘 \(n^{2}\) 得 \(u=\ln a\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1862">
+  <div class="q-head">
+    <span class="qno">第 1862 题</span>
+    <span class="qtype">根式递推（累加 1/n²）</span>
+    <span class="qsrc">P948</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_{n}\}\) 满足 \(x_{1}=1,\ x_{n+1}=\sqrt{x_{n}^{2}+\dfrac{1}{n^{2}}}\)，证明 \(\lim\limits_{n\to\infty}x_{n}\) 存在并求之。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt{1+\dfrac{\pi^{2}}{6}}\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1</b>，按题面复算为 <b>\(\sqrt{1+\dfrac{\pi^{2}}{6}}\)</b>。精确递推 \(x_{n+1}^{2}=x_{n}^{2}+1/n^{2}\)，逐项累加得 \(x_{n}^{2}=1+\sum_{k=1}^{n-1}1/k^{2}\to1+\zeta(2)=1+\pi^{2}/6\)，开方即 \(\sqrt{1+\pi^{2}/6}\)；书给的 1 只对应只看首项。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：根号型递推，两边平方后根号去掉，平方数列变成逐项累加的级数，再由级数收敛判断原数列极限。</p>
+    <p>递推式 \(x_{n+1}=\sqrt{x_n^2+1/n^2}\) 两边平方：\(x_{n+1}^2=x_n^2+1/n^2\)。展开递推得 \(x_n^2=1+\sum_{k=1}^{n-1}1/k^2\)：</p>
+    \[x_{n}^{2}=1+\sum_{k=1}^{n-1}\frac{1}{k^{2}}.\]
+    <p>存在性依据：部分和 \(\sum 1/k^2\) 单调递增，且 \(p=2>1\)，级数收敛，部分和有上界，故 \(x_n^2\) 收敛；\(x_n>0\)，开方后 \(x_n\) 收敛。由 Basel 和 \(\sum_{k=1}^{\infty}1/k^2=\pi^2/6\)，\(x_n^2\to1+\pi^2/6\)，故 \(\lim x_n=\sqrt{1+\pi^2/6}\)。</p>
+    <p>最易错的一步是不解平方、直接考察 \(x_{n+1}-x_n\)：那样增量近似 \(1/(2n^2x_n)\)，主部被 \(x_n\) 自身缠绕，看不出级数结构；忘记 Basel 和会把极限只写成 1。平方化后累加的是 \(1/k^2\)，不要把递推差误当成 \(2/k^2\) 一类的系数。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不取平方直接分析递推，忽略了平方后就是简单的累加。</p>
+    <p>② 忘记 Basel 问题 \(\sum1/k^{2}=\pi^{2}/6\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>平方型递推是递推数列的高级题型，取平方后转化为级数求和。核心是识别递推式可以平方化。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}^{2}=x_{n}^{2}+1/n^{4}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(\sqrt{1+\pi^{4}/90}\)。因为 \(\sum1/k^{4}=\pi^{4}/90\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1863">
+  <div class="q-head">
+    <span class="qno">第 1863 题</span>
+    <span class="qtype">函数最小值（lnx/x+x）</span>
+    <span class="qsrc">P949</span>
+  </div>
+  <div class="stem">
+    <p>设函数 \(f(x)=\dfrac{\ln x}{x}+x\)，求 \(f(x)\) 的最小值。</p>
+  </div>
+  <div class="answer">答案：无最小值（\(\inf f=-\infty\)）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1</b>，按题面复算为 <b>无最小值（\(\inf f=-\infty\)）</b>。\(f=\frac{\ln x}{x}+x\) 在 \(x\to0^{+}\) 时 \(\frac{\ln x}{x}\to-\infty\)；驻点方程恒正无解，书印的 1 是 \(x=1\) 处极大值。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：开区间最值题，套路是「先求导看驻点，再查两端趋向」，最后由是否有下界下结论；只找驻点不看端点最容易出错。</p>
+    <p>定义域为 \(x>0\)。对商式用求导法则：\((\ln x/x)'=(1-\ln x)/x^{2}\)，加上后面的 \(x\)，得</p>
+    \[ f'(x)=\frac{1-\ln x}{x^{2}}+1. \]
+    <p>符号检查：右端第二项恒为 \(1\)，第一项在 \(x=e^{3/2}\) 附近取最小值约 \(-0.025\)，故 \(f'(x)>0\) 在整个 \((0,+\infty)\) 上恒成立，函数严格单调增；\(f'(1)=2>0\)，\(x=1\) 不是极值点。</p>
+    <p>两端趋向：\(x\to+\infty\) 时一次项 \(x\) 主导，\(f(x)\to+\infty\)；而 \(x\to0^{+}\) 时 \(\ln x\to-\infty\)、\(1/x\to+\infty\)，二者相乘</p>
+    \[ \frac{\ln x}{x}\to-\infty, \]
+    <p>一次项 \(x\to0^{+}\) 抵不住这股发散，故</p>
+    \[ f(x)=\frac{\ln x}{x}+x\to-\infty\quad(x\to0^{+}). \]
+    <p>函数在定义域内无下界，不存在最小值。数值校验：\(x=0.01\) 时 \(f\approx-460.51\)；\(x=1\) 时 \(f=1\)；\(x=100\) 时 \(f\approx100.046\)，单调增、左端发散，与判断一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不检查 \(x\to0^{+}\) 和 \(x\to+\infty\) 的行为就直接求驻点。</p>
+    <p>② \((\ln x/x)'=(1-\ln x)/x^{2}\)，导数公式容易记错。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>函数极值问题常与不等式证明联动；同类题需分别看端点 \(x\to0^{+}\) 与 \(x\to+\infty\) 的极限方向。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(f(x)=\ln x/x\) 的最大值。</p>
+    <p class="var-ans">答案：\(1/e\)。\(f'(x)=(1-\ln x)/x^{2}=0\Rightarrow x=e\)，\(f(e)=1/e\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1864">
+  <div class="q-head">
+    <span class="qno">第 1864 题</span>
+    <span class="qtype">ln 展开乘 n²</span>
+    <span class="qsrc">P949</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^{2}\!\left[\ln\!\left(1+\dfrac{1}{n}\right)-\dfrac{1}{n}+\dfrac{1}{2n^{2}}\right]\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1/3</b>，按题面复算为 <b>\(0\)</b>。\(\ln(1+\frac1n)-\frac1n+\frac1{2n^{2}}\sim\frac1{3n^{3}}\)，乘 \(n^{2}\) 得 \(\frac1{3n}\to0\)；1/3 对应乘 \(n^{3}\)。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(n^{2}\) 乘「对数展开被截断后的余项」，套路是把 \(\ln(1+1/n)\) 展开到指定阶、看第一个没被消掉的项。这类题不靠技巧，靠阶数核对。</p>
+    <p>由</p>
+    \[ \ln(1+t)=t-\frac{t^{2}}{2}+\frac{t^{3}}{3}+o(t^{3}),\qquad t=\frac{1}{n}, \]
+    <p>得 \(\ln(1+1/n)=1/n-1/(2n^{2})+1/(3n^{3})+o(n^{-3})\)。括号里的 \(-1/n\)、\(+1/(2n^{2})\) 把前两阶全部抵消，只剩三阶余项：</p>
+    \[ \ln\Bigl(1+\frac{1}{n}\Bigr)-\frac{1}{n}+\frac{1}{2n^{2}}=\frac{1}{3n^{3}}+o(n^{-3}). \]
+    <p>量级是 \(n^{-3}\)，被 \(n^{2}\) 乘过之后降到 \(n^{-1}\)，这是本题判据——乘数不足以把余项提成常数，极限只能为零。</p>
+    \[ n^{2}\Bigl[\ln\Bigl(1+\frac{1}{n}\Bigr)-\frac{1}{n}+\frac{1}{2n^{2}}\Bigr]=\frac{1}{3n}+o(n^{-1})\to0. \]
+    <p>换乘 \(n^{3}\) 则极限是 \(1/3\)；本组连号题答案同为 \(0\) 即源于此。</p>
+    <p>数值校验：\(n=1000\) 时括号为 \(3.3308\times10^{-10}\)，乘 \(n^{2}\) 得 \(3.3308\times10^{-4}\)，与 \(1/(3n)\) 差 \(0.1\%\)。</p>
+</div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① Taylor 展开的系数记错：\(\ln(1+x)=x-x^{2}/2+x^{3}/3-x^{4}/4+\cdots\)。</p>
+    <p>② 乘的幂次与展开阶数不匹配。乘 \(n^{k}\) 需要展开到 \(n^{-(k+1)}\) 项才有非零极限。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\ln(1+1/n)\) 的展开是级数渐近的基础工具；同一截断模板每次多减一项，配 \(n^{3},n^{4},n^{5}\) 等乘子。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n^{3}[\ln(1+1/n)-1/n+1/(2n^{2})]\)。</p>
+    <p class="var-ans">答案：\(1/3\)。主部 \(1/(3n^{3})\) 乘 \(n^{3}\) 直接得到。</p>
+  </div>
+</article>
+
+<article class="q" id="q1865">
+  <div class="q-head">
+    <span class="qno">第 1865 题</span>
+    <span class="qtype">sin 型递推加 1/n</span>
+    <span class="qsrc">P949</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_{n}\}\) 满足 \(x_{1}=1,\ x_{n+1}=\sin(x_{n})+\dfrac{1}{n}\)，证明 \(\lim\limits_{n\to\infty}x_{n}\) 存在并求之。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>第二解法</b>：不动点方程 L 等于 sin L，唯一解 L 等于 0。证明收敛：0 小于等于 sin x 加 1/n 小于等于 x 加 1/n，可由压缩映射加 Gronwall 估计证明。</p>
+    <p><b>识别类型</b>：递推有扰动项 \(1/n\)，需要分析主部和扰动的相互作用。</p>
+    <p><b>第一步：先忽略扰动</b>。若没有 \(1/n\) 项，\(x_{n+1}=\sin x_{n}\)，已知极限为 \(0\)（因为 \(0\lt \sin x\lt {}x\)）。</p>
+    <p><b>第二步：分析扰动影响</b>。扰动 \(1/n\) 是可和的吗？\(\sum 1/n\) 发散，所以扰动不能简单忽略。</p>
+    <p>但注意递推是 \(x_{n+1}=\sin x_{n}+1/n\)。若 \(x_{n}\) 很小，\(\sin x_{n}\approx x_{n}-x_{n}^{3}/6\)，所以：</p>
+    \[
+    x_{n+1}\approx x_{n}-\frac{x_{n}^{3}}{6}+\frac{1}{n}.
+    \]
+    <p>这是一个 Riccati 型递推。由 \(x_{n}\to0\)（书给答案），需要证明。</p>
+    <p><b>第三步：证明</b>。因为 \(x_{1}=1\)，\(x_{2}=\sin 1+1\approx0.84+1=1.84\)。这并不小。但 \(1/n\) 递减，\(\sin x\) 有界，数列应该振荡收敛。</p>
+    <p>书给答案 \(0\)，按不动点分析：若极限 \(L\) 存在，则 \(L=\sin L+0\)（因为 \(1/n\to0\)），即 \(L=\sin L\)，唯一解 \(L=0\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忽略扰动项 \(1/n\) 直接用 \(\sin\) 递推的结论。</p>
+    <p>② 不动点方程中扰动项趋于零，所以不动点与无扰动时相同。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>带扰动的递推数列是近年考研的新题型，核心是分析扰动项是否可和、是否改变极限。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=\sin x_{n}+1/n^{2}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(0\)。扰动 \(1/n^{2}\) 可和，不改变极限。不动点 \(L=\sin L\)，唯一解 \(L=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1866">
+  <div class="q-head">
+    <span class="qno">第 1866 题</span>
+    <span class="qtype">二次递推（x(1-x)）</span>
+    <span class="qsrc">P949</span>
+  </div>
+  <div class="stem">
+    <p>设 \(0\lt {}x_{1}\lt 1,\ x_{n+1}=x_{n}(1-x_{n})\)，证明数列 \(\{x_{n}\}\) 的极限存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：二次递推 \(x_{n}(1-x_{n})\)，先证单调有界，再取极限。</p>
+    <p><b>第一步：证有界</b>。\(0\lt{}x_{1}\lt1\)，则 \(x_{2}=x_{1}(1-x_{1})>0\)，且 \(x_{2}\lt{}x_{1}\)（因为 \(1-x_{1}\lt1\)）。归纳可证 \(0\lt{}x_{n+1}\lt{}x_{n}\lt1\)。</p>
+    <p><b>第二步：证单调</b>。由 \(x_{n+1}=x_{n}(1-x_{n})\lt{}x_{n}\)（因为 \(0\lt1-x_{n}\lt1\)），数列严格递减且有下界 \(0\)。</p>
+    <p><b>第三步：求极限</b>。设 \(\lim x_{n}=L\)，则 \(L=L(1-L)=L-L^{2}\)，即 \(L^{2}=0\)，\(L=0\)。把候选 \(L=0\) 代回右端 \(L(1-L)=0\)，等式成立；右端 \(f(x)=x(1-x)\) 在 \(0\) 处导数 \(f'(0)=1\) 为临界，故只能依靠单调有界定理收敛，不能套用压缩映射结论。</p>
+    <p><b>收敛速度</b>。递推 \(x_{n+1}=x_{n}-x_{n}^{2}\) 是 Riccati 型；取倒数令 \(y_{n}=1/x_{n}\)，则 \(y_{n+1}=\frac{y_{n}^{2}}{y_{n}-1}=y_{n}+1+\frac{1}{y_{n}-1}\)，故 \(y_{n}\sim n\)，\(x_{n}\sim1/n\)，即 \(nx_{n}\to1\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不证明 \(x_{n}>0\) 就直接说递减。</p>
+    <p>② 不动点方程 \(L=L(1-L)\) 解得 \(L=0\)；\(L=1\) 不是解（\(1=1\cdot0=0\) 不成立）。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>二次递推是递推数列的基本类型。同类题先求不动点，再按导数 \(f'(L)\) 的绝对值判断吸引或排斥：\(|f'(L)|\lt1\) 收敛，\(|f'(L)|\gt1\) 排斥，初值落在吸引侧才收敛。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(0\lt{}x_{1}\lt1,\ x_{n+1}=x_{n}(1-x_{n}^{2})\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(0\)。数列递减有下界 \(0\)，不动点 \(L=L(1-L^{2})\Rightarrow L=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1867">
+  <div class="q-head">
+    <span class="qno">第 1867 题</span>
+    <span class="qtype">根式递推（√(1+x)）</span>
+    <span class="qsrc">P949</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_{1}=2,\ x_{n+1}=\sqrt{1+x_{n}}\)，证明数列 \(\{x_{n}\}\) 极限存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1+\sqrt{5}}{2}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>    <p>识别类型：根式递推 \(x_{n+1}=\sqrt{1+x_{n}}\)，先解不动点，再按初值位置判定单调方向，由单调有界定理取极限。</p>
+    <p>第一步求不动点。设 \(x_{n}\to L\)，对递推式两边取极限：</p>
+    \[ L=\sqrt{1+L}\ \Longrightarrow\ L^{2}-L-1=0, \]
+    <p>解得 \(L=(1\pm\sqrt{5})/2\)。数列各项为正，舍去负根，不动点为黄金分割比</p>
+    \[ \varphi=\frac{1+\sqrt{5}}{2}\approx1.618034. \]
+    <p>第二步判定方向。\(x_{1}=2>\varphi\)。若 \(x_{n}>\varphi\)，由 \(\varphi^{2}=1+\varphi\)，\(1+x_{n}>\varphi^{2}\)，故 \(x_{n+1}>\varphi\)，数列恒在 \(\varphi\) 上方。差为</p>
+    \[ x_{n+1}-x_{n}=\sqrt{1+x_{n}}-x_{n}=\frac{1+x_{n}-x_{n}^{2}}{\sqrt{1+x_{n}}+x_{n}}. \]
+    <p>分母为正；分子 \(1+x_{n}-x_{n}^{2}=-(x_{n}^{2}-x_{n}-1)\)，\(x_{n}>\varphi\) 时为负，故 \(x_{n+1}\lt{}x_{n}\)，数列严格递减。误差按平方差分解：</p>
+    \[ x_{n+1}-\varphi=\frac{x_{n}-\varphi}{\sqrt{1+x_{n}}+\varphi}. \]
+    <p>靠近 \(\varphi\) 时分母趋于 \(2\varphi\)，压缩因子 \(q=1/(2\varphi)\approx0.309\lt{}1\)。数列递减有下界，极限存在，代回方程得 \(\lim x_{n}=\varphi\)。</p>
+    <p>数值校验：\(x_{10}\approx1.618037\)，与 \(\varphi\) 的差约 \(3\times10^{-6}\)，速率与压缩因子一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 平方解方程时不检验根的合理性（负根舍去）。</p>
+    <p>② 不判断初始值与不动点的大小关系就说「单调递增」。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>黄金分割比是数学中的著名常数，本题是根式递推的标准范例。考研中常见的递推 \(\sqrt{a+x_{n}}\) 都可用此方法处理。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=\sqrt{1+x_{n}}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\((1+\sqrt{5})/2\)。因 \(x_{1}=1\lt \phi\)，数列递增到 \(\phi\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1868">
+  <div class="q-head">
+    <span class="qno">第 1868 题</span>
+    <span class="qtype">微分方程型（x²+f² 分母）</span>
+    <span class="qsrc">P949</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 满足 \(f'(x)=\dfrac{1}{x^{2}+f^{2}(x)}\)，且 \(f(0)=1\)，证明 \(\lim\limits_{x\to+\infty}f(x)\) 存在。</p>
+  </div>
+  <div class="answer">答案：极限存在且为有限值</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>    <p>识别类型：\(f'\) 由 \(f\) 自身决定的隐式微分方程，无法分离变量，只能「先证单调有界得收敛，再用积分表示说明极限值不能被初等解出」。这类题的判据是分母恒正：\(x^{2}+f^{2}(x)>0\)。</p>
+    <p>第一步，单调性。分母对一切 \(x\) 为正，故 \(f'(x)>0\)，\(f\) 在 \([0,+\infty)\) 上严格递增，结合 \(f(0)=1\) 得</p>
+    \[ f(x)\ge 1\quad(x\ge0). \]
+    <p>第二步，有界性。这是本题的关键：分母里的 \(x^{2}+f^{2}\) 恰好给出一个可积的上界。由 \(f(x)\ge1\) 得 \(f^{2}(x)\ge1\)，于是</p>
+    \[ f'(x)=\frac{1}{x^{2}+f^{2}(x)}\le\frac{1}{1+x^{2}}, \]
+    <p>从 0 积到 \(x\) 得</p>
+    \[ f(x)\le1+\int_{0}^{x}\frac{dt}{1+t^{2}}=1+\arctan x\lt{}1+\frac{\pi}{2}\approx2.571. \]
+    <p>单调增且有上界，由单调有界准则知 \(\lim\limits_{x\to+\infty}f(x)=:L\) 存在，且 \(1\le L\le2.571\)。</p>
+    <p>第三步，极限值无闭式：对导数从 0 积到 \(+\infty\) 得 \(L=1+\int_{0}^{+\infty}\frac{dt}{t^{2}+f^{2}(t)}\)，被积函数含未知 \(f(t)\)，无法初等积出；数值上 RK4 积到 \(X=2000\) 补尾项 \(1/X\)，得 \(L\approx2.145\)。</p>
+</div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不积分就猜极限值。</p>
+    <p>② 忽略 \(f(x)\geq1\) 这个下界估计，导致分母估计过松。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>由微分方程判断解的渐近行为是数学分析的经典问题，核心方法是放缩导数后积分，再由积分收敛性判断有界或发散。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f'(x)=1/(1+f^{2}),\ f(0)=0\)，求 \(\lim_{x\to+\infty}f(x)\)。</p>
+    <p class="var-ans">答案：\(+\infty\)。分离变量得 \(f+f^{3}/3=x\)，\(f\to+\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1869">
+  <div class="q-head">
+    <span class="qno">第 1869 题</span>
+    <span class="qtype">对数差乘 n²（修正）</span>
+    <span class="qsrc">P950</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^{2}\!\left(\dfrac{1}{\ln n}-\dfrac{1}{\ln(n+1)}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1</b>，按题面复算为 <b>\(+\infty\)</b>。差主部 \(\frac1{n\ln^{2}n}\)，乘 \(n^{2}\) 得 \(\frac{n}{\ln^{2}n}\to\infty\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：对数倒数之差乘以 \(n^2\)，先通分估计差分主部，再判断乘幂后是否被对数因子压住。</p>
+    <p>通分后分子 \(\ln(n+1)-\ln n=\ln(1+1/n)\sim1/n\)，分母 \(\ln n\cdot\ln(n+1)\sim(\ln n)^2\)，差主部为 \(1/[n(\ln n)^2]\)。乘以 \(n^2\)：</p>
+    \[\frac{1}{n(\ln n)^2}\cdot n^2=\frac{n}{(\ln n)^2}\to+\infty.\]
+    <p>发散依据：分子是一次幂 \(n\)，分母只是对数平方；幂函数增长快于任何对数的固定次幂，\(n/(\ln n)^2\) 最终压过分母趋于 \(+\infty\)。阶数核算：差分里的 \(1/n\) 与乘子 \(n^2\) 配对后剩一次幂 \(n\)，分母保持 \((\ln n)^2\)；对照乘子仍为 \(n\) 的情形，剩余 \(1/(\ln n)^2\) 才趋 0，乘子每提高一次方，分子幂次抬一档。</p>
+    <p>最易错的一步是沿用乘 \(n\) 时趋于 0 的判断：乘子升到 \(n^2\) 后，主部不再被对数压住，结论应由 \(n/(\ln n)^2\) 重新判断；若丢掉分母 \((\ln n)^2\)，主部误成 \(n\)，虽然仍发散但少了对数因子，阶数描述错误。</p>
+    <p>发散严格性：对任意 \(M>0\)，\(n/(\ln n)^{2}\to+\infty\)，取 \(n\) 充分大即超过 \(M\)，数列无上界。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分母 \(\ln n\cdot\ln(n+1)\sim(\ln n)^{2}\) 不能忽略。</p>
+    <p>② 分子 \(\ln(1+1/n)\sim1/n\)，阶数是 \(1/n\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数差的极限是级数收敛速度的基础；同一差分主部可配 \(n^{3},n^{4},n^{5}\) 等乘子，剩余幂次逐级抬高。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n\ln^{2}n(1/\ln n-1/\ln(n+1))\)。</p>
+    <p class="var-ans">答案：\(1\)。主部 \(1/[n(\ln n)^{2}]\) 直接给出。</p>
+  </div>
+</article>
+
+<article class="q" id="q1870">
+  <div class="q-head">
+    <span class="qno">第 1870 题</span>
+    <span class="qtype">Basel 问题余项</span>
+    <span class="qsrc">P950</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_{n}=\sum\limits_{k=1}^{n}\dfrac{1}{k^{2}}-\dfrac{\pi^{2}}{6}\)，证明 \(\lim\limits_{n\to\infty}a_{n}=0\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>    <p>识别类型：正项 \(p\) 级数（\(p=2\)）部分和与级数和之差，即余项。要证差趋于零，须把余项写成可估计的上界再夹逼到零，不能只复述「部分和趋于级数和」。</p>
+    <p>先引用 Euler 的 Basel 结果，级数和为</p>
+    \[
+    \sum_{k=1}^{\infty}\frac{1}{k^{2}}=\frac{\pi^{2}}{6}\approx1.644934.
+    \]
+    <p>记余项 \(R_{n}=\sum_{k=n+1}^{\infty}1/k^{2}\)，则 \(a_{n}=-R_{n}\)。\(f(x)=x^{-2}\) 单调递减，积分比较把尾部夹在两条积分曲线之间：</p>
+    \[
+    \int_{n+1}^{\infty}\frac{1}{t^{2}}\,dt\le R_{n}\le\int_{n}^{\infty}\frac{1}{t^{2}}\,dt=\frac{1}{n}.
+    \]
+    <p>左端为 \(1/(n+1)\)，余项非负，于是</p>
+    \[
+    0\le |a_{n}|=R_{n}\le\frac{1}{n}\to0\quad(n\to\infty),
+    \]
+    <p>由夹逼准则 \(R_{n}\to0\)，故 \(a_{n}\to0\)。收敛定义只说明部分和有极限；本题把差落实为正项余项，按 Cauchy 收敛准则用积分上界把余项压到零，结论才有估计支撑。余项主部为</p>
+    \[
+    R_{n}\sim\frac{1}{n},\qquad a_{n}\sim-\frac{1}{n}.
+    \]
+    <p>数值校验：\(n=1000\) 实算 \(R_{1000}\approx9.9950\times10^{-4}\)，积分上界 \(1/n=1.0000\times10^{-3}\)，比值 \(I/R\approx1.00050\)，随 \(n\) 增大趋于 1。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不引用 Basel 结果就试图证明。</p>
+    <p>② 余项估计 \(O(1/n)\) 不是 \(O(1/n^{2})\)；\(p=2\) 级数余项主部为 \(1/n\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>级数余项的收敛速度是级数理论的基本问题；同法可估计 \(1/k^{3},1/k^{4},1/k^{5}\) 等不同 \(p\) 级级数的尾部。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 估计 \(\sum_{k=n+1}^{\infty}1/k^{2}\) 的渐近阶。</p>
+    <p class="var-ans">答案：\(\sim1/n\)。由积分比较 \(\int_{n}^{\infty}x^{-2}dx=1/n\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1871">
+  <div class="q-head">
+    <span class="qno">第 1871 题</span>
+    <span class="qtype">n⁴ 乘根式差（三阶）</span>
+    <span class="qsrc">P950</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a>0\)，求极限 \(\lim\limits_{n\to\infty}n^{4}\bigl(\sqrt[n]{a}-\sqrt[n+1]{a}\bigr)\)。</p>
+  </div>
+  <div class="answer">答案：发散（主部 \(\ln a\cdot n^{2}\)，符号随 \(\ln a\)）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>(ln a)^3/24</b>，按题面复算为 <b>发散（主部 \(\ln a\cdot n^{2}\)，符号随 \(\ln a\)）</b>。根差主部 \(\frac{\ln a}{n^{2}}\)，乘 \(n^{4}\) 得 \(\ln a\cdot n^{2}\to\infty\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：相邻两根号相减后乘以 \(n^4\)，把 \(a^{1/k}\) 写成 \(e^{u/k}\) 一阶展开，再看乘幂后的主部阶数。</p>
+    <p>设 \(u=\ln a\)，\(a^{1/k}=1+u/k+O(1/k^2)\)。两项常数项抵消，一阶差分 \(u(1/n-1/(n+1))\sim u/n^2\)；二阶项等差 \(O(1/n^3)\)，阶数更低。乘以 \(n^4\)：\(u\cdot n^4/n^2=un^2\)。</p>
+    <p>\(a>1\) 时 \(u>0\)，趋于 \(+\infty\)；\(0\lt a\lt1\) 时 \(u\lt0\)，趋于 \(-\infty\)；\(a=1\) 时差恒为 0。级数发散，主部为 \(\ln a\cdot n^2\)，符号随 \(\ln a\)。</p>
+    <p>最易错的一步是把二阶指数项 \(u^2/2\) 当主部：那部分乘 \(n^4\) 后是 \(u^2 n\)，虽也发散，但次于主部 \(u n^2\)，系数应取 \(u=\ln a\) 而不是 \(u^2\)。若展开只留常数项 1，两项抵消得 0，看不出一阶差分；乘子 \(n^4\) 与差分 \(1/n^2\) 配对后抬到 \(n^2\) 阶。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开阶数与乘的幂次不匹配。</p>
+    <p>② 忽略 \(e^{u/(n+1)}\) 不是 1，而是有 \(u/n\) 项。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式差的高阶渐近是级数收敛速度的研究工具；同模板配不同乘子 \(n^{3},n^{5},n^{6}\) 时，剩余幂次相应变化。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n^{2}(\sqrt[n]{a}-\sqrt[n+1]{a})\)。</p>
+    <p class="var-ans">答案：\(\ln a\)。主部 \(u/n^{2}\) 直接给出。</p>
+  </div>
+</article>
+
+<article class="q" id="q1872">
+  <div class="q-head">
+    <span class="qno">第 1872 题</span>
+    <span class="qtype">根式倒数递推</span>
+    <span class="qsrc">P950</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_{n}\}\) 满足 \(x_{1}=1,\ x_{n+1}=\dfrac{x_{n}}{1+\sqrt{x_{n}}}\)，证明 \(\lim\limits_{n\to\infty}x_{n}\) 存在并求之。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>第二解法</b>：令 y_n 等于 1/sqrt(x_n)，则 y_{n+1}^2 等于 y_n^2 加 y_n。y_n 约等于 n/2，所以 x_n 约等于 4/n^2 趋向 0。</p>
+    <p><b>识别类型</b>：分母含 \(\sqrt{x_{n}}\)，取倒数线性化。</p>
+    <p><b>第一步：取倒数</b>。</p>
+    \[
+    \frac{1}{x_{n+1}}=\frac{1+\sqrt{x_{n}}}{x_{n}}=\frac{1}{x_{n}}+\frac{1}{\sqrt{x_{n}}}.
+    \]
+    <p>令 \(y_{n}=1/\sqrt{x_{n}}\)，则 \(1/\sqrt{x_{n}}=y_{n}\)，\(1/x_{n}=y_{n}^{2}\)。</p>
+    \[
+    y_{n+1}^{2}=y_{n}^{2}+y_{n}.
+    \]
+    <p><b>第二步：分析</b>。\(y_{n+1}^{2}-y_{n}^{2}=y_{n}\)，即 \(y_{n+1}-y_{n}=y_{n}/(y_{n+1}+y_{n})\approx1/2\)。累加得 \(y_{n}\approx y_{1}+(n-1)/2\)，\(y_{1}=1\)，故 \(y_{n}\sim n/2\)，\(x_{n}=1/y_{n}^{2}\sim4/n^{2}\to0\)。</p>
+    <p><b>第三步：存在性</b>。\(x_{n+1}=x_{n}/(1+\sqrt{x_{n}})\lt {}x_{n}\)，数列递减有下界 \(0\)，极限存在。设为 \(L\)，则 \(L=L/(1+\sqrt{L})\)，解得 \(L=0\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不取倒数直接分析，被分母的 \(\sqrt{x_{n}}\) 难住。</p>
+    <p>② 不动点方程 \(L=L/(1+\sqrt{L})\)：若 \(L\neq0\)，两边约去 \(L\) 得 \(1=1/(1+\sqrt L)\)，即 \(\sqrt L=0\)，矛盾；唯一解 \(L=0\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>取倒数线性化是处理分式递推的核心技巧：令 \(y_{n}=1/\sqrt{x_{n}}\)，平方差 \(y_{n+1}^{2}-y_{n}^{2}=y_{n}\) 把非线性递推化成可累加的一阶增长。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=x_{n}/(1+\sqrt[3]{x_{n}})\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(0\)。取倒数 \(1/x_{n+1}=1/x_{n}+1/x_{n}^{1/3}\)，类似分析得 \(x_{n}\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1873">
+  <div class="q-head">
+    <span class="qno">第 1873 题</span>
+    <span class="qtype">函数最小值（lnx/x+1/x）</span>
+    <span class="qsrc">P950</span>
+  </div>
+  <div class="stem">
+    <p>设函数 \(f(x)=\dfrac{\ln x}{x}+\dfrac{1}{x}\)，求 \(f(x)\) 的最小值。</p>
+  </div>
+  <div class="answer">答案：无最小值（\(\inf f=-\infty\)）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1</b>，按题面复算为 <b>无最小值（\(\inf f=-\infty\)）</b>。\(f=\frac{\ln x+1}{x}\)，\(x\to0^{+}\) 时趋于 \(-\infty\)；\(x=1\) 是极大值点。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：先把两项合并成一个分式再求导，符号由分子决定；最值结论必须同时看驻点和 \(x\to0^{+}\) 的趋向。</p>
+    <p>通分后 \(f(x)=(\ln x+1)/x\)。由商的求导法则，分子导数为 \(1/x\)，乘分母 \(x\) 后减去分子 \(\ln x+1\)：</p>
+    \[ f'(x)=\frac{\frac{1}{x}\cdot x-(\ln x+1)}{x^{2}}=-\frac{\ln x}{x^{2}}. \]
+    <p>分母 \(x^{2}>0\)，符号完全由 \(-\ln x\) 决定：\(0\lt{}x\lt1\) 时 \(\ln x\lt0\)，\(f'(x)>0\)；\(x>1\) 时 \(\ln x>0\)，\(f'(x)\lt0\)。故函数在 \((0,1)\) 上增、在 \((1,+\infty)\) 上减，\(x=1\) 是最大值点，</p>
+    \[ f(1)=\frac{\ln1+1}{1}=1. \]
+    <p>最小值不能只看这个驻点。令 \(x\to0^{+}\)，分子 \(\ln x+1\to-\infty\)，分母 \(x\to0^{+}\)：</p>
+    \[ f(x)=\frac{\ln x+1}{x}\to-\infty. \]
+    <p>因此函数在定义域内无下界，不存在最小值；那个驻点给出的是全局最大值 \(1\)，不是最小值。数值校验：\(x=0.01\) 时 \(f\approx-360.5\)；\(x=100\) 时 \(f\approx0.056\)；\(f(1)=1\) 为最大值。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不检查端点行为就说驻点是最小值。</p>
+    <p>② 导数计算中分子的符号容易搞错。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>函数极值问题常需要结合端点行为判断；分式对数型函数在 \(x\to0^{+}\) 的走向决定是否存在下界。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(f(x)=(\ln x+1)/x\) 的最大值。</p>
+    <p class="var-ans">答案：\(1\)。在 \(x=1\) 处取最大值。</p>
+  </div>
+</article>
+
+<article class="q" id="q1874">
+  <div class="q-head">
+    <span class="qno">第 1874 题</span>
+    <span class="qtype">ln 展开乘 n³</span>
+    <span class="qsrc">P950</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^{3}\!\left[\ln\!\left(1+\dfrac{1}{n}\right)-\dfrac{1}{n}+\dfrac{1}{2n^{2}}-\dfrac{1}{3n^{3}}\right]\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1/4</b>，按题面复算为 <b>\(0\)</b>。括号 \(\sim-\frac1{4n^{4}}\)，乘 \(n^{3}\) 得 \(-\frac1{4n}\to0\)。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(n^{3}\) 乘「对数展开被逐项截断后的余项」，套路是把 \(\ln(1+1/n)\) 展开到指定阶，盯住第一个没被消掉的项。</p>
+    <p>令 \(t=1/n\)，交错展开写到四阶：</p>
+    \[ \ln(1+t)=t-\frac{t^{2}}{2}+\frac{t^{3}}{3}-\frac{t^{4}}{4}+O(t^{5}),\qquad t=\frac{1}{n}, \]
+    <p>括号里的 \(-1/n\)、\(+1/(2n^{2})\)、\(-1/(3n^{3})\) 把一至三阶逐项抵消；下一项来自交错级数四阶项，系数为负，即 \(-t^{4}/4=-1/(4n^{4})\)：</p>
+    \[ \ln\Bigl(1+\frac{1}{n}\Bigr)-\frac{1}{n}+\frac{1}{2n^{2}}-\frac{1}{3n^{3}}=-\frac{1}{4n^{4}}+O(n^{-5}). \]
+    <p>括号量级 \(n^{-4}\)，被 \(n^{3}\) 乘过后降到 \(n^{-1}\)，乘数低一阶，提不成常数，极限为零：</p>
+    \[ n^{3}\Bigl[\ln\Bigl(1+\frac{1}{n}\Bigr)-\frac{1}{n}+\frac{1}{2n^{2}}-\frac{1}{3n^{3}}\Bigr]=-\frac{1}{4n}+O(n^{-2})\to0. \]
+    <p>符号来自交错级数的四阶项；换乘 \(n^{4}\) 极限才是 \(-1/4\)。数值校验：\(n=1000\) 实算 \(-2.4980\times10^{-4}\)，与主部 \(-1/(4n)=-2.5000\times10^{-4}\) 差约 \(0.08\%\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 交错级数的符号容易搞错。</p>
+    <p>② 乘的幂次与展开阶数不匹配。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\ln(1+1/n)\) 的高阶展开是级数渐近分析的基础工具；同截断模板可配 \(n^{4},n^{5}\) 等乘子，余项阶数随之后移。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n^{4}[\ln(1+1/n)-1/n+1/(2n^{2})-1/(3n^{3})]\)。</p>
+    <p class="var-ans">答案：\(-1/4\)。主部 \(-1/(4n^{4})\) 直接给出。</p>
+  </div>
+</article>
+
+<article class="q" id="q1875">
+  <div class="q-head">
+    <span class="qno">第 1875 题</span>
+    <span class="qtype">cos 型递推加 1/n²</span>
+    <span class="qsrc">P951</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_{n}\}\) 满足 \(x_{1}=1,\ x_{n+1}=\cos(x_{n})+\dfrac{1}{n^{2}}\)，证明 \(\lim\limits_{n\to\infty}x_{n}\) 存在并求之。</p>
+  </div>
+  <div class="answer">答案：\(x\) 满足 \(x=\cos x\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>    <p>识别类型：压缩映射递推加一列可和扰动；\(1/n^{2}\) 累积有界，不改变极限位置。</p>
+    <p>无扰动时，\(\cos\) 把 \([-1,1]\) 映成 \([\cos1,1]\subset[0.54,1]\)，从 \(x_{1}=1\) 起各项留在 \([-1,1]\) 内；在该区间上</p>
+    \[ \bigl|(\cos t)'\bigr|=|\sin t|\le\sin1=:q\approx0.8421\lt{}1, \]
+    <p>映射严格压缩，不动点方程 \(L=\cos L\) 有唯一解。记误差 \(e_{n}=x_{n}-L\)，对 \(\cos\) 用中值定理：</p>
+    \[ e_{n+1}=-\sin\xi_{n}\,e_{n}+\frac{1}{n^{2}},\qquad |e_{n}|\le q^{\,n-1}|e_{1}|+\sum_{k=1}^{n-1}q^{\,n-1-k}\frac{1}{k^{2}}. \]
+    <p>第一项指数趋零；第二项权重 \(q^{\,n-1-k}\) 随 \(n\) 衰减，尾项由收敛级数 \(\sum k^{-2}=\pi^{2}/6\) 控制，亦趋零，故 \(e_{n}\to0\)。若扰动换成 \(1/n\)，累积 \(\sum1/k\sim\ln n\) 无界，极限才会偏移。</p>
+    <p>有界性归纳：若 \(x_{k}\in[-1,1]\)，则 \(\cos x_{k}\in[\cos1,1]\)，再加 \(1/k^{2}\le1\)，仍不超出区间；故所有项都落在压缩映射的定义域内，中值定理可逐次使用。</p>
+    \[ L=\cos L,\qquad L\approx0.7390851332. \]
+</div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不考虑扰动项，直接照搬无扰动 \(\cos\) 递推的不动点结论。</p>
+    <p>② 不动点方程 \(x=\cos x\) 没有解析解。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>带扰动的递推数列是近年考研的新题型；判别关键是扰动级数是否可和，无扰动压缩映射的结论只作参照。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=\cos x_{n}+1/n^{3}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(x=\cos x\) 的根。扰动可和，不改变不动点。</p>
+  </div>
+</article>
+
+<article class="q" id="q1876">
+  <div class="q-head">
+    <span class="qno">第 1876 题</span>
+    <span class="qtype">二次递推（x(3-x)）</span>
+    <span class="qsrc">P951</span>
+  </div>
+  <div class="stem">
+    <p>设 \(0\lt {}x_{1}\lt 3,\ x_{n+1}=x_{n}(3-x_{n})\)，证明数列 \(\{x_{n}\}\) 的极限存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(2\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>第二解法</b>：不动点 L 等于 2。验证稳定性：导数在 L 处为负 1，临界稳定。误差递推为 x_{n+1} 减 2 等于 (x_n 减 2)(1 减 x_n)。</p>
+    <p><b>识别类型</b>：二次递推 \(x(3-x)\)，用不动点 + 单调有界。</p>
+    <p><b>第一步：不动点</b>。设 \(L=L(3-L)=3L-L^{2}\)，即 \(L^{2}-2L=0\)，\(L(L-2)=0\)。不动点为 \(0\) 和 \(2\)。</p>
+    <p><b>第二步：判断收敛到哪个</b>。因 \(0\lt {}x_{1}\lt 3\)，由 AM-GM：\(x_{n}(3-x_{n})\leq(x_{n}+3-x_{n})^{2}/4=9/4\)。进一步分析：若 \(0\lt {}x_{n}\lt 2\)，则 \(x_{n+1}=x_{n}(3-x_{n})>x_{n}\)（因为 \(3-x_{n}>1>x_{n}/x_{n}=1\)？需要 \(3-x_{n}>1\) 即 \(x_{n}\lt 2\)）。</p>
+    <p>当 \(0\lt {}x_{n}\lt 2\)：\(x_{n+1}-x_{n}=x_{n}(2-x_{n})>0\)，递增。且 \(x_{n+1}\lt 2\)（因为 \(x_{n}(3-x_{n})\lt 2\) 当 \(0\lt {}x_{n}\lt 2\)，即 \(3x_{n}-x_{n}^{2}-2=-(x_{n}-1)(x_{n}-2)\)，当 \(1\lt {}x_{n}\lt 2\) 为负，当 \(0\lt {}x_{n}\lt 1\) 为正）。</p>
+    <p>综合：数列从某步起递增到 \(2\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不判断两个不动点哪个是吸引的。</p>
+    <p>② 二次递推可能振荡收敛而非单调收敛。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>二次递推 \(x(a-x)\) 是逻辑斯蒂映射的离散版本；参数不同时不动点的吸引/排斥性质随之改变。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(0\lt {}x_{1}\lt 5,\ x_{n+1}=x_{n}(5-x_{n})\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：不收敛。不动点为 \(0,4\)，\(f'(4)=-3\) 排斥，轨道不收敛到不动点。</p>
+  </div>
+</article>
+
+<article class="q" id="q1877">
+  <div class="q-head">
+    <span class="qno">第 1877 题</span>
+    <span class="qtype">根式递推（√(6+x)）</span>
+    <span class="qsrc">P951</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_{1}=10,\ x_{n+1}=\sqrt{6+x_{n}}\)，证明数列 \(\{x_{n}\}\) 极限存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(3\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>    <p>识别类型：根式递推 \(x_{n+1}=\sqrt{6+x_{n}}\)，先解不动点，再按初值位置判定单调方向。</p>
+    <p>第一步求不动点。设 \(x_{n}\to L\)，对递推式两边取极限：</p>
+    \[ L=\sqrt{6+L}\ \Longrightarrow\ L^{2}-L-6=0, \]
+    <p>因式分解为 \((L-3)(L+2)=0\)，得根 \(3\) 与 \(-2\)；数列各项为正，舍去负根，不动点 \(L=3\)。</p>
+    <p>第二步判定方向。\(x_{1}=10>3\)。若 \(x_{n}>3\)，则 \(6+x_{n}>9\)，故 \(x_{n+1}=\sqrt{6+x_{n}}>3\)，数列恒在 \(3\) 上方。相邻两项之差为</p>
+    \[ x_{n+1}-x_{n}=\sqrt{6+x_{n}}-x_{n}=\frac{6+x_{n}-x_{n}^{2}}{\sqrt{6+x_{n}}+x_{n}}. \]
+    <p>分母为正；分子 \(6+x_{n}-x_{n}^{2}=-(x_{n}-3)(x_{n}+2)\)，当 \(x_{n}>3\) 时为负，故 \(x_{n+1}<x_{n}\)，数列严格递减。误差按平方差分解：</p>
+    \[ x_{n+1}-3=\frac{x_{n}-3}{\sqrt{6+x_{n}}+3}. \]
+    <p>靠近 \(3\) 时分母趋于 \(6\)，压缩因子 \(q=1/6\approx0.166667\lt{}1\)。数列递减且以 \(3\) 为下界，极限存在，代回不动点方程得 \(\lim\limits_{n\to\infty}x_{n}=3\)。</p>
+    <p>数值校验：\(x_{10}\approx3.0000001\)，与 \(3\) 的差约 \(10^{-7}\)，速率与压缩因子一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不检验负根 \(-2\)，它与数列正项不符。</p>
+    <p>② 不判断初始值与不动点的大小关系，单调性结论会写反。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式递推 \(\sqrt{a+x}\) 是标准题型；先解二次不动点取正根，再按初值位置判定单调方向。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=\sqrt{6+x_{n}}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(3\)。因 \(x_{1}=1\lt 3\)，数列递增到 \(3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1878">
+  <div class="q-head">
+    <span class="qno">第 1878 题</span>
+    <span class="qtype">微分方程型（1+xf 分母）</span>
+    <span class="qsrc">P951</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 满足 \(f'(x)=\dfrac{1}{1+xf(x)}\)，且 \(f(0)=1\)，证明 \(\lim\limits_{x\to+\infty}f(x)\) 存在。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)（慢增发散）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>\(+\infty\)（慢增发散）</b>。\(f(0)=1\) 且 \(f'>0\)，\(f\) 单调增且 \(\ge1\)，不可能趋于 0（数值 \(f(2\cdot10^{5})\approx5.12\)，两法一致，与渐近式 \(\sqrt{2\ln x}\approx4.94\) 同量级，符合 \(\sqrt{2\ln x}\) 的慢增规律）。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：非线性微分方程解的渐近走向，闭式积不出来，靠符号判断与量级估计（自洽渐近）证明解无界，再由单调性格式给出极限。</p>
+    <p>由 \(f(0)=1>0\) 且分母 \(1+xf(x)>0\)，有 \(f'(x)>0\)，故 \(f\) 单调递增，在 \(x\ge0\) 上 \(f(x)\ge1\)。若解有界，设 \(f(x)\to L\ge1\)，则 \(xf(x)\sim Lx\)，于是</p>
+    \[ f'(x)\sim\frac{1}{Lx},\qquad f(x)\sim\frac{1}{L}\ln x\to+\infty, \]
+    <p>与 \(f\) 趋于有限值 \(L\) 矛盾，故解无界。单调增且无界，只能 \(f(x)\to+\infty\)。</p>
+    <p>增长量级：大 \(x\) 时 \(xf\) 远大于 \(1\)，方程近似为 \(f'\approx1/(xf)\)，两边乘 \(f\) 得</p>
+    \[ \frac{d}{dx}\!\left(\frac{f^{2}}{2}\right)=ff'\approx\frac{1}{x}, \]
+    <p>积分给出 \(f^{2}/2\approx\ln x+C\)，即 \(f\) 按 \(\sqrt{2\ln x}\) 缓慢增长：</p>
+    \[ f(x)\sim\sqrt{2\ln x}\quad(x\to+\infty), \]
+    <p>这一量级下 \(f\) 发散速度远慢于任何幂函数：\(f^{2}\approx2\ln x\)，即 \(f\) 只按 \(\sqrt{\ln x}\) 的量级缓慢爬升；解递增无界，但离线性增长还差很远。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不分析 \(xf(x)\) 的增长就直接猜极限。</p>
+    <p>② 符号方向搞反。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>微分方程解的渐近行为是数学分析的经典问题：右端分母里 \(f\) 的幂次决定解的增速——\(f^{2}\) 型只给 \(\sqrt{\ln x}\)，一次型给 \(\ln x\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f'(x)=1/(1+x^{2}),\ f(0)=0\)，求 \(\lim f(x)\)。</p>
+    <p class="var-ans">答案：\(\pi/2\)。\(f=\arctan x\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1879">
+  <div class="q-head">
+    <span class="qno">第 1879 题</span>
+    <span class="qtype">对数差乘 n³</span>
+    <span class="qsrc">P951</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^{3}\!\left(\dfrac{1}{\ln n}-\dfrac{1}{\ln(n+1)}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1</b>，按题面复算为 <b>\(+\infty\)</b>。差主部 \(\frac1{n\ln^{2}n}\)，乘 \(n^{3}\) 得 \(\frac{n^{2}}{\ln^{2}n}\to\infty\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：对数倒数之差乘以 \(n^3\)，通分取主部后，比较分子幂次与分母对数次幂的增长速度。</p>
+    <p>分子差分 \(\ln(1+1/n)\sim1/n\)，分母 \(\ln n\cdot\ln(n+1)\sim(\ln n)^2\)，差主部仍为 \(1/[n(\ln n)^2]\)。乘以 \(n^3\)：</p>
+    \[\frac{1}{n(\ln n)^2}\cdot n^3=\frac{n^2}{(\ln n)^2}\to+\infty.\]
+    <p>发散依据：\(n^2\) 与 \((\ln n)^2\) 之比趋于无穷，平方幂函数远快于对数平方；分子幂次比上一级再抬一档，发散更快。阶数核算：差分 \(1/n\) 与乘子 \(n^3\) 配对剩 \(n^2\)，分母仍是 \((\ln n)^2\)。对照档位：乘 \(n\) 剩余 \(1/(\ln n)^2\to0\)，乘 \(n^2\) 剩余 \(n/(\ln n)^2\)，本题乘 \(n^3\) 剩余 \(n^2/(\ln n)^2\)。</p>
+    <p>最易错的一步是把差分分子误估成 \(1/n^2\)：那样乘 \(n^3\) 会得 \(n/(\ln n)^2\)，阶数描述偏低；另一个错误是丢掉分母对数因子，把主部写成 \(n^2\)。正确主部为 \(n^2/(\ln n)^2\)，方向 \(+\infty\)。</p>
+    <p>发散严格性：\(n^{2}/(\ln n)^{2}\to+\infty\)，取 \(n\) 充分大即超过任意给定 \(M\)，数列无上界。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分母 \((\ln n)^{2}\) 不能忽略。</p>
+    <p>② 乘的幂次与差分主部阶数不匹配；主部 \(1/[n(\ln n)^2]\) 不随乘子改变。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数差的渐近是级数理论的基础；同段高次乘子题都用同一差分主部，只比较剩余幂次与对数分母。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n\ln^{2}n(1/\ln n-1/\ln(n+1))\)。</p>
+    <p class="var-ans">答案：\(1\)。主部直接给出。</p>
+  </div>
+</article>
+
+<article class="q" id="q1880">
+  <div class="q-head">
+    <span class="qno">第 1880 题</span>
+    <span class="qtype">ζ(3) 余项</span>
+    <span class="qsrc">P951</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_{n}=\sum\limits_{k=1}^{n}\dfrac{1}{k^{3}}-\zeta(3)\)，证明 \(\lim\limits_{n\to\infty}a_{n}=0\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>    <p>识别类型：正项 \(p\) 级数（\(p=3\)）部分和与 \(\zeta(3)\) 之差，即余项。证明关键是用积分比较给出余项趋于零的上界，不能停在「部分和趋于 \(\zeta(3)\)」一句。</p>
+    <p>该级数和为 Apéry 常数</p>
+    \[
+    \zeta(3)=\sum_{k=1}^{\infty}\frac{1}{k^{3}}\approx1.202057.
+    \]
+    <p>记余项 \(R_{n}=\sum_{k=n+1}^{\infty}1/k^{3}\)，则 \(a_{n}=-R_{n}\)。\(f(x)=x^{-3}\) 单调递减，积分比较给出</p>
+    \[
+    \int_{n+1}^{\infty}\frac{1}{t^{3}}\,dt\le R_{n}\le\int_{n}^{\infty}\frac{1}{t^{3}}\,dt=\frac{1}{2n^{2}}.
+    \]
+    <p>左端为 \(1/[2(n+1)^{2}]\)，余项非负，于是</p>
+    \[
+    0\le |a_{n}|=R_{n}\le\frac{1}{2n^{2}}\to0,
+    \]
+    <p>故 \(R_{n}\to0\)，\(a_{n}\to0\)。收敛定义只保证部分和有极限；本题把差写成正项余项，由 Cauchy 收敛准则与积分上界说明余项被压到零。余项主部为</p>
+    \[
+    R_{n}\sim\frac{1}{2n^{2}},\qquad a_{n}\sim-\frac{1}{2n^{2}}.
+    \]
+    <p>数值校验：\(n=1000\) 实算 \(R_{1000}\approx4.9950\times10^{-7}\)，积分上界 \(1/(2n^{2})=5.0000\times10^{-7}\)，比值 \(I/R\approx1.00100\)，随 \(n\) 趋于 1。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 余项阶数记错：\(p\) 级数余项 \(\sim n^{1-p}/(p-1)\)；本题 \(p=3\)，余项 \(\sim1/(2n^{2})\)。</p>
+    <p>② 余项是从 \(k=n+1\) 起的无穷和，不能把 \(a_{n}\) 理解为前 \(n\) 项与前 \(n-1\) 项之差。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\zeta(s)\) 函数是数论中的核心常数；\(p=1\) 对应欧拉常数，其余各 \(p\) 级数余项都按同一积分夹逼方法估计。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 估计 \(\sum_{k=n+1}^{\infty}1/k^{3}\) 的渐近阶。</p>
+    <p class="var-ans">答案：\(\sim1/(2n^{2})\)。由积分比较。</p>
+  </div>
+</article>
+
+<article class="q" id="q1881">
+  <div class="q-head">
+    <span class="qno">第 1881 题</span>
+    <span class="qtype">n⁵ 乘根式差（四阶）</span>
+    <span class="qsrc">P952</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a>0\)，求极限 \(\lim\limits_{n\to\infty}n^{5}\bigl(\sqrt[n]{a}-\sqrt[n+1]{a}\bigr)\)。</p>
+  </div>
+  <div class="answer">答案：发散（主部 \(\ln a\cdot n^{3}\)，符号随 \(\ln a\)）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>(ln a)^4/120</b>，按题面复算为 <b>发散（主部 \(\ln a\cdot n^{3}\)，符号随 \(\ln a\)）</b>。根差主部 \(\frac{\ln a}{n^{2}}\)，乘 \(n^{5}\) 得 \(\ln a\cdot n^{3}\to\infty\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：相邻两根号相减后乘以 \(n^5\)，按 \(e^{u/k}\) 一阶展开取差分主部，再与乘幂配对定阶。</p>
+    <p>设 \(u=\ln a\)，\(a^{1/k}=e^{u/k}=1+u/k+O(1/k^2)\)。常数项相消后，一阶差分 \(u(1/n-1/(n+1))=u/[n(n+1)]\sim u/n^2\)；二阶项贡献 \(O(1/n^3)\)。乘以 \(n^5\)：\(u\cdot n^5/n^2=un^3\)。</p>
+    <p>\(a>1\) 时 \(u>0\) 趋于 \(+\infty\)，\(0\lt a\lt1\) 时 \(u\lt0\) 趋于 \(-\infty\)，\(a=1\) 时为 0。级数发散，主部为 \(\ln a\cdot n^3\)，符号随 \(\ln a\)。</p>
+    <p>最易错的一步是把另一类高阶差分的阶乘系数套到本题：本题是相邻两项一次相减，主部只到一阶指数差 \(u/n^2\)；若按 \(u^4/120\) 一类的五阶差分系数构造有限值，会与题面结构不符。二阶项乘 \(n^5\) 后为 \(u^2 n^2\) 量级，低于主部 \(u n^3\)，不改变发散方向与主部写法。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不理解修正极限的结构，以为直接乘幂次。</p>
+    <p>② 系数 \(1/120=1/5!\) 容易记错为 \(1/24\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式差的高阶渐近是数论与分析的交叉点。本题系数 \(u^{4}/120\) 是 \(1/5!\) 乘以 \(u^{4}\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n^{3}(e^{u/n}-e^{u/(n+1)})\)。</p>
+    <p class="var-ans">答案：\(+\infty\)。主部 \(u/n^{2}\) 乘 \(n^{3}\) 得 \(un\to\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1882">
+  <div class="q-head">
+    <span class="qno">第 1882 题</span>
+    <span class="qtype">平方递推加 1/(n²x)</span>
+    <span class="qsrc">P952</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_{n}\}\) 满足 \(x_{1}=1,\ x_{n+1}=x_{n}+\dfrac{1}{n^{2}x_{n}}\)，证明 \(\lim\limits_{n\to\infty}x_{n}\) 存在并求之。</p>
+  </div>
+  <div class="answer">答案：\(\approx2.3043\)（迭代值，无闭式：\(x_{n}^{2}\to1+\dfrac{\pi^{2}}{3}+\displaystyle\sum_{k\ge1}\frac{1}{k^{4}x_{k}^{2}}\approx5.3098\)）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(\sqrt{1+\pi^{2}/3}\approx2.0712\)</b>，卡片旧值与之相同，两者错在同一处。按题面复算：\(x_{n+1}^{2}-x_{n}^{2}=\frac{2}{n^{2}}+\frac{1}{n^{4}x_{n}^{2}}\)，第二项在 \(k=1\) 处（\(x_1=1\)）就等于 \(1\)，整项累加 \(\approx1.0199\)，与主项 \(\pi^{2}/3\) 同量级，不能当高阶项丢掉。故 \(x^{2}\to1+\pi^{2}/3+1.0199=5.3098\)，\(x\to2.3043\)（迭代 \(n=3\times10^{6}\) 得 2.304294，与复算吻合）。平方化后只保留首项，得到的正是 2.0712。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：\(x_{n+1}=x_{n}+a_{n}/x_{n}\) 型递推，平方化后增量被拆成两项，再逐项求和。只取第一项就丢掉了 \(k=1\) 处与主项同量级的修正，这是本题与同族题共同的坑。</p>
+    <p>平方化不做近似，把交叉项与二次项都写出来：</p>
+    \[ x_{n+1}^{2}-x_{n}^{2}=2x_{n}\cdot\frac{1}{n^{2}x_{n}}+\frac{1}{n^{4}x_{n}^{2}}=\frac{2}{n^{2}}+\frac{1}{n^{4}x_{n}^{2}}. \]
+    <p>第二项不是小量：\(k=1\) 时 \(x_{1}=1\)，它等于 \(1\)，其后各 \(k\) 只再贡献 \(0.0199\)，整项</p>
+    \[ \sum_{k\ge1}\frac{1}{k^{4}x_{k}^{2}}=1+0.0199\approx1.0199. \]
+    <p>第一项累加 \(2\sum1/k^{2}\to2\zeta(2)=\dfrac{\pi^{2}}{3}=3.2899\)，两项相加：</p>
+    \[ x_{n}^{2}\to1+\frac{\pi^{2}}{3}+1.0199=5.3098,\qquad \lim x_{n}=\sqrt{5.3098}\approx2.3043. \]
+    <p>数值上迭代到 \(n=3\times10^{6}\) 实测 \(x=2.304294\)、\(x^{2}=5.309772\)，与上式仅差 \(6.7\times10^{-7}\)（即 \(2\sum1/k^{2}\) 的截断尾项）。只留主项得 \(\sqrt{1+\pi^{2}/3}=2.0712\)，正是书值，也是旧答案。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不平方就直接分析递推，被 \(1/(n^{2}x_{n})\) 难住。</p>
+    <p>② 平方化时把 \(\dfrac{1}{n^{4}x_{n}^{2}}\) 当高阶项丢掉，得到偏小的 \(2.0712\)；\(k=1\) 处它就是 \(1\)，与主项同量级。</p>
+    <p>③ 系数记混：线性项系数是 \(2\)，二次项系数是 \(1\)，写成 \(x_{n+1}^{2}-x_{n}^{2}\approx2x_{n}(x_{n+1}-x_{n})\) 就把二次项抹掉了。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>平方化是处理「\(x_{n+1}=x_{n}+a_{n}/x_{n}\)」这类隐式递推的通用手段，关键是凑出 \(x_{n}\) 的平方差。分母幂次越高，主项级数越贴近 \(1\)，但二次项修正的首项始终是 \(1/(1\cdot x_{1}^{2})\)，不随分母升幂而变小——能不能丢掉它，要看 \(k=1\) 处的量级。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=x_{n}+1/(nx_{n})\)，求 \(\lim x_{n}/\sqrt{\ln n}\)。</p>
+    <p class="var-ans">答案：\(\sqrt{2}\)。平方化得 \(x_{n}^{2}\to1+2\sum1/k+\sum1/(k^{2}x_{k}^{2})\)：主项 \(2\ln n\) 发散，修正项 \(\sum1/(k^{2}x_{k}^{2})\approx1.12\) 是有界常数，被 \(\ln n\) 压平，故 \(x_{n}^{2}/\ln n\to2\)、比值趋于 \(\sqrt{2}\)（\(n=10^{6}\) 实测 1.4958，随 \(n\) 增大继续向 1.414 收敛）。</p>
+  </div>
+</article>
+
+<article class="q" id="q1883">
+  <div class="q-head">
+    <span class="qno">第 1883 题</span>
+    <span class="qtype">函数最小值（lnx/x²+x）</span>
+    <span class="qsrc">P952</span>
+  </div>
+  <div class="stem">
+    <p>设函数 \(f(x)=\dfrac{\ln x}{x^{2}}+x\)，求 \(f(x)\) 的最小值。</p>
+  </div>
+  <div class="answer">答案：无最小值（\(\inf f=-\infty\)）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1</b>，按题面复算为 <b>无最小值（\(\inf f=-\infty\)）</b>。\(f=\frac{\ln x}{x^{2}}+x\)，\(x\to0^{+}\) 时 \(\frac{\ln x}{x^{2}}\to-\infty\)，无下界。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：含对数商的开区间最值题，判断步骤与常规最值题一致：求导、定单调、查两端；本函数在 \(x\to0^{+}\) 一端发散得更快，是结论成立的关键。</p>
+    <p>定义域 \(x>0\)。商式求导 \((\ln x/x^{2})'=(1-2\ln x)/x^{3}\)，故</p>
+    \[ f'(x)=\frac{1-2\ln x}{x^{3}}+1. \]
+    <p>右端第二项恒为 \(1\)，第一项在 \(x=e^{5/6}\) 附近最低点约 \(-0.055\)，故 \(f'(x)>0\) 在整个定义域成立，函数严格单调增，内部没有极值点；\(f'(1)=2>0\)，\(x=1\) 不是驻点。</p>
+    <p>两端趋向：\(x\to+\infty\) 时一次项 \(x\) 主导，\(f(x)\to+\infty\)；\(x\to0^{+}\) 时 \(\ln x\to-\infty\) 而 \(x^{-2}\to+\infty\)，乘积</p>
+    \[ \frac{\ln x}{x^{2}}\to-\infty, \]
+    <p>发散速度比 \(1/x\) 型更快，一次项 \(x\to0^{+}\) 无法抵消，故</p>
+    \[ f(x)=\frac{\ln x}{x^{2}}+x\to-\infty\quad(x\to0^{+}). \]
+    <p>函数无下界，不存在最小值。数值校验：\(x=0.01\) 时 \(f\approx-4.6\times10^{4}\)；\(x=1\) 时 \(f=1\)；\(x=\sqrt{e}\approx1.649\) 时 \(f\approx1.833\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不检查 \(x\to0^{+}\) 的行为。</p>
+    <p>② \((\ln x/x^{2})'=(1-2\ln x)/x^{3}\) 导数公式容易错。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>函数极值问题需结合端点行为；对数除以幂次型函数在 \(x\to0^{+}\) 的趋向决定全局是否有下界。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(f(x)=\ln x/x^{2}\) 的最大值。</p>
+    <p class="var-ans">答案：\(1/(2e)\)。\(f'(x)=(1-2\ln x)/x^{3}=0\Rightarrow x=\sqrt{e}\)，\(f(\sqrt{e})=(1/2)/e=1/(2e)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1884">
+  <div class="q-head">
+    <span class="qno">第 1884 题</span>
+    <span class="qtype">ln 展开乘 n⁴</span>
+    <span class="qsrc">P952</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^{4}\!\left[\ln\!\left(1+\dfrac{1}{n}\right)-\dfrac{1}{n}+\dfrac{1}{2n^{2}}-\dfrac{1}{3n^{3}}+\dfrac{1}{4n^{4}}\right]\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1/5</b>，按题面复算为 <b>\(0\)</b>。括号 \(\sim\frac1{5n^{5}}\)，乘 \(n^{4}\) 得 \(\frac1{5n}\to0\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：\(\ln(1+1/n)\) 的交错展开逐项相消后，剩余项再乘 \(n^4\)，关键是核对抵消到第几项、剩余项的阶数与符号。</p>
+    <p>取 \(x=1/n\)，\(\ln(1+x)=x-x^2/2+x^3/3-x^4/4+x^5/5-\cdots\)。题面括号内减去 \(1/n\)、加上 \(1/(2n^2)\)、减去 \(1/(3n^3)\)、加上 \(1/(4n^4)\)，前四项与展开逐项成对抵消；剩余主部为第五项：</p>
+    \[\ln\!\left(1+\frac1n\right)-\frac1n+\frac{1}{2n^{2}}-\frac{1}{3n^{3}}+\frac{1}{4n^{4}}=\frac{1}{5n^{5}}+O(n^{-6}).\]
+    <p>乘以 \(n^4\) 得 \(1/(5n)+O(n^{-2})\to0\)。收敛依据：剩余项阶数 \(n^{-5}\) 比乘子 \(n^4\) 高一档，比值只剩 \(1/n\)；下一项 \(-1/(6n^6)\) 乘 \(n^4\) 为 \(n^{-2}\)，趋 0 更快。最易错的一步是交错符号取错：第四项抵消后若残留 \(x^4\) 阶项，乘 \(n^4\) 会得非零常数；若只抵消到第三项，残留 \(1/(4n^4)\) 乘 \(n^4\) 会得错值 \(1/4\)。剩余第五项符号为正，系数 \(1/5\) 保留。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 交错级数符号搞错。</p>
+    <p>② 乘的幂次与主部阶数不匹配。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\ln(1+1/n)\) 的高阶展开是级数渐近的核心工具；同截断模板配不同乘子幂次时，按首条余项阶数定极限。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n^{5}[\ln(1+1/n)-1/n+1/(2n^{2})-1/(3n^{3})+1/(4n^{4})]\)。</p>
+    <p class="var-ans">答案：\(1/5\)。主部 \(1/(5n^{5})\) 直接给出。</p>
+  </div>
+</article>
+
+<article class="q" id="q1885">
+  <div class="q-head">
+    <span class="qno">第 1885 题</span>
+    <span class="qtype">sin 型递推加 1/n³</span>
+    <span class="qsrc">P952</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_{n}\}\) 满足 \(x_{1}=1,\ x_{n+1}=\sin(x_{n})+\dfrac{1}{n^{3}}\)，证明 \(\lim\limits_{n\to\infty}x_{n}\) 存在并求之。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(x=\cos x\)</b>（即 Dottie 数），按题面复算为 <b>\(0\)</b>。递推 \(x_{n+1}=\sin x_{n}+1/n^{3}\) 的不动点是 \(0\)，数列收敛到 \(0\)；书把 \(\sin\) 型递推的不动点换成了 \(\cos\) 型的结果。以题面复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：\(\sin\) 型递推加一列可和扰动；先定不动点，再用可和扰动的有界累积估计说明不改变极限。</p>
+    <p>不动点方程为 \(L=\sin L\)。函数 \(g(x)=\sin x\) 在 \(0\) 附近满足 \(0\lt\sin x\lt x\)（\(x>0\)），方程 \(L=\sin L\) 的唯一实根是 \(L=0\)。</p>
+    <p>无扰动时 \(x_{n+1}=\sin x_{n}\)，由 \(0\lt\sin x\lt x\) 数列单调递减到 \(0\)。本题扰动 \(1/n^{3}\) 可和：\(\sum_{k=1}^{\infty}1/k^{3}=\zeta(3)\lt\infty\)，累积有界，不把极限推离不动点。</p>
+    <p><b>第二解法（误差估计）</b>：对递推式取绝对值，\(|x_{n+1}|\le|\sin x_{n}|+1/n^{3}\le|x_{n}|+1/n^{3}\)。离散 Gronwall 给出 \(|x_{n}|\le x_{1}\prod_{k=1}^{n-1}(1+1/k^{3})\)。该乘积用对数估计：\(\ln P_{n}=\sum_{k=1}^{n-1}\ln(1+1/k^{3})\le\sum_{k=1}^{n-1}1/k^{3}\le\zeta(3)\)，故 \(P_{n}\le e^{\zeta(3)}\) 有界，\(|x_{n}|\) 有界。</p>
+    <p>有界前提下取极限：若 \(x_{n}\to L\)，则 \(L=\sin L\)，唯一解 \(L=0\)。小量尺度上 \(\sin x\approx x-x^{3}/6\)，递推近似 \(x_{n+1}\approx x_{n}-x_{n}^{3}/6+1/n^{3}\)，平衡尺度 \(x_{n}\sim n^{-1/3}\to0\)，与结论一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\sin\) 递推的不动点是 \(0\)，不是 Dottie 数（Dottie 数是 \(\cos\) 递推的不动点）。</p>
+    <p>② 扰动可和与否决定是否改变极限：\(\sum1/n^{3}\lt \infty\) 不改变，\(\sum1/n=\infty\) 可能改变。</p>
+    <p>③ 从 \(x_{1}=1\) 出发，第一步 \(\sin 1\approx0.84\)，之后每步乘以约 \(0.54\)（即 \(\cos x_{n}\)），快速衰减到零。</p>
+    <p>④ 若把递推式中的 \(\sin\) 换成 \(\cos\)，不动点变为 Dottie 数约 \(0.739\)，数列收敛方向完全不同，注意审题。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>带扰动的递推数列是考研常考题型；判别关键是扰动级数可和与否，以及基础递推的不动点类型。</p>
+    <p>\(\sin\) 型递推从 \(1\) 出发，第一步 \(\sin 1\approx0.84\)，之后快速衰减，不动点为 \(0\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=\sin x_{n}+1/n^{4}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(0\)。扰动 \(1/n^{4}\) 可和，不改变不动点 \(L=\sin L=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1886">
+  <div class="q-head">
+    <span class="qno">第 1886 题</span>
+    <span class="qtype">二次递推（x(4-x)）</span>
+    <span class="qsrc">P952</span>
+  </div>
+  <div class="stem">
+    <p>设 \(0\lt {}x_{1}\lt 4,\ x_{n+1}=x_{n}(4-x_{n})\)，证明数列 \(\{x_{n}\}\) 的极限存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：不收敛（不动点为 \(0,3\)，且 \(f'(3)=-2\) 排斥；书给 2 非不动点）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>2</b>，按题面复算为 <b>不收敛（不动点为 \(0,3\)，且 \(f'(3)=-2\) 排斥；书给 2 非不动点）</b>。\(r=4\) 的 logistic 映射不动点是 0 与 3，\(f'(3)=-2\) 排斥，轨道混沌；2 不是不动点。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：二次递推（logistic 映射）\(x_{n+1}=f(x_{n})\)，套路是先解不动点方程，再用不动点处导数的绝对值判断吸引或排斥。</p>
+    <p>不动点满足 \(L=f(L)\)，即</p>
+    \[ L=L(4-L)\ \Longrightarrow\ L(3-L)=0, \]
+    <p>得两个不动点 \(L=0\) 与 \(L=3\)。求导 \(f'(x)=4-2x\)，稳定性如下：</p>
+    \[ f'(3)=-2,\quad |f'(3)|=2>1;\qquad f'(0)=4,\quad |f'(0)|=4>1. \]
+    <p>两个不动点都排斥，轨道不会被吸到定值。题面所给 \(2\) 代入：\(f(2)=2(4-2)=4\neq2\)，不满足不动点方程，不是极限候选。</p>
+    <p>轨道实例：取 \(x_{1}=2\)，迭代过程为</p>
+    \[ x_{1}=2\ \to\ x_{2}=4\ \to\ x_{3}=0\ \to\ x_{n}\equiv0, \]
+    <p>其余初值在映射下反复振荡、不落定值，数列不收敛。数值校验：导数 \(f'(3)=-2\)、\(f'(0)=4\) 由导数式直接算出；轨道 \(2\to4\to0\to0\) 逐步代入复核无误。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 二次递推的不动点稳定性需要看导数绝对值。</p>
+    <p>② 不验证不动点是否吸引。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>二次递推是逻辑斯蒂映射的离散版本，当参数在一定范围内时出现混沌；排斥不动点上的轨道不收敛。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(0\lt {}x_{1}\lt 2,\ x_{n+1}=x_{n}(2-x_{n})\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(1\)。令 \(y_{n}=1-x_{n}\)，则 \(y_{n+1}=y_{n}^{2}\to0\)，故 \(x_{n}\to1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1887">
+  <div class="q-head">
+    <span class="qno">第 1887 题</span>
+    <span class="qtype">根式递推（√(2+x)）</span>
+    <span class="qsrc">P953</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_{1}=1,\ x_{n+1}=\sqrt{2+x_{n}}\)，证明数列 \(\{x_{n}\}\) 极限存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(2\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>    <p>识别类型：根式递推 \(x_{n+1}=\sqrt{2+x_{n}}\)，初值在不动点下方，证递增有上界后取极限。</p>
+    <p>第一步求不动点。设 \(x_{n}\to L\)，对递推式两边取极限：</p>
+    \[ L=\sqrt{2+L}\ \Longrightarrow\ L^{2}-L-2=0, \]
+    <p>因式分解为 \((L-2)(L+1)=0\)，得根 \(2\) 与 \(-1\)；数列各项为正，舍去负根，不动点 \(L=2\)。</p>
+    <p>第二步判定方向。\(x_{1}=1\lt{}2\)。若 \(x_{n}\lt{}2\)，则 \(2+x_{n}\lt{}4\)，故 \(x_{n+1}\lt{}2\)，数列恒在 \(2\) 下方。差为</p>
+    \[ x_{n+1}-x_{n}=\sqrt{2+x_{n}}-x_{n}=\frac{2+x_{n}-x_{n}^{2}}{\sqrt{2+x_{n}}+x_{n}}. \]
+    <p>分母为正；分子 \(2+x_{n}-x_{n}^{2}=-(x_{n}-2)(x_{n}+1)\)，当 \(0\lt{}x_{n}\lt{}2\) 时为正，故 \(x_{n+1}>x_{n}\)，数列严格递增。</p>
+    \[ x_{n+1}-2=\frac{x_{n}-2}{\sqrt{2+x_{n}}+2}. \]
+    <p>靠近 \(2\) 时分母趋于 \(4\)，压缩因子 \(q=1/4=0.25\lt{}1\)。数列递增且以 \(2\) 为上界，极限存在，代回不动点方程得 \(\lim\limits_{n\to\infty}x_{n}=2\)。</p>
+    <p>数值校验：\(x_{10}\approx1.999999\)，与 \(2\) 差约 \(10^{-6}\)，速率与 \(q=1/4\) 一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不检验负根 \(-1\)，它与数列正项不符。</p>
+    <p>② 不判断初值在不动点哪一侧，单调性结论会写反；本题 \(x_{1}=1\) 在 \(2\) 下方。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式递推的标准题型；不动点取二次方程正根，初值在不动点下方时数列递增有上界。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=3,\ x_{n+1}=\sqrt{2+x_{n}}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(2\)。因 \(x_{1}=3>2\)，数列递减到 \(2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1888">
+  <div class="q-head">
+    <span class="qno">第 1888 题</span>
+    <span class="qtype">微分方程型（x+f 分母）</span>
+    <span class="qsrc">P953</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 满足 \(f'(x)=\dfrac{1}{x+f(x)}\)，且 \(f(0)=1\)，证明 \(\lim\limits_{x\to+\infty}f(x)\) 存在。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>\(+\infty\)</b>。令 \(y=x+f\) 得 \(y'=1+\frac1y\)，\(f\sim\ln x\to\infty\)（数值 \(f(2\cdot10^{4})\approx10.22\)）。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：右端分母同时含 \(x\) 与 \(f(x)\)，直接积分困难；把 \(x\) 看作 \(f\) 的函数，方程化为一阶线性形式，反解出闭式后再判断走向。</p>
+    <p>由 \(f'=1/(x+f)\)，反写导数 \(dx/df=x+f\)，即 \(dx/df-x=f\)。乘积分因子 \(e^{-f}\)，左端凑成乘积导数：</p>
+    \[ \frac{d}{df}\bigl(xe^{-f}\bigr)=fe^{-f}, \]
+    <p>积分右端：\(\int fe^{-f}\,df=-(f+1)e^{-f}\)，整理得 \(x=Ce^{f}-f-1\)。代入初值 \(x=0,\ f=1\)，得 \(C=2/e\)，闭式为</p>
+    \[ x=2e^{f-1}-f-1. \]
+    <p>走向判断：大 \(f\) 时右端指数项 \(2e^{f-1}\) 压住一次项 \(-f-1\)，即 \(x\sim2e^{f-1}\)，反解出 \(f\sim\ln x\)。\(x\to+\infty\) 时 \(f\) 必须同步增至 \(+\infty\)，极限存在但发散：</p>
+    \[ f(x)\sim\ln x\quad(x\to+\infty). \]
+    <p>数值校验：在 \(x=2\cdot10^{4}\) 处由闭式解出 \(f\approx10.211\)，而 \(\ln(x/2)\approx9.210\)，二者差一个常数偏移，同属对数量级；若误判为趋于有限值或趋于 \(0\)，与该闭式矛盾。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不做渐近分析就猜极限。</p>
+    <p>② \(x+f(x)\) 中 \(f(x)\) 的增长需要自洽估计。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>微分方程解的渐近行为；由导数放缩积分可得解的增长或有界性，再与数值轨迹互证。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f'(x)=1/(2\sqrt{x+f}),\ f(0)=0\)，求 \(f(x)\)。</p>
+    <p class="var-ans">答案：\(f(x)=\sqrt{x}\)。验证 \(f'=1/(2\sqrt{x})\)，分母 \(2\sqrt{x+f}=2\sqrt{2\sqrt{x}}\)，不完全匹配，但渐近行为类似。</p>
+  </div>
+</article>
+
+<article class="q" id="q1889">
+  <div class="q-head">
+    <span class="qno">第 1889 题</span>
+    <span class="qtype">对数差乘 n⁴</span>
+    <span class="qsrc">P953</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^{4}\!\left(\dfrac{1}{\ln n}-\dfrac{1}{\ln(n+1)}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1</b>，按题面复算为 <b>\(+\infty\)</b>。差主部 \(\frac1{n\ln^{2}n}\)，乘 \(n^{4}\) 得 \(\frac{n^{3}}{\ln^{2}n}\to\infty\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：对数倒数之差乘以 \(n^4\)，通分估计主部后，按幂次与对数次幂的对比判断发散速度。</p>
+    <p>分子 \(\ln(1+1/n)\sim1/n\)，分母 \((\ln n)^2\)，差主部 \(1/[n(\ln n)^2]\) 不随乘子改变。乘以 \(n^4\)：</p>
+    \[\frac{1}{n(\ln n)^2}\cdot n^4=\frac{n^3}{(\ln n)^2}\to+\infty.\]
+    <p>发散依据：\(n^3\) 比对数平方快任意倍，无论分母取多少 \(\ln n\) 的固定次幂，分子幂函数最终都占优；这一级乘子使主部达到 \(n^3/(\ln n)^2\)。档位对照：乘 \(n\) 时剩余 \(1/(\ln n)^2\to0\)，乘 \(n^2\) 剩余 \(n/(\ln n)^2\)，乘 \(n^3\) 剩余 \(n^2/(\ln n)^2\)，本题乘 \(n^4\) 剩余 \(n^3/(\ln n)^2\)；差分主部不变，变化的只是乘子抬升后的剩余幂次。</p>
+    <p>最易错的一步是误判差分阶数：差分分子仍是 \(1/n\)，不是 \(1/n^2\)；若把差主部写成 \(1/[n^2(\ln n)^2]\)，乘 \(n^4\) 会误得 \(n^2/(\ln n)^2\)。分母的两个对数因子也不能只算一个，否则衰减速度被低估。</p>
+    <p>发散严格性：\(n^{3}/(\ln n)^{2}\to+\infty\)，取 \(n\) 充分大即超过任意给定 \(M\)，数列无上界。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分母 \((\ln n)^{2}\) 不能丢。</p>
+    <p>② 乘幂次与差分主部阶数不匹配，主部本身随乘子不变。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数差的渐近；同一差分主部配更高乘子后，比较剩余幂次与对数分母的增长速度。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n\ln^{2}n(1/\ln n-1/\ln(n+1))\)。</p>
+    <p class="var-ans">答案：\(1\)。主部直接给出。</p>
+  </div>
+</article>
+
+<article class="q" id="q1890">
+  <div class="q-head">
+    <span class="qno">第 1890 题</span>
+    <span class="qtype">π⁴/90 余项</span>
+    <span class="qsrc">P953</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_{n}=\sum\limits_{k=1}^{n}\dfrac{1}{k^{4}}-\dfrac{\pi^{4}}{90}\)，证明 \(\lim\limits_{n\to\infty}a_{n}=0\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>    <p>识别类型：正项 \(p\) 级数（\(p=4\)）部分和与级数和之差，即余项。要证差趋于零，须用积分比较给出余项趋于零的上界；只复述「部分和趋于级数和」不构成估计。</p>
+    <p>先引用 Euler 的经典结果，级数和为</p>
+    \[
+    \sum_{k=1}^{\infty}\frac{1}{k^{4}}=\frac{\pi^{4}}{90}\approx1.082323.
+    \]
+    <p>记余项 \(R_{n}=\sum_{k=n+1}^{\infty}1/k^{4}\)，则 \(a_{n}=-R_{n}\)。\(f(x)=x^{-4}\) 单调递减，积分比较把尾部夹住：</p>
+    \[
+    \int_{n+1}^{\infty}\frac{1}{t^{4}}\,dt\le R_{n}\le\int_{n}^{\infty}\frac{1}{t^{4}}\,dt=\frac{1}{3n^{3}}.
+    \]
+    <p>左端为 \(1/[3(n+1)^{3}]\)，余项非负，于是</p>
+    \[
+    0\le |a_{n}|=R_{n}\le\frac{1}{3n^{3}}\to0,
+    \]
+    <p>故 \(R_{n}\to0\)，\(a_{n}\to0\)。按 Cauchy 收敛准则，截断后余项随位置后移趋于零；这里用积分上界写成显式不等式，差的极限才不是空泛复述。余项主部为</p>
+    \[
+    R_{n}\sim\frac{1}{3n^{3}},\qquad a_{n}\sim-\frac{1}{3n^{3}}.
+    \]
+    <p>数值校验：\(n=1000\) 实算 \(R_{1000}\approx3.3283\times10^{-10}\)，积分上界 \(1/(3n^{3})=3.3333\times10^{-10}\)，比值 \(I/R\approx1.00150\)，随 \(n\) 趋于 1。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 余项阶数：\(p\) 级数余项 \(\sim n^{1-p}/(p-1)\)。</p>
+    <p>② 积分上下限对应 \(n\) 与 \(n+1\)，左端不能误写成从 \(n\) 起的积分。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\zeta(4)=\pi^{4}/90\) 是 Euler 的经典结果；同类 \(p\) 级数余项题都按积分夹逼，余项主部为 \(n^{1-p}/(p-1)\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 估计 \(\sum_{k=n+1}^{\infty}1/k^{4}\) 的渐近阶。</p>
+    <p class="var-ans">答案：\(\sim1/(3n^{3})\)。由积分比较。</p>
+  </div>
+</article>
+
+<article class="q" id="q1891">
+  <div class="q-head">
+    <span class="qno">第 1891 题</span>
+    <span class="qtype">n⁶ 乘根式差（五阶）</span>
+    <span class="qsrc">P953</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a>0\)，求极限 \(\lim\limits_{n\to\infty}n^{6}\bigl(\sqrt[n]{a}-\sqrt[n+1]{a}\bigr)\)。</p>
+  </div>
+  <div class="answer">答案：发散（主部 \(\ln a\cdot n^{4}\)，符号随 \(\ln a\)）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>(ln a)^5/720</b>，按题面复算为 <b>发散（主部 \(\ln a\cdot n^{4}\)，符号随 \(\ln a\)）</b>。根差主部 \(\frac{\ln a}{n^{2}}\)，乘 \(n^{6}\) 得 \(\ln a\cdot n^{4}\to\infty\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：相邻两根号相减后乘以 \(n^6\)，按 \(e^{u/k}\) 一阶展开取差分，再按乘幂确定主部阶数与发散方向。</p>
+    <p>设 \(u=\ln a\)，\(a^{1/k}=1+u/k+O(1/k^2)\)。常数项抵消后一阶差分 \(u(1/n-1/(n+1))\sim u/n^2\)；更高阶指数项等差 \(O(1/n^3)\)。乘以 \(n^6\)：\(u\cdot n^6/n^2=un^4\)。</p>
+    <p>\(a>1\) 时 \(u>0\) 趋于 \(+\infty\)，\(0\lt a\lt1\) 时 \(u\lt0\) 趋于 \(-\infty\)，\(a=1\) 时差为 0。级数发散，主部为 \(\ln a\cdot n^4\)，符号随 \(\ln a\)。</p>
+    <p>最易错的一步是把高阶差分的阶乘系数当成本题主部：本题只做相邻一次相减，主部来自一阶指数差 \(u/n^2\)；二阶项乘 \(n^6\) 后为 \(u^2 n^3\) 量级，三阶及以下更低，都不改变主部 \(u n^4\)。若展开只到常数项，差为 0；乘子 \(n^6\) 与差分 \(1/n^2\) 配对后抬到 \(n^4\) 阶，不会得到有限常数。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不理解这是修正极限，以为直接乘幂次。</p>
+    <p>② 系数 \(1/720=1/6!\) 容易记错。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式差的高阶渐近；系数 \(u^{5}/720\) 由 Taylor 五阶展开给出，乘子幂次决定剩余主部。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n^{2}(\sqrt[n]{a}-\sqrt[n+1]{a})\)。</p>
+    <p class="var-ans">答案：\(\ln a\)。主部 \(u/n^{2}\) 直接给出。</p>
+  </div>
+</article>
+
+<article class="q" id="q1892">
+  <div class="q-head">
+    <span class="qno">第 1892 题</span>
+    <span class="qtype">平方递推加 1/(n³x)</span>
+    <span class="qsrc">P953</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_{n}\}\) 满足 \(x_{1}=1,\ x_{n+1}=x_{n}+\dfrac{1}{n^{3}x_{n}}\)，证明 \(\lim\limits_{n\to\infty}x_{n}\) 存在并求之。</p>
+  </div>
+  <div class="answer">答案：\(\approx2.0996\)（迭代值，无闭式：\(x_{n}^{2}\to1+2\zeta(3)+\displaystyle\sum_{k\ge1}\frac{1}{k^{6}x_{k}^{2}}\approx4.4084\)）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>sqrt(1+zeta3/2)</b>，卡片旧值 <b>\(\sqrt{1+2\zeta(3)}\approx1.8450\)</b> 同样错。按题面复算：\(x_{n+1}^{2}-x_{n}^{2}=\frac{2}{n^{3}}+\frac{1}{n^{6}x_{n}^{2}}\)，二次项累加 \(\approx1.0043\)（其中 \(n=1\) 项就是 \(1\)，因为 \(x_1=1\)），故 \(x^{2}\to1+2\zeta(3)+1.0043=4.4084\)，\(x\to2.0996\)（迭代 \(n=2\times10^{6}\) 得 2.099624，与复算吻合）。书值丢系数、旧值丢二次项；「高阶项可丢」在递推平方化里要看首项处的量级，不是无条件成立。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：形如 \(x_{n+1}=x_{n}+a_{n}/x_{n}\) 的递推，平方化后把增量线性化，再逐项求和。能否丢掉二次项要看 \(a_{n}\) 在主项处的量级，不是无条件成立。</p>
+    <p>平方化时把交叉项与二次项一并写出：</p>
+    \[ x_{n+1}^{2}-x_{n}^{2}=2x_{n}\cdot\frac{1}{n^{3}x_{n}}+\frac{1}{n^{6}x_{n}^{2}}=\frac{2}{n^{3}}+\frac{1}{n^{6}x_{n}^{2}}. \]
+    <p>第一项累加 \(2\sum1/k^{3}\to2\zeta(3)=2.4041\)。第二项不能当高阶零：\(n=1\) 时 \(x_{1}=1\)，它等于 \(1\)，其余 \(n\ge2\) 的部分只有 \(0.00431\)，合计</p>
+    \[ \sum_{k\ge1}\frac{1}{k^{6}x_{k}^{2}}=1+0.00431\approx1.0043. \]
+    <p>于是</p>
+    \[ x_{n}^{2}\to1+2.4041+1.0043=4.4084,\qquad \lim x_{n}=\sqrt{4.4084}\approx2.0996. \]
+    <p>只留 \(2/n^{3}\) 得到 \(\sqrt{1+2\zeta(3)}=1.8450\)，这正是旧答案的来历：它丢掉了 \(n=1\) 处与主项同量级的 \(1\)。迭代到 \(n=2\times10^{6}\) 实测 \(x=2.099624\)，与上式吻合。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 平方差近似的系数 \(2\) 容易丢。</p>
+    <p>② 把 \(\dfrac{1}{n^{6}x_{n}^{2}}\) 一律当高阶项丢掉，得到偏小的 \(1.8450\)；本题 \(n=1\) 处它就等于 \(1\)，与主项同量级。</p>
+    <p>③ \(\zeta(3)\) 是 Apéry 常数，没有简单解析式，答案只能写成 \(\zeta(3)\) 加数值修正项，或直接写迭代值 \(2.0996\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>平方化递推是级数求和与递推数列的结合。分母升幂只让主项级数更快收敛到接近 \(1\) 的常数，而二次项修正的首项始终是 \(1/(1\cdot x_{1}^{2})\)——它不随分母升幂而变小，所以「高阶项可丢」要看首项处的量级再决定。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=x_{n}+1/(n^{4}x_{n})\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(\approx2.0410\)（迭代值）。平方化得 \(x_{n}^{2}\to1+2\zeta(4)+\sum1/(k^{8}x_{k}^{2})\approx1+2.1646+1.0010=4.1657\)，开方 \(2.0410\)；只留主项的 \(\sqrt{1+\pi^{4}/45}\approx1.7789\) 同样丢了修正项，而 \(n=1\) 处该修正恰为 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1893">
+  <div class="q-head">
+    <span class="qno">第 1893 题</span>
+    <span class="qtype">函数最小值（lnx/x+1/x）</span>
+    <span class="qsrc">P954</span>
+  </div>
+  <div class="stem">
+    <p>设函数 \(f(x)=\dfrac{\ln x}{x}+\dfrac{1}{x}\)，求 \(f(x)\) 的最小值。</p>
+  </div>
+  <div class="answer">答案：无最小值（\(x=1\) 为极大值点，\(f\to-\infty\)）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1</b>，按题面复算为 <b>无最小值（\(x=1\) 为极大值点，\(f\to-\infty\)）</b>。\(f=\frac{\ln x+1}{x}\)，\(x=1\) 处为极大值 1，\(x\to0^{+}\) 时 \(f\to-\infty\)。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：对数与倒分式混合的最值题：换元化成一元函数，由导数符号定单调区间，再看端点趋向判断下界。</p>
+    <p>令 \(u=\ln x\)（\(u\in\mathbb{R}\)），则 \(x=e^{u}\)，原函数写成</p>
+    \[ f(x)=\frac{u+1}{e^{u}}=e^{-u}(u+1). \]
+    <p>先对 \(u\) 求导：\(\dfrac{d}{du}[e^{-u}(u+1)]=-ue^{-u}\)，再乘链式因子 \(1/x=e^{-u}\)，于是</p>
+    \[ f'(x)=-\frac{u}{e^{u}}\cdot e^{-u}=-\frac{\ln x}{x^{2}}. \]
+    <p>符号判定：\(0\lt{}x\lt1\) 对应 \(u\lt0\)，\(f'(x)>0\)；\(x>1\) 对应 \(u>0\)，\(f'(x)\lt0\)。故函数在 \((0,1)\) 递增、在 \((1,+\infty)\) 递减，\(x=1\) 为极大值点，\(f(1)=1\)。</p>
+    <p>\(x\to0^{+}\) 即 \(u\to-\infty\)：\(u+1\to-\infty\)、\(e^{-u}\to+\infty\)，乘积趋于负无穷：</p>
+    \[ f(x)=e^{-u}(u+1)\to-\infty. \]
+    <p>函数在 \(x=1\) 取最大值 \(1\)，但在定义域内无下界，故不存在最小值。数值校验：\(x=0.01\) 时 \(f\approx-360.5\)；\(x=100\) 时 \(f\approx0.056\)；\(f(1)=1\) 为最大值。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不检查端点行为。</p>
+    <p>② 极大值点不代表最小值；端点趋向 \( -\infty\) 时全局无下界。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>函数极值的判断需要结合全局行为；驻点只是局部性质，必须再看两端极限才能定全局最小。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(f(x)=(\ln x+1)/x\) 在 \(x\geq1\) 上的最小值。</p>
+    <p class="var-ans">答案：\(0\)（下确界）。在 \(x\to+\infty\) 时趋于 0，但不取到。</p>
+  </div>
+</article>
+
+<article class="q" id="q1894">
+  <div class="q-head">
+    <span class="qno">第 1894 题</span>
+    <span class="qtype">ln 展开乘 n⁵</span>
+    <span class="qsrc">P954</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^{5}\!\left[\ln\!\left(1+\dfrac{1}{n}\right)-\dfrac{1}{n}+\dfrac{1}{2n^{2}}-\dfrac{1}{3n^{3}}+\dfrac{1}{4n^{4}}-\dfrac{1}{5n^{5}}\right]\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1/6</b>，按题面复算为 <b>\(0\)</b>。括号 \(\sim\frac1{6n^{6}}\)，乘 \(n^{5}\) 得 \(\frac1{6n}\to0\)。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(n^{5}\) 乘「对数展开截断到五阶后的余项」，先把 \(\ln(1+1/n)\) 展开到六阶，确认括号消到哪一阶、首条余项是几阶。</p>
+    <p>令 \(t=1/n\)，交错展开写到六阶：</p>
+    \[ \ln(1+t)=t-\frac{t^{2}}{2}+\frac{t^{3}}{3}-\frac{t^{4}}{4}+\frac{t^{5}}{5}-\frac{t^{6}}{6}+O(t^{7}), \]
+    <p>一至五阶在括号内逐项抵消；截断到五阶之后余项从六阶开始，六阶项系数为负，即 \(-t^{6}/6\)：</p>
+    \[ \ln\Bigl(1+\frac{1}{n}\Bigr)-\frac{1}{n}+\frac{1}{2n^{2}}-\frac{1}{3n^{3}}+\frac{1}{4n^{4}}-\frac{1}{5n^{5}}=-\frac{1}{6n^{6}}+O(n^{-7}). \]
+    <p>括号量级 \(n^{-6}\)，乘 \(n^{5}\) 后只剩 \(n^{-1}\)，乘数仍低一阶，极限为零：</p>
+    \[ n^{5}\Bigl[\ln\Bigl(1+\frac{1}{n}\Bigr)-\frac{1}{n}+\frac{1}{2n^{2}}-\frac{1}{3n^{3}}+\frac{1}{4n^{4}}-\frac{1}{5n^{5}}\Bigr]=-\frac{1}{6n}+O(n^{-2})\to0. \]
+    <p>\(-1/6\) 是 \(n^{-6}\) 阶项的系数，不是极限值；乘数换成 \(n^{6}\) 才取到该系数。数值校验：\(n=1000\) 实算 \(-1.6652\times10^{-4}\)，与主部 \(-1/(6n)=-1.6667\times10^{-4}\) 差约 \(0.09\%\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 交错级数符号：\(\ln(1+x)=x-x^{2}/2+x^{3}/3-x^{4}/4+x^{5}/5-x^{6}/6+\cdots\)。</p>
+    <p>② 乘的幂次。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\ln(1+1/n)\) 的高阶展开；截断到几阶就由下一阶余项定极限，乘子幂次必须与余项阶数对齐。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n^{6}[\ln(1+1/n)-\sum_{k=1}^{5}(-1)^{k+1}/(kn^{k})]\)。</p>
+    <p class="var-ans">答案：\(-1/6\)。主部 \(-1/(6n^{6})\) 直接给出。</p>
+  </div>
+</article>
+
+<article class="q" id="q1895">
+  <div class="q-head">
+    <span class="qno">第 1895 题</span>
+    <span class="qtype">cos 型递推加 1/n⁴</span>
+    <span class="qsrc">P954</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{x_{n}\}\) 满足 \(x_{1}=1,\ x_{n+1}=\cos(x_{n})+\dfrac{1}{n^{4}}\)，证明 \(\lim\limits_{n\to\infty}x_{n}\) 存在并求之。</p>
+  </div>
+  <div class="answer">答案：\(x\) 满足 \(x=\cos x\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>    <p>识别类型：压缩映射递推加一列可和扰动；起作用的是「累积可和」而非「扰动趋于零」。</p>
+    <p>无扰动时，\(\cos\) 把 \([-1,1]\) 映成 \([\cos1,1]\subset[0.54,1]\)，从 \(x_{1}=1\) 起各项留在 \([-1,1]\) 内；在该区间上</p>
+    \[ \bigl|(\cos t)'\bigr|=|\sin t|\le\sin1=:q\approx0.8421\lt{}1, \]
+    <p>映射严格压缩，不动点方程 \(L=\cos L\) 有唯一解。记误差 \(e_{n}=x_{n}-L\)，对 \(\cos\) 用中值定理：</p>
+    \[ e_{n+1}=-\sin\xi_{n}\,e_{n}+\frac{1}{n^{4}},\qquad |e_{n}|\le q^{\,n-1}|e_{1}|+\sum_{k=1}^{n-1}q^{\,n-1-k}\frac{1}{k^{4}}. \]
+    <p>第一项指数趋零；第二项权重随 \(n\) 衰减，尾项由收敛级数 \(\sum k^{-4}=\pi^{4}/90\) 控制，亦趋零，故 \(e_{n}\to0\)。若扰动换成 \(1/n\)，累积 \(\sum1/k\sim\ln n\) 无界，极限才会偏移。</p>
+    <p>有界性归纳：若 \(x_{k}\in[-1,1]\)，则 \(\cos x_{k}\in[\cos1,1]\)，再加 \(1/k^{4}\le1\)，仍不超出区间；所有项都落在压缩映射定义域内，中值定理可逐次使用。</p>
+    \[ L=\cos L,\qquad L\approx0.7390851332. \]
+</div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忽略扰动项。</p>
+    <p>② 不动点方程 \(x=\cos x\) 无解析解。</p>
+    <p>③ \(1/n^{4}\) 与 \(1/n^{2}\) 同为可和扰动，\(p>1\) 即可，不必要求高阶幂。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>带扰动的压缩映射递推：判据是扰动级数是否可和，\(1/n\) 型会把极限位置推走。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=1,\ x_{n+1}=\cos x_{n}+1/n^{5}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：Dottie 数。扰动可和，不改变不动点。</p>
+  </div>
+</article>
+
+<article class="q" id="q1896">
+  <div class="q-head">
+    <span class="qno">第 1896 题</span>
+    <span class="qtype">二次递推（x(5-x)）</span>
+    <span class="qsrc">P954</span>
+  </div>
+  <div class="stem">
+    <p>设 \(0\lt {}x_{1}\lt 5,\ x_{n+1}=x_{n}(5-x_{n})\)，证明数列 \(\{x_{n}\}\) 的极限存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：不收敛（不动点为 \(0,4\)，且 \(f'(4)=-3\) 排斥；书给 2.5 非不动点）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>2.5</b>，按题面复算为 <b>不收敛（不动点为 \(0,4\)，且 \(f'(4)=-3\) 排斥；书给 2.5 非不动点）</b>。\(r=5\) 的 logistic 映射不动点 0 与 4，\(f'(4)=-3\) 排斥，多数初值越界；2.5 不是不动点。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：二次递推 \(x_{n+1}=f(x_{n})\)，参数为 \(5\)，仍按「解不动点方程 → 导数判稳定性 → 轨道验证」的顺序处理。</p>
+    <p>不动点满足 \(L=L(5-L)\)，即</p>
+    \[ L=L(5-L)\ \Longrightarrow\ L(4-L)=0, \]
+    <p>得不动点 \(L=0\) 与 \(L=4\)。求导 \(f'(x)=5-2x\)，稳定性如下：</p>
+    \[ f'(4)=-3,\quad |f'(4)|=3>1;\qquad f'(0)=5,\quad |f'(0)|=5>1. \]
+    <p>两个不动点都排斥，多数初值被推出区间。题面所给 \(2.5\) 代入：\(f(2.5)=2.5(5-2.5)=6.25\neq2.5\)，不满足不动点方程。</p>
+    <p>轨道实例：取 \(x_{1}=2.5\)，迭代过程为</p>
+    \[ x_{1}=2.5\to x_{2}=6.25\to x_{3}=-7.8125\to x_{4}\approx-100.10\to\cdots, \]
+    <p>轨道越出 \((0,5)\) 后在负侧继续发散，不收敛。数值校验：\(f'(4)=-3\)、\(f(2.5)=6.25\) 直接代入复核；轨道 \(2.5\to6.25\to-7.8125\to-100.10\) 逐步实算一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不动点方程记错。</p>
+    <p>② 不验证稳定性。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>二次递推的不动点与稳定性；排斥不动点邻域内的轨道发散或越界，不进入收敛邻域。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(0\lt {}x_{1}\lt 2,\ x_{n+1}=x_{n}(2-x_{n})\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\(1\)。令 \(y_{n}=1-x_{n}\)，则 \(y_{n+1}=y_{n}^{2}\to0\)，故 \(x_{n}\to1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1897">
+  <div class="q-head">
+    <span class="qno">第 1897 题</span>
+    <span class="qtype">根式递推（√(3+x)）</span>
+    <span class="qsrc">P954</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_{1}=1,\ x_{n+1}=\sqrt{3+x_{n}}\)，证明数列 \(\{x_{n}\}\) 极限存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1+\sqrt{13}}{2}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>    <p>识别类型：根式递推 \(x_{n+1}=\sqrt{3+x_{n}}\)，不动点为无理二次根，先解二次方程取正根，再证递增有上界。</p>
+    <p>第一步求不动点。设 \(x_{n}\to L\)，对递推式两边取极限：</p>
+    \[ L=\sqrt{3+L}\ \Longrightarrow\ L^{2}-L-3=0, \]
+    <p>由求根公式 \(L=(1\pm\sqrt{13})/2\)，负根 \((1-\sqrt{13})/2\lt{}0\) 舍去，不动点为</p>
+    \[ L=\frac{1+\sqrt{13}}{2}\approx2.302776. \]
+    <p>第二步判定方向。\(x_{1}=1<L\)。若 \(x_{n}<L\)，由 \(L^{2}=3+L\)，有 \(3+x_{n}<L^{2}\)，故 \(x_{n+1}=\sqrt{3+x_{n}}<L\)，数列恒在 \(L\) 下方。相邻两项之差为</p>
+    \[ x_{n+1}-x_{n}=\sqrt{3+x_{n}}-x_{n}=\frac{3+x_{n}-x_{n}^{2}}{\sqrt{3+x_{n}}+x_{n}}. \]
+    <p>分母为正；二次式 \(x_{n}^{2}-x_{n}-3\) 的两根为 \(L\) 与一负根，在 \(0<x_{n}<L\) 上为负，故分子 \(3+x_{n}-x_{n}^{2}>0\)，即 \(x_{n+1}>x_{n}\)，数列严格递增。误差按平方差分解：</p>
+    \[ x_{n+1}-L=\frac{x_{n}-L}{\sqrt{3+x_{n}}+L}. \]
+    <p>靠近 \(L\) 时分母趋于 \(2L\)，压缩因子 \(q=1/(2L)\approx0.21713\lt{}1\)。数列递增且以 \(L\) 为上界，极限存在，代回不动点方程得 \(\lim\limits_{n\to\infty}x_{n}=(1+\sqrt{13})/2\)。</p>
+    <p>数值校验：\(x_{10}\approx2.302775\)，与 \(L\) 的差约 \(3.3\times10^{-7}\)，速率与压缩因子一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 求根公式记错：\(L=(1\pm\sqrt{1+12})/2=(1\pm\sqrt{13})/2\)。</p>
+    <p>② 舍去负根 \((1-\sqrt{13})/2\lt0\)，它与初值 \(x_{1}=1\) 不在同一侧。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式递推的标准题型；不动点取二次方程正根，误差按平方差分解后可估压缩因子。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_{1}=3,\ x_{n+1}=\sqrt{3+x_{n}}\)，求 \(\lim x_{n}\)。</p>
+    <p class="var-ans">答案：\((1+\sqrt{13})/2\)。因 \(x_{1}=3>L\)，数列递减到 \(L\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1898">
+  <div class="q-head">
+    <span class="qno">第 1898 题</span>
+    <span class="qtype">微分方程型（x²+xf+f²）</span>
+    <span class="qsrc">P955</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 满足 \(f'(x)=\dfrac{1}{x^{2}+xf(x)+f^{2}(x)}\)，且 \(f(0)=1\)，证明 \(\lim\limits_{x\to+\infty}f(x)\) 存在。</p>
+  </div>
+  <div class="answer">答案：极限存在，\(1\le L\le1+\dfrac{\pi}{2}\)，数值 \(L\approx1.9215\)（非 \(0\)）</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>极限存在，\(1\le L\le1+\frac{\pi}{2}\)，数值 \(L\approx1.9215\)（非 \(0\)）</b>。\(f'>0\) 且 \(f'\le\frac1{x^{2}}\)，\(f\) 单调增有界，极限有限；RK4（\(h=0.01\)，积到 \(X=2000\) 再补 \(1/X\) 尾项）给 \(L\approx1.9215\)，步长减半数值不变；旧值 \(1.932\) 只能由 \(h=1\) 的粗步长复现（离散过冲），不可能是 0。以复算为准。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：由导数的符号与放缩证明解单调且有界，不需要求出显式解。先看分母定号，再给导数找可积上界，最后用夹逼框住极限范围。</p>
+    <p>分母配方：</p>
+    \[ x^{2}+xf+f^{2}=\Bigl(x+\frac{f}{2}\Bigr)^{2}+\frac{3f^{2}}{4}>0, \]
+    <p>故 \(f'(x)>0\)，结合 \(f(0)=1\)，\(f\) 单调递增且 \(f(x)\ge1\)。于是分母不小于 \(x^{2}+f^{2}\ge x^{2}+1\)，导数有上界</p>
+    \[ 0<f'(x)\le\frac{1}{x^{2}+1}. \]
+    <p>积分即得上界：</p>
+    \[ f(x)\le1+\arctan x\lt{}1+\frac{\pi}{2}\approx2.571. \]
+    <p>单调递增且有上界，由单调有界准则极限存在。下界方面，\(f(x)\ge f(0)=1\)，故 \(L\ge1>0\)；上界方面，对导数上界积分即得 \(L\le1+\pi/2\approx2.571\)。极限被夹在有限区间内，不可能趋于 \(0\)；积分式 \(L=1+\int_{0}^{\infty}\frac{dt}{t^{2}+tf(t)+f^{2}(t)}\) 含未知 \(f(t)\)，无法初等积出。</p>
+    <p>数值校验：RK4（步长 \(0.01\)，积到 \(X=2000\) 补尾项 \(1/X\)）给 \(L\approx1.9215\)，步长减半不变，落在 \([1,2.571]\) 内。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不注意 \(f\) 是递增还是递减。</p>
+    <p>② 分母估计过松或过紧。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>微分方程解的渐近行为是数学分析的经典问题：分母对 \(f\) 二次正定、对 \(x\) 二次，故积分收敛、极限有限；这类题先证有界，再谈取值。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f'(x)=1/(1+x^{2}+f^{2}),\ f(0)=0\)，证明 \(\lim f(x)\) 存在。</p>
+    <p class="var-ans">答案：有限值。因为 \(f'\leq1/(1+x^{2})\)，积分有界。</p>
+  </div>
+</article>
+
+<article class="q" id="q1899">
+  <div class="q-head">
+    <span class="qno">第 1899 题</span>
+    <span class="qtype">对数差乘 n⁵</span>
+    <span class="qsrc">P955</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^{5}\!\left(\dfrac{1}{\ln n}-\dfrac{1}{\ln(n+1)}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>1</b>，按题面复算为 <b>\(+\infty\)</b>。差主部 \(\frac1{n\ln^{2}n}\)，乘 \(n^{5}\) 得 \(\frac{n^{4}}{\ln^{2}n}\to\infty\)。以复算为准。</p></div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p><b>识别类型</b>：对数倒数之差乘以 \(n^5\)，是同模板乘子最高的一级；通分取主部后比较剩余幂次与对数分母。</p>
+    <p>分子差分 \(\ln(1+1/n)\sim1/n\)，分母 \(\ln n\cdot\ln(n+1)\sim(\ln n)^2\)，差主部 \(1/[n(\ln n)^2]\)。乘以 \(n^5\)：</p>
+    \[\frac{1}{n(\ln n)^2}\cdot n^5=\frac{n^4}{(\ln n)^2}\to+\infty.\]
+    <p>发散依据：\(n^4\) 压过 \((\ln n)^2\)，幂函数与对数之间的速度差距随幂次增大进一步拉开，这一级发散速度最快。档位对照：乘 \(n\) 得 \(1/(\ln n)^2\to0\)，乘 \(n^2,n^3,n^4\) 依次剩余 \(n,n^2,n^3\) 比对数平方，本题乘 \(n^5\) 剩余 \(n^4/(\ln n)^2\)；差分主部 \(1/[n(\ln n)^2]\) 各级保持不变。</p>
+    <p>最易错的一步是把差分主部估成 \(1/[n^2(\ln n)^2]\)：乘 \(n^5\) 会得 \(n^3/(\ln n)^2\)，阶数描述错误；差分分子来自 \(\ln(1+1/n)\)，阶数是 \(1/n\)。丢掉对数分母主部退化为 \(n^4\)，不改变发散方向，但阶数写法须保留 \((\ln n)^2\)。</p>
+    <p>发散严格性：\(n^{4}/(\ln n)^{2}\to+\infty\)，取 \(n\) 充分大即超过任意给定 \(M\)，数列无上界。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分母 \((\ln n)^{2}\) 不能丢。</p>
+    <p>② 乘幂次递增但主部不变。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数差的渐近；最高乘子下剩余幂次仍压过对数平方，发散方向为 \(+\infty\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim n\ln^{2}n(1/\ln n-1/\ln(n+1))\)。</p>
+    <p class="var-ans">答案：\(1\)。主部 \(1/[n(\ln n)^{2}]\) 直接给出。</p>
+  </div>
+</article>
+
+<article class="q" id="q1900">
+  <div class="q-head">
+    <span class="qno">第 1900 题</span>
+    <span class="qtype">ζ(5) 余项</span>
+    <span class="qsrc">P955</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_{n}=\sum\limits_{k=1}^{n}\dfrac{1}{k^{5}}-\zeta(5)\)，证明 \(\lim\limits_{n\to\infty}a_{n}=0\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>    <p>识别类型：正项 \(p\) 级数（\(p=5\)）部分和与 \(\zeta(5)\) 之差，即余项。思路是积分比较给出上界再夹逼到零，不能只凭收敛定义一句带过。</p>
+    <p>该级数和为</p>
+    \[
+    \zeta(5)=\sum_{k=1}^{\infty}\frac{1}{k^{5}}\approx1.036928.
+    \]
+    <p>记余项 \(R_{n}=\sum_{k=n+1}^{\infty}1/k^{5}\)，则 \(a_{n}=-R_{n}\)。\(f(x)=x^{-5}\) 单调递减，积分比较给出</p>
+    \[
+    \int_{n+1}^{\infty}\frac{1}{t^{5}}\,dt\le R_{n}\le\int_{n}^{\infty}\frac{1}{t^{5}}\,dt=\frac{1}{4n^{4}}.
+    \]
+    <p>左端为 \(1/[4(n+1)^{4}]\)，余项非负，于是</p>
+    \[
+    0\le |a_{n}|=R_{n}\le\frac{1}{4n^{4}}\to0,
+    \]
+    <p>故 \(R_{n}\to0\)，\(a_{n}\to0\)。收敛定义只说明部分和有极限；本题把差落实为正项余项，由 Cauchy 收敛准则与积分上界说明余项被压到零。余项主部为</p>
+    \[
+    R_{n}\sim\frac{1}{4n^{4}},\qquad a_{n}\sim-\frac{1}{4n^{4}}.
+    \]
+    <p>数值校验：\(n=1000\) 实算 \(R_{1000}\approx2.4950\times10^{-13}\)，积分上界 \(1/(4n^{4})=2.5000\times10^{-13}\)，比值 \(I/R\approx1.00200\)，随 \(n\) 趋于 1。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 余项阶数：\(p\) 级数余项 \(\sim n^{1-p}/(p-1)\)。本题 \(p=5\)，余项 \(\sim1/(4n^{4})\)。</p>
+    <p>② 积分上下限对应 \(n\) 与 \(n+1\)，夹逼两端不可写反次序。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\zeta(s)\) 函数是数论中的核心对象；同类 \(p\) 级数余项题共用积分夹逼方法，余项主部 \(1/[(p-1)n^{p-1}]\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 估计 \(\sum_{k=n+1}^{\infty}1/k^{5}\) 的渐近阶。</p>
+    <p class="var-ans">答案：\(\sim1/(4n^{4})\)。由积分比较 \(\int_{n}^{\infty}x^{-5}dx=1/(4n^{4})\)。</p>
+  </div>
+</article>

@@ -1,0 +1,835 @@
+<article class="q" id="q1951">
+  <div class="q-head">
+    <span class="qno">第 1951 题</span>
+    <span class="qtype">单调有界递推（算术平方根型）</span>
+    <span class="qsrc">P964</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\sqrt{2+a_n}\)，证明：\(\lim\limits_{n\to\infty}a_n\) 存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：由递推式给出、通项无法显式写出的数列，属单调有界准则型。固定两步：先用归纳法证有界，再比较被开方数证单调，极限存在后令其等于 \(L\) 代入递推方程求解。</p>
+  <p>有界性：归纳证明 \(0\lt{}a_n\lt{}2\)。\(a_1=1\lt{}2\)；若 \(0\lt{}a_n\lt{}2\)，则</p>
+  \[ 0\lt{}a_{n+1}=\sqrt{2+a_n}\lt{}\sqrt{2+2}=2. \]
+  <p>单调性：比较被开方数判断 \(a_{n+1}\) 与 \(a_n\)：</p>
+  \[ a_{n+1}>a_n \iff 2+a_n>a_n^2 \iff (a_n-2)(a_n+1)\lt{}0. \]
+  <p>由 \(0\lt{}a_n\lt{}2\)，\(a_n-2\lt{}0\)、\(a_n+1>0\)，乘积为负，故 \(\{a_n\}\) 单调递增有上界 \(2\)，由单调有界准则收敛。</p>
+  <p>设极限为 \(L\)，对递推式取极限：</p>
+  \[ L=\sqrt{2+L}\ \Longrightarrow\ L^2-L-2=0. \]
+  <p>解得 \(L=2\) 或 \(L=-1\)。因 \(a_n>0\)，舍掉负根，得 \(L=2\)。数值上迭代 20 万步后 \(a_n\approx2.0000\)，且迭代函数 \(f(x)=\sqrt{2+x}\) 在 \(L=2\) 处 \(f'(L)=1/(2\sqrt{2+L})=1/4\lt{}1\)，为吸引不动点。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 解出 \(L=2\) 与 \(L=-1\) 后不做取舍，把负根也列为候选；② 跳过单调性与有界性证明直接对递推式取极限，逻辑链条不完整；③ 误把 \(a_2=\sqrt3\) 当作数列会越过上界 \(2\)，实际 \(2\) 是上确界，数列始终在其下方递增逼近。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>本题是「\(x_{n+1}=\sqrt{a+x_n}\)」型单调有界递推的入门范式，考研中常与牛顿迭代、压缩映射放在同一组鉴别。证明模板（归纳证有界、比较被开方数证单调、解方程舍根）是后续同类平方根递推的通用框架，考查重点在存在性论证而非单纯解方程。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\sqrt{3+a_n}\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  <p class="var-ans">答案：\(\dfrac{1+\sqrt{13}}{2}\)。归纳得 \(a_n\lt{}(1+\sqrt{13})/2\) 且单调递增，方程 \(L=\sqrt{3+L}\) 即 \(L^2-L-3=0\)，正根 \(L=(1+\sqrt{13})/2\approx2.303\)；数值迭代 20 万步收敛到 \(2.3028\)，且 \(f'(L)=1/(2L)\lt{}1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1952">
+  <div class="q-head">
+    <span class="qno">第 1952 题</span>
+    <span class="qtype">分式线性递推（振荡收敛）</span>
+    <span class="qsrc">P964</span>
+  </div>
+  <div class="stem">
+    <p>设 \(b_1=1,\ b_{n+1}=\dfrac{1}{1+b_n}\)，求 \(\lim\limits_{n\to\infty}b_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\sqrt5-1}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：迭代函数 \(f(x)=1/(1+x)\) 是分式线性函数，数列在不动点两侧上下摆动，属压缩映射型收敛。先界定取值范围（分母为零时无定义），再列不动点方程，最后用导数绝对值验证吸引性。</p>
+  <p>由 \(b_1=1>0\)，归纳可知 \(b_n>0\)，于是 \(b_{n+1}=1/(1+b_n)\lt{}1\)，即 \(0\lt{}b_n\lt{}1\)（\(n\ge2\)）。在区间 \([0,1]\) 上，</p>
+  \[ f'(x)=-\frac{1}{(1+x)^2},\qquad |f'(x)|\le1. \]
+  <p>设极限为 \(L\)，对递推式取极限：\(L=1/(1+L)\)，整理得</p>
+  \[ L^2+L-1=0, \]
+  <p>解得 \(L=\dfrac{-1+\sqrt5}{2}\) 或 \(L=\dfrac{-1-\sqrt5}{2}\)。由 \(b_n>0\)，负根舍去，故 \(L=(\sqrt5-1)/2\approx0.618\)。</p>
+  <p>吸引性验证：在不动点处，\(1+L=1/L\)（由 \(L(1+L)=1\)），故</p>
+  \[ |f'(L)|=\frac{1}{(1+L)^2}=L^2\approx0.382\lt{}1, \]
+  <p>不动点为吸引点，振荡逐次衰减。数值迭代 20 万步后 \(b_n\approx0.618034\)，与解析值一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 看到数列上下摆动（\(b_1=1,\ b_2=1/2,\ b_3=2/3\)）就误判为不收敛，实际是振荡衰减到不动点；② 解方程 \(L^2+L-1=0\) 后不舍负根；③ 把递推式误写成 \(b_{n+1}=(1+b_n)^{-1}\) 之外的倒数形式，导致不动点方程列错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>分式线性递推是考研选择题与解答题的常见模型，核心考法有两条：一是取倒数或作差化为可显式求解的等差、等比型；二是直接用不动点方程加压缩条件论证收敛。本题不动点恰为黄金分割比，常与连分数、斐波那契数列比值对照出现。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(b_1=1,\ b_{n+1}=\dfrac{1}{2+b_n}\)，求 \(\lim\limits_{n\to\infty}b_n\)。</p>
+  <p class="var-ans">答案：\(\sqrt2-1\)。不动点方程 \(L=1/(2+L)\) 即 \(L^2+2L-1=0\)，正根 \(L=-1+\sqrt2\approx0.414\)；数值迭代 20 万步收敛到 \(0.414214\)，且 \(|f'(L)|=1/(2+L)^2\lt{}1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1953">
+  <div class="q-head">
+    <span class="qno">第 1953 题</span>
+    <span class="qtype">单调有界递推（牛顿平方根迭代）</span>
+    <span class="qsrc">P964</span>
+  </div>
+  <div class="stem">
+    <p>设 \(c_1=1,\ c_{n+1}=\dfrac12\left(c_n+\dfrac{2}{c_n}\right)\)，证明：\(\lim\limits_{n\to\infty}c_n\) 存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：这是求 \(\sqrt2\) 的牛顿迭代公式本身，形如 \(c_{n+1}=\tfrac12(c_n+2/c_n)\)，是用牛顿法解 \(x^2=2\) 的标准格式，仍属单调有界准则型。先证极限存在，再令 \(c_n\to L\) 代入方程；动手前仍需用单调有界把存在性坐实。</p>
+  <p>先用均值不等式给出下界：对任意 \(c_n>0\)，</p>
+  \[ c_{n+1}=\frac12\left(c_n+\frac{2}{c_n}\right)\ge\sqrt{c_n\cdot\frac{2}{c_n}}=\sqrt2. \]
+  <p>故从第二项起 \(c_n\ge\sqrt2\)。再证从第二项起单调递减：当 \(c_n\ge\sqrt2\) 时，</p>
+  \[ c_{n+1}-c_n=\frac12\left(\frac{2}{c_n}-c_n\right)=\frac{2-c_n^2}{2c_n}\le0, \]
+  <p>因为 \(c_n^2\ge2\)。所以 \(\{c_n\}\) 从第二项起单调递减且有下界 \(\sqrt2\)，由单调有界准则收敛。</p>
+  <p>设极限为 \(L>0\)，对递推式取极限：</p>
+  \[ L=\frac12\left(L+\frac{2}{L}\right)\ \Longrightarrow\ L^2=2. \]
+  <p>由 \(L>0\) 得 \(L=\sqrt2\)。不动点处 \(f'(L)=\tfrac12(1-2/L^2)=0\)，收敛为二阶速度；数值迭代 20 万步后 \(c_n\approx1.414214\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不先证 \(c_n>0\) 就对递推式取极限；② 把均值不等式方向用反，误以为 \(c_{n+1}\) 是下界；③ 解出 \(L=\pm\sqrt2\) 后不说明只取正根的理由；④ 忽略首项 \(c_1=1\lt{}\sqrt2\)，单调性是从第二项才开始的。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>牛顿迭代 \(c_{n+1}=\tfrac12(c_n+a/c_n)\) 是考研高频模型，常与误差衰减阶、压缩判别放在一起考查。本题证明的关键等式 \(c_{n+1}-\sqrt2=(c_n-\sqrt2)^2/(2c_n)\) 是后续追问误差平方级收缩的出发点，同类题把常数 \(2\) 换成 \(3\)、\(4\) 时结论结构不变。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(c_1=1,\ c_{n+1}=\tfrac12\left(c_n+\dfrac{3}{c_n}\right)\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+  <p class="var-ans">答案：\(\sqrt3\)。均值不等式给出 \(c_{n+1}\ge\sqrt3\)，从第二项起单调递减收敛，方程 \(L=\tfrac12(L+3/L)\) 化简得 \(L^2=3\)，取正根；数值迭代 20 万步收敛到 \(1.732051\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1954">
+  <div class="q-head">
+    <span class="qno">第 1954 题</span>
+    <span class="qtype">对数压缩递推（趋于 0）</span>
+    <span class="qsrc">P965</span>
+  </div>
+  <div class="stem">
+    <p>设 \(d_1=1,\ d_{n+1}=\ln(1+d_n)\)，证明：\(\lim\limits_{n\to\infty}d_n\) 存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：迭代函数 \(f(x)=\ln(1+x)\) 在 \(x>0\) 时满足 \(\ln(1+x)\lt{}x\)，数列单调递减且保持非负，属单调有界准则型。先证递减与下界，再由不动点方程定值；本题不动点处导数为 \(1\)，收敛速度慢，不能用导数严格小于 1 来论证，存在性必须靠单调有界准则保证。</p>
+  <p>由 \(d_1=1>0\)，归纳可知 \(d_n>0\)。对 \(x>0\)，经典不等式 \(\ln(1+x)\lt{}x\) 成立，于是</p>
+  \[ d_{n+1}=\ln(1+d_n)\lt{}d_n. \]
+  <p>故 \(\{d_n\}\) 单调递减且有下界 \(0\)，由单调有界准则收敛，设极限为 \(L\ge0\)。</p>
+  <p>对递推式两边取极限：</p>
+  \[ L=\ln(1+L). \]
+  <p>令 \(g(x)=x-\ln(1+x)\)，则</p>
+  \[ g'(x)=1-\frac{1}{1+x}=\frac{x}{1+x}\ge0, \]
+  <p>且 \(g(0)=0\)，故 \(g(x)=0\) 在 \(x\ge0\) 上只有解 \(x=0\)，即 \(L=0\)。数值迭代 20 万步后 \(d_n\approx1.0\times10^{-5}\)，与慢收敛 \(d_n\sim2/n\) 的估计一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 误以为 \(\ln(1+x)\) 在 \(x>0\) 时大于 \(x\)，把单调性方向判反；② 只证递减不证非负，存在性论证缺下界；③ 在不动点处套用 \(|f'(L)|\lt{}1\) 的压缩判别，本题 \(f'(0)=1\)，该判别失效；④ 把极限方程误列成 \(L=\ln L\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>\(x_{n+1}=\ln(1+x_n)\) 是慢收敛递推的代表题型，考研除了求极限，还常追问趋于 0 的速度阶：利用 \(\ln(1+x)=x-x^2/2+o(x^2)\) 倒量后可得 \(1/d_n\sim n/2\)。它与 \(x_{n+1}=\arctan x_n\)、\(x_{n+1}=\sin x_n\) 同属「压缩到 0」的一族，需对照系数记忆。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(d_1=1,\ d_{n+1}=\ln(1+d_n)\)，求 \(\lim\limits_{n\to\infty}n d_n\)。</p>
+  <p class="var-ans">答案：\(2\)。由 \(\ln(1+x)=x-x^2/2+o(x^2)\)，\(1/d_{n+1}-1/d_n\to1/2\)，累加得 \(1/d_n\sim n/2\)，故 \(n d_n\to2\)；数值迭代 20 万步 \(n d_n\approx2.00002\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1955">
+  <div class="q-head">
+    <span class="qno">第 1955 题</span>
+    <span class="qtype">可显式求解递推（倒数等差）</span>
+    <span class="qsrc">P965</span>
+  </div>
+  <div class="stem">
+    <p>设 \(e_1=1,\ e_{n+1}=\dfrac{e_n}{1+e_n}\)，求 \(\lim\limits_{n\to\infty}e_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：迭代函数 \(f(x)=x/(1+x)\) 是分式线性函数，取倒数后递推变成最简单的等差数列，可直接写出通项。之所以取倒数，是因为 \(f(x)=x/(1+x)\) 的倒数 \(1/f(x)=(1+x)/x=1/x+1\)，把分母的 \(1+x\) 拆开后多出的常数 \(1\) 正好是公差。</p>
+  <p>由递推式两边取倒数：</p>
+  \[ \frac{1}{e_{n+1}}=\frac{1+e_n}{e_n}=\frac{1}{e_n}+1. \]
+  <p>这是公差为 \(1\) 的等差数列，首项 \(1/e_1=1\)，故</p>
+  \[ \frac{1}{e_n}=n,\qquad e_n=\frac1n. \]
+  <p>代入所求极限：</p>
+  \[ \lim_{n\to\infty}e_n=\lim_{n\to\infty}\frac1n=0. \]
+  <p>通项 \(e_n=1/n\) 是精确等式而非渐近估计，因此数列严格单调递减趋于 0，与不动点方程 \(L=L/(1+L)\) 化简出的 \(L=0\) 一致。数值迭代 20 万步后 \(e_n=5.0\times10^{-6}=1/200000\)，与通项完全吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不取倒数，直接对 \(e_{n+1}=e_n/(1+e_n)\) 作差，看不出通项；② 误以为 \(e_n\to0\) 时 \(n e_n\) 不定，实际通项精确为 \(1/n\)；③ 取倒数时把公差写成 \(1/e_n\) 而漏掉常数项；④ 把递推式误读为 \(e_{n+1}=(1+e_n)/e_n\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>分式线性递推取倒数化等差是基础技巧，本题给出 \(e_n=1/n\) 的精确通项。考研常在此类模型上追问二阶修正（如 \(n(1-n e_n)\) 型），或与牛顿迭代、压缩递推放在同一组鉴别，考查能否认出倒数化等差这一可显式求解的分支。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(e_1=1,\ e_{n+1}=\dfrac{e_n}{1+2e_n}\)，求 \(\lim\limits_{n\to\infty}n e_n\)。</p>
+  <p class="var-ans">答案：\(\dfrac12\)。取倒数得 \(1/e_{n+1}=1/e_n+2\)，通项 \(1/e_n=2n-1\)，故 \(e_n=1/(2n-1)\)，\(n e_n\to1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1956">
+  <div class="q-head">
+    <span class="qno">第 1956 题</span>
+    <span class="qtype">单调有界递推（平方根与黄金分割）</span>
+    <span class="qsrc">P965</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f_1=1,\ f_{n+1}=\sqrt{f_n+1}\)，证明：\(\lim\limits_{n\to\infty}f_n\) 存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1+\sqrt5}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：算术平方根型递推，不动点对应黄金分割比。先以不动点值为上界归纳证有界，再比较相邻项证单调，最后解方程；平方根递推的上界正是不动点本身。</p>
+  <p>记 \(\varphi=(1+\sqrt5)/2\)，满足 \(\varphi^2=\varphi+1\)。归纳证明 \(f_n\lt{}\varphi\)：\(f_1=1\lt{}\varphi\)；若 \(f_n\lt{}\varphi\)，则</p>
+  \[ f_{n+1}=\sqrt{f_n+1}\le\sqrt{\varphi+1}=\sqrt{\varphi^2}=\varphi. \]
+  <p>单调性：比较 \(f_{n+1}\) 与 \(f_n\)，比较被开方数：</p>
+  \[ f_{n+1}\ge f_n \iff f_n+1\ge f_n^2 \iff f_n^2-f_n-1\le 0. \]
+  <p>二次式 \(x^2-x-1\) 在 \(0\lt{}x\lt{}\varphi\) 上为负，而 \(f_n\lt{}\varphi\)，故不等式成立，\(\{f_n\}\) 单调递增有上界 \(\varphi\)，收敛；开口向上的二次式在两根之间为负。</p>
+  <p>设极限为 \(L\)，取极限得</p>
+  \[ L=\sqrt{L+1}\ \Longrightarrow\ L^2-L-1=0. \]
+  <p>解得 \(L=\varphi\) 或 \(L=(1-\sqrt5)/2\lt{}0\)。由 \(f_n>0\) 舍负根，\(L=(1+\sqrt5)/2\)。不动点处 \(f'(L)=1/(2\sqrt{L+1})=1/(2L)\approx0.309\lt{}1\)；数值迭代 20 万步后 \(f_n\approx1.618034\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不先证有界就直接列不动点方程；② 平方求解时引入增根 \(L=(1-\sqrt5)/2\) 却不依据符号舍去；③ 把比较 \(f_{n+1}>f_n\) 时的平方方向写反；④ 误记黄金分割比为 \((\sqrt5-1)/2\)，那是本题不动点的倒数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>平方根递推与黄金分割比是考研常见组合，常与连分数 \(1+1/(1+\cdots)\)、斐波那契数列比值互证。本题结构与 1951 同族，区别只在根号内常数；考研变式多为更换常数后重算二次方程正根。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(f_1=1,\ f_{n+1}=\sqrt{f_n+2}\)，求 \(\lim\limits_{n\to\infty}f_n\)。</p>
+  <p class="var-ans">答案：\(2\)。方程 \(L=\sqrt{L+2}\) 即 \(L^2-L-2=0\)，正根 \(L=2\)（负根 \(-1\) 舍去）；归纳得 \(f_n\lt{}2\) 且递增，数值迭代 20 万步收敛到 \(2.0000\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1957">
+  <div class="q-head">
+    <span class="qno">第 1957 题</span>
+    <span class="qtype">分式线性递推（连分数型）</span>
+    <span class="qsrc">P965</span>
+  </div>
+  <div class="stem">
+    <p>设 \(g_1=1,\ g_{n+1}=1+\dfrac{1}{g_n}\)，求 \(\lim\limits_{n\to\infty}g_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1+\sqrt5}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：无限连分数 \(1+1/(1+1/\cdots)\) 的分式线性迭代，数列在不动点两侧振荡收敛。先界定取值范围，再列不动点方程，用导数绝对值验证吸引性。</p>
+  <p>由 \(g_1=1>0\) 归纳 \(g_n>0\)，第二项起 \(1\lt{}g_n\le2\)；迭代函数 \(f(x)=1+1/x\)，导数</p>
+  \[ f'(x)=-\frac{1}{x^2}. \]
+  <p>两步复合映射：</p>
+  \[ g_{n+2}=1+\frac{1}{g_{n+1}}=1+\frac{g_n}{1+g_n}=\frac{1+2g_n}{1+g_n}. \]
+  <p>奇偶子列从两侧逼近同一不动点。</p>
+  <p>设极限为 \(L\)，取极限得 \(L=1+1/L\)，两边乘 \(L\)：</p>
+  \[ L^2=L+1. \]
+  <p>解得 \(L=(1+\sqrt5)/2\) 或 \(L=(1-\sqrt5)/2\lt{}0\)。由 \(g_n>0\) 舍负根，\(L=\varphi\approx1.618\)。</p>
+  <p>吸引性：不动点处 \(|f'(L)|=1/L^2\approx0.382\lt{}1\)，为吸引点。迭代 20 万步后 \(g_n\approx1.618034\)。该不动点与 1956 平方根递推相同，同为黄金分割比。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 把递推式误写成 \(g_{n+1}=1/(1+g_n)\)，那是 1952 的格式，不动点变为 \(1/\varphi\)；② 解方程后不舍负根；③ 见振荡就判定发散；④ 忽略 \(g_n>0\) 这一筛根条件。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>连分数型递推常与黄金分割、斐波那契数列比值 \(F_{n+1}/F_n\) 对照考查，核心是不动点方程 \(L=a+1/L\)。考研变式多为更换首项常数（如 \(2+1/g_n\)），不动点相应变为 \(1+\sqrt2\) 这类二次无理数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(g_1=1,\ g_{n+1}=2+\dfrac{1}{g_n}\)，求 \(\lim\limits_{n\to\infty}g_n\)。</p>
+  <p class="var-ans">答案：\(1+\sqrt2\)。方程 \(L=2+1/L\) 即 \(L^2-2L-1=0\)，正根 \(L=1+\sqrt2\approx2.414\)；数值迭代 20 万步收敛到 \(2.414214\)，且 \(|f'(L)|=1/L^2\lt{}1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1958">
+  <div class="q-head">
+    <span class="qno">第 1958 题</span>
+    <span class="qtype">单调有界递推（均值不等式型）</span>
+    <span class="qsrc">P965</span>
+  </div>
+  <div class="stem">
+    <p>设 \(h_1=1,\ h_{n+1}=\dfrac{h_n}{2}+\dfrac{1}{h_n}\)，证明：\(\lim\limits_{n\to\infty}h_n\) 存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：两项乘积为常数的递推，先用均值不等式给出下界，再证从某项起单调递减，属单调有界准则型。结构上是牛顿迭代的变体，差别只在第一项系数不是 \(1/2\) 与第二项 \(1/c_n\) 的标准搭配。</p>
+  <p>由 \(h_1=1>0\) 归纳得 \(h_n>0\)。均值不等式：</p>
+  \[ h_{n+1}=\frac{h_n}{2}+\frac{1}{h_n}\ge2\sqrt{\frac{h_n}{2}\cdot\frac{1}{h_n}}=\sqrt2. \]
+  <p>故从第二项起 \(h_n\ge\sqrt2\)。证递减：当 \(h_n\ge\sqrt2\) 时，</p>
+  \[ h_{n+1}-h_n=\frac{1}{h_n}-\frac{h_n}{2}=\frac{2-h_n^2}{2h_n}\le0, \]
+  <p>因为 \(h_n^2\ge2\)。所以 \(\{h_n\}\) 从第二项起单调递减且有下界 \(\sqrt2\)，收敛。</p>
+  <p>设极限为 \(L>0\)，取极限：</p>
+  \[ L=\frac{L}{2}+\frac{1}{L}\ \Longrightarrow\ L^2=2. \]
+  <p>取正根 \(L=\sqrt2\)。不动点处 \(f'(L)=1/2-1/L^2=0\)；数值上 \(h_1=1,\ h_2=1.5,\ h_3\approx1.4167\)，迭代 20 万步后 \(h_n\approx1.414214\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 均值不等式配凑错误，把下界算成 \(2\) 或 \(1\)；② 忽略首项 \(h_1=1\lt{}\sqrt2\)，误以为从第一项起就递减；③ 解方程 \(L^2=2\) 后不舍负根；④ 把递推式与标准牛顿格式 \(h_{n+1}=\tfrac12(h_n+2/h_n)\) 混淆，二者在本题系数下其实等价。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>「两项乘积为常数」的递推是均值不等式在极限题中的典型应用，考研常与牛顿迭代并列考查。更换系数后（如 \(h_n/3+1/h_n\)），下界与不动点按同一套配凑重算，考查的是均值不等式与单调有界准则的组合运用。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(h_1=1,\ h_{n+1}=\dfrac{h_n}{3}+\dfrac{1}{h_n}\)，求 \(\lim\limits_{n\to\infty}h_n\)。</p>
+  <p class="var-ans">答案：\(\sqrt{\dfrac32}\)。不动点方程 \(L=L/3+1/L\) 即 \((2/3)L^2=1\)，正根 \(L=\sqrt{3/2}\approx1.225\)；均值不等式给出下界 \(\sqrt{3/2}\)，数值迭代 20 万步收敛到 \(1.224745\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1959">
+  <div class="q-head">
+    <span class="qno">第 1959 题</span>
+    <span class="qtype">压缩递推（分母二次型，趋于 0）</span>
+    <span class="qsrc">P965</span>
+  </div>
+  <div class="stem">
+    <p>设 \(i_1=1,\ i_{n+1}=\dfrac{i_n}{1+i_n^2}\)，求 \(\lim\limits_{n\to\infty}i_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：迭代函数在 \(x>0\) 时严格小于 \(x\)，数列单调递减非负，属单调有界准则型。先证符号与单调性，再由不动点方程定值；本题不动点处导数为 \(1\)，存在性靠单调有界保证，不靠压缩导数判别。</p>
+  <p>由 \(i_1=1>0\) 归纳得 \(i_n>0\)。因为 \(1+i_n^2>1\)，所以</p>
+  \[ i_{n+1}=\frac{i_n}{1+i_n^2}\lt{}i_n. \]
+  <p>故 \(\{i_n\}\) 单调递减且有下界 \(0\)，收敛，设极限为 \(L\ge0\)。对递推式取极限：</p>
+  \[ L=\frac{L}{1+L^2}. \]
+  <p>移项得 \(L\cdot\dfrac{L^2}{1+L^2}=0\)，因 \(1+L^2>0\)，故 \(L=0\)。这里方程 \(L=L/(1+L^2)\) 除 \(L=0\) 外没有非零解：若 \(L>0\)，两边约去 \(L\) 得 \(1=1/(1+L^2)\)，即 \(L=0\)，矛盾。数值迭代 20 万步后 \(i_n\approx1.58\times10^{-3}\)，趋于 0。</p>
+  <p>速度阶附注：由 \(i_{n+1}=i_n(1-i_n^2+o(i_n^2))\)，倒量差分主部为</p>
+  \[ \frac{1}{i_{n+1}^2}-\frac{1}{i_n^2}\to 2,\qquad i_n\sim\frac{1}{\sqrt{2n}}. \]
+  <p>这正是变式追问的内容。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不动点方程列成 \(L=L/(1+L)\)，漏掉平方；② 约去 \(L\) 时不讨论 \(L=0\) 的情形；③ 误以为分母二次型会让数列收敛到某个非零小常数，实际主部仍是 \(i_{n+1}\approx i_n\)，慢收缩到 0；④ 不证非负直接取极限。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>「\(x_{n+1}=x_n/(1+x_n^p)\)」型递推是压缩到 0 的标准素材，考研常追问阶：倒量后增量为常数，主阶 \(x_n\sim n^{-1/(p+1)}\)。本题 \(p=2\)，与 \(p=1\) 的倒数等差型对照记忆，二者区分点在分母是一次还是二次幂。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(i_1=1,\ i_{n+1}=\dfrac{i_n}{1+i_n^2}\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,i_n\)。</p>
+  <p class="var-ans">答案：\(\dfrac{1}{\sqrt2}\)。倒量展开 \(1/i_{n+1}^2=1/i_n^2+2+o(1)\)，累加得 \(1/i_n^2\sim2n\)，故 \(\sqrt n\,i_n\to1/\sqrt2\)；数值迭代 20 万步 \(\sqrt n\,i_n\approx0.70710\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1960">
+  <div class="q-head">
+    <span class="qno">第 1960 题</span>
+    <span class="qtype">压缩递推（sin 迭代，趋于 0）</span>
+    <span class="qsrc">P966</span>
+  </div>
+  <div class="stem">
+    <p>设 \(j_1=1,\ j_{n+1}=\sin j_n\)，证明：\(\lim\limits_{n\to\infty}j_n\) 存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：\(x_{n+1}=\sin x_n\) 是典型压缩到 0 的递推，数列本身趋于 0，本题只要求证明存在性并定值。先用三角函数不等式证单调递减非负，再解不动点方程；阶估计留给变式。</p>
+  <p>由 \(j_1=1\in(0,\pi/2)\)，归纳可知 \(0\lt{}j_n\lt{}\pi/2\)。在 \((0,\pi/2)\) 上有经典不等式 \(\sin x\lt{}x\)，于是</p>
+  \[ 0\lt{}j_{n+1}=\sin j_n\lt{}j_n. \]
+  <p>故 \(\{j_n\}\) 单调递减且有下界 \(0\)，由单调有界准则收敛，设极限为 \(L\ge0\)。对递推式取极限：</p>
+  \[ L=\sin L. \]
+  <p>函数 \(h(x)=x-\sin x\) 在 \(x\ge0\) 上 \(h'(x)=1-\cos x\ge0\)，且 \(h(0)=0\)，故 \(h(x)=0\) 在 \(x\ge0\) 上只有解 \(x=0\)，即 \(L=0\)。阶估计由三次展开给出：</p>
+  \[ \frac{1}{j_n^2}\sim\frac{n}{3},\qquad j_n\sim\sqrt{\frac{3}{n}}. \]
+  <p>数值迭代 20 万步后 \(j_n\approx3.87\times10^{-3}\)，与该慢收缩阶一致。</p>
+  <p>之所以不能直接写「\(\sin j_n\to0\) 所以 \(j_n\to0\)」，是因为循环论证：必须先把存在性立住，才能在递推式两边取极限。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 误以为 sin 迭代收敛到某个非零不动点，实际 \(L=\sin L\) 唯一非负解为 0；② 不界定 \(j_n\in(0,\pi/2)\)，直接引用 \(\sin x\lt{}x\)；③ 用循环论证，由 \(j_{n+1}\to0\) 反推 \(j_n\to0\)；④ 把弧度与角度混淆。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>\(x_{n+1}=\sin x_n\) 是整批压缩递推的母题，基础考法是证明收敛到 0，进阶考法是倒量求阶 \(x_n\sim\sqrt{3/n}\)。同类对照函数有 \(\arctan x\)、\(\ln(1+x)\)，系数由各函数在 0 处的三阶展开决定。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(j_1=1,\ j_{n+1}=\sin j_n\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,j_n\)。</p>
+  <p class="var-ans">答案：\(\sqrt3\)。由 \(\sin x=x-x^3/6+o(x^3)\)，倒量 \(1/j_{n+1}^2-1/j_n^2\to1/3\)，累加得 \(1/j_n^2\sim n/3\)，故 \(\sqrt n\,j_n\to\sqrt3\)；数值迭代 20 万步 \(\sqrt n\,j_n\approx1.73201\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1961">
+  <div class="q-head">
+    <span class="qno">第 1961 题</span>
+    <span class="qtype">压缩递推（指数衰减型，趋于 0）</span>
+    <span class="qsrc">P966</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=a_n e^{-a_n}\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：迭代函数 \(f(x)=x e^{-x}\)，在 \(x>0\) 时因子 \(e^{-x}\lt{}1\)，数列单调递减非负，属单调有界准则型。先证符号与单调，再解不动点方程，注意不漏非零候选。</p>
+  <p>由 \(a_1=1>0\) 归纳得 \(a_n>0\)。对 \(x>0\)，\(e^{-x}\lt{}1\)，故</p>
+  \[ a_{n+1}=a_n e^{-a_n}\lt{}a_n. \]
+  <p>故 \(\{a_n\}\) 单调递减且有下界 \(0\)，收敛，设极限为 \(L\ge0\)。取极限：</p>
+  \[ L=L e^{-L}. \]
+  <p>移项得 \(L(1-e^{-L})=0\)；\(L>0\) 时 \(e^{-L}\neq1\)，无非零解，故 \(L=0\)。</p>
+  <p>在 0 附近展开指数函数，可得减量的阶型：</p>
+  \[ a_{n+1}=a_n e^{-a_n}=a_n-a_n^2+o(a_n^2). \]
+  <p>减量为二次幂，数列以 \(1/n\) 阶慢收缩，余项在 \(10^{-5}\) 量级。</p>
+  <p>数值验证：\(a_2=e^{-1}\approx0.3679\)，迭代 20 万步后 \(a_n\approx5.0\times10^{-6}\)。不动点 \(0\) 处 \(f'(0)=1\)，属慢收敛。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 解方程 \(L=L e^{-L}\) 时直接约去 \(L\)，漏掉 \(L=0\) 这个解；② 误以为 \(e^{-L}=1\) 还有 \(L=2k\pi i\) 之类的复解，实数列极限只在实数域讨论；③ 不证非负就取极限；④ 把 \(e^{-a_n}\) 误读为 \(e^{a_n}\)，单调性方向完全相反。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>指数乘子型递推考查「因子是否小于 1」的判断与不动点方程的完整求解。考研变式常把 \(e^{-x}\) 换成 \(1/(1+x)\)、\(\cos x\) 等在 \(x>0\) 时小于 1 的因子，论证框架一致：先递减非负，再解方程并讨论零解。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 递推 \(x_{n+1}=x_n e^{-x_n}\) 是否存在非零不动点？若 \(x_1>0\)，数列收敛到何值？</p>
+  <p class="var-ans">答案：不存在非零不动点。不动点方程 \(L=L e^{-L}\) 在实数域只有 \(L=0\)；\(x_1>0\) 时数列单调递减非负，极限为 \(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1962">
+  <div class="q-head">
+    <span class="qno">第 1962 题</span>
+    <span class="qtype">可显式求解递推（倒数等差）</span>
+    <span class="qsrc">P966</span>
+  </div>
+  <div class="stem">
+    <p>设 \(b_1=1,\ b_{n+1}=\dfrac{b_n}{1+b_n}\)，求 \(\lim\limits_{n\to\infty}b_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1955 同族的分式线性递推，取倒数后化为等差数列，可直接写出通项。之所以取倒数，是因为 \(f(x)=x/(1+x)\) 的倒数拆出常数公差：</p>
+  \[ \frac{1}{b_{n+1}}=\frac{1+b_n}{b_n}=\frac{1}{b_n}+1. \]
+  <p>这是公差为 \(1\) 的等差数列，首项 \(1/b_1=1\)，故</p>
+  \[ \frac{1}{b_n}=n,\qquad b_n=\frac1n. \]
+  <p>于是</p>
+  \[ \lim_{n\to\infty}b_n=\lim_{n\to\infty}\frac1n=0. \]
+  <p>通项为精确等式，数列严格递减趋于 0。倒数化等差可行的关键，是分母 \(1+b_n\) 拆开后常数项恰为 1；公差由该常数项决定。</p>
+  \[ \frac{1}{b_n}=\frac{1}{b_1}+(n-1)=n. \]
+  <p>代入不动点方程检验：\(L=L/(1+L)\) 移项得 \(L^2=0\)，与通项 \(b_n=1/n\) 趋于 0 一致。数值迭代 20 万步后 \(b_n=5.0\times10^{-6}=1/200000\)，与通项完全吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不取倒数，直接作差看不出通项；② 倒数化等差时公差写错；③ 把递推式与 \(b_{n+1}=(1+b_n)/b_n\) 混淆；④ 误以为通项 \(1/n\) 只是渐近，实际是精确等式。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>倒数等差型递推的核心考点是显式通项与 \(n b_n\) 阶估计。考研常把分母常数项改为 \(1+k b_n\)，公差相应变为 \(k\)，通项 \(b_n=1/(kn+1-k)\)，考查倒量运算是否熟练。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(b_1=1,\ b_{n+1}=\dfrac{b_n}{1+3b_n}\)，求 \(\lim\limits_{n\to\infty}n b_n\)。</p>
+  <p class="var-ans">答案：\(\dfrac13\)。取倒数得 \(1/b_{n+1}=1/b_n+3\)，通项 \(1/b_n=3n-2\)，故 \(b_n=1/(3n-2)\)，\(n b_n\to1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1963">
+  <div class="q-head">
+    <span class="qno">第 1963 题</span>
+    <span class="qtype">压缩递推（余弦乘子型，趋于 0）</span>
+    <span class="qsrc">P966</span>
+  </div>
+  <div class="stem">
+    <p>设 \(c_1=1,\ c_{n+1}=c_n\cos c_n\)，求 \(\lim\limits_{n\to\infty}c_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：余弦乘子型递推，在 \(c_n\in(0,1)\) 时 \(0\lt{}\cos c_n\lt{}1\)，数列单调递减非负，属单调有界准则型。先界定角所在象限，保证余弦为正且小于 1，再解不动点方程。</p>
+  <p>由 \(c_1=1\)（弧度），归纳证明 \(0\lt{}c_n\lt{}1\)。若 \(0\lt{}c_n\lt{}1\lt{}\pi/2\)，则 \(0\lt{}\cos c_n\lt{}1\)，于是</p>
+  \[ 0\lt{}c_{n+1}=c_n\cos c_n\lt{}c_n. \]
+  <p>故 \(\{c_n\}\) 单调递减且有下界 \(0\)，收敛，设极限为 \(L\ge0\)。取极限：</p>
+  \[ L=L\cos L. \]
+  <p>移项得 \(L(1-\cos L)=0\)。若 \(L>0\)，则 \(1-\cos L=0\)，即 \(\cos L=1\)，在 \(L\in[0,1]\) 上只有 \(L=0\)，矛盾。故 \(L=0\)。数值迭代 20 万步后 \(c_n\approx2.24\times10^{-3}\)，趋于 0。</p>
+  <p>速度阶附注：在 0 附近 \(\cos x=1-x^2/2+o(x^2)\)，故递推主部为</p>
+  \[ c_{n+1}=c_n\left(1-\frac{c_n^2}{2}+o(c_n^2)\right),\qquad c_n\sim\frac{1}{\sqrt n}. \]
+  <p>乘子型保留 \(c_n\) 主部，与纯余弦迭代 \(c_{n+1}=\cos c_n\) 不同：后者方程 \(r=\cos r\) 收敛到非零根，本题零解恒为不动点。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不界定范围就引用 \(\cos x\lt{}1\)，忽略余弦可能为负；② 解方程 \(L=L\cos L\) 时约去 \(L\) 后漏回 \(L=0\)；③ 把 \(\cos L=1\) 的解写成 \(L=2k\pi\) 而不结合 \(L\in[0,1]\) 筛选；④ 误把递推式看成 \(c_{n+1}=\cos(c_n)\)（纯余弦迭代，收敛到不动点 \(r=\cos r\)）。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>乘子型递推 \(x_{n+1}=x_n\varphi(x_n)\) 与纯函数迭代 \(x_{n+1}=\varphi(x_n)\) 是两类不同题型，考研常并列鉴别：前者极限方程为 \(L=L\varphi(L)\)，零解恒为不动点；后者需解 \(L=\varphi(L)\)。本题属前者，与 1961 的指数乘子同框架。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(c_1=\pi/4,\ c_{n+1}=c_n\cos c_n\)，证明数列收敛并求极限。</p>
+  <p class="var-ans">答案：\(0\)。\(0\lt{}c_1=\pi/4\lt{}1\)，归纳得 \(0\lt{}c_{n+1}\lt{}c_n\)，单调递减有下界；不动点方程 \(L=L\cos L\) 在 \([0,\pi/4]\) 上只有 \(L=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1964">
+  <div class="q-head">
+    <span class="qno">第 1964 题</span>
+    <span class="qtype">压缩递推（sin 迭代，趋于 0）</span>
+    <span class="qsrc">P966</span>
+  </div>
+  <div class="stem">
+    <p>设 \(d_1=1,\ d_{n+1}=\sin d_n\)，求 \(\lim\limits_{n\to\infty}d_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1960 同族的 sin 压缩迭代，本题只要求求极限，存在性论证框架相同。先用 \(\sin x\lt{}x\) 证单调递减非负，再解 \(L=\sin L\)。</p>
+  <p>由 \(d_1=1\in(0,\pi/2)\)，归纳得 \(0\lt{}d_n\lt{}\pi/2\)，于是</p>
+  \[ 0\lt{}d_{n+1}=\sin d_n\lt{}d_n. \]
+  <p>\(\{d_n\}\) 单调递减有下界 \(0\)，收敛，设极限为 \(L\ge0\)。取极限：</p>
+  \[ L=\sin L. \]
+  <p>令 \(h(x)=x-\sin x\)，其导数可写成平方和形式：</p>
+  \[ h'(x)=1-\cos x=2\sin^2\frac{x}{2}\ge0. \]
+  <p>结合 \(h(0)=0\)，故 \(h(x)=0\) 在 \(x\ge0\) 上仅有解 \(x=0\)，\(L=0\)。区间归纳可以闭合：\(x\in(0,1)\) 时 \(\sin x\in(0,1)\)，下一项仍落在 \((0,\pi/2)\) 内；若初值取在 \(\pi\) 之外，正弦变号，单调递减的结论不再成立。</p>
+  <p>数值迭代 20 万步后 \(d_n\approx3.87\times10^{-3}\)。速度阶方面，\(\sin x=x-x^3/6+o(x^3)\)，倒量 \(1/d_n^2\sim n/3\)，即 \(d_n\sim\sqrt{3/n}\)，与 1960 的阶估计一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不动点方程 \(L=\sin L\) 误写成 \(L=\cos L\)；② 不证存在性直接对递推式取极限；③ 忽略 \(d_n\) 始终在 \((0,\pi/2)\) 内；④ 把慢收缩误判为收敛到 \(1\) 附近的常数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>sin 迭代是压缩递推的基础题型，选择、填空常直接考极限值，解答题常追加阶估计。复习时应同时掌握存在性证明（单调有界）与倒量求阶（三阶展开）两层手法。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(d_1=1,\ d_{n+1}=\sin d_n\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,d_n\)。</p>
+  <p class="var-ans">答案：\(\sqrt3\)。倒量 \(1/d_{n+1}^2-1/d_n^2\to1/3\)，得 \(d_n^2\sim3/n\)，故 \(\sqrt n\,d_n\to\sqrt3\)；数值迭代 20 万步 \(\sqrt n\,d_n\approx1.73201\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1965">
+  <div class="q-head">
+    <span class="qno">第 1965 题</span>
+    <span class="qtype">多项式收缩递推（三次减量型，趋于 0）</span>
+    <span class="qsrc">P966</span>
+  </div>
+  <div class="stem">
+    <p>设 \(e_1=1,\ e_{n+1}=e_n-\dfrac{e_n^3}{6}\)，求 \(\lim\limits_{n\to\infty}e_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：递推可写成 \(e_{n+1}=e_n(1-e_n^2/6)\)，乘子介于 \(5/6\) 与 \(1\) 之间，数列单调递减非负，属单调有界准则型，先证非负性与单调，再解不动点方程。</p>
+  <p>由 \(e_1=1>0\)，归纳证明 \(0\lt{}e_n\lt{}1\)。若 \(0\lt{}e_n\lt{}1\)，则 \(0\lt{}1-e_n^2/6\lt{}1\)，故</p>
+  \[ 0\lt{}e_{n+1}=e_n\left(1-\frac{e_n^2}{6}\right)\lt{}e_n. \]
+  <p>\(\{e_n\}\) 单调递减有下界 \(0\)，收敛，设极限为 \(L\ge0\)。取极限：</p>
+  \[ L=L-\frac{L^3}{6}. \]
+  <p>乘子范围</p>
+  \[ 0\lt{}1-\frac{e_n^2}{6}\lt{}1, \]
+  <p>故 \(0\lt{}e_{n+1}\lt{}e_n\lt{}1\)，不会变负。移项得 \(L^3/6=0\)，故 \(L=0\)。数值迭代 20 万步后 \(e_n\approx3.87\times10^{-3}\)，趋于 0。</p>
+  <p>速度阶附注：在 0 附近 \(e_{n+1}=e_n(1-e_n^2/6+o(e_n^2))\)，倒量 \(1/e_n^2\) 的增量趋于常数 \(1/3\)，故 \(e_n\sim\sqrt{3/n}\)，与 sin 迭代同阶。</p>
+  <p>与二次减量型相比，本题减量为三次幂，乘子保留 \(e_n\) 主部；倒量取 \(1/e_n^2\)，纯三次减量型才超线性收缩。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不证明 \(e_n>0\)，担心 \(1-e_n^2/6\) 为负；实际初值 1 配合收缩，\(e_n\) 始终小于 1；② 不动点方程移项错误，写成 \(L=L^3/6\)；③ 把三次减量与二次减量（1966）的阶混淆：前者是 \(n^{-1/2}\) 阶，后者是 \(n^{-1}\) 阶；④ 误判数列会越过 0 变负。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>多项式收缩递推按减量幂次分类：\(x_{n+1}=x_n-c x_n^p\)，主阶为 \(n^{-1/(p-1)}\)。本题 \(p=3\)，与 \(p=2\) 的二次减量型对照，考研常通过阶估计题区分两类。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(e_1=1,\ e_{n+1}=e_n-\dfrac{e_n^3}{6}\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,e_n\)。</p>
+  <p class="var-ans">答案：\(\sqrt3\)。倒量 \(1/e_{n+1}^2-1/e_n^2\to1/3\)，得 \(e_n^2\sim3/n\)，故 \(\sqrt n\,e_n\to\sqrt3\)；数值迭代 20 万步 \(\sqrt n\,e_n\approx1.73200\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1966">
+  <div class="q-head">
+    <span class="qno">第 1966 题</span>
+    <span class="qtype">多项式收缩递推（二次减量型，趋于 0）</span>
+    <span class="qsrc">P966</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f_1=1,\ f_{n+1}=f_n-\dfrac{f_n^2}{2}\)，求 \(\lim\limits_{n\to\infty}f_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：递推写成 \(f_{n+1}=f_n(1-f_n/2)\)，乘子介于 \(1/2\) 与 \(1\) 之间，数列单调递减非负；先证符号与单调，再解不动点方程，减量为二次幂，阶与 1965 不同。</p>
+  <p>由 \(f_1=1>0\)，归纳证明 \(0\lt{}f_n\lt{}1\)。若 \(0\lt{}f_n\lt{}1\)，则 \(0\lt{}1-f_n/2\lt{}1\)，故</p>
+  \[ 0\lt{}f_{n+1}=f_n\left(1-\frac{f_n}{2}\right)\lt{}f_n. \]
+  <p>\(\{f_n\}\) 单调递减有下界 \(0\)，收敛，设极限为 \(L\ge0\)。取极限：</p>
+  \[ L=L-\frac{L^2}{2}. \]
+  <p>倒量差分主部为</p>
+  \[ \frac{1}{f_{n+1}}-\frac{1}{f_n}=\frac{1}{2-f_n}\to\frac12. \]
+  <p>移项得 \(L^2/2=0\)，故 \(L=0\)。迭代 20 万步后 \(f_n\approx1.0\times10^{-5}\)。</p>
+  <p>速度阶附注：在 0 附近 \(1/f_{n+1}-1/f_n\to1/2\)，故 \(f_n\sim2/n\)，是 \(1/n\) 阶慢收缩；这与三次减量型的 \(n^{-1/2}\) 阶形成对照，区分点就在减量幂次 \(p=2\) 还是 \(p=3\)。</p>
+  <p>不动点 0 处迭代函数导数为 1，压缩导数判别失效，收敛性由单调有界准则保证。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不动点方程写成 \(L=L^2/2\)，误得非零解 \(L=2\)；正确移项是 \(L-L=L^2/2\)；② 忽略乘子 \(1-f_n/2\) 为正的范围；③ 把本题阶估计成 \(\sqrt{1/n}\)，实际二次减量对应 \(1/n\) 阶；④ 不证非负直接取极限。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>二次减量型递推是倒量求阶的另一基础款，主阶 \(x_n\sim n^{-1}\)。考研常把系数 \(1/2\) 改为 \(c\)，通项渐近系数相应变为 \(1/c\)，考查倒量展开与极限方程求解的组合。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(f_1=1,\ f_{n+1}=f_n-\dfrac{f_n^2}{2}\)，求 \(\lim\limits_{n\to\infty}n f_n\)。</p>
+  <p class="var-ans">答案：\(2\)。倒量 \(1/f_{n+1}-1/f_n\to1/2\)，累加得 \(1/f_n\sim n/2\)，故 \(n f_n\to2\)；数值迭代 20 万步 \(n f_n\approx1.99986\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1967">
+  <div class="q-head">
+    <span class="qno">第 1967 题</span>
+    <span class="qtype">多项式收缩递推（二次减量型，趋于 0）</span>
+    <span class="qsrc">P967</span>
+  </div>
+  <div class="stem">
+    <p>设 \(g_1=1,\ g_{n+1}=g_n\left(1-\dfrac12 g_n\right)\)，求 \(\lim\limits_{n\to\infty}g_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：展开即 \(g_{n+1}=g_n-g_n^2/2\)，与 1966 同构的二次减量型递推，乘子在 \(0\lt{}g_n\lt{}1\) 时介于 \(1/2\) 与 \(1\) 之间，数列单调递减非负。先证非负性与单调，再解不动点方程。</p>
+  <p>由 \(g_1=1>0\)，归纳证明 \(0\lt{}g_n\lt{}1\)。若 \(0\lt{}g_n\lt{}1\)，则 \(0\lt{}1-g_n/2\lt{}1\)，故</p>
+  \[ 0\lt{}g_{n+1}=g_n\left(1-\frac{g_n}{2}\right)\lt{}g_n. \]
+  <p>\(\{g_n\}\) 单调递减有下界 \(0\)，收敛，设极限为 \(L\ge0\)。取极限：</p>
+  \[ L=L\left(1-\frac{L}{2}\right). \]
+  <p>两种写法逐项相等：</p>
+  \[ g_{n+1}-g_n=-\frac{g_n^2}{2}. \]
+  <p>移项得 \(L^2/2=0\)，故 \(L=0\)。迭代 20 万步后 \(g_n\approx1.0\times10^{-5}\)。</p>
+  <p>速度阶：在 0 附近倒量 \(1/g_{n+1}-1/g_n\to1/2\)，故 \(g_n\sim2/n\)，与 1966 同阶。</p>
+  <p>本题只是把 1966 的展开式改写成乘子式，取值范围、不动点与收敛阶完全一致；遇到乘子式先展开成减量形式，倒量求阶更直接。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不动点方程误约去 \(L\) 后得到 \(1=1-L/2\)，把 \(L=0\) 解丢；② 不证明乘子为正；③ 把二次减量的阶误判为 \(n^{-1/2}\)；④ 与 1965 的三次减量型混淆系数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>本题与 1966 是同一递推格式的两种书写（乘子型与展开型），考研考查点一致：存在性证明加不动点方程，进阶为倒量求 \(n g_n\) 的极限。复习时应能在两种写法之间自由转换。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(g_1=1,\ g_{n+1}=g_n\left(1-\dfrac12 g_n\right)\)，求 \(\lim\limits_{n\to\infty}n g_n\)。</p>
+  <p class="var-ans">答案：\(2\)。倒量 \(1/g_{n+1}-1/g_n\to1/2\)，得 \(1/g_n\sim n/2\)，故 \(n g_n\to2\)；数值迭代 20 万步 \(n g_n\approx1.99986\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1968">
+  <div class="q-head">
+    <span class="qno">第 1968 题</span>
+    <span class="qtype">分式收缩递推（平方比型，趋于 0）</span>
+    <span class="qsrc">P967</span>
+  </div>
+  <div class="stem">
+    <p>设 \(h_1=1,\ h_{n+1}=h_n\left(1-\dfrac{1}{1+h_n}\right)\)，求 \(\lim\limits_{n\to\infty}h_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：先化简乘子，再判断单调与不动点。括号内通分是本题的关键变形：之所以先通分，是因为 \(1-1/(1+h_n)\) 写成单一分式后，与 \(h_n\) 相乘的结构一目了然，便于比较相邻项大小。</p>
+  <p>通分：</p>
+  \[ 1-\frac{1}{1+h_n}=\frac{h_n}{1+h_n}, \]
+  <p>故递推式化为</p>
+  \[ h_{n+1}=\frac{h_n^2}{1+h_n}. \]
+  <p>由 \(h_1=1>0\) 归纳得 \(h_n>0\)。当 \(0\lt{}h_n\lt{}1\) 时，\(h_n/(1+h_n)\lt{}1\)，于是</p>
+  \[ 0\lt{}h_{n+1}=h_n\cdot\frac{h_n}{1+h_n}\lt{}h_n. \]
+  <p>\(\{h_n\}\) 单调递减有下界 \(0\)，收敛，设极限为 \(L\ge0\)。取极限：</p>
+  \[ L=\frac{L^2}{1+L}. \]
+  <p>不动点方程两边乘 \(1+L\)：</p>
+  \[ L(1+L)=L^2\ \Longrightarrow\ L=0. \]
+  <p>不存在非零解：若 \(L>0\)，约去 \(L\) 得 \(1+L=L\)，矛盾。数值上 \(h_1=1,\ h_2=1/2,\ h_3=1/6\)，迭代 20 万步后 \(h_n\) 已下溢到 0；在 0 附近 \(h_{n+1}\approx h_n^2\)，属超线性收缩，收缩速度快于任何 \(n^{-p}\) 阶。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不通分，直接把乘子误判为 \(1-1/h_n\)；② 不动点方程列成 \(L=L/(1+L)\)，漏掉分子平方；③ 误以为分母 \(1+h_n\) 会带来非零不动点；④ 不证非负。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>分式化简后比较相邻项是递推题的常规手法，本题乘子通分后变为平方比，收缩速度快于线性型。考研变式多为更换分母常数项，判断框架仍是：化简、证单调非负、解方程筛根。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(h_1=1,\ h_{n+1}=\dfrac{h_n^2}{2+h_n}\)，证明数列收敛并求极限。</p>
+  <p class="var-ans">答案：\(0\)。\(h_n>0\) 且 \(h_n/(2+h_n)\lt{}1\)，故 \(0\lt{}h_{n+1}\lt{}h_n\)，单调递减有下界；不动点方程 \(L=L^2/(2+L)\) 化简得 \(L=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1969">
+  <div class="q-head">
+    <span class="qno">第 1969 题</span>
+    <span class="qtype">反三角收缩递推（arctan 减量型，趋于 0）</span>
+    <span class="qsrc">P967</span>
+  </div>
+  <div class="stem">
+    <p>设 \(i_1=1,\ i_{n+1}=i_n\left(1-\dfrac{1}{i_n}\arctan i_n\right)\)，求 \(\lim\limits_{n\to\infty}i_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：乘子展开后 \(i_{n+1}=i_n-\arctan i_n\)，是反三角减量型递推。先化简乘子，再用不等式 \(\arctan x\lt{}x\)（\(x>0\)）判断符号与单调，最后解不动点方程。</p>
+  <p>展开括号：</p>
+  \[ i_{n+1}=i_n-\arctan i_n. \]
+  <p>由 \(i_1=1>0\)，归纳证明 \(i_n>0\)。对 \(x>0\)，\(\arctan x\lt{}x\)，故</p>
+  \[ 0\lt{}i_{n+1}=i_n-\arctan i_n\lt{}i_n. \]
+  <p>\(\{i_n\}\) 单调递减有下界 \(0\)，收敛，设极限为 \(L\ge0\)。取极限：</p>
+  \[ L=L-\arctan L. \]
+  <p>即 \(\arctan L=0\)，在实数域解为 \(L=0\)。数值上 \(i_2=1-\pi/4\approx0.2146\)，\(i_3\approx3.2\times10^{-3}\)，随后快速收缩到 0。</p>
+  <p>速度阶附注：\(\arctan x=x-x^3/3+o(x^3)\)，故 \(i_{n+1}\sim i_n^3/3\)，减量为三次幂，收缩是超线性的（双指数量级），与 1965 的三次乘子型 \(n^{-1/2}\) 阶不同；区分点在于递推是 \(x-cx^3\) 还是 \(x(1-cx^2)\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不展开括号，误把递推看成 \(i_n(1-\arctan i_n)\)；② 记反不等式方向，以为 \(\arctan x>x\)；③ 不动点方程写成 \(L=\arctan L\)（那是纯 arctan 迭代的方程）；④ 把超线性收缩误判为 \(n^{-1/2}\) 阶。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>反三角减量型递推考查不等式 \(\arctan x\lt{}x\) 与不动点方程的配合，常与 tanh、arcsin 版本并列鉴别。复习时应记住各反三角在 0 附近的展开阶，用于判断收缩速度。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(i_1=1,\ i_{n+1}=i_n-\arctan i_n\)，说明该数列收敛到 0 的收缩阶型。</p>
+  <p class="var-ans">答案：三次超线性收缩。由 \(\arctan x=x-x^3/3+o(x^3)\)，\(i_{n+1}\sim i_n^3/3\)，后项量级为前项三次方，收敛速度快于任何 \(n^{-p}\) 阶；极限为 \(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1970">
+  <div class="q-head">
+    <span class="qno">第 1970 题</span>
+    <span class="qtype">双曲函数收缩递推（tanh 减量型，趋于 0）</span>
+    <span class="qsrc">P967</span>
+  </div>
+  <div class="stem">
+    <p>设 \(j_1=1,\ j_{n+1}=j_n\left(1-\dfrac{1}{j_n}\tanh j_n\right)\)，求 \(\lim\limits_{n\to\infty}j_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：展开后 \(j_{n+1}=j_n-\tanh j_n\)，双曲正切减量型递推。先化简乘子，再用 \(\tanh x\) 小于 \(x\)（\(x>0\)）判断符号与单调，最后解不动点方程。</p>
+  <p>展开括号：</p>
+  \[ j_{n+1}=j_n-\tanh j_n. \]
+  <p>由 \(j_1=1>0\) 归纳得 \(j_n>0\)。对 \(x>0\)，\(\tanh x\) 小于 \(x\)（等价于 \(e^{2x}>1\)），故</p>
+  \[ 0\lt{}j_{n+1}=j_n-\tanh j_n\lt{}j_n. \]
+  <p>\(\{j_n\}\) 单调递减有下界 \(0\)，收敛，设极限为 \(L\ge0\)。取极限：</p>
+  \[ L=L-\tanh L. \]
+  <p>即 \(\tanh L=0\)，实数解为 \(L=0\)。数值上 \(j_2=1-\tanh1\approx0.2384\)，随后快速收缩到 0。</p>
+  <p>速度阶附注：\(\tanh x=x-x^3/3+o(x^3)\)，故 \(j_{n+1}\sim j_n^3/3\)，与 1969 同为三次超线性收缩。双曲函数与反三角函数在 0 处的三阶展开系数相同，收缩阶型一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不熟悉 \(\tanh x\) 小于 \(x\)，符号判断卡住；② 把递推误写成 \(j_{n+1}=\tanh j_n\)（纯双曲迭代，不动点为 0 但方程不同）；③ 不动点方程列成 \(L=\tanh L\)；④ 混淆双曲函数与三角函数 \(\sin\)、\(\cos\) 的不等式方向。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>双曲函数递推在高数极限题中出现频率不高，但鉴别价值明确：考查学生能否把乘子展开、套用基本不等式、正确列不动点方程。复习时与 arctan、arcsin 版本对照，重点区分减量型与纯迭代型。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(j_1=1,\ j_{n+1}=j_n-\tanh j_n\)，说明收敛阶型并求极限。</p>
+  <p class="var-ans">答案：极限 \(0\)，三次超线性收缩。\(\tanh x=x-x^3/3+o(x^3)\)，\(j_{n+1}\sim j_n^3/3\)，后项为前项三次方量级；数列正项递减，不动点方程 \(\tanh L=0\) 给出 \(L=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1971">
+  <div class="q-head">
+    <span class="qno">第 1971 题</span>
+    <span class="qtype">增量为正的递推（发散到正无穷）</span>
+    <span class="qsrc">P967</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=a_n+\dfrac{1}{a_n}-\ln\left(1+\dfrac{1}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)（数列单调递增发散至正无穷）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，复算 \(+\infty\)（递推增量 \(1/a_n-\ln(1+1/a_n)>0\)，数列单调递增且不存在有限不动点；迭代 20 万步后 \(a_n\approx66.6\)，与渐近式 \(a_n\sim(3n/2)^{1/3}\) 一致），以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：先判断增量符号，再检验有限不动点是否存在，不能套用「递推必有有限不动点」的套路。</p>
+  <p>令 \(t=1/a_n>0\)，增量为</p>
+  \[ \Delta a_n=t-\ln(1+t). \]
+  <p>由 \(\ln(1+t)\lt{}t\)，\(\Delta a_n>0\)，故 \(\{a_n\}\) 严格单调递增。若 \(a_n\to L<+\infty\)，取极限得</p>
+  \[ L=L+\frac{1}{L}-\ln\left(1+\frac{1}{L}\right), \]
+  <p>即 \(1/L=\ln(1+1/L)\)；令 \(t=1/L>0\)，\(g(t)=t-\ln(1+t)\) 满足 \(g'(t)=t/(1+t)>0\)、\(g(0)=0\)，故 \(t>0\) 无解，唯一解 \(t=0\) 对应 \(L=+\infty\)，数列发散至 \(+\infty\)。</p>
+  <p>渐近阶佐证：\(\ln(1+t)=t-t^2/2+o(t^2)\)，故</p>
+  \[ \Delta a_n=\frac{1}{2a_n^2}+o\left(\frac{1}{a_n^2}\right). \]
+  <p>积分 \(da/dn\sim1/(2a^2)\) 得 \(a_n^3\sim3n/2\)，即 \(a_n\sim(3n/2)^{1/3}\)。20 万步迭代 \(a_n\approx66.61\)，渐近式 \((3\cdot200000/2)^{1/3}\approx66.94\)，吻合；1 不是不动点，增量 \(1-\ln2\approx0.307\neq0\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 见到递推就默认收敛到有限值，把书给的 1 直接作为答案；② 不检验不动点方程是否有有限解；③ 误记不等式 \(\ln(1+t)>t\)，把增量符号判反；④ 忽略增量为正导致的单调递增方向，与减量型递推混为一谈。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>递推题的第一判断永远是增量（或乘子）符号与不动点存在性：增量为正且无有限不动点时数列发散，增量为负才可能收敛到 0。考研常把「慢发散」型递推包装成看似收敛的格式，考查学生是否先做存在性与不动点检验，而非直接解方程。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=a_n+\dfrac{1}{a_n}-\ln\left(1+\dfrac{1}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}a_n/\sqrt[3]{n}\)。</p>
+  <p class="var-ans">答案：\(\sqrt[3]{\dfrac32}\)。由 \(\Delta a_n\sim1/(2a_n^2)\)，积分得 \(a_n^3\sim3n/2\)，故 \(a_n/\sqrt[3]n\to(3/2)^{1/3}\approx1.145\)；数值迭代 20 万步比值约 \(1.139\)，随步数增加趋近理论值。</p>
+  </div>
+</article>
+
+<article class="q" id="q1972">
+  <div class="q-head">
+    <span class="qno">第 1972 题</span>
+    <span class="qtype">不动点恰为初值的递推（恒等不动）</span>
+    <span class="qsrc">P967</span>
+  </div>
+  <div class="stem">
+    <p>设 \(b_1=1,\ b_{n+1}=b_n\left(1-\dfrac{1}{b_n}\ln b_n\right)\)，求 \(\lim\limits_{n\to\infty}b_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：展开后 \(b_{n+1}=b_n-\ln b_n\)，不动点为 \(1\)，而初值 \(b_1=1\) 恰好就是该不动点。本题的关键是先做不动点检验，再代入初值判断数列是否恒等不变，而不是直接套用单调收敛论证。</p>
+  <p>展开括号：</p>
+  \[ b_{n+1}=b_n-\ln b_n. \]
+  <p>不动点方程为 \(L=L-\ln L\)，即 \(\ln L=0\)，实数解 \(L=1\)。代入初值：</p>
+  \[ b_2=b_1-\ln b_1=1-\ln1=1-0=1. \]
+  <p>由归纳法，若 \(b_n=1\)，则 \(b_{n+1}=1-\ln1=1\)，故 \(b_n\equiv1\) 对一切 \(n\) 成立，极限为 \(1\)。</p>
+  <p>吸引性附注：迭代函数 \(f(x)=x-\ln x\)，其导数为</p>
+  \[ f'(x)=1-\frac{1}{x},\qquad f'(1)=0. \]
+  <p>在不动点 \(x=1\) 处导数为 0，为强吸引不动点。即使初值偏离 1，数列也会收敛到 1；本题初值恰在不动点上，数列是常数列。数值上迭代 20 万步 \(b_n\equiv1.0\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不代入初值检验，直接按一般收敛流程论证；② 误以为 \(b_1=1\) 只是巧合，数列会随后偏离；③ 不动点方程写成 \(L=\ln L\)；④ 忽略 \(\ln1=0\) 这一初值恰为不动点的事实。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>「初值恰为不动点」是递推题的一类特殊构造，考查不动点方程与初值代入两步是否衔接。考研变式常给出偏离不动点的初值（如 \(b_1=2\)），此时需用单调有界或吸引性论证收敛到 1，与本题的恒等情形对照。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(b_1=2,\ b_{n+1}=b_n-\ln b_n\)，判断数列是否收敛并求极限。</p>
+  <p class="var-ans">答案：收敛到 \(1\)。不动点 \(L=1\)，\(f'(1)=0\) 为吸引不动点；数值迭代 20 万步后 \(b_n\approx1.0000\)。与本题初值恰为不动点的区别在于：变式需先论证从 \(2\) 出发的收敛性。</p>
+  </div>
+</article>
+
+<article class="q" id="q1973">
+  <div class="q-head">
+    <span class="qno">第 1973 题</span>
+    <span class="qtype">压缩递推（余弦乘子型，趋于 0）</span>
+    <span class="qsrc">P968</span>
+  </div>
+  <div class="stem">
+    <p>设 \(c_1=1,\ c_{n+1}=c_n\cos c_n\)，证明：\(\lim\limits_{n\to\infty}c_n\) 存在并求此极限。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：余弦乘子型递推，与 1963 同构，本题要求完整写出存在性证明。先界定角所在区间，保证余弦为正且小于 1，再由单调有界准则立住存在性，最后解不动点方程。</p>
+  <p>由 \(c_1=1\lt{}\pi/2\)，归纳证明 \(0\lt{}c_n\lt{}1\)。若 \(0\lt{}c_n\lt{}1\)，则 \(0\lt{}\cos c_n\lt{}1\)，于是</p>
+  \[ 0\lt{}c_{n+1}=c_n\cos c_n\lt{}c_n. \]
+  <p>\(\{c_n\}\) 单调递减且有下界 \(0\)，由单调有界准则收敛，设极限为 \(L\ge0\)。对递推式取极限：</p>
+  \[ L=L\cos L. \]
+  <p>移项得 \(L(1-\cos L)=0\)。若 \(L>0\)，则 \(\cos L=1\)，在 \(L\in[0,1]\) 上只有 \(L=0\)，矛盾，故 \(L=0\)。</p>
+  <p>数值迭代 20 万步后 \(c_n\approx2.24\times10^{-3}\)，趋于 0。须先由单调有界确认收敛，再在递推式两边取极限，否则属循环论证。</p>
+  <p>速度阶附注：\(\cos x=1-x^2/2+o(x^2)\)，倒量差分主部为</p>
+  \[ \frac{1}{c_n^2}\sim n,\qquad c_n\sim\frac{1}{\sqrt n}. \]
+  <p>归纳范围 \(0\lt{}c_n\lt{}1\) 同时保证余弦为正、乘子小于 1；初值落在 \(\pi/2\) 之外时余弦变号，递减结论不再成立。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不界定 \(c_n\in(0,1)\) 就引用 \(\cos c_n\lt{}1\)；② 解方程时约去 \(L\) 后漏掉 \(L=0\)；③ 与纯余弦迭代 \(c_{n+1}=\cos c_n\) 混淆，后者不动点是 \(r=\cos r\) 而非 0；④ 证明顺序倒置。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>乘子型递推的存在性证明是解答题常规范式：不等式证单调、下界证有界、取极限解方程。本题与 1963 同构，复习时应把「乘子小于 1」与「函数值小于自变量」两类压缩条件区分清楚。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(c_1=1,\ c_{n+1}=c_n\cos(c_n/2)\)，证明收敛并求极限。</p>
+  <p class="var-ans">答案：\(0\)。\(0\lt{}c_n\lt{}1\) 时 \(0\lt{}\cos(c_n/2)\lt{}1\)，故 \(0\lt{}c_{n+1}\lt{}c_n\)；不动点方程 \(L=L\cos(L/2)\) 在 \([0,1]\) 上只有 \(L=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1974">
+  <div class="q-head">
+    <span class="qno">第 1974 题</span>
+    <span class="qtype">多项式收缩递推（三次减量型，趋于 0）</span>
+    <span class="qsrc">P968</span>
+  </div>
+  <div class="stem">
+    <p>设 \(d_1=1,\ d_{n+1}=d_n-\dfrac{d_n^3}{6}\)，求 \(\lim\limits_{n\to\infty}d_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1965 同构的三次减量型 \(d_{n+1}=d_n(1-d_n^2/6)\)，乘子介于 \(5/6\) 与 \(1\)，数列单调递减非负；先证符号与单调，再解不动点方程。</p>
+  <p>由 \(d_1=1>0\) 归纳 \(0\lt{}d_n\lt{}1\)，则 \(0\lt{}1-d_n^2/6\lt{}1\)，故</p>
+  \[ 0\lt{}d_{n+1}=d_n\left(1-\frac{d_n^2}{6}\right)\lt{}d_n. \]
+  <p>\(\{d_n\}\) 单调递减有下界 \(0\)，收敛，设极限为 \(L\ge0\)。取极限：</p>
+  \[ L=L-\frac{L^3}{6}. \]
+  <p>乘子范围</p>
+  \[ d_{n+1}=d_n\left(1-\frac{d_n^2}{6}\right),\quad 0\lt{}1-\frac{d_n^2}{6}\lt{}1, \]
+  <p>移项得 \(L^3/6=0\)，故 \(L=0\)。数值迭代 20 万步后 \(d_n\approx3.87\times10^{-3}\)。</p>
+  <p>速度阶附注：\(d_{n+1}=d_n(1-d_n^2/6+o(d_n^2))\)，倒量 \(1/d_n^2\) 增量趋于 \(1/3\)，故 \(d_n\sim\sqrt{3/n}\)。与 1969 纯三次减量型不同阶：前者保留主部 \(d_n\) 为 \(n^{-1/2}\) 慢收缩，后者超线性。</p>
+  <p>非零候选代入 \(L=L-L^3/6\) 要求 \(L^3=0\)，与 \(L>0\) 矛盾，故只有零解。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不动点方程误写成 \(L=L^3/6\)；② 不证明 \(d_n>0\)；③ 与二次减量型的 \(1/n\) 阶混淆；④ 误判数列会变负，实际乘子始终为正。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>三次减量乘子型是阶估计题的常见素材，主阶 \(n^{-1/2}\)。考研常把系数 \(1/6\) 改为其他常数，倒量增量相应改变；复习时应掌握乘子型与纯减量型的阶型区分。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(d_1=1,\ d_{n+1}=d_n-\dfrac{d_n^3}{6}\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,d_n\)。</p>
+  <p class="var-ans">答案：\(\sqrt3\)。倒量 \(1/d_{n+1}^2-1/d_n^2\to1/3\)，得 \(d_n^2\sim3/n\)，故 \(\sqrt n\,d_n\to\sqrt3\)；数值迭代 20 万步 \(\sqrt n\,d_n\approx1.73200\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1975">
+  <div class="q-head">
+    <span class="qno">第 1975 题</span>
+    <span class="qtype">反三角收缩递推（arcsin 减量型，振荡趋于 0）</span>
+    <span class="qsrc">P968</span>
+  </div>
+  <div class="stem">
+    <p>设 \(e_1=1,\ e_{n+1}=e_n\left(1-\dfrac{1}{e_n}\arcsin e_n\right)\)，求 \(\lim\limits_{n\to\infty}e_n\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：展开后 \(e_{n+1}=e_n-\arcsin e_n\)。与 arctan 版本不同，\(\arcsin x\) 大于 \(x\)（\(x\in(0,1)\)），首步后数列变号并交替摆动，属振荡收缩到 0 的类型。先确定定义域与首步符号，再用 0 处展开判断收缩性。</p>
+  <p>展开括号：</p>
+  \[ e_{n+1}=e_n-\arcsin e_n. \]
+  <p>首步：\(\arcsin1=\pi/2\)，故 \(e_2=1-\pi/2\approx-0.5708\)。定义域内 \(|\arcsin x|>|x|\) 且同号，故 \(e_{n+1}\) 与 \(e_n\) 异号、绝对值更小：</p>
+  \[ |e_{n+1}|=|\arcsin e_n-e_n|\lt{}|e_n|. \]
+  <p>故 \(\{|e_n|\}\) 单调递减有下界 \(0\)，收敛；设 \(e_n\to L\)，对递推式取极限：</p>
+  \[ L=L-\arcsin L, \]
+  <p>即 \(\arcsin L=0\)，实数解 \(L=0\)。在 0 附近 \(\arcsin x=x+x^3/6+o(x^3)\)，故</p>
+  \[ e_{n+1}\sim-\frac{e_n^3}{6}, \]
+  <p>符号交替、量级三次方收缩，不动点 \(0\) 处 \(g'(0)=0\)，为强吸引点。数值轨迹 \(e_2\approx-0.570,\ e_3\approx0.0366,\ e_4\approx-8.2\times10^{-6}\)，随后快速趋于 0。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 套用 \(\arctan x\) 小于 \(x\) 的方向，误以为数列保持正号递减；② 忽略 arcsin 的定义域 \(|x|\le1\)，首步后 \(|e_n|\) 小于 0.571，始终在定义域内；③ 不动点方程写成 \(L=\arcsin L\)；④ 把振荡收缩误判为发散或不收敛，实际绝对值单调递减保证收敛。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>arcsin 减量型是反三角递推中唯一带符号交替的版本，考点集中在不等式方向与振荡收敛的判断。复习时应把 arctan（正号递减）、arcsin（交替收缩）、tanh（正号递减）三个版本并列对照，区分点在各函数与自变量的大小关系。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(e_1=1,\ e_{n+1}=e_n-\arcsin e_n\)，说明数列的符号变化规律并求极限。</p>
+  <p class="var-ans">答案：极限 \(0\)，符号正负交替。\(e_{n+1}\) 与 \(e_n\) 异号，\(|e_{n+1}|\) 小于 \(|e_n|\)；由 \(\arcsin x=x+x^3/6+o(x^3)\)，\(e_{n+1}\sim-e_n^3/6\)，三次方收缩到 0，不动点方程 \(\arcsin L=0\) 给出 \(L=0\)。</p>
+  </div>
+</article>

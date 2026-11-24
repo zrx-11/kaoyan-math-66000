@@ -1,0 +1,2140 @@
+<article class="q" id="q1786">
+  <div class="q-head">
+    <span class="qno">第 1786 题</span>
+    <span class="qtype">右 Riemann 和乘 n⁴ 的渐近</span>
+    <span class="qsrc">P932</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^{4}\left(\dfrac{1}{n}\sum\limits_{k=1}^{n}e^{k/n}-\int_{0}^{1}e^{x}dx\right)\)。</p>
+  </div>
+  <div class="answer">答案：发散到 \(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{e}{8}\)，按题面复算为发散到 \(+\infty\)。题面中的 \(\dfrac1n\sum_{k=1}^{n}e^{k/n}\) 是右端点 Riemann 和，其与积分的差首项为 \(\dfrac{e-1}{2n}\)，乘 \(n^{4}\) 后得 \(\dfrac{e-1}{2}n^{3}\to+\infty\)；\(\dfrac{e}{8}\) 对应的是已经消去 \(1/n\) 与 \(1/n^{2}\) 阶修正后的高阶 Euler-Maclaurin 余项，题面未写这些修正项，以题面复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：右端点 Riemann 和与积分之差的渐近，用 Euler-Maclaurin 展开。先把右端点和写成闭式：\(R_n=\dfrac1n\sum_{k=1}^{n}e^{k/n}\) 是首项 \(e^{1/n}\)、公比 \(e^{1/n}\) 的等比数列，故</p>
+    \[ R_n=\frac1n\cdot\frac{e^{1/n}(e-1)}{e^{1/n}-1}=(e-1)\cdot e^{1/n}\cdot\frac{1/n}{e^{1/n}-1}. \]
+    <p>对 \(t=1/n\) 展开 \(e^{t}=1+t+t^{2}/2+t^{3}/6+t^{4}/24+\cdots\)，得</p>
+    \[ \frac{t}{e^{t}-1}=1-\frac{t}{2}+\frac{t^{2}}{12}-\frac{t^{4}}{720}+\cdots. \]
+    <p>乘上 \(e^{t}=1+t+t^{2}/2+t^{3}/6+\cdots\)：</p>
+    \[ e^{t}\cdot\frac{t}{e^{t}-1}=1+\frac{t}{2}+\frac{t^{2}}{12}-\frac{t^{4}}{720}+\cdots. \]
+    <p>因此</p>
+    \[ R_n-\int_0^1 e^x dx=(e-1)\left(\frac{1}{2n}+\frac{1}{12n^{2}}-\frac{1}{720n^{4}}+\cdots\right). \]
+    <p>乘 \(n^{4}\)：</p>
+    \[ n^{4}(R_n-(e-1))=(e-1)\left(\frac{n^{3}}{2}+\frac{n^{2}}{12}-\frac{1}{720}+\cdots\right)\to+\infty. \]
+    <p>首项 \((e-1)n^{3}/2\) 随 \(n\) 三次方增长，不可能压成常数。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为右端点和与积分之差是 \(O(1/n^{2})\)。右端点和的首项误差是 \((f(1)-f(0))/(2n)\)，是 \(O(1/n)\)，只有梯形法才消去这一项。</p>
+    <p>② 直接套用 Euler-Maclaurin 的 \(1/n^{4}\) 系数 \(-(e-1)/720\) 当答案，忽略了前面尚未消去的 \(1/n\) 与 \(1/n^{2}\) 项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和的高阶渐近是数学分析的拔高题，考研中较少直接考 \(n^{4}\) 乘未校正和，但常见问法是「梯形法误差」「中矩形法误差」配 \(n^{2}\) 或 \(n^{4}\) 权重。关键在于先判断用的是哪一类求积公式，再决定哪一阶是首项。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n^{2}\left[\dfrac1n\sum_{k=1}^{n}e^{k/n}-\int_0^1 e^x dx-\dfrac{e-1}{2n}\right]\)。</p>
+    <p class="var-ans">答案：\(\dfrac{e-1}{12}\)。括号内消去 \(1/n\) 项后剩 \(1/(12n^{2})\)，乘 \(n^{2}\) 得 \((e-1)/12\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1787">
+  <div class="q-head">
+    <span class="qno">第 1787 题</span>
+    <span class="qtype">复合函数三阶展开对消</span>
+    <span class="qsrc">P933</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan(\tan x)-\arcsin(\arcsin x)}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{3}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，按题面复算为 \(\dfrac{1}{3}\)。依据：两层复合均展开到 \(x^{3}\)，\(\tan(\tan x)=x+\dfrac{2x^{3}}{3}+O(x^{5})\)，\(\arcsin(\arcsin x)=x+\dfrac{x^{3}}{3}+O(x^{5})\)，差的 \(x^{3}\) 系数为 \(\dfrac{2}{3}-\dfrac{1}{3}=\dfrac{1}{3}\)，不存在五阶对消使三阶项消失；书答 0 误作高阶对消，以题面复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两个复合函数在 \(x\to0\) 时都是三阶小量，分母为 \(x^{3}\)，两层都必须展开到 \(x^{3}\) 项。先展开内函数：</p>
+    \[ \tan x=x+\frac{x^{3}}{3}+O(x^{5}),\qquad \arcsin x=x+\frac{x^{3}}{6}+O(x^{5}). \]
+    <p><b>展开 \(\tan(\tan x)\)</b>：令 \(y=\tan x=x+x^{3}/3+O(x^{5})\)，外层 \(\tan y=y+y^{3}/3+O(y^{5})\)，代入：</p>
+    \[ \tan(\tan x)=\left(x+\frac{x^{3}}{3}\right)+\frac13\left(x+\frac{x^{3}}{3}\right)^{3}+O(x^{5})=x+\frac{2x^{3}}{3}+O(x^{5}). \]
+    <p><b>展开 \(\arcsin(\arcsin x)\)</b>：令 \(z=\arcsin x=x+x^{3}/6+O(x^{5})\)，外层 \(\arcsin z=z+z^{3}/6+O(z^{5})\)，代入：</p>
+    \[ \arcsin(\arcsin x)=\left(x+\frac{x^{3}}{6}\right)+\frac16\left(x+\frac{x^{3}}{6}\right)^{3}+O(x^{5})=x+\frac{x^{3}}{3}+O(x^{5}). \]
+    <p>相减得 \(\dfrac{x^{3}}{3}+O(x^{5})\)，除以 \(x^{3}\) 得极限 \(\dfrac{1}{3}\)。内层 \(x^{3}\) 项与外层三次项叠加：\(\tan\) 链为 \(1/3+1/3=2/3\)，\(\arcsin\) 链为 \(1/6+1/6=1/3\)，系数差 \(2/3-1/3=1/3\)，五阶项不影响三阶极限。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 复合函数展开时只展开内函数，忘记对外层函数也做泰勒替换。两层都要展开到 \(x^{3}\)。</p>
+    <p>② 把 \(\tan x\) 的三阶系数记成 \(1/3\) 后直接代入，忽略外层 \(y^{3}/3\) 项也贡献一个 \(x^{3}\) 系数。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>复合函数的低阶泰勒展开是求极限的基本功，考研常以 \(\sin(\sin x)\)、\(\tan(\tan x)\)、\(\arcsin(\arcsin x)\) 为素材，考的是「链式展开时内层高阶项和外层高阶项的系数叠加」。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin(\sin x)-\arcsin(\arcsin x)}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{2}{3}\)。\(\sin(\sin x)=x-x^{3}/3+O(x^{5})\)，\(\arcsin(\arcsin x)=x+x^{3}/3+O(x^{5})\)，差为 \(-2x^{3}/3\)，除以 \(x^{3}\) 得 \(-2/3\)；对照本题注意符号。</p>
+  </div>
+</article>
+
+<article class="q" id="q1788">
+  <div class="q-head">
+    <span class="qno">第 1788 题</span>
+    <span class="qtype">(1+x)^{1/x} 的二阶渐近</span>
+    <span class="qsrc">P933</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{(1+x)^{1/x}-e+\dfrac{e}{2}x}{x^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{11e}{24}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\((1+x)^{1/x}\) 在 \(x\to0\) 时趋向 \(e\)，题面已减去 \(e\) 和一阶修正 \(\dfrac{e}{2}x\)，剩下的 \(x^{2}\) 阶系数即答案。取对数展开到 \(x^{2}\) 阶。</p>
+    <p>令 \(u=\dfrac{\ln(1+x)}{x}\)，则 \((1+x)^{1/x}=e^{u}\)。由 \(\ln(1+x)=x-x^{2}/2+x^{3}/3-\cdots\)：</p>
+    \[ u=\frac{\ln(1+x)}{x}=1-\frac{x}{2}+\frac{x^{2}}{3}-\frac{x^{3}}{4}+\cdots. \]
+    <p>令 \(v=u-1=-x/2+x^{2}/3+O(x^{3})\)，则 \(e^{u}=e\cdot e^{v}\)，且 \(v^{2}=x^{2}/4+O(x^{3})\)。展开 \(e^{v}=1+v+v^{2}/2+\cdots\)，算到 \(x^{2}\)：</p>
+    \[ e^{v}=1+\left(-\frac{x}{2}+\frac{x^{2}}{3}\right)+\frac12\cdot\frac{x^{2}}{4}+O(x^{3})=1-\frac{x}{2}+\frac{11x^{2}}{24}+O(x^{3}). \]
+    \[ (1+x)^{1/x}=e\left(1-\frac{x}{2}+\frac{11x^{2}}{24}+O(x^{3})\right)=e-\frac{ex}{2}+\frac{11ex^{2}}{24}+O(x^{3}). \]
+    <p>代入原式，分子为 \(\dfrac{11ex^{2}}{24}+O(x^{3})\)，除以 \(x^{2}\) 得 \(\dfrac{11e}{24}\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开 \(u=\ln(1+x)/x\) 时漏了 \(x^{2}/3\) 项，导致后面 \(v^{2}/2\) 与 \(v\) 中 \(x^{2}\) 系数算错。</p>
+    <p>② 把 \(e^{v}\) 展开只写到 \(1+v\)，漏掉 \(v^{2}/2\)，这一项恰好贡献 \(x^{2}/8\)，与 \(v\) 中的 \(x^{2}/3\) 合起来才是 \(11/24\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\((1+x)^{1/x}\) 的渐近展开是经典题，一阶项 \(-ex/2\)、二阶项 \(11ex^{2}/24\)、三阶项 \(-7ex^{3}/16\)（见第 1798 题）是固定链条。考研常考二阶或三阶修正，要求熟练取对数后两次指数展开。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{(1+x)^{1/x}-e}{x}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac{e}{2}\)。由上面展开，\((1+x)^{1/x}-e=-ex/2+O(x^{2})\)，除以 \(x\) 得 \(-e/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1789">
+  <div class="q-head">
+    <span class="qno">第 1789 题</span>
+    <span class="qtype">给定导数写泰勒展开求极限</span>
+    <span class="qsrc">P933</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \(x=0\) 处三阶可导，且 \(f(0)=0,\ f'(0)=1,\ f''(0)=2,\ f'''(0)=6\)。求 \(\lim\limits_{x\to0}\dfrac{f(x)-x-x^{2}}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：已知函数在 0 处的各阶导数值，直接写泰勒展开到 \(x^{3}\) 项，再与分母 \(x^{3}\) 比对。三阶可导保证皮亚诺余项 \(o(x^{3})\) 可用，本题求极限只需用到这一阶。</p>
+    <p>带皮亚诺余项的三阶泰勒公式为：</p>
+    \[ f(x)=f(0)+f'(0)x+\frac{f''(0)}{2!}x^{2}+\frac{f'''(0)}{3!}x^{3}+o(x^{3}). \]
+    <p>代入 \(f(0)=0,\ f'(0)=1,\ f''(0)=2,\ f'''(0)=6\)，注意每阶系数都要除以相应阶乘：</p>
+    \[ f(x)=0+1\cdot x+\frac{2}{2}x^{2}+\frac{6}{6}x^{3}+o(x^{3})=x+x^{2}+x^{3}+o(x^{3}). \]
+    <p>于是分子为：</p>
+    \[ f(x)-x-x^{2}=x^{3}+o(x^{3}). \]
+    <p>除以 \(x^{3}\)：\(\dfrac{x^{3}+o(x^{3})}{x^{3}}=1+o(1)\)，取极限得 \(1\)。分母阶数与展开阶数一致，\(x^{3}\) 系数 \(f'''(0)/3!=6/6=1\) 就是极限值；若漏除阶乘，会误得 \(6\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记除以阶乘：\(f''(0)/2!=2/2=1\)，\(f'''(0)/3!=6/6=1\)。若漏除阶乘会得到 \(f(x)=x+2x^{2}+6x^{3}\)，答案变成 6。</p>
+    <p>② 三阶可导与三阶连续可导混淆。三阶可导（导数存在）只能保证皮亚诺余项 \(o(x^{3})\)，不能写拉格朗日余项；本题求极限用皮亚诺余项足够。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>给定导数数值求极限是选择题和填空题的送分题，套路固定：写泰勒展开、比对系数。常考的陷阱就是「忘记除阶乘」和「展开阶数不够」。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(0)=1,\ f'(0)=0,\ f''(0)=-2\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)-1}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(-1\)。\(f(x)=1-x^{2}+o(x^{2})\)，分子为 \(-x^{2}+o(x^{2})\)，除以 \(x^{2}\) 得 \(-1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1790">
+  <div class="q-head">
+    <span class="qno">第 1790 题</span>
+    <span class="qtype">含 sin t/t 的变限积分极限</span>
+    <span class="qsrc">P933</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\int_{0}^{x}\dfrac{\sin t}{t}dt-x}{x^{3}}=c\)，求 \(c\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{18}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(-\dfrac16\)，按题面复算为 \(-\dfrac1{18}\)。\(\sin t/t\) 的展开是 \(1-t^{2}/6+\cdots\)，积分后 \(x^{3}\) 系数为 \(-1/(6\cdot 3)=-1/18\)；书答 \(-1/6\) 相当于漏掉了积分时除以的阶数 3，以题面复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：变限积分求极限，标准做法是把被积函数展开到足够阶，再逐项积分。分母是 \(x^{3}\)，需要积分结果展开到 \(x^{3}\)；被积函数在 \(t=0\) 处补定义为 1，展开式在 0 附近一致收敛，逐项积分合法。</p>
+    <p>展开被积函数 \(\dfrac{\sin t}{t}\)：\(\sin t=t-t^{3}/6+t^{5}/120-\cdots\)，除以 \(t\) 得</p>
+    \[ \frac{\sin t}{t}=1-\frac{t^{2}}{6}+\frac{t^{4}}{120}+O(t^{6}). \]
+    <p>从 0 到 \(x\) 逐项积分，幂次每升一次、系数除以新幂次：</p>
+    \[ \int_0^x \frac{\sin t}{t}dt=\int_0^x\left(1-\frac{t^{2}}{6}+\frac{t^{4}}{120}+\cdots\right)dt=x-\frac{x^{3}}{18}+\frac{x^{5}}{600}+O(x^{7}). \]
+    <p>分子：</p>
+    \[ \int_0^x\frac{\sin t}{t}dt-x=-\frac{x^{3}}{18}+O(x^{5}). \]
+    <p>除以 \(x^{3}\) 得 \(c=-1/18\)。关键在于积分时 \(\int_0^x t^{2}dt=x^{3}/3\)，故 \(t^{2}/6\) 积分后为 \(x^{3}/18\)，系数中的阶数 3 不可漏；若直接照搬被积函数的 \(-1/6\)，就会得到书印的 \(-1/6\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 积分时忘记逐项积分的系数：\(\int_0^x t^{2}dt=x^{3}/3\)，所以 \(\int t^{2}/6\,dt=x^{3}/18\)，不是 \(x^{3}/6\)。</p>
+    <p>② 用洛必达法则三次：\((\sin x/x-1)/(3x^{2})\to(\sin x-x)/(3x^{3})\to(-1/6)/3=-1/18\)，结果一致。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>变限积分与泰勒展开结合是高频考点。核心动作是把被积函数展开到「积分后能与分母同阶」的程度，再逐项积分。常见被积函数有 \(\sin t/t\)、\((e^{t}-1)/t\)、\(\ln(1+t)/t\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\int_0^x \dfrac{\tan t}{t}dt-x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac19\)。\(\tan t/t=1+t^{2}/3+\cdots\)，积分得 \(x+x^{3}/9+\cdots\)，分子 \(x^{3}/9\)，除以 \(x^{3}\) 得 \(1/9\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1791">
+  <div class="q-head">
+    <span class="qno">第 1791 题</span>
+    <span class="qtype">标准 Riemann 和求定积分</span>
+    <span class="qsrc">P933</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\sqrt{1+\dfrac{k^{2}}{n^{2}}}\cdot\dfrac{1}{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\bigl(\sqrt{2}+\ln(1+\sqrt{2})\bigr)\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：标准 Riemann 和。\(\dfrac1n\sum_{k=1}^{n}f(k/n)\) 是右端点矩形和，\(f\) 连续时极限为 \(\int_0^1 f(x)dx\)。这里 \(f(x)=\sqrt{1+x^{2}}\)，端点 \(k=1\) 与 \(k=0\) 的差异在极限中消失。</p>
+    <p>于是</p>
+    \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\sqrt{1+\frac{k^{2}}{n^{2}}}=\int_0^1\sqrt{1+x^{2}}dx. \]
+    <p>计算积分用三角代换 \(x=\tan\theta\)，则 \(dx=\sec^{2}\theta\,d\theta\)，\(\sqrt{1+x^{2}}=\sec\theta\)，上下限 \(x=0\to\theta=0\)，\(x=1\to\theta=\pi/4\)：</p>
+    \[ \int_0^1\sqrt{1+x^{2}}dx=\int_0^{\pi/4}\sec^{3}\theta\,d\theta. \]
+    <p>对 \(\int\sec^{3}\theta\,d\theta\) 分部积分（取 \(u=\sec\theta,\ dv=\sec^{2}\theta\,d\theta\)），得</p>
+    \[ \int\sec^{3}\theta\,d\theta=\frac12\bigl(\sec\theta\tan\theta+\ln|\sec\theta+\tan\theta|\bigr)+C. \]
+    <p>代回 \(x=\tan\theta\)，\(\sec\theta=\sqrt{1+x^{2}}\)，即得原函数</p>
+    \[ \int\sqrt{1+x^{2}}dx=\frac{x}{2}\sqrt{1+x^{2}}+\frac12\ln\bigl(x+\sqrt{1+x^{2}}\bigr)+C. \]
+    <p>代入上下限 0 和 1：\(x=1\) 时为 \(\sqrt{2}/2+\frac12\ln(1+\sqrt{2})\)，\(x=0\) 时两项均为 0，故</p>
+    \[ \int_0^1\sqrt{1+x^{2}}dx=\frac{\sqrt{2}}{2}+\frac12\ln(1+\sqrt{2})=\frac12\bigl(\sqrt{2}+\ln(1+\sqrt{2})\bigr). \]
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 积分 \(\int\sqrt{1+x^{2}}dx\) 公式记错。这个积分的结果是 \(\dfrac{x}{2}\sqrt{1+x^{2}}+\dfrac12\ln(x+\sqrt{1+x^{2}})\)，不是 \(\dfrac13(1+x^{2})^{3/2}\)。</p>
+    <p>② 把 \(k=1\) 到 \(n\) 误判为 \(k=0\) 到 \(n-1\)。两者在极限下都对应 \(\int_0^1\)，端点差异不影响结果，但写推导时要清楚。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和求极限是考研数学的固定题型，识别关键是看到 \(\dfrac1n\sum f(k/n)\)。常考的函数有 \(\sqrt{1+x^{2}}\)、\(\ln(1+x)\)、\(e^{x}\)、\(1/(1+x^{2})\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum_{k=1}^{n}\sqrt{1+\dfrac{2k}{n}+\dfrac{k^{2}}{n^{2}}}\)。</p>
+    <p class="var-ans">答案：\(\int_0^1(1+x)dx=3/2\)。注意 \(\sqrt{1+2x+x^{2}}=1+x\)，直接积分即可。</p>
+  </div>
+</article>
+
+<article class="q" id="q1792">
+  <div class="q-head">
+    <span class="qno">第 1792 题</span>
+    <span class="qtype">Gamma 函数型递推比</span>
+    <span class="qsrc">P934</span>
+  </div>
+  <div class="stem">
+    <p>记 \(K_{n}=\int_{0}^{\infty}e^{-x^{2}}x^{n}dx\)，求 \(\lim\limits_{n\to\infty}\dfrac{K_{n+1}}{K_{n}}\)。</p>
+  </div>
+  <div class="answer">答案：发散到 \(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，按题面复算为发散到 \(+\infty\)。\(K_n=\frac12\Gamma\bigl(\frac{n+1}{2}\bigr)\)，由 Gamma 函数渐近 \(\Gamma(z+1/2)/\Gamma(z)\sim\sqrt{z}\)，比值 \(\sim\sqrt{n/2}\to+\infty\)；书答 1 误将 Gamma 比值当作有界，以题面复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：含 \(e^{-x^{2}}\) 的无穷积分，换元化为 Gamma 函数。令 \(u=x^{2}\)，则 \(x=\sqrt{u}\)，\(dx=\dfrac{du}{2\sqrt{u}}\)：</p>
+    \[ K_n=\int_0^\infty e^{-u}u^{n/2}\cdot\frac{du}{2\sqrt{u}}=\frac12\int_0^\infty e^{-u}u^{(n-1)/2}du=\frac12\Gamma\left(\frac{n+1}{2}\right). \]
+    <p>于是相邻两项为：</p>
+    \[ K_{n+1}=\frac12\Gamma\left(\frac{n+2}{2}\right),\qquad \frac{K_{n+1}}{K_n}=\frac{\Gamma\left(\frac n2+1\right)}{\Gamma\left(\frac n2+\frac12\right)}. \]
+    <p>令 \(z=\dfrac n2+\dfrac12\)，利用 Gamma 函数渐近公式 \(\Gamma(z+1/2)/\Gamma(z)\sim\sqrt{z}\)（\(z\to\infty\)）：</p>
+    \[ \frac{K_{n+1}}{K_n}\sim\sqrt{z}\sim\sqrt{\frac n2}\to+\infty. \]
+    <p>该渐近也可由 Stirling 公式互证：\(\Gamma(w)\sim\sqrt{2\pi}\,w^{w-1/2}e^{-w}\)，两式相除后指数主部给出 \(w^{1/2}\)，比值随 \(\sqrt n\) 增长。直观上，被积函数 \(e^{-x^{2}}x^{n}\) 的峰值在 \(x=\sqrt{n/2}\)，\(n\) 越大峰值越靠右，\(K_{n+1}\) 比 \(K_n\) 多一个 \(x\) 权重，积分值之比不会有界。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(K_n\) 是常数或有界序列。\(e^{-x^{2}}x^{n}\) 对大 \(n\) 的峰值在 \(\sqrt{n/2}\)，积分值随 \(n\) 增长。</p>
+    <p>② 与 \(J_n=\int_0^\infty e^{-x}x^n dx=n!\) 混淆。\(J_{n+1}/J_n=n+1\to\infty\)，\(K_n\) 因为有 \(x^{2}\) 指数，比值是 \(\sqrt n\) 量级。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Gamma 函数与无穷积分的递推是考研数一卷子中的拔高题，常考的是 \(\int_0^\infty e^{-x^{2}}x^{n}dx\) 的换元与渐近。核心是记住 \(\Gamma(z+1)=z\Gamma(z)\) 和渐近 \(\Gamma(z+a)/\Gamma(z)\sim z^{a}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{J_{n+1}}{J_n}\)，其中 \(J_n=\int_0^\infty e^{-x}x^n dx\)。</p>
+    <p class="var-ans">答案：发散到 \(+\infty\)。\(J_n=n!\)，\(J_{n+1}/J_n=n+1\to\infty\)，比 \(K_n\) 的 \(\sqrt n\) 更快。</p>
+  </div>
+</article>
+
+<article class="q" id="q1793">
+  <div class="q-head">
+    <span class="qno">第 1793 题</span>
+    <span class="qtype">由两个极限条件反求泰勒系数</span>
+    <span class="qsrc">P934</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to0}\dfrac{f(x)-x-x^{3}}{x^{5}}=0\)，且 \(\lim\limits_{x\to0}\dfrac{f(x)-\sin x}{x^{5}}=1\)，求 \(f(0),f'(0),f''(0),f'''(0),f^{(4)}(0),f^{(5)}(0)\)。</p>
+  </div>
+  <div class="answer">答案：两条件互斥，无解（不存在同时满足两条件的 \(f\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(f(0)=0,\ f'(0)=1,\ f''(0)=0,\ f'''(0)=-1,\ f^{(4)}(0)=0,\ f^{(5)}(0)=120\)，按题面复算两条件互斥、无解。依据：第一式要求 \(f(x)=x+x^{3}+o(x^{5})\)，即 \(x^{3}\) 系数 \(a_{3}=1\)（\(f'''(0)=6\)）；第二式要求 \(f(x)-\sin x=x^{5}+o(x^{5})\)，而 \(\sin x\) 的 \(x^{3}\) 系数为 \(-1/6\)，故 \(a_{3}=-1/6\)（\(f'''(0)=-1\)）；同一 \(a_{3}\) 既要等于 1 又要等于 \(-1/6\)，方程矛盾，以题面复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两个极限条件联立反求泰勒系数。把 \(f(x)\) 写到 \(x^{5}\) 阶，其中 \(a_k=f^{(k)}(0)/k!\)：</p>
+    \[ f(x)=a_0+a_1x+a_2x^{2}+a_3x^{3}+a_4x^{4}+a_5x^{5}+o(x^{5}). \]
+    <p><b>第一式</b>：\([f(x)-x-x^{3}]/x^{5}\to0\)，低于 \(x^{5}\) 的系数全为 0：</p>
+    \[ a_0=0,\ a_1=1,\ a_2=0,\ a_3=1,\ a_4=0, \]
+    <p>即 \(f'''(0)=6a_3=6\)。<b>第二式</b>：由 \(\sin x=x-x^{3}/6+x^{5}/120+o(x^{5})\)，</p>
+    \[ f(x)-\sin x=(a_0)+(a_1-1)x+a_2x^{2}+(a_3+1/6)x^{3}+a_4x^{4}+(a_5-1/120)x^{5}+o(x^{5}). \]
+    <p>除以 \(x^{5}\) 极限为 1，低于 \(x^{5}\) 的系数须全 0：\(a_3+1/6=0\) 给出 \(a_3=-1/6\)，即 \(f'''(0)=-1\)；同时 \(a_5-1/120=1\)。同一 \(a_3\) 既要等于 1 又要等于 \(-1/6\)，两式矛盾，无解。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记 \(a_k=f^{(k)}(0)/k!\)，把系数 \(a_5\) 直接当 \(f^{(5)}(0)\)。\(a_5=1\) 对应 \(f^{(5)}(0)=5!=120\)。</p>
+    <p>② 两个条件联立时，要让 \(x^{3}\) 项同时被「消掉」和「匹配」，需要仔细看题面中 \(x^{3}\) 项前的符号。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「由两个极限反求导数」是选择题和填空题的综合题，套路是把 \(f\) 展开到足够阶，按「低于分母阶的系数必须全零」列方程。常考的联立对象是 \(f(x)-\sin x\)、\(f(x)-e^{x}\)、\(f(x)-\ln(1+x)\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(\lim\limits_{x\to0}\dfrac{f(x)-e^{x}+1}{x^{2}}=0\)，求 \(f(0),f'(0),f''(0)\)。</p>
+    <p class="var-ans">答案：\(f(0)=0,\ f'(0)=1,\ f''(0)=1\)。\(e^x=1+x+x^{2}/2+\cdots\)，要使 \(f(x)-e^x+1=o(x^{2})\)，需 \(f(x)=e^x-1+o(x^{2})=x+x^{2}/2+o(x^{2})\)，故 \(f(0)=0,\ f'(0)=1,\ f''(0)=1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1794">
+  <div class="q-head">
+    <span class="qno">第 1794 题</span>
+    <span class="qtype">变限积分配 arcsin x 定系数</span>
+    <span class="qsrc">P934</span>
+  </div>
+  <div class="stem">
+    <p>求常数 \(a,b,c,d,e\)，使得 \(\lim\limits_{x\to0}\dfrac{\int_{0}^{x}(a+bt+ct^{2}+dt^{3}+et^{4})dt-\arcsin x}{x^{6}}=1\)。</p>
+  </div>
+  <div class="answer">答案：无解（不存在使极限等于 1 的常数；消去低阶项仅得 \(a=1,\ b=0,\ c=\dfrac12,\ d=0,\ e=\dfrac38\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(a=0,\ b=1,\ c=0,\ d=\dfrac16,\ e=0\)，按题面复算无解。依据：积分 \(=ax+\dfrac b2x^{2}+\dfrac c3x^{3}+\dfrac d4x^{4}+\dfrac e5x^{5}\)，\(\arcsin x=x+\dfrac{x^{3}}6+\dfrac{3x^{5}}{40}+\cdots\)；消去低于 \(x^{6}\) 的项强制 \(a=1,\ b=0,\ c=1/2,\ d=0,\ e=3/8\)，此时分子余项为 \(-5x^{7}/112+O(x^{9})\)，分子不含 \(x^{6}\) 项，除以 \(x^{6}\) 极限为 0，不可能等于 1，以题面复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：变限积分展开与 \(\arcsin x\) 比对定系数。分母是 \(x^{6}\)，需要把分子展开到 \(x^{6}\)。</p>
+    <p>先算积分：</p>
+    \[ \int_0^x(a+bt+ct^{2}+dt^{3}+et^{4})dt=ax+\frac b2 x^{2}+\frac c3 x^{3}+\frac d4 x^{4}+\frac e5 x^{5}. \]
+    <p>再展开目标函数：</p>
+    \[ \arcsin x=x+\frac{x^{3}}{6}+\frac{3x^{5}}{40}+\frac{5x^{7}}{112}+\cdots. \]
+    <p>分子 = 积分 - \(\arcsin x\)：</p>
+    \[ (a-1)x+\frac b2 x^{2}+\left(\frac c3-\frac16\right)x^{3}+\frac d4 x^{4}+\left(\frac e5-\frac{3}{40}\right)x^{5}+O(x^{7}). \]
+    <p>要使除以 \(x^{6}\) 的极限存在且为有限值，低于 \(x^{6}\) 的系数必须全为 0：\(a-1=0\Rightarrow a=1\)；\(b/2=0\Rightarrow b=0\)；\(c/3-1/6=0\Rightarrow c=1/2\)；\(d/4=0\Rightarrow d=0\)；\(e/5-3/40=0\Rightarrow e=3/8\)。</p>
+    <p>但积分最高只到 \(x^{5}\)，\(\arcsin x\) 是奇函数、只有奇次项，分子不含 \(x^{6}\) 项。代入上述系数后，分子余项为 \(-5x^{7}/112+O(x^{9})\)，除以 \(x^{6}\) 得 \(O(x)\to0\)，极限为 0 而不是题设的 1，故不存在满足条件的常数。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 积分后忘记除以阶数：\(\int t^{k}dt=x^{k+1}/(k+1)\)，系数不是直接写 \(c\) 而是 \(c/(k+1)\)。</p>
+    <p>② \(\arcsin x\) 是奇函数，只有奇次项，所有偶次幂系数必须为 0。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>变限积分展开定系数是填空题的高频题，核心是「被积函数展开→逐项积分→与目标函数比对→低阶系数全零」。常考搭配是 \(\arcsin x\)、\(\arctan x\)、\(\sin x\)、\(e^{x}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(a,b\) 使 \(\lim\limits_{x\to0}\dfrac{\int_0^x(a+bt)dt-\sin x}{x^{3}}=C\) 存在。</p>
+    <p class="var-ans">答案：\(a=1,\ b=0,\ C=\dfrac16\)。积分 \(=ax+bx^{2}/2\)，减 \(\sin x=x-x^{3}/6+\cdots\)，得 \((a-1)x+bx^{2}/2+x^{3}/6+\cdots\)，要 \(x^{3}\) 极限存在需 \(a=1,b=0\)，\(C=1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1795">
+  <div class="q-head">
+    <span class="qno">第 1795 题</span>
+    <span class="qtype">给定七阶导数值求极限</span>
+    <span class="qsrc">P934</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \(x=0\) 处七阶可导，且 \(f(0)=0,\ f'(0)=1,\ f''(0)=0,\ f'''(0)=0,\ f^{(4)}(0)=0,\ f^{(5)}(0)=0,\ f^{(6)}(0)=0,\ f^{(7)}(0)=5040\)。求 \(\lim\limits_{x\to0}\dfrac{f(x)-x-x^{7}}{x^{8}}\)。</p>
+  </div>
+  <div class="answer">答案：条件不足，极限不确定（仅凭七阶可导不能推出 \(0\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，按题面复算为条件不足、极限不确定。题设仅给七阶可导，泰勒余项只能写 \(o(x^{7})\)：\(f(x)=x+x^{7}+o(x^{7})\)，分子 \(f(x)-x-x^{7}=o(x^{7})\)，除以 \(x^{8}\) 得 \(o(1)/x\)，七阶信息不足以定出极限。反例：取 \(f_1(x)=x+x^{7}\) 时比值为 \(0\)；取 \(f_2(x)=x+x^{7}+x^{8}\) 时比值为 \(1\)；取 \(f_3(x)=x+x^{7}+x^{8}\sin(1/x)\) 时比值为 \(\sin(1/x)\)，双侧振荡不存在；三者七阶导数数据均与题设一致。书答 \(0\) 只对应特定光滑模型，不能由题面推出，以复算结论为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：给定泰勒系数求极限，先判断题给可导阶数与分母阶数是否匹配。由 \(f^{(7)}(0)=5040=7!\)，其余低阶导数按题面代入，七阶可导对应的皮亚诺展开为：</p>
+    \[ f(x)=f(0)+f'(0)x+\cdots+\frac{f^{(7)}(0)}{7!}x^{7}+o(x^{7})=x+x^{7}+o(x^{7}). \]
+    <p>于是分子为：</p>
+    \[ f(x)-x-x^{7}=o(x^{7}). \]
+    <p>除以分母 \(x^{8}\)：</p>
+    \[ \frac{f(x)-x-x^{7}}{x^{8}}=\frac{o(x^{7})}{x^{8}}=\frac{o(1)}{x}. \]
+    <p>这里 \(o(x^{7})/x^{7}\to0\)，再除 \(x\) 后是趋于 0 的量与趋于无穷的 \(1/x\) 相乘，乘积极限没有定论：可以是 \(0\)、任意有限常数，也可以振荡不存在。题面未给八阶导数或更强余项，无法把 \(o(x^{7})\) 升级为 \(O(x^{8})\)，极限不能由题设确定。</p>
+    <p>对照变式：分母改为 \(x^{7}\) 时 \(o(x^{7})/x^{7}=o(1)\to0\)，阶数匹配极限才确定；本题分母比可导阶数高一阶，属阶次错位陷阱。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 七阶可导只能写 \(o(x^{7})\)，不能写 \(O(x^{8})\)。除以 \(x^{8}\) 时，如果只有七阶信息，极限可能不存在。</p>
+    <p>② 忘记 \(7!=5040\)，以为 \(f^{(7)}(0)=5040\) 对应 \(x^{7}\) 系数是 5040。实际上是 \(5040/7!=1\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>高阶泰勒展开是选择题的常考陷阱，考的是「几阶可导能写几阶余项」。本题设置了大量零系数，目的是让 \(f(x)\) 简化为 \(x+x^{7}\)，再除以 \(x^{8}\) 看极限。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(0)=0,\ f'(0)=1,\ f^{(7)}(0)=5040\)，其余中间阶导数均为 0，求 \(\lim\limits_{x\to0}\dfrac{f(x)-x-x^{7}}{x^{7}}\)。</p>
+    <p class="var-ans">答案：\(0\)。分子是 \(o(x^{7})\)，除以 \(x^{7}\) 得 \(o(1)\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1796">
+  <div class="q-head">
+    <span class="qno">第 1796 题</span>
+    <span class="qtype">对数函数 Riemann 和乘 n⁵</span>
+    <span class="qsrc">P934</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^{5}\left(\dfrac{1}{n}\sum\limits_{k=1}^{n}\ln\Bigl(1+\dfrac{k^{2}}{n^{2}}\Bigr)-\int_{0}^{1}\ln(1+x^{2})dx\right)\)。</p>
+  </div>
+  <div class="answer">答案：发散到 \(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(-\dfrac14\)，按题面复算为发散到 \(+\infty\)。右端点和与积分之差的首项为 \(\dfrac{f(1)-f(0)}{2n}=\dfrac{\ln2}{2n}\)，乘 \(n^{5}\) 得 \(\dfrac{\ln2}{2}n^{4}\to+\infty\)；书答 \(-1/4\) 对应已消去低阶项后的高阶系数，题面未含修正项，以题面复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：与第 1786 题同型，右端点 Riemann 和乘高次幂。\(f(x)=\ln(1+x^{2})\)。由 Euler-Maclaurin 公式：</p>
+    \[ \frac1n\sum_{k=1}^{n}f\left(\frac kn\right)-\int_0^1 f(x)dx=\frac{f(1)-f(0)}{2n}+\frac{f'(1)-f'(0)}{12n^{2}}+O(n^{-4}). \]
+    <p>计算端点值与导数值：</p>
+    \[ f(1)=\ln2,\ f(0)=0,\qquad f'(x)=\frac{2x}{1+x^{2}},\ f'(1)=1,\ f'(0)=0. \]
+    <p>故首项为 \(\ln2/(2n)\)，次项为 \(1/(12n^{2})\)。</p>
+    <p>因此</p>
+    \[ n^{5}\left(R_n-\int_0^1 f\right)=n^{5}\left(\frac{\ln2}{2n}+\frac{1}{12n^{2}}+O(n^{-4})\right)=\frac{\ln2}{2}n^{4}+\frac{n^{3}}{12}+O(n)\to+\infty. \]
+    <p>首项 \((\ln2/2)n^{4}\) 随 \(n\) 四次方增长，不可能压成常数 \(-1/4\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 直接套用梯形法或 Simpson 法的误差公式。题面是右端点和，不是梯形法，首项误差 \(O(1/n)\) 必须先看到。</p>
+    <p>② 算 \(f(1)-f(0)\) 时漏了 \(f(1)=\ln2\)，以为首项为 0。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与第 1786 题同型，是 Euler-Maclaurin 展开的识别题。考研中若出现，通常会配好校正项（如梯形法、中矩形法），让首项误差为 \(O(1/n^{2})\) 或 \(O(1/n^{4})\)，再乘 \(n^{2}\) 或 \(n^{4}\) 取常数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n^{2}\left[\dfrac1n\sum_{k=1}^{n}\ln(1+k^{2}/n^{2})-\int_0^1\ln(1+x^{2})dx-\dfrac{\ln2}{2n}\right]\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{12}\)。消去 \(1/n\) 项后，剩余 \(1/(12n^{2})\) 乘 \(n^{2}\) 得 \(1/12\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1797">
+  <div class="q-head">
+    <span class="qno">第 1797 题</span>
+    <span class="qtype">sin 与 arcsin 复合的三阶对消</span>
+    <span class="qsrc">P935</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sin(\sin x)-\arcsin(\arcsin x)}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{2}{3}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(0\)，按题面 \(x^{3}\) 分母复算为 \(-\dfrac{2}{3}\)。依据：\(\sin(\sin x)=x-x^{3}/3+O(x^{5})\)，\(\arcsin(\arcsin x)=x+x^{3}/3+O(x^{5})\)，差的 \(x^{3}\) 系数为 \(-1/3-1/3=-2/3\)；书答 0 误作高阶对消，以题面复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：与第 1787 题同型，两个复合函数三阶展开对消。内函数：</p>
+    \[ \sin x=x-\frac{x^{3}}{6}+O(x^{5}),\qquad \arcsin x=x+\frac{x^{3}}{6}+O(x^{5}). \]
+    <p><b>展开 \(\sin(\sin x)\)</b>：令 \(y=\sin x=x-x^{3}/6+\cdots\)，\(\sin y=y-y^{3}/6+\cdots\)，代入得 \(y^{3}=x^{3}+O(x^{5})\)，故</p>
+    \[ \sin(\sin x)=\left(x-\frac{x^{3}}{6}\right)-\frac16 x^{3}+O(x^{5})=x-\frac{x^{3}}{3}+O(x^{5}). \]
+    <p><b>展开 \(\arcsin(\arcsin x)\)</b>：令 \(z=\arcsin x=x+x^{3}/6+\cdots\)，\(\arcsin z=z+z^{3}/6+\cdots\)，代入得 \(z^{3}=x^{3}+O(x^{5})\)，故</p>
+    \[ \arcsin(\arcsin x)=\left(x+\frac{x^{3}}{6}\right)+\frac16 x^{3}+O(x^{5})=x+\frac{x^{3}}{3}+O(x^{5}). \]
+    <p>相减：</p>
+    \[ \sin(\sin x)-\arcsin(\arcsin x)=-\frac{2x^{3}}{3}+O(x^{5}), \]
+    <p>除以 \(x^{3}\) 得 \(-2/3\)。内层 \(\sin x\) 与 \(\arcsin x\) 的三阶系数符号相反，外层 \(y^{3}/6\) 与 \(z^{3}/6\) 均贡献 \(+1/6\)，两者叠加后差为 \(-2/3\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 内层 \(\sin x\) 和 \(\arcsin x\) 的三阶系数符号相反（\(-1/6\) vs \(+1/6\)），复合后两个函数分别得到 \(x-x^{3}/3\) 和 \(x+x^{3}/3\)，差是 \(-2x^{3}/3\)。</p>
+    <p>② 误以为 \(\sin(\sin x)\approx\sin x\) 和 \(\arcsin(\arcsin x)\approx\arcsin x\)，直接用 \(\sin x-\arcsin x\) 近似，漏掉外层复合的贡献。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与第 1787 题同型，是复合函数泰勒展开的经典对消题。考研常考 \(\sin(\sin x)\)、\(\tan(\tan x)\)、\(\arcsin(\arcsin x)\) 之间的差，关键是两层都展开到同阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin(\arcsin x)-\arcsin(\sin x)}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(0\)。\(\sin(\arcsin x)=x\)（精确等式）；在 \(|x|\le\pi/2\) 内 \(\arcsin(\sin x)=x\) 亦为恒等式，两式之差恒为 0，极限为 0。</p>
+  </div>
+</article>
+
+<article class="q" id="q1798">
+  <div class="q-head">
+    <span class="qno">第 1798 题</span>
+    <span class="qtype">(1+x)^{1/x} 的三阶渐近</span>
+    <span class="qsrc">P935</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{(1+x)^{1/x}-e+\dfrac{e}{2}x-\dfrac{11e}{24}x^{2}}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{7e}{16}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac{7e}{16}\)，按题面复算为 \(-\dfrac{7e}{16}\)。展开 \(e^{v}\) 的 \(x^{3}\) 项来自 \(v\)、\(v^{2}/2\)、\(v^{3}/6\) 三部分，系数均为负，合计 \(-7/16\)；书答符号反了，以复算 \(-7e/16\) 为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：承接第 1788 题继续求三阶系数。令 \(u=\ln(1+x)/x\)，\(v=u-1=-x/2+x^{2}/3-x^{3}/4+O(x^{4})\)，\((1+x)^{1/x}=e\cdot e^{v}\)。</p>
+    <p>展开 \(e^{v}=1+v+v^{2}/2+v^{3}/6+O(v^{4})\)，先算各幂次到 \(x^{3}\)：</p>
+    \[ v=-x/2+\frac{x^{2}}{3}-\frac{x^{3}}{4}+O(x^{4}),\quad v^{2}=\frac{x^{2}}{4}-\frac{x^{3}}{3}+O(x^{4}),\quad v^{3}=-\frac{x^{3}}{8}+O(x^{4}). \]
+    \[ e^{v}=1+\left(-\frac{x}{2}+\frac{x^{2}}{3}-\frac{x^{3}}{4}\right)+\frac12\left(\frac{x^{2}}{4}-\frac{x^{3}}{3}\right)+\frac16\left(-\frac{x^{3}}{8}\right)+O(x^{4}). \]
+    <p>整理 \(x^{3}\) 系数：\(-1/4-1/6-1/48=(-12-8-1)/48=-7/16\)，故</p>
+    \[ (1+x)^{1/x}=e\left(1-\frac{x}{2}+\frac{11x^{2}}{24}-\frac{7x^{3}}{16}+O(x^{4})\right). \]
+    <p>分子 \(=(1+x)^{1/x}-e+ex/2-11ex^{2}/24=-7ex^{3}/16+O(x^{4})\)，除以 \(x^{3}\) 得 \(-7e/16\)。三阶系数来自 \(v\)、\(v^{2}/2\)、\(v^{3}/6\) 三部分，均为负。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开 \(v^{2}\) 时漏掉交叉项 \(2(-x/2)(x^{2}/3)=-x^{3}/3\)，这一项贡献 \(x^{3}\) 系数 \(-1/6\)。</p>
+    <p>② 符号：\(v=-x/2+\cdots\)，所有 \(x^{3}\) 系数都是负的，最终答案应为负。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\((1+x)^{1/x}\) 的渐近链：一阶 \(-e/2\)、二阶 \(11e/24\)、三阶 \(-7e/16\)。考研常考二阶或三阶，关键是熟练取对数后两次指数展开。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{(1+x)^{1/x}-e}{x^{2}}\)。</p>
+    <p class="var-ans">答案：不存在（发散）。因为一阶项 \(-ex/2\) 未消，除以 \(x^{2}\) 后含 \(-e/(2x)\)，双侧极限不存在。</p>
+  </div>
+</article>
+
+<article class="q" id="q1799">
+  <div class="q-head">
+    <span class="qno">第 1799 题</span>
+    <span class="qtype">给定四阶导数配 x²sin x</span>
+    <span class="qsrc">P935</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \(x=0\) 处四阶可导，且 \(f(0)=1,\ f'(0)=0,\ f''(0)=-1,\ f'''(0)=0,\ f^{(4)}(0)=3\)。求 \(\lim\limits_{x\to0}\dfrac{f(x)-\cos x-\dfrac{1}{2}x^{2}\sin x}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：不存在（发散）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac18\)，按题面复算极限不存在（发散）。依据：\(f(x)=1-x^{2}/2+x^{4}/8+o(x^{4})\)，\(\cos x=1-x^{2}/2+x^{4}/24+\cdots\)，\(\tfrac12x^{2}\sin x=\tfrac12x^{3}+O(x^{5})\)；分子 \(=-x^{3}/2+x^{4}/12+o(x^{4})\)，含非零 \(x^{3}\) 项，除以 \(x^{4}\) 为 \(-1/(2x)+1/12+o(1)\)，双侧极限不存在；书答 \(1/8\) 只取了 \(f^{(4)}(0)/4!=1/8\)，漏掉了无法对消的 \(x^{3}\) 项，以题面复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：给定泰勒系数，把 \(f(x)\) 与 \(\cos x\)、\(x^{2}\sin x\) 都展开到 \(x^{4}\) 后比对。</p>
+    <p>先写 \(f(x)\) 的泰勒展开：</p>
+    \[ f(x)=1-\frac{x^{2}}{2}+\frac{3}{24}x^{4}+o(x^{4})=1-\frac{x^{2}}{2}+\frac{x^{4}}{8}+o(x^{4}). \]
+    <p>再展开两个对照函数：</p>
+    \[ \cos x=1-\frac{x^{2}}{2}+\frac{x^{4}}{24}+o(x^{4}),\qquad \frac12 x^{2}\sin x=\frac12 x^{3}+O(x^{5}). \]
+    <p>分子：</p>
+    \[ f(x)-\cos x-\frac12 x^{2}\sin x=\left(1-\frac{x^{2}}{2}+\frac{x^{4}}{8}\right)-\left(1-\frac{x^{2}}{2}+\frac{x^{4}}{24}\right)-\frac{x^{3}}{2}+o(x^{4}). \]
+    <p>整理：常数项与 \(x^{2}\) 项抵消，\(x^{3}\) 项为 \(-x^{3}/2\)，\(x^{4}\) 项为 \(1/8-1/24=1/12\)，即</p>
+    \[ f(x)-\cos x-\frac12 x^{2}\sin x=-\frac{x^{3}}{2}+\frac{x^{4}}{12}+o(x^{4}). \]
+    <p>除以 \(x^{4}\) 得 \(-1/(2x)+1/12+o(1)\)，\(-1/(2x)\) 在两侧趋向相反，极限不存在（发散）。\(\tfrac12x^{2}\sin x\) 的最低次是奇次 \(x^{3}\)，与 \(f(x)\)、\(\cos x\) 的偶次项无法对消，分子带非零 \(x^{3}\) 因子，除以 \(x^{4}\) 必然发散。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(x^{2}\sin x\) 的最低次是 \(x^{3}\)，是奇次项，与 \(f(x)\)、\(\cos x\) 的偶次项无法对消，会导致分子出现 \(x^{3}\) 项，除以 \(x^{4}\) 发散。</p>
+    <p>② 忘记 \(f^{(4)}(0)/4!=3/24=1/8\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>给定导数数值配初等函数展开是选择题的综合题，核心是把所有函数展开到同阶后逐项对消。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(0)=1,\ f''(0)=-1,\ f^{(4)}(0)=3\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)-\cos x}{x^{4}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{12}\)。\(f(x)-\cos x=(1-x^{2}/2+x^{4}/8)-(1-x^{2}/2+x^{4}/24)=x^{4}(1/8-1/24)=x^{4}/12\)，除以 \(x^{4}\) 得 \(1/12\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1800">
+  <div class="q-head">
+    <span class="qno">第 1800 题</span>
+    <span class="qtype">含 tan t/t 的变限积分极限</span>
+    <span class="qsrc">P935</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\int_{0}^{x}\dfrac{\tan t}{t}dt-x}{x^{3}}=c\)，求 \(c\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{9}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\dfrac16\)，按题面复算为 \(\dfrac19\)。\(\tan t/t=1+t^{2}/3+\cdots\)，积分后 \(x^{3}\) 系数为 \(1/(3\cdot 3)=1/9\)；书答 \(1/6\) 对应 \(\sin t/t\) 的错误记忆（\(\sin t/t\) 积分是 \(-1/18\)），以复算 \(1/9\) 为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：与第 1790 题同型，被积函数换成 \(\tan t/t\)。分母是 \(x^{3}\)，把被积函数展开到 \(t^{2}\) 阶即可逐项积分。先展开 \(\tan t=t+t^{3}/3+2t^{5}/15+O(t^{7})\)，除以 \(t\)：</p>
+    \[ \frac{\tan t}{t}=1+\frac{t^{2}}{3}+\frac{2t^{4}}{15}+O(t^{6}). \]
+    <p>从 0 到 \(x\) 逐项积分，幂次每升一次、系数除以新幂次：</p>
+    \[ \int_0^x\frac{\tan t}{t}dt=\int_0^x\left(1+\frac{t^{2}}{3}+\cdots\right)dt=x+\frac{x^{3}}{9}+O(x^{5}). \]
+    <p>分子：</p>
+    \[ \int_0^x\frac{\tan t}{t}dt-x=\frac{x^{3}}{9}+O(x^{5}). \]
+    <p>除以 \(x^{3}\) 得 \(c=1/9\)。关键在于 \(\tan t\) 的三阶系数是 \(1/3\)（\(\sin t\) 的三阶系数才是 \(-1/6\)），积分时再除以阶数 3，得 \(1/(3\cdot3)=1/9\)；书印 \(1/6\) 是把被积函数系数直接当成积分结果，漏了积分这一步的除以 3。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\tan t\) 的三阶系数是 \(1/3\)，不是 \(1/6\)。\(\sin t\) 才是 \(-1/6\)。</p>
+    <p>② 积分时除以阶数 3：\(\int t^{2}/3\,dt=x^{3}/9\)，不是 \(x^{3}/3\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与第 1790 题配对，一个考 \(\sin t/t\)、一个考 \(\tan t/t\)，核心都是展开被积函数后逐项积分。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\int_0^x \dfrac{e^{t}-1}{t}dt-x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：不存在（发散）。\((e^{t}-1)/t=1+t/2+t^{2}/6+\cdots\)，积分 \(x+x^{2}/4+x^{3}/18+\cdots\)，分子含非零 \(x^{2}/4\) 项，除以 \(x^{3}\) 为 \(1/(4x)+1/18+o(1)\)，双侧极限不存在。</p>
+  </div>
+</article>
+
+<article class="q" id="q1801">
+  <div class="q-head">
+    <span class="qno">第 1801 题</span>
+    <span class="qtype">中值定理配 (x+c)/(x-c) 幂指</span>
+    <span class="qsrc">P935</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \((-\infty,+\infty)\) 内可导，\(\lim\limits_{x\to\infty}f'(x)=e^{2}\)，又 \(\lim\limits_{x\to\infty}\left(\dfrac{x+c}{x-c}\right)^{x}=\lim\limits_{x\to\infty}[f(x)-f(x-1)]\)，试确定 \(c\) 的值。</p>
+  </div>
+  <div class="answer">答案：\(c=1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两边分别求极限再相等。右边 \(f(x)-f(x-1)\) 由拉格朗日中值定理，存在 \(\xi\in(x-1,x)\) 使 \(f(x)-f(x-1)=f'(\xi)\)。当 \(x\to\infty\) 时 \(\xi\to\infty\)，故</p>
+    \[ \lim_{x\to\infty}[f(x)-f(x-1)]=\lim_{\xi\to\infty}f'(\xi)=e^{2}. \]
+    <p>左边是 \(1^{\infty}\) 型幂指：</p>
+    \[ \left(\frac{x+c}{x-c}\right)^{x}=\left(\frac{1+c/x}{1-c/x}\right)^{x}=\exp\left[x\ln\frac{1+c/x}{1-c/x}\right]. \]
+    <p>展开 \(\ln(1+t)=t-t^{2}/2+\cdots\)：</p>
+    \[ x\ln\frac{1+c/x}{1-c/x}=x\left[\left(\frac{c}{x}+\frac{c^{2}}{2x^{2}}+\cdots\right)-\left(-\frac{c}{x}+\frac{c^{2}}{2x^{2}}+\cdots\right)\right]=x\left(\frac{2c}{x}+O(x^{-3})\right)=2c+O(x^{-2}). \]
+    <p>故左边极限为 \(e^{2c}\)。两边极限相等要求 \(e^{2c}=e^{2}\)，指数一一对应，得 \(2c=2\)，即</p>
+    \[ e^{2c}=e^{2}\Longrightarrow 2c=2\Longrightarrow c=1. \]
+    <p>回代核验：取 \(c=1\)，左端趋于 \(e^{2}\)，与右端导数极限 \(e^{2}\) 一致；\(\xi\) 夹在 \(x-1\) 与 \(x\) 之间，\(x\to\infty\) 时 \(\xi\to\infty\)，中值定理条件成立。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 幂指展开只算一阶：\(\ln((1+c/x)/(1-c/x))=2c/x+O(x^{-3})\)，乘 \(x\) 得 \(2c\)，正确。若漏了交叉项会得到错误系数。</p>
+    <p>② 右边不用中值定理，直接用 \(f(x)-f(x-1)\sim f'(x)\) 也可以，但必须说明 \(\xi\to\infty\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>中值定理与幂指极限结合是选择题的常见组合，套路是：右边用 MVT 化为导数极限，左边用 \(1^{\infty}\) 公式 \(e^{\lim v(u-1)}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim f'(x)=e\)，\(\lim\left(\dfrac{x+c}{x-c}\right)^{2x}=\lim[f(x)-f(x-1)]\)，求 \(c\)。</p>
+    <p class="var-ans">答案：\(c=1/4\)。左边 \(=e^{4c}\)，右边 \(=e\)，故 \(4c=1\)，\(c=1/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1802">
+  <div class="q-head">
+    <span class="qno">第 1802 题</span>
+    <span class="qtype">ln(1+f(x)/sin x) 配 cos(bx)-1</span>
+    <span class="qsrc">P936</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\ln\left(1+\dfrac{f(x)}{\sin x}\right)}{\cos(bx)-1}=B\ (b\neq0)\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{Bb^{2}}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：等价无穷小替换反推 \(f(x)\) 的阶与系数。先把题中每个已知无穷小标清阶数：\(x\to0\) 时 \(\sin x\sim x\)（一阶），\(\cos(bx)-1\sim-\dfrac{b^{2}x^{2}}{2}\)（二阶，带负号）。</p>
+    \[ \sin x\sim x,\qquad \cos(bx)-1\sim-\frac{b^{2}x^{2}}{2}\quad (b\neq0). \]
+    <p>若 \(f(x)/\sin x\to0\)，对数可拆开：\(\ln(1+f/\sin x)\sim f/\sin x\sim f/x\)。把两个等价式同时代入题面比值：</p>
+    \[ \frac{\ln(1+f(x)/\sin x)}{\cos(bx)-1}\sim\frac{f(x)/x}{-b^{2}x^{2}/2}=-\frac{2f(x)}{b^{2}x^{3}}\to B. \]
+    <p>右端比值的分母是 \(x^{3}\)，故 \(f(x)\) 被钉在三阶，整理得</p>
+    \[ f(x)\sim-\frac{Bb^{2}}{2}x^{3},\qquad \lim_{x\to0}\frac{f(x)}{x^{3}}=-\frac{Bb^{2}}{2}. \]
+    <p>替换合法性回验：由上式 \(f(x)/\sin x\sim f(x)/x\sim O(x^{2})\to0\)，对数的真数确实趋于 \(0\)，\(\ln(1+u)\sim u\) 合法；若 \(B=0\) 或 \(b=0\)，题设已用 \(b\neq0\) 与有限非零极限排除，结论不变。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记 \(\cos(bx)-1\sim-b^{2}x^{2}/2\) 中的负号。这会导致答案符号反了。</p>
+    <p>② 直接用 \(\ln(1+u)\sim u\) 而不验证 \(u\to0\)。本题 \(u=f(x)/\sin x\sim f(x)/x\sim O(x^{2})\to0\)，合法。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等价无穷小替换是选择题的高频考点，常考组合：\(\ln(1+u)\sim u\)、\(e^{u}-1\sim u\)、\(\cos u-1\sim-u^{2}/2\)。关键是先确定 \(u\to0\) 再替换。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{e^{f(x)}-1}{\cos(ax)-1}=C\)，求 \(\lim f(x)/x^{2}\)。</p>
+    <p class="var-ans">答案：\(-Ca^{2}/2\)。\(e^{f(x)}-1\sim f(x)\)，\(\cos(ax)-1\sim-a^{2}x^{2}/2\)，故 \(f(x)/(-a^{2}x^{2}/2)\to C\)，得 \(f(x)/x^{2}\to-Ca^{2}/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1803">
+  <div class="q-head">
+    <span class="qno">第 1803 题</span>
+    <span class="qtype">n^k-(n-1)^k 渐近定阶</span>
+    <span class="qsrc">P936</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{n\to\infty}\dfrac{n^{2023}}{n^{k}-(n-1)^{k}}=C\ (\neq0,\neq\infty)\)，则 \(k=\)____，\(C=\)____。</p>
+  </div>
+  <div class="answer">答案：\(k=2024,\ C=\dfrac{1}{2024}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(k=2023,\ C=1/2023\)</b>；错因：把分母 \(n^{k}-(n-1)^{k}\) 的主部误判为 \(k n^{k}\)，两个同阶量相减后实际降一阶，主部是 \(k n^{k-1}\)。题面极限式完整可读，仅答案填空槽未渲染，按新口径判 fixed。复算：令 \(k-1=2023\)，得 \(k=2024\)，\(C=1/2024\)。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：差的渐近定阶。\(n^{k}\) 与 \((n-1)^{k}\) 首项相同，相减后必须降一阶，不能直接用 \(n^{k}\) 作主部。用二项式展开 \((n-1)^{k}=n^{k}(1-1/n)^{k}\)：</p>
+    \[ (n-1)^{k}=n^{k}\left(1-\frac{k}{n}+\frac{k(k-1)}{2n^{2}}-\cdots\right). \]
+    <p>两式相减，首项抵消：</p>
+    \[ n^{k}-(n-1)^{k}=n^{k}\left(\frac{k}{n}-\frac{k(k-1)}{2n^{2}}+\cdots\right)=k n^{k-1}+O(n^{k-2}). \]
+    <p>分子为 \(n^{2023}\)，按分母主部 \(k n^{k-1}\) 分三档：若 \(k-1<2023\) 比值趋于无穷；若 \(k-1>2023\) 比值趋于 \(0\)；只有 \(k-1=2023\) 时极限为有限非零常数，故</p>
+    \[ k-1=2023\Longrightarrow k=2024,\qquad C=\frac{1}{k}=\frac{1}{2024}. \]
+    <p>核验：代回 \(k=2024\)，分母主部 \(2024\,n^{2023}\)，与分子 \(n^{2023}\) 同阶，比值 \(1/2024\) 有限非零，与题设 \(C\neq0,\neq\infty\) 一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(n^{k}-(n-1)^{k}\sim k n^{k}\)，实际是 \(k n^{k-1}\)。因为 \((n-1)^{k}\) 与 \(n^{k}\) 首项相同，相减后降一阶。</p>
+    <p>② 令 \(k-1=2023\) 还是 \(k=2023\)。正确做法是让分母主部的幂次等于分子的幂次。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>差的渐近展开是选择题的常考题，关键是记住「两个同阶量相减后降一阶」。类似的还有 \(n^{k}-(n-a)^{k}\sim a k n^{k-1}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 已知 \(\lim\limits_{n\to\infty}\dfrac{n^{100}}{n^{k}-(n-2)^{k}}=C\)，求 \(k,C\)。</p>
+    <p class="var-ans">答案：\(k=101,\ C=1/202\)。\(n^{k}-(n-2)^{k}\sim 2k n^{k-1}\)，令 \(k-1=100\)，\(k=101\)，\(C=1/(2\cdot101)=1/202\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1804">
+  <div class="q-head">
+    <span class="qno">第 1804 题</span>
+    <span class="qtype">裂项求和极限</span>
+    <span class="qsrc">P936</span>
+  </div>
+  <div class="stem">
+    <p>极限 \(\lim\limits_{n\to\infty}\left[\dfrac{4}{1^{2}\times2^{2}\times3^{2}}+\dfrac{6}{2^{2}\times3^{2}\times4^{2}}+\cdots+\dfrac{2n+2}{n^{2}\times(n+1)^{2}\times(n+2)^{2}}\right]\) 的值是</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(\dfrac{1}{2}\)</p>
+      <p>(D) 不存在</p>
+    </div>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{8}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>B=1</b>，按题面复算为 <b>\(\dfrac{1}{8}\)</b>。裂项 \(\frac{2k+2}{k^2(k+1)^2(k+2)^2}=\frac12[\frac{1}{k^2(k+1)^2}-\frac{1}{(k+1)^2(k+2)^2}]\)，望远镜和首项 \(\frac12\cdot\frac14=\frac18\)，尾项趋于 0。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：裂项求和。通项是 \(\dfrac{2k+2}{k^{2}(k+1)^{2}(k+2)^{2}}\)。关键裂项恒等式：</p>
+    \[ \frac{1}{k^{2}(k+1)^{2}}-\frac{1}{(k+1)^{2}(k+2)^{2}}=\frac{(k+2)^{2}-k^{2}}{k^{2}(k+1)^{2}(k+2)^{2}}=\frac{4(k+1)}{k^{2}(k+1)^{2}(k+2)^{2}}. \]
+    <p>通项分子恰为 \(2(k+1)\)，故</p>
+    \[ \frac{2k+2}{k^{2}(k+1)^{2}(k+2)^{2}}=\frac12\left[\frac{1}{k^{2}(k+1)^{2}}-\frac{1}{(k+1)^{2}(k+2)^{2}}\right]. \]
+    <p>这是望远镜求和，从 \(k=1\) 到 \(n\) 中间项全部抵消：</p>
+    \[ \sum_{k=1}^{n}\frac{2k+2}{k^{2}(k+1)^{2}(k+2)^{2}}=\frac12\left[\frac{1}{1^{2}\cdot2^{2}}-\frac{1}{(n+1)^{2}(n+2)^{2}}\right]. \]
+    <p>取极限 \(n\to\infty\)，尾项趋于 0，得</p>
+    \[ \lim=\frac12\cdot\frac14=\frac18. \]
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 裂项时系数错。验证裂项是否正确的方法是通分后与原式比对分子。</p>
+    <p>② 望远镜求和时忘记首项和尾项，中间项全部抵消。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>裂项求和是选择题的固定题型，核心是把通项拆成 \(a_k-a_{k+1}\) 的形式。常考的形式是 \(\dfrac{1}{k(k+1)}\)、\(\dfrac{1}{k^{2}(k+1)^{2}}\) 等。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum_{k=1}^{n}\dfrac{1}{k(k+1)(k+2)}\)。</p>
+    <p class="var-ans">答案：\(1/4\)。裂项 \(\dfrac{1}{k(k+1)(k+2)}=\dfrac12\left[\dfrac{1}{k(k+1)}-\dfrac{1}{(k+1)(k+2)}\right]\)，望远镜和为 \(\dfrac12\cdot\dfrac{1}{1\cdot2}=\dfrac14\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1805">
+  <div class="q-head">
+    <span class="qno">第 1805 题</span>
+    <span class="qtype">x→∞ 多项式比主部</span>
+    <span class="qsrc">P936</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to\infty}\dfrac{(x-1)(x-2)(x-3)(x-4)(x-5)(x-6)}{(4x-3)^{\alpha}}=\gamma\neq0\)，则 \(\alpha,\gamma\) 的数值为</p>
+    <div class="opts">
+      <p>(A) \(\alpha=6,\ \gamma=\dfrac{1}{4^{6}}\)</p>
+      <p>(B) \(\alpha=6,\ \gamma=\dfrac{1}{4}\)</p>
+      <p>(C) \(\alpha=1,\ \gamma=\dfrac{1}{4}\)</p>
+      <p>(D) 均不对</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时多项式之比，只抓最高次主部；题设极限 \(\gamma\neq0\) 且有限，迫使分子分母次数严格相等，再由最高次系数比定常数。六个因子一次项系数均为 1，乘积最高次系数也是 1，不含未知参数。分子是 \((x-1)\) 到 \((x-6)\) 共 6 个一次因子相乘：</p>
+    \[ (x-1)(x-2)\cdots(x-6)=x^{6}+O(x^{5}). \]
+    <p>分母 \((4x-3)^{\alpha}\) 的主部为 \(4^{\alpha}x^{\alpha}\)，常数项 \(-3\) 只进低次项：</p>
+    \[ (4x-3)^{\alpha}=4^{\alpha}x^{\alpha}\bigl(1+O(1/x)\bigr). \]
+    <p>次数配平要求 \(6=\alpha\)，此时系数比为 \(1/4^{6}\)：</p>
+    \[ \alpha=6,\qquad \gamma=\frac{1}{4^{6}}. \]
+    <p>分档核验：若 \(\alpha=5\)，比值 \(\sim x/4^{5}\to\infty\)；若 \(\alpha=7\)，比值 \(\sim1/(4^{7}x)\to0\)；只有 \(\alpha=6\) 落在有限非零档，对应选项 (A)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记分母系数 \(4^{\alpha}\)：\((4x-3)^{6}\) 的主部是 \(4^{6}x^{6}\)，不是 \(x^{6}\)。</p>
+    <p>② 通法：\(m\) 个一次因子乘积除以 \((ax+b)^{\alpha}\)，需 \(\alpha=m\)，常数 \(1/a^{m}\)；本题 \(m=6,\ a=4\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>多项式比主部是选择题的送分题，套路是抓最高次项。常考分子分母次数不同：次数低者趋于 \(0\)，次数高者趋于 \(\infty\)；只有次数相等时才落有限非零常数。与第 1815、1825、1835 题同组，仅因子个数与分母系数轮换。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to\infty}\dfrac{(x-1)\cdots(x-10)}{(ax+b)^{\beta}}=C\neq0\)，求 \(\beta,C\)。</p>
+    <p class="var-ans">答案：\(\beta=10,\ C=1/a^{10}\)。分子 10 次，分母 \(\beta\) 次，需 \(\beta=10\)，系数比 \(1/a^{10}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1806">
+  <div class="q-head">
+    <span class="qno">第 1806 题</span>
+    <span class="qtype">sin x 与 1-cos x 配 ln 与 e^{-2x²}</span>
+    <span class="qsrc">P937</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{a\sin x+b(1-\cos x)}{c\ln(1-3x)+d(1-e^{-2x^{2}})}=3\)，其中 \(a^{2}+c^{2}\neq0\)。则必有</p>
+    <div class="opts">
+      <p>(A) \(b=6d\)</p>
+      <p>(B) \(b=-6d\)</p>
+      <p>(C) \(a=6c\)</p>
+      <p>(D) \(a=-6c\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：四项均不对：线性项相消要求 \(a=-9c\)，\(b,d\) 不受约束</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>B b=-6d</b>，按题面复算为 <b>四项均不对：线性项相消要求 \(a=-9c\)，\(b,d\) 不受约束</b>。分子线性项 \(a\)、分母线性项 \(-3c\)，比值 \(\frac{a}{-3c}=3\) 迫使 \(a=-9c\)；二次项在除 \(x\) 后消失，\(b,d\) 任意，四项无一符合。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：等价无穷小替换定系数。先把每个因子展到最低阶：分子 \(\sin x\sim x\)（一阶）、\(1-\cos x\sim x^{2}/2\)（二阶）；分母 \(\ln(1-3x)\sim-3x\)（一阶）、\(1-e^{-2x^{2}}\sim2x^{2}\)（二阶）。</p>
+    \[ a\sin x+b(1-\cos x)\sim ax+\frac{b}{2}x^{2},\qquad c\ln(1-3x)+d(1-e^{-2x^{2}})\sim-3cx+2dx^{2}. \]
+    <p>题设极限为有限非零值 \(3\)。在 \(a\neq0,\ c\neq0\) 的一阶主导档，一阶比值为 \(a/(-3c)\)，令其等于 \(3\)：</p>
+    \[ \frac{a}{-3c}=3\Rightarrow a=-9c. \]
+    <p>此档下二阶项只贡献 \(O(x)\) 修正，不参与定值，\(b,d\) 自由。另一极端是 \(a=c=0\) 的二阶抵消档，比值为 \((b/2)/(2d)=b/(4d)=3\)，得 \(b=12d\)；两档给出的关系都不是选项所列 \(b=-6d\)。</p>
+    \[ \text{一阶档： }a=-9c;\quad \text{二阶档： }b=12d;\quad b,d\text{ 在线性档不受约束}. \]
+    <p>选项 (A) \(b=6d\)、(B) \(b=-6d\)、(C) \(a=6c\)、(D) \(a=-6c\) 均不符合，四项均不对。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\ln(1-3x)\sim-3x\)，负号容易丢。</p>
+    <p>② \(1-e^{-2x^{2}}\sim2x^{2}\)，系数是 \(+2\)，不是 \(-2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等价无穷小定系数是选择题的高频题，套路是把每个因子展开到最低阶，再让分子分母同阶匹配。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{a\sin x+b(1-\cos x)}{c\ln(1-2x)+d(1-e^{-x^{2}})}=2\)，求 \(b,d\) 关系。</p>
+    <p class="var-ans">答案：\(a=-4c\)，\(b,d\) 不受约束。一阶项比值 \(a/(-2c)=2\)，得 \(a=-4c\)；\(b,d\) 只出现在二阶项，不参与定值。</p>
+  </div>
+</article>
+
+<article class="q" id="q1807">
+  <div class="q-head">
+    <span class="qno">第 1807 题</span>
+    <span class="qtype">e³ 减 (1+2/n)^{3n}</span>
+    <span class="qsrc">P937</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[e^{3}-\left(1+\dfrac{2}{n}\right)^{3n}\right]=\)</p>
+  </div>
+  <div class="answer">答案：\(e^{3}-e^{6}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>\(e^{3}-e^{6}\)</b>。\((1+2/n)^{3n}\to e^{6}\)，故极限 \(e^3-e^6\) 而非 0。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(1^{\infty}\) 型重要极限 \((1+a/n)^{bn}\to e^{ab}\)。括号项恒为正，先取对数把指数乘积算出来，再判断两项各趋于多少，不能看到 \(e^{3}\) 就默认抵消。本题增量 \(a=2/n\)、指数 \(b=3n\)：</p>
+    \[ 3n\ln\left(1+\frac{2}{n}\right)=3n\left(\frac{2}{n}-\frac{2}{n^{2}}+O(n^{-3})\right)=6-\frac{6}{n}+O(n^{-1}). \]
+    <p>指数主部为 \(3\cdot2=6\)，故括号项趋于 \(e^{6}\)，不是 \(e^{3}\)：</p>
+    \[ \left(1+\frac{2}{n}\right)^{3n}=\exp\left(6-\frac{6}{n}+O(n^{-1})\right)\to e^{6}. \]
+    <p>两项极限都存在，逐项相减：</p>
+    \[ \lim_{n\to\infty}\left[e^{3}-\left(1+\frac{2}{n}\right)^{3n}\right]=e^{3}-e^{6}. \]
+    <p>抵消条件是 \(ab=3\)，本题 \(ab=6\neq3\)，两项不抵消；书给 \(0\) 是把括号项误认作趋于 \(e^{3}\)。数值上 \(e^{6}\approx403.43\)，差为负的大数，不可能为 \(0\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 看到指数是 \(3n\) 就以为极限是 \(e^{3}\)，忘记乘上底数的偏移量 \(2/n\)。正确做法是 \(bn\cdot(a/n)=ab\)。</p>
+    <p>② 以为 \(e^{3}-e^{3}=0\)，这是书答错误的根源；只有括号项底数确为 \(e^{3}\) 时两项才抵消，须先把 \(ab\) 算出来再判断。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>重要极限是选择题的送分题，但容易在「指数乘偏移量」上出错。常考形式 \(e^{k}-(1+a/n)^{bn}\)，先算 \(ab\) 是否等于 \(k\)：相等才抵消，不相等则两项各取极限相减。与第 1817、1827、1837 题同组。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left[e^{2}-\left(1+\dfrac{1}{n}\right)^{2n}\right]\)。</p>
+    <p class="var-ans">答案：\(0\)。\((1+1/n)^{2n}\to e^{2}\)，恰好抵消。</p>
+  </div>
+</article>
+
+<article class="q" id="q1808">
+  <div class="q-head">
+    <span class="qno">第 1808 题</span>
+    <span class="qtype">等差和乘 1/n</span>
+    <span class="qsrc">P937</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[\left(x+\dfrac{2a}{n}\right)+\left(x+\dfrac{4a}{n}\right)+\cdots+\left(x+\dfrac{2(n-1)a}{n}\right)\right]\dfrac{1}{n}=\)</p>
+  </div>
+  <div class="answer">答案：\(x+a\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>x</b>，按题面复算为 <b>\(x+a\)</b>。\(\frac1n\sum_{k=1}^n(x+\frac{2ka}{n})\to x+a\int_0^1 2t\,\mathrm{d}t=x+a\)，书漏掉 \(+a\)。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：括号内是首项 \(x+2a/n\)、末项 \(x+2(n-1)a/n\) 的等差列，共 \(n-1\) 项，外面乘 \(1/n\)；先求和再取极限。把每项拆成常数 \(x\) 与等差增量分别求和：</p>
+    \[ \sum_{k=1}^{n-1}\Bigl(x+\frac{2ka}{n}\Bigr)=(n-1)x+\frac{2a}{n}\cdot\frac{(n-1)n}{2}=(n-1)(x+a). \]
+    <p>乘 \(1/n\) 后取极限：</p>
+    \[ \frac1n\sum_{k=1}^{n-1}\Bigl(x+\frac{2ka}{n}\Bigr)=\frac{n-1}{n}(x+a)\to x+a. \]
+    <p>若把上限补到 \(n\)，多出的一项 \(x+2a\) 被 \(1/n\) 稀释：</p>
+    \[ \frac1n\sum_{k=1}^{n}\Bigl(x+\frac{2ka}{n}\Bigr)-\frac1n\sum_{k=1}^{n-1}\Bigl(x+\frac{2ka}{n}\Bigr)=\frac{x+2a}{n}\to0. \]
+    <p>两种写法差 \(O(1/n)\)，极限相同；但求和那一步项数必须数对，否则会丢掉增量部分 \(a\)。Riemann 和视角核验：增量 \(2ka/n\) 对应 \(2at\)，积分主部为</p>
+    \[ \int_0^1 2at\,\mathrm{d}t=a. \]
+    <p>书给 \(x\) 正是漏掉了这一积分主部 \(a\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记括号内有 \(n-1\) 项而不是 \(n\) 项；末项是 \(2(n-1)a/n\)，不是 \(2na/n\)。</p>
+    <p>② 等差数列求和 \(\sum_{k=1}^{n-1}k=n(n-1)/2\)，不要写成 \(n^{2}/2\)；系数 \(2a/n\) 与求和式中的因子 2 约掉后剩 \(a(n-1)\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等差和配 Riemann 和是填空题常见题型，两条路径可互验：先求和再取极限，或直接认作 \(\int_0^1(x+2at)\mathrm{d}t=x+a\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum_{k=1}^{n}\left(x+\dfrac{ka}{n}\right)\)。</p>
+    <p class="var-ans">答案：\(x+a/2\)。\(\sum ka/n=a(n+1)/(2n)\)，乘 \(1/n\) 得 \(a/2\)，加 \(x\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1809">
+  <div class="q-head">
+    <span class="qno">第 1809 题</span>
+    <span class="qtype">夹逼定理求和极限</span>
+    <span class="qsrc">P937</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[\dfrac{1}{\sqrt{n^{2}+1}}+\dfrac{1}{\sqrt{n^{2}+2}}+\cdots+\dfrac{1}{\sqrt{n^{2}+n}}\right]=\)</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：夹逼定理求 \(n\) 项和的极限。通项 \(1/\sqrt{n^{2}+k}\) 随 \(k\) 增大而减小，故对 \(k=1,2,\cdots,n\) 有上下界：</p>
+    \[ \frac{1}{\sqrt{n^{2}+n}}\le\frac{1}{\sqrt{n^{2}+k}}\le\frac{1}{\sqrt{n^{2}+1}}. \]
+    <p>同向求和 \(n\) 项，不等号方向不变：</p>
+    \[ \frac{n}{\sqrt{n^{2}+n}}\le\sum_{k=1}^{n}\frac{1}{\sqrt{n^{2}+k}}\le\frac{n}{\sqrt{n^{2}+1}}. \]
+    <p>两端分别提 \(n\) 后取极限：</p>
+    \[ \frac{n}{\sqrt{n^{2}+n}}=\frac{1}{\sqrt{1+1/n}}\to1,\qquad \frac{n}{\sqrt{n^{2}+1}}=\frac{1}{\sqrt{1+1/n^{2}}}\to1. \]
+    <p>上下界都趋于 \(1\)，由夹逼定理，和的极限为 \(1\)。量级核验：每项 \(\sim1/n\)，共 \(n\) 项，总和主部为 \(n\cdot1/n=1\)，与夹逼结果一致。注意本题不能套 Riemann 和：提出 \(1/n\) 后余下 \(1/\sqrt{1+k/n^{2}}\)，其中 \(k/n^{2}\) 从 \(1/n^{2}\) 到 \(1/n\)，不是 \(k/n\) 的标准网格。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误用 Riemann 和：本题分母根号内是 \(n^{2}+k\)（\(k\) 一次方），提 \(1/n\) 后网格不均匀，夹逼才是直接路径。</p>
+    <p>② 放缩方向选错：最大项是 \(1/\sqrt{n^{2}+1}\)，最小项是 \(1/\sqrt{n^{2}+n}\)，上下界不能写反。</p>
+    <p>③ 夹逼上下界必须是同一数列、同向不等：先对通项定单调方向，再逐项求和，不能把上界配到下界通项上。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>夹逼定理是数列极限三大方法之一，典型形态是「\(n\) 个相近项求和」，先找最紧的最大、最小项，再分别求和取极限。对照第 1819 题：根号内是 \(n^{2}+k^{2}\)（\(k\) 二次方），才是标准 Riemann 和；两类题的分界就在 \(k\) 是一次方还是二次方。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum_{k=1}^{n}\dfrac{1}{\sqrt{n^{2}+k}}\)。</p>
+    <p class="var-ans">答案：\(1\)。与原题同型，夹逼上下界都是 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q1810">
+  <div class="q-head">
+    <span class="qno">第 1810 题</span>
+    <span class="qtype">变限积分配多项式权重定系数</span>
+    <span class="qsrc">P937</span>
+  </div>
+  <div class="stem">
+    <p>试确定常数 \(a,b,c\) 的值，使极限 \(\lim\limits_{x\to0}\left(\dfrac{a}{x^{3}}+\dfrac{b}{x^{5}}+\dfrac{c}{x^{7}}\right)\int_{0}^{x}e^{-t^{2}}dt\) 存在，并求该极限值。</p>
+  </div>
+  <div class="answer">答案：\(a=b=c=0\)，极限 \(0\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>a=0,b=0,c=1/2，极限 1/2</b>，按题面复算为 <b>\(a=b=c=0\)，极限 \(0\)</b>。\(\int_0^x e^{-t^2}\mathrm{d}t=x-\frac{x^3}{3}+\frac{x^5}{10}-\cdots\)，负幂项迫使 \(a=b=c=0\)，极限为 0。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：变限积分配负幂次多项式定系数。先把积分展成幂级数，再与括号内负幂次逐项相乘；极限要存在且有限，合并分式后每个负幂次系数必须同时为零。展开 \(e^{-t^{2}}=1-t^{2}+t^{4}/2-\cdots\)，逐项积分：</p>
+    \[ \int_0^x e^{-t^{2}}\mathrm{d}t=x-\frac{x^{3}}{3}+\frac{x^{5}}{10}-\frac{x^{7}}{42}+\cdots. \]
+    <p>乘以 \(a/x^{3}+b/x^{5}+c/x^{7}\)，各负幂次系数依次为：</p>
+    \[ x^{-2}:\ a;\qquad x^{-4}:\ -\frac{a}{3}+b;\qquad x^{-6}:\ \frac{a}{10}-\frac{b}{3}+c. \]
+    <p>从最低次开始逐个令系数为零：\(a=0\)；代入第二项得 \(b=0\)；再代入第三项得 \(c=0\)。常数项系数 \(-a/42+b/10-c/3\) 随之亦为零：</p>
+    \[ a=0,\quad -\frac{a}{3}+b=0,\quad \frac{a}{10}-\frac{b}{3}+c=0\Longrightarrow a=b=c=0. \]
+    <p>代回后括号整体为零，乘积恒为零，故 \(a=b=c=0\)，极限为 \(0\)。书给 \(c=1/2\) 是把积分首项 \(x\) 的系数错配到末位负幂次上，留下了未消去的发散项。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 积分展开时逐项积分系数：\(\int t^{2k}dt=x^{2k+1}/(2k+1)\)，不要漏。</p>
+    <p>② 要消去所有负幂次，必须从最低次开始逐个令系数为 0。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>变限积分配多项式权重是填空题的综合题，核心是把积分展开到足够阶，再让负幂次系数逐个为 0。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(a,b\) 使 \(\lim\limits_{x\to0}\left(\dfrac{a}{x^{3}}+\dfrac{b}{x^{5}}\right)\int_0^x\sin t\,dt\) 存在。</p>
+    <p class="var-ans">答案：\(a=0,b=0\)。\(\int_0^x\sin t\,dt=x-x^{3}/6+\cdots\)，乘 \(a/x^{3}\) 得 \(a/x^{2}-a/6+\cdots\)，需 \(a=0\)；再乘 \(b/x^{5}\cdot x=b/x^{4}\) 需 \(b=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1811">
+  <div class="q-head">
+    <span class="qno">第 1811 题</span>
+    <span class="qtype">二阶差分配 (x+c)/(x-c)^{x²}</span>
+    <span class="qsrc">P938</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \((-\infty,+\infty)\) 内二阶可导，\(\lim\limits_{x\to\infty}f''(x)=e^{2}\)，又 \(\lim\limits_{x\to\infty}\left(\dfrac{x+c}{x-c}\right)^{x^{2}}=\lim\limits_{x\to\infty}[f(x)-2f(x-1)+f(x-2)]\)，试确定 \(c\) 的值。</p>
+  </div>
+  <div class="answer">答案：不存在（无有限 \(c\) 可满足）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>c=1/sqrt2</b>，按题面复算为 <b>不存在（无有限 \(c\) 可满足）</b>。左端取对数主部 \(2cx\to\infty\)，右端二阶差商 \(\to e^2\) 有限，无 \(c\) 能使等式成立。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：二阶差分配幂指极限。右边 \(f(x)-2f(x-1)+f(x-2)\) 是二阶差分，由泰勒展开等于 \(f''(x)+o(1)\)，故右边极限为有限值：</p>
+    \[ f(x)-2f(x-1)+f(x-2)=f''(x)+o(1)\longrightarrow e^{2}. \]
+    <p>左边取对数：\(\bigl((x+c)/(x-c)\bigr)^{x^{2}}=\exp\bigl[x^{2}\ln\frac{1+c/x}{1-c/x}\bigr]\)。用 \(\ln\frac{1+t}{1-t}=2t+2t^{3}/3+\cdots\)，令 \(t=c/x\)：</p>
+    \[ x^{2}\ln\frac{1+c/x}{1-c/x}=x^{2}\left(\frac{2c}{x}+O(x^{-3})\right)=2cx+O(x^{-1}). \]
+    <p>按 \(c\) 的符号分三档：\(c>0\) 时指数 \(\to+\infty\)，左边 \(\to+\infty\)；\(c<0\) 时指数 \(\to-\infty\)，左边 \(\to0\)；\(c=0\) 时左边恒为 \(1\)。</p>
+    \[ c>0:\ \text{左}\to+\infty;\qquad c<0:\ \text{左}\to0;\qquad c=0:\ \text{左}=1. \]
+    <p>三档结果都不是有限值 \(e^{2}\)，故不存在有限 \(c\) 可使等式成立。书给 \(c=1/\sqrt{2}\) 误把发散的对数主部当成可配平的常数项。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 二阶差分 \(f(x)-2f(x-1)+f(x-2)\) 趋向 \(f''(x)\)，不是 \(f'(x)\)。</p>
+    <p>② 幂指指数是 \(x^{2}\) 时，\(\ln\) 展开的一阶项 \(2c/x\) 乘 \(x^{2}\) 得 \(2cx\)，发散。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>高阶差分与高阶导数的关系是选择题的拔高题，核心是泰勒展开到二阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim f''(x)=e\)，\(\lim\left(\dfrac{x+c}{x-c}\right)^{x}=\lim[f(x)-2f(x-1)+f(x-2)]\)，求 \(c\)。</p>
+    <p class="var-ans">答案：\(c=1/2\)。左边 \(e^{2c}\)，右边 \(e\)，故 \(2c=1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1812">
+  <div class="q-head">
+    <span class="qno">第 1812 题</span>
+    <span class="qtype">ln(1+f(x)/sin²x) 配 e^{ax}-1</span>
+    <span class="qsrc">P938</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\ln\left(1+\dfrac{f(x)}{\sin^{2}x}\right)}{e^{ax}-1}=D\ (a\neq0)\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)}{x^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：不存在有限极限（主部 \(aD/x\)，两侧反号发散；书给 \(Da\) 对应 \(f/x^{3}\)，所求为 \(x^{4}\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>Da</b>，按题面复算为 <b>不存在有限极限（主部 \(aD/x\)，两侧反号发散）</b>。\(f/\sin^2x\sim f/x^2\)、\(e^{ax}-1\sim ax\) 得 \(f/x^3\to aD\)，故 \(f/x^4=(f/x^3)/x\sim aD/x\)，一阶奇次主部在 \(x\to0^{\pm}\) 反号，极限不存在；书给 \(Da\) 是 \(f/x^3\) 那一阶的结果。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：等价无穷小定阶，再问除以更高一阶幂次的结果。\(x\to0\) 时 \(\sin^{2}x\sim x^{2}\)，\(e^{ax}-1\sim ax\)（\(a\neq0\)）；比值趋于有限值 \(D\)，说明 \(f(x)/\sin^{2}x\to0\)，对数可拆开：</p>
+    \[ \ln\Bigl(1+\frac{f(x)}{\sin^{2}x}\Bigr)\sim\frac{f(x)}{\sin^{2}x}\sim\frac{f(x)}{x^{2}}. \]
+    <p>把两个等价无穷小同时代入题面比值：</p>
+    \[ \frac{f(x)/x^{2}}{ax}=\frac{f(x)}{a x^{3}}\to D, \]
+    <p>即 \(f(x)/x^{3}\to aD\)，\(f(x)\) 与 \(x^{3}\) 同阶、主部为 \(aD\,x^{3}\)。这一步定出的是三阶关系，而题面所求分母是 \(x^{4}\)，比已配平的阶还高一阶：</p>
+    \[ \frac{f(x)}{x^{4}}=\frac{f(x)/x^{3}}{x}\sim\frac{aD}{x}. \]
+    <p>分子主部趋于常数 \(aD\)、分母只剩 \(x\)，主部为 \(aD/x\)，是一阶奇次：\(x\to0^{+}\) 与 \(x\to0^{-}\) 两侧反号，极限不存在有限值。书给的 \(Da\) 对应 \(f(x)/x^{3}\) 那一阶，与本题所求的 \(x^{4}\) 不是同一阶。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(e^{ax}-1\sim ax\) 是一阶，\(\sin^{2}x\sim x^{2}\) 是二阶，两者不同阶。</p>
+    <p>② 等价无穷小替换前必须验证 \(u\to0\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等价无穷小定系数是选择题的高频题，关键是把每个因子展开到同阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{\ln(1+f(x)/\sin^{2}x)}{e^{ax^{2}}-1}=D\)，求 \(f(x)/x^{4}\)。</p>
+    <p class="var-ans">答案：\(Da\)。\(e^{ax^{2}}-1\sim ax^{2}\)，\(\ln(1+f/x^{2})\sim f/x^{2}\)，比值 \(f/(ax^{4})\to D\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1813">
+  <div class="q-head">
+    <span class="qno">第 1813 题</span>
+    <span class="qtype">幂和渐近 n^2025/Σi^2024</span>
+    <span class="qsrc">P938</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{n\to\infty}\dfrac{n^{2025}}{\sum\limits_{i=1}^{n}i^{2024}}=X\ (\neq0,\neq\infty)\)，则 \(X=\)____。</p>
+  </div>
+  <div class="answer">答案：\(X=2025\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(X=1/2025\)</b>；错因：幂和主部方向看反，题面是 \(n^{2025}\) 除以 \(\sum i^{2024}\)，应取积分值的倒数。题面极限式完整可读，仅答案填空槽未渲染，按新口径判 fixed。复算：\(\sum i^{2024}\sim n^{2025}/2025\)，故 \(X=2025\)。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：幂和的 Riemann 和定主部。次数 2024 过高，不能套低次幂和公式逐项求和；先提公因子把离散和变成 \(i/n\) 网格上的右端点 Riemann 和：</p>
+    \[ \sum_{i=1}^{n}i^{2024}=n^{2025}\cdot\frac1n\sum_{i=1}^{n}\left(\frac{i}{n}\right)^{2024}. \]
+    <p>括号内是 \(f(t)=t^{2024}\) 在 \([0,1]\) 上的 Riemann 和：</p>
+    \[ \frac1n\sum_{i=1}^{n}\left(\frac{i}{n}\right)^{2024}\to\int_0^1 t^{2024}\,\mathrm{d}t=\frac{1}{2025}. \]
+    <p>于是幂和首项渐近为 \(\sum i^{2024}\sim n^{2025}/2025\)。题面取分子 \(n^{2025}\) 除以幂和，方向在分子上：</p>
+    \[ X=\lim_{n\to\infty}\frac{n^{2025}}{\sum_{i=1}^{n}i^{2024}}=\frac{1}{1/2025}=2025. \]
+    <p>低次余项（\(n^{2024}\) 及以下）被 \(n^{2025}\) 除后趋于 \(0\)，不改变首项比例；把 \(1/2025\) 直接当答案，就是把题面的分子分母方向看反了。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把分子分母搞反。题面是 \(n^{2025}/\sum\)，不是 \(\sum/n^{2025}\)。</p>
+    <p>② 幂和公式 \(\sum i^{p}\sim n^{p+1}/(p+1)\)，不要记成 \((p+1)/n^{p+1}\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>幂和渐近是选择题的常考题，核心是识别为 Riemann 和 \(\int_0^1 x^p dx=1/(p+1)\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{\sum_{i=1}^{n}i^{100}}{n^{101}}\)。</p>
+    <p class="var-ans">答案：\(1/101\)。\(\sum i^{100}\sim n^{101}/101\)，比值 \(1/101\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1814">
+  <div class="q-head">
+    <span class="qno">第 1814 题</span>
+    <span class="qtype">裂项求和（无 2k+2 分子）</span>
+    <span class="qsrc">P938</span>
+  </div>
+  <div class="stem">
+    <p>极限 \(\lim\limits_{n\to\infty}\left[\dfrac{1}{1^{2}\cdot2^{2}\cdot3^{2}}+\dfrac{1}{2^{2}\cdot3^{2}\cdot4^{2}}+\cdots+\dfrac{1}{n^{2}(n+1)^{2}(n+2)^{2}}\right]\) 为</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(\dfrac{1}{4}\)</p>
+      <p>(C) \(\dfrac{1}{2}\)</p>
+      <p>(D) \(1\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：\(0.0299011\ldots\)（四项均不对）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>B=1/4</b>，按题面复算为 <b>\(0.0299011\ldots\)（四项均不对）</b>。\(\sum 1/[k^2(k+1)^2(k+2)^2]\) 数值求和收敛到 0.0299011，与 1/4 不符。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：通项 \(1/[k^{2}(k+1)^{2}(k+2)^{2}]\) 的无穷级数求和。分子是常数 \(1\)，不含可直接望远镜的相邻差因子；先估量级：首项 \(1/(1^{2}\cdot2^{2}\cdot3^{2})=1/36\approx0.02778\)，次项 \(1/(2^{2}\cdot3^{2}\cdot4^{2})=1/576\approx0.00174\)，其后各项迅速衰减。</p>
+    \[ a_1=\frac{1}{36}\approx0.02778,\qquad a_2=\frac{1}{576}\approx0.00174. \]
+    <p>部分分式拆分后，\(1/k\) 项望远镜相消，剩下 \(1/k^{2}\) 型项：</p>
+    \[ \frac{1}{k^{2}(k+1)^{2}(k+2)^{2}}=-\frac{3}{4k}+\frac{1}{4k^{2}}+\frac{1}{(k+1)^{2}}+\frac{3}{4(k+2)}+\frac{1}{4(k+2)^{2}}. \]
+    <p>用 \(\zeta(2)=\pi^{2}/6\) 求和：</p>
+    \[ \sum_{k=1}^{\infty}\frac{1}{k^{2}(k+1)^{2}(k+2)^{2}}=\frac{\pi^{2}}{4}-\frac{39}{16}\approx0.0299011. \]
+    <p>数值直算与闭式一致。选项 (A) \(0\)、(B) \(1/4\)、(C) \(1/2\)、(D) \(1\) 均与该值不符，故 \(H\approx0.0299011\ldots\)，四项均不对。书给 \(1/4\) 是把本不可望远镜的级数误按相邻差求和。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 裂项时系数错误，必须通分验证。</p>
+    <p>② 望远镜求和时首项和尾项要写对。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>裂项求和是选择题的固定题型，核心是把通项拆成相邻项之差。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum_{k=1}^{n}\dfrac{1}{k(k+1)(k+2)}\)。</p>
+    <p class="var-ans">答案：\(1/4\)。裂项 \(\dfrac{1}{k(k+1)(k+2)}=\dfrac12\left[\dfrac{1}{k(k+1)}-\dfrac{1}{(k+1)(k+2)}\right]\)，望远镜和为 \(\dfrac12\cdot\dfrac{1}{1\cdot2}=\dfrac14\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1815">
+  <div class="q-head">
+    <span class="qno">第 1815 题</span>
+    <span class="qtype">x→∞ 多项式比（10 次）</span>
+    <span class="qsrc">P939</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to\infty}\dfrac{(x-1)(x-2)\cdots(x-10)}{(5x-4)^{\beta}}=\delta\neq0\)，则 \(\beta,\delta\) 的数值为</p>
+    <div class="opts">
+      <p>(A) \(\beta=10,\ \delta=\dfrac{1}{5^{10}}\)</p>
+      <p>(B) \(\beta=10,\ \delta=\dfrac{1}{5}\)</p>
+      <p>(C) \(\beta=1,\ \delta=\dfrac{1}{5}\)</p>
+      <p>(D) 均不对</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 多项式之比，只看最高次主部；极限 \(\delta\neq0\) 且有限，要求分子分母次数相等，再由系数比定常数。分子从 \(x-1\) 到 \(x-10\) 共 10 个一次因子：</p>
+    \[ (x-1)(x-2)\cdots(x-10)=x^{10}+O(x^{9}). \]
+    <p>分母 \((5x-4)^{\beta}\) 主部为 \(5^{\beta}x^{\beta}\)，两边主部并写：</p>
+    \[ \prod_{k=1}^{10}(x-k)=x^{10}(1+O(1/x)),\qquad (5x-4)^{10}=5^{10}x^{10}(1+O(1/x)). \]
+    <p>次数配平：</p>
+    \[ \beta=10,\qquad \delta=\frac{1}{5^{10}}. \]
+    <p>分子各因子一次项系数都是 1，乘积最高次系数为 1；分母主部系数 \(5^{10}\)，两者相除即常数 \(\delta\)。(B) 漏掉系数 5 的 10 次方；(C) 把十个因子的乘积误当成一次式；(D) 与配平结果矛盾，故选 (A)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记分母系数 \(5^{10}\)，选项 \(1/5\) 是漏算 10 次方。</p>
+    <p>② 因子个数是 10，不是 5；通法：\(m\) 个一次因子乘积除以 \((ax+b)^{\beta}\)，需 \(\beta=m\)，常数 \(1/a^{m}\)，本题 \(m=10,\ a=5\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与第 1805、1825、1835 题同组：先数分子因子个数定次数，再抓分母系数，常见错误是漏算因子个数或忘记系数的 \(m\) 次方。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to\infty}\dfrac{(x-1)\cdots(x-20)}{(ax+b)^{\beta}}=C\neq0\)，求 \(\beta,C\)。</p>
+    <p class="var-ans">答案：\(\beta=20,\ C=1/a^{20}\)。按通法 \(m=20\) 配平次数，系数比 \(1/a^{20}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1816">
+  <div class="q-head">
+    <span class="qno">第 1816 题</span>
+    <span class="qtype">arcsin x 配 1-cos x 定系数</span>
+    <span class="qsrc">P939</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{a\arcsin x+b(1-\cos x)}{c\ln(1-4x)+d(1-e^{-3x^{2}})}=4\)，其中 \(a^{2}+c^{2}\neq0\)。则必有</p>
+    <div class="opts">
+      <p>(A) \(b=8d\)</p>
+      <p>(B) \(b=-8d\)</p>
+      <p>(C) \(a=8c\)</p>
+      <p>(D) \(a=-8c\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：四项均不对：线性项相消要求 \(a=-16c\)，\(b,d\) 不受约束</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>B b=-8d</b>，按题面复算为 <b>四项均不对：线性项相消要求 \(a=-16c\)，\(b,d\) 不受约束</b>。线性项比值 \(a/(-4c)=4\) 迫使 \(a=-16c\)；二次项不参与定值，\(b,d\) 任意。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：与第 1806 题同型，等价无穷小定系数。分子 \(\arcsin x\sim x\)（一阶）、\(1-\cos x\sim x^{2}/2\)（二阶）；分母 \(\ln(1-4x)\sim-4x\)（一阶）、\(1-e^{-3x^{2}}\sim3x^{2}\)（二阶）。</p>
+    \[ a\arcsin x+b(1-\cos x)\sim ax+\frac{b}{2}x^{2},\qquad c\ln(1-4x)+d(1-e^{-3x^{2}})\sim-4cx+3dx^{2}. \]
+    <p>极限为有限非零值 \(4\)。一阶主导档下，一阶比值 \(a/(-4c)\) 等于 \(4\)：</p>
+    \[ \frac{a}{-4c}=4\Rightarrow a=-16c. \]
+    <p>此档二阶项只贡献 \(O(x)\) 修正，\(b,d\) 自由；若 \(a=c=0\) 进入二阶档，比值 \((b/2)/(3d)=b/(6d)=4\)，得 \(b=24d\)，也不是选项所列关系。</p>
+    \[ \text{一阶档： }a=-16c;\quad \text{二阶档： }b=24d. \]
+    <p>(A) \(b=8d\)、(B) \(b=-8d\)、(C) \(a=8c\)、(D) \(a=-8c\) 均不符合，四项均不对。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\ln(1-4x)\sim-4x\)，负号。</p>
+    <p>② \(1-e^{-3x^{2}}\sim3x^{2}\)，系数 3。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与第 1806 题同型，等价无穷小定系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{a\arcsin x+b(1-\cos x)}{c\ln(1-2x)+d(1-e^{-x^{2}})}=2\)，求 \(b,d\)。</p>
+    <p class="var-ans">答案：\(a=-4c\)，\(b,d\) 不受约束。一阶项比值 \(a/(-2c)=2\)，得 \(a=-4c\)；\(b,d\) 只出现在二阶项，不参与定值。</p>
+  </div>
+</article>
+
+<article class="q" id="q1817">
+  <div class="q-head">
+    <span class="qno">第 1817 题</span>
+    <span class="qtype">e⁴ 减 (1+3/n)^{4n}</span>
+    <span class="qsrc">P939</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[e^{4}-\left(1+\dfrac{3}{n}\right)^{4n}\right]=\)</p>
+  </div>
+  <div class="answer">答案：\(e^{4}-e^{12}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>\(e^{4}-e^{12}\)</b>。\((1+3/n)^{4n}\to e^{12}\)，极限为 \(e^4-e^{12}\)。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(1^{\infty}\) 型重要极限。括号内 \(1+3/n\)、指数 \(4n\)；先取对数算指数乘积，再判断两项各趋于多少，不能看到 \(e^{4}\) 就默认抵消。</p>
+    <p>对括号项取对数，增量 \(3/n\)、指数 \(4n\)：</p>
+    \[ 4n\ln\Bigl(1+\frac{3}{n}\Bigr)=4n\Bigl(\frac{3}{n}-\frac{9}{2n^{2}}+O(n^{-3})\Bigr)=12-\frac{18}{n}+O(n^{-1}). \]
+    <p>指数主部为 \(4\cdot3=12\)，故括号项趋于 \(e^{12}\)：</p>
+    \[ \Bigl(1+\frac{3}{n}\Bigr)^{4n}=\exp\Bigl(12-\frac{18}{n}+O(n^{-1})\Bigr)\to e^{12}. \]
+    <p>两项极限都存在，逐项相减：</p>
+    \[ e^{4}-e^{12}. \]
+    <p>抵消条件是 \(ab=4\)，本题 \(ab=12\neq4\)；书给 \(0\) 是把括号项误认作趋于 \(e^{4}\)。对数展开的二阶项乘 \(4n\) 后只剩 \(O(1/n)\) 余项，不改变指数主部；差值主部由 \(e^{12}\) 决定，符号为负，不是趋于 \(0\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(bn\cdot(a/n)=ab\)，本题 \(a=3,\ b=4\)，底数极限 \(e^{12}\)，不是 \(e^{3}\) 也不是 \(e^{4}\)。</p>
+    <p>② 通法：\((1+k/n)^{mn}\to e^{mk}\)；要使 \(e^{k}-(1+k/n)^{mn}\) 为 \(0\)，必须 \(mk=k\) 即 \(m=1\)，本题 \(m=4\) 不满足。</p>
+    <p>③ 两项相减前要先确认各自极限存在；本题括号项趋于有限 \(e^{12}\)，\(e^{4}\) 为常数，逐项取极限合法。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与第 1807、1827、1837 题同组：算 \(mk\) 再与 \(e^{k}\) 比较，只有 \(m=1\) 时两项才抵消；四个题仅增量系数与指数系数轮换，判定流程一致。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left[e^{6}-(1+2/n)^{3n}\right]\)。</p>
+    <p class="var-ans">答案：\(0\)。\((1+2/n)^{3n}\to e^{6}\)，恰好抵消。</p>
+  </div>
+</article>
+
+<article class="q" id="q1818">
+  <div class="q-head">
+    <span class="qno">第 1818 题</span>
+    <span class="qtype">平方和 Riemann 和</span>
+    <span class="qsrc">P939</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[\left(x+\dfrac{a}{n}\right)^{2}+\left(x+\dfrac{2a}{n}\right)^{2}+\cdots+\left(x+\dfrac{na}{n}\right)^{2}\right]\dfrac{1}{n}=\)</p>
+  </div>
+  <div class="answer">答案：\(x^{2}+ax+\dfrac{a^{2}}{3}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：展开平方后用幂和公式求和。先展开通项：</p>
+    \[ \left(x+\frac{ka}{n}\right)^{2}=x^{2}+\frac{2kax}{n}+\frac{k^{2}a^{2}}{n^{2}}. \]
+    <p>三项分别求和，再统一乘 \(1/n\)。常数项与一次项：</p>
+    \[ \frac1n\sum_{k=1}^{n}x^{2}=x^{2},\qquad \frac1n\sum_{k=1}^{n}\frac{2kax}{n}=\frac{2ax}{n^{2}}\cdot\frac{n(n+1)}{2}=ax\frac{n+1}{n}. \]
+    <p>二次项用 \(\sum k^{2}=n(n+1)(2n+1)/6\)：</p>
+    \[ \frac1n\sum_{k=1}^{n}\frac{k^{2}a^{2}}{n^{2}}=\frac{a^{2}}{n^{3}}\cdot\frac{n(n+1)(2n+1)}{6}\to\frac{a^{2}}{3}. \]
+    <p>合并取极限：</p>
+    \[ x^{2}+ax\frac{n+1}{n}+\frac{a^{2}(n+1)(2n+1)}{6n^{2}}\to x^{2}+ax+\frac{a^{2}}{3}. \]
+    <p>积分核验：\(\frac1n\sum(x+ka/n)^{2}\to\int_0^1(x+at)^{2}\mathrm{d}t=x^{2}+ax+a^{2}/3\)，与幂和结果一致。三个幂次 \(k^{0},k^{1},k^{2}\) 对应的积分主部分别为 \(1,1/2,1/3\)，正好配出 \(x^{2},ax,a^{2}/3\) 三项系数。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\sum k^{2}=n(n+1)(2n+1)/6\)，系数不要记错；展开平方时交叉项 \(2x\cdot ka/n\) 的因子 2 要保留。</p>
+    <p>② 乘 \(1/n\) 后每一项再取极限，\(n+1\)、\(2n+1\) 中的低次项要随 \(n\) 约掉；一次项系数是 \(a\) 不是 \(2a\)，因为 \(\sum k/n^{2}\to1/2\) 与交叉项的 2 相消。</p>
+    <p>③ 不要把 \(k^{2}a^{2}/n^{2}\) 的分母写成 \(n\)；二次项求和后整体再乘 \(1/n\)，分母总幂次为 \(n^{3}\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>幂和 Riemann 和是填空题常考题，套路是展开后用幂和公式，两条路径可互验：直接展开配 \(\sum k,\sum k^{2}\)，或认作 \(\int_0^1(x+at)^{2}\mathrm{d}t\)。与第 1828（立方）、1838（四次方）题同组，次数升高时幂和公式依次换成 \(\sum k^{3},\sum k^{4}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum_{k=1}^{n}(x+k/n)^{2}\)。</p>
+    <p class="var-ans">答案：\(x^{2}+x+1/3\)。令 \(a=1\) 即得。</p>
+  </div>
+</article>
+
+<article class="q" id="q1819">
+  <div class="q-head">
+    <span class="qno">第 1819 题</span>
+    <span class="qtype">夹逼求和（1,4,...,n²）</span>
+    <span class="qsrc">P939</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[\dfrac{1}{\sqrt{n^{2}+1}}+\dfrac{1}{\sqrt{n^{2}+4}}+\cdots+\dfrac{1}{\sqrt{n^{2}+n^{2}}}\right]=\)</p>
+  </div>
+  <div class="answer">答案：\(\ln(1+\sqrt{2})\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：标准 Riemann 和。根号内 \(k\) 是二次方，提出 \(1/n\) 后落在 \(k/n\) 均匀网格上：</p>
+    \[ \frac{1}{\sqrt{n^{2}+k^{2}}}=\frac1n\cdot\frac{1}{\sqrt{1+(k/n)^{2}}}. \]
+    <p>于是和式是 \(f(t)=1/\sqrt{1+t^{2}}\) 在 \([0,1]\) 上的右端点 Riemann 和：</p>
+    \[ \frac1n\sum_{k=1}^{n}\frac{1}{\sqrt{1+(k/n)^{2}}}\to\int_0^1\frac{\mathrm{d}x}{\sqrt{1+x^{2}}}. \]
+    <p>原函数为 \(\ln(x+\sqrt{1+x^{2}})\)，代入上下限：</p>
+    \[ \left.\ln(x+\sqrt{1+x^{2}})\right|_0^1=\ln(1+\sqrt{2}). \]
+    <p>原函数可由代换 \(x=\tan t\) 或直接求导验证：\(\frac{\mathrm{d}}{\mathrm{d}x}\ln(x+\sqrt{1+x^{2}})=1/\sqrt{1+x^{2}}\)；下限 \(x=0\) 时 \(\ln1=0\)，故只需代上限。</p>
+    <p>对照第 1809 题：本题 \(k\) 是二次方，提 \(1/n\) 后是标准网格，用 Riemann 和；1809 中 \(k\) 是一次方，\(k/n^{2}\) 网格不均，才用夹逼。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 提 \(1/n\) 时要把 \(k^{2}/n^{2}\) 写成 \((k/n)^{2}\)，不能留在 \(k/n^{2}\)。</p>
+    <p>② 积分 \(\int\mathrm{d}x/\sqrt{1+x^{2}}=\ln(x+\sqrt{1+x^{2}})\)，不要与 \(\arcsin x\) 的公式混淆；前者对应双曲/正切代换，后者对应 \(1/\sqrt{1-x^{2}}\)。</p>
+    <p>③ 右端点网格 \(k/n\) 从 \(1/n\) 到 \(1\)，积分区间仍是 \([0,1]\)，端点差一项的贡献被 \(1/n\) 稀释，不影响积分极限。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和求积分是考研固定题型，关键是识别 \(1/\sqrt{n^{2}+k^{2}}\) 的结构：先提 \(1/n\) 认网格，再选积分公式。与第 1839 题同属根式型积分，1839 被积函数是 \(\sqrt{1+x^{2}}\)，原函数带对数与根式两项。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum_{k=1}^{n}\dfrac{1}{\sqrt{4+(k/n)^{2}}}\)。</p>
+    <p class="var-ans">答案：\(\ln(1+\sqrt{5})-\ln2\)。积分 \(\int_0^1\dfrac{dx}{\sqrt{4+x^{2}}}=\ln(x+\sqrt{4+x^{2}})\Big|_0^1=\ln(1+\sqrt5)-\ln2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1820">
+  <div class="q-head">
+    <span class="qno">第 1820 题</span>
+    <span class="qtype">sin(t²) 变限积分定系数</span>
+    <span class="qsrc">P940</span>
+  </div>
+  <div class="stem">
+    <p>试确定常数 \(a,b,c,d\) 的值，使极限 \(\lim\limits_{x\to0}\left(\dfrac{a}{x^{4}}+\dfrac{b}{x^{6}}+\dfrac{c}{x^{8}}+\dfrac{d}{x^{10}}\right)\int_{0}^{x}\sin(t^{2})dt\) 存在，并求该极限值。</p>
+  </div>
+  <div class="answer">答案：\(a=b=c=d=0\)，极限 \(0\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>d=1/3，极限 1/3</b>，按题面复算为 <b>\(a=b=c=d=0\)，极限 \(0\)</b>。\(\int_0^x\sin t^2\mathrm{d}t=\frac{x^3}{3}-\frac{x^7}{42}+\cdots\)，负幂系数方程迫使全为 0，极限 0。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：与第 1810 题同型，变限积分配负幂次多项式。展开 \(\sin(t^{2})=t^{2}-t^{6}/6+t^{10}/120-\cdots\)，逐项积分：</p>
+    \[ \int_0^x\sin(t^{2})\mathrm{d}t=\frac{x^{3}}{3}-\frac{x^{7}}{42}+\frac{x^{11}}{1320}-\cdots. \]
+    <p>乘以 \(a/x^{4}+b/x^{6}+c/x^{8}+d/x^{10}\)，各负幂次系数依次为：</p>
+    \[ x^{-1}:\ \frac{a}{3};\quad x^{-3}:\ -\frac{a}{42}+\frac{b}{3};\quad x^{-5}:\ \frac{a}{1320}-\frac{b}{42}+\frac{c}{3};\quad x^{-7}:\ -\frac{c}{42}+\frac{d}{3}. \]
+    <p>从最低次开始逐个令系数为零：</p>
+    \[ \frac{a}{3}=0\Rightarrow a=0;\quad -\frac{a}{42}+\frac{b}{3}=0\Rightarrow b=0;\quad \frac{a}{1320}-\frac{b}{42}+\frac{c}{3}=0\Rightarrow c=0;\quad -\frac{c}{42}+\frac{d}{3}=0\Rightarrow d=0. \]
+    <p>代回后常数项亦为零，括号整体消失，故 \(a=b=c=d=0\)，极限为 \(0\)。书给 \(d=1/3\) 是把积分首项 \(x^{3}/3\) 的系数错配到末位负幂次上。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\sin(t^{2})=t^{2}-t^{6}/6+\cdots\)，积分后是 \(x^{3}/3-x^{7}/42+\cdots\)，最低次 \(x^{3}\)。</p>
+    <p>② 负幂次必须从最低次开始逐个消去。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与第 1810 题同型，变限积分定系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(a,b\) 使 \(\lim\limits_{x\to0}(a/x^{4}+b/x^{6})\int_0^x\sin(t^{2})dt\) 存在。</p>
+    <p class="var-ans">答案：\(a=0,b=0\)。最低次 \(x^{3}\) 乘 \(a/x^{4}\) 得 \(a/x\)，需 \(a=0\)；再乘 \(b/x^{6}\cdot x^{3}/3=b/(3x^{3})\)，需 \(b=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1821">
+  <div class="q-head">
+    <span class="qno">第 1821 题</span>
+    <span class="qtype">三阶差分配 (x+c)/(x-c)^{x³}</span>
+    <span class="qsrc">P940</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \((-\infty,+\infty)\) 内三阶可导，\(\lim\limits_{x\to\infty}f'''(x)=\ln2\)，又 \(\lim\limits_{x\to\infty}\left(\dfrac{x+c}{x-c}\right)^{x^{3}}=\lim\limits_{x\to\infty}[f(x)-3f(x-1)+3f(x-2)-f(x-3)]\)，试确定 \(c\) 的值。</p>
+  </div>
+  <div class="answer">答案：不存在（无有限 \(c\) 可满足）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>c=1/cbrt6</b>，按题面复算为 <b>不存在（无有限 \(c\) 可满足）</b>。左端对数主部 \(2cx^2\to\infty\)，右端三阶差商 \(\to\ln2\) 有限，无解。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：三阶差分配幂指极限。右边 \(f(x)-3f(x-1)+3f(x-2)-f(x-3)\) 是三阶差分，由泰勒展开等于 \(f^{(3)}(x)+o(1)\)，极限为有限值：</p>
+    \[ f(x)-3f(x-1)+3f(x-2)-f(x-3)=f'''(x)+o(1)\longrightarrow\ln2. \]
+    <p>左边取对数，\(t=c/x\)，用 \(\ln\frac{1+t}{1-t}=2t+O(t^{3})\)：</p>
+    \[ x^{3}\ln\frac{1+c/x}{1-c/x}=x^{3}\left(\frac{2c}{x}+O(x^{-3})\right)=2cx^{2}+O(1). \]
+    <p>按 \(c\) 分三档：\(c>0\) 时指数 \(\to+\infty\)，左边 \(\to+\infty\)；\(c<0\) 时指数 \(\to-\infty\)，左边 \(\to0\)；\(c=0\) 时左边恒为 \(1\)。</p>
+    \[ c>0:\ \text{左}\to+\infty;\qquad c<0:\ \text{左}\to0;\qquad c=0:\ \text{左}=1. \]
+    <p>三档都不是有限值 \(\ln2\)，故不存在有限 \(c\)。书给 \(c=1/\sqrt[3]{6}\) 误把发散的 \(2cx^{2}\) 主部当成可配平的常数。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 三阶差分 \(f(x)-3f(x-1)+3f(x-2)-f(x-3)\) 趋向 \(f'''(x)\)。</p>
+    <p>② 指数是 \(x^{3}\) 时，\(\ln\) 的一阶项 \(2c/x\) 乘 \(x^{3}\) 得 \(2cx^{2}\)，发散。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>高阶差分与高阶导数是选择题的拔高题。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim f'''(x)=1\)，\(\lim\left(\dfrac{x+c}{x-c}\right)^{x}=\lim[f(x)-3f(x-1)+3f(x-2)-f(x-3)]\)，求 \(c\)。</p>
+    <p class="var-ans">答案：\(c=0\)。左边 \(e^{2c}\)，右边 1，故 \(2c=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1822">
+  <div class="q-head">
+    <span class="qno">第 1822 题</span>
+    <span class="qtype">ln(1+f/sin³x) 配 cos(ax)-1</span>
+    <span class="qsrc">P940</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\ln\left(1+\dfrac{f(x)}{\sin^{3}x}\right)}{\cos(ax)-1}=F\ (a\neq0)\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)}{x^{6}}\)。</p>
+  </div>
+  <div class="answer">答案：不存在有限极限（主部 \(-Fa^{2}/(2x)\)，两侧反号发散；书给 \(-Fa^{2}/2\) 对应 \(f/x^{5}\)，所求为 \(x^{6}\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(-Fa^{2}/2\)</b>，按题面复算为 <b>不存在有限极限（主部 \(-Fa^{2}/(2x)\)，两侧反号发散）</b>。\(f/\sin^3x\sim f/x^3\)、\(\cos ax-1\sim -a^2x^2/2\) 得 \(f/x^5\to -Fa^2/2\)，故 \(f/x^6=(f/x^5)/x\sim -Fa^2/(2x)\)，一阶奇次主部两侧反号，极限不存在；书给值是 \(f/x^5\) 那一阶的结果。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：等价无穷小替换定阶。\(x\to0\) 时 \(\sin^{3}x\sim x^{3}\)（三阶），\(\cos(ax)-1\sim-a^{2}x^{2}/2\)（二阶，带负号）；若 \(f(x)/\sin^{3}x\to0\)，对数可拆开：</p>
+    \[ \ln\left(1+\frac{f(x)}{\sin^{3}x}\right)\sim\frac{f(x)}{\sin^{3}x}\sim\frac{f(x)}{x^{3}}. \]
+    <p>两个等价式同时代入题面比值：</p>
+    \[ \frac{f(x)/x^{3}}{-a^{2}x^{2}/2}=-\frac{2f(x)}{a^{2}x^{5}}\to F. \]
+    <p>比值分母是 \(x^{5}\)，故 \(f(x)\) 被钉在五阶：</p>
+    \[ f(x)\sim-\frac{Fa^{2}}{2}x^{5}. \]
+    <p>所求分母是 \(x^{6}\)，比已配平的阶还高一阶：</p>
+    \[ \frac{f(x)}{x^{6}}\sim-\frac{Fa^{2}}{2x}. \]
+    <p>主部是 \(1/x\) 型一阶奇次：\(x\to0^{+}\) 与 \(x\to0^{-}\) 两侧反号，极限不存在有限值。书给 \(-Fa^{2}/2\) 是 \(f/x^{5}\) 那一阶的系数，与本题所求的 \(x^{6}\) 差一个阶。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\sin^{3}x\sim x^{3}\) 是三阶，\(\cos(ax)-1\sim-a^{2}x^{2}/2\) 是二阶，两者不同阶，配平阶数由分母幂次决定。</p>
+    <p>② 求出 \(f\) 的阶后，先核对所求分母比它高几阶；高一阶时主部为 \(1/x\)，两侧反号，不能写成单侧 \(+\infty\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等价无穷小定系数是选择题高频题。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{\ln(1+f(x)/\sin^{3}x)}{\cos(ax^{2})-1}=F\)，求 \(f(x)/x^{6}\)。</p>
+    <p class="var-ans">答案：\(0\)。\(\cos(ax^{2})-1\sim-a^{2}x^{4}/2\)，比值 \(-2f/(a^{2}x^{7})\to F\)，得 \(f\sim-Fa^{2}x^{7}/2\)，故 \(f(x)/x^{6}\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1823">
+  <div class="q-head">
+    <span class="qno">第 1823 题</span>
+    <span class="qtype">幂和渐近 n^3030/Σi^3029</span>
+    <span class="qsrc">P940</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{n\to\infty}\dfrac{n^{3030}}{\sum\limits_{i=1}^{n}i^{3029}}=G\ (\neq0,\neq\infty)\)，则 \(G=\)____。</p>
+  </div>
+  <div class="answer">答案：\(G=3030\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(G=1/3030\)</b>；错因：幂和主部方向看反，题面是 \(n^{3030}\) 除以 \(\sum i^{3029}\)，应取积分值的倒数。题面极限式完整可读，仅答案填空槽未渲染，按新口径判 fixed。复算：\(\sum i^{3029}\sim n^{3030}/3030\)，故 \(G=3030\)。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：幂和配 \(1/n\) 的 Riemann 和定主部。次数 3029 过高，不能套低次幂和公式；先提公因子变成 \(i/n\) 网格上的右端点 Riemann 和。</p>
+    \[ \sum_{i=1}^{n}i^{3029}=n^{3030}\cdot\frac1n\sum_{i=1}^{n}\Bigl(\frac{i}{n}\Bigr)^{3029}. \]
+    <p>括号内是 \(f(t)=t^{3029}\) 在 \([0,1]\) 上的 Riemann 和：</p>
+    \[ \frac1n\sum_{i=1}^{n}\Bigl(\frac{i}{n}\Bigr)^{3029}\to\int_0^1 t^{3029}\,\mathrm{d}t=\frac{1}{3030}. \]
+    <p>幂和首项渐近为 \(\sum i^{3029}\sim n^{3030}/3030\)。题面分子是 \(n^{3030}\)，取该比例的倒数：</p>
+    \[ G=\lim_{n\to\infty}\frac{n^{3030}}{\sum_{i=1}^{n}i^{3029}}=3030. \]
+    <p>低次余项被 \(n^{3030}\) 除后趋于 \(0\)，不改变首项比例；把 \(1/3030\) 直接当答案，就是分子分母方向看反。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分子分母搞反：题面是 \(n^{3030}/\sum\)，不是 \(\sum/n^{3030}\)。</p>
+    <p>② 幂和首项 \(\sum_{i=1}^n i^p\sim n^{p+1}/(p+1)\)，本题 \(p=3029\)，首项为 \(n^{3030}/3030\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>幂和渐近，与第 1813、1833 题同型。核心是识别 \(\sum i^p\) 的首项 \(n^{p+1}/(p+1)\)，再与题面分子分母比对方向。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum_{i=1}^{n}i^{10}/n^{11}\)。</p>
+    <p class="var-ans">答案：\(1/11\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1824">
+  <div class="q-head">
+    <span class="qno">第 1824 题</span>
+    <span class="qtype">裂项求和 (3k+2)/(k⁴(k+1)⁴)</span>
+    <span class="qsrc">P940</span>
+  </div>
+  <div class="stem">
+    <p>极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{3k+2}{k^{4}(k+1)^{4}}=H\)，求 \(H\)。</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(\dfrac{1}{8}\)</p>
+      <p>(C) \(\dfrac{1}{4}\)</p>
+      <p>(D) \(\dfrac{1}{2}\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：\(0.3193225\ldots\)（四项均不对）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>B=1/8</b>，按题面复算为 <b>\(0.3193225\ldots\)（四项均不对）</b>。\(\sum(3k+2)/[k^4(k+1)^4]\) 数值求和得 0.3193225，与 1/8 不符。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：通项 \((3k+2)/[k^{4}(k+1)^{4}]\) 的无穷级数求和。首项 \(k=1\) 为 \(5/16=0.3125\)，次项 \(8/1296\approx0.00617\)，其后迅速衰减。</p>
+    \[ a_1=\frac{5}{16}=0.3125,\qquad a_2=\frac{8}{1296}\approx0.00617. \]
+    <p>部分分式拆分后，\(1/k\) 型项望远镜相消，留下 \(1/k^{2},1/k^{3},1/k^{4}\) 型项：</p>
+    \[ \frac{3k+2}{k^{4}(k+1)^{4}}=\frac{10}{k+1}-\frac{10}{k}+\frac{8}{k^{2}}+\frac{2}{(k+1)^{2}}-\frac{5}{k^{3}}-\frac{1}{(k+1)^{3}}+\frac{2}{k^{4}}-\frac{1}{(k+1)^{4}}. \]
+    <p>用 \(\zeta(2),\zeta(3),\zeta(4)\) 求和：</p>
+    \[ \sum_{k=1}^{\infty}\frac{3k+2}{k^{4}(k+1)^{4}}=10\zeta(2)-6\zeta(3)+\zeta(4)-10\approx0.3193225. \]
+    <p>数值直算与闭式一致。选项 (A) \(0\)、(B) \(1/8\)、(C) \(1/4\)、(D) \(1/2\) 均与该值不符，故 \(H\approx0.3193225\ldots\)，四项均不对。书给 \(1/8\) 是把本级数误按相邻差望远镜求和。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 裂项必须通分验证系数；本通项分子不是相邻立方差的配对因子，不构成干净望远镜。</p>
+    <p>② 首项 \(0.3125\) 已大于 \(1/8=0.125\)，可先据此排除 (B)；级数各项为正，和不可能小于首项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与第 1814、1834 题同组：高次连乘分母的级数，先估首项量级排除选项，再用部分分式落到 \(\zeta\) 值或数值求和，不要硬套望远镜。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum_{k=1}^{n}\dfrac{1}{k(k+1)}\)。</p>
+    <p class="var-ans">答案：\(1\)。裂项 \(1/k-1/(k+1)\)，望远镜和为 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q1825">
+  <div class="q-head">
+    <span class="qno">第 1825 题</span>
+    <span class="qtype">x→∞ 多项式比（15 次）</span>
+    <span class="qsrc">P941</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to\infty}\dfrac{(x-1)(x-2)\cdots(x-15)}{(6x-5)^{\gamma}}=\epsilon\neq0\)，则 \(\gamma,\epsilon\) 的数值为</p>
+    <div class="opts">
+      <p>(A) \(\gamma=15,\ \epsilon=\dfrac{1}{6^{15}}\)</p>
+      <p>(B) \(\gamma=15,\ \epsilon=\dfrac{1}{6}\)</p>
+      <p>(C) \(\gamma=1,\ \epsilon=\dfrac{1}{6}\)</p>
+      <p>(D) 均不对</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：与第 1805、1815、1835 题同型，\(x\to\infty\) 多项式比主部；极限 \(\epsilon\neq0\) 且有限，要求分子分母次数相等，再由系数比定常数。分子从 \(x-1\) 到 \(x-15\) 共 15 个一次因子：</p>
+    \[ (x-1)(x-2)\cdots(x-15)=x^{15}+O(x^{14}). \]
+    <p>分母 \((6x-5)^{\gamma}\) 主部为 \(6^{\gamma}x^{\gamma}\)：</p>
+    \[ (6x-5)^{15}=6^{15}x^{15}\bigl(1+O(1/x)\bigr). \]
+    <p>次数配平并取系数比：</p>
+    \[ \gamma=15,\qquad \epsilon=\frac{1}{6^{15}}. \]
+    <p>分子各因子一次项系数都是 1，乘积最高次系数为 1；分母主部系数 \(6^{15}\)，相除即 \(\epsilon\)。若 \(\gamma=14\)，比值 \(\sim x/6^{14}\to\infty\)；若 \(\gamma=16\)，比值 \(\sim1/(6^{16}x)\to0\)，只有 \(\gamma=15\) 落在有限非零档，对应选项 (A)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 系数 \(6^{15}\) 不要漏：选项 (B) 的 \(1/6\) 是忘记 15 次方。</p>
+    <p>② 通法：\(m\) 个一次因子乘积除以 \((ax+b)^{\gamma}\)，需 \(\gamma=m\)，常数 \(1/a^{m}\)；本题 \(m=15,\ a=6\)。</p>
+    <p>③ 因子编号从 \(x-1\) 到 \(x-15\) 连续共 15 个，不能凭系数 6 猜次数；常数项 \(-5\) 只进低次项，不参与主部系数。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 1805、1815、1835 同组：先数因子个数定次数，再抓分母系数；选项 (C) \(\gamma=1\) 是把乘积误当成一次式。四题答案形式一致，只是 \(m\) 与 \(a\) 轮换。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to\infty}\dfrac{(x-1)\cdots(x-20)}{(ax+b)^{\gamma}}=C\neq0\)，求 \(\gamma,C\)。</p>
+    <p class="var-ans">答案：\(\gamma=20,\ C=1/a^{20}\)。按通法 \(m=20\) 配平次数，系数比 \(1/a^{20}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1826">
+  <div class="q-head">
+    <span class="qno">第 1826 题</span>
+    <span class="qtype">arctan x 配 1-cos x 定系数</span>
+    <span class="qsrc">P941</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{a\arctan x+b(1-\cos x)}{c\ln(1-5x)+d(1-e^{-4x^{2}})}=5\)，其中 \(a^{2}+c^{2}\neq0\)。则必有</p>
+    <div class="opts">
+      <p>(A) \(b=10d\)</p>
+      <p>(B) \(b=-10d\)</p>
+      <p>(C) \(a=10c\)</p>
+      <p>(D) \(a=-10c\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：四项均不对：线性项相消要求 \(a=-25c\)，\(b,d\) 不受约束</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>B b=-10d</b>，按题面复算为 <b>四项均不对：线性项相消要求 \(a=-25c\)，\(b,d\) 不受约束</b>。线性项比值 \(a/(-5c)=5\) 迫使 \(a=-25c\)；\(b,d\) 只在二次项出现，不参与定值。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：与第 1806、1816 题同型，等价无穷小定系数。分子 \(\arctan x\sim x\)（一阶）、\(1-\cos x\sim x^{2}/2\)（二阶）；分母 \(\ln(1-5x)\sim-5x\)（一阶）、\(1-e^{-4x^{2}}\sim4x^{2}\)（二阶）。</p>
+    \[ a\arctan x+b(1-\cos x)\sim ax+\frac{b}{2}x^{2},\qquad c\ln(1-5x)+d(1-e^{-4x^{2}})\sim-5cx+4dx^{2}. \]
+    <p>极限为有限非零值 \(5\)。一阶主导档下，一阶比值 \(a/(-5c)=5\)：</p>
+    \[ \frac{a}{-5c}=5\Rightarrow a=-25c. \]
+    <p>此档二阶项只贡献 \(O(x)\) 修正，\(b,d\) 自由；若 \(a=c=0\) 进入二阶档，比值 \((b/2)/(4d)=b/(8d)=5\)，得 \(b=40d\)，也不是选项所列关系。</p>
+    \[ \text{一阶档： }a=-25c;\quad \text{二阶档： }b=40d. \]
+    <p>(A) \(b=10d\)、(B) \(b=-10d\)、(C) \(a=10c\)、(D) \(a=-10c\) 均不符合，四项均不对。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\ln(1-5x)\sim-5x\)，\(1-e^{-4x^{2}}\sim4x^{2}\)；一阶、二阶因子不可混用。</p>
+    <p>② 通法：一阶比值 \(a/(-5c)\)，二阶比值 \(b/(8d)\)；题给有限非零值时先判断落在哪一档。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等价无穷小定系数，与前两题同型。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{a\arctan x+b(1-\cos x)}{c\ln(1-3x)+d(1-e^{-2x^{2}})}=2\)，求 \(b,d\)。</p>
+    <p class="var-ans">答案：\(a=-6c\)，\(b,d\) 不受约束。一阶项比值 \(a/(-3c)=2\)，得 \(a=-6c\)；二阶项不参与定值。</p>
+  </div>
+</article>
+
+<article class="q" id="q1827">
+  <div class="q-head">
+    <span class="qno">第 1827 题</span>
+    <span class="qtype">e⁵ 减 (1+4/n)^{5n}</span>
+    <span class="qsrc">P941</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[e^{5}-\left(1+\dfrac{4}{n}\right)^{5n}\right]=\)</p>
+  </div>
+  <div class="answer">答案：\(e^{5}-e^{20}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>\(e^{5}-e^{20}\)</b>。\((1+4/n)^{5n}\to e^{20}\)，极限 \(e^5-e^{20}\)。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：重要极限 \((1+u)^{1/u}\to e\) 的变形，括号内 \(1+4/n\)、指数 \(5n\)。括号项恒为正，取对数合法；两项极限都存在时才可逐项相减，先算指数乘积，再判断两项各趋于多少。</p>
+    <p>本题增量为 \(4/n\)、指数 \(5n\)，取对数展开：</p>
+    \[ 5n\ln\Bigl(1+\frac{4}{n}\Bigr)=5n\Bigl(\frac{4}{n}-\frac{8}{n^{2}}+O(n^{-3})\Bigr)=20-\frac{40}{n}+O(n^{-1}). \]
+    <p>指数极限为 \(5\cdot4=20\)，故</p>
+    \[ \Bigl(1+\frac{4}{n}\Bigr)^{5n}=\exp\Bigl(20-\frac{40}{n}+O(n^{-1})\Bigr)\to e^{20}. \]
+    <p>易错点：极限底数是 \(e^{20}\)，由指数系数 5 与增量系数 4 相乘得到，不是 \(e^{4}\)，也不是 \(e^{5}\)。原式两项分别取极限：</p>
+    \[ e^{5}-e^{20}. \]
+    <p>因 \(20\neq5\)，两项不抵消。书给 \(0\) 是把 \(e^{5}\) 与括号项误认作同底抵消；实际括号项趋于 \(e^{20}\)，差为负的大数。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(ab=5\cdot4=20\)，不是 5，也不是 4。</p>
+    <p>② 通法：\((1+k/n)^{mn}\to e^{mk}\)；本题 \(m=5,\ k=4\)，底数 \(e^{20}\)。若设计为抵消，需 \(m=1\)。</p>
+    <p>③ 对数展开二阶余项乘 \(mn\) 后只留 \(O(1/n)\)，不改变指数主部；判断抵消与否只看 \(mk\) 与常数指数是否相等。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 1807、1817、1837 同组：算 \(mk\) 再与 \(e^{k}\) 比较，\(5\cdot4=20\neq5\)，正确答案 \(e^{5}-e^{20}\)。四题仅系数轮换，流程一致。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left[e^{8}-(1+2/n)^{4n}\right]\)。</p>
+    <p class="var-ans">答案：\(0\)。\((1+2/n)^{4n}\to e^{8}\)，恰好抵消。</p>
+  </div>
+</article>
+
+<article class="q" id="q1828">
+  <div class="q-head">
+    <span class="qno">第 1828 题</span>
+    <span class="qtype">立方和 Riemann 和</span>
+    <span class="qsrc">P941</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[\left(x+\dfrac{a}{n}\right)^{3}+\left(x+\dfrac{2a}{n}\right)^{3}+\cdots+\left(x+\dfrac{na}{n}\right)^{3}\right]\dfrac{1}{n}=\)</p>
+  </div>
+  <div class="answer">答案：\(x^{3}+\dfrac{3}{2}ax^{2}+a^{2}x+\dfrac{a^{3}}{4}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：展开立方后用幂和公式求和，也可直接认作 Riemann 和。先展开通项：</p>
+    \[ \left(x+\frac{ka}{n}\right)^{3}=x^{3}+\frac{3x^{2}ka}{n}+\frac{3xk^{2}a^{2}}{n^{2}}+\frac{k^{3}a^{3}}{n^{3}}. \]
+    <p>常数项与一次项分别求和、乘 \(1/n\)：</p>
+    \[ \frac1n\sum x^{3}=x^{3},\qquad \frac1n\sum\frac{3x^{2}ka}{n}=\frac{3x^{2}a}{n^{2}}\cdot\frac{n(n+1)}{2}\to\frac{3}{2}ax^{2}. \]
+    <p>二次项用 \(\sum k^{2}=n(n+1)(2n+1)/6\)，三次项用 \(\sum k^{3}=[n(n+1)/2]^{2}\)：</p>
+    \[ \frac1n\sum\frac{3xk^{2}a^{2}}{n^{2}}\to xa^{2},\qquad \frac1n\sum\frac{k^{3}a^{3}}{n^{3}}=\frac{a^{3}}{n^{4}}\cdot\left[\frac{n(n+1)}{2}\right]^{2}\to\frac{a^{3}}{4}. \]
+    <p>合并四项：</p>
+    \[ x^{3}+\frac{3}{2}ax^{2}+a^{2}x+\frac{a^{3}}{4}. \]
+    <p>积分核验：\(\frac1n\sum(x+ka/n)^{3}\to\int_0^1(x+at)^{3}\mathrm{d}t\)，展开后与上式一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\sum k^{3}=[n(n+1)/2]^{2}\)，平方和公式不要记混；展开立方时三个交叉项系数 \(3x^{2}a,\ 3xa^{2}\) 要保留。</p>
+    <p>② 各次项乘 \(1/n\) 后再约 \(n\)，三次项系数 \(a^{3}/4\) 容易漏分母 4。</p>
+    <p>③ 二项展开的 \(k^{2}\) 项对应系数 \(3xa^{2}\)，积分主部 \(1/3\)，配出 \(xa^{2}\)；不要把该系数误写成 \(3xa^{2}\cdot 1/3=xa^{2}\) 时漏掉因子 3 已参与相消。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>幂和 Riemann 和，与第 1818、1838 题同型；展开后按 \(k^{0},k^{1},k^{2},k^{3}\) 四个幂次逐项配幂和公式。积分视角下四个主部系数依次为 \(1,1/2,1/3,1/4\)，可用来核对展开系数：\((x+at)^{3}\) 展开后积分得 \(x^{3}+\frac32 ax^{2}+xa^{2}+\frac14 a^{3}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum_{k=1}^{n}(k/n)^{3}\)。</p>
+    <p class="var-ans">答案：\(1/4\)。积分 \(\int_0^1 x^{3}\mathrm{d}x=1/4\)；用幂和公式 \(\sum k^{3}/n^{4}=[n(n+1)/2]^{2}/n^{4}\to1/4\) 互验。</p>
+  </div>
+</article>
+
+<article class="q" id="q1829">
+  <div class="q-head">
+    <span class="qno">第 1829 题</span>
+    <span class="qtype">ln(1+k/n) Riemann 和</span>
+    <span class="qsrc">P942</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[\dfrac{1}{n}\sum\limits_{k=1}^{n}\ln\left(1+\dfrac{k}{n}\right)\right]=\)</p>
+  </div>
+  <div class="answer">答案：\(2\ln2-1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：标准 Riemann 和。\(1/n\) 是权重，\(k/n\) 是均匀网格，\(f(t)=\ln(1+t)\)：</p>
+    \[ \frac1n\sum_{k=1}^{n}\ln\left(1+\frac{k}{n}\right)\to\int_0^1\ln(1+x)\,\mathrm{d}x. \]
+    <p>分部积分求原函数：取 \(u=\ln(1+x)\)，\(\mathrm{d}v=\mathrm{d}x\)，得</p>
+    \[ \int\ln(1+x)\,\mathrm{d}x=(1+x)\ln(1+x)-(1+x)+C. \]
+    <p>代入上下限 \(0,1\)：</p>
+    \[ \bigl[(1+x)\ln(1+x)-(1+x)\bigr]_0^1=2\ln2-2-(-1)=2\ln2-1. \]
+    <p>乘积视角核验：\(\frac1n\sum\ln(1+k/n)=\ln\prod(1+k/n)^{1/n}\)，取指数后极限为 \(\exp\int_0^1\ln(1+x)\mathrm{d}x\)，与积分结果一致。数值核验 \(2\ln2-1\approx0.3863\)，首项 \(\ln(1+1/n)/n\to0\)、末项 \(\ln2/n\to0\)，和式主部由积分给定，量级吻合。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 原函数 \((1+x)\ln(1+x)-(1+x)\) 中的 \(-(1+x)\) 不能漏；代入下限 \(x=0\) 时该项为 \(-1\)，整体下限值是 \(-1\) 而不是 \(0\)。</p>
+    <p>② 不要把网格误认成 \(k/n^{2}\)；本题 \(k/n\) 从 \(1/n\) 到 \(1\)，是标准 Riemann 和。</p>
+    <p>③ 对数求和不要先拆开成 \(\sum\ln k/n\) 与 \(\sum\ln(n+k)/n\) 分别取极限，两项各自发散，必须先认作积分再算原函数。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和求积分是考研固定题型：认出 \(\frac1n\sum f(k/n)\to\int_0^1 f(x)\mathrm{d}x\)，对数函数积分用分部积分。与根式型 1819、1839 并列，是和式极限的三条主干路径之一。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum_{k=1}^{n}\ln(1+2k/n)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{3\ln3-2}{2}\)。积分 \(\int_0^1\ln(1+2x)\mathrm{d}x=\dfrac12\bigl[(1+2x)\ln(1+2x)-(1+2x)\bigr]_0^1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1830">
+  <div class="q-head">
+    <span class="qno">第 1830 题</span>
+    <span class="qtype">cos(t³) 变限积分定系数</span>
+    <span class="qsrc">P942</span>
+  </div>
+  <div class="stem">
+    <p>试确定常数 \(a,b,c,d,e\) 的值，使极限 \(\lim\limits_{x\to0}\left(\dfrac{a}{x^{5}}+\dfrac{b}{x^{7}}+\dfrac{c}{x^{9}}+\dfrac{d}{x^{11}}+\dfrac{e}{x^{13}}\right)\int_{0}^{x}\cos(t^{3})dt\) 存在，并求该极限值。</p>
+  </div>
+  <div class="answer">答案：\(a=b=c=d=e=0\)，极限 \(0\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>e=1/4，极限 1/4</b>，按题面复算为 <b>\(a=b=c=d=e=0\)，极限 \(0\)</b>。\(\int_0^x\cos t^3\mathrm{d}t=x-\frac{x^7}{14}+\cdots\)，负幂项迫使全 0，极限 0。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：变限积分配负幂次多项式定系数。极限要存在且有限，合并分式后每个负幂次系数必须同时为零。展开被积函数并逐项积分：</p>
+    \[ \cos(t^{3})=1-\frac{t^{6}}{2}+O(t^{12}),\qquad \int_0^x\cos(t^{3})\,\mathrm{d}t=x-\frac{x^{7}}{14}+O(x^{13}). \]
+    <p>括号内五项乘上去，最低次 \(x\) 先配对，产生的负幂次依次为：</p>
+    \[ \frac{a}{x^{4}}+\frac{b}{x^{6}}+\frac{c}{x^{8}}+\frac{d}{x^{10}}+\frac{e}{x^{12}}+\cdots. \]
+    <p>这些负幂次在 \(x\to0\) 时各自发散，从最低次开始逐项令系数为零：</p>
+    \[ a=0\Rightarrow b=0\Rightarrow c=0\Rightarrow d=0\Rightarrow e=0. \]
+    <p>五个系数对应五个负幂次，互相独立，必须同时为零；代回后括号整体消失，极限为 \(0\)。书给 \(e=1/4\) 是把积分首项 \(x\) 的系数错配到末位负幂次上。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\cos(t^{3})=1-t^{6}/2+\cdots\)，积分后 \(x-x^{7}/14+\cdots\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>变限积分定系数，与前两题同型。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(a,b\) 使 \(\lim\limits_{x\to0}(a/x^{5}+b/x^{7})\int_0^x\cos(t^{3})dt\) 存在。</p>
+    <p class="var-ans">答案：\(a=0,b=0\)。最低次 \(x\) 乘 \(a/x^{5}\) 得 \(a/x^{4}\)，需 \(a=0\)；\(b/x^{7}\cdot x=b/x^{6}\)，需 \(b=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1831">
+  <div class="q-head">
+    <span class="qno">第 1831 题</span>
+    <span class="qtype">四阶差分配 (x+c)/(x-c)^{x⁴}</span>
+    <span class="qsrc">P942</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \((-\infty,+\infty)\) 内四阶可导，\(\lim\limits_{x\to\infty}f^{(4)}(x)=\sqrt{2}\)，又 \(\lim\limits_{x\to\infty}\left(\dfrac{x+c}{x-c}\right)^{x^{4}}=\lim\limits_{x\to\infty}[f(x)-4f(x-1)+6f(x-2)-4f(x-3)+f(x-4)]\)，试确定 \(c\) 的值。</p>
+  </div>
+  <div class="answer">答案：不存在（无有限 \(c\) 可满足）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>c=1/root4(24)</b>，按题面复算为 <b>不存在（无有限 \(c\) 可满足）</b>。左端主部 \(2cx^3\to\infty\)，右端四阶差商 \(\to\sqrt2\) 有限，无解。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：四阶差分配幂指极限。右边 \(f(x)-4f(x-1)+6f(x-2)-4f(x-3)+f(x-4)\) 是四阶差分，由泰勒展开等于 \(f^{(4)}(x)+o(1)\)，极限为有限值：</p>
+    \[ f(x)-4f(x-1)+6f(x-2)-4f(x-3)+f(x-4)=f^{(4)}(x)+o(1)\longrightarrow\sqrt{2}. \]
+    <p>左边取对数，\(t=c/x\)，用 \(\ln\frac{1+t}{1-t}=2t+O(t^{3})\)：</p>
+    \[ x^{4}\ln\frac{1+c/x}{1-c/x}=x^{4}\left(\frac{2c}{x}+O(x^{-3})\right)=2cx^{3}+O(x). \]
+    <p>按 \(c\) 分三档：\(c>0\) 时指数 \(\to+\infty\)，左边 \(\to+\infty\)；\(c<0\) 时指数 \(\to-\infty\)，左边 \(\to0\)；\(c=0\) 时左边恒为 \(1\)。</p>
+    \[ c>0:\ \text{左}\to+\infty;\qquad c<0:\ \text{左}\to0;\qquad c=0:\ \text{左}=1. \]
+    <p>三档都不是有限值 \(\sqrt{2}\)，故不存在有限 \(c\)。书给 \(c=1/\sqrt[4]{24}\) 误把发散的 \(2cx^{3}\) 主部当成可配平的常数。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 四阶差分系数是 \(1,-4,6,-4,1\)，趋向 \(f^{(4)}(x)\)；系数对应二项式展开，不要写成三阶。</p>
+    <p>② 指数 \(x^{4}\) 乘 \(2c/x\) 得 \(2cx^{3}\)，阶数仍发散；只有指数取 \(x\) 一次方时主部才退化为常数 \(2c\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>高阶差分与高阶导数是选择题拔高题；与第 1811、1821 题同组，差分阶数依次为二、三、四阶，幂指指数依次为 \(x^{2},x^{3},x^{4}\)，结论一致：右端有限、左端发散，无有限常数 \(c\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim f^{(4)}(x)=1\)，\(\lim\left(\dfrac{x+c}{x-c}\right)^{x}=\lim\Delta^{4}f(x)\)，求 \(c\)。</p>
+    <p class="var-ans">答案：\(c=0\)。左边 \(e^{2c}\)，右边 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q1832">
+  <div class="q-head">
+    <span class="qno">第 1832 题</span>
+    <span class="qtype">ln(1+f/sin⁴x) 配 tan(ax)-sin(ax)</span>
+    <span class="qsrc">P942</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\ln\left(1+\dfrac{f(x)}{\sin^{4}x}\right)}{\tan(ax)-\sin(ax)}=J\ (a\neq0)\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)}{x^{8}}\)。</p>
+  </div>
+  <div class="answer">答案：不存在有限极限（主部 \(Ja^{3}/(2x)\)，两侧反号发散；书给 \(Ja^{3}/6\) 对应 \(f/x^{7}\)，所求为 \(x^{8}\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(Ja^{3}/6\)</b>，按题面复算为 <b>不存在有限极限（主部 \(Ja^{3}/(2x)\)，两侧反号发散）</b>。\(f/\sin^4x\sim f/x^4\)、\(\tan ax-\sin ax\sim a^{3}x^{3}/2\) 得 \(f/x^7\to Ja^{3}/2\)，故 \(f/x^8=(f/x^7)/x\sim Ja^{3}/(2x)\)，一阶奇次主部两侧反号，极限不存在；书给值是 \(f/x^7\) 那一阶的结果。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：等价无穷小替换定阶。\(\sin^{4}x\sim x^{4}\)（四阶），若 \(f(x)/\sin^{4}x\to0\)，则 \(\ln(1+f/\sin^{4}x)\sim f/x^{4}\)。分母先提公因子：</p>
+    \[ \tan(ax)-\sin(ax)=\sin(ax)\left(\frac1{\cos(ax)}-1\right)\sim ax\cdot\frac{a^{2}x^{2}}{2}=\frac{a^{3}x^{3}}{2}. \]
+    <p>两个等价式同时代入题面比值：</p>
+    \[ \frac{f(x)/x^{4}}{a^{3}x^{3}/2}=\frac{2f(x)}{a^{3}x^{7}}\to J. \]
+    <p>比值分母是 \(x^{7}\)，故 \(f(x)\) 被钉在七阶：</p>
+    \[ f(x)\sim\frac{Ja^{3}}{2}x^{7}. \]
+    <p>所求分母是 \(x^{8}\)，比已配平的阶还高一阶：</p>
+    \[ \frac{f(x)}{x^{8}}\sim\frac{Ja^{3}}{2x}. \]
+    <p>阶数清点：\(\sin^{4}x\) 是四阶，分母 \(\tan ax-\sin ax\) 是三阶，比值趋于有限 \(J\)，故 \(f(x)\) 被钉在 \(4+3=7\) 阶；所求分母 \(x^{8}\) 比这一阶还高一阶。主部是 \(1/x\) 型一阶奇次：\(x\to0^{+}\) 与 \(x\to0^{-}\) 两侧反号，极限不存在有限值。书给 \(Ja^{3}/6\) 是 \(f/x^{7}\) 那一阶的系数，与本题所求的 \(x^{8}\) 差一个阶。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\tan u-\sin u=\sin u(1/\cos u-1)\sim u\cdot u^{2}/2=u^{3}/2\)，是三阶，不是二阶；其中 \(1/\cos u-1\sim u^{2}/2\) 来自 \(\sec u\) 的泰勒展开。</p>
+    <p>② 求出 \(f\) 的阶后核对所求分母高几阶；高一阶时主部为 \(1/x\)，两侧反号，不能写成单侧 \(+\infty\)。</p>
+    <p>③ 对数 \(\ln(1+u)\sim u\) 只在 \(u\to0\) 时成立；题面比值有限非零已隐含 \(f/\sin^{4}x\to0\)，可直接替换。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等价无穷小定系数是选择题高频题，与第 1812、1822、1832 同属「配平阶数后再除高一阶」的错配档；解法是先数清各因子阶数定出 \(f\) 的阶，再判断所求分母是同阶、低一阶还是高一阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{\ln(1+f(x)/\sin^{4}x)}{\tan(ax^{2})-\sin(ax^{2})}=J\)，求 \(f(x)/x^{8}\)。</p>
+    <p class="var-ans">答案：\(0\)。分母 \(\tan(ax^{2})-\sin(ax^{2})\sim a^{3}x^{6}/2\)，比值 \(2f/(a^{3}x^{10})\to J\)，得 \(f\sim Ja^{3}x^{10}/2\)，故 \(f(x)/x^{8}\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1833">
+  <div class="q-head">
+    <span class="qno">第 1833 题</span>
+    <span class="qtype">幂和渐近 n^4040/Σi^4039</span>
+    <span class="qsrc">P942</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{n\to\infty}\dfrac{n^{4040}}{\sum\limits_{i=1}^{n}i^{4039}}=K\ (\neq0,\neq\infty)\)，则 \(K=\)____。</p>
+  </div>
+  <div class="answer">答案：\(K=4040\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>\(K=1/4040\)</b>；错因：幂和主部方向看反，题面是 \(n^{4040}\) 除以 \(\sum i^{4039}\)，应取积分值的倒数。题面极限式完整可读，仅答案填空槽未渲染，按新口径判 fixed。复算：\(\sum i^{4039}\sim n^{4040}/4040\)，故 \(K=4040\)。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：幂和配 \(1/n\) 的 Riemann 和定主部，\(p=4039\)。次数过高，先提公因子变成 \(i/n\) 网格上的右端点 Riemann 和：</p>
+    \[ \sum_{i=1}^{n}i^{4039}=n^{4040}\cdot\frac1n\sum_{i=1}^{n}\Bigl(\frac{i}{n}\Bigr)^{4039}. \]
+    <p>括号内是 \(f(t)=t^{4039}\) 在 \([0,1]\) 上的 Riemann 和：</p>
+    \[ \frac1n\sum_{i=1}^{n}\Bigl(\frac{i}{n}\Bigr)^{4039}\to\int_0^1 t^{4039}\,\mathrm{d}t=\frac{1}{4040}. \]
+    <p>幂和首项渐近 \(\sum i^{4039}\sim n^{4040}/4040\)，题面分子是 \(n^{4040}\)，取该比例的倒数：</p>
+    \[ K=\lim_{n\to\infty}\frac{n^{4040}}{\sum_{i=1}^{n}i^{4039}}=4040. \]
+    <p>低次余项被 \(n^{4040}\) 除后趋于 \(0\)，不改变首项比例；把 \(1/4040\) 直接当答案，就是分子分母方向看反。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分子分母搞反：题面是 \(n^{4040}/\sum\)，不是 \(\sum/n^{4040}\)。</p>
+    <p>② 幂和首项 \(\sum i^{p}\sim n^{p+1}/(p+1)\)，本题 \(p=4039\)，首项为 \(n^{4040}/4040\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>幂和渐近，与第 1813、1823 同型：先认 \(p+1\) 次幂和主部，再比对题面分子分母方向。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum_{i=1}^{n}i^{100}/n^{101}\)。</p>
+    <p class="var-ans">答案：\(1/101\)。对应 \(\int_0^1 x^{100}\mathrm{d}x=1/101\)，方向在分母一侧。</p>
+  </div>
+</article>
+
+<article class="q" id="q1834">
+  <div class="q-head">
+    <span class="qno">第 1834 题</span>
+    <span class="qtype">裂项求和 (4k+3)/(k⁵(k+1)⁵)</span>
+    <span class="qsrc">P943</span>
+  </div>
+  <div class="stem">
+    <p>极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{4k+3}{k^{5}(k+1)^{5}}=L\)，求 \(L\)。</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(\dfrac{1}{16}\)</p>
+      <p>(C) \(\dfrac{1}{8}\)</p>
+      <p>(D) \(\dfrac{1}{4}\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：\(0.2202321\ldots\)（四项均不对）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>B=1/16</b>，按题面复算为 <b>\(0.2202321\ldots\)（四项均不对）</b>。\(\sum(4k+3)/[k^5(k+1)^5]\) 数值求和得 0.2202321，与 1/16 不符。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：通项 \((4k+3)/[k^{5}(k+1)^{5}]\) 的无穷级数求和。首项 \(7/32\approx0.219\)，次项 \(11/7776\approx0.00141\)，其后迅速衰减。</p>
+    \[ a_1=\frac{7}{32}\approx0.219,\qquad a_2=\frac{11}{7776}\approx0.00141. \]
+    <p>部分分式拆分后，\(1/k\) 型项望远镜相消，留下 \(1/k^{2}\) 至 \(1/k^{5}\) 型项：</p>
+    \[ \frac{4k+3}{k^{5}(k+1)^{5}}=\frac{70}{k}-\frac{70}{k+1}-\frac{45}{k^{2}}-\frac{25}{(k+1)^{2}}+\frac{25}{k^{3}}-\frac{5}{(k+1)^{3}}-\frac{11}{k^{4}}+\frac{1}{(k+1)^{4}}+\frac{3}{k^{5}}+\frac{1}{(k+1)^{5}}. \]
+    <p>用 \(\zeta(2),\cdots,\zeta(5)\) 求和：</p>
+    \[ \sum_{k=1}^{\infty}\frac{4k+3}{k^{5}(k+1)^{5}}=98-70\zeta(2)+20\zeta(3)-10\zeta(4)+4\zeta(5)\approx0.2202321. \]
+    <p>数值直算与闭式一致。选项 (A) \(0\)、(B) \(1/16\)、(C) \(1/8\)、(D) \(1/4\) 均与该值不符，故 \(L\approx0.2202321\ldots\)，四项均不对。书给 \(1/16\) 是把本级数误按相邻差望远镜求和。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 各级数项为正，和不可能小于首项 \(7/32\)；选项 \(1/16=0.0625\) 可先据此排除。</p>
+    <p>② 裂项必须通分验证系数；本通项分子不是相邻五阶差的配对因子，不构成干净望远镜。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与第 1814、1824 题同组：高次连乘分母级数，先估首项量级排除选项，再部分分式落到 \(\zeta\) 值或数值求和。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum_{k=1}^{n}\dfrac{1}{k(k+1)(k+2)(k+3)}\)。</p>
+    <p class="var-ans">答案：\(1/18\)。裂项望远镜，首项 \(1/(1\cdot2\cdot3\cdot4)=1/24\)，尾项趋于 \(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1835">
+  <div class="q-head">
+    <span class="qno">第 1835 题</span>
+    <span class="qtype">x→∞ 多项式比（20 次）</span>
+    <span class="qsrc">P943</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to\infty}\dfrac{(x-1)(x-2)\cdots(x-20)}{(7x-6)^{\eta}}=\mu\neq0\)，则 \(\eta,\mu\) 的数值为</p>
+    <div class="opts">
+      <p>(A) \(\eta=20,\ \mu=\dfrac{1}{7^{20}}\)</p>
+      <p>(B) \(\eta=20,\ \mu=\dfrac{1}{7}\)</p>
+      <p>(C) \(\eta=1,\ \mu=\dfrac{1}{7}\)</p>
+      <p>(D) 均不对</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 多项式比主部；极限 \(\mu\neq0\) 且有限，要求分子分母次数相等，再由系数比定常数。分子从 \(x-1\) 到 \(x-20\) 共 20 个一次因子：</p>
+    \[ (x-1)(x-2)\cdots(x-20)=x^{20}+O(x^{19}). \]
+    <p>分母 \((7x-6)^{\eta}\) 主部为 \(7^{\eta}x^{\eta}\)，常数项 \(-6\) 只进低次项：</p>
+    \[ (7x-6)^{20}=7^{20}x^{20}\bigl(1+O(1/x)\bigr). \]
+    <p>次数配平并取系数比：</p>
+    \[ \eta=20,\qquad \mu=\frac{1}{7^{20}}. \]
+    <p>分子各因子一次项系数都是 1，乘积最高次系数为 1；分母主部系数 \(7^{20}\)，相除即 \(\mu\)。若 \(\eta=19\)，比值 \(\sim x/7^{19}\to\infty\)；若 \(\eta=21\)，比值 \(\sim1/(7^{21}x)\to0\)，只有 \(\eta=20\) 落在有限非零档。(B) 漏掉系数 7 的 20 次方；(C) 把 20 个因子的乘积误当成一次式；(D) 与配平结果矛盾，故选 (A)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 系数 \(7^{20}\) 不要漏，选项 \(1/7\) 是忘记 20 次方。</p>
+    <p>② 通法：\(m\) 个一次因子乘积除以 \((ax+b)^{\eta}\)，需 \(\eta=m\)，常数 \(1/a^{m}\)；本题 \(m=20,\ a=7\)。</p>
+    <p>③ 因子从 \(x-1\) 连续到 \(x-20\) 共 20 个，不能凭分母系数 7 猜次数；常数项 \(-6\) 只进低次项，不参与主部系数。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 1805、1815、1825 同组：先数因子个数定次数，再抓分母系数；四题答案形式一致，仅 \(m\) 与 \(a\) 轮换。常见错误是漏算因子个数，或把分母系数误写成 \(1/a\) 而非 \(1/a^{m}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to\infty}\dfrac{(x-1)\cdots(x-10)}{(ax+b)^{\eta}}=\mu\neq0\)，求 \(\eta,\mu\)。</p>
+    <p class="var-ans">答案：\(\eta=10,\ \mu=1/a^{10}\)。按通法 \(m=10\) 配平次数，系数比 \(1/a^{10}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1836">
+  <div class="q-head">
+    <span class="qno">第 1836 题</span>
+    <span class="qtype">sinh x 配 1-cos x 定系数</span>
+    <span class="qsrc">P943</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{a\sinh x+b(1-\cos x)}{c\ln(1-6x)+d(1-e^{-5x^{2}})}=6\)，其中 \(a^{2}+c^{2}\neq0\)。则必有</p>
+    <div class="opts">
+      <p>(A) \(b=12d\)</p>
+      <p>(B) \(b=-12d\)</p>
+      <p>(C) \(a=12c\)</p>
+      <p>(D) \(a=-12c\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：四项均不对：线性项相消要求 \(a=-36c\)，\(b,d\) 不受约束</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>B b=-12d</b>，按题面复算为 <b>四项均不对：线性项相消要求 \(a=-36c\)，\(b,d\) 不受约束</b>。线性项比值 \(a/(-6c)=6\) 迫使 \(a=-36c\)；\(b,d\) 任意。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：与第 1806、1816、1826 题同型，等价无穷小定系数。分子 \(\sinh x\sim x\)（一阶）、\(1-\cos x\sim x^{2}/2\)（二阶）；分母 \(\ln(1-6x)\sim-6x\)（一阶）、\(1-e^{-5x^{2}}\sim5x^{2}\)（二阶）。</p>
+    \[ a\sinh x+b(1-\cos x)\sim ax+\frac{b}{2}x^{2},\qquad c\ln(1-6x)+d(1-e^{-5x^{2}})\sim-6cx+5dx^{2}. \]
+    <p>极限为有限非零值 \(6\)。一阶主导档下，一阶比值 \(a/(-6c)=6\)：</p>
+    \[ \frac{a}{-6c}=6\Rightarrow a=-36c. \]
+    <p>此档二阶项只贡献 \(O(x)\) 修正，\(b,d\) 自由；若 \(a=c=0\) 进入二阶档，比值 \((b/2)/(5d)=b/(10d)=6\)，得 \(b=60d\)，也不是选项所列关系。</p>
+    \[ \text{一阶档： }a=-36c;\quad \text{二阶档： }b=60d. \]
+    <p>(A) \(b=12d\)、(B) \(b=-12d\)、(C) \(a=12c\)、(D) \(a=-12c\) 均不符合，四项均不对。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\sinh x\sim x\)，与 \(\sin x\) 同阶，区别在 sinh 是双曲函数；\(\ln(1-6x)\sim-6x\)。</p>
+    <p>② 通法：一阶比值 \(a/(-6c)\)，二阶比值 \(b/(10d)\)；题给有限非零值时先判断落在哪一档。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等价无穷小定系数，与 1806、1816、1826 同组；四个题仅系数与一阶函数名轮换，判定流程一致。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{a\sinh x+b(1-\cos x)}{c\ln(1-4x)+d(1-e^{-3x^{2}})}=3\)，求 \(b,d\)。</p>
+    <p class="var-ans">答案：\(a=-12c\)，\(b,d\) 不受约束。一阶项比值 \(a/(-4c)=3\)，得 \(a=-12c\)；二阶项不参与定值。</p>
+  </div>
+</article>
+
+<article class="q" id="q1837">
+  <div class="q-head">
+    <span class="qno">第 1837 题</span>
+    <span class="qtype">e⁶ 减 (1+5/n)^{6n}</span>
+    <span class="qsrc">P943</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[e^{6}-\left(1+\dfrac{5}{n}\right)^{6n}\right]=\)</p>
+  </div>
+  <div class="answer">答案：\(e^{6}-e^{30}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>0</b>，按题面复算为 <b>\(e^{6}-e^{30}\)</b>。\((1+5/n)^{6n}\to e^{30}\)，极限 \(e^6-e^{30}\)。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(1^{\infty}\) 型重要极限。括号内 \(1+5/n\)、指数 \(6n\)；先取对数算指数乘积，再判断两项各趋于多少，不能看到 \(e^{6}\) 就默认抵消。增量 \(5/n\)、指数 \(6n\)：</p>
+    \[ 6n\ln\Bigl(1+\frac{5}{n}\Bigr)=6n\Bigl(\frac{5}{n}-\frac{25}{2n^{2}}+O(n^{-3})\Bigr)=30-\frac{75}{n}+O(n^{-1}). \]
+    <p>指数主部为 \(6\cdot5=30\)，故括号项趋于 \(e^{30}\)：</p>
+    \[ \Bigl(1+\frac{5}{n}\Bigr)^{6n}=\exp\Bigl(30-\frac{75}{n}+O(n^{-1})\Bigr)\to e^{30}. \]
+    <p>两项极限都存在，逐项相减：</p>
+    \[ e^{6}-e^{30}. \]
+    <p>抵消条件是 \(ab=6\)，本题 \(ab=30\neq6\)；书给 \(0\) 是把括号项误认作趋于 \(e^{6}\)。对数展开二阶项乘 \(6n\) 后只剩 \(O(1/n)\) 余项，不改变指数主部；差值主部由 \(e^{30}\) 决定，符号为负，不可能趋于 \(0\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(ab=6\cdot5=30\)，不是 6，也不是 5；指数 \(6n\) 与底数偏移 \(5/n\) 相乘才是指数主部。</p>
+    <p>② 通法：\((1+k/n)^{mn}\to e^{mk}\)；本题 \(m=6,\ k=5\)，底数 \(e^{30}\)。若设计为抵消，需 \(m=1\)。</p>
+    <p>③ 两项相减前先确认各自极限存在：括号项趋于有限 \(e^{30}\)，\(e^{6}\) 为常数，逐项取极限合法，不能先把两项对数相减再展开。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 1807、1817、1827 同组：算 \(mk\) 再与 \(e^{k}\) 比较，\(6\cdot5=30\neq6\)，正确答案 \(e^{6}-e^{30}\)。四题仅增量系数与指数系数轮换，判定流程一致。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left[e^{10}-(1+2/n)^{5n}\right]\)。</p>
+    <p class="var-ans">答案：\(0\)。\((1+2/n)^{5n}\to e^{10}\)，恰好抵消。</p>
+  </div>
+</article>
+
+<article class="q" id="q1838">
+  <div class="q-head">
+    <span class="qno">第 1838 题</span>
+    <span class="qtype">四次方和 Riemann 和</span>
+    <span class="qsrc">P944</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[\left(x+\dfrac{a}{n}\right)^{4}+\left(x+\dfrac{2a}{n}\right)^{4}+\cdots+\left(x+\dfrac{na}{n}\right)^{4}\right]\dfrac{1}{n}=\)</p>
+  </div>
+  <div class="answer">答案：\(x^{4}+2ax^{3}+2a^{2}x^{2}+a^{3}x+\dfrac{a^{4}}{5}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：展开四次方后用幂和公式求和，也可直接认作 Riemann 和。先按二项式展开通项：</p>
+    \[ \left(x+\frac{ka}{n}\right)^{4}=\sum_{j=0}^{4}\binom{4}{j}x^{4-j}\left(\frac{ka}{n}\right)^{j}. \]
+    <p>每项乘 \(1/n\) 后，由 Riemann 和 \(\sum k^{j}/n^{j+1}\to\int_0^1 t^{j}\mathrm{d}t=1/(j+1)\)，逐次定系数：</p>
+    \[ j=0:\ x^{4};\quad j=1:\ 4x^{3}a\cdot\frac12=2ax^{3};\quad j=2:\ 6x^{2}a^{2}\cdot\frac13=2a^{2}x^{2}; \]
+    \[ j=3:\ 4xa^{3}\cdot\frac14=a^{3}x;\qquad j=4:\ a^{4}\cdot\frac15=\frac{a^{4}}{5}. \]
+    <p>合并各次项：</p>
+    \[ x^{4}+2ax^{3}+2a^{2}x^{2}+a^{3}x+\frac{a^{4}}{5}. \]
+    <p>积分核验：\(\frac1n\sum(x+ka/n)^{4}\to\int_0^1(x+at)^{4}\mathrm{d}t\)，展开后与上式一致。逐项积分 \(\int_0^1 x^{4-j}(at)^{j}\mathrm{d}t=x^{4-j}a^{j}/(j+1)\)，与二项式系数相乘即得各阶系数，可反向核对。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 二项式系数 \(\binom{4}{j}\) 依次为 \(1,4,6,4,1\)，不要与三次方系数 \(1,3,3,1\) 混淆。</p>
+    <p>② 幂次 \(j\) 对应积分 \(1/(j+1)\)，四次方末项系数是 \(a^{4}/5\)，不是 \(a^{4}/4\)。</p>
+    <p>③ 交叉项 \(j=2\) 系数 \(6x^{2}a^{2}\) 配 \(1/3\) 得 \(2a^{2}x^{2}\)，因子 6 与 3 相消，不要保留成 \(6a^{2}x^{2}/3\) 不化简。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>幂和 Riemann 和，与第 1818（平方）、1828（立方）题同型；展开后按 \(k^{0}\) 到 \(k^{4}\) 五个幂次逐项配幂和公式，系数比积分 \(1/(j+1)\)。平方、立方、四次方三题的末项系数依次 \(1/3,1/4,1/5\)，规律即 \(1/(次数+1)\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum_{k=1}^{n}(k/n)^{4}\)。</p>
+    <p class="var-ans">答案：\(1/5\)。积分 \(\int_0^1 x^{4}\mathrm{d}x=1/5\)；用幂和公式 \(\sum k^{4}/n^{5}\to1/5\) 互验。</p>
+  </div>
+</article>
+
+<article class="q" id="q1839">
+  <div class="q-head">
+    <span class="qno">第 1839 题</span>
+    <span class="qtype">√(1+k²/n²) Riemann 和</span>
+    <span class="qsrc">P944</span>
+  </div>
+  <div class="stem">
+    <p>\(\lim\limits_{n\to\infty}\left[\dfrac{1}{n}\sum\limits_{k=1}^{n}\sqrt{1+\dfrac{k^{2}}{n^{2}}}\right]=\)</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2}\bigl(\sqrt{2}+\ln(1+\sqrt{2})\bigr)\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：标准 Riemann 和。\(1/n\) 是权重，\(k/n\) 是均匀网格，\(f(t)=\sqrt{1+t^{2}}\)：</p>
+    \[ \frac1n\sum_{k=1}^{n}\sqrt{1+\left(\frac{k}{n}\right)^{2}}\to\int_0^1\sqrt{1+x^{2}}\,\mathrm{d}x. \]
+    <p>套用双曲代换或查表公式求原函数：</p>
+    \[ \int\sqrt{1+x^{2}}\,\mathrm{d}x=\frac{x}{2}\sqrt{1+x^{2}}+\frac12\ln\bigl(x+\sqrt{1+x^{2}}\bigr)+C. \]
+    <p>原函数可由分部积分推出：记 \(I=\int\sqrt{1+x^{2}}\mathrm{d}x\)，分部积分得 \(I=x\sqrt{1+x^{2}}-\int x^{2}/\sqrt{1+x^{2}}\mathrm{d}x\)，而 \(x^{2}/\sqrt{1+x^{2}}=\sqrt{1+x^{2}}-1/\sqrt{1+x^{2}}\)，代入整理：</p>
+    \[ 2I=x\sqrt{1+x^{2}}+\int\frac{\mathrm{d}x}{\sqrt{1+x^{2}}}=x\sqrt{1+x^{2}}+\ln\bigl(x+\sqrt{1+x^{2}}\bigr). \]
+    <p>代入上下限 \(0,1\)：</p>
+    \[ \left.\left(\frac{x}{2}\sqrt{1+x^{2}}+\frac12\ln(x+\sqrt{1+x^{2}})\right)\right|_0^1=\frac{\sqrt2}{2}+\frac12\ln(1+\sqrt2). \]
+    <p>题中 \(k^{2}/n^{2}\) 是 \((k/n)^{2}\)，网格均匀；对照第 1809 题 \(k\) 为一次方的情形，本题才是标准 Riemann 和。数值核验 \(\sqrt2/2\approx0.7071\)、\(\frac12\ln(1+\sqrt2)\approx0.4407\)，合计约 \(1.1478\)，与 \(\int_0^1\sqrt{1+x^{2}}\mathrm{d}x\) 的量级一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 原函数中两项系数：\(\frac{x}{2}\sqrt{1+x^{2}}\) 与 \(\frac12\ln(x+\sqrt{1+x^{2}})\)，不要漏对数前的 \(1/2\)。</p>
+    <p>② 下限 \(x=0\) 时两项均为 \(0\)，不用额外加常数；下限代入前先把两项都算一遍，避免只代上限。</p>
+    <p>③ \(\sqrt{1+x^{2}}\) 的原函数带对数与根式两项，不要只写根式项；对照 \(1/\sqrt{1+x^{2}}\) 的原函数只有对数项，两题公式不要记混。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和求积分；与第 1819 题同属网格均匀的根式型积分，认出 \(1/n\sum f(k/n)\) 后直接套积分公式。1819 被积函数是 \(1/\sqrt{1+x^{2}}\)（仅对数原函数），本题是 \(\sqrt{1+x^{2}}\)（对数加根式两项），两者常对照考查。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum_{k=1}^{n}\sqrt{4+(k/n)^{2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\sqrt5}{2}+2\ln\dfrac{1+\sqrt5}{2}\)。积分 \(\int_0^1\sqrt{4+x^{2}}\mathrm{d}x\) 套用同一公式，代上下限即得；常数 4 使代换后出现 \(x/2\) 与 \(\ln((x+\sqrt{4+x^{2}})/2)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1840">
+  <div class="q-head">
+    <span class="qno">第 1840 题</span>
+    <span class="qtype">ln(1+t⁴) 变限积分定系数</span>
+    <span class="qsrc">P944</span>
+  </div>
+  <div class="stem">
+    <p>试确定常数 \(a,b,c,d,e,f\) 的值，使极限 \(\lim\limits_{x\to0}\left(\dfrac{a}{x^{6}}+\dfrac{b}{x^{8}}+\dfrac{c}{x^{10}}+\dfrac{d}{x^{12}}+\dfrac{e}{x^{14}}+\dfrac{f}{x^{16}}\right)\int_{0}^{x}\ln(1+t^{4})dt\) 存在，并求该极限值。</p>
+  </div>
+  <div class="answer">答案：\(a=b=c=d=e=f=0\)，极限 \(0\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 <b>f=1/5，极限 1/5</b>，按题面复算为 <b>\(a=b=c=d=e=f=0\)，极限 \(0\)</b>。\(\int_0^x\ln(1+t^4)\mathrm{d}t=\frac{x^5}{5}-\frac{x^9}{18}+\cdots\)，负幂项迫使全 0，极限 0。以复算为准。</p></div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：与第 1810、1820、1830 题同型，变限积分配负幂次多项式定系数。展开 \(\ln(1+t^{4})=t^{4}-t^{8}/2+t^{12}/3-\cdots\)，逐项积分：</p>
+    \[ \int_0^x\ln(1+t^{4})\mathrm{d}t=\frac{x^{5}}{5}-\frac{x^{9}}{18}+\frac{x^{13}}{39}-\cdots. \]
+    <p>最低次是 \(x^{5}\)，与六个负幂次配对后产生的发散项依次为：</p>
+    \[ \frac{a}{5x}+\frac{b}{5x^{3}}+\frac{c}{5x^{5}}+\frac{d}{5x^{7}}+\frac{e}{5x^{9}}+\frac{f}{5x^{11}}+\cdots. \]
+    <p>从最低次开始逐项令系数为零：</p>
+    \[ a=0\Rightarrow b=0\Rightarrow c=0\Rightarrow d=0\Rightarrow e=0\Rightarrow f=0. \]
+    <p>六个系数对应六个负幂次，互相独立，必须同时为零；代回后括号整体消失，极限为 \(0\)。即使取 \(b\neq0\)，积分第二项 \(x^{9}/18\) 与 \(b/x^{8}\) 配出 \(b/(18x)\) 仍发散，高阶展开不能抵消同阶负幂；书给 \(f=1/5\) 是把积分首项 \(x^{5}/5\) 的系数错配到末位负幂次上。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\ln(1+t^{4})=t^{4}-t^{8}/2+\cdots\)，积分后首项是 \(x^{5}/5\)，不要写成 \(x^{4}/4\)。</p>
+    <p>② 负幂次从 \(x^{-1}\) 到 \(x^{-11}\) 与积分各次项一一对应；只消前几项而留 \(f/x^{16}\)，它乘 \(x^{5}/5\) 仍得 \(f/(5x^{11})\) 发散。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>变限积分定系数，与第 1810、1820、1830 同组；判定流程固定：积分展开→配对负幂次→从最低次起逐个归零→核对常数项。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(a,b\) 使 \(\lim\limits_{x\to0}(a/x^{6}+b/x^{8})\int_0^x\ln(1+t^{4})dt\) 存在。</p>
+    <p class="var-ans">答案：\(a=0,b=0\)。最低次 \(x^{5}\) 乘 \(a/x^{6}\) 得 \(a/(5x)\)，需 \(a=0\)；\(b/x^{8}\cdot x^{5}/5=b/(5x^{3})\)，需 \(b=0\)。</p>
+  </div>
+</article>

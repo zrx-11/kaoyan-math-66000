@@ -1,0 +1,305 @@
+<article class="q" id="q254">
+  <div class="q-head"><span class="qno">第 254 题</span><span class="qtype">无穷大的差（概念辨析）</span><span class="qsrc">P646</span></div>
+  <div class="stem"><p>判断命题是否成立：若 \(\lim\limits_{x\to a}f(x)=\infty\) 且 \(\lim\limits_{x\to a}g(x)=\infty\)，则 \(\lim\limits_{x\to a}\bigl[f(x)-g(x)\bigr]=0\)。</p></div>
+  <div class="answer">答案：错误</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>「都是无穷大」只说明两个函数各自无界增大，并不说明它们增大的<b>速度</b>相同。差趋于零要求二者是同阶无穷大，这个条件题目没有给。</p>
+    <p>反例一：\(f(x)=\dfrac{1}{(x-a)^2}\)，\(g(x)=\dfrac{1}{(x-a)^2}+\dfrac{1}{|x-a|}\)。两者都趋于 \(+\infty\)，但 \(f-g=-\dfrac{1}{|x-a|}\to-\infty\)，不是 0。</p>
+    <p>反例二：\(f(x)=\dfrac1{x-a},\ g(x)=\dfrac{2}{x-a}\)，则 \(f-g=-\dfrac{1}{x-a}\to\infty\)（双侧无极限）。</p>
+    <p>正确的说法是：只有当 \(f\) 与 \(g\) 是<b>等价无穷大</b>（\(f/g\to1\)）时，差才可能趋于 0，且还需进一步验证，等价也不保证差趋于 0（如 \(f=x^2+x\)、\(g=x^2\)，差为 \(x\)）。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>把「无穷大」当成一个「数」来做减法，以为 \(\infty-\infty=0\)。极限的四则运算法则只对<b>有限极限</b>成立，无穷大不适用。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>概念判断题的经典套路：把极限四则运算的适用条件抽掉。\(\infty-\infty\) 是七种未定型之一，之所以「未定」，正因为答案取决于两者的相对阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(\lim f(x)=\infty\)、\(\lim g(x)=\infty\) 且 \(f(x)-g(x)\to0\)，能否断言 \(f/g\to1\)？</p>
+    <p class="var-ans">答案：能。由 \(\dfrac fg=1+\dfrac{f-g}{g}\)，当 \(f-g\to0\) 且 \(g\to\infty\) 时，\(\dfrac{f-g}{g}\to0\)，故 \(\dfrac fg\to1\)。反过来不成立：取 \(f=x+\sqrt x\)、\(g=x\)，则 \(f/g\to1\) 而 \(f-g=\sqrt x\to\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q255">
+  <div class="q-head"><span class="qno">第 255 题</span><span class="qtype">裂项相消求和</span><span class="qsrc">P646</span></div>
+  <div class="stem"><p>求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{k(k+1)}\)。</p></div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：这是「\(n\) 项和求极限」，通项是两个相邻整数之积的倒数，分母随 \(k\) 变化而不是随 \(n\) 整体放大，凑不出 \(\frac1n f(k/n)\) 的定积分结构，优先尝试裂项相消。</p>
+    <p>关键代换：把 \(k(k+1)\) 拆成相邻两项之差。设 \(\dfrac{1}{k(k+1)}=\dfrac{A}{k}+\dfrac{B}{k+1}\)，通分后 \(1=A(k+1)+Bk\)，比较系数得 \(A=1\)、\(B=-1\)，于是</p>
+    \[ \frac{1}{k(k+1)}=\frac1k-\frac1{k+1}. \]
+    <p>逐步代入：前 \(n\) 项相加时，第 \(k\) 项的 \(-\frac1{k+1}\) 与第 \(k+1\) 项的 \(+\frac1{k+1}\) 相邻抵消：</p>
+    \[ \sum_{k=1}^{n}\left(\frac1k-\frac1{k+1}\right)=1-\frac{1}{n+1}. \]
+    <p>主部与结论：抵消后只剩首项 \(1\) 与末项 \(-\frac{1}{n+1}\)，令 \(n\to\infty\)，\(\frac{1}{n+1}\to0\)，故极限为 \(1\)。</p>
+    <p>最易错那步：裂项后若忘记只剩首尾两项，把中间的 \(\frac12,\frac13,\ldots\) 又抄回和式，会误判成发散；另一种错法是把系数拆反，写成 \(\frac1{k+1}-\frac1k\)，得到 \(-\frac1{n+1}\to0\)，错值为 \(0\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 想用定积分定义，把和式硬凑成 \(\frac1n\sum f(k/n)\)——分母是 \(k(k+1)\) 而不是 \(n\) 的倍数，凑不出来。</p>
+    <p>② 裂项后忘记只剩首尾两项，多写了中间项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(n\) 项和求极限」三条路：能裂项就裂项（本题）、能凑定积分定义就凑、都不行用夹逼。裂项是最快的一条。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{k(k+2)}\)。</p>
+    <p class="var-ans">答案：\(\dfrac34\)。\(\dfrac{1}{k(k+2)}=\dfrac12\left(\dfrac1k-\dfrac1{k+2}\right)\)，求和剩 \(\dfrac12\left(1+\dfrac12\right)=\dfrac34\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q256">
+  <div class="q-head"><span class="qno">第 256 题</span><span class="qtype">阶乘与幂的比较</span><span class="qsrc">P646</span></div>
+  <div class="stem"><p>设 \(a_n=\dfrac{n!}{n^n}\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p></div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>用比值法看单调性与速度：</p>
+    \[ \frac{a_{n+1}}{a_n}=\frac{(n+1)!}{n!}\cdot\frac{n^n}{(n+1)^{n+1}}=\frac{n^n}{(n+1)^n}=\left(\frac{n}{n+1}\right)^n\to\frac1e\lt{}1. \]
+    <p>比值极限小于 1，说明 \(a_n\) 从某项起单调递减且以 0 为下界，故收敛；设极限为 \(A\)，由 \(a_{n+1}=a_n\cdot\left(\frac{n}{n+1}\right)^n\) 取极限得 \(A=A\cdot\frac1e\)，只能 \(A=0\)。</p>
+    <p>也可直接夹逼：\(0\lt{}a_n=\dfrac{1}{n}\cdot\dfrac{2}{n}\cdots\dfrac{n}{n}\lt{}\dfrac1n\to0\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(n!\) 增长极快所以极限为 \(\infty\)。实际上 \(n!\) 与 \(n^n\) 相比是「小的」，因为 \(n^n\) 的增长更快（每个因子都是 \(n\)）。</p>
+    <p>② 用夹逼时把每一项都放大成 1，得不出结论；必须至少把其中一项缩到 \(\frac1n\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(n!\) 与 \(n^n\)、\(a^n\) 的大小」是数列极限的常见比较，结论：\(\ln n\ll n^k\ll a^n\ll n!\ll n^n\)（\(a>1\)）。记住这条链可秒判多数题。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{n!}{2^n}\)。</p>
+    <p class="var-ans">答案：\(+\infty\)。由增长速度 \(n!\gg a^n\)（\(a>1\)），比值发散。</p>
+  </div>
+</article>
+
+<article class="q" id="q257">
+  <div class="q-head"><span class="qno">第 257 题</span><span class="qtype">0·∞ 型（x→0⁺）</span><span class="qsrc">P646</span></div>
+  <div class="stem"><p>求 \(\lim\limits_{x\to0^{+}}x\ln x\)。</p></div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x\to0^+\) 时 \(x\to0\) 而 \(\ln x\to-\infty\)，这是 \(0\cdot\infty\) 型未定型，不能把「0 乘无穷」直接当成 0，必须先化成商再判断。</p>
+    <p>关键代换：选把哪一块下放分母。对数 \(\ln x\) 求导得 \(\frac1x\)，再求导形式更简单；幂 \(x\) 求导仍是幂，因此把 \(x\) 放到分母，化成 \(\frac{\infty}{\infty}\)：</p>
+    \[ \lim_{x\to0^+}x\ln x=\lim_{x\to0^+}\frac{\ln x}{1/x}. \]
+    <p>逐步代入：分子分母都趋于 \(\infty\)，用洛必达法则，分子求导为 \(\frac1x\)，分母求导为 \(-\frac1{x^2}\)：</p>
+    \[ \frac{1/x}{-1/x^2}=-x\to0. \]
+    <p>主部与结论：对数增长比任何正幂次都慢，\(x\) 这一无穷小压得住 \(\ln x\) 这一无穷大，乘积趋于 \(0\)，故极限为 \(0\)。只有 \(x\to0^+\) 时题目才有意义，因为 \(\ln x\) 的定义域是 \(x>0\)。</p>
+    <p>最易错那步：一是把代换方向选反，若把 \(\ln x\) 下放分母得到 \(\frac{x}{1/\ln x}\)，求导后形式更乱，容易误判为 \(-\infty\)；二是忽略定义域写成双侧极限，\(x\lt0\) 时 \(\ln x\) 无定义，不存在所谓左极限。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 写成 \(x\to0\) 而不区分左右，但 \(x\lt{}0\) 时 \(\ln x\) 无定义，题目本身只在右侧成立。</p>
+    <p>② 把 \(0\cdot\infty\) 直接当成 0，虽然答案对，但过程不成立——这是未定型，必须化成商再算。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(x\ln x\to0\) 是「对数增长比任何幂次都慢」的直接体现，常出现在定积分收敛性、反常积分敛散性判断里作为比较标准。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0^{+}}x^2\ln x\)。</p>
+    <p class="var-ans">答案：\(0\)。化为 \(\dfrac{\ln x}{x^{-2}}\)，洛必达得 \(\dfrac{1/x}{-2x^{-3}}=-\dfrac{x^2}{2}\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q258">
+  <div class="q-head"><span class="qno">第 258 题</span><span class="qtype">递推数列（单调有界）</span><span class="qsrc">P646</span></div>
+  <div class="stem"><p>设数列 \(\{x_n\}\) 满足 \(x_1=1\)，\(x_{n+1}=1+\dfrac{1}{x_n}\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p></div>
+  <div class="answer">答案：\(\dfrac{1+\sqrt5}{2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>第一步：先证有界。显然 \(x_n>0\)，且 \(x_{n+1}=1+\dfrac{1}{x_n}\lt{}2\)（因 \(x_n>0\) 时 \(1/x_n\lt{}1\) 不总成立，需更细：\(x_1=1\)，\(x_2=2\)，\(x_3=\frac32\)…）。归纳可得 \(1\le x_n\le2\)。</p>
+    <p>第二步：判定收敛。子列 \(x_{2n}\le2\)、\(x_{2n+1}\ge1\) 交错，单调性不成立，说明本题不能用单调有界直接做，需换法：</p>
+    <p>设 \(x_n\to A\)，由递推式取极限得 \(A=1+\dfrac1A\)，即 \(A^2-A-1=0\)，解得 \(A=\dfrac{1\pm\sqrt5}{2}\)。因 \(x_n>0\)，取 \(A=\dfrac{1+\sqrt5}{2}\)（并需另行证明收敛，如用 \(|x_{n+1}-A|=\dfrac{|x_n-A|}{Ax_n}\) 压缩）。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只写「令 \(n\to\infty\) 解方程」而不验证收敛。递推数列可能有两个不动点或根本不收敛，必须补证（或用压缩映射 \(|f'|\le c\lt{}1\)）。</p>
+    <p>② 取错根：\(A=\dfrac{1-\sqrt5}{2}\lt{}0\)，与 \(x_n>0\) 矛盾，舍去。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>递推数列是高频解答题（常 10 分）。完整步骤：有界 → 单调（或压缩）→ 取极限 → 解方程 → 舍去不合题意的根。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(x_{n+1}=\sqrt{2+x_n}\)，\(x_1=1\)，求 \(\lim x_n\)。</p>
+    <p class="var-ans">答案：\(2\)。方程为 \(A=\sqrt{2+A}\)，即 \(A^2-A-2=0\)，正根为 2。</p>
+  </div>
+</article>
+
+<article class="q" id="q259">
+  <div class="q-head"><span class="qno">第 259 题</span><span class="qtype">tan x − x 的三阶</span><span class="qsrc">P646</span></div>
+  <div class="stem"><p>求 \(\lim\limits_{x\to0}\dfrac{\tan x-x}{x^3}\)。</p></div>
+  <div class="answer">答案：\(\dfrac13\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时 \(\tan x\) 与 \(x\) 的一阶项相同，相减后一阶抵消，差值从三阶开始，分母正是 \(x^3\)，属于三阶泰勒展开题，展开阶数必须取到三阶。</p>
+    <p>关键展开：记不住公式时由 \(\tan x\cos x=\sin x\) 推出。先写两块的低阶展开：\(\sin x=x-\frac{x^3}{6}+o(x^3)\)，\(\cos x=1-\frac{x^2}{2}+o(x^2)\)，代入得</p>
+    \[ \tan x\left(1-\frac{x^2}{2}\right)=x-\frac{x^3}{6}+o(x^3). \]
+    <p>设 \(\tan x=x+ax^3+o(x^3)\)，左端乘开为 \(x+ax^3-\frac{x^3}{2}+o(x^3)\)，比较 \(x^3\) 系数：\(a-\frac12=-\frac16\)，解得 \(a=\frac13\)，即</p>
+    \[ \tan x=x+\frac{x^3}{3}+o(x^3). \]
+    <p>逐步代入与主部：</p>
+    \[ \frac{\tan x-x}{x^3}=\frac{\frac{x^3}{3}+o(x^3)}{x^3}\to\frac13. \]
+    <p>最易错那步：与 \(x-\sin x\) 的系数记混会把三阶系数写成 \(-\frac16\)，错值为 \(-\frac16\)；若展开只取到二阶，\(\tan x\) 与 \(x\) 的二阶项都为零，相消后会误答 \(0\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>与 \(\sin x-x\) 记混。\(\tan x-x>0\)（\(\frac13\)），\(x-\sin x>0\)（\(\frac16\)），两者都正但系数不同。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题与第 518 题同型，是全册出现频次最高的三阶等价之一，务必形成条件反射。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-x}{\sin x-x}\)。</p>
+    <p class="var-ans">答案：\(-2\)。分子 \(\frac{x^3}{3}>0\)，分母 \(x-\sin x>0\) 故 \(\sin x-x\lt{}0\)，比值为 \(-\dfrac{1/3}{1/6}=-2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q260">
+  <div class="q-head"><span class="qno">第 260 题</span><span class="qtype">振荡因子 + 夹逼</span><span class="qsrc">P647</span></div>
+  <div class="stem"><p>设 \(f(x)=\begin{cases}x\sin\dfrac1x,&x\neq0\\ 0,&x=0\end{cases}\)，求 \(\lim\limits_{x\to0}f(x)\)。</p></div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时 \(x\to0\)，而 \(\sin\frac1x\) 在 \(-1\) 与 \(1\) 之间无限振荡、没有极限，但它始终有界，本题是「无穷小乘有界量」型，用夹逼准则，不能对两个因子分别取极限再相乘。</p>
+    <p>关键放缩：由正弦函数的值域 \(|\sin u|\le1\)，对任意 \(x\neq0\) 有</p>
+    \[ 0\le|f(x)|=\left|x\sin\frac1x\right|\le|x|. \]
+    <p>逐步代入：右端 \(|x|\to0\)，左端是 \(0\)，两侧都趋于 \(0\)，夹逼准则给出 \(|f(x)|\to0\)，故 \(\lim\limits_{x\to0}f(x)=0\)。又 \(f(0)=0\)，极限值等于函数值，所以 \(f\) 在 \(x=0\) 处连续。</p>
+    <p>主部与边界：振荡因子 \(\sin\frac1x\) 本身不趋于任何值，但乘以 \(x\) 后被压到 \(0\)；量级差一阶结论就反转，若乘的是 \(x^0=1\)，极限确实不存在。</p>
+    <p>最易错那步：认为「因子无极限则乘积无极限」，误判极限不存在；另一种错法是把夹逼写成 \(0\le x\sin\frac1x\le x\) 而漏掉绝对值，在 \(x\lt0\) 时不等式方向不成立。若进一步用导数定义判断可导，\(\frac{f(x)-f(0)}{x}=\sin\frac1x\) 振荡不收敛，故连续但不可导。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 认为 \(\sin\frac1x\) 无极限故 \(f\) 无极限。乘以 \(x\) 后它被「压」成 0，这是无穷小乘有界量的标准结论。</p>
+    <p>② 误以为可导：\(f'(0)=\lim\dfrac{x\sin(1/x)}{x}=\lim\sin\frac1x\) 不存在，故 \(f\) 在 0 处连续但不可导。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「无穷小 × 有界」是极限存在性的常用判据；本题的变体还常问「在 \(x=0\) 是否可导」「是否连续」，答案通常是「连续不可导」。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(g(x)=x^2\sin\dfrac1x\ (x\neq0)\)，\(g(0)=0\)，问 \(g\) 在 0 处是否可导。</p>
+    <p class="var-ans">答案：可导，\(g'(0)=0\)。\(\dfrac{g(x)-g(0)}{x}=x\sin\dfrac1x\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q261">
+  <div class="q-head"><span class="qno">第 261 题</span><span class="qtype">调和和 → 定积分</span><span class="qsrc">P647</span></div>
+  <div class="stem"><p>求 \(\lim\limits_{n\to\infty}\left(\dfrac1n+\dfrac{1}{n+1}+\cdots+\dfrac{1}{2n}\right)\)。</p></div>
+  <div class="answer">答案：\(\ln2\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：这是 \(n\) 项和求极限，分母写成 \(n+k\) 的形式，每一项都含 \(n\)，符合定积分黎曼和的结构；通项不能裂成相邻整数之差，因此走定积分定义这条路。</p>
+    <p>关键代换：先提出 \(\frac1n\) 作为积分步长，令 \(k=0,1,\ldots,n\)：</p>
+    \[ \sum_{k=0}^{n}\frac{1}{n+k}=\frac1n\sum_{k=0}^{n}\frac{1}{1+\frac kn}. \]
+    <p>逐步代入：右端正是函数 \(g(t)=\frac{1}{1+t}\) 在区间 \([0,1]\) 上 \(n\) 等分所得的黎曼和，\(\frac1n\) 是小区间长度，\(\frac{k}{n}\) 是分点：</p>
+    \[ \lim_{n\to\infty}\frac1n\sum_{k=0}^{n}\frac{1}{1+\frac kn}=\int_0^1\frac{\mathrm{d}t}{1+t}=\ln(1+t)\Big|_0^1=\ln2. \]
+    <p>主部与结论：调和型和式的增长由 \(\ln n\) 提供，前后项相消后落在 \(\ln(2n)-\ln n=\ln2\)，与积分结果一致。</p>
+    <p>最易错那步：一是项数搞错，从 \(\frac1n\) 到 \(\frac{1}{2n}\) 共 \(n+1\) 项，黎曼和多写一项或少写一项不改变极限，但分点区间要对齐；二是被积函数与区间配错，若把被积式写成 \(\frac1t\) 却仍在 \([0,1]\) 上积分，会在 \(t=0\) 处发散，错值为 \(\infty\)。等价写法是在 \([1,2]\) 上积 \(\frac{\mathrm{d}t}{t}\)，结果同样为 \(\ln2\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 项数搞错：从 \(\frac1n\) 到 \(\frac{1}{2n}\) 共 \(n+1\) 项，多一项少一项不影响极限，但写黎曼和时要统一。</p>
+    <p>② 误把区间取成 \([1,2]\)，写成 \(\int_1^2\frac{dx}{x}=\ln2\)——结果相同，但被积函数与区间要匹配（本题也可视为 \(\int_1^2\frac{dx}{x}\)，两种划分等价）。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>调和型的定积分定义是 \(n\) 项和题的标配，识别标志：分母含 \(n+k\)、\(n^2+k^2\)、\(\sqrt{n^2+k^2}\) 等。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{n}{n^2+k^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{4}\)。化为 \(\frac1n\sum\frac{1}{1+(k/n)^2}\to\int_0^1\frac{dx}{1+x^2}=\frac\pi4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q262">
+  <div class="q-head"><span class="qno">第 262 题</span><span class="qtype">双曲正弦差</span><span class="qsrc">P647</span></div>
+  <div class="stem"><p>求 \(\lim\limits_{x\to0}\dfrac{e^{x}-e^{-x}-2x}{x^3}\)。</p></div>
+  <div class="answer">答案：\(\dfrac13\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两边展开：\(e^x=1+x+\dfrac{x^2}{2}+\dfrac{x^3}{6}\)，\(e^{-x}=1-x+\dfrac{x^2}{2}-\dfrac{x^3}{6}\)，相减得 \(2x+\dfrac{x^3}{3}\)。减去 \(2x\) 剩 \(\dfrac{x^3}{3}\)，故极限为 \(\dfrac13\)。</p>
+    <p>等价说法：\(e^x-e^{-x}=2\sinh x=2\left(x+\dfrac{x^3}{6}+\cdots\right)\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>只展开到二阶，二阶项抵消为 0，误答 0；分母是 \(x^3\)，必须展到三阶。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\sinh x-x\sim\dfrac{x^3}{6}\)、\(\tan x-x\sim\dfrac{x^3}{3}\)、\(\arcsin x-x\sim\dfrac{x^3}{6}\)，三条并列常考。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x-e^{-x}-2\sin x}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac23\)。\(e^x-e^{-x}=2x+\dfrac{x^3}{3}+o(x^3)\)，而 \(2\sin x=2x-\dfrac{x^3}{3}+o(x^3)\)，相减得 \(\dfrac{2x^3}{3}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q263">
+  <div class="q-head"><span class="qno">第 263 题</span><span class="qtype">递推数列（取倒数）</span><span class="qsrc">P647</span></div>
+  <div class="stem"><p>设 \(\{x_n\}\) 满足 \(x_1=1\)，\(x_{n+1}=\dfrac{x_n}{1+x_n}\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p></div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：递推式是分式形式 \(x_{n+1}=\frac{x_n}{1+x_n}\)，分母含 \(1+x_n\)，取倒数后非线性项被消掉，化成等差数列最快；直接令 \(x_n\to A\) 只能列不动点方程，还要另证收敛。</p>
+    <p>关键代换：先确认 \(x_n>0\) 才能取倒数。\(x_1=1>0\)，若 \(x_n>0\)，则 \(x_{n+1}=\frac{x_n}{1+x_n}>0\)，归纳可知所有 \(x_n>0\)，倒数有意义：</p>
+    \[ \frac{1}{x_{n+1}}=\frac{1+x_n}{x_n}=\frac{1}{x_n}+1. \]
+    <p>逐步代入：令 \(y_n=\frac1{x_n}\)，则 \(y_{n+1}=y_n+1\)，\(\{y_n\}\) 是公差为 \(1\) 的等差数列，首项 \(y_1=\frac1{x_1}=1\)，故 \(y_n=1+(n-1)=n\)，即 \(x_n=\frac1n\)。</p>
+    <p>主部与结论：\(\frac1n\to0\)，数列极限为 \(0\)。数列递减且以 \(0\) 为下界，单调有界，收敛结论与取极限求得的结果吻合。</p>
+    <p>最易错那步：跳过正数性验证直接取倒数，若初始项为负或递推中出现零，倒数会无意义；另一种错法是直接令 \(A=\frac{A}{1+A}\) 解得 \(A=0\) 就收笔，不验证收敛性——本题 \(A=0\) 虽是不动点，但若递推不收敛，解方程得到的根不能作为极限。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 直接令 \(A=\dfrac{A}{1+A}\) 解得 \(A=0\)，但不验证会导致「除以零」的问题：严格做法是先证 \(x_n>0\) 且单调递减有下界，再取极限。</p>
+    <p>② 忘记 \(x_n\neq0\) 才能取倒数（本题 \(x_n=1/n>0\) 恒成立）。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>形如 \(x_{n+1}=\dfrac{ax_n}{b+cx_n}\) 的分式递推，取倒数化成等差数列是标准解法，比单调有界更快。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(x_{n+1}=\dfrac{2x_n}{1+x_n}\)，\(x_1=1\)，求 \(\lim x_n\)。</p>
+    <p class="var-ans">答案：\(1\)。令 \(y_n=\dfrac1{x_n}\)，则 \(y_{n+1}=\dfrac{y_n}{2}+\dfrac12\)，且 \(y_1=1\) 是不动点，故 \(y_n\equiv1\)，即 \(x_n\equiv1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q264">
+  <div class="q-head"><span class="qno">第 264 题</span><span class="qtype">商的极限法则（条件辨析）</span><span class="qsrc">P647</span></div>
+  <div class="stem"><p>判断命题是否成立：若 \(\lim\limits_{n\to\infty}x_n=a\)，\(\lim\limits_{n\to\infty}y_n=b\)，则 \(\lim\limits_{n\to\infty}\dfrac{x_n}{y_n}=\dfrac ab\)。</p></div>
+  <div class="answer">答案：错误</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>商的极限法则要求<b>分母的极限不为零</b>，即 \(b\neq0\)。题目没有这个条件，命题不成立。</p>
+    <p>反例：\(x_n=1\)（\(a=1\)），\(y_n=\dfrac1n\)（\(b=0\)），则 \(\dfrac{x_n}{y_n}=n\to\infty\)，不是 \(\dfrac10\)。</p>
+    <p>即使 \(b\neq0\)，还需要 \(y_n\neq0\)（从某项起）才能写商，这由 \(b\neq0\) 的保号性自动保证。补上 \(b\neq0\) 后命题成立。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>做题时直接套「极限的商等于商的极限」，忘记检查分母极限是否为零——这是计算题出错最常见的原因之一。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>极限四则运算法则的适用条件是概念题的核心：和差积要求两个极限都存在，商还要求分母极限非零。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(\lim x_n=a\neq0\)、\(\lim y_n=0\)，则 \(\lim\dfrac{y_n}{x_n}\) 是多少？</p>
+    <p class="var-ans">答案：\(0\)。分母极限非零，商的法则可用，\(\dfrac{0}{a}=0\)。</p>
+  </div>
+</article>

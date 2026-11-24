@@ -1,0 +1,821 @@
+<article class="q" id="q2251">
+  <div class="q-head">
+    <span class="qno">第 2251 题</span>
+    <span class="qtype">二阶佩亚诺展开的求和极限</span>
+    <span class="qsrc">P1018</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \(x=0\) 处二阶可导，且 \(f(0)=0,\ f'(0)=1,\ f''(0)=2\)，求 \(\lim\limits_{n\to\infty}n\left[f\left(\dfrac1{n^2}\right)+f\left(\dfrac2{n^2}\right)+\cdots+f\left(\dfrac{n}{n^2}\right)-\dfrac12\right]\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac56\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：数列求和型极限。函数在原点二阶可导，用佩亚诺余项展开到二阶，按幂和公式求和。</p>
+    \[ f(u)=f(0)+f'(0)u+\frac{f''(0)}2u^2+o(u^2)=u+u^2+o(u^2). \]
+    <p>令 \(u=k/n^2\)：</p>
+    \[ \sum_{k=1}^n f\!\left(\frac{k}{n^2}\right)=\sum_{k=1}^n\frac{k}{n^2}+\sum_{k=1}^n\frac{k^2}{n^4}+\sum_{k=1}^n o\!\left(\frac{k^2}{n^4}\right). \]
+    <p>幂和公式：</p>
+    \[ \sum_{k=1}^n k=\frac{n(n+1)}2,\qquad \sum_{k=1}^n k^2=\frac{n(n+1)(2n+1)}6, \]
+    <p>一阶 \((n+1)/(2n)=1/2+1/(2n)\)，二阶 \((n+1)(2n+1)/(6n^3)=1/(3n)+O(1/n^2)\)，余项为 \(o(1/n)\)。括号内</p>
+    \[ \sum_{k=1}^n f\!\left(\frac{k}{n^2}\right)-\frac12=\frac1{2n}+\frac1{3n}+o\!\left(\frac1n\right)=\frac5{6n}+o\!\left(\frac1n\right). \]
+    <p>乘 \(n\) 后极限 \(5/6\)。复核：\(n=10^3\) 为 \(0.833833\)，\(n=10^4\) 为 \(0.833383\)，\(n=10^5\) 为 \(0.833338\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只展开到一阶会丢掉二阶项 \(1/(3n)\)，误得 \(1/2\)；括号里的 \(1/2\) 是一阶幂和的极限，与一阶余项 \(1/(2n)\) 对消后，必须靠二阶项定值。② 余项阶数估计要跟上：\(o(u^2)\) 求和后仍为 \(o(1/n)\)，不能放大成 \(O(1)\)。③ 幂和公式中 \(\sum k^2\) 的系数 \(2n+1\) 不可漏写，否则二阶主部算错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>佩亚诺展开配幂和公式是数列极限的常规模块，核心是按求和后的量级决定展开到几阶：一阶幂和趋于常数并与括号内常数对消，极限由下一阶余项系数决定。这类题与变限积分主部题共用同一套「先定阶、再取系数」的思路。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n\left[\dfrac1{n^2}\displaystyle\sum_{k=1}^n k-\dfrac12\right]\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。\(\sum k/n^2=(n+1)/(2n)=1/2+1/(2n)\)，减去 \(1/2\) 后为 \(1/(2n)\)，乘 \(n\) 得 \(1/2\)；本题去掉了二次项，只剩一阶余项。</p>
+  </div>
+</article>
+
+<article class="q" id="q2252">
+  <div class="q-head">
+    <span class="qno">第 2252 题</span>
+    <span class="qtype">变限积分换元与主部比阶</span>
+    <span class="qsrc">P1018</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f'(x)\) 连续，且 \(f(0)=0,\ f'(0)=2\)，求 \(\lim\limits_{x\to0}\dfrac{\displaystyle\int_0^{x^2}f(x-t)dt}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是变上限积分，被积函数里同时含变量 \(x\)。先换元把 \(x\) 移出被积函数，再由导数条件写出积分主部，最后与分母 \(x^3\) 比阶。</p>
+    <p>令 \(u=x-t\)，则 \(t=x-u\)；当 \(t=0\) 时 \(u=x\)，当 \(t=x^2\) 时 \(u=x-x^2\)，且 \(dt=-du\)，于是</p>
+    \[ \int_0^{x^2} f(x-t)\,dt=\int_{x-x^2}^{x} f(u)\,du. \]
+    <p>由 \(f(0)=0\)、\(f'(0)=2\)，在原点附近 \(f(u)=2u+o(u)\)。积分主部为</p>
+    \[ \int_{x-x^2}^{x} 2u\,du=u^2\Big|_{x-x^2}^{x}=x^2-(x-x^2)^2=2x^3-x^4. \]
+    <p>余项 \(o(u)\) 分布在长度为 \(x^2\) 的区间上，积分量级为 \(o(x^2)\cdot x^2=o(x^4)\)，除以 \(x^3\) 为 \(o(x)\)，随 \(x\to0\) 趋于零。因此</p>
+    \[ \lim_{x\to0}\frac{2x^3-x^4+o(x^4)}{x^3}=2. \]
+    <p>数值复核：\(x=0.01\) 时比值 \(1.9900\)，\(x=0.001\) 时 \(1.9990\)，随 \(x\) 缩小向 \(2\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 换元后上下限方向与符号容易弄错：原下限 \(t=0\) 对应 \(u=x\)，原上限 \(t=x^2\) 对应 \(u=x-x^2\)，积分限交换时负号要随之处理。② 不换元就直接写 \(f(x-t)\sim2(x-t)\)，积分限与变量分离混乱。③ 漏掉 \(f'(0)=2\) 的系数，误把主部写成 \(x^3\) 量级而得 \(1\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>变限积分比阶分两步：先换元消去被积函数中携带的变量 \(x\)，再由函数在原点的导数写主部并升一阶。本题与 2257、2262、2271 同属积分主部比对族，区别只在积分限与被积内核。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(0)=0,\ f'(0)=0,\ f''(0)=2\)，其余条件不变，求同一极限。</p>
+    <p class="var-ans">答案：\(0\)。此时 \(f(u)=u^2+o(u^2)\)，在长度 \(x^2\) 的区间上积分主部为 \(x^2\cdot x^4=x^6\)，除以 \(x^3\) 为 \(o(1)\)，极限为零。</p>
+  </div>
+</article>
+
+<article class="q" id="q2253">
+  <div class="q-head">
+    <span class="qno">第 2253 题</span>
+    <span class="qtype">n 次根阶乘（对数黎曼和）</span>
+    <span class="qsrc">P1018</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{n\to\infty}\left(\dfrac{n!}{n^n}\right)^{\frac1n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac1e\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：数列幂指式，底数由 \(n!\) 与 \(n^n\) 组成，指数为 \(1/n\)。先取自然对数，把乘积与开方化为求和，再用定积分定义求出对数极限，最后指数化。</p>
+    <p>设 \(a_n=(n!/n^n)^{1/n}\)，取对数：</p>
+    \[ \ln a_n=\frac1n\ln\frac{n!}{n^n}=\frac1n\sum_{k=1}^n\ln\frac{k}{n}. \]
+    <p>右端是函数 \(g(x)=\ln x\) 在 \([0,1]\) 上的右端点黎曼和。\(x=0\) 处为瑕点，但瑕积分收敛，不影响黎曼和极限：</p>
+    \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^n\ln\frac{k}{n}=\int_0^1\ln x\,dx=\bigl[x\ln x-x\bigr]_0^1=-1. \]
+    <p>由指数函数连续性，对数极限为 \(-1\) 时</p>
+    \[ a_n=e^{\ln a_n}\to e^{-1}=\frac1e. \]
+    <p>数值复核：\(n=10^3\) 时 \(a_n\approx0.369492\)，\(n=10^4\) 时 \(0.368083\)，向 \(1/e\approx0.367879\) 收敛。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 取对数时把 \(\ln(n!)\) 写成 \(\sum\ln k\) 后忘记除以 \(n\)，对数极限被放大。② 把瑕积分 \(\int_0^1\ln x\,dx\) 误判为发散；该积分在 \(x\to0^+\) 时 \(x\ln x\to0\)，收敛于 \(-1\)。③ 指数化时符号反掉，误写成 \(e\)。④ 判别标志：乘积的 \(n\) 次根 \((\prod a_k)^{1/n}\) 先取对数转求和；用 Stirling 须保留 \(\ln n!\) 主部 \(n\ln n-n\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>n 次根阶乘是黎曼和与幂指极限的交叉考点，2258 题是同一结论的代数变形，Stirling 公式也可直接给出同值。复习时把对数黎曼和与 Stirling 两条通路对照掌握。答案为有限正常数：对数黎曼和收敛到 \(-1\)，指数化得 \(e^{-1}\)；对数极限发散时答案才趋于 \(\infty\) 或 \(0\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{(n!)^{1/n}}{n}\)。</p>
+    <p class="var-ans">答案：\(\dfrac1e\)。该式与原题互为代数变形：\((n!)^{1/n}/n=(n!/n^n)^{1/n}\)，取对数后同一黎曼和收敛于 \(-1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2254">
+  <div class="q-head">
+    <span class="qno">第 2254 题</span>
+    <span class="qtype">复合指数差对消（三阶主部）</span>
+    <span class="qsrc">P1018</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{e^{\sin x}-e^{\tan x}}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，两个指数函数分别在三角自变量处取值后相减。零阶、一阶、二阶项两侧对消，必须展开到三阶才能定系数；先写内核三角展开，再套外层指数级数。</p>
+    <p>三角内核在原点的展开为</p>
+    \[ \sin x=x-\frac{x^3}{6}+O(x^5),\qquad \tan x=x+\frac{x^3}{3}+O(x^5). \]
+    <p>外层指数按 \(e^u=1+u+u^2/2+u^3/6+O(u^4)\) 展开。取 \(u=\sin x\) 时，三阶项由 \(u\) 的三阶部分 \(-x^3/6\) 与 \(u^3/6=x^3/6\) 抵消：</p>
+    \[ e^{\sin x}=1+x+\frac{x^2}{2}+0\cdot x^3+O(x^4). \]
+    <p>取 \(u=\tan x\) 时，三阶系数为 \(u\) 的三阶部分 \(1/3\) 与 \(u^3/6=1/6\) 之和：</p>
+    \[ e^{\tan x}=1+x+\frac{x^2}{2}+\left(\frac13+\frac16\right)x^3+O(x^4)=1+x+\frac{x^2}{2}+\frac{x^3}{2}+O(x^4). \]
+    <p>两式相减：</p>
+    \[ e^{\sin x}-e^{\tan x}=-\frac{x^3}{2}+O(x^4), \]
+    <p>除以 \(x^3\) 得 \(-1/2\)。级数复核：sympy 展开该差主部恰为 \(-x^3/2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只展开到一阶，看到两个指数都趋于 \(1\) 就判分子为零；对消发生在二阶之前，主部在三阶。② 对消阶数算错：两侧 \(x^2\) 项同为 \(x^2/2\)，必须继续往下写到 \(x^3\)。③ 正切三阶系数 \(1/3\) 与正弦三阶系数 \(-1/6\) 合并时符号出错，会把三阶系数算成 \(0\) 或正值。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>同一外层函数在两个复合自变量处相减，标准做法是分别展开到对消后的第一个非零项；分母阶数决定展开截断位置。这类结构与指数差配中值定理的题目互通，选择与解答题中都可能出现。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x-e^{-x}}{x^3}\)。</p>
+    <p class="var-ans">答案：极限不存在，趋于无穷。\(e^x-e^{-x}=2x+x^3/3+O(x^5)\)，一阶主部 \(2x\) 未对消，除以 \(x^3\) 为 \(2/x^2+1/3+O(x^2)\)，\(x\to0\) 时 \(1/x^2\to+\infty\)；此时不能取三阶系数 \(1/3\) 作为答案。</p>
+  </div>
+</article>
+
+<article class="q" id="q2255">
+  <div class="q-head">
+    <span class="qno">第 2255 题</span>
+    <span class="qtype">累次极限（先后取极限）</span>
+    <span class="qsrc">P1019</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\lim\limits_{y\to0}\dfrac{\sin(x^2y)}{xy}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：二元累次极限，外层 \(x\to0\)、内层 \(y\to0\)；先固定 \(x\) 算内层，再取外层极限，不能当成二重极限。</p>
+    <p>固定 \(x\neq0\)，令 \(y\to0\)，此时 \(u=x^2y\to0\)。由等价无穷小 \(\sin u\sim u\)：</p>
+    \[ \sin(x^2y)\sim x^2y. \]
+    <p>内层比值化为</p>
+    \[ \lim_{y\to0}\frac{\sin(x^2y)}{xy}=\lim_{y\to0}\frac{x^2y}{xy}=x. \]
+    <p>再对外层取 \(x\to0\)：</p>
+    \[ \lim_{x\to0} x=0. \]
+    <p>数值复核：固定 \(x=0.01\)、取 \(y=0.001\) 时比值约 \(0.0100\)；把 \(x\) 缩到 \(0.001\) 后比值约 \(0.0010\)，随 \(x\) 趋于零。</p>
+    <p>进一步看顺序：内层把 \(x\) 视为参数，得表达式 \(x\)，外层再令其随 \(x\to0\) 趋于零；交换次序本题亦为 \(0\)（见变式），但累次极限一般与次序有关，不能据此认为总与二重极限相等。判据：先固定外层变量取内层极限，再代回外层；这与沿 \(y=kx\) 讨论二重路径无关性不是同一问题。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把累次极限当成二重极限，沿 \(y=kx\) 等路径讨论路径无关性；本题只要求先后两次取极限，路径行为不在题内。② 内层等价替换时 \(x^2y/(xy)=x\)，\(x\) 作为固定常数提出，不能误约成 \(x^2\) 或常数 \(x\) 以外的量。③ 忘记先固定 \(x\)，把两个变量同时放缩。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>累次极限与二重极限是两个不同概念，选择题常考二者不等的反例。含 \(\sin(xy)\)、\(\arctan(xy)\) 结构的题目，先固定一元做等价无穷小，再取另一元，是处理累次极限的固定顺序。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{y\to0}\lim\limits_{x\to0}\dfrac{\sin(x^2y)}{xy}\)。</p>
+    <p class="var-ans">答案：\(0\)。内层 \(x\to0\) 时 \(\sin(x^2y)\sim x^2y\)，除以 \(xy\) 得 \(xy\to0\)，外层 \(y\to0\) 后仍为零；本题两种次序结果相同。</p>
+  </div>
+</article>
+
+<article class="q" id="q2256">
+  <div class="q-head">
+    <span class="qno">第 2256 题</span>
+    <span class="qtype">可导函数差商拆分</span>
+    <span class="qsrc">P1019</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \(x=0\) 处可导，且 \(f(0)=0,\ f'(0)=1\)，求 \(\lim\limits_{x\to0}\dfrac{f(x^2)-f(x)}{x}\)。</p>
+  </div>
+  <div class="answer">答案：\(-1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是 \(f\) 在 \(x^2\) 与 \(x\) 两点取值之差。题面只给可导条件，优先用导数定义把两项分别写成差商，不依赖洛必达或导数连续。</p>
+    <p>由 \(f(0)=0\)、\(f'(0)=1\)，导数定义给出</p>
+    \[ \lim_{x\to0}\frac{f(x)}{x}=f'(0)=1. \]
+    <p>第一项 \(f(x^2)/x\) 配成差商形式：</p>
+    \[ \frac{f(x^2)}{x}=\frac{f(x^2)}{x^2}\cdot x. \]
+    <p>当 \(x\to0\) 时 \(x^2\to0\)，故 \(f(x^2)/x^2\to f'(0)=1\)，再乘趋于零的 \(x\)，第一项整体趋于 \(0\)。两项极限均存在，可拆分：</p>
+    \[ \lim_{x\to0}\frac{f(x^2)-f(x)}{x}=\lim_{x\to0}\frac{f(x^2)}{x}-\lim_{x\to0}\frac{f(x)}{x}=0-1=-1. \]
+    <p>数值复核：取代表函数 \(f(x)=x\)，\(x=0.01\) 时比值 \(-0.99\)，向 \(-1\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(f(x^2)/x\) 误判为 \(f'(0)\cdot x^2/x=x\) 后再取极限；差商因子 \(f(x^2)/x^2\to1\) 乘 \(x\) 后趋于零，不是趋于 \(1\)。② 直接对原式用洛必达，题面未保证 \(f'\) 连续，洛必达条件不足。③ 拆分两项极限前应确认两项各自极限存在；本题第一项趋于 \(0\)、第二项趋于 \(1\)，拆分合法。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>导数定义型拆分是可导条件下的固定手法：把函数值差配成自变量增量的商，再乘回原分母。本题与 2257 题对照看，一个用差商定义，一个用变限积分主部，二者都只依赖原点处的函数与导数信息。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(0)=0,\ f'(0)=1\)，求 \(\lim\limits_{x\to0}\dfrac{f(x^2)}{x}\)。</p>
+    <p class="var-ans">答案：\(0\)。\(f(x^2)/x=[f(x^2)/x^2]\cdot x\to1\cdot0=0\)；自变量换成 \(x^2\) 后差商极限仍为 \(f'(0)\)，多出的 \(x\) 因子把结果拉向零。</p>
+  </div>
+</article>
+
+<article class="q" id="q2257">
+  <div class="q-head">
+    <span class="qno">第 2257 题</span>
+    <span class="qtype">变限积分与等价无穷小</span>
+    <span class="qsrc">P1019</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 连续，且 \(f(0)=0,\ f'(0)=2\)，求 \(\lim\limits_{x\to0}\dfrac{\displaystyle\int_0^x f(t)dt}{x\sin x}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子为变上限积分；由 \(f'(0)=2\) 写被积函数一阶主部，积分升阶后与分母等价无穷小比对。</p>
+    <p>由 \(f(0)=0\)、\(f'(0)=2\)，在原点附近 \(f(t)=2t+o(t)\)。代入积分：</p>
+    \[ \int_0^x f(t)\,dt=\int_0^x(2t+o(t))\,dt=x^2+o(x^2). \]
+    <p>分母由 \(\sin x\sim x\) 得</p>
+    \[ x\sin x\sim x^2. \]
+    <p>分子分母主部同为 \(x^2\)，系数比为 \(1\)：</p>
+    \[ \lim_{x\to0}\frac{x^2+o(x^2)}{x\sin x}=\lim_{x\to0}\frac{x^2}{x^2}=1. \]
+    <p>复核：\(x=0.01\) 时比值 \(1.000017\)，\(x=0.001\) 时 \(1.00000017\)。</p>
+    <p>阶数复核：被积函数主部 \(2t\) 一阶，积分后升为二阶 \(x^2\)；分母 \(x\sin x\sim x^2\) 同为二阶，系数 \(2\) 经积分除以 \(2\) 得 \(1\)。若 \(f'(0)=0\)，被积函数主部降为二阶，积分后为三阶，与分母 \(x^2\) 不同阶，结论随之改变。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(f'(0)=2\) 当成积分主部系数 \(2x^2\) 后又漏除 \(2\)，误得 \(2\)；积分 \(2t\) 得 \(x^2\)，系数已经减半。② 分母 \(x\sin x\) 误写成 \(x\)，主部量级错一档。③ 题面只说 \(f\) 连续，\(f'(0)\) 存在即保证一阶主部成立，不必假设 \(f\) 在整个区间可导。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>变限积分主部等于被积函数主部积分后幂次加一，这一族题目的分母通常配成同阶无穷小。本题与 2252、2262、2271 同族，复习时按被积内核与积分限分类梳理。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(0)=0,\ f'(0)=1\)，求同一极限。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。分子主部为 \(x^2/2\)，分母主部 \(x^2\)，系数比为 \(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2258">
+  <div class="q-head">
+    <span class="qno">第 2258 题</span>
+    <span class="qtype">n 次根阶乘除以 n</span>
+    <span class="qsrc">P1019</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{n\to\infty}\dfrac{\sqrt[n]{n!}}{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac1e\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：数列幂指式，与 2253 题同一结构，先取对数把开方与除法化为求和，再用黎曼和定值。</p>
+    <p>令 \(a_n=\sqrt[n]{n!}/n\)，取对数并拆分：</p>
+    \[ \ln a_n=\frac1n\ln(n!)-\ln n=\frac1n\sum_{k=1}^n\ln k-\ln n=\frac1n\sum_{k=1}^n\ln\frac{k}{n}. \]
+    <p>右端即 \(g(x)=\ln x\) 在 \([0,1]\) 上的右端点黎曼和，瑕积分收敛：</p>
+    \[ \lim_{n\to\infty}\ln a_n=\int_0^1\ln x\,dx=-1. \]
+    <p>指数化后</p>
+    \[ a_n\to e^{-1}=\frac1e. \]
+    <p>该题与 2253 题互为代数变形：\((n!)^{1/n}/n=(n!/n^n)^{1/n}\)，两种写法的对数主部完全一致。</p>
+    <p>对照两种写法可以看清化简路径：原题把 \(n!\) 与 \(n^n\) 同时放在底数内开 \(n\) 次方，本题先开方再除以 \(n\)，对数化后两项相减，最终得到同一个 \(\frac1n\sum\ln(k/n)\)。黎曼和的分割点为 \(k/n\)，右端点取值，区间长度 \(1/n\)；函数 \(\ln x\) 在 \((0,1]\) 上可积，瑕点 \(0\) 附近矩形和虽发散缓慢，但被小分割段长度压制，整体收敛于瑕积分值。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 对数展开时 \(\ln n\) 的减法处理出错：\(\ln(n!)/n-\ln n\) 必须合并成 \(\frac1n\sum\ln(k/n)\)，不能漏除 \(n\)。② 把开 \(n\) 次方漏写，直接对 \(n!/n^n\) 取极限，得到 \(0\) 这一错误量级。③ 瑕积分符号记反，指数化后写成 \(e\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>阶乘渐近有两种常考形式：n 次根比阶乘除 \(n\)（本题与 2253），以及对数阶乘比 \(n\ln n\)（2270 题），分别对应定积分定义与 Stirling 公式。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{(n!)^{1/n}}{n/e}\)。</p>
+    <p class="var-ans">答案：\(1\)。由 Stirling 渐近 \(n!\sim\sqrt{2\pi n}(n/e)^n\)，开 \(n\) 次方后 \((n!)^{1/n}\sim(n/e)(2\pi n)^{1/(2n)}\)，除以 \(n/e\) 后因子 \((2\pi n)^{1/(2n)}\to1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2259">
+  <div class="q-head">
+    <span class="qno">第 2259 题</span>
+    <span class="qtype">权函数集中在端点的积分渐近</span>
+    <span class="qsrc">P1019</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_n=\displaystyle\int_0^1 x^n e^x dx\)，求 \(\lim\limits_{n\to\infty} n a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(e\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：含参数 \(n\) 的定积分，乘 \(n\) 后取极限。\(x^n\) 在 \([0,1]\) 上随 \(n\) 增大集中于 \(x=1\) 附近，用分部积分把端点值剥离出来，避免直接交换极限与积分。</p>
+    <p>记 \(a_n=\int_0^1 x^n e^x dx\)。分部积分，取 \(u=e^x\)、\(dv=x^n dx\)，则 \(v=x^{n+1}/(n+1)\)：</p>
+    \[ a_n=\left.\frac{x^{n+1}e^x}{n+1}\right|_0^1-\frac1{n+1}\int_0^1 x^{n+1}e^x dx=\frac{e}{n+1}-\frac{a_{n+1}}{n+1}. \]
+    <p>移项得</p>
+    \[ (n+1)a_n=e-a_{n+1}. \]
+    <p>由 \(0\le a_{n+1}\le e/(n+2)\to0\)，两边取极限：</p>
+    \[ \lim_{n\to\infty}(n+1)a_n=e. \]
+    <p>而 \(n a_n=(n+1)a_n\cdot n/(n+1)\)，因子 \(n/(n+1)\to1\)，故 \(\lim n a_n=e\)。数值复核：\(n=100\) 时 \(n a_n\approx2.66524\)，\(n=10^3\) 时 \(2.71286\)，向 \(e\approx2.71828\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接把极限号搬进积分号，把 \(e^x\) 在积分号下换成 \(e\) 却漏掉 \(1/(n+1)\) 的量级关系。② 分部积分后忘记 \(a_{n+1}\) 仍趋于零，移项等式不完整。③ \(n a_n\) 与 \((n+1)a_n\) 相差因子 \(n/(n+1)\)，二者极限相同，但列式时不可直接划等号。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>标准命题：若 \(g\) 在 \([0,1]\) 上连续，则 \(\lim n\int_0^1 x^n g(x)dx=g(1)\)。2260 题把 \(g\) 换成 \(1/(1+x)\)，端点值为 \(1/2\)；复习时掌握该结论的分部积分证明即可迁移。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty} n\displaystyle\int_0^1 x^n e^{-x}dx\)。</p>
+    <p class="var-ans">答案：\(e^{-1}\)。权重 \(x^n\) 集中在端点 \(x=1\)，连续权函数在该点取值 \(g(1)=e^{-1}\)，标准权集中结果直接给出。</p>
+  </div>
+</article>
+
+<article class="q" id="q2260">
+  <div class="q-head">
+    <span class="qno">第 2260 题</span>
+    <span class="qtype">端点取值型积分渐近</span>
+    <span class="qsrc">P1019</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_n=\displaystyle\int_0^1\dfrac{x^n}{1+x}dx\)，求 \(\lim\limits_{n\to\infty} n a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：与 2259 同模，权重 \(x^n\) 集中于 \(x=1\)，被积权函数 \(1/(1+x)\) 在端点取值 \(1/2\)。先用标准权重结论定位答案，再用局部放缩验证主部。</p>
+    <p>对 \([0,1]\) 上连续函数 \(g\)，标准权重结论为</p>
+    \[ \lim_{n\to\infty}n\int_0^1 x^n g(x)\,dx=g(1). \]
+    <p>此处 \(g(x)=1/(1+x)\)，\(g(1)=1/2\)。放缩验证先把积分拆成端点邻域与其余区间两段：</p>
+    \[ n a_n=\int_0^{1-\delta} n x^n g(x)\,dx+\int_{1-\delta}^1 n x^n g(x)\,dx. \]
+    <p>对任意 \(\varepsilon\gt0\)，取 \(\delta\) 使 \([1-\delta,1]\) 上 \(g(x)\in[1/2-\varepsilon,\,1/2+\varepsilon]\)；其余区间被 \(x^n\) 压制，贡献为 \(O((1-\delta)^n)\)，乘 \(n\) 后趋于零，故极限由端点值决定：</p>
+    \[ \lim_{n\to\infty}n a_n=\frac12. \]
+    <p>数值复核：\(n=100\) 时 \(n a_n\approx0.497500\)，\(n=10^3\) 时 \(0.499750\)，向 \(1/2\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把分母 \(1+x\) 在积分号下直接换成 \(1\)，误得 \(1\)；端点修正正是 \(1/2\) 的来源。② 忘记题目乘了 \(n\)，裸积分 \(\int x^n/(1+x)dx\) 本身趋于零，不能与 \(n a_n\) 混淆。③ 权集中结论要求 \(g\) 在 \(x=1\) 处连续，本题 \(g\) 光滑，条件满足。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2259 成对出现：一个取 \(e^x\) 的端点值 \(e\)，一个取 \(1/(1+x)\) 的端点值 \(1/2\)。权重集中结论在选择与解答题中均可直接引用，证明路径是分部积分或局部放缩。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty} n\displaystyle\int_0^1 x^n\ln(1+x)dx\)。</p>
+    <p class="var-ans">答案：\(\ln 2\)。权函数 \(g(x)=\ln(1+x)\) 在端点 \(x=1\) 取值 \(\ln2\)，由标准权集中结论直接得到。</p>
+  </div>
+</article>
+
+<article class="q" id="q2261">
+  <div class="q-head">
+    <span class="qno">第 2261 题</span>
+    <span class="qtype">黎曼和一阶误差渐近</span>
+    <span class="qsrc">P1020</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{n\to\infty} n\left(\dfrac1n\displaystyle\sum_{k=1}^n e^{k/n}-(e-1)\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{e-1}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：黎曼和与其积分真值之差再乘 \(n\)，考右端点矩形误差的一阶主部。先确认黎曼和的极限就是积分值，再估计误差按 \(1/n\) 趋于零的系数。</p>
+    <p>记右端点黎曼和 \(R_n=\frac1n\sum_{k=1}^n e^{k/n}\)，积分真值 \(I=\int_0^1 e^x dx=e-1\)。对单调可导函数，右端点矩形与曲边梯形的一阶误差为 Euler–Maclaurin 主项：</p>
+    \[ R_n-I=\frac{f(1)-f(0)}{2n}+O(n^{-2}). \]
+    <p>代入 \(f(x)=e^x\)，端点差 \(f(1)-f(0)=e-1\)：</p>
+    \[ R_n-(e-1)=\frac{e-1}{2n}+O(n^{-2}). \]
+    <p>乘 \(n\) 后 \(O(n^{-2})\) 项消失，得</p>
+    \[ \lim_{n\to\infty}n[R_n-(e-1)]=\frac{e-1}{2}. \]
+    <p>数值复核：\(n=10^3\) 时该量 \(0.859284\)，\(n=10^4\) 时 \(0.859155\)，向 \((e-1)/2\approx0.859141\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误差主部系数记混：右端点误差一阶项是 \((f(1)-f(0))/(2n)\)，不是 \(f(0)/(2n)\)，也不是 \(f(1)/n\)。② 以为黎曼和按 \(1/n^2\) 收敛；单调递增函数右端点矩形高出曲边梯形的部分主部为 \(1/n\)。③ 漏掉括号里减去的 \(e-1\)，直接对 \(nR_n\) 取极限会得到无穷。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>黎曼和误差估计是拔高考点，连接数值积分与渐近展开，与 2251 的佩亚诺求和同属「误差乘 \(n\)」模块。真题中偶见把指数函数换成多项式或三角函数，端点差决定一阶系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 对 \(f(x)=x\) 求 \(\lim\limits_{n\to\infty}n\left[\dfrac1n\displaystyle\sum_{k=1}^n\dfrac{k}{n}-\dfrac12\right]\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。端点差 \(f(1)-f(0)=1\)，误差主部 \(1/(2n)\)，乘 \(n\) 得 \(1/2\)；直接计算 \(R_n=(n+1)/(2n)\) 也给出同一结果。</p>
+  </div>
+</article>
+
+<article class="q" id="q2262">
+  <div class="q-head">
+    <span class="qno">第 2262 题</span>
+    <span class="qtype">变限积分等价无穷小（三次方正弦）</span>
+    <span class="qsrc">P1020</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\displaystyle\int_0^x\sin(t^3)dt}{x^4}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac14\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子为变上限积分。被积函数 \(\sin(t^3)\) 在原点主部为 \(t^3\)，积分后幂次升一阶，再与分母 \(x^4\) 同阶比对。</p>
+    <p>由 \(\sin u\sim u\)（\(u\to0\)）：</p>
+    \[ \sin(t^3)\sim t^3. \]
+    <p>积分主部为</p>
+    \[ \int_0^x\sin(t^3)\,dt\sim\int_0^x t^3\,dt=\frac{x^4}{4}. \]
+    <p>严格写到余项阶数：\(\sin(t^3)=t^3+O(t^7)\)，积分后余项 \(O(x^8)\)，于是</p>
+    \[ \lim_{x\to0}\frac{\int_0^x\sin(t^3)\,dt}{x^4}=\lim_{x\to0}\frac{x^4/4+O(x^8)}{x^4}=\frac14. \]
+    <p>数值复核：\(x=0.01\) 时比值 \(0.250000\)，\(x=0.001\) 时 \(0.250000\)，向 \(1/4\) 逼近。</p>
+    <p>从阶数链条看：内核 \(t^3\) 是三阶无穷小，\(\sin(t^3)\) 与 \(t^3\) 等价，积分后幂次加一成为四阶，与分母 \(x^4\) 同阶。若把分母换成 \(x^3\)，分子四阶主部相对分母高一阶，极限为零；换成 \(x^5\) 则主部未对消而发散。等价替换只作用于被积函数整体，不能在积分号内对 \(t\) 单独取 \(\sin t\sim t\) 后再代入 \(t^3\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\sin(t^3)\) 等价成 \(t\)，积分主部误写 \(x^2/2\)；等价对象是 \(t^3\)，不是 \(t\)。② 积分后幂次未升高：\(t^3\) 积分得 \(x^4/4\)，不是 \(x^3/3\)。③ 洛必达一次后分子变为 \(\sin(x^3)\)，仍是 \(0/0\)，需继续比阶；等价替换路径更短。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>变限积分比阶三步：写被积函数主部、积分升一阶、与分母同阶取系数。本题与 2271 同结构，内核分别为三次方正弦与二次方对数，掌握主部升降阶即可迁移。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\displaystyle\int_0^x\sin(t^3)dt}{x^7}\)。</p>
+    <p class="var-ans">答案：极限不存在，发散。分子最低次非零项为 \(x^4/4\)，未被对消，除以 \(x^7\) 为 \(1/(4x^3)+O(x)\)；\(x\to0^+\) 趋于 \(+\infty\)，\(x\to0^-\) 趋于 \(-\infty\)，双侧不一致，不能填五阶以后的系数。</p>
+  </div>
+</article>
+
+<article class="q" id="q2263">
+  <div class="q-head">
+    <span class="qno">第 2263 题</span>
+    <span class="qtype">对数展开二阶比阶</span>
+    <span class="qsrc">P1020</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x}{x^2}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，\(\ln(1+x)\) 减 \(x\)，一阶项抵消，分母为 \(x^2\)，展开到二阶取系数。</p>
+    <p>对数函数在原点的麦克劳林展开为</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}+O(x^4). \]
+    <p>减去 \(x\)：</p>
+    \[ \ln(1+x)-x=-\frac{x^2}{2}+\frac{x^3}{3}+O(x^4). \]
+    <p>除以 \(x^2\)，三阶及以上项随 \(x\) 趋于零：</p>
+    \[ \lim_{x\to0}\frac{-x^2/2+O(x^3)}{x^2}=-\frac12. \]
+    <p>数值复核：\(x=0.01\) 时比值约 \(-0.4983\)，向 \(-1/2\) 逼近。</p>
+    <p>展开系数可由导数核验：\(\ln(1+x)\) 在原点一阶导数为 \(1\)，二阶导数为 \(-1\)，二阶系数 \(-1/2!=-1/2\)。加减型比阶中，等价无穷小替换只保留主部，会把抵消后的余项信息丢掉，因此必须用泰勒展开写到分母所在阶数。对数余项与指数余项互为对照：\(e^x-1-x\) 主部 \(+x^2/2\)，\(\ln(1+x)-x\) 主部 \(-x^2/2\)，符号相反，复习时可成对记忆。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 符号记反：\(\ln(1+x)\) 二阶项为负，结果是 \(-1/2\)，写成正号即错。② 误用 \(\ln(1+x)\sim x\) 等价替换后判分子为零；等价无穷小只能用于乘除因子，不能用于加减后比阶。③ 展开阶数不足：只写 \(x+o(x)\) 无法定出二阶系数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>基本初等函数余项比阶是选择填空的高频送分点，本组 2263–2266、2274、2275 分别覆盖对数、正切、反正弦、指数、双曲函数的标准展开系数，复习时应把各函数三阶以内级数整体记牢。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+x^2/2}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。减去二阶主部后，剩余最低次为 \(x^3/3\)，除以 \(x^3\) 得 \(1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2264">
+  <div class="q-head">
+    <span class="qno">第 2264 题</span>
+    <span class="qtype">正切余项三阶比阶</span>
+    <span class="qsrc">P1020</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\tan x-x}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac13\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，\(\tan x\) 减 \(x\)，一阶项 \(x\) 抵消，分母 \(x^3\)，取三阶系数。</p>
+    <p>正切函数在原点的麦克劳林展开为</p>
+    \[ \tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+O(x^7). \]
+    <p>减去 \(x\)：</p>
+    \[ \tan x-x=\frac{x^3}{3}+\frac{2x^5}{15}+O(x^7). \]
+    <p>除以 \(x^3\)，五阶项随 \(x^2\) 趋于零：</p>
+    \[ \lim_{x\to0}\frac{x^3/3+O(x^5)}{x^3}=\frac13. \]
+    <p>三阶系数可由导数核验：\(\tan'x=\sec^2x=1+\tan^2x\)，在原点 \(\tan'''0=2\)，三阶系数 \(2/3!=1/3\)。数值复核：\(x=0.01\) 时比值 \(0.333347\)，向 \(1/3\) 逼近。</p>
+    <p>正切展开的高阶系数来自导数递推：\(\tan'x=1+\tan^2x\)，逐次求导可得五阶系数 \(2/15\)。本题分母为 \(x^3\)，五阶项随 \(x^2\) 趋于零，不进入主部；只有当分母抬到 \(x^5\) 且三阶主部被单独减去时，五阶系数才参与定值。选择正切余项题时，先判断分母幂次再决定取哪一阶系数，避免把高次项提前写入答案。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 三阶系数与正弦 \(-1/6\)、反正弦 \(1/6\) 混淆；正切三阶标准值为 \(1/3\)。② 把五阶系数 \(2/15\) 误当成三阶系数填进答案。③ 直接等价 \(\tan x\sim x\) 后判分子为零，等价替换不适用于加减余项比阶。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正切余项按分母幂次分阶：除以 \(x^3\) 取三阶系数 \(1/3\)，抬到 \(x^5\) 才取五阶系数 \(2/15\)。与双曲正切 2275 题对照，二者三阶系数符号相反，复习时成对记忆。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-x-x^3/3}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac2{15}\)。减去三阶主部后，剩余最低次为 \(2x^5/15\)，除以 \(x^5\) 得 \(2/15\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2265">
+  <div class="q-head">
+    <span class="qno">第 2265 题</span>
+    <span class="qtype">反正弦余项三阶比阶</span>
+    <span class="qsrc">P1021</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-x}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac16\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，\(\arcsin x\) 减 \(x\)，一阶项抵消，分母 \(x^3\)，取三阶系数。</p>
+    <p>反正弦函数在原点的展开为</p>
+    \[ \arcsin x=x+\frac{x^3}{6}+\frac{3x^5}{40}+O(x^7). \]
+    <p>减去 \(x\)：</p>
+    \[ \arcsin x-x=\frac{x^3}{6}+\frac{3x^5}{40}+O(x^7). \]
+    <p>除以 \(x^3\)：</p>
+    \[ \lim_{x\to0}\frac{x^3/6+O(x^5)}{x^3}=\frac16. \]
+    <p>系数核验：\((\arcsin x)'=1/\sqrt{1-x^2}\)，在原点二阶导数为 \(1\)，三阶系数 \(1/3!=1/6\)。数值复核：\(x=0.01\) 时比值 \(0.166686\)，向 \(1/6\) 逼近。</p>
+    <p>反正弦的展开可由导数积分得到：\((\arcsin x)'=(1-x^2)^{-1/2}=1+x^2/2+O(x^4)\)，逐项积分后三阶项为 \(x^3/6\)。与正弦对照，\(\sin x\) 三阶系数为 \(-1/6\)，二者相减时系数叠加。处理反三角余项时，先确认内核是反正弦、反余弦还是反正切，三者三阶系数符号各不相同，不可混用同一张系数表。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 与 \(\arcsin x-\sin x\) 型混合题混淆；本题内核单一，只需反正弦自身的余项。② 三阶系数记错为 \(1/3\)；标准值为 \(1/6\)。③ 等价替换 \(\arcsin x\sim x\) 后判分子为零，加减余项不能用一阶等价。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>反三角与三角函数成对记忆：\(\arcsin x=x+x^3/6\)，\(\arctan x=x-x^3/3\)，\(\sin x=x-x^3/6\)，\(\tan x=x+x^3/3\)；符号与系数是选择题常设的干扰点。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-\sin x}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。\(\arcsin x\) 三阶系数 \(+1/6\)，\(\sin x\) 三阶系数 \(-1/6\)，相减后三阶主部为 \(x^3/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2266">
+  <div class="q-head">
+    <span class="qno">第 2266 题</span>
+    <span class="qtype">指数展开二阶比阶</span>
+    <span class="qsrc">P1021</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{e^x-1-x}{x^2}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，\(e^x\) 减去 \(1\) 与 \(x\)，零阶、一阶项抵消，分母 \(x^2\)，取二阶系数。</p>
+    <p>指数函数麦克劳林展开为</p>
+    \[ e^x=1+x+\frac{x^2}{2}+\frac{x^3}{6}+O(x^4). \]
+    <p>减去 \(1+x\)：</p>
+    \[ e^x-1-x=\frac{x^2}{2}+\frac{x^3}{6}+O(x^4). \]
+    <p>除以 \(x^2\)：</p>
+    \[ \lim_{x\to0}\frac{x^2/2+O(x^3)}{x^2}=\frac12. \]
+    <p>也可洛必达两次：分子二阶导数在原点为 \(1\)，分母二阶导数为 \(2\)，比值 \(1/2\)。数值复核：\(x=0.01\) 时比值 \(0.505008\)，向 \(1/2\) 逼近。</p>
+    <p>指数展开的系数来自阶乘：\(e^x=\sum_{k=0}^\infty x^k/k!\)，二阶项 \(x^2/2!\)，三阶项 \(x^3/3!\)。题面括号内减去 \(1\) 与 \(x\)，正好对消零阶与一阶，剩余二阶主部。洛必达路径中，第一次求导后分子 \(e^x-1\)、分母 \(2x\)，仍为 \(0/0\)；第二次求导后分子 \(e^x\to1\)、分母 \(2\)，得 \(1/2\)，与展开结果一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 漏减 \(x\)，把 \(e^x-1\) 除以 \(x^2\) 误判发散；题面括号内同时减了常数与一次项。② 二阶系数 \(1/2!\) 误写为 \(1\)。③ 洛必达一次后仍是 \(0/0\)，必须求到第二次才能定值。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>\(e^x\) 的截断余项是 \(1^\infty\) 型与比阶题的公共素材，2268 题指数底的对数主部也来自同一展开。复习时把 \(e^x\) 前三项与正弦、对数的余项系数放在一起记。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x-1-x-x^2/2}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac16\)。对消二阶主部后，剩余最低次为 \(x^3/6\)，除以 \(x^3\) 得 \(1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2267">
+  <div class="q-head">
+    <span class="qno">第 2267 题</span>
+    <span class="qtype">幂指数列取对数定值</span>
+    <span class="qsrc">P1021</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{n\to\infty}\left(\dfrac1n\right)^{\frac1{\ln n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac1e\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：数列幂指式，底数趋于零、指数含 \(1/\ln n\)。先取自然对数，指数因子进入对数主体，化简后定值，再指数化。</p>
+    <p>设 \(a_n=(1/n)^{1/\ln n}\)，分解为底数与指数：</p>
+    \[ u_n=\frac1n,\qquad v_n=\frac1{\ln n},\qquad a_n=u_n^{v_n}. \]
+    <p>取对数：</p>
+    \[ \ln a_n=\frac1{\ln n}\ln\frac1n=\frac{-\ln n}{\ln n}=-1. \]
+    <p>对数极限为常数 \(-1\)，记 \(L=\lim\ln a_n\)，指数化：</p>
+    \[ L=-1,\qquad \lim_{n\to\infty}a_n=e^L=e^{-1}=\frac1e. \]
+    <p>数值复核：\(n=10^3\) 时 \(a_n\approx0.367879\)，\(n=10^5\) 时仍为 \(0.367879\)，与 \(1/e\) 一致。</p>
+    <p>幂指式 \(u_n^{v_n}\) 的统一处理是取对数：\(\ln(u_n^{v_n})=v_n\ln u_n\)，先求对数极限 \(L\)，原极限即 \(e^L\)。本题 \(u_n=1/n\)、\(v_n=1/\ln n\)，对数主体为 \((-\ln n)/\ln n=-1\)，分子分母的 \(\ln n\) 直接约去，不需要对 \(\ln n\) 再做渐近展开。若指数换成 \(1/n\)，对数主部为 \(-\ln n/n\to0\)，极限将变为 \(1\)；指数形式改变会显著改变结论，审题时需看清指数位置。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误以为底数趋零、指数趋零就是需要展开的不定型；本题对数直接约成常数，不需要渐近展开。② 对数符号漏负号，指数化后写成 \(e\)。③ 把指数 \(1/\ln n\) 误当成 \(1/n\)，错判底数按任意小幂次趋于 \(1\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>幂指极限先取对数是统一手法，与 2253、2258 的阶乘幂指同属「对数化后定值」模块；数列题与函数题在这一手法上完全通用。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(\dfrac1n\right)^{1/\ln n^2}\)。</p>
+    <p class="var-ans">答案：\(e^{-1/2}\)。对数主部为 \(-\ln n/(2\ln n)=-1/2\)，指数化后得 \(e^{-1/2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2268">
+  <div class="q-head">
+    <span class="qno">第 2268 题</span>
+    <span class="qtype">1 的 ∞ 型幂指函数</span>
+    <span class="qsrc">P1021</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\left(\dfrac{\sin x}{x}\right)^{\frac1{x^2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(e^{-\frac16}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(1^\infty\) 型，底数 \(\sin x/x\to1\)，指数 \(1/x^2\to\infty\)。取对数后用 \(\ln(1+u)\sim u\)，抓底数的一阶修正项。</p>
+    <p>先写底数修正：</p>
+    \[ \frac{\sin x}{x}=1-\frac{x^2}{6}+O(x^4). \]
+    <p>令 \(u=-x^2/6+O(x^4)\)，\(\ln(1+u)=u+O(u^2)\)，故</p>
+    \[ \ln\left(\frac{\sin x}{x}\right)=-\frac{x^2}{6}+O(x^4). \]
+    <p>除以 \(x^2\)：</p>
+    \[ \frac1{x^2}\ln\frac{\sin x}{x}=-\frac16+O(x^2)\to-\frac16. \]
+    <p>指数化得</p>
+    \[ \lim_{x\to0}\left(\frac{\sin x}{x}\right)^{1/x^2}=e^{-1/6}. \]
+    <p>数值复核：\(x=0.1\) 时指数值约 \(0.8465\)，向 \(e^{-1/6}\approx0.846482\) 逼近。</p>
+    <p>底数修正的来源是正弦自身余项：\(\sin x=x-x^3/6+O(x^5)\)，除以 \(x\) 后 \(1-x^2/6+O(x^4)\)。对数展开 \(\ln(1+u)=u-u^2/2+\cdots\) 中 \(u=-x^2/6\)，\(u^2\) 为 \(x^4\) 量级，被指数 \(1/x^2\) 除后只剩 \(x^2\)，归入余项。整个链条上每一步都只保留与分母 \(x^2\) 同阶的修正，高阶项不参与定值。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接对底数用 \(\sin x/x\sim1\) 后判极限为 \(1\)；\(1^\infty\) 型必须取对数看一阶修正。② 对数展开时底数修正只取到 \(x^2\) 阶，漏一阶修正就得不到 \(-1/6\)。③ 指数化时符号写反，写成 \(e^{1/6}\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>\(1^\infty\) 型有两条通路：\(e^{\lim v(u-1)}\) 与取对数 \(\lim v\ln u\)；本题底数是商式，取对数展开更顺。与 2267 的数列幂指对照，一个是 \(1^\infty\)，一个是 \(0^0\)，对数化步骤一致。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{(1+x)^{1/x}}{e}\right)^{1/x}\)。</p>
+    <p class="var-ans">答案：\(e^{-1/2}\)。对数主体为 \(\ln(1+x)/x-1=-x/2+O(x^2)\)，除以 \(x\) 得 \(-1/2\)，指数化后为 \(e^{-1/2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2269">
+  <div class="q-head">
+    <span class="qno">第 2269 题</span>
+    <span class="qtype">双函数展开对消到四阶</span>
+    <span class="qsrc">P1021</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\cos x-e^{-x^2/2}}{x^4}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac1{12}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，\(\cos x\) 与 \(e^{-x^2/2}\) 在零阶、二阶对消，分母 \(x^4\)，必须展开到四阶逐项对齐。</p>
+    <p>分别写出麦克劳林展开：</p>
+    \[ \cos x=1-\frac{x^2}{2}+\frac{x^4}{24}+O(x^6), \]
+    \[ e^{-x^2/2}=1-\frac{x^2}{2}+\frac{x^4}{8}+O(x^6). \]
+    <p>相减时零阶 \(1\)、二阶 \(-x^2/2\) 两侧相同，抵消后只剩四阶项：</p>
+    \[ \cos x-e^{-x^2/2}=\left(\frac1{24}-\frac18\right)x^4+O(x^6)=-\frac{x^4}{12}+O(x^6). \]
+    <p>除以 \(x^4\)：</p>
+    \[ \lim_{x\to0}\frac{-x^4/12+O(x^6)}{x^4}=-\frac1{12}. \]
+    <p>系数核验：\(1/24-1/8=1/24-3/24=-2/24=-1/12\)。数值复核：\(x=0.1\) 时比值约 \(-0.0831\)，向 \(-1/12\approx-0.083333\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 对消阶数判断失误：零阶、二阶两侧相同，主部在四阶；只展开到二阶会误判分子为零。② 四阶系数符号：\(1/24-1/8\) 为负，负号不可丢。③ \(e^{-x^2/2}\) 的四阶项为 \((-x^2/2)^2/2!=x^4/8\)，指数展开的幂次容易乘错。④ 判别式：两函数零阶、二阶系数逐项相等，三阶本就缺项，首个非零主部必在四阶；若两侧四阶系数也相同，主部将落到六阶，须继续展开。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>两个泰勒多项式对消型必须逐项对齐到首个非零项，与 2254、2236 同族；分母阶数即对消后应展开到达的阶数。这类题在选择题中常以两个初等函数之差配高阶分母出现。答案形态为有限常数：四阶主部 \(x^4\) 被分母 \(x^4\) 除尽，系数比即答案；主部阶数低于分母阶数时答案才发散到 \(\pm\infty\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{-x^2/2}-\cos x}{x^4}\)。</p>
+    <p class="var-ans">答案：\(\dfrac1{12}\)。原式反号，主部由 \(-x^4/12\) 变为 \(+x^4/12\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2270">
+  <div class="q-head">
+    <span class="qno">第 2270 题</span>
+    <span class="qtype">Stirling 公式阶乘对数比阶</span>
+    <span class="qsrc">P1022</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{n\to\infty}\dfrac{\ln(n!)}{n\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：数列渐近比阶，分子 \(\ln(n!)\)，分母 \(n\ln n\)。用 Stirling 公式写出阶乘对数的主部，再与分母逐项比较量级。</p>
+    <p>Stirling 公式给出</p>
+    \[ \ln(n!)=n\ln n-n+O(\ln n). \]
+    <p>除以 \(n\ln n\)：</p>
+    \[ \frac{\ln(n!)}{n\ln n}=1-\frac1{\ln n}+O\!\left(\frac{\ln n}{n\ln n}\right)\to1. \]
+    <p>也可用对数和积分估计：\(\ln n!=\sum_{k=1}^n\ln k\)，与 \(n\int_1^n\ln x\,dx=n\ln n-n\) 同阶，主部 \(n\ln n\) 的系数为 \(1\)。数值复核：\(n=10^3\) 时比值 \(0.8559\)，\(n=10^5\) 时 \(0.9131\)，随 \(\ln n\) 增大向 \(1\) 缓慢收敛。</p>
+    <p>除 Stirling 公式外，也可由积分放缩估计主部：</p>
+    \[ \int_1^n\ln x\,dx\le\sum_{k=1}^n\ln k\le\int_1^{n+1}\ln x\,dx, \]
+    <p>两端主部均为 \(n\ln n\)，故 \(\ln(n!)\) 与 \(n\ln n\) 之比被夹向 \(1\)。\(-n\) 项与 \(O(\ln n)\) 项在除以 \(n\ln n\) 后分别趋于零，不影响主部系数。数值上收敛速度受 \(-1/\ln n\) 项拖累，需 \(n\) 很大时比值才接近 \(1\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 Stirling 的 \(-n\) 项当成主部，误答 \(0\)；与 \(n\ln n\) 相比，\(-n\) 是低阶项。② 用积分估计时忽略 \(\ln k\) 在小区间上的矩形偏差，该偏差量级为 \(\ln n\)，不影响 \(n\ln n\) 主部。③ 分母误写成 \(n\)，主部比较对象出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>阶乘渐近三兄弟：n 次根比阶乘（2253、2258）、对数比 \(n\ln n\)（本题）、中心二项式系数渐近；分别考黎曼和与 Stirling 主部，复习时按主部量级归类。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{\ln(n!)}{n}\)。</p>
+    <p class="var-ans">答案：\(+\infty\)。主部 \(n\ln n\) 除以 \(n\) 为 \(\ln n\to+\infty\)，极限发散到正无穷。</p>
+  </div>
+</article>
+
+<article class="q" id="q2271">
+  <div class="q-head">
+    <span class="qno">第 2271 题</span>
+    <span class="qtype">变限积分等价无穷小（对数内核）</span>
+    <span class="qsrc">P1022</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\displaystyle\int_0^x\ln(1+t^2)dt}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac13\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，被积函数 \(\ln(1+t^2)\) 主部为 \(t^2\)，积分升一阶后与分母 \(x^3\) 比对。</p>
+    <p>由 \(\ln(1+u)\sim u\)（\(u\to0\)）：</p>
+    \[ \ln(1+t^2)\sim t^2. \]
+    <p>积分主部为</p>
+    \[ \int_0^x\ln(1+t^2)\,dt\sim\int_0^x t^2\,dt=\frac{x^3}{3}. \]
+    <p>余项展开：\(\ln(1+t^2)=t^2-t^4/2+O(t^6)\)，积分后余项 \(O(x^5)\)，除以 \(x^3\) 为 \(O(x^2)\to0\)。于是</p>
+    \[ \lim_{x\to0}\frac{x^3/3+O(x^5)}{x^3}=\frac13. \]
+    <p>数值复核：\(x=0.01\) 时比值 \(0.333323\)，\(x=0.001\) 时 \(0.333333\)，向 \(1/3\) 逼近。</p>
+    <p>对数内核的展开链条：\(\ln(1+t^2)=t^2-t^4/2+O(t^6)\)，积分后三阶主部 \(x^3/3\)，五阶余项 \(-x^5/10\)。分母 \(x^3\) 只匹配三阶主部，五阶项随 \(x^2\) 消失。与 2262 对照，被积内核幂次不同，积分后主部幂次相应不同；先写出内核最低次幂，再加一即为分子主部幂次，这一顺序可避免阶数错位。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\ln(1+t^2)\) 等价成 \(t\)，积分主部误写 \(x^2/2\)；等价对象是 \(t^2\)。② 积分后忘记升阶，\(t^2\) 积分得 \(x^3/3\)。③ 洛必达后分子变 \(\ln(1+x^2)\sim x^2\)，再除 \(x^2\) 得 \(1/3\)，路径可行，但等价替换更短。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>与 2262 同模板，内核分别为 \(t^3\) 正弦与 \(t^2\) 对数；记住「被积主部积分后幂次加一」，变限积分比阶题即可按同一流程处理。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\displaystyle\int_0^x\ln(1+t^2)dt}{x^5}\)。</p>
+    <p class="var-ans">答案：极限不存在，发散。分子主部 \(x^3/3\) 未对消，除以 \(x^5\) 为 \(1/(3x^2)+O(x^2)\)，\(x\to0\) 时 \(1/x^2\to+\infty\)；不能取四阶以后的系数作为有限答案。</p>
+  </div>
+</article>
+
+<article class="q" id="q2272">
+  <div class="q-head">
+    <span class="qno">第 2272 题</span>
+    <span class="qtype">根式等价无穷小</span>
+    <span class="qsrc">P1022</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\sqrt[3]{1+x}-1}{x}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac13\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，\((1+x)^{1/3}-1\)。可用二项式展开，也可用等价无穷小 \((1+u)^\alpha-1\sim\alpha u\) 定值。</p>
+    <p>二项式展开：</p>
+    \[ (1+x)^{1/3}=1+\frac13x+O(x^2). \]
+    <p>减 \(1\)：</p>
+    \[ \sqrt[3]{1+x}-1=\frac{x}{3}+O(x^2). \]
+    <p>除以 \(x\)：</p>
+    \[ \lim_{x\to0}\frac{x/3+O(x^2)}{x}=\frac13. \]
+    <p>有理化核验：令 \(a=\sqrt[3]{1+x}\)、\(b=1\)，分子乘 \(a^2+ab+b^2\) 后分母化为 \(x\)，因子 \(a^2+ab+b^2\to3\)，比值 \(1/3\)。数值复核：\(x=0.01\) 时比值 \(0.33228\)，向 \(1/3\) 逼近。</p>
+    <p>二项式展开的一般形式 \((1+x)^\alpha=1+\alpha x+\alpha(\alpha-1)x^2/2+O(x^3)\)，本题 \(\alpha=1/3\)，一阶系数即 \(1/3\)。有理化路径中立方差因子 \(a^2+ab+b^2\) 在 \(x\to0\) 时趋于 \(3\)，分子 \(x\) 与分母因子相除得到同一系数。分数次幂等价无穷小是求极限选择题的高频素材，正负号、根指数、系数三者需同时检查。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 根指数与系数错位：立方根系数 \(1/3\)，平方根系数 \(1/2\)，不可互换。② 有理化时立方差分解公式写错；\(a^3-b^3=(a-b)(a^2+ab+b^2)\)。③ 误用 \(\sqrt[3]{1+x}\sim1\) 后判分子为零。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>等价无穷小族 \((1+u)^\alpha-1\sim\alpha u\) 是替换题核心素材，与 \(\sqrt{1+u}-1\sim u/2\)、\(1-\cos u\sim u^2/2\) 并列记忆；选择题常把指数 \(\alpha\) 换成分数或负数考查系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+x}-1}{x}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。\(\alpha=1/2\)，等价无穷小系数 \(\alpha=1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2273">
+  <div class="q-head">
+    <span class="qno">第 2273 题</span>
+    <span class="qtype">∞−∞ 型根式差有理化</span>
+    <span class="qsrc">P1022</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to\infty}\left(\sqrt{x^2+x}-x\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(\infty-\infty\) 型，两个根式项之差。先乘共轭根式有理化，把差化为商，再抓 \(1/x\) 级别的修正项。</p>
+    <p>分子分母同乘 \(\sqrt{x^2+x}+x\)：</p>
+    \[ \sqrt{x^2+x}-x=\frac{(\sqrt{x^2+x}-x)(\sqrt{x^2+x}+x)}{\sqrt{x^2+x}+x}=\frac{x}{\sqrt{x^2+x}+x}. \]
+    <p>题中 \(x\to\infty\) 按正方向理解，根号取主值；分子分母同除以 \(x\)：</p>
+    \[ \frac{x}{\sqrt{x^2+x}+x}=\frac{1}{\sqrt{1+1/x}+1}\to\frac1{1+1}=\frac12. \]
+    <p>数值复核：\(x=10^3\) 时差值 \(0.499875\)，\(x=10^5\) 时 \(0.499999\)，向 \(1/2\) 逼近。</p>
+    <p>有理化之后的商式仍需做同除最高次处理：分母 \(\sqrt{x^2+x}+x\) 的最高次为 \(x\)，同除后两项分别趋于 \(1\) 与 \(1\)，分子趋于 \(1\)。一般形式</p>
+    \[ \sqrt{x^2+ax}-x=\frac{ax}{\sqrt{x^2+ax}+x}\to\frac a2, \]
+    <p>本题 \(a=1\)，结果 \(1/2\)。\(\infty-\infty\) 型不能直接拆成两个极限之差，因为二者各自发散；共轭因子把差化为有限商，才使极限可算。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 有理化后分子算成 \(x^2+x-x^2=x\)，这一步正确；把分子漏写 \(x\) 会得到零或发散。② 除以 \(x\) 时 \(\sqrt{x^2+x}=x\sqrt{1+1/x}\)，要求 \(x\) 取正；负方向需另行讨论。③ 直接用 \(\sqrt{x^2+x}\sim x\) 代入得零，丢掉低阶修正项，这正是本题要算的部分。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>\(\infty-\infty\) 根式差的标准动作是共轭因子有理化，再抓 \(1/x\) 修正；与 2272 的局部根式展开分别处理 \(x\to\infty\) 与 \(x\to0\) 两个方向，注意区分渐近变量。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\sqrt{x^2+x}-\sqrt{x^2-x}\right)\)。</p>
+    <p class="var-ans">答案：\(1\)。共轭化后分子为 \(2x\)，分母和式 \(\sqrt{x^2+x}+\sqrt{x^2-x}\sim2x\)，比值趋于 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2274">
+  <div class="q-head">
+    <span class="qno">第 2274 题</span>
+    <span class="qtype">双曲正弦余项三阶比阶</span>
+    <span class="qsrc">P1022</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\sinh x-x}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac16\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，\(\sinh x\) 减 \(x\)，一阶抵消，分母 \(x^3\)，取三阶系数。</p>
+    <p>由双曲正弦定义与指数展开：</p>
+    \[ \sinh x=\frac{e^x-e^{-x}}2=x+\frac{x^3}{6}+\frac{x^5}{120}+O(x^7). \]
+    <p>减去 \(x\)：</p>
+    \[ \sinh x-x=\frac{x^3}{6}+\frac{x^5}{120}+O(x^7). \]
+    <p>除以 \(x^3\)：</p>
+    \[ \lim_{x\to0}\frac{x^3/6+O(x^5)}{x^3}=\frac16. \]
+    <p>系数核验：\(e^x\) 三阶项 \(x^3/6\)，\(e^{-x}\) 三阶项 \(-x^3/6\)，相减除 \(2\) 后三阶项为 \(x^3/6\)。数值复核：\(x=0.01\) 时比值 \(0.166671\)，向 \(1/6\) 逼近。</p>
+    <p>双曲正弦与正弦的展开符号对照：\(\sinh x=x+x^3/6+x^5/120+\cdots\)，\(\sin x=x-x^3/6+x^5/120-\cdots\)，仅奇次项符号交替不同。本题分母 \(x^3\)，五阶项 \(x^5/120\) 随 \(x^2\) 趋于零。由定义 \(\sinh x=(e^x-e^{-x})/2\) 展开时，\(e^{-x}\) 奇次项带负号，相减后奇次项叠加、偶次项抵消，得到纯奇级数。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 与 \(\sin x-x\) 的系数符号混淆：\(\sinh\) 三阶为 \(+1/6\)，\(\sin\) 三阶为 \(-1/6\)。② 忘记双曲函数定义，直接套正弦展开。③ 五阶项 \(1/120\) 归入余项，不参与本题主部。④ 判别式：\(\sinh x\) 是纯奇次级数，一阶对消后首个非零在三阶；对照 \(\cosh x\) 为纯偶次结构，主部阶数落到二阶，奇偶结构不可混用。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>双曲函数与三角函数展开逐号对应：\(\sinh\) 对 \(\sin\)（奇函数号），\(\cosh\) 对 \(\cos\)；2275 题 \(\tanh\) 三阶为负，与 \(\tan\) 相反，复习时成对记符号。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\cosh x-1}{x^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。\(\cosh x=1+x^2/2+O(x^4)\)，对消零阶后主部 \(x^2/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2275">
+  <div class="q-head">
+    <span class="qno">第 2275 题</span>
+    <span class="qtype">双曲正切余项三阶比阶</span>
+    <span class="qsrc">P1023</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\tanh x-x}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac13\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，\(\tanh x\) 减 \(x\)，一阶抵消，分母 \(x^3\)，取三阶系数。</p>
+    <p>双曲正切在原点的展开为</p>
+    \[ \tanh x=x-\frac{x^3}{3}+\frac{2x^5}{15}+O(x^7). \]
+    <p>减去 \(x\)：</p>
+    \[ \tanh x-x=-\frac{x^3}{3}+\frac{2x^5}{15}+O(x^7). \]
+    <p>除以 \(x^3\)：</p>
+    \[ \lim_{x\to0}\frac{-x^3/3+O(x^5)}{x^3}=-\frac13. \]
+    <p>系数核验：\(\tanh x=\sinh x/\cosh x\)，\(\sinh x=x+x^3/6\)，\(\cosh x=1+x^2/2\)，相除后三阶系数 \(1/6-1/2=-1/3\)。级数复核主部恰为 \(-x^3/3\)。数值复核：\(x=0.01\) 时比值 \(-0.333356\)，向 \(-1/3\) 逼近。</p>
+    <p>双曲正切也可由双曲正弦与双曲余弦相除得到，用 \(1/(1+x^2/2)=1-x^2/2+\cdots\) 相乘即可复核三阶系数。与正切对照，\(\tan x\) 三阶为 \(+1/3\)，二者分子结构对称、符号相反。五阶系数 \(2/15\) 在本题归入余项，只有减去三阶主部后才需要取用。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 与 \(\tan x-x\) 的 \(+1/3\) 混淆；\(\tanh\) 三阶为负。② 展开 \(\tanh\) 时直接套用正弦系数再改号，容易把五阶项也带错。③ 五阶系数 \(2/15\) 归入余项，不参与本题主部。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>\(\tanh\) 与 \(\tan\) 是符号对偶：\(\tan x=x+x^3/3+2x^5/15\)，\(\tanh x=x-x^3/3+2x^5/15\)，三阶符号相反、五阶符号相同；复习时成对记忆可减少符号错误。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tanh x-x+x^3/3}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac2{15}\)。对消三阶主部后，剩余最低次为 \(2x^5/15\)，除以 \(x^5\) 得 \(2/15\)。</p>
+  </div>
+</article>

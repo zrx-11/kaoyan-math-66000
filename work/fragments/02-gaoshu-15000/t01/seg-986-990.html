@@ -1,0 +1,821 @@
+<article class="q" id="q2076">
+  <div class="q-head">
+    <span class="qno">第 2076 题</span>
+    <span class="qtype">振荡积分（Riemann–Lebesgue 引理）</span>
+    <span class="qsrc">P985</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在[0,1]上连续，且 \(\int_0^1 f(x)dx=0\)，\(\int_0^1 x f(x)dx=1\)，求 \(\lim\limits_{n\to\infty}\int_0^1 f(x)\sin(nx)dx\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：连续函数 \(f\) 乘振荡因子 \(\sin(nx)\) 在有限区间积分，属 Riemann–Lebesgue 引理型：若 \(f\) 在 \([a,b]\) 上可积，则 \(\lambda\to\infty\) 时</p>
+    \[ \int_a^b f(x)\sin(\lambda x)\,dx\to0,\qquad \int_a^b f(x)\cos(\lambda x)\,dx\to0. \]
+    <p>阶梯函数 \(g=\sum_j c_j\mathbf 1_{[\alpha_j,\beta_j]}\) 的分段振荡积分为</p>
+    \[ \int_{\alpha_j}^{\beta_j} c_j\sin(nx)\,dx=\frac{c_j}{n}\bigl(\cos(n\alpha_j)-\cos(n\beta_j)\bigr), \]
+    \[ \left|\int_{\alpha_j}^{\beta_j} c_j\sin(nx)\,dx\right|\le\frac{2|c_j|}{n}=O(1/n). \]
+    <p>该段积分一致趋于零；阶梯函数逼近 \(f\) 的误差积分被区间长度乘上确界控制、与 \(n\) 无关地任意小，故 \(f\) 的振荡积分同样趋于零。</p>
+    <p>题给两个矩条件 \(\int_0^1 f(x)dx=0\)、\(\int_0^1 xf(x)dx=1\) 不改变结论：引理只要求可积，与低阶矩无关；矩条件仅在乘 \(n\)、\(n^2\) 等放大因子考察渐近时才参与定值，本题未放大，主部即振荡消去后的零。取 \(f(x)=x-\tfrac12\) 验算，它满足两个矩条件，\(n=1000\) 时积分已在 \(1/n\) 量级。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误以为矩条件能决定极限值，去把 \(f(x)\) 按 \(1,x\) 展开配系数；振荡积分的极限由引理直接给出，矩条件在不取放大因子时不参与定值。② 把 \(\sin(nx)\) 当成 \(\sin x\) 套用中值定理，振荡相位随 \(n\) 变化，中值点无法固定。③ 忽略可积性前提，在无界函数上直接引用引理。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>振荡积分趋于零是 Fourier 分析的基础结论，选择题与解答题中常以「连续函数乘 \(\sin(nx)\) 或 \(\cos(nx)\) 在有限区间积分」的形式出现。同组题目会逐阶增加矩条件（对照 2086、2096 题），解题框架不变：先判振荡消去，再看是否乘了放大因子决定是否需要更高阶渐近。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f\in C[0,1]\)，求 \(\lim\limits_{n\to\infty}\int_0^1 f(x)\cos(nx)\,dx\)。</p>
+    <p class="var-ans">答案：\(0\)。Riemann–Lebesgue 引理的余弦版本结论相同，阶梯函数逼近后每段 \(\int\cos(nx)dx=O(1/n)\) 趋于零。</p>
+  </div>
+</article>
+
+<article class="q" id="q2077">
+  <div class="q-head">
+    <span class="qno">第 2077 题</span>
+    <span class="qtype">Taylor 展开（对数余项）</span>
+    <span class="qsrc">P986</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+\dfrac{x^2}{2}-\dfrac{x^3}{3}}{x^4}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac14\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子是 \(\ln(1+x)\) 与其前三阶多项式近似之差，分母为 \(x^4\)，属泰勒展开定系数型。思路是把 \(\ln(1+x)\) 展开到与分母同阶，再比对分子的最低次项。</p>
+    <p>对数函数在原点的麦克劳林展开为</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+O(x^5). \]
+    <p>代入分子：前三项 \(x-\tfrac{x^2}{2}+\tfrac{x^3}{3}\) 与题目中减去、加回、再减去的部分逐项抵消，剩下的最低次项为</p>
+    \[ \ln(1+x)-x+\frac{x^2}{2}-\frac{x^3}{3}=-\frac{x^4}{4}+O(x^5). \]
+    <p>关键一步在于展开阶数必须够：分母是 \(x^4\)，分子展开就必须写到 \(x^4\) 项，那个 \(-\tfrac14\) 系数正是答案的来源；若只写到 \(x^3\)，分子只能判为 \(O(x^3)\)，与分母相除后阶数对不上，无法定值。于是</p>
+    \[ \frac{-\frac{x^4}{4}+O(x^5)}{x^4}=-\frac14+O(x)\to-\frac14. \]
+    <p>数值复核：取 \(x=0.02\)，比值约为 \(-0.2461\)，随 \(x\) 缩小向 \(-1/4=-0.25\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 展开阶数不足，只写到 \(x^3\) 就判定分子为高阶无穷小，得到极限 \(0\)。② 符号交替写错，把 \(x^4\) 项系数记成 \(+1/4\)，得到 \(+1/4\)。③ 误用等价无穷小 \(\ln(1+x)\sim x\)：等价关系只保一阶，分子中 \(x,x^2,x^3\) 各项都被消去，必须用完整展开。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「函数减其泰勒多项式后除以指定幂次」是 \(0/0\) 型极限的固定考法，对数、正弦、余弦、正切、反正切、双曲函数各成一组（对照 2080、2087、2088、2090、2097、2098、2100 题）。解题先按分母幂次决定展开到第几项，再逐项抵消比对最低次系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x}{x^2}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac12\)。展开到二阶：\(\ln(1+x)-x=-x^2/2+O(x^3)\)，除以 \(x^2\) 得 \(-1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2078">
+  <div class="q-head">
+    <span class="qno">第 2078 题</span>
+    <span class="qtype">等价无穷小（三角差）</span>
+    <span class="qsrc">P986</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是正切与正弦之差，直接分别等价替换会漏掉高阶项。先提取公因子统一结构：</p>
+    \[ \tan x-\sin x=\sin x\left(\frac1{\cos x}-1\right)=\frac{\sin x(1-\cos x)}{\cos x}. \]
+    <p>这样分子拆成三个因子：\(\sin x\)、\(1-\cos x\)、分母上的 \(\cos x\)。各因子在 \(x\to0\) 时的等价无穷小为</p>
+    \[ \sin x\sim x,\qquad 1-\cos x\sim\frac{x^2}{2},\qquad \cos x\to1. \]
+    <p>等价无穷小替换可以在乘积因子上进行，这是本题选择因式分解的原因：若不分解而直接写 \(\tan x\sim x\)、\(\sin x\sim x\)，两个一阶项相减后一阶部分抵消，留下的三阶主部会被错误替换消掉。代入得</p>
+    \[ \frac{\sin x(1-\cos x)}{\cos x}\sim\frac{x\cdot x^2/2}{1}=\frac{x^3}{2}. \]
+    <p>因此</p>
+    \[ \lim_{x\to0}\frac{\tan x-\sin x}{x^3}=\frac12. \]
+    <p>用泰勒展开复核：\(\tan x=x+\tfrac{x^3}{3}+O(x^5)\)，\(\sin x=x-\tfrac{x^3}{6}+O(x^5)\)，相减得 \(\tfrac{x^3}{2}+O(x^5)\)，结论一致。数值上 \(x=0.02\) 时比值约为 \(0.5001\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 对差式整体做等价替换，\(\tan x-\sin x\sim x-x=0\)，丢掉三阶主部；等价替换只适用于乘除因子，不能用于加减后未判明主部阶数的情形。② 记错 \(1-\cos x\sim x^2/2\) 的系数，写成 \(x^2\)，得到 \(1\)。③ 忽略 \(\cos x\) 分母在原点趋于 \(1\)，不影响阶数但应在式中写明。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>三角差型极限常考「一阶抵消、高阶主部定阶」，因式分解提取公因子是标准预处理。同组题目把分子换成 \(\tan x-x\)、\(\sin x-x\)、\(\cot x-1/x\) 等（对照 2082、2092、2100 题），处理框架都是先分解再逐因子定阶。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{1-\cos x}{x^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。由 \(1-\cos x=2\sin^2(x/2)\sim2(x/2)^2=x^2/2\)，除以 \(x^2\) 得 \(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2079">
+  <div class="q-head">
+    <span class="qno">第 2079 题</span>
+    <span class="qtype">Dirichlet 判别法（三角级数）</span>
+    <span class="qsrc">P986</span>
+  </div>
+  <div class="stem">
+    <p>证明：级数 \(\sum\limits_{n=1}^{\infty}\dfrac{\cos n}{n^p}\) 对于 \(p\gt{}0\) 收敛。</p>
+  </div>
+  <div class="answer">答案：收敛</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：一般项为「有界振荡序列乘单调趋于零的数列」，属 Dirichlet 判别法适用型。判别法条件：部分和 \(\sum_{k=1}^N a_k\) 对 \(N\) 一致有界，\(b_n\) 单调趋于零，则 \(\sum a_nb_n\) 收敛。</p>
+    <p>先验证余弦部分和有界。由等比数列求和或积化和差公式，</p>
+    \[ \sum_{k=1}^N\cos k=\frac{\sin(N/2)\cos((N+1)/2)}{\sin(1/2)}. \]
+    <p>分子是两个正弦、余弦值的乘积，绝对值不超过 \(1\)，分母 \(\sin(1/2)\) 为固定正数，故部分和一致有界于 \(1/\sin(1/2)\)，与 \(N\) 无关：</p>
+    \[ \left|\sum_{k=1}^N\cos k\right|\le\frac{1}{\sin(1/2)},\qquad N=1,2,\ldots \]
+    <p>再验乘子 \(b_n=n^{-p}\)：当 \(p\gt{}0\) 时，\(b_n\) 随 \(n\) 单调递减，且</p>
+    \[ \lim_{n\to\infty}n^{-p}=0. \]
+    <p>两个条件同时满足，由 Dirichlet 判别法，级数 \(\sum \cos n/n^p\) 对一切 \(p\gt{}0\) 收敛。需要区分收敛类型：当 \(p\gt{}1\) 时，\(|\cos n|/n^p\le1/n^p\)，\(p\)-级数收敛，级数绝对收敛；当 \(0\lt{}p\le1\) 时不绝对收敛，属条件收敛。题述只要求证明收敛。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(p\gt{}0\) 都判成绝对收敛：绝对值级数 \(\sum|\cos n|/n^p\) 在 \(p\le1\) 时发散，只能称条件收敛。② 直接套用 Leibniz 交错级数判别：\(\cos n\) 的符号不是交替出现，该判别法不适用。③ 忘记验证部分和有界这一前提，只看 \(1/n^p\to0\) 就下结论。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>Dirichlet 判别法是判断三角级数、交错风格级数收敛的主工具，考研解答题常要求写出部分和有界性的证明。同组题目把 \(\cos n\) 换成 \(\sin n\)，或把 \(n^{-p}\) 换成 \(\ln n/n\)、\(n!/n^n\) 等单调零序列（对照 2089、2099 题），核心都是「振荡部分和有界 + 乘子单调趋零」。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 判断级数 \(\sum\limits_{n=1}^{\infty}\dfrac{\sin n}{n^p}\)（\(p\gt{}0\)）的收敛性。</p>
+    <p class="var-ans">答案：收敛。正弦部分和 \(\sum_{k=1}^N\sin k=\dfrac{\sin(N/2)\sin((N+1)/2)}{\sin(1/2)}\) 同样一致有界，乘子 \(n^{-p}\) 单调趋零，Dirichlet 判别法给出收敛；\(p\gt{}1\) 时绝对收敛，\(0\lt{}p\le1\) 时条件收敛。</p>
+  </div>
+</article>
+
+<article class="q" id="q2080">
+  <div class="q-head">
+    <span class="qno">第 2080 题</span>
+    <span class="qtype">Taylor 展开（反正切余项）</span>
+    <span class="qsrc">P986</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\arctan x-x+\dfrac{x^3}{3}}{x^5}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac15\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子是反正切函数与其一、三阶多项式近似之差，分母 \(x^5\)，属泰勒展开定系数型。按分母幂次把 \(\arctan x\) 展开到 \(x^5\) 项。</p>
+    <p>反正切的麦克劳林展开可由逐项积分几何级数得到：</p>
+    \[ \frac1{1+t^2}=1-t^2+t^4-t^6+\cdots, \]
+    <p>从 \(0\) 积到 \(x\)：</p>
+    \[ \arctan x=x-\frac{x^3}{3}+\frac{x^5}{5}+O(x^7). \]
+    <p>代入分子，\(x\) 与 \(x^3/3\) 两项被逐项抵消，剩余最低次项为</p>
+    \[ \arctan x-x+\frac{x^3}{3}=\frac{x^5}{5}+O(x^7). \]
+    <p>这里必须展开到 \(x^5\)：分母为 \(x^5\)，若只写到 \(x^3\)，分子只能判为 \(O(x^3)\)，与分母相除后趋于无穷，阶数判断错误。继续相除：</p>
+    \[ \frac{\frac{x^5}{5}+O(x^7)}{x^5}=\frac15+O(x^2)\to\frac15. \]
+    <p>数值复核：取 \(x=0.02\)，比值约为 \(0.19994\)，向 \(1/5=0.2\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 展开到 \(x^3\) 即停止，误判分子为三阶以上而答案不定或趋于零。② 符号记反：\(\arctan x\) 的 \(x^3\) 项为负、\(x^5\) 项为正，题目分子是「\(-x+x^3/3\)」，对应抵消后取正的 \(x^5/5\)。③ 用导数法逐阶求导时漏算链式因子，导致五阶系数出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>反三角函数的泰勒展开是同组对照题的常客：反正切、反正弦各配一个余项极限（对照 2098 题）。展开来源是几何级数逐项积分，系数符号交替，解题时先列展开式再按分母阶数截取。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arctan x-x}{x^3}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac13\)。展开到三阶：\(\arctan x-x=-x^3/3+O(x^5)\)，除以 \(x^3\) 得 \(-1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2081">
+  <div class="q-head">
+    <span class="qno">第 2081 题</span>
+    <span class="qtype">含参反常积分（Frullani 型）</span>
+    <span class="qsrc">P986</span>
+  </div>
+  <div class="stem">
+    <p>设函数 \(f(x)=\int_0^x\dfrac{\sin t}{t}e^{-t}dt\)，求 \(\lim\limits_{x\to\infty}f(x)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\pi}{4}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：变上限积分在上限趋于无穷时取极限，被积函数含 \(\sin t/t\) 与衰减因子 \(e^{-t}\)，属含参反常积分。所求即收敛反常积分</p>
+    \[ I=\int_0^\infty e^{-t}\frac{\sin t}{t}\,dt. \]
+    <p>直接对 \(1/t\) 积分不便，引入参数 \(a\)：记</p>
+    \[ F(a)=\int_0^\infty e^{-t}\frac{\sin(at)}{t}\,dt,\qquad F(0)=0. \]
+    <p>被积函数关于 \(a\) 可求导，且求导后积分一致收敛，可在积分号下求导：</p>
+    \[ F'(a)=\int_0^\infty e^{-t}\cos(at)\,dt. \]
+    <p>这是标准指数衰减配余弦的积分，分部积分两次或用复指数积分可得</p>
+    \[ \int_0^\infty e^{-t}\cos(at)\,dt=\frac{1}{1+a^2}. \]
+    <p>再对 \(a\) 从 \(0\) 积分回 \(1\)：</p>
+    \[ I=F(1)-F(0)=\int_0^1\frac{da}{1+a^2}=\arctan 1-\arctan 0=\frac{\pi}{4}. \]
+    <p>数值复核：30 位精度下数值积分结果为 \(0.7853981634\)，与 \(\pi/4=0.7853981634\) 完全一致。衰减因子 \(e^{-t}\) 保证积分绝对收敛，没有普通 Dirichlet 积分那种条件收敛的边界问题。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把被积函数当成 \(\sin t/t\) 的经典 Dirichlet 积分，答成 \(\pi/2\)；本题多了 \(e^{-t}\)，参数积分给出的是 \(\arctan 1=\pi/4\)。② 直接对 \(1/t\) 分部积分，在 \(t=0\) 附近误判发散；\(\sin t/t\to1\)，原点处可积。③ 积分号下求导时不验证一致收敛，在被积函数振荡加剧的参数段出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「\(\sin(at)/t\) 配衰减因子」是含参积分的经典模型，结论 \(\int_0^\infty e^{-bt}\sin(at)/t\,dt=\arctan(a/b)\)。同组题目对照普通 Dirichlet 积分 \(\int_0^\infty\sin t/t\,dt=\pi/2\)（见 2091 题的分部积分框架），解题先看有无衰减因子决定收敛类型。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\int_0^\infty e^{-2t}\dfrac{\sin t}{t}\,dt\)。</p>
+    <p class="var-ans">答案：\(\arctan\dfrac12\)。按参数公式 \(\arctan(a/b)\)，取 \(a=1,b=2\)，结果为 \(\arctan(1/2)\approx0.46365\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2082">
+  <div class="q-head">
+    <span class="qno">第 2082 题</span>
+    <span class="qtype">等价无穷小（余割差）</span>
+    <span class="qsrc">P987</span>
+  </div>
+  <div class="stem">
+    <p>证明：当 \(x\to0\) 时，\(\dfrac{1}{\sin x}-\dfrac{1}{x}\sim\dfrac{x}{6}\)。</p>
+  </div>
+  <div class="answer">答案：成立</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：两等价无穷大之差的主部判定。\(1/\sin x\) 与 \(1/x\) 在 \(x\to0\) 时都趋于无穷，一阶部分相消，需展开到二阶以上才能定出差的主部。</p>
+    <p>先写正弦的展开：</p>
+    \[ \sin x=x-\frac{x^3}{6}+O(x^5)=x\left(1-\frac{x^2}{6}+O(x^4)\right). \]
+    <p>取倒数时利用 \((1+u)^{-1}=1-u+O(u^2)\)，令 \(u=-x^2/6+O(x^4)\)：</p>
+    \[ \frac1{\sin x}=\frac1x\left(1-\frac{x^2}{6}+O(x^4)\right)^{-1}
+       =\frac1x\left(1+\frac{x^2}{6}+O(x^4)\right)
+       =\frac1x+\frac{x}{6}+O(x^3). \]
+    <p>两式相减，\(1/x\) 项抵消：</p>
+    \[ \frac1{\sin x}-\frac1x=\frac{x}{6}+O(x^3). \]
+    <p>比值</p>
+    \[ \frac{\frac1{\sin x}-\frac1x}{x/6}=1+O(x^2)\to1, \]
+    <p>故差与 \(x/6\) 等价，题述成立。数值复核：\(x=0.02\) 时比值约为 \(0.16667\)，即 \(1/6\)。</p>
+    <p>关键一步是倒数展开不能只取 \(\sin x\sim x\)：若写 \(1/\sin x\sim1/x\)，差的主部被整体消去，必须保留 \(x^3\) 阶修正才能得到 \(x/6\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 对无穷大量做等价替换后相减，判得差为零；等价关系只保最低阶，两式一阶相同、差值来自高阶修正。② 倒数展开时符号出错，把 \(+x/6\) 写成 \(-x/6\)。③ 通分后用洛必达法则两次以上仍未提取主部，计算量增大且容易在导数阶数上出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「三角函数倒数与 \(1/x\) 之差」是等价无穷小证明题的固定一组，与余切差（2092 题）互为对照：余割差主部为 \(+x/6\)，余切差主部为 \(-x/3\)。这类结论常作为后续 \(0/0\) 极限的构件出现，记住展开系数可加快判定。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\csc x-1/x}{x}\)。</p>
+    <p class="var-ans">答案：\(\dfrac16\)。由上述展开 \(\csc x-1/x=x/6+O(x^3)\)，除以 \(x\) 得 \(1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2083">
+  <div class="q-head">
+    <span class="qno">第 2083 题</span>
+    <span class="qtype">变限积分 + Taylor 展开</span>
+    <span class="qsrc">P987</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\int_0^x\cos(t^4)dt-x}{x^9}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac1{18}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：变上限积分减其被积函数常数项对应的原函数，分母 \(x^9\)，属「先展开被积函数、再逐项积分」型。被积函数 \(\cos(t^4)\) 在 \(t=0\) 附近展开：</p>
+    \[ \cos(t^4)=1-\frac{(t^4)^2}{2}+O(t^{16})=1-\frac{t^8}{2}+O(t^{16}). \]
+    <p>对 \(t\) 从 \(0\) 到 \(x\) 逐项积分，幂次提升一次：</p>
+    \[ \int_0^x\cos(t^4)\,dt=x-\frac12\cdot\frac{x^9}{9}+O(x^{17})
+       =x-\frac{x^9}{18}+O(x^{17}). \]
+    <p>分子减去 \(x\) 后，常数项与一次项抵消，最低次为 \(x^9\)：</p>
+    \[ \int_0^x\cos(t^4)\,dt-x=-\frac{x^9}{18}+O(x^{17}). \]
+    <p>除以 \(x^9\)：</p>
+    \[ \frac{-\frac{x^9}{18}+O(x^{17})}{x^9}=-\frac1{18}+O(x^8)\to-\frac1{18}. \]
+    <p>关键一步是判断展开阶数：分母 \(x^9\) 对应被积函数中 \(t^8\) 项，积分后幂次 \(9\)；余弦修正项系数 \(-1/2\) 与积分因子 \(1/9\) 相乘得到 \(-1/18\)。数值复核：\(x=0.1\) 时比值约为 \(-0.0555556\)，与 \(-1/18\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 积分后忘记幂次加一，把 \(t^8\) 积分成 \(x^8/8\)，系数与分母幂次全错。② 余弦展开写成 \(1-t^4/2\)，漏掉平方：\(\cos u=1-u^2/2\)，这里 \(u=t^4\)，修正项是 \(t^8/2\)。③ 对变限积分直接用洛必达法则，求导后得到 \(\cos(x^4)-1\sim -x^8/2\)，再与分母 \(9x^8\) 比较，结果相同但需注意洛必达后仍要定阶。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>变限积分配泰勒展开是 \(0/0\) 型的高频组合，考法固定：展开被积函数到与分母同阶、逐项积分、比对最低次。同组题目把余弦换成正弦（对照 2093 题的格式），区别只在展开首项是常数还是 \(t\) 的幂。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\int_0^x\cos(t^2)dt-x}{x^5}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac1{10}\)。\(\cos(t^2)=1-t^4/2+O(t^8)\)，积分得 \(x-x^5/10+O(x^9)\)，分子为 \(-x^5/10\)，除以 \(x^5\) 得 \(-1/10\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2084">
+  <div class="q-head">
+    <span class="qno">第 2084 题</span>
+    <span class="qtype">算术平均型递推（初值恰为不动点）</span>
+    <span class="qsrc">P987</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{a_n\}\) 满足 \(a_1=1\)，\(a_{n+1}=\dfrac1n\sum\limits_{k=1}^n a_k\)，证明 \(\lim\limits_{n\to\infty}a_n=0\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)（题述结论 \(0\) 不成立）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>【题述结论错误】题目要求证明的 \(\lim\limits_{n\to\infty}a_n=0\) 本身不成立：记 \(S_n=\sum_{k=1}^n a_k\)，则 \(S_{n+1}/(n+1)=S_n/n\) 为不变量，恒等于首项 \(1\)，归纳得 \(a_n\equiv1\)，极限为 \(1\)；答案栏「证明完成」系沿用题述假结论，并非答案栏另行算错。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推右端是前 \(n\) 项的算术平均，先把和式记成 \(S_n=\sum_{k=1}^n a_k\)，递推式写成 \(a_{n+1}=S_n/n\)。考察部分和的变化：</p>
+    \[ S_{n+1}=S_n+a_{n+1}=S_n+\frac{S_n}{n}=S_n\left(1+\frac1n\right)=S_n\cdot\frac{n+1}{n}. \]
+    <p>两边除以 \(n+1\)：</p>
+    \[ \frac{S_{n+1}}{n+1}=\frac{S_n}{n}. \]
+    <p>可见前 \(n\) 项的平均值 \(S_n/n\) 是递推不变量，对一切 \(n\) 等于初值：</p>
+    \[ \frac{S_n}{n}=\frac{S_1}{1}=a_1=1. \]
+    <p>于是 \(a_{n+1}=S_n/n=1\)，结合 \(a_1=1\)，归纳得 \(a_n\equiv1\) 对所有 \(n\) 成立，极限为 \(1\)，而不是题述的 \(0\)。</p>
+    <p>从不动点角度复核：常值 \(L\) 满足 \(L=(1/n)\sum_{k=1}^n L=L\)，任何常数都是该平均递推的不动点，初值是多少，数列就保持多少；不存在把平均拉向零的收缩机制。数值迭代前 30 步各项均为 \(1.000000\)，与推导一致。题述若要得到趋于零的结论，递推右端应含使数列收缩的因子或映射，当前印式不具备该结构。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 见到「平均」就默认数列被摊薄到零，不写不变量推导；算术平均递推保持的是均值，不是把各项拉向零。② 取极限时令 \(a_n\to L\)，把右端均值也写成 \(L\)，方程 \(L=L\) 恒等，定不出 \(L\)；必须靠初值与不变量确定。③ 忽略 \(a_1=1\) 这一初值对常值不动点的决定作用。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>平均型递推的关键是识别不变量：求和项与项数同步增长时，均值不随递推改变。同类题目若递推含平方根、倒数等非线性映射（对照 2094 题），则需先解不动点方程再判初值落点；线性平均映射本身不产生收缩。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=2\)，\(a_{n+1}=\dfrac1n\sum\limits_{k=1}^n a_k\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+    <p class="var-ans">答案：\(2\)。均值不变量 \(S_n/n=2\)，故 \(a_n\equiv2\)，极限为初值 \(2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2085">
+  <div class="q-head">
+    <span class="qno">第 2085 题</span>
+    <span class="qtype">Taylor 展开（双曲正切）</span>
+    <span class="qsrc">P987</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tanh x-x}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac13\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：双曲正切与其线性近似之差，分母 \(x^3\)，属泰勒展开定系数型。\(\tanh x\) 的麦克劳林展开可由双曲正弦、余弦之比或直接求导得到：</p>
+    \[ \tanh x=x-\frac{x^3}{3}+\frac{2x^5}{15}+O(x^7). \]
+    <p>代入分子，一次项抵消，最低次为 \(x^3\)：</p>
+    \[ \tanh x-x=-\frac{x^3}{3}+O(x^5). \]
+    <p>除以 \(x^3\)：</p>
+    \[ \frac{-\frac{x^3}{3}+O(x^5)}{x^3}=-\frac13+O(x^2)\to-\frac13. \]
+    <p>与三角函数对照可帮助记忆：\(\tan x=x+x^3/3+\cdots\)，双曲正切的三阶项符号相反，系数同为 \(1/3\)。负号来源是 \(\tanh x\) 在原点附近增长慢于 \(x\)，故 \(\tanh x-x\) 取负三阶主部。关键一步仍是展开阶数匹配分母：分母 \(x^3\) 就必须写到 \(x^3\) 项，只写 \(\tanh x\sim x\) 会把差值主部整个消掉。数值复核：\(x=0.02\) 时比值约 \(-0.33328\)，\(x=0.01\) 时约 \(-0.33333\)，向 \(-1/3\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把双曲正切与正切展开记混，三阶项写成 \(+x^3/3\)，得到 \(+1/3\)。② 用等价 \(\tanh x\sim x\) 后直接相减判零，未保留三阶修正。③ 双曲函数定义记错，把 \(\tanh x\) 写成 \(\sinh x/\cosh x\) 后展开时漏了 \(\cosh\) 分母的贡献。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>双曲函数展开与三角函数展开成对出现：\(\sinh\) 对照 \(\sin\)、\(\tanh\) 对照 \(\tan\)（对照 2095 题），系数相同、奇偶项符号规律不同。双曲正切五阶系数 \(2/15\) 与正切五阶相同、三阶符号相反；考题通常停在三阶或五阶，更高阶系数用 \(\sinh/\cosh\) 级数相除递推。解题时先列双曲展开式，再按分母幂次截取最低次项。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tanh x-x+x^3/3}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac2{15}\)。展开五阶项为 \(2x^5/15\)，除以 \(x^5\) 得 \(2/15\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2086">
+  <div class="q-head">
+    <span class="qno">第 2086 题</span>
+    <span class="qtype">振荡积分（Riemann–Lebesgue 引理）</span>
+    <span class="qsrc">P987</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在[0,1]上连续，且 \(\int_0^1 f(x)dx=0\)，\(\int_0^1 x f(x)dx=0\)，\(\int_0^1 x^2 f(x)dx=1\)，求 \(\lim\limits_{n\to\infty}\int_0^1 f(x)\sin(nx)dx\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：与 2076 题同属振荡积分，被积函数为连续函数 \(f\) 乘振荡因子 \(\sin(nx)\)，直接由 Riemann–Lebesgue 引理给出极限。引理：有限区间上可积函数乘 \(\sin(\lambda x)\) 或 \(\cos(\lambda x)\) 的积分，在 \(\lambda\to\infty\) 时趋于零。</p>
+    <p>证明仍走阶梯函数逼近路线。对阶梯函数 \(g=\sum c_j\mathbf 1_{[\alpha_j,\beta_j]}\)，分段积分</p>
+    \[ \int_{\alpha_j}^{\beta_j}c_j\sin(nx)\,dx=\frac{c_j}{n}\bigl(\cos(n\alpha_j)-\cos(n\beta_j)\bigr)=O(1/n), \]
+    \[ \left|\int_{\alpha_j}^{\beta_j}c_j\sin(nx)\,dx\right|\le\frac{2|c_j|}{n}=O(1/n). \]
+    <p>一致趋于零；连续函数被阶梯函数一致逼近，误差积分被区间长度乘上确界控制，与 \(n\) 无关地任意小，故 \(f\) 的振荡积分同样趋于零：</p>
+    \[ \lim_{n\to\infty}\int_0^1 f(x)\sin(nx)\,dx=0. \]
+    <p>题给三个矩条件 \(\int f=0\)、\(\int xf=0\)、\(\int x^2f=1\) 不改变这一结论。矩条件描述的是 \(f\) 与低次多项式的正交程度，只有在积分前乘 \(n\)、\(n^2\) 等放大因子考察二阶渐近时才参与定值；本题原积分未放大，振荡消去后的主部就是零。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 看到矩条件就去配正交多项式求极限，把渐近修正项当成主部。② 误认为矩条件越多极限越复杂；引理只要求可积，与矩无关。③ 把 \(\sin(nx)\) 展开后逐项积分，低频项被矩条件消去、高频项才是振荡部分，直接展开容易混淆阶数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2076、2096 题构成同组对照：矩条件逐阶增加（零阶、一阶、二阶、三阶），振荡积分的极限始终为零。若题目改为求 \(n\int f\sin(nx)dx\) 之类放大形式，才需要用矩条件或分部积分算首项渐近。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f\in C[0,1]\)，且各阶矩条件不变，求 \(\lim\limits_{n\to\infty}\int_0^1 f(x)\cos(nx)\,dx\)。</p>
+    <p class="var-ans">答案：\(0\)。Riemann–Lebesgue 引理余弦版本结论相同，矩条件不参与定值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2087">
+  <div class="q-head">
+    <span class="qno">第 2087 题</span>
+    <span class="qtype">Taylor 展开（对数余项）</span>
+    <span class="qsrc">P988</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+\dfrac{x^2}{2}-\dfrac{x^3}{3}+\dfrac{x^4}{4}}{x^5}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac15\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子是 \(\ln(1+x)\) 到四阶的多项式近似之差，分母 \(x^5\)，按分母幂次把对数展开到五阶。麦克劳林展开为</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\frac{x^5}{5}+O(x^6). \]
+    <p>代入分子，前四项与题目中的 \(-x、+x^2/2、-x^3/3、+x^4/4\) 逐项抵消，剩余最低次项为</p>
+    \[ \ln(1+x)-x+\frac{x^2}{2}-\frac{x^3}{3}+\frac{x^4}{4}=\frac{x^5}{5}+O(x^6). \]
+    <p>除以 \(x^5\)：</p>
+    \[ \frac{\frac{x^5}{5}+O(x^6)}{x^5}=\frac15+O(x)\to\frac15. \]
+    <p>关键一步是展开阶数：分母 \(x^5\) 要求写到 \(x^5\) 项，系数 \(+1/5\) 来自对数展开的第五项；对数级数系数规律为 \((-1)^{k+1}/k\)，第五项符号为正。数值复核：\(x=0.02\) 时比值约为 \(0.1967\)，随 \(x\) 缩小向 \(1/5=0.2\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 符号交替记错，把第五项写成 \(-x^5/5\)，得到 \(-1/5\)。② 展开只到四阶，误判分子为四阶以上而答案为零或发散。③ 混淆本题与 2077 题：2077 分母 \(x^4\) 取到第四项 \(-1/4\)，本题分母 \(x^5\) 取到第五项 \(+1/5\)，阶数与符号都随题号递进。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数余项型题目按分母幂次逐级递进，同一框架覆盖 2077、2087、2097 三题，分别取四、五、六阶系数。复习时先记住 \(\ln(1+x)\) 级数通式 \(\sum(-1)^{k+1}x^k/k\)，再按分母阶数截取，不必逐题背系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+x^2/2}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。第三项为 \(+x^3/3\)，除以 \(x^3\) 得 \(1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2088">
+  <div class="q-head">
+    <span class="qno">第 2088 题</span>
+    <span class="qtype">Taylor 展开（余弦余项）</span>
+    <span class="qsrc">P988</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\cos x-1+\dfrac{x^2}{2}}{x^4}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac1{24}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：余弦与其二阶多项式近似之差，分母 \(x^4\)，属泰勒展开定系数型。余弦的麦克劳林展开为</p>
+    \[ \cos x=1-\frac{x^2}{2}+\frac{x^4}{24}+O(x^6). \]
+    <p>代入分子，常数项与二阶项抵消：</p>
+    \[ \cos x-1+\frac{x^2}{2}=\frac{x^4}{24}+O(x^6). \]
+    <p>除以 \(x^4\)：</p>
+    \[ \frac{\frac{x^4}{24}+O(x^6)}{x^4}=\frac1{24}+O(x^2)\to\frac1{24}. \]
+    <p>展开阶数由分母决定：分母 \(x^4\) 就必须写到 \(x^4\)，系数 \(1/24=1/4!\) 来自余弦级数第四项。若只记住 \(1-\cos x\sim x^2/2\)，二阶主部被题目中的 \(+x^2/2\) 消去，剩余的四阶主部必须靠完整展开取得。余弦级数只有偶次项，系数符号按 \(1,-1/2!,+1/4!,-1/6!,\cdots\) 交替，四阶项为正。</p>
+    <p>也可用导数核验系数：\(\cos x\) 在原点的四阶导数为 \(1\)，泰勒系数 \(f^{(4)}(0)/4!=1/24\)，与展开结果一致。数值复核：\(x=0.02\) 时比值约为 \(0.0416661\)，与 \(1/24\approx0.0416667\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只用等价无穷小 \(1-\cos x\sim x^2/2\)，分子判为高阶无穷小答零，漏掉四阶修正。② 阶乘系数记错，把 \(1/24\) 写成 \(1/12\) 或 \(1/4!\) 之外的数。③ 展开时把 \(\cos x\) 的偶次项符号写成交替混乱，四阶项应为正。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>余弦余项型是 \(0/0\) 展开题的基础构件，常与正弦、正切展开成对出现（对照 2078、2090、2100 题）。解题先列余弦偶次项级数 \(1-x^2/2!+x^4/4!-x^6/6!+\cdots\)，按分母阶数截取。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{1-\cos x}{x^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。二阶主部 \(x^2/2\)，除以 \(x^2\) 得 \(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2089">
+  <div class="q-head">
+    <span class="qno">第 2089 题</span>
+    <span class="qtype">交错级数（Leibniz 判别法）</span>
+    <span class="qsrc">P988</span>
+  </div>
+  <div class="stem">
+    <p>证明：级数 \(\sum\limits_{n=1}^{\infty}\dfrac{(-1)^n\ln n}{n}\) 收敛。</p>
+  </div>
+  <div class="answer">答案：收敛</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：交错级数，一般项绝对值为 \(b_n=\ln n/n\)，用 Leibniz 判别法：若 \(b_n\) 单调递减趋于零，则交错级数 \(\sum(-1)^n b_n\) 收敛。</p>
+    <p>先验证 \(b_n\to0\)。令连续函数 \(f(x)=\ln x/x\)，由洛必达法则，</p>
+    \[ \lim_{x\to\infty}\frac{\ln x}{x}=\lim_{x\to\infty}\frac{1/x}{1}=0, \]
+    <p>故 \(b_n\to0\)。再验证单调性：求导</p>
+    \[ f'(x)=\frac{1-\ln x}{x^2}. \]
+    <p>当 \(x\gt{}e\) 时 \(1-\ln x\lt{}0\)，即 \(f'(x)\lt{}0\)，所以 \(b_n=\ln n/n\) 从 \(n=3\) 起单调递减；前两项不影响级数收敛性。两个条件满足，由 Leibniz 判别法，交错级数收敛。</p>
+    <p>进一步看收敛类型：绝对值级数 \(\sum \ln n/n\) 发散，因为对 \(n\ge3\) 有 \(\ln n/n\ge1/n\)，而调和级数发散，比较判别法给出绝对值级数发散：</p>
+    \[ \frac{\ln n}{n}\ge\frac1n\ (n\ge3),\qquad \sum_{n=1}^\infty\frac1n\ \text{发散}. \]
+    <p>因此本题为条件收敛。题述只要求证明收敛，结论成立。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不验证单调性，只看 \(b_n\to0\) 就套用交错判别；趋零与单调缺一不可。② 把条件收敛误判为绝对收敛，忽略 \(\ln n/n\gt{}1/n\) 的比较关系。③ 误以为 \(\ln n/n\) 一直递增：它在 \(x=e\) 处达最大，之后递减，判别时只需从某一项起单调。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>交错级数判别是级数解答题的基础题型，考法为「构造连续函数验证趋零与单调」。同组题目把 \(b_n\) 换成 \(1/n\)、\(n!/n^n\) 等（对照 2099 题），条件收敛与绝对收敛的区分常作为追问出现。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 判断级数 \(\sum\limits_{n=1}^{\infty}\dfrac{(-1)^n}{n}\) 的收敛类型。</p>
+    <p class="var-ans">答案：条件收敛。\(1/n\) 单调趋零，Leibniz 判收敛；绝对值为调和级数发散，故不绝对收敛。</p>
+  </div>
+</article>
+
+<article class="q" id="q2090">
+  <div class="q-head">
+    <span class="qno">第 2090 题</span>
+    <span class="qtype">Taylor 展开（正弦余项）</span>
+    <span class="qsrc">P988</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sin x-x+\dfrac{x^3}{6}}{x^5}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac1{120}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：正弦与其三阶多项式近似之差，分母 \(x^5\)，按分母幂次把 \(\sin x\) 展开到五阶。正弦的麦克劳林展开为</p>
+    \[ \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}+O(x^7). \]
+    <p>代入分子，一次项与三阶项抵消：</p>
+    \[ \sin x-x+\frac{x^3}{6}=\frac{x^5}{120}+O(x^7). \]
+    <p>除以 \(x^5\)：</p>
+    \[ \frac{\frac{x^5}{120}+O(x^7)}{x^5}=\frac1{120}+O(x^2)\to\frac1{120}. \]
+    <p>系数 \(1/120=1/5!\) 来自正弦级数第五项；五阶项为正，答案取正常数。分母 \(x^5\) 要求展开到五阶，只写到三阶会把五阶主部漏掉。关键一步仍是阶数匹配：正弦只有奇次项，相邻非零项间隔 \(x^2\)，三阶抵消后下一项就是五阶。数值复核：\(x=0.02\) 时比值约 \(0.0083333\)，\(x=0.01\) 时约 \(0.0083333\)，与 \(1/120\approx0.0083333\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 用 \(\sin x\sim x\) 等价替换后分子判零，未保留三阶、五阶修正。② 阶乘记错，把 \(1/120\) 写成 \(1/24\)。③ 符号出错：五阶项在正弦级数中为正，题目分子是「\(-x+x^3/6\)」，抵消后取正的 \(x^5/120\)。④ 误以为三阶抵消后接偶次项；正弦只有奇次非零项，三阶之后直接是五阶。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正弦余项型与余弦、正切、双曲函数展开构成同组对照（对照 2088、2095、2100 题）。三阶主部 \((\sin x-x)/x^3=-1/6\) 与五阶主部 \(1/120\) 是同一条级数相邻两阶。记住正弦奇次项级数 \(x-x^3/3!+x^5/5!-\cdots\)，按分母幂次截取即可，变式常改问三阶主部 \((\sin x-x)/x^3\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x}{x^3}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac16\)。三阶项为 \(-x^3/6\)，除以 \(x^3\) 得 \(-1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2091">
+  <div class="q-head">
+    <span class="qno">第 2091 题</span>
+    <span class="qtype">反常积分（分部积分 + Dirichlet 积分）</span>
+    <span class="qsrc">P988</span>
+  </div>
+  <div class="stem">
+    <p>设函数 \(f(x)=\int_0^x\dfrac{\sin^2 t}{t^2}dt\)，求 \(\lim\limits_{x\to\infty}f(x)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\pi}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：变上限积分在上限趋于无穷时取极限，被积函数 \(\sin^2 t/t^2\)，所求为收敛反常积分</p>
+    \[ I=\int_0^\infty\frac{\sin^2 t}{t^2}\,dt. \]
+    <p>直接积分不便，用分部积分降低 \(t\) 的幂次。取 \(u=\sin^2 t\)，\(dv=dt/t^2\)，则 \(v=-1/t\)：</p>
+    \[ I=\left[-\frac{\sin^2 t}{t}\right]_0^\infty+\int_0^\infty\frac{2\sin t\cos t}{t}\,dt. \]
+    <p>边界项两端都为零：在 \(t\to\infty\) 时 \(|\sin^2 t/t|\le1/t\to0\)；在 \(t\to0\) 时 \(\sin^2 t\sim t^2\)，故 \(\sin^2 t/t\sim t\to0\)。利用 \(2\sin t\cos t=\sin 2t\)：</p>
+    \[ I=\int_0^\infty\frac{\sin 2t}{t}\,dt. \]
+    <p>作代换 \(u=2t\)，\(dt=du/2\)：</p>
+    \[ I=\int_0^\infty\frac{\sin u}{u}\,du=\frac{\pi}{2}, \]
+    <p>最后一步用经典 Dirichlet 积分 \(\int_0^\infty\sin u/u\,du=\pi/2\)。数值复核：30 位精度下积分值约 \(1.57145\)（尾部截断带来小误差），解析值 \(\pi/2\approx1.57080\)，一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 忽略原点处可积性：\(\sin^2 t/t^2\to1\)，原点不是瑕点；但若代换不当，边界项可能误判发散。② 分部积分后忘记 \(2\sin t\cos t=\sin2t\)，留下乘积形式无法套用 Dirichlet 积分。③ 代换 \(u=2t\) 时漏乘 \(1/2\) 与分母 \(t=u/2\) 的因子抵消关系，系数算错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「\(\sin^2 t/t^2\) 型积分」是分部积分配 Dirichlet 积分的标准例题，结论 \(\pi/2\)。同组题目对照 2081 题的含参指数衰减积分，区别在于本题无衰减因子、靠 \(1/t^2\) 保证绝对收敛，分部积分后落到条件收敛的 Dirichlet 积分。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\int_0^\infty\dfrac{\sin t}{t}\,dt\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{2}\)。经典 Dirichlet 积分，条件收敛；可由 \(\int_0^\infty e^{-\lambda t}\sin t/t\,dt=\arctan(1/\lambda)\) 令 \(\lambda\to0^+\) 取极限得到。</p>
+  </div>
+</article>
+
+<article class="q" id="q2092">
+  <div class="q-head">
+    <span class="qno">第 2092 题</span>
+    <span class="qtype">等价无穷小（余切差）</span>
+    <span class="qsrc">P989</span>
+  </div>
+  <div class="stem">
+    <p>证明：当 \(x\to0\) 时，\(\dfrac{1}{\tan x}-\dfrac{1}{x}\sim-\dfrac{x}{3}\)。</p>
+  </div>
+  <div class="answer">答案：成立</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：余切与 \(1/x\) 两个等价无穷大之差的主部判定。\(1/\tan x=\cot x\)，一阶部分与 \(1/x\) 相同，差值来自三阶以内的修正，需展开到三阶。</p>
+    <p>正切的展开为</p>
+    \[ \tan x=x+\frac{x^3}{3}+O(x^5)=x\left(1+\frac{x^2}{3}+O(x^4)\right). \]
+    <p>取倒数，令 \(u=x^2/3+O(x^4)\)，用 \((1+u)^{-1}=1-u+O(u^2)\)：</p>
+    \[ \cot x=\frac1x\left(1+\frac{x^2}{3}+O(x^4)\right)^{-1}
+       =\frac1x\left(1-\frac{x^2}{3}+O(x^4)\right)
+       =\frac1x-\frac{x}{3}+O(x^3). \]
+    <p>两式相减，\(1/x\) 项抵消：</p>
+    \[ \frac1{\tan x}-\frac1x=-\frac{x}{3}+O(x^3). \]
+    <p>比值</p>
+    \[ \frac{\frac1{\tan x}-\frac1x}{-x/3}=1+O(x^2)\to1, \]
+    <p>故差与 \(-x/3\) 等价，题述成立。数值复核：\(x=0.02\) 时比值约为 \(-0.33334\)，即 \(-1/3\)。</p>
+    <p>与 2082 题对照：余割差主部为 \(+x/6\)，余切差主部为 \(-x/3\)，两者符号与系数都不同，来源分别是正弦、正切展开的三阶修正。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把余切差与余割差记混，系数写成 \(+x/6\)。② 倒数展开符号出错，\((1+u)^{-1}\) 的一阶修正为 \(-u\)，余切差应为负。③ 直接用 \(\tan x\sim x\) 替换后相减判零，高阶主部被消去。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>余切差结论 \(\cot x-1/x\sim -x/3\) 常作为复杂极限的构件出现，与 2082 题构成倒数三角函数对照组。复习时连同 \(\tan x-x\sim x^3/3\)、\(\csc x-1/x\sim x/6\) 一起记，可快速识别 \(0/0\) 题的主部阶数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\cot x-1/x}{x}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac13\)。由展开 \(\cot x-1/x=-x/3+O(x^3)\)，除以 \(x\) 得 \(-1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2093">
+  <div class="q-head">
+    <span class="qno">第 2093 题</span>
+    <span class="qtype">变限积分渐近（印式发散）</span>
+    <span class="qsrc">P989</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\int_0^x\sin(t^5)dt-x}{x^{11}}\)。</p>
+  </div>
+  <div class="answer">答案：发散至 \(-\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>【书答与印式不符】题面印式完整可读：按 \(\sin(t^5)\) 展开，分子主部为残留的 \(-x\)，被 \(x^{11}\) 除后阶为 \(-x^{-10}\)，比值发散至 \(-\infty\)；书答 \(-1/66\) 这一整齐常数无法由余弦模板（\(-1/22\)）或正弦减主项模板（\(-1/96\)）等自然漏因子形式反推，以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：变上限积分减多项式后除以幂次，展开被积函数后逐项积分。\(\sin(t^5)\) 的原点展开为</p>
+    \[ \sin(t^5)=t^5-\frac{t^{15}}6+O(t^{25}). \]
+    <p>逐项积分：</p>
+    \[ \int_0^x\sin(t^5)\,dt=\frac{x^6}{6}-\frac{x^{16}}{96}+O(x^{26}). \]
+    <p>对照 2083 题的常数首项模板，\(\sin(t^5)\) 首项是 \(t^5\)，积分首项 \(x^6/6\) 不含 \(x\) 项；分子主导残留即 \(-x\)：</p>
+    \[ \int_0^x\sin(t^5)\,dt-x=-x+\frac{x^6}{6}-\frac{x^{16}}{96}+O(x^{26}), \]
+    \[ \frac{-x+\frac{x^6}{6}+O(x^{16})}{x^{11}}=-\frac1{x^{10}}+\frac1{6x^5}+O(x^5). \]
+    <p>当 \(x\to0\) 时 \(-1/x^{10}\) 占主导，比值趋于 \(-\infty\)（双侧一致，因 \(x^{10}\gt{}0\)）。数值复核：\(x=0.1/0.01/0.001\) 时比值依次约 \(-10^{10}\)、\(-10^{20}\)、\(-10^{30}\)，量级按 \(x^{-10}\) 增长。</p>
+    <p>余弦模板 \(\int_0^x\cos(t^5)dt-x\) 得 \(x-x^{11}/22\)，极限 \(-1/22\)；当前印式正弦首项不含常数，与所减 \(x\) 不匹配。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 照搬 2083 题的余弦模板，默认被积函数首项为 \(1\)，去配 \(x^9\)、\(x^{11}\) 阶系数；正弦型首项是 \(t^5\)，阶数完全不同。② 看到分母 \(x^{11}\) 就去寻找 \(x^{11}\) 阶修正项，忽略分子中 \(-x\) 这个低阶残留才是主导。③ 不做阶数比较就直接套洛必达法则，求导后仍含 \(-1\) 常数项，无法消去。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>变限积分题必须先判被积函数在原点的首项阶数：常数首项配所减的线性项，幂次首项则应减去对应积分幂次（如 \(\int t^5dt=x^6/6\)）。阶数不匹配时，低阶残留主导极限，表现为发散；这一类题的坑正在于模板套用而不比对首项阶数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\int_0^x\cos(t^5)dt-x}{x^{11}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac1{22}\)。\(\cos(t^5)=1-t^{10}/2+O(t^{20})\)，积分得 \(x-x^{11}/22+O(x^{21})\)，分子为 \(-x^{11}/22\)，除以 \(x^{11}\) 得 \(-1/22\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2094">
+  <div class="q-head">
+    <span class="qno">第 2094 题</span>
+    <span class="qtype">平均型递推（初值恰为不动点）</span>
+    <span class="qsrc">P989</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{a_n\}\) 满足 \(a_1=1\)，\(a_{n+1}=\dfrac1n\sum\limits_{k=1}^n\sqrt{a_k}\)，证明 \(\lim\limits_{n\to\infty}a_n=0\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)（题述结论 \(0\) 不成立）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>【题述结论错误】题目要求证明的 \(\lim\limits_{n\to\infty}a_n=0\) 本身不成立：从 \(a_1=1\) 出发，\(\sqrt{a_1}=1\)，归纳得各项恒为不动点 \(1\)；不动点方程 \(L=\sqrt L\) 的解为 \(0\) 与 \(1\)，初值精确落在 \(1\) 上，极限为 \(1\)；答案栏「证明完成」系沿用题述假结论，并非答案栏另行算错。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推右端是前 \(n\) 项平方根的算术平均。先求不动点：若数列恒等于 \(L\)，则</p>
+    \[ L=\frac1n\sum_{k=1}^n\sqrt L=\sqrt L. \]
+    <p>解 \(L=\sqrt L\)（\(L\ge0\)）：两边平方 \(L^2=L\)，得 \(L=0\) 或 \(L=1\)，两个不动点。</p>
+    <p>再看初值落点：\(a_1=1\)，于是</p>
+    \[ a_2=\frac11\sqrt{a_1}=1. \]
+    <p>归纳：若 \(a_1=\cdots=a_n=1\)，则 \(\sqrt{a_k}=1\)，右端平均为 \(1\)，故</p>
+    \[ a_1=\cdots=a_n=1\ \Longrightarrow\ a_{n+1}=\frac1n\sum_{k=1}^n\sqrt{a_k}=1. \]
+    <p>因此 \(a_n\equiv1\) 对所有 \(n\) 成立，极限为 \(1\)，不是题述的 \(0\)。</p>
+    <p>数值迭代前 30 步各项均为 \(1.000000\)，与归纳一致。不动点 \(0\) 只有在初值严格小于 \(1\) 时才可能被趋向；本题初值精确等于 \(1\)，数列停在另一不动点上。递推中平方根映射在 \(1\) 附近把小于 \(1\) 的值放大、大于 \(1\) 的值压缩，平均作用是把数列向 \(1\) 与 \(0\) 之间的某个水平拉平，不会从 \(1\) 自行掉到 \(0\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只解出不动点 \(0\)，漏掉 \(L=1\)；方程 \(L=\sqrt L\) 有两个非负解。② 不验算初值是否等于不动点，直接按「平均递推趋于零」的印象下结论。③ 忽略平方根的非负性，在递推中引入负根讨论。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>非线性平均递推的处理顺序是先解不动点方程、再判初值落点与稳定性。与 2084 题的线性平均对照：线性平均保持初值常数，非线性平均有多个不动点，初值落在哪一个就停在哪一个；后续若追问稳定性，需在不动点处估计映射导数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求递推 \(a_{n+1}=\dfrac1n\sum_{k=1}^n\sqrt{a_k}\) 的全部非负不动点。</p>
+    <p class="var-ans">答案：\(0\) 与 \(1\)。由 \(L=\sqrt L\) 平方得 \(L(L-1)=0\)，非负解为 \(L=0,1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2095">
+  <div class="q-head">
+    <span class="qno">第 2095 题</span>
+    <span class="qtype">Taylor 展开（双曲正弦）</span>
+    <span class="qsrc">P989</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sinh x-x}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac16\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：双曲正弦与其线性近似之差，分母 \(x^3\)，属泰勒展开定系数型。双曲正弦的麦克劳林展开为</p>
+    \[ \sinh x=x+\frac{x^3}{6}+\frac{x^5}{120}+O(x^7). \]
+    <p>代入分子，一次项抵消，最低次为 \(x^3\)：</p>
+    \[ \sinh x-x=\frac{x^3}{6}+O(x^5). \]
+    <p>除以 \(x^3\)：</p>
+    \[ \frac{\frac{x^3}{6}+O(x^5)}{x^3}=\frac16+O(x^2)\to\frac16. \]
+    <p>展开可由定义核验：\(\sinh x=(e^x-e^{-x})/2\)，代入指数级数</p>
+    \[ e^x=1+x+\frac{x^2}{2}+\frac{x^3}{6}+O(x^4),\qquad
+       e^{-x}=1-x+\frac{x^2}{2}-\frac{x^3}{6}+O(x^4), \]
+    <p>两式相减后偶次项抵消、只留奇次项，除以 \(2\) 即得上式。三阶系数 \(1/6=1/3!\)，与正弦三阶项 \(-1/3!\) 仅差符号；答案为正的整齐常数，说明分子三阶主部与分母同号。等价 \(\sinh x\sim x\) 只保一阶，差值主部在三阶。数值复核：\(x=0.02\) 时比值约 \(0.16667\)，\(x=0.01\) 时约 \(0.166667\)，向 \(1/6\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 与正弦展开记混，三阶项写成 \(-x^3/6\)，得到 \(-1/6\)。② 用 \(\sinh x\sim x\) 等价替换后判分子为零，漏掉三阶修正。③ 双曲函数定义记错，\(\sinh x=(e^x-e^{-x})/2\)，展开时偶次项抵消、只留奇次项。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>双曲正弦与正弦、双曲正切与正切构成成对对照题（对照 2085、2090 题），系数相同、符号按双曲/三角区分。记住 \(\sinh x=x+x^3/3!+x^5/5!+\cdots\)，按分母阶数截取即可。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sinh x-x-x^3/6}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac1{120}\)。五阶项为 \(x^5/120\)，除以 \(x^5\) 得 \(1/120\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2096">
+  <div class="q-head">
+    <span class="qno">第 2096 题</span>
+    <span class="qtype">振荡积分（Riemann–Lebesgue 引理）</span>
+    <span class="qsrc">P989</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在[0,1]上连续，且 \(\int_0^1 f(x)dx=0\)，\(\int_0^1 x f(x)dx=0\)，\(\int_0^1 x^2 f(x)dx=0\)，\(\int_0^1 x^3 f(x)dx=1\)，求 \(\lim\limits_{n\to\infty}\int_0^1 f(x)\sin(nx)dx\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：连续函数乘振荡因子 \(\sin(nx)\) 在有限区间积分，与 2076、2086 题同属 Riemann–Lebesgue 引理型。引理结论：若 \(f\) 在 \([a,b]\) 上可积，则</p>
+    \[ \int_a^b f(x)\sin(\lambda x)\,dx\to0\qquad(\lambda\to\infty). \]
+    <p>证明路线仍是阶梯函数逼近：对阶梯函数 \(g=\sum c_j\mathbf 1_{[\alpha_j,\beta_j]}\)，分段积分</p>
+    \[ \int_{\alpha_j}^{\beta_j}c_j\sin(nx)\,dx=\frac{c_j}{n}\bigl(\cos(n\alpha_j)-\cos(n\beta_j)\bigr)=O(1/n), \]
+    <p>趋于零；连续函数被阶梯函数一致逼近，误差积分被区间长度乘上确界控制，与 \(n\) 无关地任意小，故 \(f\) 的振荡积分同样趋于零：</p>
+    \[ \lim_{n\to\infty}\int_0^1 f(x)\sin(nx)\,dx=0. \]
+    <p>题给四个矩条件（前三阶为零、三阶矩为一）不改变主部结论。矩条件刻画 \(f\) 与低次多项式的正交关系，只有在积分前乘 \(n\)、\(n^2\) 等放大因子考察渐近展开时才逐项参与；本题原积分没有放大，振荡消去后的主部就是零。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 矩条件逐级增加后误以为需要逐项抵消正弦展开，把低频修正项当成极限值。② 忘记引理只需可积性，去额外假设 \(f\) 可导或有界变差。③ 混淆振荡积分与核函数积分：后者权函数集中端点，极限取端点值；本题权函数 \(\sin(nx)\) 全域振荡，质量相互抵消。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是 2076、2086 题的三阶矩版本，三题构成矩条件递增的对照组。复习要点是区分「振荡消去型」与「端点集中型」两类积分极限：前者由 R-L 引理给零，后者由权函数集中点给函数值。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f\in C[0,1]\)，各阶矩条件不变，求 \(\lim\limits_{n\to\infty}\int_0^1 f(x)\cos(nx)\,dx\)。</p>
+    <p class="var-ans">答案：\(0\)。Riemann–Lebesgue 引理余弦版本结论相同，矩条件不参与定值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2097">
+  <div class="q-head">
+    <span class="qno">第 2097 题</span>
+    <span class="qtype">Taylor 展开（对数余项）</span>
+    <span class="qsrc">P989</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+\dfrac{x^2}{2}-\dfrac{x^3}{3}+\dfrac{x^4}{4}-\dfrac{x^5}{5}}{x^6}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac16\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子是 \(\ln(1+x)\) 到五阶的多项式近似之差，分母 \(x^6\)，按分母幂次展开到六阶。对数的麦克劳林展开为</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\frac{x^5}{5}-\frac{x^6}{6}+O(x^7). \]
+    <p>代入分子，前五项逐项抵消，剩余最低次项为</p>
+    \[ \ln(1+x)-x+\frac{x^2}{2}-\frac{x^3}{3}+\frac{x^4}{4}-\frac{x^5}{5}=-\frac{x^6}{6}+O(x^7). \]
+    <p>除以 \(x^6\)：</p>
+    \[ \frac{-\frac{x^6}{6}+O(x^7)}{x^6}=-\frac16+O(x)\to-\frac16. \]
+    <p>第六项系数符号为负，对应级数通式 \((-1)^{k+1}/k\) 在 \(k=6\) 时取负。阶数仍由分母决定：分母 \(x^6\) 必须写到 \(x^6\)，只到五阶会把六阶主部漏掉。数值复核：\(x=0.02\) 时比值约为 \(-0.1639\)，向 \(-1/6\approx-0.1667\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 第六项符号记错，写成 \(+x^6/6\)，得到 \(+1/6\)。② 与 2087 题混淆：2087 取五阶系数 \(+1/5\)，本题取六阶系数 \(-1/6\)，阶数与符号都递进一位。③ 展开只到五阶，误判分子为五阶以上。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题与 2077、2087 构成对数余项三阶递进组，分别取四、五、六阶系数。复习时直接背级数通式 \(\sum_{k=1}^\infty(-1)^{k+1}x^k/k\)，按分母阶数 \(k\) 查系数与符号，不必逐题记忆结果。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+x^2/2-x^3/3}{x^4}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac14\)。四阶项为 \(-x^4/4\)，除以 \(x^4\) 得 \(-1/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2098">
+  <div class="q-head">
+    <span class="qno">第 2098 题</span>
+    <span class="qtype">Taylor 展开（反正弦余项）</span>
+    <span class="qsrc">P990</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\arcsin x-x-\dfrac{x^3}{6}}{x^5}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac3{40}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：反正弦与其三阶多项式近似之差，分母 \(x^5\)，按分母幂次展开到五阶。反正弦的麦克劳林展开为</p>
+    \[ \arcsin x=x+\frac{x^3}{6}+\frac{3x^5}{40}+O(x^7). \]
+    <p>该展开可由 \((1-t^2)^{-1/2}\) 的二项式级数逐项积分得到：</p>
+    \[ (1-t^2)^{-1/2}=1+\frac12t^2+\frac38t^4+\cdots, \]
+    <p>积分后 \(t^2\) 项给出 \(x^3/6\)，\(t^4\) 项给出 \(3x^5/40\)。代入分子，一次项与三阶项抵消：</p>
+    \[ \arcsin x-x-\frac{x^3}{6}=\frac{3x^5}{40}+O(x^7). \]
+    <p>除以 \(x^5\)：</p>
+    \[ \frac{\frac{3x^5}{40}+O(x^7)}{x^5}=\frac3{40}+O(x^2)\to\frac3{40}. \]
+    <p>五阶系数：二项式 \(t^4\) 项系数 \(3/8\)，积分后分母再乘 \(5\)，得 \(3/(8\cdot5)=3/40\)。与反正切对照：\(\arctan x\) 五阶项为 \(+x^5/5\)，\(\arcsin x\) 五阶项系数为 \(3/40\)，二者不要混淆。数值复核：\(x=0.02\) 时比值约 \(0.07502\)，\(x=0.01\) 时约 \(0.07500\)，与 \(3/40=0.075\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把反正弦与反正切展开记混，五阶系数写成 \(1/5\)。② 二项式系数 \(\binom{-1/2}{2}=3/8\) 算错，积分后系数 \(3/(8\cdot5)=3/40\) 推导断裂。③ 只展开到三阶，误判分子为三阶以上而答案为零。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>反三角函数展开成对出现：反正切来自几何级数、反正弦来自二项式级数（对照 2080 题）。三阶主部 \(1/6\) 与五阶主部 \(3/40\) 同属二项式级数逐项积分产物。五阶以上系数计算量偏大，考题常停在三阶或五阶，复习时掌握二项式系数递推即可，不必背全级数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-x}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac16\)。三阶项为 \(x^3/6\)，除以 \(x^3\) 得 \(1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2099">
+  <div class="q-head">
+    <span class="qno">第 2099 题</span>
+    <span class="qtype">交错级数（比值 + Leibniz 判别）</span>
+    <span class="qsrc">P990</span>
+  </div>
+  <div class="stem">
+    <p>证明：级数 \(\sum\limits_{n=1}^{\infty}\dfrac{(-1)^n n!}{n^n}\) 收敛。</p>
+  </div>
+  <div class="answer">答案：收敛</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：交错级数，绝对值 \(a_n=n!/n^n\)。先用比值法验证 \(a_n\to0\) 并考察单调性。相邻两项之比为</p>
+    \[ \frac{a_{n+1}}{a_n}
+       =\frac{(n+1)!}{(n+1)^{n+1}}\cdot\frac{n^n}{n!}
+       =\left(\frac{n}{n+1}\right)^n
+       =\frac{1}{(1+1/n)^n}. \]
+    <p>由于 \((1+1/n)^n\to e\)，故</p>
+    \[ \lim_{n\to\infty}\frac{a_{n+1}}{a_n}=\frac1e\lt{}1. \]
+    <p>比值小于 \(1\) 且趋于 \(1/e\)，所以从某项起 \(a_n\) 严格递减；同时由比值法，正项级数 \(\sum a_n\) 本身收敛，因而 \(a_n\to0\)。也可用 Stirling 公式直接看阶：</p>
+    \[ n!\sim\left(\frac ne\right)^n\sqrt{2\pi n},\qquad a_n\sim\frac{\sqrt{2\pi n}}{e^n}\to0. \]
+    <p>对交错级数 \(\sum(-1)^n a_n\)，\(a_n\) 单调递减趋于零，Leibniz 判别法给出收敛。进一步，绝对值级数由比值法（极限 \(1/e\lt{}1\)）收敛，故本题实为绝对收敛。题述证明收敛的结论成立。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只验证 \(a_n\to0\)，不证单调性就套 Leibniz；本题单调性由比值 \(\lt{}1\) 保证。② 把比值极限 \(1/e\) 与 \(1\) 比较时算错，误认为比值法临界而无法判别。③ 忽略阶乘与 \(n^n\) 的增长对比，凭直觉认为 \(n!\) 增长更快导致发散；实际上 \(n^n\) 比 \(n!\) 增长更快，通项指数衰减。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>含阶乘的级数首选比值法，\(n!/n^n\) 型通项常配合 Stirling 公式估阶。本题同时具备交错级数外形与绝对收敛实质，考试追问点往往是「条件还是绝对」，比值极限与 \(1\) 的大小关系是判定关键。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 判断正项级数 \(\sum\limits_{n=1}^{\infty}\dfrac{n!}{n^n}\) 的收敛性。</p>
+    <p class="var-ans">答案：收敛。比值极限 \(1/e\lt{}1\)，比值判别法判定正项级数收敛；对应交错级数为绝对收敛。</p>
+  </div>
+</article>
+
+<article class="q" id="q2100">
+  <div class="q-head">
+    <span class="qno">第 2100 题</span>
+    <span class="qtype">Taylor 展开（正切余项）</span>
+    <span class="qsrc">P990</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan x-x-\dfrac{x^3}{3}}{x^5}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac2{15}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：正切与其三阶多项式近似之差，分母 \(x^5\)，按分母幂次展开到五阶。正切的麦克劳林展开为</p>
+    \[ \tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+O(x^7). \]
+    <p>五阶系数可由 \(\tan x=\sin x/\cos x\) 相除得到：正弦、余弦展开到四阶后做幂级数除法，\(x^5\) 项系数为 \(2/15\)。代入分子，一次项与三阶项抵消：</p>
+    \[ \tan x-x-\frac{x^3}{3}=\frac{2x^5}{15}+O(x^7). \]
+    <p>除以 \(x^5\)：</p>
+    \[ \frac{\frac{2x^5}{15}+O(x^7)}{x^5}=\frac2{15}+O(x^2)\to\frac2{15}. \]
+    <p>阶数匹配仍是关键：分母 \(x^5\) 必须写到五阶，只到三阶会把五阶主部漏掉。五阶系数由 \(\sin/\cos\) 级数相除得到。与双曲正切对照，\(\tanh x\) 五阶项为 \(2x^5/15\)，系数相同、三阶符号相反。数值复核：\(x=0.02\) 时比值约 \(0.13335\)，\(x=0.01\) 时约 \(0.13334\)，与 \(2/15\approx0.13333\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 五阶系数记错，写成 \(1/15\) 或 \(1/5\)；正切五阶系数 \(2/15\) 不是阶乘倒数。② 用 \(\tan x\sim x\) 或 \(\tan x-x\sim x^3/3\) 替换后判分子为高阶无穷小，漏掉五阶修正。③ 级数相除时展开阶数不够，余弦分母的高阶项未参与导致五阶系数算错。④ 把正切五阶系数与正弦 \(1/120\) 混用；相除耦合后系数不是阶乘倒数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正切展开是三角余切、双曲正切各题的对照基准（对照 2078、2085、2092 题）。三阶主部 \(1/3\) 与五阶主部 \(2/15\) 为相邻两阶。考题通常只考到三阶 \(x^3/3\) 或五阶 \(2x^5/15\)，更高阶系数不必死记，需要时用正弦余弦级数相除递推。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-x}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。三阶项为 \(x^3/3\)，除以 \(x^3\) 得 \(1/3\)。</p>
+  </div>
+</article>

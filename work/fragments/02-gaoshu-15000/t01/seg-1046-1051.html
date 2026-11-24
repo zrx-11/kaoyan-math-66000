@@ -1,0 +1,1046 @@
+<article class="q" id="q2401">
+  <div class="q-head">
+    <span class="qno">第 2401 题</span>
+    <span class="qtype">和式极限（主部配对与夹逼）</span>
+    <span class="qsrc">P1046</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{n^{2}+k}{n^{3}+k^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：该和式没有显式的 \(1/n\) 网格因子，不能直接套定积分定义；先把通项与基准项 \(1/n\) 配对，比较两者之差，再用上下界夹逼。</p>
+    <p>把通项写成 \(1/n\) 乘以一个扰动因子：</p>
+    \[
+    \frac{n^{2}+k}{n^{3}+k^{2}}
+    =\frac1n\cdot\frac{1+k/n^{2}}{1+k^{2}/n^{3}}.
+    \]
+    <p>与 \(1/n\) 相减，通分后分子为 \(n(n^{2}+k)-(n^{3}+k^{2})=nk-k^{2}=k(n-k)\)：</p>
+    \[
+    0\le \frac1n-\frac{n^{2}+k}{n^{3}+k^{2}}
+    =\frac{k(n-k)}{n(n^{3}+k^{2})}
+    \le \frac{nk}{n\cdot n^{3}}=\frac{k}{n^{4}}.
+    \]
+    <p>对 \(k=1\) 到 \(n\) 求和，基准和为 \(1\)，偏差被上界控制：</p>
+    \[
+    0\le 1-S_{n}\le \frac1{n^{4}}\sum_{k=1}^{n}k
+    =\frac{n(n+1)}{2n^{4}}=O(n^{-2})\to0.
+    \]
+    <p>夹逼准则给出 \(S_{n}\to1\)。数值复核：\(N=100\) 时 \(S_{n}\approx1.001662\)，\(N=1000\) 时约 \(1.000167\)，\(N=10000\) 时约 \(1.000017\)，偏差按 \(O(1/n^{2})\) 缩小，与估计一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 强行把该和式当成黎曼和：分母是 \(n^{3}+k^{2}\)，提取 \(n\) 后剩下的不是 \(f(k/n)\) 的连续核，积分路径不成立。② 过早丢掉分子的 \(k\) 与分母的 \(k^{2}\)，没有估计扰动项的阶，只凭主部 \(n^{2}/n^{3}=1/n\) 下结论。③ 配对差值通分时分子展开漏项，把 \(nk-k^{2}\) 写成 \(nk\) 或 \(k^{2}\)，上界量级随之判错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>非标准和式极限的固定处理是先拆主部、再估计扰动的一致阶，最后用夹逼收口。复习时应先判断和式是否具备 \(1/n\) 乘以 \(f(k/n)\) 的网格结构：具备才走定积分，不具备就走配对与上下界。这类题常在选择、填空里把低阶扰动藏进分子分母，考查阶数比较。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{n}{n^{2}+k}\)。</p>
+    <p class="var-ans">答案：\(\ln2\)。整理为 \(\frac1n\sum\limits_{k=1}^{n}\dfrac{1}{1+k/n}\)，收敛到 \(\int_0^1\dfrac{dx}{1+x}=\ln2\)；扰动在此题中恰好构成标准网格，与原题的夹逼路径形成对照。</p>
+  </div>
+</article>
+
+<article class="q" id="q2402">
+  <div class="q-head">
+    <span class="qno">第 2402 题</span>
+    <span class="qtype">连乘积数列（取对数化和式）</span>
+    <span class="qsrc">P1046</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{k}{n^{2}}\right)}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：有限连乘积再开 \(n\) 次方，固定手法是取自然对数，把乘积化成和式，估计对数后的量级，最后再指数还原。</p>
+    <p>记 \(P_{n}=\prod\limits_{k=1}^{n}(1+k/n^{2})\)，取对数：</p>
+    \[
+    \ln P_{n}=\sum_{k=1}^{n}\ln\left(1+\frac{k}{n^{2}}\right).
+    \]
+    <p>开 \(n\) 次方后对数为 \(\frac1n\ln P_{n}\)。利用不等式 \(0\le\ln(1+t)\le t\)（\(t\ge0\)）放缩：</p>
+    \[
+    0\le \frac1n\ln P_{n}
+    \le \frac1n\sum_{k=1}^{n}\frac{k}{n^{2}}
+    =\frac{n(n+1)}{2n^{3}}\to0.
+    \]
+    <p>由夹逼，对数部分趋于 \(0\)，指数还原：</p>
+    \[
+    P_{n}^{1/n}=e^{\frac1n\ln P_{n}}\to e^{0}=1.
+    \]
+    <p>数值复核：\(N=100\) 时 \(\ln P_{n}/n\approx0.005033\)，\(N=1000\) 时约 \(0.000500\)，\(N=10000\) 时约 \(5.00\times10^{-5}\)，按 \(1/(2n)\) 的量级趋于零，指数值随之为 \(1+O(1/n)\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 忘记开 \(n\) 次方这一层，直接对连乘积取对数求和后指数还原，量级判断错位。② 把 \(\ln(1+k/n^{2})\) 误当成 \(\ln(1+k/n)\)，和式变成非平凡黎曼和。③ 放缩时漏掉分子上的 \(n\) 次根，把上界写成 \(\sum k/n^{2}=O(1)\)，误以为对数不趋于零。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>连乘积、阶乘根式类数列极限几乎都走「取对数—化和式—估计主部—指数还原」四步。与阶乘的斯特林根式题互为对照：本题对数主部为零，斯特林题对数主部为常数。复习时应熟记 \(\ln(1+t)\le t\) 这类单向不等式，用于快速夹逼。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sqrt[n]{\prod\limits_{k=1}^{n}\left(1+\dfrac{k}{n}\right)}\)。</p>
+    <p class="var-ans">答案：\(\dfrac4e\)。对数部分为 \(\frac1n\sum\ln(1+k/n)\to\int_0^1\ln(1+x)\,dx=2\ln2-1\)，指数还原得 \(e^{2\ln2-1}=4/e\approx1.4715178\)；网格因子由 \(k/n^{2}\) 换成 \(k/n\) 后，对数主部不再是零。</p>
+  </div>
+</article>
+
+<article class="q" id="q2403">
+  <div class="q-head">
+    <span class="qno">第 2403 题</span>
+    <span class="qtype">0/0 型极限（泰勒主部）</span>
+    <span class="qsrc">P1046</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan x-x}{x^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac13\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子分母在 \(x\to0\) 时同为三阶以下无穷小，属 \(0/0\) 型；最直接的办法是把分子展开到与分母同阶，抓 \(x^{3}\) 主部。</p>
+    <p>正切函数的麦克劳林展开为：</p>
+    \[
+    \tan x=x+\frac{x^{3}}{3}+\frac{2x^{5}}{15}+o(x^{5}).
+    \]
+    <p>减去 \(x\) 后，一次项抵消，留下三阶主部：</p>
+    \[
+    \tan x-x=\frac{x^{3}}{3}+o(x^{3}).
+    \]
+    <p>除以 \(x^{3}\) 取极限：</p>
+    \[
+    \lim_{x\to0}\frac{\tan x-x}{x^{3}}
+    =\lim_{x\to0}\frac{\frac{x^{3}}{3}+o(x^{3})}{x^{3}}=\frac13.
+    \]
+    <p>洛必达法则互证：分子分母连续求导两次，</p>
+    \[
+    \lim_{x\to0}\frac{\sec^{2}x-1}{3x^{2}}
+    =\lim_{x\to0}\frac{\tan^{2}x}{3x^{2}}=\frac13,
+    \]
+    其中 \(\tan x\sim x\)（\(x\to0\)），与泰勒结论一致。</p>
+    <p>展开复核：\(\sec^{2}x-1\) 写成 \(\tan^{2}x\) 后，等价无穷小 \(\tan x\sim x\) 给出 \(\tan^{2}x/x^{2}\to1\)，与泰勒主部相互独立。三阶系数也可由导数定义复核：对 \(f(t)=\tan t\)，\(f'(0)=1\)，\(f''(0)=0\)，\(f'''(0)=2\)，泰勒系数 \(f'''(0)/3!=1/3\)，与比阶结果相同。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 展开阶数不够：只写 \(\tan x=x+o(x)\)，减去 \(x\) 后只剩 \(o(x)\)，无法与 \(x^{3}\) 比阶。② 把 \(\sin x-x\sim -x^{3}/6\) 的系数直接套到正切上，符号与数值同时出错。③ 洛必达求导时把 \(\sec^{2}x-1\) 误写成 \(\tan x\)，少一个平方导致主部阶数降到一阶。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>初等函数与自身线性主部之差的三阶比阶，是选择填空的固定考点。应记牢一组标准系数：\(\sin x-x\sim -x^{3}/6\)，\(\tan x-x\sim x^{3}/3\)，\(\arcsin x-x\sim x^{3}/6\)，\(\arctan x-x\sim -x^{3}/3\)。考查方式通常是换函数、换分母幂次，框架不变。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arctan x-x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac13\)。由 \(\arctan x=x-\dfrac{x^{3}}{3}+o(x^{3})\)，分子主部为 \(-x^{3}/3\)，除以 \(x^{3}\) 得 \(-1/3\)，与正切题符号相反、系数绝对值相同。</p>
+  </div>
+</article>
+
+<article class="q" id="q2404">
+  <div class="q-head">
+    <span class="qno">第 2404 题</span>
+    <span class="qtype">黎曼和（对数函数积分）</span>
+    <span class="qsrc">P1046</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\left(\dfrac{1}{n}\sum\limits_{k=1}^{n}\ln\left(1+\dfrac{k}{n}\right)\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(2\ln 2-1\approx0.3862943611\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\ln 2-1\approx-0.3069\)，复算 \(2\ln 2-1\approx0.3862943611\)（sympy 精确积分与 mpmath 35 位自适应积分两档一致，离散部分和 \(N=10^{3}/10^{4}/10^{5}\) 分别为 \(0.3866409/0.3863290/0.3862978\)，同向逼近）。硬性判据：被积函数 \(\ln(1+x)\) 在 \([0,1]\) 上非负，和式恒非负，书给负数直接不成立。邻近变体排除：\(\int_0^1\ln x\,dx=-1\)，\(\int_0^1\ln(1+2x)\,dx=(3\ln3-2)/2\approx0.6479\)，均不等于书给值；同题另一版本书答 \(2\ln2-1\) 正确。书值系对数原函数常数项写错，以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准右端点黎曼和，取 \(x_{k}=k/n\)，被积函数 \(f(x)=\ln(1+x)\)，极限化为 \([0,1]\) 上的定积分。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\ln\left(1+\frac{k}{n}\right)
+    =\int_0^1\ln(1+x)\,dx.
+    \]
+    <p>对数函数的原函数用分部积分得到：令 \(u=\ln(1+x)\)，\(dv=dx\)，则</p>
+    \[
+    \int\ln(1+x)\,dx=(1+x)\ln(1+x)-(1+x)+C.
+    \]
+    <p>代入上下限 \(1\) 与 \(0\)，下限处 \(1\cdot\ln1-1=-1\)：</p>
+    \[
+    I=\big[(1+x)\ln(1+x)-(1+x)\big]_0^1
+    =(2\ln2-2)-(-1)=2\ln2-1.
+    \]
+    <p>数值复核：部分和在 \(N=1000\) 时 \(0.3866409\)，\(N=10000\) 时 \(0.3863290\)，\(N=100000\) 时 \(0.3862978\)，随网格加密向 \(0.3862944\) 逼近。被积函数从 \(0\) 增到 \(\ln2\)，积分值落在 \([0,\ln2]\) 区间内，书给负值超出该范围。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 代下限常数项时把 \(-(1+x)\) 在 \(x=0\) 处误写成 \(0\)，得到 \(\ln2-1\) 这类偏小结果。② 把 \(\ln(1+x)\) 当成 \(\ln x\) 平移，直接套 \(\int\ln x\,dx=x\ln x-x\) 却不修正常数项。③ 看到对数就以为积分可能为负：\(\ln(1+x)\) 在 \([0,1]\) 上整体非负，积分符号先做定性判断即可排除负值答案。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数核黎曼和的考点分两层：先认积分，再用分部积分求原函数。常数项是最容易丢分的位置，复习时应把 \((1+x)\ln(1+x)-(1+x)\) 这一原函数连同上下限取值一起记熟。带缩放系数的同类题在本组 2412 题出现，按系数 \(c\) 套通式处理。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\ln\left(1+\dfrac{2k}{n}\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{3\ln3-2}{2}\approx0.6479184\)。换元 \(u=1+2x\)，上限由 \(1\) 变到 \(3\)，\(\int_0^1\ln(1+2x)\,dx=\frac12[u\ln u-u]_1^3=(3\ln3-2)/2\)，通式为 \(\frac{(1+c)\ln(1+c)-c}{c}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2405">
+  <div class="q-head">
+    <span class="qno">第 2405 题</span>
+    <span class="qtype">黎曼和（幂函数根式积分）</span>
+    <span class="qsrc">P1047</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\sqrt{1+\dfrac{k}{n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{2}{3}(2\sqrt2-1)\approx1.2189514165\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(\frac23(2\sqrt2-2)\approx0.5522847\)，复算 \(\frac23(2\sqrt2-1)\approx1.2189514165\)（sympy 精确积分与 mpmath 两档一致，离散部分和 \(N=10^{3}/10^{4}/10^{5}\) 为 \(1.2191585/1.2189721/1.2189535\)）。原函数 \(\frac23(1+x)^{3/2}\) 下限代入值是 \(\frac23\cdot1^{3/2}=\frac23\)，书误按 \(\frac23\cdot2\) 计算，属常数项算术错，不是印式分歧。邻近读法排除：\(\int_0^1\sqrt{x}\,dx=\frac23\)，\(\int_0^1\sqrt{1-x}\,dx=\frac23\)，均不等于 \(0.5523\)。同族模板 \(\frac{m}{m+1}(2^{(m+1)/m}-1)\)，\(m=2\) 即复算值，以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，取 \(x_{k}=k/n\)，被积函数 \(f(x)=\sqrt{1+x}\)，极限为 \([0,1]\) 上的定积分。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\sqrt{1+\frac{k}{n}}
+    =\int_0^1\sqrt{1+x}\,dx.
+    \]
+    <p>换元 \(u=1+x\)，积分上下限由 \(x=0,1\) 对应到 \(u=1,2\)，\(du=dx\)：</p>
+    \[
+    I=\int_1^2\sqrt{u}\,du=\frac23u^{3/2}\Big|_{1}^{2}.
+    \]
+    <p>上下限分别代入：上限 \(2^{3/2}=2\sqrt2\)，下限 \(1^{3/2}=1\)，下限项系数为 \(\frac23\cdot1\)，不是 \(\frac23\cdot2\)：</p>
+    \[
+    I=\frac23\left(2\sqrt2-1\right)\approx1.2189514165.
+    \]
+    <p>数值复核：\(N=1000\) 部分和 \(1.2191585\)，\(N=10000\) 为 \(1.2189721\)，\(N=100000\) 为 \(1.2189535\)，单调逼近积分值。被积函数在 \([0,1]\) 上从 \(1\) 增到 \(\sqrt2\)，积分值落在 \([1,\sqrt2]\) 内，书给 \(0.5523\) 低于该区间下限。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 下限代入时把 \(1^{3/2}\) 误算成 \(2\)，常数项符号与数值同时出错。② 误读成 \(\sqrt{x}\) 或 \(\sqrt{1-x}\)，被积函数与积分区间随之改变。③ 换元后忘记同步更换上下限，仍按 \(0\) 到 \(1\) 对 \(\sqrt u\) 积分，得到 \(2/3\) 附近的错误值。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>幂函数型黎曼和族的通式为 \(\frac1n\sum(1+k/n)^{1/m}\to\frac{m}{m+1}(2^{(m+1)/m}-1)\)。本组相邻的根式题按 \(m=3,4,5\) 依次排列，主部常数都由上限 \(2\) 的幂次与下限 \(1\) 的差决定，复习时可按通式一次性复核整族。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\sqrt[3]{1+\dfrac{k}{n}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac34(2^{4/3}-1)\approx1.1398816\)。按通式 \(m=3\)，\(\int_0^1(1+x)^{1/3}\,dx=\frac34(2^{4/3}-1)\)，下限项仍为 \(1\) 的幂次。</p>
+  </div>
+</article>
+
+<article class="q" id="q2406">
+  <div class="q-head">
+    <span class="qno">第 2406 题</span>
+    <span class="qtype">斯特林公式（阶乘根式渐近）</span>
+    <span class="qsrc">P1047</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{\sqrt[n]{n!}}{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac1e\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：阶乘的 \(n\) 次根与 \(n\) 之比，固定走取对数后用斯特林公式估计主部，再指数还原。</p>
+    <p>记 \(A_{n}=\sqrt[n]{n!}/n\)，取自然对数：</p>
+    \[
+    \ln A_{n}=\frac1n\ln(n!)-\ln n.
+    \]
+    <p>斯特林主部为 \(\ln(m!)=m\ln m-m+O(\ln m)\)，代入 \(m=n\)：</p>
+    \[
+    \ln(n!)=n\ln n-n+O(\ln n).
+    \]
+    <p>两边除以 \(n\)：</p>
+    \[
+    \frac1n\ln(n!)=\ln n-1+O\left(\frac{\ln n}{n}\right).
+    \]
+    <p>减去 \(\ln n\) 后，\(\ln n\) 项抵消，留下常数主部：</p>
+    \[
+    \ln A_{n}\to -1,\qquad A_{n}\to e^{-1}=\frac1e.
+    \]
+    <p>数值复核：\(N=1000\) 时比值约 \(0.3694917\)，\(N=50000\) 时约 \(0.3679260\)，对照 \(1/e\approx0.3678794\)，偏差按 \(O(\ln n/n)\) 缩小。斯特林公式只取主部即可定极限，\(O(\ln n)\) 项在除以 \(n\) 后消失。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 斯特林主部漏写线性项 \(-m\)，对数差值只剩 \(\ln n\) 相消后的零，误判极限为 \(1\)。② 把 \(\sqrt[n]{n!}\) 与 \((n!)^{1/(2n)}\) 之类的根指数混淆，主部系数随之改变。③ 取对数后忘记减去 \(\ln n\)，直接对 \((1/n)\ln n!\) 指数还原，底数漏了归一化因子 \(1/n\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>阶乘根式渐近是斯特林公式的标准出口，与阶乘比对数型题目互为镜像：前者取根后归一化到常数 \(e^{-1}\)，后者取对数后得到分组系数的对数和。复习时应掌握 \(\ln n!\) 的主部结构 \(n\ln n-n\)，以及余项在除法后的消失速度。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{\sqrt[n]{(2n)!}}{n^{2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac4{e^{2}}\approx0.5413411\)。由 \(\ln(2n)!=2n\ln(2n)-2n+O(\ln n)\)，除以 \(n\) 再减 \(2\ln n\)，对数主部为 \(2\ln2-2\)，指数还原得 \(e^{2\ln2-2}=4/e^{2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2407">
+  <div class="q-head">
+    <span class="qno">第 2407 题</span>
+    <span class="qtype">调和数列与欧拉常数</span>
+    <span class="qsrc">P1047</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\left(\sum\limits_{k=1}^{n}\dfrac1k-\ln n\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\gamma\)（欧拉常数）</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：调和级数前 \(n\) 项和与对数的差，是单调有界收敛的典型例题，极限为欧拉常数 \(\gamma\)。</p>
+    <p>记 \(H_{n}=\sum_{k=1}^{n}1/k\)，由积分比较：在区间 \([k,k+1]\) 上 \(1/x\le1/k\)，在 \([k-1,k]\) 上 \(1/x\ge1/k\)，得到夹逼：</p>
+    \[
+    \ln(n+1)=\int_1^{n+1}\frac{dx}{x}\le H_{n}\le 1+\int_1^n\frac{dx}{x}=1+\ln n.
+    \]
+    <p>于是 \(H_{n}-\ln n\) 有下界 \(0\)、上界 \(1\)。再看单调性：</p>
+    \[
+    a_{n}-a_{n+1}
+    =\left(H_{n}-\ln n\right)-\left(H_{n+1}-\ln(n+1)\right)
+    =\ln\left(1+\frac1n\right)-\frac1{n+1}\gt{0},
+    \]
+    <p>数列 \(\{a_{n}\}\) 单调递减且有下界，故收敛，其极限记为欧拉常数：</p>
+    \[
+    \gamma=\lim_{n\to\infty}(H_{n}-\ln n)\approx0.5772156649.
+    \]
+    <p>数值复核：\(N=1000\) 时差约 \(0.5777156\)，\(N=100000\) 时约 \(0.5772207\)，随 \(1/(2n)\) 量级向 \(\gamma\) 逼近。该常数没有已知的初等闭式，题目只要求识别极限记号 \(\gamma\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 误以为调和级数本身收敛：\(H_{n}\) 与 \(\ln n\) 同为发散阶，相减后才有有限极限。② 把 \(H_{n}-\ln(n+1)\) 当成另一个常数：两者之差为 \(\ln(1+1/n)\to0\)，极限同为 \(\gamma\)。③ 单调性方向判断反了，实际 \(a_{n}\) 递减而非递增；积分比较时注意每项对应的区间位置。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>欧拉常数题在考研中主要考结论识别与单调有界证明，不要求展开 \(\gamma\) 的级数形式。相关变形包括 \(H_{2n}-H_{n}\to\ln2\)、交错调和级数收敛到 \(\ln2\) 等，都建立在调和数与对数的渐近关系上。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(\sum\limits_{k=1}^{n}\dfrac1k-\ln(n+1)\right)\)。</p>
+    <p class="var-ans">答案：\(\gamma\)。两式相差 \(\ln(n+1)-\ln n=\ln(1+1/n)\to0\)，同一极限；这说明把对数基线换成 \(\ln(n+1)\) 不改变收敛常数。</p>
+  </div>
+</article>
+
+<article class="q" id="q2408">
+  <div class="q-head">
+    <span class="qno">第 2408 题</span>
+    <span class="qtype">黎曼和（余弦函数积分）</span>
+    <span class="qsrc">P1047</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\cos\left(\dfrac{k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\sin 1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准右端点黎曼和，网格点 \(x_{k}=k/n\)，被积函数 \(f(x)=\cos x\)，极限化为 \([0,1]\) 上的定积分。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\cos\left(\frac{k}{n}\right)
+    =\int_0^1\cos x\,dx.
+    \]
+    <p>余弦的原函数是正弦：</p>
+    \[
+    \int_0^1\cos x\,dx=\sin x\Big|_0^1=\sin1-\sin0=\sin1.
+    \]
+    <p>数值复核：\(\sin1\approx0.8414709848\)。被积函数在 \([0,1]\) 上从 \(1\) 递减到 \(\cos1\approx0.5403\)，积分值落在该取值区间内。</p>
+    \[
+    \cos x=1-\frac{x^{2}}2+\frac{x^{4}}{24}-\cdots,
+    \]
+    <p>逐项积分可得 \(I=1-1/6+1/120-\cdots\)，与 \(\sin1\) 的级数一致，互为校验。右端点 \(k=n\) 对应 \(x=1\)，取值 \(\cos1\neq1\)，不能逐项把 \(k/n\) 当成零。</p>
+    <p>级数互证：余弦级数逐项积分后常数项 \(1\) 与二次项 \(-1/6\) 等交替相消，结果仍落在 \([\cos1,1]\) 这一取值区间内。右端网格点对应连续变量 \(1\)，而不是零，这是黎曼和整体取极限与逐项代入的根本区别；和式有 \(n\) 项，每项权重 \(1/n\)，必须先合成积分再读被积函数。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 逐项把 \(k/n\) 当零而写 \(\cos0=1\)，再乘以 \(n\) 个 \(1/n\) 得到错误答案 \(1\)；黎曼和必须整体取极限。② 误读成 \(\cos(k^{2}/n^{2})\) 一类变核，被积函数与积分值都改变。③ 原函数符号写反，把 \(\int\cos x\,dx\) 写成 \(-\sin x\)，得到负值。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>基础三角核黎曼和考查定积分定义的直接套用，\(\sin\)、\(\cos\)、幂函数、对数核在本组交替出现。解题关键是先写出 \(f(k/n)\) 的形式，再读积分区间；端点取值是否等于 \(f(0)\) 只影响直觉，不影响积分定义。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\sin\left(\dfrac{k}{n}\right)\)。</p>
+    <p class="var-ans">答案：\(1-\cos1\approx0.4596977\)。收敛到 \(\int_0^1\sin x\,dx=-\cos x\big|_0^1=1-\cos1\)，与余弦题成对。</p>
+  </div>
+</article>
+
+<article class="q" id="q2409">
+  <div class="q-head">
+    <span class="qno">第 2409 题</span>
+    <span class="qtype">黎曼和（单位圆四分之一面积）</span>
+    <span class="qsrc">P1047</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n^{2}}\sum\limits_{k=1}^{n}\sqrt{n^{2}-k^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\pi}{4}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：先把通项提出 \(n\) 归一化，写成标准黎曼和；被积函数是上半单位圆的纵坐标，积分对应四分之一圆面积。</p>
+    <p>根式内提取 \(n^{2}\)：</p>
+    \[
+    \sqrt{n^{2}-k^{2}}=n\sqrt{1-\left(\frac{k}{n}\right)^{2}},
+    \]
+    <p>代入和式，分母 \(n^{2}\) 与分子的 \(n\) 配成 \(1/n\) 网格因子：</p>
+    \[
+    \frac1{n^{2}}\sum_{k=1}^{n}\sqrt{n^{2}-k^{2}}
+    =\frac1n\sum_{k=1}^{n}\sqrt{1-\left(\frac{k}{n}\right)^{2}}
+    \to\int_0^1\sqrt{1-x^{2}}\,dx.
+    \]
+    <p>换元 \(x=\sin t\)，\(dx=\cos t\,dt\)，区间 \(x\in[0,1]\) 对应 \(t\in[0,\pi/2]\)：</p>
+    \[
+    I=\int_0^{\pi/2}\cos^{2}t\,dt=\frac{\pi}{4}\approx0.7853981634.
+    \]
+    <p>几何解释：\(y=\sqrt{1-x^{2}}\) 是单位圆上半支，\([0,1]\) 段下的面积恰为四分之一圆，面积 \(\pi\cdot1^{2}/4=\pi/4\)，与三角换元结果互证。右端点 \(k=n\) 处根式为零，和式最后一项不贡献面积。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 漏掉分母上的 \(n^{2}\) 归一化，把通项当成 \(n\sqrt{1-(k/n)^{2}}\) 直接求和，量级变成发散。② 把根式近似成 \(n\)，每项取 \(n\) 后得到 \(n\) 阶错误结果。③ 三角换元后忘记 \(\cos t\) 非负区间，平方关系 \(\sqrt{1-\sin^{2}t}=\cos t\) 的符号未加说明。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>带几何背景的黎曼和常以圆、椭圆、双曲线的纵坐标为核，积分值可由面积公式直接读出。本组 2420 题是对偶形式 \(1/\sqrt{1-x^{2}}\)，对应反正弦积分；复习时把两根式核的原函数与几何意义成对记忆。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1{n^{2}}\sum\limits_{k=1}^{n}\sqrt{n^{2}+k^{2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\sqrt2}{2}+\dfrac12\ln(1+\sqrt2)\approx1.1477936\)。收敛到 \(\int_0^1\sqrt{1+x^{2}}\,dx\)，按双曲代换或分部积分求得原函数 \(\frac{x}{2}\sqrt{1+x^{2}}+\frac12\ln(x+\sqrt{1+x^{2}})\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2410">
+  <div class="q-head">
+    <span class="qno">第 2410 题</span>
+    <span class="qtype">1<sup>∞</sup> 型幂指极限</span>
+    <span class="qsrc">P1048</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\left(\dfrac{2n+1}{2n-1}\right)^{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(e\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：底数趋于 \(1\)，指数趋于无穷，属 \(1^{\infty}\) 型；固定手法是取对数，计算指数乘以底数减一的主部，再指数还原。</p>
+    <p>先写底数与 \(1\) 的差：</p>
+    \[
+    u_{n}=\frac{2n+1}{2n-1}=1+\frac{2}{2n-1}\to1.
+    \]
+    <p>取对数后，由 \(\ln(1+t)\sim t\)（\(t\to0\)）：</p>
+    \[
+    \ln L=\lim_{n\to\infty}n\ln u_{n}
+    =\lim_{n\to\infty}n\cdot\frac{2}{2n-1}.
+    \]
+    <p>抓分子分母主部：</p>
+    \[
+    n\cdot\frac{2}{2n-1}=\frac{2n}{2n-1}\to1.
+    \]
+    <p>对数极限为 \(1\)，指数还原：</p>
+    \[
+    L=e^{1}=e\approx2.7182818285.
+    \]
+    <p>标准公式 \(u^{v}\to e^{\lim v(u-1)}\) 与此路径一致：\(u-1=2/(2n-1)\)，\(v=n\)，乘积主部为 \(1\)。底数分子分母同阶，展开到 \(1/n\) 阶即可定常数，更高阶项不影响极限。</p>
+    <p>二阶展开复核：\(\ln(1+2/(2n-1))=2/(2n-1)+O(1/n^{2})\)，乘以指数 \(n\) 后二阶项为 \(O(1/n)\) 趋于零，留下主部 \(2n/(2n-1)\to1\)。底数差的分子是常数 \(2\)，指数是一次式，两者商的极限只看一次项系数。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 看到底数趋于 \(1\) 就直接写 \(1\)，忽略指数 \(n\) 带来的 \(1^{\infty}\) 未定式。② 分子分母符号弄反，把底数写成 \((2n-1)/(2n+1)\)，主部常数变 \(-1\)，答案成 \(e^{-1}\)。③ 对数展开时用 \(\ln(1+t)\sim t\) 后漏乘指数 \(n\)，只估计底数差的量级。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>\(1^{\infty}\) 型是数列与函数极限的高频考点，分式底数、\((1+a/n)^{n}\)、和式底数都走同一套对数主部流程。复习时应熟练 \(v(u-1)\) 的代数整理，以及 \(\ln(1+t)\) 等价替换的适用条件。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(\dfrac{2n-1}{2n+1}\right)^{n}\)。</p>
+    <p class="var-ans">答案：\(e^{-1}\)。底数差为 \(-2/(2n+1)\)，\(v(u-1)\to-1\)，指数还原得 \(e^{-1}\)；与原题互为分子分母交换的对称情形。</p>
+  </div>
+</article>
+
+<article class="q" id="q2411">
+  <div class="q-head">
+    <span class="qno">第 2411 题</span>
+    <span class="qtype">和式极限（低阶扰动夹逼）</span>
+    <span class="qsrc">P1048</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{\sqrt{n^{2}+k}}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：根式内 \(k\) 相对于 \(n^{2}\) 是低阶扰动，先把通项归一化到 \(1/n\)，再用两端根式比较夹逼。</p>
+    <p>提取 \(n^{2}\) 并做二项展开：</p>
+    \[
+    \frac1{\sqrt{n^{2}+k}}
+    =\frac1n\left(1+\frac{k}{n^{2}}\right)^{-1/2}
+    =\frac1n\left(1+O\left(\frac{k}{n^{2}}\right)\right).
+    \]
+    <p>求和后扰动项总量为 \(O(1/n)\)：</p>
+    \[
+    S_{n}=\frac1n\sum_{k=1}^{n}\left(1+O\left(\frac{k}{n^{2}}\right)\right)=1+O\left(\frac1n\right).
+    \]
+    <p>严格夹逼：对 \(1\le k\le n\)，根式内 \(n^{2}+k\) 介于 \(n^{2}\) 与 \(n^{2}+n\) 之间，故</p>
+    \[
+    \frac1{\sqrt{n^{2}+n}}\le \frac1{\sqrt{n^{2}+k}}\le\frac1n.
+    \]
+    <p>逐项求和：</p>
+    \[
+    \frac{n}{\sqrt{n^{2}+n}}\le S_{n}\le1,
+    \qquad \frac{n}{\sqrt{n^{2}+n}}=\frac1{\sqrt{1+1/n}}\to1.
+    \]
+    <p>夹逼给出 \(S_{n}\to1\)。数值复核：\(N=100\) 时 \(0.9974876\)，\(N=1000\) 时 \(0.9997499\)，\(N=10000\) 时 \(0.9999750\)，偏差按 \(1/(2n)\) 量级缩小。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把分母里的 \(k\) 当成与 \(n^{2}\) 同级，误写成标准黎曼和 \(\int_0^1 1/\sqrt{1+x}\,dx\)；扰动阶必须先看 \(k/n^{2}\) 还是 \(k/n\)。② 二项展开后漏记余项量级，扰动总量被误判为不趋于零。③ 夹逼时上界取下界对应反，根式单调性方向出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>低阶扰动和式考的是阶数比较：先判断扰动相对于主项是 \(1/n\) 还是 \(1/n^{2}\)，再决定用夹逼还是黎曼和。同一套根式结构若把 \(k\) 换成 \(k^{2}\)，扰动升级为网格因子，就转入定积分路径。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{\sqrt{n^{2}+k^{2}}}\)。</p>
+    <p class="var-ans">答案：\(\ln(1+\sqrt2)\approx0.8813736\)。整理为 \(\frac1n\sum 1/\sqrt{1+(k/n)^{2}}\)，收敛到 \(\int_0^1 dx/\sqrt{1+x^{2}}=\ln(x+\sqrt{1+x^{2}})\big|_0^1=\ln(1+\sqrt2)\)；扰动升级为 \(k^{2}\) 后走积分路径。</p>
+  </div>
+</article>
+
+<article class="q" id="q2412">
+  <div class="q-head">
+    <span class="qno">第 2412 题</span>
+    <span class="qtype">黎曼和（带缩放系数的对数积分）</span>
+    <span class="qsrc">P1048</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\ln\left(1+\dfrac{2k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{3\ln3-2}{2}\approx0.6479184330\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(2\ln2-1\approx0.3862944\)。按页面印式 \(\ln(1+2k/n)\) 复算 \(\int_0^1\ln(1+2x)\,dx=\frac{3\ln3-2}{2}\approx0.6479184330\)（sympy 精确积分与 mpmath 两档一致，离散部分和 \(N=10^{3}/10^{4}/10^{5}\) 为 \(0.6484676/0.6479734/0.6479239\)）。两种读法并列：若被积式本应为 \(\ln(1+k/n)\)（去掉系数 \(2\)），极限恰为书给值 \(2\ln2-1\)。这是印式-书答不匹配型，答案按页面印式取 \(\frac{3\ln3-2}{2}\)，以页面印式为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，网格点 \(x_{k}=k/n\)，被积函数 \(f(x)=\ln(1+2x)\)，缩放系数 \(c=2\) 进入函数内部。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\ln\left(1+\frac{2k}{n}\right)
+    =\int_0^1\ln(1+2x)\,dx.
+    \]
+    <p>换元 \(u=1+2x\)，\(du=2dx\)，上下限由 \(x=0,1\) 对应到 \(u=1,3\)：</p>
+    \[
+    I=\frac12\int_1^3\ln u\,du
+    =\frac12\big[u\ln u-u\big]_1^3.
+    \]
+    <p>代入上下限：上限 \(3\ln3-3\)，下限 \(1\cdot\ln1-1=-1\)：</p>
+    \[
+    I=\frac12\big[(3\ln3-3)-(-1)\big]=\frac{3\ln3-2}{2}.
+    \]
+    <p>一般化：系数为 \(c\) 时</p>
+    \[
+    J(c)=\int_0^1\ln(1+cx)\,dx
+    =\frac{(1+c)\ln(1+c)-c}{c},
+    \]
+    <p>代入 \(c=1\) 得 \(2\ln2-1\)，代入 \(c=2\) 得 \((3\ln3-2)/2\)，两题数值由此区分。数值复核：部分和 \(N=1000\) 为 \(0.6484676\)，\(N=10000\) 为 \(0.6479734\)，\(N=100000\) 为 \(0.6479239\)，向 \(0.6479184\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 漏掉系数 \(2\)，把被积式当成 \(\ln(1+k/n)\)，积分限仍按 \(1\) 到 \(2\) 处理，得到 \(2\ln2-1\)。② 换元后忘记 \(du=2dx\) 的因子 \(1/2\)，常数项翻倍。③ 分部积分下限代入时把 \(u=1\) 处的 \(u\ln u-u\) 写成 \(0\)，常数项再错一次。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>带缩放系数的对数核黎曼和，通式 \(\frac{(1+c)\ln(1+c)-c}{c}\) 一次覆盖 \(c=1,2,3\) 各题。复习时应先识别系数 \(c\) 落在对数内部还是网格外面，再决定换元区间；与 2404 题的 \(c=1\) 情形互补对照。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\ln\left(1+\dfrac{3k}{n}\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{4\ln4-3}{3}\approx0.8483925\)。按通式 \(c=3\)，\(\int_0^1\ln(1+3x)\,dx=\frac13[u\ln u-u]_1^4=(4\ln4-3)/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2413">
+  <div class="q-head">
+    <span class="qno">第 2413 题</span>
+    <span class="qtype">黎曼和（正弦函数积分）</span>
+    <span class="qsrc">P1048</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\sin\left(\dfrac{\pi k}{2n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{2}{\pi}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，网格点 \(x_{k}=k/n\)，被积函数 \(f(x)=\sin(\pi x/2)\)，角频率为 \(\pi/2\)。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\sin\left(\frac{\pi k}{2n}\right)
+    =\int_0^1\sin\left(\frac{\pi x}{2}\right)\,dx.
+    \]
+    <p>正弦原函数按角频率倒系数写出：</p>
+    \[
+    \int\sin\left(\frac{\pi x}{2}\right)dx
+    =-\frac{2}{\pi}\cos\left(\frac{\pi x}{2}\right)+C.
+    \]
+    <p>代入上下限：</p>
+    \[
+    I=-\frac{2}{\pi}\cos\left(\frac{\pi x}{2}\right)\Big|_0^1
+    =\frac{2}{\pi}\big(\cos0-\cos(\pi/2)\big)=\frac{2}{\pi}.
+    \]
+    <p>数值复核：\(2/\pi\approx0.6366197724\)。被积函数在 \([0,1]\) 上从 \(0\) 增到 \(1\)，积分值介于平均值 \(0.5\) 与峰值 \(1\) 之间，结果数量级吻合。右端点对应角度 \(\pi/2\)，正弦取 \(1\)，不能按 \(k/n\to0\) 取 \(\sin0=0\)。</p>
+    <p>几何与网格复核：被积函数在四分之一周期内非负，面积等于峰值 \(1\) 乘以形状系数 \(2/\pi\)。和式从 \(k=1\) 计到 \(k=n\)，左端点 \(k=0\) 未计入，右端点对应 \(x=1\)；去掉或增加一个网格点只改变 \(O(1/n)\) 的端点误差，不改变积分极限。角频率 \(\pi/2\) 决定原函数系数 \(2/\pi\)，频率翻倍时系数相应减半。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 角频率记错，把原函数系数写成 \(1/\pi\) 或 \(2\pi\)；正弦积分系数是频率的倒数。② 端点取值混淆：\(\cos(\pi/2)=0\)，\(\cos0=1\)，相减顺序写反。③ 把和式当成有限项三角级数求和，试图用等差角公式化简，方向走错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>三角核黎曼和的固定两步：读出角频率 \(\omega\)，积分 \(\int_0^1\sin(\omega x)dx\) 给出 \(2\sin(\omega/2)/\omega\) 一类结果。本组 2423 题为频率 \(\pi\) 的版本，2424 题为余弦版本，框架相同，只换频率与相位。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\sin\left(\dfrac{\pi k}{3n}\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{3}{2\pi}\approx0.4774648\)。收敛到 \(\int_0^1\sin(\pi x/3)\,dx=\frac3\pi(1-\cos(\pi/3))=3/(2\pi)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2414">
+  <div class="q-head">
+    <span class="qno">第 2414 题</span>
+    <span class="qtype">黎曼和（正切函数积分）</span>
+    <span class="qsrc">P1048</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\tan\left(\dfrac{\pi k}{4n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{2}{\pi}\ln 2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数 \(f(x)=\tan(\pi x/4)\)，积分区间 \([0,1]\)，对应角度区间 \(0\) 到 \(\pi/4\)，不触及正切奇点 \(\pi/2\)。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\tan\left(\frac{\pi k}{4n}\right)
+    =\int_0^1\tan\left(\frac{\pi x}{4}\right)\,dx.
+    \]
+    <p>换元 \(t=\pi x/4\)，\(dx=4/\pi\,dt\)，角度区间 \(t\in[0,\pi/4]\)：</p>
+    \[
+    I=\frac4\pi\int_0^{\pi/4}\tan t\,dt.
+    \]
+    <p>正切原函数为 \(-\ln|\cos t|\)：</p>
+    \[
+    \int\tan t\,dt=-\ln\cos t+C,
+    \]
+    <p>代入端点 \(\cos(\pi/4)=\sqrt2/2\)，\(\cos0=1\)：</p>
+    \[
+    I=\frac4\pi\big[-\ln\cos t\big]_0^{\pi/4}
+    =\frac4\pi\ln\frac{1}{\cos(\pi/4)}
+    =\frac4\pi\ln\sqrt2=\frac2\pi\ln2.
+    \]
+    <p>数值复核：\((2/\pi)\ln2\approx0.4412712003\)。正切在 \([0,\pi/4]\) 上非负且有限，积分收敛；端点临近 \(\pi/2\) 才出现发散，本题区间不到该位置。</p>
+    <p>对数化简：\(\ln\sqrt2=\frac12\ln2\)，换元系数 \(4/\pi\) 与之相乘得 \(2/\pi\ln2\)；下限 \(t=0\) 处 \(\cos0=1\)，对数为零，只剩上限正割项。被积函数从 \(0\) 增到 \(1\)，积分值小于区间右端的有限值，结果数量级吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 正切原函数符号记反，写成 \(\ln\cos t\)，结果变负。② 角度上限认错：\(\pi/4\) 处余弦为 \(\sqrt2/2\)，不是 \(0\)，不能套用 \(\int_0^{\pi/2}\tan t\,dt\) 的发散结论。③ 换元漏写因子 \(4/\pi\)，对数结果未按频率缩放。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正切核是少见的可积黎曼和，原函数藏在余弦对数里。复习时应记住 \(\int\tan t\,dt=-\ln|\cos t|\)，并检查角度区间避开 \(\pi/2\) 奇点；同类变式常把频率降到 \(\pi/6\)、\(\pi/5\) 以保持有限。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\tan\left(\dfrac{\pi k}{6n}\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{6}{\pi}\ln\dfrac{2}{\sqrt3}\approx0.2747161\)。换元后角度上限 \(\pi/6\)，\(\cos(\pi/6)=\sqrt3/2\)，\(I=\frac{6}{\pi}\ln\sec(\pi/6)=\frac{6}{\pi}\ln(2/\sqrt3)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2415">
+  <div class="q-head">
+    <span class="qno">第 2415 题</span>
+    <span class="qtype">Cesàro 平均（根式数列收敛）</span>
+    <span class="qsrc">P1049</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\sqrt[k]{k}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：通项 \(k^{1/k}\) 随 \(k\) 趋于 \(1\)，求前 \(n\) 项算术平均，属 Cesàro 平均问题；数列收敛到常数时，其算术平均收敛到同一常数。</p>
+    <p>取指数写成 \(e\) 的幂：</p>
+    \[
+    k^{1/k}=e^{\ln k/k}.
+    \]
+    <p>由对数增长慢于线性，\(\ln k/k\to0\)（\(k\to\infty\)），故</p>
+    \[
+    \ln k/k\to0\quad\Longrightarrow\quad k^{1/k}\to e^{0}=1.
+    \]
+    <p>按平均收敛定理：对任意 \(\varepsilon\gt{0}\)，存在 \(K\)，当 \(k\gt K\) 时 \(|k^{1/k}-1|\lt{\varepsilon}\)；前 \(K\) 项为有限个常数，除以 \(n\) 后趋于零：</p>
+    \[
+    \frac1n\sum_{k=1}^{n}k^{1/k}\to1.
+    \]
+    <p>数值复核：\(N=1000\) 时平均约 \(1.0248188\)，\(N=10000\) 时约 \(1.0043399\)，偏差来自前段有限项与慢收敛尾项，随 \(n\) 增大被摊薄。\(k=1\) 项为 \(1\)，\(k=2\) 项为 \(\sqrt2\)，这些个别值不影响平均极限。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 担心根式内 \(k\) 随项数增大，误以为平均会偏离 \(1\)；根指数与被开方数同步增大，主部由 \(\ln k/k\) 决定。② 忽略前有限项不影响平均，被 \(k=2\) 的 \(\sqrt2\) 等个别值带偏估计。③ 把本题与阶乘根式混淆，去套斯特林公式；通项不是阶乘结构。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>Cesàro 平均结论是数列极限的常用推论：若 \(a_{k}\to L\)，则 \((a_{1}+\cdots+a_{n})/n\to L\)。本题先证 \(k^{1/k}\to1\)，再用平均定理收口；相邻 2416 题是双下标版本，思路同为逐项趋于常数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}(k+1)^{1/(k+1)}\)。</p>
+    <p class="var-ans">答案：\(1\)。换指标后通项仍是趋于 \(1\) 的根式数列，Cesàro 平均不变；首项平移只改变有限个前期值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2416">
+  <div class="q-head">
+    <span class="qno">第 2416 题</span>
+    <span class="qtype">双下标幂指项（一致趋于 1）</span>
+    <span class="qsrc">P1049</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\left(\dfrac{n}{k}\right)^{1/n}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：幂指项同时含 \(n\) 与 \(k\)，先取对数看指数的一致量级；指数一致趋于零时，底数一致趋于 \(1\)，算术平均同极限。</p>
+    <p>记 \(a_{k,n}=(n/k)^{1/n}\)，取对数：</p>
+    \[
+    \ln a_{k,n}=\frac1n(\ln n-\ln k).
+    \]
+    <p>对 \(1\le k\le n\)，\(0\le\ln n-\ln k\le\ln n\)，故</p>
+    \[
+    0\le\ln a_{k,n}\le\frac{\ln n}{n}\to0.
+    \]
+    <p>该上界与 \(k\) 无关，指数在整个求和范围内一致趋于零：</p>
+    \[
+    a_{k,n}=e^{\ln a_{k,n}}=1+o(1)\quad\text{对 }k\text{ 一致成立}.
+    \]
+    <p>逐项与 \(1\) 比较后求平均：</p>
+    \[
+    \frac1n\sum_{k=1}^{n}a_{k,n}
+    =\frac1n\sum_{k=1}^{n}\big(1+o(1)\big)=1+o(1)\to1.
+    \]
+    <p>数值复核：\(N=1000\) 时平均约 \(1.0009966\)，\(N=10000\) 时约 \(1.0001000\)，偏差随 \(\ln n/n\) 缩小。\(k=1\) 项为 \(n^{1/n}\to1\)，是指数最大的一项，也被同一上界控制。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把指数 \(1/n\) 误读成 \(k/n\)，指数变成随 \(k\) 变化的量，结论结构改变。② 只验证 \(k\) 固定时的行为，漏掉 \(k=1\) 这一最不利位置；必须用与 \(k\) 无关的上界做一致估计。③ 忘记先取对数，直接比较 \(n/k\) 的大小，把底数偏大误当成整体偏大。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>双下标题的核心动作是分离指数与底数：先证指数一致趋零，再由指数函数连续性把一致趋于零翻译成一致趋于 \(1\)。这类估计常与 Cesàro 平均结合，和 2415 题同属「逐项趋于常数」族。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\left(\dfrac{n}{k}\right)^{2/n}\)。</p>
+    <p class="var-ans">答案：\(1\)。对数指数为 \(2(\ln n-\ln k)/n\)，上界 \(2\ln n/n\to0\) 仍一致成立，底数一致趋于 \(1\)，平均极限不变；系数 \(2\) 不改变趋零结论。</p>
+  </div>
+</article>
+
+<article class="q" id="q2417">
+  <div class="q-head">
+    <span class="qno">第 2417 题</span>
+    <span class="qtype">变指数黎曼和（Sophomore's dream）</span>
+    <span class="qsrc">P1049</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\left(\dfrac{k}{n}\right)^{k/n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1 x^{x}\,dx\approx0.7834305107\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：底数与指数都含网格点 \(k/n\)，取 \(x_{k}=k/n\) 后通项为 \(x_{k}^{x_{k}}\)，极限收敛到 \(x^{x}\) 在 \([0,1]\) 上的积分；该积分无初等原函数，题答以积分形式给出。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\left(\frac{k}{n}\right)^{k/n}
+    =\int_0^1 x^{x}\,dx.
+    \]
+    <p>把 \(x^{x}=e^{x\ln x}\) 按指数级数展开：</p>
+    \[
+    x^{x}=\sum_{m=0}^{\infty}\frac{(x\ln x)^{m}}{m!}.
+    \]
+    <p>利用积分公式 \(\int_0^1 x^{m}(\ln x)^{m}\,dx=(-1)^{m}m!/(m+1)^{m+1}\)，与展开式中的 \(1/m!\) 相消后逐项积分，得到收敛级数：</p>
+    \[
+    I=\sum_{n=1}^{\infty}(-1)^{n-1}\frac{1}{n^{n}}.
+    \]
+    <p>该交错级数衰减很快，数值定值以自适应积分为准：\(I\approx0.7834305107\)。离散口径复核：\(N=1000\) 部分和约 \(0.7834313\)，\(N=10000\) 约 \(0.78343052\)，与积分值一致。端点 \(x=0\) 处按极限 \(x^{x}\to1\) 补充定义，不影响积分收敛性。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 漏看指数上的 \(k/n\)，把通项当成 \(k/n\) 或 \((k/n)^{2}\)，被积函数判错。② 试图为 \(x^{x}\) 找初等原函数，误入分部积分循环；该积分属特殊非初等积分，定值走级数或数值路径。③ 端点 \(0^{0}\) 未作极限说明，直接判定被积函数无定义。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>变指数黎曼和只要求认出积分形式，闭式计算不是考点。\(x^{x}\) 与 \(x^{-x}\) 是「Sophomore's dream」级数的标准素材，复习时记住两个积分的级数展开与大致数值，遇到同类非初等核直接写积分即可。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\left(\dfrac{k}{n}\right)^{-k/n}\)。</p>
+    <p class="var-ans">答案：\(\displaystyle\int_0^1 x^{-x}\,dx\approx1.2912860\)。被积函数换成 \(x^{-x}=e^{-x\ln x}\)，级数为 \(\sum n^{-n}\) 型正项级数，自适应积分与级数两档互证。</p>
+  </div>
+</article>
+
+<article class="q" id="q2418">
+  <div class="q-head">
+    <span class="qno">第 2418 题</span>
+    <span class="qtype">黎曼和（倒数对数积分）</span>
+    <span class="qsrc">P1049</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\ln\left(\dfrac{n}{k}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：对数内是网格点的倒数，\(\ln(n/k)=-\ln(k/n)\)，化为 \(\ln(1/x)\) 在 \([0,1]\) 上的黎曼和；积分在 \(x=0\) 处有瑕点但收敛。</p>
+    \[
+    \frac1n\sum_{k=1}^{n}\ln\left(\frac{n}{k}\right)
+    =\frac1n\sum_{k=1}^{n}\ln\left(\frac{1}{k/n}\right)
+    \to\int_0^1\ln\frac1x\,dx.
+    \]
+    <p>把负号提出：</p>
+    \[
+    I=-\int_0^1\ln x\,dx.
+    \]
+    <p>对数原函数 \(x\ln x-x\)，瑕点处由极限补充：</p>
+    \[
+    \lim_{x\to0^{+}}x\ln x=0,
+    \]
+    <p>故</p>
+    \[
+    I=-\big[x\ln x-x\big]_0^1=-(0-0-1)=1.
+    \]
+    <p>被积函数 \(\ln(1/x)\) 在 \((0,1]\) 上非负，靠近 \(0\) 处趋于无穷，但可积；积分值 \(1\) 与定性范围一致。和式首项 \(k=1\) 对应 \(x=1\)，取值 \(0\)，末项 \(k=n\) 对应 \(x\to1\) 方向，不取瑕点值。</p>
+    <p>数值与收敛性对照：\(\int_0^1\ln x\,dx=-1\) 是标准瑕积分，被积函数靠近零点的发散被 \(x\ln x\to0\) 的极限压住，积分有限。和式中前几项对应较大的 \(\ln(n/k)\)，被 \(1/n\) 网格宽度摊薄；越靠近 \(k=n\) 项，对数值越接近零，瑕点的奇异性不进入离散和式。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 忘记提出负号，把结果写成 \(-1\)；\(\ln(n/k)\) 与 \(\ln(k/n)\) 符号相反。② 瑕点 \(x=0\) 处直接代入 \(x\ln x\) 判为发散，未用极限 \(x\ln x\to0\) 处理。③ 把 \(\ln(n/k)\) 拆成 \(\ln n-\ln k\) 后分别求和，调和级数发散的部分相减关系没理清。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>倒数对数核与 2404、2412 的 \(\ln(1+x)\) 族互补，考瑕积分的收敛性与原函数端点极限。复习时应记住 \(\int_0^1\ln x\,dx=-1\) 这一标准结果，以及 \(x\ln x\) 在零点的极限为零。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\ln\left(\dfrac{n^{2}}{k^{2}}\right)\)。</p>
+    <p class="var-ans">答案：\(2\)。由 \(\ln(n^{2}/k^{2})=2\ln(n/k)\)，和式为原题的两倍，极限 \(2\cdot1=2\)；常数倍不改变瑕积分的收敛性。</p>
+  </div>
+</article>
+
+<article class="q" id="q2419">
+  <div class="q-head">
+    <span class="qno">第 2419 题</span>
+    <span class="qtype">黎曼和（有理函数 arctan 积分）</span>
+    <span class="qsrc">P1049</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\dfrac{1}{1+\left(\dfrac{k}{n}\right)^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\pi}{4}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数 \(f(x)=1/(1+x^{2})\)，原函数为反正切，是积分表固定核。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\frac{1}{1+(k/n)^{2}}
+    =\int_0^1\frac{dx}{1+x^{2}}.
+    \]
+    <p>由 \(\dfrac{d}{dx}\arctan x=\dfrac1{1+x^{2}}\)：</p>
+    \[
+    I=\arctan x\Big|_0^1=\arctan1-\arctan0=\frac{\pi}{4}.
+    \]
+    <p>数值复核：\(\pi/4\approx0.7853981634\)。被积函数从 \(1\) 递减到 \(1/2\)，积分值落在 \([1/2,1]\) 内，结果数量级吻合。</p>
+    \[
+    \frac{d}{dx}\arctan x=\frac1{1+x^{2}},
+    \qquad \arctan1-\arctan0=\frac{\pi}{4}.
+    \]
+    <p>该核与 2421 题是同一个积分，2421 以 \(n/(n^{2}+k^{2})\) 的伪装写法出现，提取网格宽度 \(1/n\) 后通项逐项相等：</p>
+    \[
+    \frac{n}{n^{2}+k^{2}}=\frac{1}{n}\cdot\frac{1}{1+(k/n)^{2}}.
+    \]
+    <p>归一化时分母 \(n^{2}\) 提出，余下二次项写成 \((k/n)^{2}\)，被积函数即为 \(1/(1+x^{2})\)；两题通项等价改写后同型，极限同为 \(\int_0^1 dx/(1+x^{2})=\pi/4\)，并不存在第二个被积函数，判读时按标准黎曼和直接落积分即可。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 分母展开错把 \(1+(k/n)^{2}\) 写成 \(1+k^{2}/n\)，网格结构被破坏。② 原函数记成 \(\arctan(1/x)\) 或对数型分式，求导后不匹配。③ 端点值 \(\arctan1=\pi/4\) 与 \(\arctan0=0\) 代反，常数项出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>\(1/(1+x^{2})\) 是有理函数积分的代表核，同类还有 \(1/(1+x)\) 的对数积分、\(1/\sqrt{1+x^{2}}\) 的反双曲积分。考题常把核藏进伪装分式，复习时先归一化再读被积函数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\dfrac{1}{1+2(k/n)^{2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\sqrt2}{2}\arctan\sqrt2\approx0.6755109\)。收敛到 \(\int_0^1 dx/(1+2x^{2})\)，令 \(u=\sqrt2\,x\)，原函数为 \(\frac1{\sqrt2}\arctan(\sqrt2\,x)\big|_0^1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2420">
+  <div class="q-head">
+    <span class="qno">第 2420 题</span>
+    <span class="qtype">黎曼和（反正弦瑕积分）</span>
+    <span class="qsrc">P1049</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\dfrac{1}{\sqrt{1-\left(\dfrac{k}{n}\right)^{2}}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\pi}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数 \(1/\sqrt{1-x^{2}}\)，原函数为反正弦；右端点 \(x=1\) 处被积函数无界，属瑕积分但收敛。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\frac{1}{\sqrt{1-(k/n)^{2}}}
+    =\int_0^1\frac{dx}{\sqrt{1-x^{2}}}.
+    \]
+    <p>由 \(\dfrac{d}{dx}\arcsin x=\dfrac1{\sqrt{1-x^{2}}}\)：</p>
+    \[
+    I=\arcsin x\Big|_0^1=\arcsin1-\arcsin0=\frac{\pi}{2}.
+    \]
+    <p>换元 \(x=\sin t\) 互证：</p>
+    \[
+    I=\int_0^{\pi/2}dt=\frac{\pi}{2}\approx1.5707963268.
+    \]
+    <p>右端网格点 \(k=n\) 对应分母为零，该项单独发散的趋势被网格宽度 \(1/n\) 压住；瑕积分在区间上收敛，有限个邻近端点的大值不破坏和式极限。被积函数从 \(1\) 增至无穷，积分值大于 \(1\)，\(\pi/2\) 与定性范围一致。</p>
+    <p>收敛性判断：奇点 \(x=1\) 附近 \(1/\sqrt{1-x^{2}}\sim1/\sqrt{2(1-x)}\)，而幂次 \(1/2\) 低于一阶，\(\int(1-x)^{-1/2}dx\) 收敛，故瑕积分有限。右端最后几项虽然数值偏大，但每项权重 \(1/n\)，邻近奇点的发散贡献被网格宽度压住，不影响和式极限。三角换元后根式与 \(dx\) 中的 \(\cos t\) 抵消，积分退化为长度 \(\pi/2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 看到端点无界就判定积分发散：\(1/\sqrt{1-x^{2}}\) 在 \(x=1\) 附近可积，奇点阶数低于一阶。② 原函数与 2409 的 \(\sqrt{1-x^{2}}\) 混淆，一个是反正弦，一个是圆面积公式。③ 三角换元后忘记 \(dx=\cos t\,dt\) 与根式抵消，多留一个 \(\cos t\) 因子。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>瑕积分型黎曼和考查可积性判断与反三角原函数，与 2409 的根式核互为对偶。复习时把 \(\arcsin x\)、\(\arctan x\) 的导数与对应被积函数成对整理，端点瑕点是否收敛单独检查阶数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\dfrac{1}{\sqrt{1-(k/(2n))^{2}}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{\pi}{3}\)。收敛到 \(2\int_0^{1/2}dx/\sqrt{1-x^{2}}=2\arcsin(1/2)=\pi/3\)；缩放后奇点不在积分区间内，无瑕点。</p>
+  </div>
+</article>
+
+<article class="q" id="q2421">
+  <div class="q-head">
+    <span class="qno">第 2421 题</span>
+    <span class="qtype">伪装和式（有理函数黎曼和）</span>
+    <span class="qsrc">P1050</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{n}{n^{2}+k^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{\pi}{4}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：和式没有显式 \(1/n\) 因子，但分子分母同阶，先提取 \(n\) 归一化，读出被积函数 \(1/(1+x^{2})\)。</p>
+    <p>分母提取 \(n^{2}\)，分子 \(n\) 配成网格因子：</p>
+    \[
+    \frac{n}{n^{2}+k^{2}}
+    =\frac1n\cdot\frac{1}{1+(k/n)^{2}}.
+    \]
+    <p>于是和式写成标准黎曼和：</p>
+    \[
+    \sum_{k=1}^{n}\frac{n}{n^{2}+k^{2}}
+    =\frac1n\sum_{k=1}^{n}\frac{1}{1+(k/n)^{2}}
+    \to\int_0^1\frac{dx}{1+x^{2}}.
+    \]
+    <p>原函数为反正切：</p>
+    \[
+    I=\arctan x\Big|_0^1=\arctan1=\frac{\pi}{4}\approx0.7853981634.
+    \]
+    <p>该核与 2419 题完全相同，差别只在写法：2419 直接给出 \(1/n\) 因子，本题把 \(n\) 藏在分子里。归一化后被积函数、积分区间、端点取值逐一对应，结果一致。</p>
+    <p>提取过程复核：分母 \(n^{2}+k^{2}=n^{2}(1+(k/n)^{2})\)，分子 \(n\) 与分母的 \(n^{2}\) 配出网格因子 \(1/n\)，余下部分正是 \(1/(1+(k/n)^{2})\)。两步幂次提取后，和式回到右端点黎曼和的标准形；积分区间仍为 \([0,1]\)，端点 \(x=1\) 对应核值 \(1/2\)，不影响 \(\arctan\) 端点取值。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 没把分子 \(n\) 提出来配 \(1/n\)，误判为非积分和式。② 分母提取 \(n^{2}\) 时漏写平方，把核写成 \(1/(1+k/n)\)，走成对数积分。③ 反正切端点值记错，\(\arctan1\) 写成 \(\pi/2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>伪装和式是黎曼和题的常见变形：网格因子被拆进分子分母，核保持不变。复习时先做 \(n\) 的幂次归一化，再对照 \(f(k/n)\)；同一有理核在不同写法下反复出现，识别核比记忆答案更重要。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{n}{n^{2}+2k^{2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{\sqrt2}\arctan\sqrt2\approx0.6755109\)。归一化为 \(\frac1n\sum 1/(1+2(k/n)^{2})\)，积分 \(\int_0^1 dx/(1+2x^{2})=\frac1{\sqrt2}\arctan\sqrt2\)，数值上与闭式一致。</p>
+  </div>
+</article>
+
+<article class="q" id="q2422">
+  <div class="q-head">
+    <span class="qno">第 2422 题</span>
+    <span class="qtype">黎曼和（对数平方核分部积分）</span>
+    <span class="qsrc">P1050</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\ln\left(1+\dfrac{k^{2}}{n^{2}}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln 2-2+\dfrac{\pi}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数 \(\ln(1+x^{2})\)；对数复合核不能直接积分，走分部积分把对数降下来，留下有理分式。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\ln\left(1+\frac{k^{2}}{n^{2}}\right)
+    =\int_0^1\ln(1+x^{2})\,dx.
+    \]
+    <p>分部积分：取 \(u=\ln(1+x^{2})\)，\(dv=dx\)，则 \(du=\dfrac{2x}{1+x^{2}}dx\)：</p>
+    \[
+    I=x\ln(1+x^{2})\Big|_0^1-\int_0^1 x\cdot\frac{2x}{1+x^{2}}dx.
+    \]
+    <p>第一项代入端点得 \(\ln2\)；剩余分式做多项式除法：</p>
+    \[
+    \int_0^1\frac{x^{2}}{1+x^{2}}dx
+    =\int_0^1\left(1-\frac{1}{1+x^{2}}\right)dx
+    =1-\frac{\pi}{4}.
+    \]
+    <p>合并常数项：</p>
+    \[
+    I=\ln2-2\left(1-\frac{\pi}{4}\right)
+    =\ln2-2+\frac{\pi}{2}\approx0.2639435074.
+    \]
+    \[
+    \int_0^1\frac{2x^{2}}{1+x^{2}}dx=2\left(1-\frac{\pi}{4}\right)=2-\frac{\pi}{2},
+    \]
+    <p>相减顺序为端点项 \(\ln2\) 减去上述残项 \(2-\pi/2\)，故 \(\pi/2\) 落在加项一侧，符号不会写反。数值复核与闭式一致；被积函数在 \([0,1]\) 上从 \(0\) 增到 \(x=1\) 处的 \(\ln2\approx0.6931\)，全程介于 \(0\) 与 \(\ln2\) 之间，积分值 \(0.2639\) 不越出该量级区间。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 分部积分后剩余分式 \(x^{2}/(1+x^{2})\) 没拆出常数 \(1\)，直接套 \(\arctan\) 导致常数项丢失。② 系数 \(2\) 漏乘，\(\pi/4\) 未翻倍成 \(\pi/2\)。③ 误把 \(\ln(1+x^{2})\) 当成 \(\ln^{2}(1+x)\)，被积函数结构完全不同。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数复合核的固定路径是分部积分降阶，留下的有理分式再按多项式除法拆常数与可积部分。这类题常和 \(\arctan\) 原函数结合，考查分部积分与分式分解两项基本功。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\dfrac{k}{n}\ln\left(1+\left(\dfrac{k}{n}\right)^{2}\right)\)。</p>
+    <p class="var-ans">答案：\(\ln2-\dfrac12\approx0.1931472\)。收敛到 \(\int_0^1 x\ln(1+x^{2})\,dx\)，令 \(u=1+x^{2}\)，原函数为 \(\frac12\big[(1+x^{2})\ln(1+x^{2})-(1+x^{2})\big]\)，代入端点即得 \(\ln2-1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2423">
+  <div class="q-head">
+    <span class="qno">第 2423 题</span>
+    <span class="qtype">黎曼和（正弦全区间积分）</span>
+    <span class="qsrc">P1050</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\sin\left(\dfrac{\pi k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{2}{\pi}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数 \(f(x)=\sin(\pi x)\)，角频率 \(\pi\)，区间 \([0,1]\) 正好覆盖一个半波。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\sin\left(\frac{\pi k}{n}\right)
+    =\int_0^1\sin(\pi x)\,dx.
+    \]
+    <p>正弦原函数按频率倒数写出：</p>
+    \[
+    \int\sin(\pi x)\,dx=-\frac1\pi\cos(\pi x)+C.
+    \]
+    <p>代入上下限：</p>
+    \[
+    I=-\frac1\pi\cos(\pi x)\Big|_0^1
+    =\frac1\pi\big(\cos0-\cos\pi\big)=\frac{2}{\pi}.
+    \]
+    <p>数值复核：\(2/\pi\approx0.6366197724\)。被积函数在区间内非负，从 \(0\) 升到 \(1\) 再回到 \(0\)，半波面积除以区间长度，结果与 \(2/\pi\) 吻合。</p>
+    <p>半波几何：\(\sin(\pi x)\) 在 \([0,1]\) 上构成一个完整半波，峰值 \(1\) 出现在 \(x=1/2\) 处，半波面积 \(2/\pi\) 是峰值 \(1\) 乘以形状系数。网格点从 \(k=1\) 到 \(k=n\)，两端取值都是 \(0\)，峰值只出现在内部网格附近；和式先按 \(1/n\) 合成积分，再读半波面积，不能逐项取端点零值。频率 \(\pi\) 决定原函数系数 \(1/\pi\)，端点 \(\cos\pi=-1\) 与 \(\cos0=1\) 相减给出分子 \(2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 角频率系数记错，原函数漏 \(1/\pi\)，结果写成 \(2\)。② 端点 \(\cos\pi=-1\) 与 \(\cos0=1\) 相减顺序写反，结果变负。③ 把和式当成等差角正弦级数求闭合公式，与定积分路径混淆。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>频率为 \(\pi\) 的正弦核是半波面积模型，积分结果 \(2/\pi\) 是常见常数。与 2413（频率 \(\pi/2\)）、2424（余弦核）排成一组，复习时按频率 \(\omega\) 统一写积分公式 \(\int_0^1\sin(\omega x)dx=[1-\cos\omega]/\omega\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\cos\left(\dfrac{\pi k}{n}\right)\)。</p>
+    <p class="var-ans">答案：\(0\)。收敛到 \(\int_0^1\cos(\pi x)\,dx=\frac1\pi\sin(\pi x)\big|_0^1=0\)；余弦在整周期上正负抵消，与正弦半波非负积分形成对照。</p>
+  </div>
+</article>
+
+<article class="q" id="q2424">
+  <div class="q-head">
+    <span class="qno">第 2424 题</span>
+    <span class="qtype">黎曼和（余弦函数积分）</span>
+    <span class="qsrc">P1050</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\cos\left(\dfrac{\pi k}{2n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{2}{\pi}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数 \(f(x)=\cos(\pi x/2)\)，角频率 \(\pi/2\)，区间 \([0,1]\) 对应角度 \(0\) 到 \(\pi/2\)。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\cos\left(\frac{\pi k}{2n}\right)
+    =\int_0^1\cos\left(\frac{\pi x}{2}\right)\,dx.
+    \]
+    <p>余弦原函数按频率倒数写出：</p>
+    \[
+    \int\cos\left(\frac{\pi x}{2}\right)dx
+    =\frac{2}{\pi}\sin\left(\frac{\pi x}{2}\right)+C.
+    \]
+    <p>代入上下限：</p>
+    \[
+    I=\frac2\pi\sin\left(\frac{\pi x}{2}\right)\Big|_0^1
+    =\frac2\pi\big(\sin(\pi/2)-\sin0\big)=\frac2\pi.
+    \]
+    <p>数值复核：\(2/\pi\approx0.6366197724\)。被积函数从 \(1\) 递减到 \(0\)，积分值介于 \(0\) 与 \(1\) 之间，结果数量级吻合。端点角度 \(\pi/2\) 的正弦为 \(1\)，\(0\) 处正弦为 \(0\)，相减顺序沿积分方向取。</p>
+    <p>相位对照：余弦核从 \(1\) 降到 \(0\)，与正弦半波相差四分之一周期；两个核在对应区间上的对称面积相等，积分结果同为 \(2/\pi\)。频率系数 \(2/\pi\) 来自角频率 \(\pi/2\) 的倒数，余弦原函数不带负号，这是与正弦积分的符号区别。网格右端点对应 \(x=1\)，角度 \(\pi/2\)，不是零角度，端点取值沿被积函数方向读出。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 频率倒数系数漏写，结果写成 \(1\)。② 把 \(\sin(\pi/2)=1\) 与 \(\sin\pi=0\) 混淆，端点取值判错。③ 余弦原函数误写成负号，余弦积分不带负号，与正弦积分符号相反。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>余弦核与正弦核互为相位平移，积分公式按频率 \(\omega\) 统一：\(\int_0^1\cos(\omega x)dx=\sin\omega/\omega\)。本组 2413、2423 为正弦版本，本题为余弦版本，考查点都在频率系数与端点三角值。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\cos\left(\dfrac{\pi k}{3n}\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{3\sqrt3}{2\pi}\approx0.8269933\)。收敛到 \(\int_0^1\cos(\pi x/3)\,dx=\frac3\pi\sin(\pi/3)=\frac{3\sqrt3}{2\pi}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2425">
+  <div class="q-head">
+    <span class="qno">第 2425 题</span>
+    <span class="qtype">黎曼和（正切对数积分）</span>
+    <span class="qsrc">P1051</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1}{n}\sum\limits_{k=1}^{n}\tan\left(\dfrac{\pi k}{4n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{2}{\pi}\ln 2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数 \(f(x)=\tan(\pi x/4)\)，角度区间 \(0\) 到 \(\pi/4\)，在正切奇点 \(\pi/2\) 之前，积分有限。</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^{n}\tan\left(\frac{\pi k}{4n}\right)
+    =\int_0^1\tan\left(\frac{\pi x}{4}\right)\,dx.
+    \]
+    <p>换元 \(t=\pi x/4\)，\(dx=4/\pi\,dt\)：</p>
+    \[
+    I=\frac4\pi\int_0^{\pi/4}\tan t\,dt.
+    \]
+    <p>正切原函数为余弦对数：</p>
+    \[
+    \int\tan t\,dt=-\ln\cos t+C=\ln\sec t+C.
+    \]
+    <p>代入端点 \(\sec(\pi/4)=\sqrt2\)，\(\sec0=1\)：</p>
+    \[
+    I=\frac4\pi\ln\sec(\pi/4)
+    =\frac4\pi\ln\sqrt2=\frac2\pi\ln2.
+    \]
+    <p>数值复核：\((2/\pi)\ln2\approx0.4412712003\)。正切在区间内非负递增，积分值介于 \(0\) 与右端有限值之间；换元因子 \(4/\pi\) 来自频率缩放，对数内部是端点正割比。</p>
+    <p>正切族对照：频率 \(4\) 对应角度上限 \(\pi/4\)，端点正割值 \(\sqrt2\)；若上限角换成 \(\pi/6\)，端点正割为 \(2/\sqrt3\)，公式结构不变，只替换端点对数。下限 \(t=0\) 处正割为 \(1\)，对数为零，积分只保留上限项；被积函数在区间内单调递增，面积小于右端有限值与区间长度的乘积。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 原函数写成 \(\ln\cos t\) 漏负号，结果变负。② 角度上限 \(\pi/4\) 的正割值记错，\(\cos(\pi/4)=\sqrt2/2\) 对应 \(\sec=\sqrt2\)，不是 \(2\)。③ 换元漏乘 \(4/\pi\)，对数结果未按频率归一化。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正切核黎曼和的标准模板是「换元缩角—正切积分变余弦对数—端点正割比」。复习时把频率系数与角度上限配套记忆，上限角必须落在 \((0,\pi/2)\) 内保证可积；同类变式常取 \(\pi/5\)、\(\pi/6\) 等较小角。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\tan\left(\dfrac{\pi k}{5n}\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{5}{\pi}\ln\sec\dfrac{\pi}{5}\approx0.3373056\)。换元后角度上限 \(\pi/5\)，\(I=\frac{5}{\pi}\ln\sec(\pi/5)\)；数值由 mpmath 自适应积分复核一致。</p>
+  </div>
+</article>

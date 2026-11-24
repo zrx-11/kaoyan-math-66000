@@ -1,0 +1,1036 @@
+<article class="q" id="q2351">
+  <div class="q-head">
+    <span class="qno">第 2351 题</span>
+    <span class="qtype">夹逼准则（对数和式）</span>
+    <span class="qsrc">P1037</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\ln\left(1+\dfrac{k}{n^2}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：数列和式，通项为 \(\ln(1+k/n^2)\)。先估计每一项的量级，再用夹逼准则定值；本题通项的量级低于标准黎曼和的取样步长，不能按定积分定义处理。</p>
+    <p>对 \(u\ge0\)，有不等式 \(0\le\ln(1+u)\le u\)。取 \(u=k/n^2\)，得逐项估计：</p>
+    \[
+    0\le\ln\left(1+\frac{k}{n^2}\right)\le\frac{k}{n^2}.
+    \]
+    <p>对 \(k=1,\dots,n\) 求和并乘以 \(1/n\)，右端放大为幂和：</p>
+    \[
+    0\le\frac1n\sum_{k=1}^n\ln\left(1+\frac{k}{n^2}\right)
+    \le\frac1n\sum_{k=1}^n\frac{k}{n^2}
+    =\frac{1}{n^3}\cdot\frac{n(n+1)}2
+    =\frac{n+1}{2n^2}.
+    \]
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\ln\left(1+\frac{k}{n^2}\right)=0.
+    \]
+    <p>右端 \((n+1)/(2n^2)\to0\)，左端恒为 \(0\)，由夹逼准则原极限为 \(0\)。量级上 \(k/n^2\le1/n\to0\)，对数真数一致趋于 \(1\)，每项对数都是 \(1/n\) 量级的小量，\(n\) 项累加后仍被 \(1/n\) 控制。数值复核：\(n=1000\) 时和式约 \(5.00\times10^{-4}\)，\(n=10000\) 时约 \(5.00\times10^{-5}\)，随 \(n\) 增大趋于零。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把分母 \(n^2\) 误看成 \(n\)，错认成标准黎曼和 \(\frac1n\sum f(k/n)\)，转而计算 \(\int_0^1\ln(1+x)\,dx\)。② 直接用等价无穷小 \(\ln(1+u)\sim u\) 替换后，未检查余项阶数就对和式取极限。③ 忽略下界非负这一夹逼方向，只放大不缩小，无法完成定值。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>数列和式极限先判断通项量级：量级低于 \(1/n\) 时整体趋于零，量级与 \(1/n\) 同阶才进入黎曼和路径。夹逼准则与定积分定义是和式题的两条主路径，复习时应先做量级判断再选方法。与 2359、2369 两题的标准黎曼和对照，可看清分母幂次对题型的决定作用。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\ln\left(1+\dfrac{k}{n}\right)\)。</p>
+    <p class="var-ans">答案：\(2\ln2-1\)。此时通项为 \(f(k/n)\) 的黎曼和，积分 \(\int_0^1\ln(1+x)\,dx=[(1+x)\ln(1+x)-(1+x)]_0^1=2\ln2-1\approx0.3863\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2352">
+  <div class="q-head">
+    <span class="qno">第 2352 题</span>
+    <span class="qtype">递推数列（单调有界准则）</span>
+    <span class="qsrc">P1037</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{a_n\}\) 满足 \(a_1=1,\ a_{n+1}=\sqrt{2+a_n}\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：由递推式给出的数列，先用不动点方程求出候选极限，再用单调有界准则证明收敛，最后在递推式两边取极限。</p>
+    <p>设极限为 \(L\)，对 \(a_{n+1}=\sqrt{2+a_n}\) 两边取极限：</p>
+    \[
+    L=\sqrt{2+L}\ \Longrightarrow\ L^2-L-2=0.
+    \]
+    <p>解得 \(L=2\) 或 \(L=-1\)。数列各项为算术平方根，恒非负，舍去负根 \(-1\)，候选极限为 \(2\)。</p>
+    <p>证明有界性：\(a_1=1\lt2\)；若 \(a_n\lt2\)，则 \(a_{n+1}=\sqrt{2+a_n}\lt\sqrt4=2\)，由归纳法 \(a_n\lt2\) 对所有 \(n\) 成立。证明单调性：比较相邻两项平方，</p>
+    \[
+    a_{n+1}^2-a_n^2=(2+a_n)-a_n^2=-(a_n-2)(a_n+1)\gt0,
+    \]
+    \[
+    \lim_{n\to\infty}a_n=L=2.
+    \]
+    <p>因 \(0\le a_n\lt2\)，上式为正，故 \(a_{n+1}\gt a_n\)。数列单调递增且有上界 \(2\)，由单调有界准则收敛，极限即不动点 \(2\)。数值复核：\(a_2=\sqrt3\approx1.732\)，\(a_3\approx1.932\)，逐项上升并逼近 \(2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接对递推式取极限，不先证明数列收敛，递推式两边取极限只对收敛数列合法。② 解二次方程时把负根 \(-1\) 一并保留，未用非负条件筛选。③ 单调性证明方向写反：应比较 \(a_{n+1}^2-a_n^2\)，不能由根号外观直接断言递增。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>递推数列求极限是解答题高频题型，固定路径为「不动点方程求候选值 → 单调有界证明 → 两边取极限」。根式型递推的不动点通常对应二次方程，复习时应把有界性归纳与单调性比较放在取极限之前。与 2362、2372 两题的分式递推对照，可归纳出不动点筛选的共同步骤。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\sqrt{1+a_n}\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1+\sqrt5}{2}\)。不动点方程 \(L=\sqrt{1+L}\) 即 \(L^2-L-1=0\)，取正根 \(\varphi=(1+\sqrt5)/2\approx1.6180\)；数列递增有上界 \(\varphi\)，由单调有界准则收敛到该值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2353">
+  <div class="q-head">
+    <span class="qno">第 2353 题</span>
+    <span class="qtype">泰勒展开（对数一阶差）</span>
+    <span class="qsrc">P1037</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x}{x^2}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是对数函数与一次式之差，分母为 \(x^2\)，应把 \(\ln(1+x)\) 展开到与分母同阶的 \(x^2\) 项，用泰勒展开定值。</p>
+    <p>在 \(x=0\) 处，对数函数的二阶展开为：</p>
+    \[
+    \ln(1+x)=x-\frac{x^2}{2}+o(x^2).
+    \]
+    <p>代入分子：</p>
+    \[
+    \ln(1+x)-x=-\frac{x^2}{2}+o(x^2).
+    \]
+    <p>除以 \(x^2\) 后取极限：</p>
+    \[
+    \lim_{x\to0}\frac{\ln(1+x)-x}{x^2}
+    =\lim_{x\to0}\left(-\frac12+\frac{o(x^2)}{x^2}\right)=-\frac12.
+    \]
+    <p>用洛必达法则互证：分子分母均趋于零，第一次求导得 \(\dfrac{1/(1+x)-1}{2x}\)，仍是 \(0/0\)；第二次求导，分子导数为 \(-1/(1+x)^2\)，分母导数为 \(2\)，代入 \(x=0\) 得 \(-1/2\)。数值复核：\(x=10^{-4}\) 时比值约 \(-0.49997\)，与 \(-1/2\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只把 \(\ln(1+x)\) 展开到一阶 \(x+o(x)\)，分子只剩 \(o(x)\)，无法与 \(x^2\) 比较而误判为零。② 洛必达法则使用前未检查 \(0/0\) 条件，或第二次求导时 \(1/(1+x)\) 的导数符号写反。③ 把 \(\ln(1+x)-x\) 的符号记成正，结果答成 \(1/2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>初等函数与低次多项式相减的 \(0/0\) 型极限，核心考点是展开阶数与分母幂次匹配：分母 \(x^2\) 就必须展开到 \(x^2\) 项。泰勒展开比洛必达少一次求导过程，符号也更不易错。本题与 2363、2373 两题的 \(x^3\) 型展开构成同组练习，复习时可并排比较各函数的低阶主部。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{x-\ln(1+x)}{x^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。由 \(\ln(1+x)=x-x^2/2+o(x^2)\)，分子 \(x-\ln(1+x)=x^2/2+o(x^2)\)，除以 \(x^2\) 得 \(1/2\)，与原题互为相反数。</p>
+  </div>
+</article>
+
+<article class="q" id="q2354">
+  <div class="q-head">
+    <span class="qno">第 2354 题</span>
+    <span class="qtype">斯特林公式（阶乘 \(n\) 次根）</span>
+    <span class="qsrc">P1037</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{\sqrt[n]{n!}}{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac1e\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：含阶乘的 \(n\) 次根，先取对数把根式化为和式主部，再用斯特林公式估计 \(\ln(n!)\) 的渐近阶。</p>
+    <p>设原式为 \(A_n\)，取自然对数：</p>
+    \[
+    \ln A_n=\frac1n\ln(n!)-\ln n.
+    \]
+    <p>斯特林公式给出 \(\ln(n!)\) 的主部：</p>
+    \[
+    \ln(n!)=n\ln n-n+O(\ln n).
+    \]
+    <p>代入并除以 \(n\)：</p>
+    \[
+    \frac1n\ln(n!)=\ln n-1+O\!\left(\frac{\ln n}{n}\right).
+    \]
+    <p>于是</p>
+    \[
+    \ln A_n=-1+O\!\left(\frac{\ln n}{n}\right)\to-1,
+    \]
+    <p>指数化得 \(A_n\to e^{-1}=1/e\)。数值复核：\(n=2000\) 时 \(A_n\approx0.36875\)，\(1/e\approx0.36788\)，误差随 \(n\) 增大按 \(\ln n/n\) 的速度缩小。本题也可由黎曼和路径估计：\(\frac1n\ln(n!)=\frac1n\sum_{k=1}^n\ln k\approx\int_0^1\ln x\,dx=-1\)，结论相同。该积分在 \(x=0\) 处为瑕点，但 \(x\ln x\to0\)，边界项趋于零，瑕积分收敛；原函数 \([x\ln x-x]_0^1\) 代入即得 \(-1\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 不用斯特林公式也不转积分，凭感觉把 \((n!)^{1/n}\) 与 \(n\) 的比阶搞错。② 取对数时漏掉 \(-\ln n\) 这一项，得到极限 \(1\)。③ 忽略斯特林公式中的 \(-n\) 主部，只保留 \(n\ln n\)，对数差无法消去 \(\ln n\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>阶乘型极限的标准处理是取对数后用斯特林主部，或转成对数函数的黎曼和；两类方法都把 \(\ln(n!)/n\) 归到积分 \(\int_0^1\ln x\,dx=-1\)。本题是阶乘根配一次幂分母的基础款，2364、2374 两题把分子换成 \((3n)!\)、\((4n)!\) 并配高次幂分母，属于同主部的系数放大。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}(n!)^{1/n^2}\)。</p>
+    <p class="var-ans">答案：\(1\)。取对数得 \(\ln(n!)/n^2\)，由斯特林主部 \(n\ln n-n\) 除以 \(n^2\) 趋于 \(0\)，故原极限为 \(e^0=1\)。根次提高后阶乘的对数主部被进一步压低。</p>
+  </div>
+</article>
+
+<article class="q" id="q2355">
+  <div class="q-head">
+    <span class="qno">第 2355 题</span>
+    <span class="qtype">黎曼和（幂和配平）</span>
+    <span class="qsrc">P1038</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1{n^{3/2}}\sum\limits_{k=1}^n\sqrt{k}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac23\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：幂函数和式，先把分母幂次与通项幂次配平，改写成右端点黎曼和，再用定积分定值。</p>
+    <p>将 \(\sqrt{k}\) 写成 \(\sqrt{n\cdot(k/n)}=\sqrt n\,\sqrt{k/n}\)，于是</p>
+    \[
+    \frac{1}{n^{3/2}}\sum_{k=1}^n\sqrt{k}
+    =\frac1n\sum_{k=1}^n\sqrt{\frac{k}{n}}.
+    \]
+    <p>取 \(f(x)=\sqrt{x}\)，上式是把 \([0,1]\) 分成 \(n\) 等份、在右端点 \(k/n\) 取样的黎曼和，极限为：</p>
+    \[
+    \int_0^1\sqrt{x}\,dx=\left[\frac23x^{3/2}\right]_0^1=\frac23.
+    \]
+    \[
+    \sum_{k=1}^n\sqrt{k}\sim\frac{n^{3/2}}{3/2},\qquad
+    \frac{1}{n^{3/2}}\sum_{k=1}^n\sqrt{k}\to\frac23.
+    \]
+    <p>幂函数积分规则 \(\int_0^1 x^\alpha\,dx=1/(\alpha+1)\)（\(\alpha\gt{}-1\)），本题 \(\alpha=1/2\)，系数 \(2/3\) 即由此给出；端点 \(x=0\) 处 \(x^{3/2}\to0\)，下限边界项为零，缺左端点取样不影响极限。</p>
+    <p>幂和主部互证：\(\sum k^\alpha\sim n^{\alpha+1}/(\alpha+1)\)，\(\sum\sqrt{k}\sim n^{3/2}/(3/2)\)，除以 \(n^{3/2}\) 仍得 \(2/3\)。数值复核：\(n=2000\) 时比值约 \(0.66691\)，向 \(2/3\approx0.66667\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 分母幂次配平出错：\(\sqrt{k}\) 提出 \(\sqrt n\) 后，剩余因子应再乘 \(1/n\)，分母才落到 \(n^{3/2}\)。② 幂和公式中指数写成 \(\alpha\) 而非 \(\alpha+1\)，系数 \(2/3\) 会错成 \(1/3\)。③ 把 \(\sqrt{k}\) 等价成 \(k/n\) 后积分，混淆了离散幂次与取样变量。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>幂函数黎曼和是定积分定义的基础考法，解题动作是提出 \(n\) 的幂次、配出 \(1/n\) 步长，再写 \(\int_0^1 x^\alpha\,dx=1/(\alpha+1)\)。根式与分数次幂是常见包装，2365、2375 两题进一步把被积函数换成 \(\sqrt{1+x}\) 与 \(\sqrt[3]{1+x}\)，积分区间上移到 \([1,2]\) 侧。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1{n^2}\sum\limits_{k=1}^n k\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。改写为 \(\frac1n\sum_{k=1}^n k/n\)，积分 \(\int_0^1 x\,dx=1/2\)；幂和主部 \(\sum k\sim n^2/2\)，同得 \(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2356">
+  <div class="q-head">
+    <span class="qno">第 2356 题</span>
+    <span class="qtype">黎曼和（余弦函数）</span>
+    <span class="qsrc">P1038</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\cos\dfrac{k}{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\sin1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，通项为 \(f(k/n)\)，其中 \(f(x)=\cos x\)，步长 \(1/n\)，极限化为 \([0,1]\) 上的定积分。</p>
+    <p>按定积分定义写出：</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\cos\frac{k}{n}
+    =\int_0^1\cos x\,dx.
+    \]
+    <p>余弦函数的原函数为正弦函数，代入上下限：</p>
+    \[
+    \int_0^1\cos x\,dx=\left[\sin x\right]_0^1=\sin1-\sin0=\sin1.
+    \]
+    \[
+    \int_0^1\sin x\,dx=\left[-\cos x\right]_0^1=1-\cos1.
+    \]
+    <p>右端点取样不影响极限：被积函数 \(\cos x\) 在 \([0,1]\) 上连续，黎曼和无论取左端点、右端点还是中间点，都收敛到同一积分值。数值复核：\(\sin1\approx0.841471\)；\(n=1000\) 时黎曼和约 \(0.84124\)，误差为 \(O(1/n)\)。</p>
+    <p>把余弦积分与正弦积分对照记忆：\(\int_0^1\sin x\,dx=1-\cos1\)，两个原函数互为导数关系，边界常数分别来自 \(\sin0=0\) 与 \(-\cos1\)。黎曼和的误差来自取样点与曲线之间的窄条面积，连续函数下这一面积随步长 \(1/n\) 趋于零，因此取样方式不改变极限值。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\cos(k/n)\) 误读成 \(\cos(k^2/n^2)\)，被积函数变成 \(\cos x^2\)，积分不再是初等闭式。② 原函数符号写反：\(\int\cos x\,dx=\sin x\)，与 \(\int\sin x\,dx=-\cos x\) 混淆。③ 代入下限 \(\sin0=0\) 时漏写边界项，虽本题下限为零，列式仍应保留。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>三角函数黎曼和是定积分定义的直接考法，识别出 \(f(x)\) 后只考基本积分公式。余弦与正弦成对出现，本题对应 \(\int\cos x\)，相邻变式常换成 \(\int\sin x\)。与 2366 题对照可注意：自变量是 \(k/n\) 还是 \((k/n)^2\)，决定积分是初等闭式还是 Fresnel 型非初等积分。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\sin\dfrac{k}{n}\)。</p>
+    <p class="var-ans">答案：\(1-\cos1\)。积分 \(\int_0^1\sin x\,dx=[-\cos x]_0^1=1-\cos1\approx0.45970\)，与本题的余弦积分互为姊妹形式。</p>
+  </div>
+</article>
+
+<article class="q" id="q2357">
+  <div class="q-head">
+    <span class="qno">第 2357 题</span>
+    <span class="qtype">变限积分（导数定义）</span>
+    <span class="qsrc">P1038</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\int_0^x e^{-t^2}\,dt\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)}{x}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：变上限积分与 \(x\) 之比，\(x\to0\) 时 \(f(0)=0\)，属 \(0/0\) 型；由变限积分求导法则或导数定义定值，不必求出 \(e^{-t^2}\) 的原函数。</p>
+    \[
+    f(x)=\int_0^x e^{-t^2}\,dt,\quad f(0)=0,\quad f'(x)=e^{-x^2}.
+    \]
+    <p>由变上限积分求导公式，\(f'(x)=e^{-x^2}\)。所求极限正是 \(f\) 在 \(0\) 处的导数定义：</p>
+    \[
+    \lim_{x\to0}\frac{f(x)}{x}=\lim_{x\to0}\frac{f(x)-f(0)}{x-0}=f'(0).
+    \]
+    <p>代入 \(x=0\)：</p>
+    \[
+    f'(0)=e^{-0}=1.
+    \]
+    <p>用洛必达法则互证：分子分母均趋于零，求导后得 \(f'(x)/1=e^{-x^2}\)，\(x\to0\) 时趋于 \(1\)。被积函数 \(e^{-t^2}\) 的原函数非初等（误差函数型），本题只在 \(0\) 附近取导数值，绕开了求原函数的困难。数值复核：\(x=10^{-3}\) 时 \(f(x)\approx x-x^3/3\)，比值约 \(0.9999997\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 先去求 \(e^{-t^2}\) 的初等原函数，误入非初等积分的死路；本题只需要被积函数在 \(0\) 处的值。② 忘记 \(f(0)=0\)，把比值当成普通商式直接代入。③ 变限求导时把 \(e^{-x^2}\) 误写成 \(e^{-t^2}\) 未换元，或漏掉链式因子。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>变上限积分配 \(0/0\) 型商式是选择题与解答题的常见组合，考点是「积分在端点处的导数等于被积函数在该点的值」。被积函数常取非初等形式以避免直接求原函数。与 2367 题对照：两题分别用 \(e^{-t^2}\) 与 \(\sin t/t\) 作被积函数，后者在 \(0\) 处需补充可去奇点定义。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)=\int_0^x\cos t^2\,dt\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)}{x}\)。</p>
+    <p class="var-ans">答案：\(1\)。变限求导 \(f'(x)=\cos x^2\)，\(f'(0)=\cos0=1\)；被积函数同样非初等，端点导数仍为 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2358">
+  <div class="q-head">
+    <span class="qno">第 2358 题</span>
+    <span class="qtype">斯特林公式（中心二项式系数）</span>
+    <span class="qsrc">P1038</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\ln\left(\dfrac{(2n)!}{(n!)^2}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln4\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：阶乘比的对数渐近，先把对数拆开为三个阶乘对数之差，再用斯特林主部逐项估计。</p>
+    <p>记 \(C_n=\dfrac{(2n)!}{(n!)^2}\)，则</p>
+    \[
+    \ln C_n=\ln(2n)!-2\ln(n!).
+    \]
+    <p>斯特林主部 \(\ln(m!)=m\ln m-m+O(\ln m)\)，分别代入 \(m=2n\) 与 \(m=n\)：</p>
+    \[
+    \ln(2n)!=2n\ln(2n)-2n+O(\ln n),\quad
+    \ln(n!)=n\ln n-n+O(\ln n).
+    \]
+    <p>相减并除以 \(n\)：</p>
+    \[
+    \frac1n\ln C_n
+    =\frac{2n\ln(2n)-2n-2(n\ln n-n)}{n}+o(1)
+    =2\ln2+o(1).
+    \]
+    <p>常数项 \(-2n\) 与 \(+2n\) 抵消，\(\ln n\) 项相消，留下 \(2\ln2=\ln4\)。数值复核：\(n=2000\) 时 \(\ln C_n/n\approx1.38411\)，\(\ln4\approx1.38629\)，误差按 \(O(\ln n/n)\) 缩小。组合数 \(C_n\) 即中心二项式系数 \(\binom{2n}{n}\)，其对数主部为 \(2n\ln2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 对数拆项时把 \(\ln(n!)^2\) 写成 \(\ln n!\) 只减一次，系数 \(2\) 丢失。② 斯特林主部中的 \(-m\) 项漏写，虽本题抵消，在 2364、2374 型题中会直接改变常数。③ 把 \(2\ln2\) 误化简为 \(\ln2\)，系数与对数倍数混淆。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>组合数与阶乘比的渐近是斯特林公式的典型应用，考法固定为取对数、拆阶乘、消去 \(\ln n\) 与线性主部，留下纯常数。本题对应二项式系数 \(\binom{2n}{n}\)，2368 题换成 \((3n)!/(n!)^3\) 的三项分组，主部系数由分组数决定。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\ln\dfrac{(3n)!}{n!(2n)!}\)。</p>
+    <p class="var-ans">答案：\(3\ln3-2\ln2\)。拆成 \(\ln(3n)!-\ln n!-\ln(2n)!\)，斯特林主部相消后留下 \(3\ln3-2\ln2\approx1.90954\)，线性项 \(-3n+n+2n\) 恰好抵消。</p>
+  </div>
+</article>
+
+<article class="q" id="q2359">
+  <div class="q-head">
+    <span class="qno">第 2359 题</span>
+    <span class="qtype">黎曼和（倒数函数）</span>
+    <span class="qsrc">P1038</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{1+\dfrac{k}{n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，通项为 \(f(k/n)\)，其中 \(f(x)=1/(1+x)\)，极限化为 \([0,1]\) 上的倒数型定积分。</p>
+    <p>按定积分定义：</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\frac{1}{1+k/n}
+    =\int_0^1\frac{1}{1+x}\,dx.
+    \]
+    \[
+    \frac1n\sum_{k=1}^n\frac{1}{1+k/n}
+    =\sum_{k=1}^n\frac{1}{n+k}.
+    \]
+    <p>倒数函数的原函数为对数函数：</p>
+    \[
+    \int_0^1\frac{1}{1+x}\,dx=\left[\ln(1+x)\right]_0^1=\ln2-\ln1=\ln2.
+    \]
+    <p>数值复核：\(\ln2\approx0.693147\)；\(n=1000\) 时黎曼和约 \(0.69290\)，右端点取样使和式略小于积分值，误差 \(O(1/n)\)。</p>本题与调和级数尾部 2369 题是同一积分的两种写法：2369 把步长 \(1/n\) 藏在通项 \(1/(n+k)\) 中，提取 \(1/n\) 后得到完全相同的被积函数。对数原函数 \(\ln(1+x)\) 在 \(x=0\) 处取 \(\ln1=0\)，下限边界项为零；被积函数在 \([0,1]\) 上连续为正，积分值 \(\ln2\) 介于 \(1/2\) 与 \(1\) 之间，可用于事后判断符号与量级是否合理。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 原函数写成 \(\ln x\) 而漏掉 \(1+x\) 的内层，代入下限出现 \(\ln0\)。② 把被积函数误认成 \(1/(1+k/n)^2\)，积分结果变为 \(1/2\)。③ 与调和级数混淆后直接套欧拉常数，未把通项配成 \(f(k/n)\) 形式。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>倒数型黎曼和考查 \(\int 1/(1+x)\,dx=\ln(1+x)\) 的基本积分，包装方式是把分母写成 \(1+k/n\) 或 \(n+k\)。复习时应能在「和式—积分—调和数渐近」三种表达之间互译，2369 题正是这一互译的直接对照。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{1}{\left(1+\dfrac{k}{n}\right)^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。积分 \(\int_0^1(1+x)^{-2}\,dx=[-1/(1+x)]_0^1=1/2\)；平方后被积函数不再是对数型原函数。</p>
+  </div>
+</article>
+
+<article class="q" id="q2360">
+  <div class="q-head">
+    <span class="qno">第 2360 题</span>
+    <span class="qtype">泰勒展开（对数二阶主部）</span>
+    <span class="qsrc">P1038</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^2\left(\dfrac1n-\ln\left(1+\dfrac1n\right)\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：数列型 \(0/0\) 变体，令 \(u=1/n\to0^+\)，括号内是 \(u-\ln(1+u)\) 的二阶小量，需把对数展开到 \(u^2\) 项再与 \(n^2=1/u^2\) 配平。</p>
+    <p>令 \(u=1/n\)，原式化为：</p>
+    \[
+    n^2\left(\frac1n-\ln\left(1+\frac1n\right)\right)
+    =\frac{u-\ln(1+u)}{u^2}.
+    \]
+    <p>对数在 \(u=0\) 处的二阶展开：</p>
+    \[
+    \ln(1+u)=u-\frac{u^2}{2}+\frac{u^3}{3}+o(u^3).
+    \]
+    <p>代入分子：</p>
+    \[
+    u-\ln(1+u)=\frac{u^2}{2}-\frac{u^3}{3}+o(u^3).
+    \]
+    <p>除以 \(u^2\) 并取极限：</p>
+    \[
+    \lim_{u\to0^+}\frac{u-\ln(1+u)}{u^2}
+    =\lim_{u\to0^+}\left(\frac12-\frac{u}{3}+o(u)\right)=\frac12.
+    \]
+    <p>数值复核：\(n=2000\) 时原式约 \(0.499833\)，向 \(1/2\) 逼近。展开时 \(u^3\) 项在除以 \(u^2\) 后趋于零，不影响定值，但写出来可说明余项阶数；若只展开到一阶，分子会被误判为 \(o(u)\) 而无法配平 \(u^2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 展开阶数不足：只写 \(\ln(1+u)=u+o(u)\)，分子成 \(o(u)\)，与 \(u^2\) 相比错判为零。② 符号颠倒：\(u-\ln(1+u)\) 为正，结果应取正值 \(1/2\)，写成 \(-1/2\) 是对数展开负号处理失误。③ 不换元 \(u=1/n\)，直接在数列上展开时余项阶数容易标错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数与一次式之差配平方量级是数列极限的高频考点，方法是换元为连续变量后做泰勒展开，展开阶数由外面的幂次 \(n^2\) 决定。2370 题与本题题干完全同型，属于同一主部在不同复习组中的重复出现；复习时应把 \(\ln(1+u)\) 到 \(u^3\) 的展开式记熟，便于处理 \(n^3\) 型变式。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n^3\left(\dfrac1n-\ln\left(1+\dfrac1n\right)-\dfrac1{2n^2}\right)\)。</p>
+    <p class="var-ans">答案：\(-\dfrac13\)。由展开式 \(u-\ln(1+u)=u^2/2-u^3/3+o(u^3)\)，减去 \(u^2/2\) 后主部为 \(-u^3/3\)，乘以 \(n^3=1/u^3\) 得 \(-1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2361">
+  <div class="q-head">
+    <span class="qno">第 2361 题</span>
+    <span class="qtype">黎曼和（分部积分 ln(1+x²)）</span>
+    <span class="qsrc">P1039</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\ln\left(\dfrac{n^2+k^2}{n^2}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln2-2+\dfrac{\pi}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，先把对数内的分式化简为 \(1+(k/n)^2\)，被积函数为 \(\ln(1+x^2)\)，再用分部积分计算定积分。</p>
+    <p>化简通项并写出积分：</p>
+    \[
+    \ln\frac{n^2+k^2}{n^2}=\ln\left(1+\left(\frac kn\right)^2\right),
+    \]
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\ln\left(1+\frac{k^2}{n^2}\right)
+    =\int_0^1\ln(1+x^2)\,dx.
+    \]
+    <p>分部积分：取 \(u=\ln(1+x^2)\)，\(dv=dx\)，则 \(du=\dfrac{2x}{1+x^2}dx\)，\(v=x\)：</p>
+    \[
+    \int_0^1\ln(1+x^2)\,dx
+    =\left[x\ln(1+x^2)\right]_0^1-\int_0^1\frac{2x^2}{1+x^2}\,dx.
+    \]
+    <p>边界项在 \(x=1\) 为 \(\ln2\)，在 \(x=0\) 为 \(0\)。被积函数化简 \(x^2/(1+x^2)=1-1/(1+x^2)\)：</p>
+    \[
+    \int_0^1\frac{2x^2}{1+x^2}\,dx
+    =2\int_0^1\left(1-\frac{1}{1+x^2}\right)dx
+    =2\left(1-\frac{\pi}{4}\right).
+    \]
+    <p>合并得</p>
+    \[
+    \int_0^1\ln(1+x^2)\,dx=\ln2-2+\frac{\pi}{2}.
+    \]
+    <p>数值复核：结果约 \(0.263944\)，\(n=10^4\) 时黎曼和向该值逼近。反三角项来自 \(1/(1+x^2)\) 的积分，这是对数乘二次式分部积分后的固定成分。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 分部积分后 \(2x^2/(1+x^2)\) 不化简，硬凑原函数导致漏项。② 反三角积分 \(\int 1/(1+x^2)dx=\arctan x\) 代入 \(1\) 得 \(\pi/4\)，系数 \(2\) 与 \(\pi/4\) 相乘时约分出错。③ 边界项 \(x\ln(1+x^2)\) 在 \(0\) 处为零，不要误写成 \(\ln1=0\) 之外的非零值。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数乘多项式的黎曼和，解析路径是识别和式后做一次分部积分，把对数转移为有理函数。二次式 \(1+x^2\) 带来反三角项，三次式 \(1+x^3\) 带来因式分解，2371 题即后者。复习时应把 \(\ln(1+x)\)、\(\ln(1+x^2)\)、\(\ln(1+x^3)\) 三类积分的原函数形式并排整理。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\dfrac{k}{n}\ln\left(1+\dfrac{k^2}{n^2}\right)\)。</p>
+    <p class="var-ans">答案：\(\ln2-\dfrac12\)。积分 \(\int_0^1 x\ln(1+x^2)\,dx\)，令 \(u=1+x^2\)，\(x\,dx=du/2\)，得 \(\frac12\int_1^2\ln u\,du=\ln2-1/2\approx0.19315\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2362">
+  <div class="q-head">
+    <span class="qno">第 2362 题</span>
+    <span class="qtype">递推数列（算术均值迭代）</span>
+    <span class="qsrc">P1039</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{a_n\}\) 满足 \(a_1=1,\ a_{n+1}=\dfrac12\left(a_n+\dfrac{2}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分式递推数列，先由不动点方程求候选极限，再用均值不等式与相邻项差证明收敛性，最后两边取极限。</p>
+    <p>设极限为 \(L\)，对递推式取极限：</p>
+    \[
+    L=\frac12\left(L+\frac{2}{L}\right)\ \Longrightarrow\ L^2=2.
+    \]
+    <p>数列各项为正，取正根 \(L=\sqrt2\)，负根 \(-\sqrt2\) 舍去。</p>
+    <p>证明下界：由算术—几何均值不等式，</p>
+    \[
+    a_{n+1}=\frac12\left(a_n+\frac{2}{a_n}\right)\ge\sqrt{a_n\cdot\frac{2}{a_n}}=\sqrt2,
+    \]
+    <p>等号仅在 \(a_n=\sqrt2\) 时成立。再证上界与递减性：当 \(a_n\ge\sqrt2\) 时，</p>
+    \[
+    a_{n+1}-\sqrt2=\frac{(a_n-\sqrt2)^2}{2a_n}\ge0,
+    \]
+    <p>且 \(a_{n+1}=\dfrac12(a_n+2/a_n)\le a_n\) 等价于 \(2/a_n\le a_n\)，即 \(a_n^2\ge2\)，与下界一致。故数列从第二项起单调递减且有下界 \(\sqrt2\)，由单调有界准则收敛，极限为 \(\sqrt2\)。数值复核：\(a_2=1.5\)，\(a_3\approx1.4167\)，逼近 \(1.41421\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只列不动点方程取极限，不验证数列收敛；分式递推必须先有单调有界结论。② 均值不等式方向用反，把下界写成上界。③ 解 \(L^2=2\) 时保留负根，未用 \(a_n\gt0\) 筛选。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题是求平方根的牛顿迭代格式，递推 \(a_{n+1}=(a_n+c/a_n)/2\) 收敛到 \(\sqrt c\)。复习时应掌握均值不等式证下界、平方差证递减的标准步骤。与 2352 的根式递推、2372 的三次型递推对照，三类题的共同骨架都是「不动点求候选值 → 单调有界证明 → 取极限」。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\dfrac12\left(a_n+\dfrac1{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+    <p class="var-ans">答案：\(1\)。不动点方程 \(L=(L+1/L)/2\) 即 \(L^2=1\)，取正根 \(1\)；均值不等式给出下界 \(1\)，数列递减收敛到 \(1\)，这是 \(\sqrt1\) 的牛顿迭代。</p>
+  </div>
+</article>
+
+<article class="q" id="q2363">
+  <div class="q-head">
+    <span class="qno">第 2363 题</span>
+    <span class="qtype">泰勒展开（双曲正弦主部）</span>
+    <span class="qsrc">P1039</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{e^x-e^{-x}-2x}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac13\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子为指数差减一次式，分母 \(x^3\)，需把 \(e^x\) 与 \(e^{-x}\) 展开到 \(x^3\) 项，消去低阶主部后定值。</p>
+    <p>指数函数在 \(x=0\) 处的三阶展开：</p>
+    \[
+    e^x=1+x+\frac{x^2}{2}+\frac{x^3}{6}+o(x^3),\quad
+    e^{-x}=1-x+\frac{x^2}{2}-\frac{x^3}{6}+o(x^3).
+    \]
+    <p>相减得双曲正弦的两倍：</p>
+    \[
+    e^x-e^{-x}=2x+\frac{x^3}{3}+o(x^3).
+    \]
+    <p>代入分子并除以 \(x^3\)：</p>
+    \[
+    e^x-e^{-x}-2x=\frac{x^3}{3}+o(x^3),
+    \]
+    \[
+    \lim_{x\to0}\frac{e^x-e^{-x}-2x}{x^3}
+    =\lim_{x\to0}\left(\frac13+\frac{o(x^3)}{x^3}\right)=\frac13.
+    \]
+    <p>用双曲函数互证：\(e^x-e^{-x}=2\sinh x\)，而 \(\sinh x=x+x^3/6+o(x^3)\)，故分子为 \(2(x^3/6)+o(x^3)=x^3/3+o(x^3)\)。数值复核：\(x=10^{-2}\) 时比值约 \(0.33333\)，与 \(1/3\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① \(e^{-x}\) 展开中奇次项带负号，相减时符号处理错误会改变 \(x^3\) 系数。② 只展开到 \(x^2\) 项，分子低阶部分全部消去后仍缺 \(x^3\) 主部。③ 把 \(e^x-e^{-x}\) 误写成 \(2\cosh x\)，双曲余弦主部为 \(2+x^2\)，结构完全不同。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>指数差的泰勒展开是 \(x^3\) 型 \(0/0\) 极限的标准素材，考点在于正负指数配对后偶次项抵消、奇次项加倍，从而与分母幂次配平。本题与 2373 题的三角型 \(x^3\) 极限成对，复习时可并排记忆 \(e^x-e^{-x}\) 与 \(\sin x-x\cos x\) 的低阶主部。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x+e^{-x}-2}{x^2}\)。</p>
+    <p class="var-ans">答案：\(1\)。两指数相加后奇次项抵消，\(e^x+e^{-x}=2+x^2+o(x^2)\)，减 \(2\) 后除以 \(x^2\) 得 \(1\)；对应双曲余弦的主部。</p>
+  </div>
+</article>
+
+<article class="q" id="q2364">
+  <div class="q-head">
+    <span class="qno">第 2364 题</span>
+    <span class="qtype">斯特林公式（(3n)! 根配三次幂）</span>
+    <span class="qsrc">P1039</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{\sqrt[n]{(3n)!}}{n^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{27}{e^3}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：含 \((3n)!\) 的 \(n\) 次根配 \(n^3\) 分母，先取对数把根式与幂次拆开，再用斯特林主部估计阶乘对数。</p>
+    <p>设原式为 \(A_n\)，取对数：</p>
+    \[
+    \ln A_n=\frac1n\ln(3n)!-3\ln n.
+    \]
+    <p>斯特林主部 \(\ln(m!)=m\ln m-m+O(\ln m)\)，取 \(m=3n\)：</p>
+    \[
+    \ln(3n)!=3n\ln(3n)-3n+O(\ln n).
+    \]
+    <p>除以 \(n\) 并减去 \(3\ln n\)：</p>
+    \[
+    \frac1n\ln(3n)!-3\ln n
+    =3\ln(3n)-3-3\ln n+o(1)
+    =3\ln3-3+o(1).
+    \]
+    <p>指数化：</p>
+    \[
+    A_n\to e^{3\ln3-3}=\frac{3^3}{e^3}=\frac{27}{e^3}.
+    \]
+    <p>数值复核：\(n=1000\) 时 \(A_n\approx1.3509\)，\(27/e^3\approx1.34425\)，误差随 \(O(\ln n/n)\) 缩小。一般规律：\(((mn)!)^{1/n}/n^m\to m^m/e^m\)，本题 \(m=3\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 斯特林主部中 \(-m\) 项漏写，指数化后常数因子 \(e^{-3}\) 丢失。② 分母幂次 \(3\) 与分子 \(3n\) 的系数 \(3\) 未对应，留下无法消去的 \(\ln n\)。③ 把 \(3\ln3\) 化简成 \(\ln9\) 一类的错误倍数，或指数化时漏掉 \(e^{-3}\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>阶乘根配高次幂分母是斯特林公式的放大款，解题关键是让分子系数 \(m\) 与分母幂次 \(m\) 一致，使 \(\ln n\) 项恰好消去。2374 题把 \(m\) 换成 \(4\)，同主部得 \(4^4/e^4\)；2354 题则是 \(m=1\) 的基础款 \(1/e\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{\sqrt[n]{(2n)!}}{n^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{4}{e^2}\)。取对数后主部 \(2\ln2-2\)，指数化得 \(2^2/e^2=4/e^2\approx0.54134\)，对应一般公式 \(m^m/e^m\) 中 \(m=2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2365">
+  <div class="q-head">
+    <span class="qno">第 2365 题</span>
+    <span class="qtype">黎曼和（根式平移积分）</span>
+    <span class="qsrc">P1039</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\sqrt{1+\dfrac{k}{n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac23(2^{3/2}-1)\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数为 \(\sqrt{1+x}\)，积分区间仍是 \([0,1]\)，根式内做了一次平移。</p>
+    <p>按定积分定义写出：</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\sqrt{1+\frac{k}{n}}
+    =\int_0^1\sqrt{1+x}\,dx.
+    \]
+    <p>令 \(u=1+x\)，则 \(du=dx\)，积分上下限由 \(x=0,1\) 变为 \(u=1,2\)：</p>
+    \[
+    \int_0^1(1+x)^{1/2}\,dx=\int_1^2u^{1/2}\,du
+    =\left[\frac23u^{3/2}\right]_1^2.
+    \]
+    <p>代入上下限：</p>
+    \[
+    \int_1^2u^{1/2}\,du=\frac23(2^{3/2}-1).
+    \]
+    <p>数值复核：结果约 \(1.21895\)；\(n=10^4\) 时黎曼和向该值逼近。幂函数积分系数为 \(1/(\alpha+1)\)，本题 \(\alpha=1/2\)，故系数 \(2/3\)；平移只改变积分区间，不改变积分系数。换元后区间 \([1,2]\) 上 \(u^{3/2}\) 单调递增，积分值大于 \(\int_0^1\sqrt{x}\,dx=2/3\)，与 \(1.219\) 的量级一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 积分系数写错：\(\int u^{1/2}du\) 系数是 \(2/3\)，不是 \(1/2\)。② 平移后下限 \(u=1\) 的项漏掉，只保留上限 \(2\) 的贡献。③ 把 \(\sqrt{1+k/n}\) 等价成 \(\sqrt{k/n}\)，丢掉常数 \(1\) 后积分变成 \(2/3\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>根式平移型黎曼和考查幂函数积分公式与换元上下限，被积函数由 \(\sqrt{x}\) 换成 \(\sqrt{1+x}\)，难度只在区间平移。2375 题把根次换成三次根，系数对应变为 \(3/4\)；两题可并排对照幂次与系数的对应关系。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\sqrt{1+\dfrac{2k}{n}}\)。</p>
+    <p class="var-ans">答案：\(\sqrt3-\dfrac13\)。积分 \(\int_0^1\sqrt{1+2x}\,dx\)，令 \(u=1+2x\)，\(dx=du/2\)，得 \(\frac12\cdot\frac23[u^{3/2}]_1^3=\sqrt3-1/3\approx1.39872\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2366">
+  <div class="q-head">
+    <span class="qno">第 2366 题</span>
+    <span class="qtype">黎曼和（Fresnel 型非初等积分）</span>
+    <span class="qsrc">P1040</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\cos\left(\dfrac{k^2}{n^2}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(0.9045242379\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，复算 \(\int_0^1\cos(x^2)\,dx\approx0.9045242379\)（余弦级数与 mpmath 40 位自适应积分两档一致）；邻近变体排除：\(\int_0^1\cos x\,dx=\sin1\approx0.841471\)，\(\int_0^1\cos x^3\,dx\approx0.931704\)，\(\int_0^1\sin x^2\,dx\approx0.310268\)，\(\int_0^1\cos^2x\,dx\approx0.727324\)，均不等于 \(1\)。书给 \(1\) 系将 \(\cos(x^2)\) 整体近似为 \(1\) 所致，以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，通项为 \(\cos((k/n)^2)\)，被积函数 \(f(x)=\cos(x^2)\)，极限化为 \([0,1]\) 上的定积分。该积分为 Fresnel 型非初等积分，需用函数级数逐项积分定值。</p>
+    <p>按定积分定义写出：</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\cos\frac{k^2}{n^2}
+    =\int_0^1\cos(x^2)\,dx.
+    \]
+    <p>展开余弦级数 \(\cos t=\sum_{m=0}^\infty(-1)^m t^{2m}/(2m)!\)，取 \(t=x^2\)：</p>
+    \[
+    \cos(x^2)=\sum_{m=0}^\infty\frac{(-1)^m x^{4m}}{(2m)!}.
+    \]
+    <p>在 \([0,1]\) 上逐项积分：</p>
+    \[
+    I=\sum_{m=0}^\infty\frac{(-1)^m}{(2m)!(4m+1)}.
+    \]
+    <p>前几项为：\(m=0\) 项 \(1\)，\(m=1\) 项 \(-1/(2!\cdot5)=-0.1\)，\(m=2\) 项 \(+1/(4!\cdot9)\approx0.00463\)，交错级数快速收敛。与自适应积分互证，两档均得：</p>
+    \[
+    I\approx0.9045242379002721.
+    \]
+    <p>数值复核：\(n=1000\) 时黎曼和约 \(0.904294\)，\(n=10000\) 时约 \(0.904501\)，随 \(n\) 增大向积分值逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\cos(x^2)\) 在区间上近似为 \(1\)，直接得到极限 \(1\)；余弦只在 \(x\) 接近 \(0\) 时接近 \(1\)，在整个 \([0,1]\) 上不能整体替换。② 误读成 \(\cos^2x\)，被积函数与积分值都改变。③ 以为 \(\cos(x^2)\) 有初等原函数，强行分部积分陷入非初等项；非初等积分应走级数或数值路径。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>变核黎曼和在被积函数非初等时，考查用幂级数逐项积分或自适应数值积分定值，而不是套基本积分公式。\(\cos x^2\)、\(\sin x^2\) 是 Fresnel 积分的标准素材，真题中若出现同类非初等核，应先判断原函数类型，再决定级数展开或数值复核。与 2356 题的 \(\cos x\) 对照，自变量是否平方决定题型走向。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\sin\left(\dfrac{k^2}{n^2}\right)\)。</p>
+    <p class="var-ans">答案：\(0.3102683017\)。积分 \(\int_0^1\sin(x^2)\,dx\)，正弦级数逐项积分得 \(\sum(-1)^m/((2m+1)!(4m+3))\)，与自适应积分互证约 \(0.310268\)，同为 Fresnel 型非初等积分。</p>
+  </div>
+</article>
+
+<article class="q" id="q2367">
+  <div class="q-head">
+    <span class="qno">第 2367 题</span>
+    <span class="qtype">变限积分（可去奇点被积函数）</span>
+    <span class="qsrc">P1040</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\int_0^x\dfrac{\sin t}{t}\,dt\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)}{x}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：变上限积分与 \(x\) 之比，\(f(0)=0\)，属 \(0/0\) 型；被积函数 \(\sin t/t\) 在 \(t=0\) 处为可去奇点，补充定义后连续，端点导数等于补充后的函数值。</p>
+    <p>由变上限积分求导公式：</p>
+    \[
+    f'(x)=\frac{\sin x}{x}.
+    \]
+    <p>所求极限为 \(f\) 在 \(0\) 处的导数：</p>
+    \[
+    \lim_{x\to0}\frac{f(x)}{x}=\lim_{x\to0}\frac{f(x)-f(0)}{x-0}=f'(0).
+    \]
+    <p>由重要极限 \(\lim\limits_{t\to0}\sin t/t=1\)，补充定义 \((\sin t/t)|_{t=0}=1\)，故</p>
+    \[
+    f'(0)=1.
+    \]
+    <p>洛必达法则互证：分子分母求导后得 \((\sin x/x)/1\)，\(x\to0\) 时趋于 \(1\)。被积函数的原函数非初等（正弦积分型），本题只取端点导数值，绕开求原函数。数值复核：\(x=10^{-3}\) 时 \(f(x)\approx x-x^3/18\)，比值约 \(0.99999994\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 认为 \(\sin t/t\) 在 \(0\) 处无定义就判定变限积分不可导；可去奇点补充定义后不影响积分与求导。② 变限求导后忘记取 \(x\to0\) 的重要极限，把 \(\sin x/x\) 当成未定式搁置。③ 试图先求正弦积分的初等原函数，误入非初等积分。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>含可去奇点的变限积分是 2357 题的姊妹款，考点仍是「端点导数等于被积函数在该点的补充值」。复习时应记住 \(\sin t/t\)、\((e^t-1)/t\) 等常见可去奇点在 \(0\) 处的补充值，直接用于变限积分求导。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)=\int_0^x\left(\dfrac{\sin t}{t}\right)^2dt\)，求 \(\lim\limits_{x\to0}\dfrac{f(x)}{x}\)。</p>
+    <p class="var-ans">答案：\(1\)。变限求导 \(f'(x)=(\sin x/x)^2\)，补充值在 \(0\) 处为 \(1^2=1\)，故 \(f'(0)=1\)；平方不改变可去奇点的补充值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2368">
+  <div class="q-head">
+    <span class="qno">第 2368 题</span>
+    <span class="qtype">斯特林公式（三项分组阶乘比）</span>
+    <span class="qsrc">P1040</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\ln\left(\dfrac{(3n)!}{(n!)^3}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln27\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：三项分组的阶乘比对数渐近，拆成四个阶乘对数之差后用斯特林主部逐项估计。</p>
+    <p>记 \(D_n=\dfrac{(3n)!}{(n!)^3}\)，则</p>
+    \[
+    \ln D_n=\ln(3n)!-3\ln(n!).
+    \]
+    <p>代入斯特林主部 \(\ln(m!)=m\ln m-m+O(\ln m)\)：</p>
+    \[
+    \ln(3n)!=3n\ln(3n)-3n+O(\ln n),\quad
+    3\ln(n!)=3(n\ln n-n)+O(\ln n).
+    \]
+    <p>相减并除以 \(n\)：</p>
+    \[
+    \frac1n\ln D_n
+    =\frac{3n\ln(3n)-3n-3n\ln n+3n}{n}+o(1)
+    =3\ln3+o(1).
+    \]
+    <p>线性项 \(-3n+3n\) 抵消，\(\ln n\) 项相消，留下 \(3\ln3=\ln27\)。数值复核：\(n=1000\) 时 \(\ln D_n/n\approx3.28764\)，\(\ln27\approx3.29584\)，误差按 \(O(\ln n/n)\) 缩小。分组系数为 \(3\)，主部常数即 \(3\ln3\)，与 2358 题二项分组的 \(2\ln2\) 同规律。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 分母 \((n!)^3\) 拆项时只减一次 \(\ln n!\)，系数 \(3\) 丢失。② 斯特林线性主部 \(-m\) 漏写，分组相减时常数抵消关系被破坏。③ 把 \(3\ln3\) 化简成 \(\ln9\)，对数倍数与系数对应错误。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>多项式系数型阶乘比的渐近，主部常数由各组的系数与对数决定，是斯特林公式在组合计数中的直接应用。2358 题对应二项分组 \(2\ln2\)，本题对应三项分组 \(3\ln3\)，复习时可按分组数归纳一般公式 \(\sum m_i\ln m_i\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\ln\dfrac{(4n)!}{(n!)^4}\)。</p>
+    <p class="var-ans">答案：\(\ln256\)。拆项后主部 \(4\ln4=4\ln4=\ln4^4=\ln256\approx5.54518\)，线性项 \(-4n+4n\) 抵消，对应四项分组。</p>
+  </div>
+</article>
+
+<article class="q" id="q2369">
+  <div class="q-head">
+    <span class="qno">第 2369 题</span>
+    <span class="qtype">调和级数尾部（黎曼和与欧拉常数）</span>
+    <span class="qsrc">P1040</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\left(\dfrac1n+\dfrac1{n+1}+\cdots+\dfrac1{2n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：调和级数从 \(n\) 到 \(2n\) 的尾部和，有两条互证路径：配成黎曼和用定积分，或用调和数渐近公式（欧拉常数）相减。</p>
+    <p>黎曼和路径：通项提取 \(1/n\)，</p>
+    \[
+    \sum_{k=n}^{2n}\frac1k=\frac1n\sum_{k=n}^{2n}\frac{1}{k/n}.
+    \]
+    <p>令 \(j=k-n\)，取样点由 \(k/n=1+j/n\) 覆盖 \([1,2]\)，等价于标准和式：</p>
+    \[
+    \lim_{n\to\infty}\sum_{k=n}^{2n}\frac1k=\int_0^1\frac{1}{1+x}\,dx=\ln2.
+    \]
+    <p>调和数路径：记 \(H_m=\sum_{k=1}^m1/k\)，尾部和为 \(H_{2n}-H_n\)。由渐近公式 \(H_m=\ln m+\gamma+o(1)\)：</p>
+    \[
+    H_{2n}-H_n=\ln(2n)-\ln n+o(1)=\ln2+o(1).
+    \]
+    <p>两条路径结论一致。数值复核：\(n=2000\) 时尾部和约 \(0.693022\)，\(\ln2\approx0.693147\)，误差 \(O(1/n)\)。项数为 \(n+1\) 项，端点多一项不影响极限。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把尾部和当成发散的调和级数整体，误判为 \(+\infty\)；取的是相邻两段之差，发散部分相消。② 黎曼和配平时端点区间写成 \([0,1]\) 还是 \([1,2]\) 混淆，被积函数仍应取 \(1/(1+x)\)。③ 调和数渐近中欧拉常数 \(\gamma\) 未相减，残留常数项。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>调和级数尾部是黎曼和与欧拉常数两条主线的交汇点，真题常以「\(1/n+1/(n+1)+\cdots+1/(2n)\)」的文字和式出现，考查提取步长与积分互译。与 2359 题对照：两题被积函数相同，只是通项包装一个是 \(k/n\)、一个是 \(n+k\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(\dfrac1n+\dfrac1{n+1}+\cdots+\dfrac1{3n}\right)\)。</p>
+    <p class="var-ans">答案：\(\ln3\)。调和数差 \(H_{3n}-H_n=\ln(3n)-\ln n+o(1)=\ln3\)；黎曼和路径对应 \(\int_0^2 1/(1+x)\,dx=\ln3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2370">
+  <div class="q-head">
+    <span class="qno">第 2370 题</span>
+    <span class="qtype">泰勒展开（对数二阶主部）</span>
+    <span class="qsrc">P1040</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^2\left(\dfrac1n-\ln\left(1+\dfrac1n\right)\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：与 2360 同型的数列二阶小量，令 \(u=1/n\to0^+\)，括号内为 \(u-\ln(1+u)\)，展开到 \(u^2\) 项后与 \(n^2=1/u^2\) 配平。</p>
+    <p>换元 \(u=1/n\)：</p>
+    \[
+    n^2\left(\frac1n-\ln\left(1+\frac1n\right)\right)
+    =\frac{u-\ln(1+u)}{u^2}.
+    \]
+    <p>对数二阶展开：</p>
+    \[
+    \ln(1+u)=u-\frac{u^2}{2}+\frac{u^3}{3}+o(u^3).
+    \]
+    <p>分子主部：</p>
+    \[
+    u-\ln(1+u)=\frac{u^2}{2}-\frac{u^3}{3}+o(u^3).
+    \]
+    <p>除以 \(u^2\) 取极限：</p>
+    \[
+    \lim_{u\to0^+}\frac{u-\ln(1+u)}{u^2}
+    =\frac12.
+    \]
+    <p>数值复核：\(n=2000\) 时原式约 \(0.499833\)，向 \(1/2\) 逼近。\(u^3\) 项除以 \(u^2\) 后趋于零，不影响定值；展开阶数由外面的 \(n^2\) 决定，只需保证分子写到 \(u^2\) 主部。若外面幂次换成 \(n^3\)，则需保留到 \(u^3\) 项，主部系数由对数展开的三阶项决定；幂次与展开阶数的对应是同类题的通用判断依据。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 展开只到一阶，分子成 \(o(u)\)，与 \(u^2\) 配平时错判为零。② 把 \(u-\ln(1+u)\) 的符号写反，得到 \(-1/2\)。③ 不换元直接在数列上写余项，阶数标记混乱。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数与一次式之差配平方量级是数列极限的稳定考点，换元后即为连续变量的泰勒展开题。本题与 2360 题干同型，复习时掌握 \(\ln(1+u)\) 到 \(u^3\) 的展开式，即可覆盖 \(n^2\) 与 \(n^3\) 两种配平方式。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n^2\left(\ln\left(1+\dfrac1n\right)-\dfrac1n\right)\)。</p>
+    <p class="var-ans">答案：\(-\dfrac12\)。括号内为 \(\ln(1+u)-u=-u^2/2+o(u^2)\)，乘以 \(n^2=1/u^2\) 得 \(-1/2\)，与原题互为相反数。</p>
+  </div>
+</article>
+
+<article class="q" id="q2371">
+  <div class="q-head">
+    <span class="qno">第 2371 题</span>
+    <span class="qtype">黎曼和（因式分解 ln(1+x³)）</span>
+    <span class="qsrc">P1040</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\ln\left(\dfrac{n^3+k^3}{n^3}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(2\ln2-3+\dfrac{\pi}{\sqrt3}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，通项化简为 \(\ln(1+(k/n)^3)\)，被积函数 \(\ln(1+x^3)\)；先因式分解三次式，再分项积分。</p>
+    <p>化简通项并写出积分：</p>
+    \[
+    \ln\frac{n^3+k^3}{n^3}=\ln\left(1+\frac{k^3}{n^3}\right),
+    \]
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\ln\left(1+\frac{k^3}{n^3}\right)
+    =\int_0^1\ln(1+x^3)\,dx.
+    \]
+    <p>因式分解 \(1+x^3=(1+x)(x^2-x+1)\)，对数拆开：</p>
+    \[
+    \int_0^1\ln(1+x^3)\,dx=\int_0^1\ln(1+x)\,dx+\int_0^1\ln(x^2-x+1)\,dx.
+    \]
+    <p>第一项：</p>
+    \[
+    \int_0^1\ln(1+x)\,dx=[(1+x)\ln(1+x)-(1+x)]_0^1=2\ln2-1.
+    \]
+    <p>第二项配方 \(x^2-x+1=(x-1/2)^2+3/4\)，令 \(u=x-1/2\)，由 \(\ln(u^2+a^2)\) 积分公式（\(a=\sqrt3/2\)）算得：</p>
+    \[
+    \int_0^1\ln(x^2-x+1)\,dx=-2+\frac{\pi}{\sqrt3}.
+    \]
+    <p>两项合并：</p>
+    \[
+    I=(2\ln2-1)+\left(-2+\frac{\pi}{\sqrt3}\right)=2\ln2-3+\frac{\pi}{\sqrt3}.
+    \]
+    <p>数值复核：结果约 \(0.200094\)，与 mpmath 自适应积分一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 三次式不分解，直接对 \(\ln(1+x^3)\) 分部积分导致有理函数难以化简。② 第一项边界项在 \(x=0\) 处为 \(-1\)，代入时漏减，常数 \(2\ln2-1\) 错成 \(2\ln2-2\)。③ 配方后反三角积分的参数 \(a=\sqrt3/2\) 与角度 \(\pi/6\) 换算出错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数乘三次式的黎曼和，考查立方和因式分解与不可约二次因子的配方积分，是本组难度较高的积分题。与 2361 题的 \(\ln(1+x^2)\) 对照：二次式直接分部积分，三次式先分解再分项。复习时应把两类对数多项式积分的原函数路径分别理清。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\left(\dfrac{k}{n}\right)^2\ln\left(1+\dfrac{k^3}{n^3}\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac{2\ln2-1}{3}\)。积分 \(\int_0^1 x^2\ln(1+x^3)\,dx\)，令 \(u=1+x^3\)，\(x^2dx=du/3\)，得 \(\frac13\int_1^2\ln u\,du=(2\ln2-1)/3\approx0.128765\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2372">
+  <div class="q-head">
+    <span class="qno">第 2372 题</span>
+    <span class="qtype">递推数列（三次型不动点）</span>
+    <span class="qsrc">P1041</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(\{a_n\}\) 满足 \(a_1=1,\ a_{n+1}=\dfrac13\left(a_n+\dfrac{2}{a_n^2}\right)\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分式递推数列，先由不动点方程求候选极限，再结合初值判断数列行为。</p>
+    <p>设极限为 \(L\)，对递推式取极限：</p>
+    \[
+    L=\frac13\left(L+\frac{2}{L^2}\right).
+    \]
+    <p>两边乘 \(3L^2\)：</p>
+    \[
+    3L^3=L^3+2\ \Longrightarrow\ L^3=1.
+    \]
+    \[
+    a_2=\frac13(1+2)=1,\qquad a_n\equiv1,\qquad \lim_{n\to\infty}a_n=1.
+    \]
+    <p>在实数范围内 \(L=1\)；复数根 \(-1/2\pm i\sqrt3/2\) 不对应实数列，舍去。</p>
+    <p>结合初值：\(a_1=1\)，代入递推式得 \(a_2=\frac13(1+2)=1\)，由归纳法 \(a_n=1\) 对所有 \(n\) 成立，数列为常数列，极限即 \(1\)。同族一般形式 \(a_{n+1}=\frac1p(a_n+(p-1)/a_n^{p-1})\) 的不动点方程为 \(L^p=1\)，正实根恒为 \(1\)；本题 \(p=3\)，方程 \(L^3=1\) 的实根只有 \(1\)，另两个为共轭复根，不对应实数列。数值复核：逐项计算 \(a_n\) 恒为 \(1\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 解 \(L^3=1\) 时混入复根，或误写成 \(L=\sqrt2\) 一类的二次不动点。② 不检查初值与不动点的关系，把一般牛顿迭代的收敛结论直接套到常数列上。③ 递推式中 \(a_n^2\) 的平方位置看错，写成 \(2/a_n\) 后不动点方程变为二次型。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>三次型递推与平方根迭代 2362 题并排对照，不动点方程由二次式 \(L^2=2\) 变为三次式 \(L^3=1\)，考查幂次与系数的对应。复习时应掌握「取极限 → 解代数方程 → 按实根与正性筛选 → 用初值验证」的完整步骤，与 2352、2362 两题并排归纳。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_{n+1}=\dfrac13\left(a_n+\dfrac{8}{a_n^2}\right)\)，求该递推的正不动点。</p>
+    <p class="var-ans">答案：\(\sqrt[3]{4}\)。不动点方程 \(L=(L+8/L^2)/3\)，乘 \(3L^2\) 得 \(3L^3=L^3+8\)，即 \(2L^3=8\)，\(L^3=4\)，正实根 \(L=\sqrt[3]{4}\approx1.5874\)；迭代从正数初值出发收敛到该值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2373">
+  <div class="q-head">
+    <span class="qno">第 2373 题</span>
+    <span class="qtype">泰勒展开（三角差主部）</span>
+    <span class="qsrc">P1041</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sin x-x\cos x}{x^3}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac13\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子为正弦与 \(x\cos x\) 之差，分母 \(x^3\)，需把 \(\sin x\) 与 \(\cos x\) 展开到 \(x^3\) 项，消去低阶主部后定值。</p>
+    <p>三角函数在 \(x=0\) 处的三阶展开：</p>
+    \[
+    \sin x=x-\frac{x^3}{6}+o(x^3),\quad
+    \cos x=1-\frac{x^2}{2}+o(x^2).
+    \]
+    <p>计算 \(x\cos x\)：</p>
+    \[
+    x\cos x=x-\frac{x^3}{2}+o(x^3).
+    \]
+    <p>分子相减：</p>
+    \[
+    \sin x-x\cos x
+    =\left(x-\frac{x^3}{6}\right)-\left(x-\frac{x^3}{2}\right)+o(x^3)
+    =\frac{x^3}{3}+o(x^3).
+    \]
+    <p>除以 \(x^3\) 取极限：</p>
+    \[
+    \lim_{x\to0}\frac{\sin x-x\cos x}{x^3}
+    =\lim_{x\to0}\left(\frac13+\frac{o(x^3)}{x^3}\right)=\frac13.
+    \]
+    <p>洛必达法则互证：分子导数为 \(\cos x-(\cos x-x\sin x)=x\sin x\)，分母导数为 \(3x^2\)，一次求导后得 \(x\sin x/(3x^2)=\sin x/(3x)\)，由重要极限 \(\sin x/x\to1\) 得 \(1/3\)。数值复核：\(x=10^{-2}\) 时比值约 \(0.33333\)，与 \(1/3\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① \(\cos x\) 展开只写到常数项 \(1\)，\(x\cos x\) 缺 \(-x^3/2\) 项，分子系数算错。② 两项 \(x^3\) 系数相减时符号颠倒：\(1/2-1/6=1/3\)，写成 \(1/6-1/2=-1/3\)。③ 洛必达使用次数不足就代入，或求导过程中漏掉乘积因子 \(x\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>三角差配 \(x^3\) 是 \(0/0\) 型泰勒展开的标准题型，考点是正弦、余弦低阶主部的系数配对。本题与 2363 题的指数差成对，一个用双曲正弦主部，一个用三角主部；复习时应把 \(\sin x\)、\(\cos x\) 到 \(x^3\) 的展开式记熟。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{1-\cos x}{x^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。由 \(\cos x=1-x^2/2+o(x^2)\)，分子 \(1-\cos x=x^2/2+o(x^2)\)，除以 \(x^2\) 得 \(1/2\)，是余弦展开的二阶主部。</p>
+  </div>
+</article>
+
+<article class="q" id="q2374">
+  <div class="q-head">
+    <span class="qno">第 2374 题</span>
+    <span class="qtype">斯特林公式（(4n)! 根配四次幂）</span>
+    <span class="qsrc">P1041</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{\sqrt[n]{(4n)!}}{n^4}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{256}{e^4}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：含 \((4n)!\) 的 \(n\) 次根配 \(n^4\) 分母，取对数后用斯特林主部估计阶乘对数，使 \(\ln n\) 项消去。</p>
+    <p>设原式为 \(A_n\)，取对数：</p>
+    \[
+    \ln A_n=\frac1n\ln(4n)!-4\ln n.
+    \]
+    <p>斯特林主部 \(\ln(m!)=m\ln m-m+O(\ln m)\)，取 \(m=4n\)：</p>
+    \[
+    \ln(4n)!=4n\ln(4n)-4n+O(\ln n).
+    \]
+    <p>除以 \(n\) 并减去 \(4\ln n\)：</p>
+    \[
+    \frac1n\ln(4n)!-4\ln n
+    =4\ln(4n)-4-4\ln n+o(1)
+    =4\ln4-4+o(1).
+    \]
+    <p>指数化：</p>
+    \[
+    A_n\to e^{4\ln4-4}=\frac{4^4}{e^4}=\frac{256}{e^4}.
+    \]
+    <p>数值复核：\(n=1000\) 时 \(A_n\approx4.71262\)，\(256/e^4\approx4.68880\)，误差随 \(O(\ln n/n)\) 缩小。一般公式 \(((mn)!)^{1/n}/n^m\to m^m/e^m\)，本题 \(m=4\)，分子系数与分母幂次同为 \(4\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 斯特林主部 \(-m\) 项漏写，指数化后 \(e^{-4}\) 因子丢失。② 分母幂次 \(4\) 与分子系数 \(4\) 未对应，\(\ln n\) 项无法消去。③ \(4\ln4\) 指数化时误算成 \(4^4=256\) 之外的倍数，或漏掉分母 \(e^4\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>阶乘根配高次幂分母是斯特林公式的放大款，2364 题 \(m=3\) 得 \(27/e^3\)，本题 \(m=4\) 得 \(256/e^4\)，结构完全平行。复习时应记住一般公式 \(m^m/e^m\)，并检查分子系数与分母幂次是否一致。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{\sqrt[n]{(5n)!}}{n^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{3125}{e^5}\)。取对数后主部 \(5\ln5-5\)，指数化得 \(5^5/e^5=3125/e^5\approx21.0561\)，对应一般公式 \(m=5\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2375">
+  <div class="q-head">
+    <span class="qno">第 2375 题</span>
+    <span class="qtype">黎曼和（三次根平移积分）</span>
+    <span class="qsrc">P1041</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\sqrt[3]{1+\dfrac{k}{n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac34(2^{4/3}-1)\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：标准黎曼和，被积函数为 \(\sqrt[3]{1+x}\)，积分区间 \([0,1]\)，根次为 \(1/3\)，换元后按幂函数积分公式定值。</p>
+    <p>按定积分定义写出：</p>
+    \[
+    \lim_{n\to\infty}\frac1n\sum_{k=1}^n\sqrt[3]{1+\frac{k}{n}}
+    =\int_0^1(1+x)^{1/3}\,dx.
+    \]
+    <p>令 \(u=1+x\)，\(du=dx\)，上下限变为 \(u=1,2\)：</p>
+    \[
+    \int_0^1(1+x)^{1/3}\,dx=\int_1^2u^{1/3}\,du
+    =\left[\frac34u^{4/3}\right]_1^2.
+    \]
+    <p>代入上下限：</p>
+    \[
+    \int_1^2u^{1/3}\,du=\frac34(2^{4/3}-1).
+    \]
+    <p>数值复核：结果约 \(1.13988\)；\(n=10^4\) 时黎曼和向该值逼近。幂函数积分系数为 \(1/(\alpha+1)\)，本题 \(\alpha=1/3\)，系数 \(3/4\)，幂次升到 \(4/3\)；平移只改变区间，不改变系数。换元后 \([1,2]\) 上 \(u^{4/3}\) 递增，积分值大于 \(\int_0^1 x^{1/3}\,dx=3/4\)，与 \(1.140\) 的量级一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 积分系数写错：\(\int u^{1/3}du\) 系数是 \(3/4\)，不是 \(1/3\) 或 \(3/2\)。② 平移后下限 \(u=1\) 的项漏掉，只保留上限 \(2\) 的贡献。③ 把三次根误看成平方根，系数与幂次错配成 \(2/3\) 与 \(3/2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>根式平移型黎曼和考查幂函数积分公式与换元上下限，2365 题平方根对应系数 \(2/3\)、幂次 \(3/2\)，本题三次根对应系数 \(3/4\)、幂次 \(4/3\)。两题并排对照即可掌握根次 \(\alpha\) 与系数 \(1/(\alpha+1)\)、幂次 \(\alpha+1\) 的对应关系。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\sqrt[4]{1+\dfrac{k}{n}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac45(2^{5/4}-1)\)。积分 \(\int_0^1(1+x)^{1/4}\,dx=\frac45[u^{5/4}]_1^2\approx1.10273\)，系数 \(4/5\)、幂次 \(5/4\)，对应根次 \(1/4\)。</p>
+  </div>
+</article>

@@ -1,0 +1,804 @@
+<article class="q" id="q2176">
+  <div class="q-head">
+    <span class="qno">第 2176 题</span>
+    <span class="qtype">n 项幂和→定积分（四次幂）</span>
+    <span class="qsrc">P1004</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1^4+2^4+\cdots+n^4}{n^5}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac15\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子是前 \(n\) 个正整数的四次幂之和，分母为 \(n^5\)，属 \(n\) 项和的定积分定义型。把通项配成 Riemann 和：</p>
+    \[ \frac{1^4+2^4+\cdots+n^4}{n^5}=\frac1n\sum_{k=1}^n\left(\frac{k}{n}\right)^4. \]
+    <p>右端正是 \(f(x)=x^4\) 在区间 \([0,1]\) 上的等距分割 Riemann 和，分点 \(x_k=k/n\)，小区间长度 \(1/n\)。由 \(x^4\) 在 \([0,1]\) 上连续，Riemann 和收敛到定积分：</p>
+    \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^n\left(\frac{k}{n}\right)^4=\int_0^1 x^4\,dx=\frac{x^5}{5}\Big|_0^1=\frac15. \]
+    <p>也可用幂和公式交叉验证：</p>
+    \[ \sum_{k=1}^n k^4=\frac{n(n+1)(2n+1)(3n^2+3n-1)}{30}=\frac{n^5}{5}+O(n^4). \]
+    <p>展开后最高次项为 \(n^5/5\)，除以 \(n^5\) 主部即 \(1/5\)，其余低次项全部消去。数值复核：\(n=10^4\) 时比值 \(0.200050\)，\(n=10^5\) 时 \(0.200005\)，向 \(0.2\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把幂和误当 \(\sum k^4\sim n^4\) 处理，得到 \(0\)；四次幂求和的主部是 \(n^5\)，不是 \(n^4\)。② 配 Riemann 和时漏写 \(1/n\)，直接把 \((k/n)^4\) 求和后误判为积分发散。③ 幂和公式展开时只看首项系数 \(1/30\) 而漏乘因子 \(6\)，四次幂和主部系数应为 \(1/5\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>幂和型极限是定积分定义的入门考法，一般结论为 \(\lim\limits_{n\to\infty}n^{-p-1}\sum_{k=1}^n k^p=1/(p+1)\)。同型题目把幂次换成五次、六次，框架不变：先提 \(n^{p+1}\) 配出 \(1/n\) 与 \(f(k/n)\)，再积 \(x^p\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1^3+2^3+\cdots+n^3}{n^4}\)。</p>
+    <p class="var-ans">答案：\(\dfrac14\)。配成 \(\frac1n\sum_{k=1}^n(k/n)^3\to\int_0^1 x^3\,dx=1/4\)；幂和公式 \(\sum k^3=[n(n+1)/2]^2\) 主部 \(n^4/4\)，结论一致。</p>
+  </div>
+</article>
+
+<article class="q" id="q2177">
+  <div class="q-head">
+    <span class="qno">第 2177 题</span>
+    <span class="qtype">Taylor 展开（指数余项）</span>
+    <span class="qsrc">P1004</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{e^x-1-x-\dfrac{x^2}{2}-\dfrac{x^3}{6}}{x^4}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac1{24}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是 \(e^x\) 与其前三阶泰勒多项式之差，分母 \(x^4\)，属泰勒展开定系数型。指数函数在原点的麦克劳林展开为</p>
+    \[ e^x=1+x+\frac{x^2}{2}+\frac{x^3}{6}+\frac{x^4}{24}+O(x^5). \]
+    <p>代入分子，\(1\)、\(x\)、\(x^2/2\)、\(x^3/6\) 逐项抵消，剩余最低次项为</p>
+    \[ e^x-1-x-\frac{x^2}{2}-\frac{x^3}{6}=\frac{x^4}{24}+O(x^5). \]
+    <p>分母是 \(x^4\)，展开必须写到 \(x^4\) 项，那个 \(1/24\) 系数正是答案来源；只写到 \(x^3\) 会把分子判为 \(O(x^3)\)，与分母相除后阶数对不上。于是</p>
+    \[ \frac{x^4/24+O(x^5)}{x^4}=\frac1{24}+O(x)\to\frac1{24}. \]
+    <p>数值复核：\(x=0.01\) 时比值 \(0.041750\)，\(x=0.001\) 时 \(0.041675\)，向 \(1/24\approx0.0416667\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 展开阶数不足，只写到 \(x^3\) 就判分子为高阶无穷小，答 \(0\)。② 记错阶乘系数，把 \(x^4/24\) 写成 \(x^4/12\) 或 \(x^4/6\)。③ 对差式整体等价替换 \(e^x\sim1+x\)，等价关系只保一阶，四阶主部会被错误消掉。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>指数余项型与正弦、对数、正切余项同属一类，考向都是「减多项式后除以幂次定系数」。做题顺序固定：按分母幂次决定展开到第几项，抵消已写项，取剩余最低次项系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x-1-x}{x^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。展开到二阶：\(e^x-1-x=x^2/2+O(x^3)\)，除以 \(x^2\) 得 \(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2178">
+  <div class="q-head">
+    <span class="qno">第 2178 题</span>
+    <span class="qtype">1<sup>∞</sup> 型极限（多项式底数）</span>
+    <span class="qsrc">P1004</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\left(1+\dfrac1n+\dfrac1{n^2}+\dfrac1{n^3}\right)^n\)。</p>
+  </div>
+  <div class="answer">答案：\(e\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：底数 \(1+1/n+1/n^2+1/n^3\to1\)，指数 \(n\to\infty\)，属 \(1^\infty\) 型未定式。标准做法是取对数，把幂指极限化为乘积极限：</p>
+    \[ \ln L=n\ln\left(1+\frac1n+\frac1{n^2}+\frac1{n^3}\right). \]
+    <p>令 \(u_n=1/n+1/n^2+1/n^3\)，则 \(u_n\to0\)，由 \(\ln(1+u)=u+O(u^2)\)，</p>
+    \[ \ln L=n\left(\frac1n+\frac1{n^2}+\frac1{n^3}+O(u_n^2)\right)=1+\frac1n+\frac1{n^2}+O\!\left(\frac1n\right). \]
+    <p>其中 \(u_n^2=O(1/n^2)\)，乘 \(n\) 后为 \(O(1/n)\)，不进入主部。由 \(1^\infty\) 标准公式 \(L=e^{\lim n\,u_n}\)，</p>
+    \[ L=\exp\!\left(\lim_{n\to\infty}n\,u_n\right)=e^1=e. \]
+    <p>二阶对数项量级：\(u_n^2/2\cdot n=1/(2n)+O(1/n^2)\to0\)，不改变 \(\ln L\) 的主部 \(1\)。</p>
+    <p>数值复核：\(n=10^4\) 得 \(2.718418\)，\(n=10^5\) 得 \(2.718295\)，向 \(e\approx2.718282\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把底数直接看成 \(1\) 后答 \(1\)；\(1^\infty\) 是未定式，必须取对数算 \(n(u-1)\) 的主部。② 展开 \(\ln(1+u)\) 时漏掉 \(u^2/2\) 阶；本题该阶乘 \(n\) 后趋于零，但若指数或底数结构改变，高阶项可能进入主部。③ 误以为 \(1/n^2\)、\(1/n^3\) 项会改变极限值；它们只贡献 \(1/n\)、\(1/n^2\) 级修正，极限主部仍由 \(1/n\) 决定。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>\(1^\infty\) 型是幂指极限第一考点。底数为「\(1\) 加若干 \(1/n\) 及其幂次」时，标准做法是取对数后用 \(\ln(1+u)\sim u\)，只保留乘 \(n\) 后不趋于零的项。同型题目逐项增加 \(1/n^4\)、\(1/n^5\)，结论均为 \(e\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(1+\dfrac{2}{n}\right)^n\)。</p>
+    <p class="var-ans">答案：\(e^2\)。取对数 \(n\ln(1+2/n)\sim n\cdot 2/n=2\)，故极限为 \(e^2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2179">
+  <div class="q-head">
+    <span class="qno">第 2179 题</span>
+    <span class="qtype">Taylor 展开（正弦余项）</span>
+    <span class="qsrc">P1004</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sin x-x+\dfrac{x^3}{6}-\dfrac{x^5}{120}}{x^7}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac1{5040}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是正弦函数与其前若干阶泰勒多项式之差，分母 \(x^7\)，属泰勒展开定系数型。正弦函数在原点的麦克劳林展开为</p>
+    \[ \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}-\frac{x^7}{5040}+O(x^9). \]
+    <p>代入分子，\(x\)、\(x^3/6\)、\(x^5/120\) 与题中减去、加回、再减去的部分逐项抵消，剩余最低次项为</p>
+    \[ \sin x-x+\frac{x^3}{6}-\frac{x^5}{120}=-\frac{x^7}{5040}+O(x^9). \]
+    <p>分母是 \(x^7\)，展开必须写到 \(x^7\) 项，那个 \(-1/5040\) 系数正是答案来源；只写到 \(x^5\) 会把分子判为 \(O(x^5)\)，阶数对不上。于是</p>
+    \[ \frac{-x^7/5040+O(x^9)}{x^7}=-\frac1{5040}+O(x^2)\to-\frac1{5040}. \]
+    <p>数值复核：\(x=0.005\) 时比值约 \(-1.98413\times10^{-4}\)，与 \(-1/5040\approx-1.98413\times10^{-4}\) 一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 符号交替记错，把 \(x^7\) 项写成正号；正弦展开符号为 \(+,-,+,-\) 交替，\(x^7\) 项系数为负。② 展开阶数不足，只写到 \(x^5\) 就判分子高阶无穷小答 \(0\)。③ 误用等价无穷小 \(\sin x\sim x\)；一阶抵消后主部在七阶，等价替换只保一阶，不能用于加减后未判明主部的差式。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>「函数减其泰勒多项式后除以指定幂次」是 \(0/0\) 型固定考法，正弦、余弦、正切、对数、指数各成一组。解题先按分母幂次决定展开阶数，再逐项抵消比对最低次系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x}{x^3}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac16\)。展开到三阶：\(\sin x-x=-x^3/6+O(x^5)\)，除以 \(x^3\) 得 \(-1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2180">
+  <div class="q-head">
+    <span class="qno">第 2180 题</span>
+    <span class="qtype">对数渐近（二阶放大）</span>
+    <span class="qsrc">P1004</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^2\left(\ln(n+1)-\ln n-\dfrac1n\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：数列极限，括号内是 \(\ln(n+1)-\ln n=\ln(1+1/n)\) 与 \(1/n\) 之差，乘 \(n^2\) 放大，属对数渐近展开型。令 \(x=1/n\to0^+\)，则</p>
+    \[ \ln(n+1)-\ln n=\ln\left(1+\frac1n\right)=\ln(1+x). \]
+    <p>对数函数在原点的麦克劳林展开为</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}+O(x^4). \]
+    <p>代入括号：</p>
+    \[ \ln(1+1/n)-\frac1n=-\frac1{2n^2}+\frac1{3n^3}+O(n^{-4}). \]
+    <p>乘 \(n^2\)：</p>
+    \[ n^2\left(\ln(1+1/n)-\frac1n\right)=-\frac12+\frac1{3n}+O(n^{-2})\to-\frac12. \]
+    <p>关键一步是展开到 \(x^2\) 项：一阶项 \(1/n\) 被括号内减去的 \(1/n\) 抵消，留下的二阶主部 \(-1/(2n^2)\) 才是答案来源；若只展开到一阶，括号只能判为 \(o(1/n)\)，无法定值。数值复核：\(n=10^4\) 得 \(-0.499967\)，\(n=10^5\) 得 \(-0.499997\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\ln(n+1)-\ln n\) 近似成 \(1/n\) 后答 \(0\)；一阶抵消后二阶主部必须展开出来。② 记错对数展开符号，把 \(x^2/2\) 写成正号，得到 \(+1/2\)。③ 直接对对数差用洛必达把 \(n\) 当连续变量，可作辅助验证，但展开定阶仍是主路。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数差配合 \(n^k\) 放大是渐近展开的标准考法，逐阶减去前若干项后定下一阶系数。框架固定：把 \(1/n\) 当小量展开对数，按放大幂次决定展开到第几项。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n\left(\ln(n+1)-\ln n\right)\)。</p>
+    <p class="var-ans">答案：\(1\)。\(\ln(1+1/n)=1/n+O(n^{-2})\)，乘 \(n\) 后主部为 \(1\)，二阶项消失。</p>
+  </div>
+</article>
+
+<article class="q" id="q2181">
+  <div class="q-head">
+    <span class="qno">第 2181 题</span>
+    <span class="qtype">递推数列（n 次根式）</span>
+    <span class="qsrc">P1005</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(a_1=1,\ a_{n+1}=\sqrt[n]{a_n+1}\)，证明 \(\lim\limits_{n\to\infty}a_n\) 存在并求之。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推数列，递推式 \(a_{n+1}=(a_n+1)^{1/n}\)，根号次数随 \(n\) 变化，需先证有界，再取对数压缩定极限。</p>
+    <p>先证有界。\(a_1=1>0\)。归纳假设 \(1\le a_n\le2\)，则 \(2\le a_n+1\le3\)，于是</p>
+    \[ a_{n+1}=(a_n+1)^{1/n}\le 3^{1/n}. \]
+    <p>对 \(n\ge2\)，\(3^{1/n}\le3^{1/2}=\sqrt3\lt2\)；又 \(a_n+1\ge2\)，故 \(a_{n+1}\ge2^{1/n}\ge1\)。由归纳法，\(1\le a_n\le2\) 对所有 \(n\) 成立，数列有界。</p>
+    <p>再取对数：</p>
+    \[ \ln a_{n+1}=\frac1n\ln(a_n+1). \]
+    <p>由 \(a_n\in[1,2]\)，\(\ln(a_n+1)\in[\ln2,\ln3]\) 有界，故</p>
+    \[ 0\le \ln a_{n+1}\le \frac{\ln3}{n}\to0. \]
+    <p>由夹逼准则 \(\ln a_{n+1}\to0\)，从而 \(a_{n+1}\to e^0=1\)。数值复核：迭代到 60 步 \(a_{60}\approx1.0119\)，随 \(n\) 增大缓慢落向 \(1\)，误差量级约 \(\ln3/n\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把递推当成固定根式 \(a_{n+1}=\sqrt{a_n+1}\)，去解不动点 \(L=\sqrt{L+1}\) 得黄金分割值；本题根号次数是 \(n\)，随项数变化，不能套用固定递推的不动点方程。② 不证有界直接写极限存在；指数 \(1/n\) 虽趋于零，但前提是底数 \(a_n+1\) 不离散到无穷。③ 把收敛速度误判为平方衰减；本题误差按 \(1/n\) 量级对数衰减。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>递推数列证明存在性常用「单调有界」或「有界加夹逼取对数」。本题指数随 \(n\) 变化，单调方向不固定，只能走有界加压缩估计；与固定系数递推区分开。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\sqrt{a_n+1}\)，证明极限存在并求之。</p>
+    <p class="var-ans">答案：\(\dfrac{1+\sqrt5}{2}\)。固定平方根递推，数列单调递增且有上界 \(2\)，不动点满足 \(L=\sqrt{L+1}\)，正根为黄金分割值。</p>
+  </div>
+</article>
+
+<article class="q" id="q2182">
+  <div class="q-head">
+    <span class="qno">第 2182 题</span>
+    <span class="qtype">Taylor 展开（对数余项）</span>
+    <span class="qsrc">P1005</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+\dfrac{x^2}{2}-\dfrac{x^3}{3}+\dfrac{x^4}{4}}{x^5}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac15\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是 \(\ln(1+x)\) 与其前若干阶泰勒多项式之差，分母 \(x^5\)，属泰勒展开定系数型。对数函数在原点的麦克劳林展开为</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\frac{x^5}{5}+O(x^6). \]
+    <p>代入分子，\(x\)、\(x^2/2\)、\(x^3/3\)、\(x^4/4\) 与题中减去、加回、交替的部分逐项抵消，剩余最低次项为</p>
+    \[ \ln(1+x)-x+\frac{x^2}{2}-\frac{x^3}{3}+\frac{x^4}{4}=\frac{x^5}{5}+O(x^6). \]
+    <p>分母是 \(x^5\)，展开必须写到 \(x^5\) 项，那个 \(1/5\) 系数正是答案来源；只写到 \(x^4\) 会把分子判为 \(O(x^4)\)，阶数对不上。于是</p>
+    \[ \frac{x^5/5+O(x^6)}{x^5}=\frac15+O(x)\to\frac15. \]
+    <p>数值复核：\(x=0.01\) 时比值 \(0.198347\)，\(x=0.002\) 时 \(0.199667\)，向 \(1/5=0.2\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 符号交替记错，把 \(x^5\) 项系数记成 \(-1/5\)；对数展开符号为 \(+,-,+,-,+\) 交替，\(x^5\) 项为正。② 展开阶数不足，只写到 \(x^4\) 就判分子高阶无穷小答 \(0\)。③ 误用等价无穷小 \(\ln(1+x)\sim x\)，一阶抵消后主部在五阶，等价替换保不住高阶项。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数余项型与指数、正弦、正切余项同属一类，考向都是「减多项式后除以幂次定系数」。对数展开的符号交替最容易写反，建议逐项对照原式复核。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x}{x^2}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac12\)。展开到二阶：\(\ln(1+x)-x=-x^2/2+O(x^3)\)，除以 \(x^2\) 得 \(-1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2183">
+  <div class="q-head">
+    <span class="qno">第 2183 题</span>
+    <span class="qtype">定积分定义（对数核 Riemann 和）</span>
+    <span class="qsrc">P1005</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\ln\left(1+\dfrac{k^2}{n^2}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\ln 2-2+\dfrac{\pi}{2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(1/n\) 乘以内核 \(\ln(1+(k/n)^2)\)，是标准 Riemann 和，对应 \(f(x)=\ln(1+x^2)\) 在 \([0,1]\) 上的积分：</p>
+    \[ \frac1n\sum_{k=1}^n\ln\left(1+\frac{k^2}{n^2}\right)\longrightarrow\int_0^1\ln(1+x^2)\,dx. \]
+    <p>分部积分：取 \(u=\ln(1+x^2)\)，\(dv=dx\)，则 \(du=\dfrac{2x}{1+x^2}dx\)，\(v=x\)，</p>
+    \[ \int_0^1\ln(1+x^2)\,dx=x\ln(1+x^2)\Big|_0^1-\int_0^1\frac{2x^2}{1+x^2}\,dx. \]
+    <p>边界项为 \(\ln2\)；剩余分式拆分：</p>
+    \[ \int_0^1\frac{x^2}{1+x^2}\,dx=\int_0^1\left(1-\frac1{1+x^2}\right)dx=1-\arctan1=1-\frac\pi4. \]
+    <p>合并得</p>
+    \[ \int_0^1\ln(1+x^2)\,dx=\ln2-2\left(1-\frac\pi4\right)=\ln2-2+\frac\pi2. \]
+    <p>数值复核：\(n=10^4\) 得 \(0.263978\)，\(n=10^5\) 得 \(0.263947\)，\(n=10^6\) 得 \(0.263944\)，与积分值 \(0.2639435\) 吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\ln(1+(k/n)^2)\) 线性化成 \((k/n)^2\) 后积分得 \(1/3\)；对数核不能在求和阶段做等价替换，必须先写成 Riemann 和再积 \(\ln(1+x^2)\)。② 分部积分后系数 \(2\) 漏掉，把结果写成 \(\ln2-1+\pi/4\)。③ 拆分 \(x^2/(1+x^2)\) 时符号写反，应为 \(1-1/(1+x^2)\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数核 Riemann 和是定积分定义的变形考法，内核可为有理式、根式、三角或反三角；关键是识别 \(1/n\) 与 \(f(k/n)\) 结构，再算定积分。含 \(\ln(1+x^2)\) 的积分固定走分部积分，化为有理分式加反正切。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\ln\left(1+\dfrac{k}{n}\right)\)。</p>
+    <p class="var-ans">答案：\(2\ln2-1\)。化为 \(\int_0^1\ln(1+x)\,dx=[(1+x)\ln(1+x)-(1+x)]_0^1=2\ln2-1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2184">
+  <div class="q-head">
+    <span class="qno">第 2184 题</span>
+    <span class="qtype">∞−∞ 型（立方根差）</span>
+    <span class="qsrc">P1005</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\left(\sqrt[3]{x^3+x^2}-x\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac13\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：两根式都趋于 \(+\infty\)，属 \(\infty-\infty\) 型未定式，不能直接判差为 \(0\)。先从根号内提出最高次幂 \(x^3\)：</p>
+    \[ \sqrt[3]{x^3+x^2}=x\sqrt[3]{1+\frac1x}=x\left(1+\frac1x\right)^{1/3}. \]
+    <p>于是原式化为</p>
+    \[ x\left[\left(1+\frac1x\right)^{1/3}-1\right]. \]
+    <p>令 \(t=1/x\to0^+\)，用二项展开 \((1+t)^\alpha=1+\alpha t+O(t^2)\)，取 \(\alpha=1/3\)：</p>
+    \[ \left(1+\frac1x\right)^{1/3}=1+\frac1{3x}+O(x^{-2}). \]
+    <p>代回：</p>
+    \[ x\left(\frac1{3x}+O(x^{-2})\right)=\frac13+O(x^{-1})\to\frac13. \]
+    <p>数值复核：\(x=1000\) 得 \(0.333222\)，\(x=10000\) 得 \(0.333322\)，向 \(1/3\) 逼近。</p>
+    <p>也可用共轭根式有理化交叉验证：令 \(u=\sqrt[3]{x^3+x^2}\)，则</p>
+    \[ u-x=\frac{u^3-x^3}{u^2+ux+x^2}=\frac{x^2}{u^2+ux+x^2}. \]
+    <p>分母三项主部均为 \(x^2\)，比值主部为 \(x^2/(3x^2)=1/3\)，与二项展开结论一致；有理化路线在根次较高时不如二项展开便捷，但可用于比对系数。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接判两根号都趋于无穷、差为 \(0\)；\(\infty-\infty\) 是未定式，需提主部后定阶。② 二项展开系数记错，把 \(1/3\) 写成 \(1/2\) 或 \(1\)。③ 提公因子时把 \(x^3\) 开成 \(x^{3/2}\)，正确开出的是 \(x\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>根差型 \(\infty-\infty\) 的标准预处理是提出最高次幂 \(x\)，化为 \((1+1/x)^{1/m}-1\) 后用二项展开；更高次根情形同理。一般结论：\(\sqrt[m]{x^m+x^{m-1}}-x\to1/m\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\sqrt{x^2+x}-x\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。提 \(x\)：\(x[(1+1/x)^{1/2}-1]\sim x\cdot1/(2x)=1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2185">
+  <div class="q-head">
+    <span class="qno">第 2185 题</span>
+    <span class="qtype">Taylor 展开（正切余项）</span>
+    <span class="qsrc">P1005</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan x-x-\dfrac{x^3}{3}-\dfrac{2x^5}{15}-\dfrac{17x^7}{315}}{x^9}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{62}{2835}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是正切函数与其前若干阶泰勒多项式之差，分母 \(x^9\)，属泰勒展开定系数型。正切函数在原点的麦克劳林展开为</p>
+    \[ \tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+\frac{17x^7}{315}+\frac{62x^9}{2835}+O(x^{11}). \]
+    <p>代入分子，\(x\)、\(x^3/3\)、\(2x^5/15\)、\(17x^7/315\) 逐项抵消，剩余最低次项为</p>
+    \[ \tan x-x-\frac{x^3}{3}-\frac{2x^5}{15}-\frac{17x^7}{315}=\frac{62x^9}{2835}+O(x^{11}). \]
+    <p>分母是 \(x^9\)，展开必须写到 \(x^9\) 项，那个 \(62/2835\) 系数正是答案来源。于是</p>
+    \[ \frac{62x^9/2835+O(x^{11})}{x^9}=\frac{62}{2835}+O(x^2)\to\frac{62}{2835}. \]
+    <p>数值复核：\(x=0.01\) 得 \(0.0218704\)，\(x=0.003\) 得 \(0.0218696\)，与 \(62/2835\approx0.0218695\) 吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 正切系数记错，把 \(x^9\) 项与 \(x^7\) 项的分母 \(315\)、\(2835\) 混淆。② 展开阶数不足，只写到 \(x^7\) 就判分子高阶无穷小答 \(0\)。③ 把正切与正弦的嵌套差符号套用到本题；本题是 \(\tan x\) 自身的泰勒余项，不涉及 \(\tan(\sin x)\) 一类嵌套结构。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正切余项系数分母大、记忆负担重，考场可由 \(\sin x/\cos x\) 展开相除递推；更高次项可由同一除法递推得到。这类题的判定标准与其他余项型一致：按分母幂次展开，抵消已写项，取剩余最低次系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-x-\dfrac{x^3}{3}}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{2}{15}\)。正切展开 \(x^5\) 项系数为 \(2/15\)，除以 \(x^5\) 即得。</p>
+  </div>
+</article>
+
+<article class="q" id="q2186">
+  <div class="q-head">
+    <span class="qno">第 2186 题</span>
+    <span class="qtype">n 项幂和→定积分（五次幂）</span>
+    <span class="qsrc">P1006</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1^5+2^5+\cdots+n^5}{n^6}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac16\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子是前 \(n\) 个正整数的五次幂之和，分母 \(n^6\)，属 \(n\) 项和的定积分定义型。配成 Riemann 和：</p>
+    \[ \frac{1^5+2^5+\cdots+n^5}{n^6}=\frac1n\sum_{k=1}^n\left(\frac{k}{n}\right)^5. \]
+    <p>右端是 \(f(x)=x^5\) 在 \([0,1]\) 上的等距分割 Riemann 和。由 \(x^5\) 连续，Riemann 和收敛到定积分：</p>
+    \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^n\left(\frac{k}{n}\right)^5=\int_0^1 x^5\,dx=\frac{x^6}{6}\Big|_0^1=\frac16. \]
+    <p>用幂和公式交叉验证：</p>
+    \[ \sum_{k=1}^n k^5=\frac{n^6}{6}+O(n^5). \]
+    <p>低次项量级：\(\sum k^5\) 中 \(n^5\) 及以下各项除以 \(n^6\) 后均为 \(O(1/n)\) 量级，随 \(n\) 趋于零。</p>
+    <p>五次幂和最高次项为 \(n^6/6\)，除以 \(n^6\) 主部即 \(1/6\)，低次项全部消去。数值复核：\(n=10^4\) 得 \(0.166717\)，\(n=10^5\) 得 \(0.166672\)，向 \(1/6\approx0.166667\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把幂和主部误判为 \(n^5\)，得到 \(0\)；五次幂求和主部是 \(n^6\)。② 配 Riemann 和时漏写 \(1/n\)，积分结构不完整。③ 积分 \(\int x^5dx\) 系数记成 \(1/5\)；幂函数积分系数为 \(1/(p+1)=1/6\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>幂和型极限与四次、六次幂和同属一组，结论 \(\lim n^{-p-1}\sum k^p=1/(p+1)\)。题目只换幂次，配和、积分两步不变；选择题中也可能把分子换成 \(\sum k(k+1)\) 一类可拆项的和式。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1^4+2^4+\cdots+n^4}{n^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac15\)。配成 \(\frac1n\sum(k/n)^4\to\int_0^1 x^4dx=1/5\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2187">
+  <div class="q-head">
+    <span class="qno">第 2187 题</span>
+    <span class="qtype">Taylor 展开（指数余项）</span>
+    <span class="qsrc">P1006</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{e^x-1-x-\dfrac{x^2}{2}-\dfrac{x^3}{6}-\dfrac{x^4}{24}}{x^5}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac1{120}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是 \(e^x\) 与其前四阶泰勒多项式之差，分母 \(x^5\)，属泰勒展开定系数型。指数函数展开为</p>
+    \[ e^x=1+x+\frac{x^2}{2}+\frac{x^3}{6}+\frac{x^4}{24}+\frac{x^5}{120}+O(x^6). \]
+    <p>代入分子，前四项多项式逐项抵消，剩余最低次项为</p>
+    \[ e^x-1-x-\frac{x^2}{2}-\frac{x^3}{6}-\frac{x^4}{24}=\frac{x^5}{120}+O(x^6). \]
+    <p>分母是 \(x^5\)，展开必须写到 \(x^5\) 项，\(1/120\) 即答案系数：</p>
+    \[ \frac{x^5/120+O(x^6)}{x^5}=\frac1{120}+O(x)\to\frac1{120}. \]
+    <p>余项阶数：分子抵消到 \(x^4\) 后，下一项为 \(x^5/5!\)，再下一项 \(x^6/6!\)；除以 \(x^5\) 后余项 \(O(x)\to0\)，极限只由 \(x^5\) 系数决定。</p>
+    <p>数值复核：\(x=0.01\) 得 \(0.0083472\)，\(x=0.002\) 得 \(0.0083361\)，向 \(1/120\approx0.0083333\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 展开阶数不足，只写到 \(x^4\) 就判分子高阶无穷小答 \(0\)。② 记错阶乘，把 \(x^5/120\) 写成 \(x^5/24\)；指数展开第 \(k\) 项系数为 \(1/k!\)。③ 对差式整体等价替换 \(e^x\sim1+x\)，五阶主部被错误消掉。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>指数余项型按分母幂次逐阶递增：上一档到 \(x^4\)、本题到 \(x^5\)、更高一档到 \(x^6\)。解题框架不变，差别只在展开项数；熟记 \(e^x=\sum x^k/k!\) 可直接读出下一项系数。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x-1-x-\dfrac{x^2}{2}}{x^3}\)。</p>
+    <p class="var-ans">答案：\(\dfrac16\)。展开到三阶：剩余 \(x^3/6\)，除以 \(x^3\) 得 \(1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2188">
+  <div class="q-head">
+    <span class="qno">第 2188 题</span>
+    <span class="qtype">1<sup>∞</sup> 型极限（多项式底数）</span>
+    <span class="qsrc">P1006</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\left(1+\dfrac1n+\dfrac1{n^2}+\dfrac1{n^3}+\dfrac1{n^4}\right)^n\)。</p>
+  </div>
+  <div class="answer">答案：\(e\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：底数趋于 \(1\)，指数 \(n\to\infty\)，属 \(1^\infty\) 型未定式。取对数：</p>
+    \[ \ln L=n\ln\left(1+\frac1n+\frac1{n^2}+\frac1{n^3}+\frac1{n^4}\right). \]
+    <p>令 \(u_n=1/n+1/n^2+1/n^3+1/n^4\)，则 \(u_n\to0\)，由 \(\ln(1+u)=u+O(u^2)\)，</p>
+    \[ \ln L=n\left(\frac1n+\frac1{n^2}+\frac1{n^3}+\frac1{n^4}+O(u_n^2)\right)=1+\frac1n+\frac1{n^2}+\frac1{n^3}+O\!\left(\frac1n\right). \]
+    <p>其中 \(u_n^2=O(1/n^2)\)，乘 \(n\) 后为 \(O(1/n)\)，不进入主部。故 \(\ln L\to1\)，\(L=e\)。数值复核：\(n=10^4\) 得 \(2.718418\)，\(n=10^5\) 得 \(2.718295\)，向 \(e\) 逼近。</p>
+    <p>套用 \(1^\infty\) 标准公式 \(L=e^{\lim n\,u_n}\) 可直接验证：\(u_n=1/n+1/n^2+1/n^3+1/n^4\)，于是</p>
+    \[ n\,u_n=1+\frac1n+\frac1{n^2}+\frac1{n^3}\to1. \]
+    <p>对数二阶项 \(u_n^2/2\) 乘 \(n\) 后为 \(1/(2n)\) 量级，随 \(n\) 消失；判断主部时只需保留乘 \(n\) 后不趋于零的 \(1/n\) 型项。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把底数直接看成 \(1\) 答 \(1\)；\(1^\infty\) 未定式必须取对数算主部。② 误以为多写的 \(1/n^4\) 项会改变极限；它乘 \(n\) 后是 \(1/n^3\) 级修正，主部仍由 \(1/n\) 决定。③ 展开对数时把 \(u_n^2\) 阶忽略后未交代其量级，严格写法应说明 \(u_n^2\cdot n=O(1/n)\to0\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题属 \(1^\infty\) 多项式底数训练，底数逐项增加 \(1/n^k\)，结论恒为 \(e\)。变式若把 \(1/n\) 换成 \(a/n\)，极限即为 \(e^a\)；若底数中出现 \(1/\sqrt n\) 级项，主部才会改变。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(1+\dfrac{a}{n}+o(1/n)\right)^n\)，其中 \(a\) 为常数。</p>
+    <p class="var-ans">答案：\(e^a\)。取对数 \(n\ln(1+a/n+o(1/n))\to a\)，故极限为 \(e^a\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2189">
+  <div class="q-head">
+    <span class="qno">第 2189 题</span>
+    <span class="qtype">Taylor 展开（正弦余项）</span>
+    <span class="qsrc">P1006</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sin x-x+\dfrac{x^3}{6}-\dfrac{x^5}{120}+\dfrac{x^7}{5040}}{x^9}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac1{362880}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是正弦函数与其前若干阶泰勒多项式之差，分母 \(x^9\)，属泰勒展开定系数型。正弦展开为</p>
+    \[ \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}-\frac{x^7}{5040}+\frac{x^9}{362880}+O(x^{11}). \]
+    <p>代入分子，\(x\)、\(x^3/6\)、\(x^5/120\)、\(x^7/5040\) 逐项抵消，剩余最低次项为</p>
+    \[ \sin x-x+\frac{x^3}{6}-\frac{x^5}{120}+\frac{x^7}{5040}=\frac{x^9}{362880}+O(x^{11}). \]
+    <p>分母是 \(x^9\)，展开必须写到 \(x^9\) 项，\(1/362880=1/9!\) 即答案系数：</p>
+    \[ \frac{x^9/362880+O(x^{11})}{x^9}=\frac1{362880}+O(x^2)\to\frac1{362880}. \]
+    <p>数值复核：\(x=0.02\) 得 \(2.75572\times10^{-6}\)，\(x=0.005\) 得 \(2.75573\times10^{-6}\)，与 \(1/362880\approx2.75573\times10^{-6}\) 吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 阶乘记错，把 \(9!\) 写成 \(8!\) 或 \(10!\)；正弦第 \(2m+1\) 项系数为 \((-1)^m/(2m+1)!\)。② 符号交替写反，\(x^9\) 项在本题为正号。③ 展开阶数不足，只写到 \(x^7\) 就答 \(0\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正弦余项型按分母幂次逐阶递增：上一档到 \(x^7\)、本题到 \(x^9\)、更高一档到 \(x^{11}\)。做题先确认分母幂次对应的阶乘，再按交替符号读出系数；与正切余项对照记忆。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x+\dfrac{x^3}{6}}{x^5}\)。</p>
+    <p class="var-ans">答案：\(\dfrac1{120}\)。展开到五阶：剩余 \(x^5/120\)，除以 \(x^5\) 得 \(1/120\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2190">
+  <div class="q-head">
+    <span class="qno">第 2190 题</span>
+    <span class="qtype">对数渐近（三阶放大）</span>
+    <span class="qsrc">P1006</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^3\left(\ln(n+1)-\ln n-\dfrac1n+\dfrac1{2n^2}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac13\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：对数差配合 \(n^3\) 放大，属对数渐近展开型。令 \(x=1/n\to0^+\)，</p>
+    \[ \ln(n+1)-\ln n=\ln(1+x). \]
+    <p>对数展开写到三阶：</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+O(x^5). \]
+    <p>代入括号，\(x=1/n\) 与 \(x^2/2=1/(2n^2)\) 被题中减去、加回的项抵消，剩余</p>
+    \[ \ln(1+1/n)-\frac1n+\frac1{2n^2}=\frac1{3n^3}-\frac1{4n^4}+O(n^{-5}). \]
+    <p>乘 \(n^3\)：</p>
+    \[ n^3\left(\ln(1+1/n)-\frac1n+\frac1{2n^2}\right)=\frac13-\frac1{4n}+O(n^{-2})\to\frac13. \]
+    <p>关键一步是展开到 \(x^3\) 项：前两阶被括号内多项式抵消，留下的三阶主部 \(1/(3n^3)\) 才是答案来源。余项阶数：再下一项 \(-1/(4n^4)\) 乘 \(n^3\) 后为 \(O(1/n)\to0\)，极限只由三阶系数决定。数值复核：\(n=10^4\) 得 \(0.333308\)，\(n=10^5\) 得 \(0.333330\)，向 \(1/3\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只展开到二阶，把括号判为 \(O(n^{-3})\) 后系数算错；三阶项 \(1/3\) 必须写出。② 对数展开符号记错，把 \(x^3/3\) 写成负号，得到 \(-1/3\)。③ 减去的 \(1/n\) 与加回的 \(1/(2n^2)\) 对应错位，抵消项对不齐。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数渐近组：放大幂次逐档递增，本题为 \(n^3\) 档，括号内逐阶减去对数展开的前几项，求下一阶系数。框架固定为展开 \(\ln(1+1/n)\) 并按放大阶数取主部。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n^2\left(\ln(n+1)-\ln n-\dfrac1n\right)\)。</p>
+    <p class="var-ans">答案：\(-\dfrac12\)。展开到二阶，剩余 \(-1/(2n^2)\)，乘 \(n^2\) 得 \(-1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2191">
+  <div class="q-head">
+    <span class="qno">第 2191 题</span>
+    <span class="qtype">递推数列（牛顿迭代·不动点恒常）</span>
+    <span class="qsrc">P1007</span>
+  </div>
+  <div class="stem">
+    <p>设数列 \(a_1=1,\ a_{n+1}=\dfrac12\left(a_n+\dfrac1{a_n}\right)\)，证明 \(\lim\limits_{n\to\infty}a_n\) 存在并求之。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：递推数列 \(a_{n+1}=\frac12(a_n+1/a_n)\)，是求 \(x^2=1\) 的牛顿迭代。第一步先查初值是否恰为不动点：</p>
+    \[ L=\frac12\left(L+\frac1L\right)\Longrightarrow L^2=1,\quad L=1\ (L>0). \]
+    <p>数列各项为正，不动点取 \(L=1\)。</p>
+    <p>代入初值 \(a_1=1\)：</p>
+    \[ a_2=\frac12\left(1+\frac11\right)=1. \]
+    <p>由归纳法，若 \(a_n=1\)，则 \(a_{n+1}=\frac12(1+1)=1\)，故 \(a_n\equiv1\) 对所有 \(n\) 成立。数列恒为常数，极限存在且等于 \(1\)。</p>
+    <p>补充收敛阶背景：即便初值不是不动点，令 \(e_n=a_n-1\)，则</p>
+    \[ e_{n+1}=a_{n+1}-1=\frac{(a_n-1)^2}{2a_n}=\frac{e_n^2}{2a_n}, \]
+    <p>迭代函数 \(f(x)=\frac12(x+1/x)\) 在不动点处导数 \(f'(1)=\frac12(1-1/1^2)=0\)，\(|f'(1)|=0\lt1\)，误差平方衰减，属二次收敛。本题初值恰为不动点，误差恒为零，不存在单调趋近过程，也不适用 \(1/\sqrt n\) 型误差估计。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 没查初值是否为不动点，直接写「数列单调递减趋于 \(1\)」；本题 \(a_n\) 恒为 \(1\)，没有趋近过程。② 把牛顿迭代误判为线性收敛 \(1/\sqrt n\) 阶；误差平方，收敛快得多。③ 忽略正性前提，解不动点时把负根 \(-1\) 也纳入；递推由正初值出发，各项恒正。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>递推数列先查不动点与初值关系是固定第一步：初值恰为不动点则数列常数；否则再判单调有界或压缩映射。牛顿型 \(x_{n+1}=(x_n+c/x_n)/2\) 在不动点处导数为零，误差平方，与线性收敛递推（如 \(x_{n+1}=x_n/(1+x_n^2)\)）区分开。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x_1=2,\ x_{n+1}=\dfrac12\left(x_n+\dfrac1{x_n}\right)\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+    <p class="var-ans">答案：\(1\)。初值非不动点，数列单调递减且有下界 \(1\)，误差 \(e_{n+1}=e_n^2/(2x_n)\) 平方衰减，极限为正不动点 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2192">
+  <div class="q-head">
+    <span class="qno">第 2192 题</span>
+    <span class="qtype">Taylor 展开（对数余项）</span>
+    <span class="qsrc">P1007</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+\dfrac{x^2}{2}-\dfrac{x^3}{3}+\dfrac{x^4}{4}-\dfrac{x^5}{5}}{x^6}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac16\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是 \(\ln(1+x)\) 与其前五阶泰勒多项式之差，分母 \(x^6\)，属泰勒展开定系数型。对数展开为</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\frac{x^5}{5}-\frac{x^6}{6}+O(x^7). \]
+    <p>代入分子，前五项多项式逐项抵消，剩余最低次项为</p>
+    \[ \ln(1+x)-x+\frac{x^2}{2}-\frac{x^3}{3}+\frac{x^4}{4}-\frac{x^5}{5}=-\frac{x^6}{6}+O(x^7). \]
+    <p>分母是 \(x^6\)，展开必须写到 \(x^6\) 项，\(-1/6\) 即答案系数：</p>
+    \[ \frac{-x^6/6+O(x^7)}{x^6}=-\frac16+O(x)\to-\frac16. \]
+    <p>符号判定：对数展开第 \(k\) 项为 \((-1)^{k-1}x^k/k\)，第六项 \(k=6\) 带负号，故分子最低次项为 \(-x^6/6\)；符号读反会把答案写成 \(+1/6\)。</p>
+    <p>数值复核：\(x=0.01\) 得 \(-0.165250\)，\(x=0.002\) 得 \(-0.166381\)，向 \(-1/6\approx-0.166667\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 符号交替记错，把 \(x^6\) 项写成正号；对数展开第六项系数为负。② 展开阶数不足，只写到 \(x^5\) 就判分子高阶无穷小答 \(0\)。③ 把原式中交替的加减号读错，抵消时多留或少留一项。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数余项递增组：上一档分母为 \(x^5\)、系数 \(1/5\)，本题分母升到 \(x^6\)、系数 \(-1/6\)。对数余项的符号交替是高频失分点，建议展开后先标出各项符号再抵消。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+\dfrac{x^2}{2}-\dfrac{x^3}{3}}{x^4}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac14\)。展开到四阶：剩余 \(-x^4/4\)，除以 \(x^4\) 得 \(-1/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2193">
+  <div class="q-head">
+    <span class="qno">第 2193 题</span>
+    <span class="qtype">定积分定义（三角核 Riemann 和）</span>
+    <span class="qsrc">P1007</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\sin\left(\dfrac{k}{n}\right)\cos\left(\dfrac{k}{n}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\sin^2 1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(1/n\) 乘以三角内核 \(\sin(k/n)\cos(k/n)\)，是标准 Riemann 和，对应 \(f(x)=\sin x\cos x\) 在 \([0,1]\) 上的积分：</p>
+    \[ \frac1n\sum_{k=1}^n\sin\frac{k}{n}\cos\frac{k}{n}\longrightarrow\int_0^1\sin x\cos x\,dx. \]
+    <p>端点项说明：和式从 \(k=1\) 起，缺少 \(f(0)=0\) 一项；单个端点项乘以 \(1/n\) 后为 \(O(1/n)\)，不影响积分极限。</p>
+    <p>被积函数有两条等价化简路线。一是凑微分：\((\sin x)'=\cos x\)，</p>
+    \[ \int_0^1\sin x\cos x\,dx=\int_0^1\sin x\,d(\sin x)=\frac12\sin^2 x\Big|_0^1=\frac12\sin^2 1. \]
+    <p>二是倍角公式：\(\sin x\cos x=\frac12\sin 2x\)，</p>
+    \[ \int_0^1\frac12\sin 2x\,dx=\frac14(1-\cos2)=\frac12\sin^2 1. \]
+    <p>两式相等。数值复核：\(n=10^4\) 得 \(0.354059\)，\(n=10^5\) 得 \(0.354039\)，\(n=10^6\) 得 \(0.354037\)，与积分值 \(0.3540367\) 吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把 \(\sin(k/n)\cos(k/n)\) 线性化成 \(k/n\) 后积分；三角核必须保留函数形式进入 Riemann 和，不能在求和阶段等价替换。② 凑微分后漏系数 \(1/2\)，把结果写成 \(\sin^2 1\)。③ 误以为振荡因子使和趋于零；本题相位 \(k/n\) 随分割点连续变化，不是 \(\sin(nx)\) 型高频振荡，Riemann 和照常收敛。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>三角核 Riemann 和是定积分定义的常见变形，内核可积即可积出。注意与振荡积分区分：乘 \(\sin(nx)\)、\(\cos(nx)\) 在固定区间积分属高频振荡趋于零；本题频率随分割点走，极限是普通定积分。对数核情形同理。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^n\sin^2\left(\dfrac{k}{n}\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac12-\dfrac{\sin2}{4}\)。化为 \(\int_0^1\sin^2 x\,dx=\int_0^1\dfrac{1-\cos2x}{2}\,dx=\dfrac12-\dfrac{\sin2}{4}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2194">
+  <div class="q-head">
+    <span class="qno">第 2194 题</span>
+    <span class="qtype">∞−∞ 型（四次根差）</span>
+    <span class="qsrc">P1007</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to\infty}\left(\sqrt[4]{x^4+x^3}-x\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac14\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：两根式都趋于 \(+\infty\)，属 \(\infty-\infty\) 型未定式。从根号内提出最高次幂 \(x^4\)：</p>
+    \[ \sqrt[4]{x^4+x^3}=x\sqrt[4]{1+\frac1x}=x\left(1+\frac1x\right)^{1/4}. \]
+    <p>原式化为</p>
+    \[ x\left[\left(1+\frac1x\right)^{1/4}-1\right]. \]
+    <p>令 \(t=1/x\to0^+\)，二项展开 \((1+t)^\alpha=1+\alpha t+O(t^2)\)，取 \(\alpha=1/4\)：</p>
+    \[ \left(1+\frac1x\right)^{1/4}=1+\frac1{4x}+O(x^{-2}). \]
+    <p>代回：</p>
+    \[ x\left(\frac1{4x}+O(x^{-2})\right)=\frac14+O(x^{-1})\to\frac14. \]
+    <p>数值复核：\(x=1000\) 得 \(0.249906\)，\(x=10000\) 得 \(0.249991\)，向 \(1/4\) 逼近。</p>
+    <p>有理化交叉验证：令 \(u=\sqrt[4]{x^4+x^3}\)，反复使用 \(a^4-b^4=(a-b)(a+b)(a^2+b^2)\)，得</p>
+    \[ u-x=\frac{u^4-x^4}{(u+x)(u^2+x^2)}=\frac{x^3}{(u+x)(u^2+x^2)}. \]
+    <p>分母两项主部分别为 \(2x\)、\(2x^2\)，乘积主部 \(4x^3\)，比值主部 \(x^3/(4x^3)=1/4\)，与二项展开一致。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 直接判差为 \(0\)；\(\infty-\infty\) 是未定式，必须提主部。② 二项系数记错，把 \(1/4\) 写成 \(1/3\)；根次与系数对应，\(m\) 次根差系数为 \(1/m\)。③ 提公因子时把 \(x^4\) 开成 \(x^2\)，正确开出的是 \(x\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>根差组：三次根差系数 \(1/3\)，四次根差系数 \(1/4\)。一般结论 \(\sqrt[m]{x^m+x^{m-1}}-x\to1/m\)，也可推广到根号内第二项为 \(c x^{m-1}\) 的情形，系数变为 \(c/m\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\sqrt[3]{x^3+2x^2}-x\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac23\)。提 \(x\) 后 \((1+2/x)^{1/3}=1+2/(3x)+O(x^{-2})\)，乘 \(x\) 得 \(2/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2195">
+  <div class="q-head">
+    <span class="qno">第 2195 题</span>
+    <span class="qtype">Taylor 展开（正切余项）</span>
+    <span class="qsrc">P1007</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\tan x-x-\dfrac{x^3}{3}-\dfrac{2x^5}{15}-\dfrac{17x^7}{315}-\dfrac{62x^9}{2835}}{x^{11}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1382}{155925}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是正切函数与其前若干阶泰勒多项式之差，分母 \(x^{11}\)，属泰勒展开定系数型。正切函数在原点的麦克劳林展开为</p>
+    \[ \tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+\frac{17x^7}{315}+\frac{62x^9}{2835}+\frac{1382x^{11}}{155925}+O(x^{13}). \]
+    <p>代入分子，前五项多项式逐项抵消，剩余最低次项为</p>
+    \[ \tan x-x-\frac{x^3}{3}-\frac{2x^5}{15}-\frac{17x^7}{315}-\frac{62x^9}{2835}=\frac{1382x^{11}}{155925}+O(x^{13}). \]
+    <p>分母是 \(x^{11}\)，展开必须写到 \(x^{11}\) 项，\(1382/155925\) 即答案系数：</p>
+    \[ \frac{1382x^{11}/155925+O(x^{13})}{x^{11}}=\frac{1382}{155925}+O(x^2)\to\frac{1382}{155925}. \]
+    <p>数值复核：\(x=0.01\) 得 \(0.0088636\)，\(x=0.003\) 得 \(0.0088640\)，与 \(1382/155925\approx0.0088632\) 吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 正切高阶系数记混，把 \(x^{11}\) 项分母 \(155925\) 与 \(x^9\) 项分母 \(2835\) 错位。② 展开阶数不足，只写到 \(x^9\) 就判分子高阶无穷小答 \(0\)。③ 考场递推系数时由 \(\sin x/\cos x\) 相除算错除法，建议保留两项到下一阶再比对。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正切余项递增组：本题分母为 \(x^{11}\)，上一档为 \(x^9\)。正切系数无简洁阶乘规律，需要时可用 Bernoulli 数公式或多项式除法递推；考试中此类高次余项题占比不高，但方法与其他余项型完全一致。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-x-\dfrac{x^3}{3}-\dfrac{2x^5}{15}}{x^7}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{17}{315}\)。正切展开 \(x^7\) 项系数为 \(17/315\)，除以 \(x^7\) 即得。</p>
+  </div>
+</article>
+
+<article class="q" id="q2196">
+  <div class="q-head">
+    <span class="qno">第 2196 题</span>
+    <span class="qtype">n 项幂和→定积分（六次幂）</span>
+    <span class="qsrc">P1007</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\dfrac{1^6+2^6+\cdots+n^6}{n^7}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac17\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分子是前 \(n\) 个正整数的六次幂之和，分母 \(n^7\)，属 \(n\) 项和的定积分定义型。配成 Riemann 和：</p>
+    \[ \frac{1^6+2^6+\cdots+n^6}{n^7}=\frac1n\sum_{k=1}^n\left(\frac{k}{n}\right)^6. \]
+    <p>右端是 \(f(x)=x^6\) 在 \([0,1]\) 上的等距分割 Riemann 和。由 \(x^6\) 连续，Riemann 和收敛到定积分：</p>
+    \[ \lim_{n\to\infty}\frac1n\sum_{k=1}^n\left(\frac{k}{n}\right)^6=\int_0^1 x^6\,dx=\frac{x^7}{7}\Big|_0^1=\frac17. \]
+    <p>用幂和公式交叉验证：</p>
+    \[ \sum_{k=1}^n k^6=\frac{n^7}{7}+O(n^6). \]
+    <p>低次项量级：\(\sum k^6\) 中 \(n^6\) 以下各项除以 \(n^7\) 后分别为 \(O(1/n)\)、\(O(1/n^2)\) 量级，全部趋于零，不进入主部。</p>
+    <p>六次幂和最高次项为 \(n^7/7\)，除以 \(n^7\) 主部即 \(1/7\)。数值复核：\(n=10^4\) 得 \(0.142907\)，\(n=10^5\) 得 \(0.142862\)，向 \(1/7\approx0.142857\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把幂和主部误判为 \(n^6\)，得到 \(0\)；六次幂求和主部是 \(n^7\)。② 积分系数记成 \(1/6\)；幂函数积分系数为 \(1/(p+1)=1/7\)。③ 配和时漏写 \(1/n\)，无法识别为 Riemann 和。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>幂和组按幂次递增：四次、五次、六次幂和结论 \(1/(p+1)\) 不变。这类题也可放在解答题中，要求用幂和公式或定积分定义两种途径互相印证。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac{1^7+2^7+\cdots+n^7}{n^8}\)。</p>
+    <p class="var-ans">答案：\(\dfrac18\)。配成 \(\frac1n\sum(k/n)^7\to\int_0^1 x^7dx=1/8\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2197">
+  <div class="q-head">
+    <span class="qno">第 2197 题</span>
+    <span class="qtype">Taylor 展开（指数余项）</span>
+    <span class="qsrc">P1008</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{e^x-1-x-\dfrac{x^2}{2}-\dfrac{x^3}{6}-\dfrac{x^4}{24}-\dfrac{x^5}{120}}{x^6}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac1{720}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是 \(e^x\) 与其前五阶泰勒多项式之差，分母 \(x^6\)，属泰勒展开定系数型。指数函数展开为</p>
+    \[ e^x=1+x+\frac{x^2}{2}+\frac{x^3}{6}+\frac{x^4}{24}+\frac{x^5}{120}+\frac{x^6}{720}+O(x^7). \]
+    <p>代入分子，前五项多项式逐项抵消，剩余最低次项为</p>
+    \[ e^x-1-x-\frac{x^2}{2}-\frac{x^3}{6}-\frac{x^4}{24}-\frac{x^5}{120}=\frac{x^6}{720}+O(x^7). \]
+    <p>分母是 \(x^6\)，展开必须写到 \(x^6\) 项，\(1/720=1/6!\) 即答案系数：</p>
+    \[ \frac{x^6/720+O(x^7)}{x^6}=\frac1{720}+O(x)\to\frac1{720}. \]
+    <p>余项阶数：分子抵消到 \(x^5\) 后，下一项为 \(x^6/6!\)；除以 \(x^6\) 后余项 \(O(x)\to0\)，极限只由 \(x^6\) 系数决定。</p>
+    <p>数值复核：\(x=0.01\) 得 \(0.0013909\)，\(x=0.002\) 得 \(0.0013893\)，向 \(1/720\approx0.0013889\) 逼近。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 展开阶数不足，只写到 \(x^5\) 就判分子高阶无穷小答 \(0\)。② 记错阶乘，把 \(x^6/720\) 写成 \(x^6/120\)；指数第 \(k\) 项系数为 \(1/k!\)。③ 对差式整体等价替换 \(e^x\sim1+x\)，六阶主部被错误消掉。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>指数余项组按分母幂次递增：上两档分别到 \(x^4\)、\(x^5\)，本题到 \(x^6\)。熟记 \(e^x=\sum x^k/k!\) 后，余项系数可直接读出，计算量集中在逐项抵消上。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^x-1-x-\dfrac{x^2}{2}-\dfrac{x^3}{6}}{x^4}\)。</p>
+    <p class="var-ans">答案：\(\dfrac1{24}\)。展开到四阶：剩余 \(x^4/24\)，除以 \(x^4\) 得 \(1/24\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2198">
+  <div class="q-head">
+    <span class="qno">第 2198 题</span>
+    <span class="qtype">1<sup>∞</sup> 型极限（多项式底数）</span>
+    <span class="qsrc">P1008</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}\left(1+\dfrac1n+\dfrac1{n^2}+\dfrac1{n^3}+\dfrac1{n^4}+\dfrac1{n^5}\right)^n\)。</p>
+  </div>
+  <div class="answer">答案：\(e\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：底数趋于 \(1\)，指数 \(n\to\infty\)，属 \(1^\infty\) 型未定式。取对数：</p>
+    \[ \ln L=n\ln\left(1+\frac1n+\frac1{n^2}+\frac1{n^3}+\frac1{n^4}+\frac1{n^5}\right). \]
+    <p>令 \(u_n=1/n+1/n^2+1/n^3+1/n^4+1/n^5\)，则 \(u_n\to0\)，由 \(\ln(1+u)=u+O(u^2)\)，</p>
+    \[ \ln L=n\left(\frac1n+\frac1{n^2}+\frac1{n^3}+\frac1{n^4}+\frac1{n^5}+O(u_n^2)\right)=1+\frac1n+\frac1{n^2}+\frac1{n^3}+\frac1{n^4}+O\!\left(\frac1n\right). \]
+    <p>其中 \(u_n^2=O(1/n^2)\)，乘 \(n\) 后为 \(O(1/n)\)，不进入主部。故 \(\ln L\to1\)，\(L=e\)。数值复核：\(n=10^4\) 得 \(2.718418\)，\(n=10^5\) 得 \(2.718295\)，向 \(e\) 逼近。</p>
+    <p>标准公式验证：\(u_n\) 中只有 \(1/n\) 项乘 \(n\) 后为 \(1\)，其余各项乘 \(n\) 后分别为 \(1/n\)、\(1/n^2\)、\(1/n^3\)、\(1/n^4\)，全部趋于零：</p>
+    \[ n\,u_n=1+\frac1n+\frac1{n^2}+\frac1{n^3}+\frac1{n^4}\to1. \]
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 把底数直接看成 \(1\) 答 \(1\)；\(1^\infty\) 未定式必须取对数算主部。② 误以为 \(1/n^5\) 项会改变极限；它乘 \(n\) 后是 \(1/n^4\) 级修正，主部仍由 \(1/n\) 决定。③ 展开对数后未交代 \(u_n^2\) 阶的量级，严格写法应说明 \(u_n^2\cdot n=O(1/n)\to0\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>本题属 \(1^\infty\) 多项式底数训练，底数逐项增加 \(1/n^k\)，结论恒为 \(e\)。判断主部只看底数中乘 \(n\) 后不趋于零的项，即 \(a/n\) 型项；其余高阶项与对数二阶项都被压掉。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\left(1+\dfrac{3}{n}\right)^{2n}\)。</p>
+    <p class="var-ans">答案：\(e^6\)。取对数 \(2n\ln(1+3/n)\sim2n\cdot3/n=6\)，故极限为 \(e^6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2199">
+  <div class="q-head">
+    <span class="qno">第 2199 题</span>
+    <span class="qtype">Taylor 展开（正弦余项）</span>
+    <span class="qsrc">P1008</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{x\to0}\dfrac{\sin x-x+\dfrac{x^3}{6}-\dfrac{x^5}{120}+\dfrac{x^7}{5040}-\dfrac{x^9}{362880}}{x^{11}}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac1{39916800}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子是正弦函数与其前若干阶泰勒多项式之差，分母 \(x^{11}\)，属泰勒展开定系数型。正弦展开为</p>
+    \[ \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}-\frac{x^7}{5040}+\frac{x^9}{362880}-\frac{x^{11}}{39916800}+O(x^{13}). \]
+    <p>代入分子，前五项多项式逐项抵消，剩余最低次项为</p>
+    \[ \sin x-x+\frac{x^3}{6}-\frac{x^5}{120}+\frac{x^7}{5040}-\frac{x^9}{362880}=-\frac{x^{11}}{39916800}+O(x^{13}). \]
+    <p>分母是 \(x^{11}\)，展开必须写到 \(x^{11}\) 项，\(-1/39916800=-1/11!\) 即答案系数：</p>
+    \[ \frac{-x^{11}/39916800+O(x^{13})}{x^{11}}=-\frac1{39916800}+O(x^2)\to-\frac1{39916800}. \]
+    <p>数值复核：\(x=0.02\) 得 \(-2.50520\times10^{-8}\)，与 \(-1/39916800\approx-2.50521\times10^{-8}\) 吻合。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 阶乘记错，把 \(11!\) 写成 \(10!\) 或 \(12!\)；正弦第 \(2m+1\) 项系数为 \((-1)^m/(2m+1)!\)。② 符号交替写反，\(x^{11}\) 项在本题为负号。③ 展开阶数不足，只写到 \(x^9\) 就答 \(0\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>正弦余项组按分母幂次递增：上两档分别到 \(x^7\)、\(x^9\)，本题到 \(x^{11}\)。做题先由分母幂次确定阶乘，再按交替符号读出系数；高次余项题数值极小，数值复核时注意取足够小的 \(x\) 以避开高阶项干扰。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x+\dfrac{x^3}{6}-\dfrac{x^5}{120}}{x^7}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac1{5040}\)。展开到七阶，剩余 \(-x^7/5040\)，除以 \(x^7\) 得 \(-1/5040\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2200">
+  <div class="q-head">
+    <span class="qno">第 2200 题</span>
+    <span class="qtype">对数渐近（四阶放大）</span>
+    <span class="qsrc">P1008</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\lim\limits_{n\to\infty}n^4\left(\ln(n+1)-\ln n-\dfrac1n+\dfrac1{2n^2}-\dfrac1{3n^3}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac14\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：对数差配合 \(n^4\) 放大，属对数渐近展开型。令 \(x=1/n\to0^+\)，</p>
+    \[ \ln(n+1)-\ln n=\ln(1+x). \]
+    <p>对数展开写到四阶：</p>
+    \[ \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\frac{x^5}{5}+O(x^6). \]
+    <p>代入括号，\(1/n\)、\(1/(2n^2)\)、\(1/(3n^3)\) 被题中减去、加回、再减去的项逐项抵消，剩余</p>
+    \[ \ln(1+1/n)-\frac1n+\frac1{2n^2}-\frac1{3n^3}=-\frac1{4n^4}+\frac1{5n^5}+O(n^{-6}). \]
+    <p>乘 \(n^4\)：</p>
+    \[ n^4\left(\ln(1+1/n)-\frac1n+\frac1{2n^2}-\frac1{3n^3}\right)=-\frac14+\frac1{5n}+O(n^{-2})\to-\frac14. \]
+    <p>关键一步是展开到 \(x^4\) 项：前三阶被括号内多项式抵消，留下的四阶主部 \(-1/(4n^4)\) 才是答案来源。数值复核：\(n=1000\) 得 \(-0.249800\)，\(n=2000\) 得 \(-0.249900\)，向 \(-1/4\) 逼近。页面书答此处排版失败，按印式结构反推与复算一致，均为 \(-1/4\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+    <p>① 只展开到三阶，把括号判为 \(O(n^{-4})\) 后系数算错；四阶项 \(-1/4\) 必须写出。② 对数展开符号记错，把 \(x^4/4\) 写成正号，得到 \(+1/4\)。③ 抵消项对应错位：减去 \(1/n\)、加回 \(1/(2n^2)\)、减去 \(1/(3n^3)\)，与展开前三项一一对应，顺序不能乱。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+    <p>对数渐近组：放大幂次逐档递增，本题为 \(n^4\) 档，括号内逐阶减去对数展开前几项，求下一阶系数。一般结论：减去前 \(m\) 阶后乘 \(n^{m+1}\)，极限为 \((-1)^m/(m+1)\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}n^3\left(\ln(n+1)-\ln n-\dfrac1n+\dfrac1{2n^2}\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。展开到三阶，剩余 \(1/(3n^3)\)，乘 \(n^3\) 得 \(1/3\)。</p>
+  </div>
+</article>

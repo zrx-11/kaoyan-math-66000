@@ -1,0 +1,1320 @@
+<article class="q" id="q966">
+  <div class="q-head">
+    <span class="qno">第 966 题</span>
+    <span class="qtype">连乘积取对数化为和式</span>
+    <span class="qsrc">P783</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{n\to\infty}\prod\limits_{k=1}^{n}\dfrac{n^{4}+k}{n^{4}}\)。</p>
+  </div>
+  <div class="answer">答案：1</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>这是一个无穷多项相乘的极限，识别类型为「连乘积 \(\xrightarrow{\text{取对数}}\) 对数和」。每个因子写成 \(1+\dfrac{k}{n^{4}}\)，于是</p>
+    \[
+    P_{n}=\prod_{k=1}^{n}\left(1+\frac{k}{n^{4}}\right),\qquad
+    \ln P_{n}=\sum_{k=1}^{n}\ln\left(1+\frac{k}{n^{4}}\right).
+    \]
+    <p>当 \(n\to\infty\) 时 \(\dfrac{k}{n^{4}}\le \dfrac{1}{n^{3}}\to0\)，对每一项用等价无穷小 \(\ln(1+u)\sim u\)，并注意此处求和对误差一致可控（\(u\le n^{-3}\)），可整体替换：</p>
+    \[
+    \ln P_{n}\sim \sum_{k=1}^{n}\frac{k}{n^{4}}
+    =\frac{1}{n^{4}}\cdot\frac{n(n+1)}{2}
+    =\frac{n+1}{2n^{3}}\to0.
+    \]
+    <p>关键在于为什么这里能放心替换：\(\dfrac{k}{n^{4}}\) 最大为 \(\dfrac{1}{n^{3}}\)，是比 \(1/n\) 还高阶的小量，\(\ln(1+u)-u=O(u^{2})\) 的累加误差为 \(O\!\left(\sum k^{2}/n^{8}\right)=O(n^{3}/n^{8})=O(n^{-5})\)，对极限无影响。于是 \(\ln P_{n}\to0\)，由指数连续性 \(P_{n}=e^{\ln P_{n}}\to e^{0}=1\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为因子个数趋于无穷、每个因子又略大于 1，乘积就会发散。实际每个因子 \(1+k/n^{4}\) 偏离 1 的量是 \(O(n^{-4})\)，\(n\) 个累加后对数和仅为 \(O(n^{-2})\)，仍趋于 0。</p>
+    <p>② 直接把 \(\ln(1+k/n^{4})\) 当成 \(k/n^{4}\) 却不说明误差可控；当分母幂次低于 3 时（如 \(n^{2}\)），这种替换就会失真，必须展开更高阶项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「连乘积极限」是数列极限的经典题型，标准通路只有一条：取对数化为和式，再用等价无穷小或定积分求和。考研中常把分母幂次 \(n^{m}\) 变化，当 \(m\le2\) 时对数和发散，答案不再是 1，需要改用积分估计主部。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\prod\limits_{k=1}^{n}\left(1+\dfrac{k}{n^{2}}\right)\)。</p>
+    <p class="var-ans">答案：\(\sqrt{e}\)。此时 \(\sum k/n^{2}=\dfrac{n(n+1)}{2n^{2}}\to\dfrac12\)，故乘积 \(\to e^{1/2}\)。这说明分母幂次 \(m=2\) 是分水岭：\(m>2\) 答案为 1，\(m=2\) 答案为 \(\sqrt e\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q967">
+  <div class="q-head">
+    <span class="qno">第 967 题</span>
+    <span class="qtype">1<sup>∞</sup> 型幂指数列极限</span>
+    <span class="qsrc">P783</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \(x=0\) 的某邻域内可导，且 \(\lim\limits_{x\to0}\dfrac{f(x)-1}{x}=3\)，则 \(\lim\limits_{n\to\infty}\left[f\!\left(\dfrac1n\right)\right]^{n}=\)？</p>
+  </div>
+  <div class="answer">答案：\(e^{3}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先读条件：\(\lim\limits_{x\to0}\dfrac{f(x)-1}{x}=3\) 本身隐含 \(f(0)=1\)（否则分式在 \(x\to0\) 时分母为 0、分子非零，极限必为无穷），且由导数定义 \(f'(0)=\lim\limits_{x\to0}\dfrac{f(x)-f(0)}{x}=3\)。即 \(f(x)=1+3x+o(x)\)。</p>
+    <p>把所求写成指数形式：\(\left[f(1/n)\right]^{n}=e^{\,n\ln f(1/n)}\)。识别为 \(1^{\infty}\) 型：底数 \(f(1/n)\to1\)，指数 \(n\to\infty\)。对指数上的 \(\ln f(1/n)\) 用等价无穷小 \(\ln(1+u)\sim u\)（此处 \(u=f(1/n)-1\to0\)）：</p>
+    \[
+    n\ln f(1/n)\sim n\bigl[f(1/n)-1\bigr]
+    =n\cdot\frac{f(1/n)-1}{1/n}\cdot\frac1n\cdot n
+    =\frac{f(1/n)-1}{1/n}\to3.
+    \]
+    <p>最后一步直接用题设条件（把 \(x=1/n\) 代入）。故指数 \(\to3\)，原极限为 \(e^{3}\)。这里也可直接套 \(1^{\infty}\) 公式 \(\lim u^{v}=e^{\lim v(u-1)}\)，取 \(u=f(1/n),v=n\)，得 \(\lim n(f(1/n)-1)=3\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忽略 \(f(0)=1\) 这一隐含信息。若不先确认底数极限为 1，就不能判断类型，也不能用 \(\ln(1+u)\sim u\)。</p>
+    <p>② 误以为需要 \(f\) 在 0 处二阶可导。本题只需一阶信息 \(f'(0)=3\)，多设条件不会错但会浪费时间。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「由导数定义式反求幂指数列极限」是选择题高频点，核心是把 \(\lim(f(x)-1)/x=c\) 读作 \(f'(0)=c\)，再套 \(1^{\infty}\) 公式。常见变体是把 \(f(1/n)\) 换成 \(f(a/n)\)，此时答案变为 \(e^{ac}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f\) 在 \(x=0\) 邻域可导，\(\lim\limits_{x\to0}\dfrac{f(x)-1}{x}=3\)，求 \(\lim\limits_{n\to\infty}\left[f\!\left(\dfrac{2}{n}\right)\right]^{n}\)。</p>
+    <p class="var-ans">答案：\(e^{6}\)。此时 \(n\!\left[f(2/n)-1\right]=2\cdot\dfrac{f(2/n)-1}{2/n}\to2\cdot3=6\)。一般地把 \(1/n\) 换成 \(a/n\)，答案即 \(e^{ac}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q968">
+  <div class="q-head">
+    <span class="qno">第 968 题</span>
+    <span class="qtype">Riemann 和与主部替换</span>
+    <span class="qsrc">P783</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\left(\dfrac{k^{3}}{n^{4}+k}+\dfrac{k^{2}}{n^{3}}\right)\cos\dfrac{k}{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(6-6\sin1-\cos1\)（约 \(0.411\)）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(\dfrac{11}{30}\)。复算：\(6-6\sin1-\cos1\approx0.411\)（权重化为 \(\frac1n[(k/n)^3+(k/n)^2]\) 后 Riemann 和收敛到定积分 \(\int_0^1(x^3+x^2)\cos x\,dx\)，数值 0.411，书答 11/30≈0.367 不符）。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型为「\(n\) 项和的极限」，权重 \(\dfrac{k^{3}}{n^{4}+k}\) 与 \(\dfrac{k^{2}}{n^{3}}\) 都是 \(1/n\) 量级，对应 \([0,1]\) 上等距分割的 Riemann 和。先整理第一项权重：</p>
+    \[
+    \frac{k^{3}}{n^{4}+k}=\frac{k^{3}}{n^{4}}\cdot\frac{1}{1+k/n^{4}}
+    =\frac1n\left(\frac{k}{n}\right)^{3}\left(1-\frac{k}{n^{4}}+O(n^{-8})\right).
+    \]
+    <p>修正项 \(\sum\dfrac{k^{4}}{n^{8}}\le\dfrac{n^{5}}{5n^{8}}=\dfrac{1}{5n^{3}}\to0\)，故两项权重合并为 \(\dfrac1n\left[\left(\dfrac{k}{n}\right)^{3}+\left(\dfrac{k}{n}\right)^{2}\right]\)。于是和式就是 \(f(x)=(x^{3}+x^{2})\cos x\) 在 \([0,1]\) 上的右端点 Riemann 和：</p>
+    \[
+    \lim_{n\to\infty}\sum_{k=1}^{n}\frac1n f\!\left(\frac{k}{n}\right)=\int_0^1(x^{3}+x^{2})\cos x\,dx.
+    \]
+    <p>分部积分：\(\int x^{2}\cos x\,dx=x^{2}\sin x+2x\cos x-2\sin x\)，在 \([0,1]\) 上为 \(2\cos1-\sin1\)；\(\int x^{3}\cos x\,dx=x^{3}\sin x+3x^{2}\cos x-6x\sin x-6\cos x\)，在 \([0,1]\) 上为 \(6-5\sin1-3\cos1\)。相加得</p>
+    \[
+    (2\cos1-\sin1)+(6-5\sin1-3\cos1)=6-6\sin1-\cos1\approx0.411.
+    \]
+    <p>数值验证：取 \(n=1000\) 直接求和得 0.4114，与积分值一致。</p><div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(\dfrac{k^{3}}{n^{4}+k}\) 的分母 \(+k\) 漏掉或随意丢弃，虽然本题该修正趋于 0，但在分母幂次更低时会改变结果，必须先估计量级。</p>
+    <p>② 对 \(\cos(k/n)\) 的处理：它在 \(k/n\in[0,1]\) 上并非处处接近 1（\(\cos1\approx0.54\)），严格积分不能直接令 \(\cos\equiv1\)；本书主部替换是一种近似口径。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和是数列极限解答题与选择题的核心，考法是「识别权重 \(1/n\) 的分布 → 写成 \(\frac1n\sum f(k/n)\to\int_0^1 f\)」。与三角、反三角因子结合时，是否替换为一阶主部取决于题目口径，复习时应以严格积分法为准。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\left(\dfrac{k}{n}\right)^{2}\sin\dfrac{k}{n}\)。</p>
+    <p class="var-ans">答案：\(2\sin1+\cos1-2\)（约 \(0.223\)）。严格 Riemann 和为 \(\int_0^1 x^{2}\sin x\,dx\)。分部积分：\(\int x^2\sin x\,dx=-x^2\cos x+2\int x\cos x\,dx\)，而 \(\int x\cos x\,dx=x\sin x+\cos x\)，故原函数为 \(-x^2\cos x+2x\sin x+2\cos x\)。代入 \([0,1]\) 得 \((-\cos1+2\sin1+2\cos1)-2=2\sin1+\cos1-2\approx0.223\)。若按 \(\sin x\sim x\) 主部替换则误得 \(\int_0^1 x^3dx=1/4\)，正说明非线性因子不能随意线性化。</p>
+  </div>
+</article>
+
+<article class="q" id="q969">
+  <div class="q-head">
+    <span class="qno">第 969 题</span>
+    <span class="qtype">Taylor 展开求 0/0 极限</span>
+    <span class="qsrc">P783</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\sin x-x+\dfrac{x^{3}}{6}}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{120}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别为 \(0/0\) 型，分子是 \(\sin x\) 与其低阶 Taylor 截断之差。分母为 \(x^{5}\)，所以 \(\sin x\) 必须展开到 \(x^{5}\) 这一阶，低于此阶的项在相减后被抵消，高于此阶的项在除以 \(x^{5}\) 后为 \(o(1)\)，可只保留到 \(x^{5}\)：</p>
+    \[
+    \sin x=x-\frac{x^{3}}{3!}+\frac{x^{5}}{5!}+o(x^{5})
+    =x-\frac{x^{3}}{6}+\frac{x^{5}}{120}+o(x^{5}).
+    \]
+    <p>代入分子：</p>
+    \[
+    \sin x-x+\frac{x^{3}}{6}
+    =\frac{x^{5}}{120}+o(x^{5}).
+    \]
+    <p>于是</p>
+    \[
+    \lim_{x\to0}\frac{\sin x-x+x^{3}/6}{x^{5}}
+    =\lim_{x\to0}\frac{\frac{x^{5}}{120}+o(x^{5})}{x^{5}}=\frac{1}{120}.
+    \]
+    <p>阶数选择的理由：分子前三项 \(x\)、\(-x^{3}/6\) 已被题目预先减掉，剩下的第一个非零项就是 \(x^{5}/120\)；若只展开到 \(x^{3}\)，分子为 \(o(x^{3})\)，会得到 0 而漏掉 \(x^{5}\) 这一项。这正是「展开到与分母同阶、并多保留一阶以抵消预设截断」的典型操作。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开阶数不够：只写到 \(x^{3}\) 会误判分子为 \(o(x^{3})\)，答案写 0。分母 \(x^{5}\) 决定了必须写到 \(x^{5}\)。</p>
+    <p>② 符号错误：\(\sin x\) 的 \(x^{5}\) 项系数为 \(+1/120\)，不要与 \(\arcsin x\) 的 \(+3/40\)、\(\tan x\) 的 \(+2/15\) 混淆。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「基本初等函数 Taylor 截断之差除以幂函数」是 0/0 型极限的送分题，关键在记住 \(\sin x,\tan x,\arcsin x,\arctan x,\ln(1+x),e^{x}\) 的前四阶系数。常与洛必达交替使用，Taylor 在分子有多函数相减时更不易错。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{x}\sin x-x(1+x)}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(1/3\)。把 \(e^{x}=1+x+x^{2}/2+x^{3}/6+o(x^{3})\) 与 \(\sin x=x-x^{3}/6+o(x^{3})\) 相乘，保留到 \(x^{3}\)：\(x^{3}\) 项来自 \((x^{2}/2)\cdot x=x^{3}/2\) 与 \(1\cdot(-x^{3}/6)=-x^{3}/6\)，合计 \(x^{3}/3\)，故 \(e^{x}\sin x=x+x^{2}+x^{3}/3+o(x^{3})\)。分子减去 \(x(1+x)=x+x^{2}\) 余 \(x^{3}/3\)，除以 \(x^{3}\) 得 \(1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q970">
+  <div class="q-head">
+    <span class="qno">第 970 题</span>
+    <span class="qtype">Riemann 和求定积分</span>
+    <span class="qsrc">P783</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{n\to\infty}\left(\dfrac1n\sum\limits_{k=1}^{n}\sqrt[3]{1+\dfrac{k}{n}}\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac34\bigl(2^{4/3}-1\bigr)\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别为标准 Riemann 和：权重 \(1/n\) 与分点 \(k/n\) 一一对应，被积函数为 \(f(x)=\sqrt[3]{1+x}\)。把 \(\dfrac1n\sum\limits_{k=1}^{n}f(k/n)\) 直接写成 \(\int_0^1 f(x)\,dx\)：</p>
+    \[
+    \frac1n\sum_{k=1}^{n}\sqrt[3]{1+\frac{k}{n}}\longrightarrow\int_0^1(1+x)^{1/3}\,dx.
+    \]
+    <p>求原函数：\(\int(1+x)^{1/3}dx=\dfrac{3}{4}(1+x)^{4/3}\)，故</p>
+    \[
+    \int_0^1(1+x)^{1/3}dx=\frac34(1+x)^{4/3}\Big|_0^1
+    =\frac34\bigl(2^{4/3}-1\bigr).
+    \]
+    <p>这里取的是右端点 Riemann 和 \(k=1,\dots,n\)，对应区间 \([0,1]\) 的右端点；若题目写成 \(k=0\) 到 \(n-1\) 则为左端点，连续函数下极限相同。端点选择不影响结果。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 原函数系数错：\(\int(1+x)^{1/3}dx=\dfrac{(1+x)^{4/3}}{4/3}=\dfrac34(1+x)^{4/3}\)，不要漏掉分母 \(4/3\)。</p>
+    <p>② 代入上下限只算 \(x=1\) 忘记减 \(x=0\) 处的值 \(1\)，得到 \(\dfrac34\cdot2^{4/3}\) 而少了 \(-\dfrac34\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和求积分是「和式极限」最基础的考法，几乎每年选择题都有一道，核心识别是权重 \(1/n\) 与 \(k/n\)。变体常把 \(\sqrt[3]{1+k/n}\) 换成 \(\ln(1+k/n)\)、\(e^{k/n}\)、\(\sin(k/n)\) 等，或把区间搬到 \([a,b]\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}e^{k/n}\)。</p>
+    <p class="var-ans">答案：\(e-1\)。即 \(\int_0^1 e^{x}dx=e-1\)。也可直接对等比数列求和：\(\dfrac1n\cdot\dfrac{e^{1/n}(1-e)}{1-e^{1/n}}\to e-1\)，两种方法互验。</p>
+  </div>
+</article>
+
+<article class="q" id="q971">
+  <div class="q-head">
+    <span class="qno">第 971 题</span>
+    <span class="qtype">\(e^{-1/x^{2}}\) 类无穷小</span>
+    <span class="qsrc">P784</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{e^{-1/x^{2}}}{x^{n}+x^{2n}}\)，其中 \(n\) 是正整数。</p>
+  </div>
+  <div class="answer">答案：0</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：分母 \(x^{n}+x^{2n}\) 在 \(x\to0\) 时是 \(n\) 阶与 \(2n\) 阶无穷小的和，主部为 \(x^{n}\)（\(n\lt{}2n\)）；分子 \(e^{-1/x^{2}}\) 是比任何 \(x^{k}\) 都高阶的无穷小。令 \(t=1/x^{2}\to+\infty\)，则</p>
+    \[
+    e^{-1/x^{2}}=e^{-t},\qquad x^{n}=t^{-n/2}.
+    \]
+    <p>于是比值（主部）为</p>
+    \[
+    \frac{e^{-t}}{t^{-n/2}}=t^{n/2}e^{-t}\to0\quad(t\to+\infty).
+    \]
+    <p>这是因为指数函数 \(e^{t}\) 的增长速度远快于幂函数 \(t^{n/2}\)，由洛必达或已知结论 \(\lim_{t\to+\infty}t^{a}e^{-t}=0\)（任意 \(a\)）。分母中 \(x^{2n}\) 项相对于 \(x^{n}\) 是高阶小量，可并入主部 \(x^{n}\)，不影响结论。故原极限为 0。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 以为分母趋于 0、分子也趋于 0 就是 \(0/0\)，需要洛必达。其实 \(e^{-1/x^{2}}\) 在 0 处任意阶导数为 0，比一切幂函数高阶，直接换元 \(t=1/x^{2}\) 最清楚。</p>
+    <p>② 分母取主部时误取 \(x^{2n}\)：当 \(x\to0\)，幂次越低越「大」，主部应是 \(x^{n}\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(e^{-1/x^{2}}\) 是「比一切幂函数高阶无穷小」的标准例子，常用于无穷小比较、Taylor 余项估计、以及间断点分类。考研中常与 \(x^{m}+x^{n}\)、\(\ln(1+x)\) 等组合，判断整体极限。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{-1/x^{2}}}{x^{100}}\)。</p>
+    <p class="var-ans">答案：0。换元 \(t=1/x^{2}\) 后为 \(t^{50}e^{-t}\to0\)。无论分母幂次多高，\(e^{-t}\) 最终都占优。</p>
+  </div>
+</article>
+
+<article class="q" id="q972">
+  <div class="q-head">
+    <span class="qno">第 972 题</span>
+    <span class="qtype">无穷远处积分与 \(e^{x^{4}}\) 之比</span>
+    <span class="qsrc">P784</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to+\infty}\dfrac{\int_0^{x}e^{t^{4}}\,dt}{x^{3}e^{x^{4}}}\)。</p>
+  </div>
+  <div class="answer">答案：0</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别为 \(x\to+\infty\) 时的 \(\infty/\infty\) 型：分子 \(\int_0^{x}e^{t^{4}}dt\) 随 \(x\) 增大而发散到无穷，分母 \(x^{3}e^{x^{4}}\) 也发散。对这种「积分 vs 被积函数在端点处取值」的结构，用洛必达法则对分子分母同时求导：</p>
+    \[
+    \frac{d}{dx}\int_0^{x}e^{t^{4}}dt=e^{x^{4}},
+    \]
+    \[
+    \frac{d}{dx}\bigl(x^{3}e^{x^{4}}\bigr)=3x^{2}e^{x^{4}}+x^{3}\cdot4x^{3}e^{x^{4}}
+    =e^{x^{4}}\bigl(3x^{2}+4x^{6}\bigr).
+    \]
+    <p>约去公共因子 \(e^{x^{4}}\)：</p>
+    \[
+    \frac{e^{x^{4}}}{e^{x^{4}}(3x^{2}+4x^{6})}
+    =\frac{1}{3x^{2}+4x^{6}}\to0.
+    \]
+    <p>本质原因：积分 \(\int_0^{x}e^{t^{4}}dt\) 的主部由被积函数在最大端点 \(t=x\) 附近决定，其量级约为 \(\dfrac{e^{x^{4}}}{4x^{3}}\)，而分母是 \(x^{3}e^{x^{4}}\)，多出 \(x^{6}\) 量级，故趋于 0。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 洛必达后忘记对 \(e^{x^{4}}\) 用链式法则，只对 \(x^{3}\) 求导。</p>
+    <p>② 试图直接估计 \(\int_0^{x}e^{t^{4}}dt\) 为 \(e^{x^{4}}\) 而忽略 \(\frac{1}{4x^{3}}\) 因子；虽然本题结论仍为 0，但在分母幂次不同的变式中该因子会起决定作用。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「含变限积分的 \(\infty/\infty\)」是解答题高频，标准动作是洛必达剥掉积分号。被积函数为 \(e^{t^{p}}\) 时，积分主部为 \(e^{x^{p}}/(px^{p-1})\)，记住这一渐近式可秒判同类题。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to+\infty}\dfrac{\int_0^{x}e^{t^{4}}dt}{x^{3}e^{x^{4}}}\) 中，若把分母改为 \(\dfrac{e^{x^{4}}}{4x^{3}}\)，极限是多少？</p>
+    <p class="var-ans">答案：1。此时分母恰为积分的主部渐近式 \(\dfrac{e^{x^{4}}}{4x^{3}}\)，洛必达后比值为 \(\dfrac{e^{x^{4}}}{e^{x^{4}}(1-3/(4x^{4}))}\to1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q973">
+  <div class="q-head">
+    <span class="qno">第 973 题</span>
+    <span class="qtype">由极限定值反求幂次</span>
+    <span class="qsrc">P784</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to+\infty}\dfrac{1}{x^{a}}\int_0^{x}\sqrt[5]{1+t^{8}}\,dt=b\)，求 \(a\) 和 \(b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=\dfrac{13}{5},\ b=\dfrac{5}{13}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x\to+\infty\) 时积分主部由被积函数的最高次项决定。当 \(t\to\infty\)，</p>
+    \[
+    \sqrt[5]{1+t^{8}}=\bigl(t^{8}+1\bigr)^{1/5}\sim t^{8/5}.
+    \]
+    <p>于是积分主部为</p>
+    \[
+    \int_0^{x}t^{8/5}dt=\frac{x^{1+8/5}}{1+8/5}=\frac{x^{13/5}}{13/5}=\frac{5}{13}x^{13/5}.
+    \]
+    <p>要使 \(\dfrac{1}{x^{a}}\cdot\dfrac{5}{13}x^{13/5}\) 趋于一个非零常数 \(b\)，分母的幂次必须与分子主部幂次相等：\(a=\dfrac{13}{5}\)。此时</p>
+    \[
+    b=\frac{5}{13}.
+    \]
+    <p>若 \(a\lt{}13/5\)，比值趋于无穷；若 \(a>13/5\)，比值趋于 0。只有 \(a=13/5\) 给出有限非零常数。这一手法是「抓被积函数最高次 → 积分幂次 = 最高次幂 + 1」。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把根指数 5 误当分母幂次：主部幂次是 \(8/5\)，不是 \(8\) 或 \(5\)。</p>
+    <p>② 忘记积分后幂次加 1：\(\int t^{8/5}dt=x^{13/5}/(13/5)\)，分母 \(1+8/5=13/5\)，故 \(b=5/13\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「由极限为常数反求 \(a,b\)」是选择/填空高频套路，本质是幂函数主部匹配。同型题反复出现，把被积函数换成 \((1+t^{p})^{1/q}\) 即可，公式为 \(a=1+p/q\)，\(b=1/(1+p/q)\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to+\infty}\dfrac{1}{x^{a}}\int_0^{x}\sqrt{1+t^{4}}dt=b\)，求 \(a,b\)。</p>
+    <p class="var-ans">答案：\(a=3,\ b=\dfrac13\)。被积函数 \(\sim t^{2}\)，积分 \(\sim x^{3}/3\)，故 \(a=3,b=1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q974">
+  <div class="q-head">
+    <span class="qno">第 974 题</span>
+    <span class="qtype">无穷小的阶与变限积分</span>
+    <span class="qsrc">P784</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 和 \(g(x)\) 为连续函数，当 \(x\to0\) 时，\(f(x)\sim x^{4}\)，\(g(x)\sim x^{5}\)，\(F(x)=\int_0^{x}f(t)\,dt\)，\(G(x)=\int_0^{x}g(t)\,dt\)。则当 \(x\to0\) 时，\(F(x)\) 是 \(G(x)\) 的什么无穷小？</p>
+  </div>
+  <div class="answer">答案：低阶无穷小</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：比较两个变限积分无穷小的阶。若 \(f(t)\sim t^{4}\)，则</p>
+    \[
+    F(x)=\int_0^{x}f(t)dt\sim\int_0^{x}t^{4}dt=\frac{x^{5}}{5}.
+    \]
+    <p>同理 \(g(t)\sim t^{5}\)，则</p>
+    \[
+    G(x)=\int_0^{x}g(t)dt\sim\int_0^{x}t^{5}dt=\frac{x^{6}}{6}.
+    \]
+    <p>比较 \(F\) 与 \(G\)：\(F\sim x^{5}/5\)，\(G\sim x^{6}/6\)。当 \(x\to0\)，\(x^{5}\) 比 \(x^{6}\) 高阶还是低阶？幂次越低，量级越大：\(x^{5}/x^{6}=1/x\to\infty\)，即 \(F\) 趋于 0 的速度比 \(G\) 慢，所以 \(F\) 是 \(G\) 的<b>低阶无穷小</b>。也即 \(F/G=\dfrac{x^{5}/5}{x^{6}/6}=\dfrac{6}{5x}\to\infty\)。</p>
+    <p>一般规律：被积函数 \(f\sim x^{p}\)，则积分 \(F\sim x^{p+1}/(p+1)\)；\(p\) 越小，积分阶数越低。本题 \(p=4\lt{}q=5\)，故 \(F\) 阶数 \(5\lt{}6\)，为低阶。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把「低阶/高阶」方向搞反：趋于 0 更慢的是低阶，更快的是高阶。\(x^{5}\) 比 \(x^{6}\) 低阶。</p>
+    <p>② 积分后忘记幂次加 1：直接拿 \(x^{4}\) 与 \(x^{5}\) 比较，会得出错误的阶数。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>无穷小比较是选择题常驻考点，常与变限积分结合，考「积分后阶数加 1」这一事实。变体是把 \(f\sim x^{p},g\sim x^{q}\) 任意赋值，判断 \(F,G\) 谁高谁低。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(f(x)\sim x^{2}\)，\(g(x)\sim x^{3}\)，问 \(F=\int_0^x f\) 是 \(G=\int_0^x g\) 的高阶还是低阶无穷小？</p>
+    <p class="var-ans">答案：低阶。\(F\sim x^{3}/3\)，\(G\sim x^{4}/4\)，\(F/G\sim 4/(3x)\to\infty\)。被积函数阶数小的，积分后仍低阶。</p>
+  </div>
+</article>
+
+<article class="q" id="q975">
+  <div class="q-head">
+    <span class="qno">第 975 题</span>
+    <span class="qtype">0/0 型极限（原书公式缺失）</span>
+    <span class="qsrc">P784</span>
+  </div>
+  <div class="stem">
+    <p>计算（原书本题表达式在生成时编译失败，页面图像与 PDF 文本层均只显示「Tex translation failed」，题干公式缺失）。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{e}{6}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>本题原表达式在源文档中未能渲染：页面 P784 与 PDF 文本层对应位置均为「Tex translation failed」，无法从现有材料恢复原式。按该组题型分布（相邻 slot10 为 \(\sin x,\tan x,\arcsin x,\arctan x\) 等单函数 Taylor 截断极限），以及所给结果 \(-e/6\) 中含有 \(e\)，可判断本题属于 \(1^{\infty}\) 型或含 \((1+x)^{1/x}\) 的 0/0 型极限。</p>
+    <p>这类题的标准解法是：先识别为 \(0/0\) 或 \(1^{\infty}\)，再把幂指部分取对数，用 \(\ln(1+u)\sim u\) 或 Taylor 展开到足够阶数。以 \((1+x)^{1/x}\) 为例，其在 \(x=0\) 处的展开为</p>
+    \[
+    (1+x)^{1/x}=e-\frac{e}{2}x+\frac{11e}{24}x^{2}-\frac{7e}{16}x^{3}+o(x^{3}),
+    \]
+    <p>含 \(e/6\) 系数的极限通常来自对该展开的某项作差后再除以 \(x\) 的相应幂次。由于原式缺失，无法在此写出唯一确定的逐步推导；所给简版答案 \(-e/6\) 按记录保留。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 在原式缺失时凭印象补写表达式，极易与同组其他题混淆。</p>
+    <p>② 含 \(e\) 的极限必须先判断类型（\(1^{\infty}\) 还是 \(\frac{e^{u}-e^{v}}{...}\)），再决定用取对数还是直接展开；类型判断错误会导致符号或系数错误。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>含 \(e\) 的 0/0 与 \(1^{\infty}\) 型极限是考研选择/填空常客，核心是 \((1+x)^{1/x}\) 与 \(e^{x}\) 的展开系数。复习时应熟记前四项系数，遇到含 \(e\) 结果的题先反推分子应保留到哪一阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{(1+x)^{1/x}-e}{x}\)。</p>
+    <p class="var-ans">答案：\(-e/2\)。由展开式一次项系数 \(-e/2\) 直接读出。这类题的答案就是展开式中被除幂次所对应的那一项系数。</p>
+  </div>
+</article>
+
+<article class="q" id="q976">
+  <div class="q-head">
+    <span class="qno">第 976 题</span>
+    <span class="qtype">不等式证明（符号估计）</span>
+    <span class="qsrc">P784</span>
+  </div>
+  <div class="stem">
+    <p>证明：对于正整数 \(n\)，有 \(\dfrac{1}{4n}-\ln\!\left(1+\dfrac1n\right)\lt{}\dfrac{1}{5n^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：成立</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先判断左端符号。由经典不等式 \(\ln(1+x)>\dfrac{x}{1+x}\)（\(x>0\)），取 \(x=1/n\) 得</p>
+    \[
+    \ln\!\left(1+\frac1n\right)>\frac{1/n}{1+1/n}=\frac{1}{n+1}.
+    \]
+    <p>当 \(n\ge1\) 时 \(\dfrac{1}{n+1}>\dfrac{1}{4n}\)（即 \(4n>n+1\)，亦即 \(n>1/3\)），故</p>
+    \[
+    \ln\!\left(1+\frac1n\right)>\frac{1}{n+1}>\frac{1}{4n}
+    \quad\Longrightarrow\quad
+    \frac{1}{4n}-\ln\!\left(1+\frac1n\right)\lt{}0.
+    \]
+    <p>而右端 \(\dfrac{1}{5n^{5}}>0\) 对一切正整数 \(n\) 成立。左端为负、右端为正，不等式自然成立。</p>
+    <p>若需更精细地看左端量级，由 \(\ln(1+1/n)=\dfrac1n-\dfrac{1}{2n^{2}}+\dfrac{1}{3n^{3}}-\cdots\)，得</p>
+    \[
+    \frac{1}{4n}-\ln\!\left(1+\frac1n\right)
+    =-\frac{3}{4n}+\frac{1}{2n^{2}}-\frac{1}{3n^{3}}+\cdots\lt{}0,
+    \]
+    <p>主项为 \(-3/(4n)\)，确为负。这与符号判断一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 试图直接把 \(\ln(1+1/n)\) 展开到高阶再与 \(1/(5n^{5})\) 比较，忽略了左端整体为负，根本不需要精细估计。</p>
+    <p>② 记错 \(\ln(1+x)>x/(1+x)\) 的方向：该不等式对 \(x>0\) 成立，是比较对数与有理式的常用工具。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>不等式证明在极限章节常以「夹逼」「级数余项估计」形式出现。本题属符号估计型，考查对 \(\ln(1+x)\) 与有理式大小关系的掌握。同组题把 \(1/(4n)\)、\(1/(5n^{5})\) 按规律递推，本质相同。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明 \(\ln(1+1/n)>\dfrac{1}{n+1}\) 对一切正整数 \(n\) 成立。</p>
+    <p class="var-ans">答案：令 \(x=1/n>0\)，\(\ln(1+x)-x/(1+x)\) 的导数为 \(x/(1+x)^{2}>0\)，且在 \(x=0\) 处取 0，故恒正。这是本题符号判断的基础不等式。</p>
+  </div>
+</article>
+
+<article class="q" id="q977">
+  <div class="q-head">
+    <span class="qno">第 977 题</span>
+    <span class="qtype">连乘积取对数化为和式</span>
+    <span class="qsrc">P785</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{n\to\infty}\prod\limits_{k=1}^{n}\dfrac{n^{5}+k}{n^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：1</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>与第 966 题同型，识别为「连乘积取对数 → 对数和 → 等价无穷小」。判断这类题第一步不是急着展开，而是先估 \(\ln P_{n}\) 的量级：每个因子 \(1+k/n^{5}\) 对数值 \(\ln(1+k/n^{5})\sim k/n^{5}\)，求和得</p>
+    \[
+    \ln P_{n}=\sum_{k=1}^{n}\ln\left(1+\frac{k}{n^{5}}\right)\sim\sum_{k=1}^{n}\frac{k}{n^{5}}=\frac{1}{n^{5}}\cdot\frac{n(n+1)}{2}=\frac{n+1}{2n^{4}}\to0.
+    \]
+    <p>为什么能逐项用 \(\ln(1+u)\sim u\)：最大偏差 \(k/n^{5}\le n/n^{5}=n^{-4}\to0\)，且 \(\ln(1+u)-u=O(u^{2})\)，累加误差 \(O(\sum k^{2}/n^{10})=O(n^{-7})\)，远小于主部 \(O(n^{-4})\)，不影响极限。于是 \(P_{n}=e^{\ln P_{n}}\to e^{0}=1\)。</p>
+    <p>分水岭在 \(m=2\)：对数和 \(\sim n(n+1)/(2n^{m})\sim n^{2-m}/2\)。\(m>2\) 时趋于 0，乘积为 1；\(m=2\) 时趋于 \(1/2\)，乘积为 \(\sqrt e\)；\(m\lt{}2\) 时发散。本题 \(m=5\) 在收敛侧。典型错解是看到 \(n\) 个略大于 1 的因子就断言发散，实则每因子偏离量为 \(n^{-5}\)，可忽略。</p>
+    <p>与第 968 题那组 Riemann 和对照：本类题权重是 \(k/n^{m}\) 的离散求和，不出现 \(\cos(k/n)\) 一类非线性因子，因此无需讨论主部替换与严格积分的口径差异，只要 \(\sum k/n^{m}\) 量级算对即可。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>误以为因子增多乘积必然变大。当 \(m\ge3\) 时每个因子偏离 1 的量是 \(n^{-m}\)，\(n\) 个累加后对数和为 \(O(n^{2-m})\)，当 \(m>2\) 时趋于 0。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>连乘积极限反复出现，核心是记住分水岭：\(m=2\) 答案为 \(\sqrt e\)，\(m>2\) 答案为 1。考研常把 \(m\) 设为具体值考判断。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\prod\limits_{k=1}^{n}\left(1+\dfrac{k}{n^{3}}\right)\)。</p>
+    <p class="var-ans">答案：1。对数和 \(\sim\sum k/n^{3}=n(n+1)/(2n^{3})\to0\)。\(m=3>2\)，结论为 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q978">
+  <div class="q-head">
+    <span class="qno">第 978 题</span>
+    <span class="qtype">1<sup>∞</sup> 型幂指数列极限</span>
+    <span class="qsrc">P785</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \(x=0\) 的某邻域内可导，且 \(\lim\limits_{x\to0}\dfrac{f(x)-1}{x}=4\)，则 \(\lim\limits_{n\to\infty}\left[f\!\left(\dfrac1n\right)\right]^{n}=\)？</p>
+  </div>
+  <div class="answer">答案：\(e^{4}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>题设 \(\lim\limits_{x\to0}\dfrac{f(x)-1}{x}=4\) 隐含 \(f(0)=1\)，且 \(f'(0)=4\)，即 \(f(x)=1+4x+o(x)\)。把所求写成指数形式：</p>
+    \[
+    \left[f\!\left(\frac1n\right)\right]^{n}=e^{\,n\ln f(1/n)}.
+    \]
+    <p>识别为 \(1^{\infty}\) 型。对指数用 \(\ln(1+u)\sim u\)，\(u=f(1/n)-1\to0\)：</p>
+    \[
+    n\ln f(1/n)\sim n\bigl[f(1/n)-1\bigr]
+    =\frac{f(1/n)-1}{1/n}\to4.
+    \]
+    <p>最后一步直接代入题设（令 \(x=1/n\)）。故原极限为 \(e^{4}\)。</p>
+    <p>对数替换有误差界支撑：\(\ln(1+u)=u-u^{2}/2+O(u^{3})\)，乘 \(n\) 后二次项 \(n u^{2}/2=(nu)u/2\to0\)，误差不改变指数极限。型别判断先于替换：若底数不趋于 1（\(f(0)\ne1\)），不是 \(1^{\infty}\) 型，不能套用 \(\ln(1+u)\sim u\)。一般地 \((f(x)-1)/x\to c\) 即 \(f'(0)=c\)，只需一阶信息、无需二阶可导；把 \(1/n\) 换成 \(a/n\) 时指数为 \(ac\)，答案 \(e^{ac}\)。</p></div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 漏读 \(f(0)=1\) 的隐含条件，无法判断底数是否趋于 1。</p>
+    <p>② 把指数 \(n\) 错当成 \(1/n\) 或其他，导致 \(e^{4}\) 与 \(e^{-4}\) 混淆。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>同 967：由导数定义式反求幂指数列极限，常数 \(c\) 就是 \(f'(0)\)。变体是把 \(1/n\) 换成 \(a/n\)，答案 \(e^{ac}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim(f(x)-1)/x=4\)，求 \(\lim[f(3/n)]^{n}\)。</p>
+    <p class="var-ans">答案：\(e^{12}\)。\(n[f(3/n)-1]=3\cdot\dfrac{f(3/n)-1}{3/n}\to3\cdot4=12\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q979">
+  <div class="q-head">
+    <span class="qno">第 979 题</span>
+    <span class="qtype">Riemann 和与 \(\tan\) 主部替换</span>
+    <span class="qsrc">P785</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\left(\dfrac{k^{4}}{n^{5}+k}+\dfrac{k^{3}}{n^{4}}\right)\tan\dfrac{k}{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\displaystyle\int_0^1(x^{4}+x^{3})\tan x\,dx\approx0.499\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(\dfrac{11}{30}\)。复算：\(\int_0^1(x^{4}+x^{3})\tan x\,dx\approx0.499\)（权重化为 \(\frac1n[(k/n)^4+(k/n)^3]\) 后 Riemann 和收敛到定积分，\(n=1000\) 直接求和得 0.500，书答 11/30≈0.367 不符）。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型为 Riemann 和。整理第一项权重：</p>
+    \[
+    \frac{k^{4}}{n^{5}+k}=\frac{k^{4}}{n^{5}}\cdot\frac{1}{1+k/n^{5}}=\frac1n\left(\frac{k}{n}\right)^{4}\left(1+o(1)\right),
+    \]
+    <p>修正项 \(\sum k^{5}/n^{10}\le n^{6}/(6n^{10})=O(n^{-4})\to0\)。两项权重合并为 \(\frac1n[(k/n)^{4}+(k/n)^{3}]\)。和式即 \(f(x)=(x^{4}+x^{3})\tan x\) 在 \([0,1]\) 上的 Riemann 和：</p>
+    \[
+    \lim_{n\to\infty}\sum_{k=1}^{n}\frac1n f\!\left(\frac{k}{n}\right)=\int_0^1(x^{4}+x^{3})\tan x\,dx.
+    \]
+    <p>该积分由 \(\int x^{m}\tan x\,dx\) 分部积分得到，结果含 \(\ln\cos x\) 与多重对数函数，不展开为初等有理式；数值为 \(0.4985\)。数值验证：\(n=1000\) 直接求和得 0.5001，与积分一致。</p>
+    <p>书答 11/30 是把 \(\tan(k/n)\) 近似为 \(k/n\) 所得，但 \(\tan x\) 在 \([0,1]\) 上并不恒等於 \(x\)（\(\tan1\approx1.56\)），Riemann 和必须用真实函数 \(f\) 积分，不能线性化。</p><div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 漏掉第一项权重分母 \(+k\) 的修正，虽本题趋于 0，但需先估计。</p>
+    <p>② 不区分「本书主部替换口径」与「严格 Riemann 积分」。\(\tan x\) 在 \(x\in[0,1]\) 上并非处处接近 \(x\)（\(\tan1\approx1.56\)），严格积分不能直接线性化。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和与三角/反三角因子结合是数列极限解答题高频点。同组题把 \(\tan\) 换成 \(\arcsin,\arctan\)，权重幂次同步升高，均按「主部替换」口径得到有理数答案。复习时应以严格积分法为主，了解本题口径。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\dfrac1n\sum\limits_{k=1}^{n}\left(\dfrac{k}{n}\right)^{3}\tan\dfrac{k}{n}\)（按主部替换口径）。</p>
+    <p class="var-ans">答案：\(\int_0^1 x^{4}dx=1/5\)。令 \(\tan(k/n)\sim k/n\)，权重 \(x^{3}\cdot x=x^{4}\)。严格积分则为 \(\int_0^1 x^{3}\tan x\,dx\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q980">
+  <div class="q-head">
+    <span class="qno">第 980 题</span>
+    <span class="qtype">Taylor 展开求 0/0 极限</span>
+    <span class="qsrc">P785</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\tan x-x-\dfrac{x^{3}}{3}}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{2}{15}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别为 \(0/0\) 型，分子是 \(\tan x\) 与其三阶 Taylor 截断之差。分母为 \(x^{5}\)，阶数选择的依据是：分子中 \(x\)、\(x^{3}/3\) 两项已被题目预先减掉，剩下第一个非零项必须落到 \(x^{5}\) 阶，否则与 \(x^{5}\) 相除后不是有限数。故 \(\tan x\) 展开到 \(x^{5}\)：</p>
+    \[
+    \tan x=x+\frac{x^{3}}{3}+\frac{2x^{5}}{15}+o(x^{5}).
+    \]
+    <p>代入分子即 \(\tan x-x-x^{3}/3=2x^{5}/15+o(x^{5})\)，除以 \(x^{5}\) 得 \(2/15\)。</p>
+    <p>洛必达在此题并不省事：分子 \(\tan x-x-x^3/3\) 在 \(x=0\) 处前四阶导数全为 0，三次求导后仍是 \(0/0\)，必须求到五阶——分子五阶导在 \(0\) 处为 \(16\)，分母 \(x^5\) 的五阶导为 \(120\)，比值 \(16/120=2/15\)，与 Taylor 法一致。典型错解是只展开到 \(x^{3}\)，分子成为 \(o(x^{3})\)，误判为 0。\(\tan x\) 的 \(x^{5}\) 系数 \(2/15\) 应与 \(\sin x\) 的 \(1/120\)、\(\arcsin x\) 的 \(3/40\) 对比记忆。</p>
+    <p>与第 990、1000 题同属「单函数 Taylor 截断之差」，差别仅在函数与阶数。这类题的复习要点是把 \(\sin x,\tan x,\arcsin x,\arctan x\) 的前四阶系数列成一张表，考试时直接对照，避免临场重新求导。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开阶数不够，只到 \(x^{3}\) 得 0。</p>
+    <p>② 系数记错：\(\tan x\) 的 \(x^{5}\) 项是 \(2/15\)，不是 \(1/15\) 或 \(1/5\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>基本初等函数 Taylor 截断极限，与 969 同型。核心是熟记六大函数前四阶系数。常与洛必达交替考查，Taylor 在多函数相减时更稳。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-x-x^{3}/3}{x^{7}}\)。</p>
+    <p class="var-ans">答案：\(\infty\)。分子主部为 \(2x^{5}/15\)，除以 \(x^{7}\) 得 \(2/(15x^{2})\to\infty\)。若题目改为保留到 \(x^{7}\)，\(\tan x\) 的 \(x^{7}\) 项为 \(17/315\)，再除以 \(x^{7}\) 得 \(17/315\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q981">
+  <div class="q-head">
+    <span class="qno">第 981 题</span>
+    <span class="qtype">\(e^{-1/x^{2}}\) 类无穷小</span>
+    <span class="qsrc">P785</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{e^{-1/x^{2}}}{x^{m}+x^{n}}\)，其中 \(m\) 和 \(n\) 是正整数且 \(m\lt{}n\)。</p>
+  </div>
+  <div class="answer">答案：0</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>与第 971 题同型。分母 \(x^{m}+x^{n}\)，因 \(m\lt{}n\)，当 \(x\to0\) 时主部为 \(x^{m}\)（幂次越低量级越大）。令 \(t=1/x^{2}\to+\infty\)：</p>
+    \[
+    e^{-1/x^{2}}=e^{-t},\qquad x^{m}=t^{-m/2}.
+    \]
+    <p>比值主部为 \(t^{m/2}e^{-t}\to0\)。这是因为 \(e^{t}\) 增长远快于任意幂函数 \(t^{m/2}\)，由 \(\lim_{t\to+\infty}t^{a}e^{-t}=0\)（任意 \(a\)）。分母中 \(x^{n}\) 项相对 \(x^{m}\) 是高阶小量，可并入主部。故原极限为 0。</p>
+    <p>无论 \(m,n\) 取多大（只要 \(m\lt{}n\)），结论都不变；这正体现 \(e^{-1/x^{2}}\) 是比一切幂函数高阶的无穷小。</p>
+    <p>为什么不用洛必达：若对 \(\dfrac{e^{-1/x^{2}}}{x^{m}}\) 直接求导，分子导数为 \(e^{-1/x^{2}}\cdot\dfrac{2}{x^{3}}\)，分母导数为 \(mx^{m-1}\)，比值仍含 \(e^{-1/x^{2}}\) 且幂次不降反升，陷入循环。换元 \(t=1/x^{2}\) 把问题化为 \(t^{a}e^{-t}\) 型极限，是处理这类「非代数衰减」的唯一捷径。错解常误把主部取成 \(x^{n}\)，但 \(x\to0\) 时幂次越低量级越大，主部必为 \(x^{m}\)。</p></div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 取分母主部时误取 \(x^{n}\)：\(x\to0\) 时幂次越低越大，主部应为 \(x^{m}\)。</p>
+    <p>② 以为需要洛必达；换元 \(t=1/x^{2}\) 最直接。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(e^{-1/x^{2}}\) 类无穷小是「高阶无穷小」的标准例子，常考与幂函数、对数函数组合的极限判断。考研选择题常要求判断整体极限是 0、有限还是无穷。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{x^{100}}{e^{-1/x^{2}}}\)。</p>
+    <p class="var-ans">答案：\(+\infty\)。换元后为 \(t^{-50}e^{t}\to+\infty\)。\(e^{-1/x^{2}}\) 比 \(x^{100}\) 高阶，故其倒数主导。</p>
+  </div>
+</article>
+
+<article class="q" id="q982">
+  <div class="q-head">
+    <span class="qno">第 982 题</span>
+    <span class="qtype">二重变限积分与 \(e^{x^{5}}\) 之比</span>
+    <span class="qsrc">P785</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to+\infty}\dfrac{\int_0^{x}\!\int_0^{s}e^{t^{5}}\,dt\,ds}{x^{4}e^{x^{5}}}\)。</p>
+  </div>
+  <div class="answer">答案：0</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别为 \(x\to+\infty\) 时的 \(\infty/\infty\) 型，分子是二重积分 \(\int_0^{x}\!\int_0^{s}e^{t^{5}}dt\,ds\)。对积分与 \(e^{x^{p}}\) 之比这类题，标准动作是洛必达逐层剥皮，每求一次导剥掉一层：</p>
+    \[
+    \frac{d}{dx}\int_0^{x}\!\int_0^{s}e^{t^{5}}dt\,ds=\int_0^{x}e^{t^{5}}dt.
+    \]
+    <p>分母导数为</p>
+    \[
+    \frac{d}{dx}(x^{4}e^{x^{5}})=4x^{3}e^{x^{5}}+x^{4}\cdot5x^{4}e^{x^{5}}=e^{x^{5}}(4x^{3}+5x^{8}).
+    \]
+    <p>此时仍为 \(\infty/\infty\)。关键是记住积分主部渐近式：\(\int_0^{x}e^{t^{p}}dt\sim e^{x^{p}}/(px^{p-1})\)，本题 \(p=5\)，即 \(\int_0^{x}e^{t^{5}}dt\sim e^{x^{5}}/(5x^{4})\)。代入后比值主部为</p>
+    \[
+    \frac{e^{x^{5}}/(5x^{4})}{e^{x^{5}}\cdot5x^{8}}=\frac{1}{25x^{12}}\to0.
+    \]
+    <p>典型错解是洛必达后忘记对 \(e^{x^{5}}\) 用链式法则（漏乘 \(5x^{4}\)），或把积分主部系数 \(1/(5x^{4})\) 丢掉，导致比值误判为有限或发散。</p>
+    <p>与第 992 题对照：992 是三重积分，剥皮层数多一层，主部系数更复杂；本题二重积分只需剥一次。两者结论都是 0，因为分子积分主部总比分母 \(e^{x^{p}}\) 多出 \(x^{-(p-1)}\) 量级的衰减因子。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 洛必达后忘记对 \(e^{x^{5}}\) 用链式法则（乘 \(5x^{4}\)）。</p>
+    <p>② 积分主部系数记错：\(\int_0^{x}e^{t^{p}}dt\sim e^{x^{p}}/(px^{p-1})\)，本题 \(p=5\)，即 \(e^{x^{5}}/(5x^{4})\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>多层变限积分与 \(e^{x^{p}}\) 之比是解答题拔高题，核心动作是洛必达逐层剥皮，再用积分主部渐近式。同组题把 \(p=5\) 换成 \(6\) 等，方法不变。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to+\infty}\dfrac{\int_0^{x}e^{t^{5}}dt}{e^{x^{5}}/(5x^{4})}\)。</p>
+    <p class="var-ans">答案：1。分母恰为积分主部渐近式，比值趋于 1。</p>
+  </div>
+</article>
+
+<article class="q" id="q983">
+  <div class="q-head">
+    <span class="qno">第 983 题</span>
+    <span class="qtype">由极限定值反求幂次</span>
+    <span class="qsrc">P786</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to+\infty}\dfrac{1}{x^{a}}\int_0^{x}\sqrt[6]{1+t^{9}}\,dt=b\)，求 \(a\) 和 \(b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=\dfrac{5}{2},\ b=\dfrac{2}{5}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>与第 973 题同型，识别为「由极限为常数反求幂次」。核心是抓被积函数在无穷远处的最高次项：当 \(t\to\infty\)，</p>
+    \[
+    \sqrt[6]{1+t^{9}}=(t^{9}+1)^{1/6}\sim t^{9/6}=t^{3/2}.
+    \]
+    <p>积分主部为 \(\int_0^{x}t^{3/2}dt=x^{5/2}/(5/2)=\dfrac25 x^{5/2}\)。要使 \(\dfrac{1}{x^{a}}\cdot\dfrac25 x^{5/2}\) 趋于非零常数，分母幂次必须与分子主部幂次相等，即 \(a=5/2\)，此时 \(b=2/5\)。若 \(a\lt{}5/2\) 比值为无穷，\(a>5/2\) 为 0。</p>
+    <p>一般公式：被积函数 \((1+t^{p})^{1/q}\sim t^{p/q}\)，积分后幂次为 \(1+p/q\)，系数 \(b=1/(1+p/q)=q/(p+q)\)。本题 \(p=9,q=6\)，\(p/q=3/2\)，故 \(a=1+3/2=5/2\)，\(b=6/15=2/5\)。典型错解是把根指数 6 直接当分母，或忘记积分后幂次加 1。</p>
+    <p>与第 973 题对照：973 取 \((1+t^{8})^{1/5}\)，主部幂次 \(8/5\)，答案 \(a=13/5,b=5/13\)；本题 \(p=9,q=6\) 仅为参数递推，方法与公式完全一致。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把根指数 6 直接当分母：主部幂次是 \(9/6=3/2\)，不是 9 或 6。</p>
+    <p>② 积分后忘记幂次加 1，得 \(a=3/2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>由极限为常数反求 \(a,b\)，与 973、993 同型。同组题把 \(p,q\) 按规律递推，公式 \(a=1+p/q\)、\(b=q/(p+q)\) 通用。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\dfrac{1}{x^{a}}\int_0^{x}\sqrt[3]{1+t^{3}}dt=b\)，求 \(a,b\)。</p>
+    <p class="var-ans">答案：\(a=2,\ b=1/2\)。被积函数 \(\sim t\)，积分 \(\sim x^{2}/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q984">
+  <div class="q-head">
+    <span class="qno">第 984 题</span>
+    <span class="qtype">无穷小的阶与变限积分</span>
+    <span class="qsrc">P786</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 和 \(g(x)\) 为连续函数，当 \(x\to0\) 时，\(f(x)\sim x^{5}\)，\(g(x)\sim x^{6}\)，\(F(x)=\int_0^{x}f(t)\,dt\)，\(G(x)=\int_0^{x}g(t)\,dt\)。则当 \(x\to0\) 时，\(F(x)\) 是 \(G(x)\) 的什么无穷小？</p>
+  </div>
+  <div class="answer">答案：低阶无穷小</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>与第 974 题同型。由 \(f(t)\sim t^{5}\)：</p>
+    \[
+    F(x)=\int_0^{x}f(t)dt\sim\int_0^{x}t^{5}dt=\frac{x^{6}}{6}.
+    \]
+    <p>由 \(g(t)\sim t^{6}\)：</p>
+    \[
+    G(x)=\int_0^{x}g(t)dt\sim\int_0^{x}t^{6}dt=\frac{x^{7}}{7}.
+    \]
+    <p>比较：\(F\sim x^{6}/6\)，\(G\sim x^{7}/7\)。当 \(x\to0\)，\(x^{6}\) 比 \(x^{7}\) 量级大（\(x^{6}/x^{7}=1/x\to\infty\)），即 \(F\) 趋于 0 的速度比 \(G\) 慢，故 \(F\) 是 \(G\) 的<b>低阶无穷小</b>。</p>
+    <p>一般规律：被积函数 \(f\sim x^{p}\)，积分后 \(F\sim x^{p+1}/(p+1)\)。本题 \(p=5\lt{}q=6\)，积分阶数 \(6\lt{}7\)，故为低阶。</p>
+    <p>积分保持等价关系的依据：若 \(f(t)/t^{p}\to1\)，由洛必达法则 \(\dfrac{F(x)}{x^{p+1}/(p+1)}=\dfrac{f(x)}{x^{p}}\to1\)（分子分母同趋于 0），故 \(F\sim x^{p+1}/(p+1)\)，系数 \(1/(p+1)\) 只影响比值常数、不影响阶数。判方向只需比较原指数 \(p,q\)：\(p<q\) 则积分阶 \(p+1<q+1\)，\(F\) 低阶；即使系数有大有小，也不改变高低阶结论。</p></div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 方向搞反：趋于 0 更慢的是低阶。\(x^{6}\) 比 \(x^{7}\) 低阶。</p>
+    <p>② 忘记积分后幂次加 1，直接用 \(x^{5}\) 与 \(x^{6}\) 比较。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>无穷小比较与变限积分结合，反复出现。核心结论：积分后阶数加 1，被积函数阶数小的积分仍低阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(f\sim x^{10}\)，\(g\sim x^{2}\)，问 \(F=\int_0^x f\) 是 \(G=\int_0^x g\) 的高阶还是低阶无穷小？</p>
+    <p class="var-ans">答案：高阶。\(F\sim x^{11}/11\)，\(G\sim x^{3}/3\)，\(F/G\sim 3/(11x^{8})\to0\)，故 \(F\) 高阶。被积函数阶数大的积分高阶。</p>
+  </div>
+</article>
+
+<article class="q" id="q985">
+  <div class="q-head">
+    <span class="qno">第 985 题</span>
+    <span class="qtype">0/0 型极限（原书公式缺失）</span>
+    <span class="qsrc">P786</span>
+  </div>
+  <div class="stem">
+    <p>计算（原书本题表达式在生成时编译失败，页面图像与 PDF 文本层均只显示「Tex translation failed」，题干公式缺失）。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{1}{20}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>本题原表达式在源文档中未能渲染：页面 P786 与 PDF 文本层对应位置均为「Tex translation failed」，无法从现有材料恢复原式。按该组题型分布，相邻 slot10 为单函数 Taylor 截断极限，所给结果 \(-1/20\) 不含 \(e\)，可判断本题为纯幂函数/三角函数相减的 \(0/0\) 型极限，答案来自 Taylor 展开的某一阶系数。</p>
+    <p>这类题的标准做法是：先识别分子是某基本初等函数与其 Taylor 截断之差，再把分子展开到与分母同阶。以经典组合 \(\cos x-e^{-x^{2}/2}\) 为例，</p>
+    \[
+    \cos x=1-\frac{x^{2}}{2}+\frac{x^{4}}{24}+o(x^{4}),\qquad
+    e^{-x^{2}/2}=1-\frac{x^{2}}{2}+\frac{x^{4}}{8}+o(x^{4}),
+    \]
+    <p>其差为 \(x^{4}(1/24-1/8)=-x^{4}/12\)。含 \(-1/20\) 系数的极限通常来自对 \(e^{x},\sin x,\tan x\) 等函数作更高阶组合展开后除以相应幂次。由于原式缺失，无法写出唯一确定的逐步推导；所给简版答案 \(-1/20\) 按记录保留。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 在原式缺失时凭印象补写表达式，易与同组其他题混淆。</p>
+    <p>② Taylor 展开阶数必须与分母同阶，不足会得 0，过高会引入无关项；相减类题要特别注意对称项抵消。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>纯幂函数/三角函数组合的 0/0 型极限是选择填空常客，核心是 Taylor 展开系数。复习时应熟记 \(\cos x,\sin x,\tan x,e^{x}\) 前四阶系数，遇到有理数结果先反推分子应保留到哪一阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\cos x-e^{-x^{2}/2}}{x^{4}}\)。</p>
+    <p class="var-ans">答案：\(-1/12\)。由上述展开，分子为 \(-x^{4}/12\)，除以 \(x^{4}\) 得 \(-1/12\)。这是该类组合极限的标准结果。</p>
+  </div>
+</article>
+
+<article class="q" id="q986">
+  <div class="q-head">
+    <span class="qno">第 986 题</span>
+    <span class="qtype">不等式证明（符号估计）</span>
+    <span class="qsrc">P786</span>
+  </div>
+  <div class="stem">
+    <p>证明：对于正整数 \(n\)，有 \(\dfrac{1}{5n}-\ln\!\left(1+\dfrac1n\right)\lt{}\dfrac{1}{6n^{6}}\)。</p>
+  </div>
+  <div class="answer">答案：成立</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>与第 976 题同型，先判断左端符号而不是急着展开。由 \(\ln(1+x)>x/(1+x)\)（\(x>0\)，对 \(g(x)=\ln(1+x)-x/(1+x)\) 求导 \(g'(x)=x/(1+x)^{2}>0\) 且 \(g(0)=0\) 可得），取 \(x=1/n\)：</p>
+    \[
+    \ln(1+1/n)>\frac{1/n}{1+1/n}=\frac{1}{n+1}.
+    \]
+    <p>当 \(n\ge1\) 时 \(1/(n+1)>1/(5n)\)（即 \(5n>n+1\)，亦即 \(n>1/4\)），故</p>
+    \[
+    \ln(1+1/n)>\frac{1}{n+1}>\frac{1}{5n}\quad\Longrightarrow\quad \frac{1}{5n}-\ln(1+1/n)\lt{}0.
+    \]
+    <p>右端 \(1/(6n^{6})>0\)，负小于正，不等式成立。</p>
+    <p>若精细展开 \(\ln(1+1/n)=1/n-1/(2n^{2})+1/(3n^{3})-\cdots\)，得左端 \(=-4/(5n)+1/(2n^{2})-1/(3n^{3})+\cdots\lt{}0\)，主项 \(-4/(5n)\) 确为负，与符号判断一致。典型错解是舍近求远，把对数展开到 \(n^{-6}\) 再与 \(1/(6n^{6})\) 比较，忽略左端整体为负。</p>
+    <p>与第 976、996 题构成同一模板：左端系数 \(1/(mn)\) 与右端 \(1/((m+1)n^{m+1})\) 按 \(m=4,5,6\) 递推。三道题的共性是左端恒为负，符号判断一步到位，无需精细展开。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 舍近求远，试图把 \(\ln(1+1/n)\) 展开到 \(n^{-6}\) 再与 \(1/(6n^{6})\) 比较，忽略左端整体为负。</p>
+    <p>② 记错 \(\ln(1+x)>x/(1+x)\) 的方向。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 976、996 同型，符号估计型不等式。同组题把系数 \(1/(mn)\) 与 \(1/((m+1)n^{m+1})\) 按规律递推，本质都是判断左端为负。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明 \(\ln(1+1/n)-\dfrac{1}{n+1}>0\)。</p>
+    <p class="var-ans">答案：令 \(g(x)=\ln(1+x)-x/(1+x)\)，\(g'(x)=x/(1+x)^{2}>0\)，\(g(0)=0\)，故 \(x>0\) 时 \(g>0\)。这是左端符号判断的基础。</p>
+  </div>
+</article>
+
+<article class="q" id="q987">
+  <div class="q-head">
+    <span class="qno">第 987 题</span>
+    <span class="qtype">连乘积取对数化为和式</span>
+    <span class="qsrc">P786</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{n\to\infty}\prod\limits_{k=1}^{n}\dfrac{n^{6}+k}{n^{6}}\)。</p>
+  </div>
+  <div class="answer">答案：1</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>与 966、977 同型。每个因子 \(1+\dfrac{k}{n^{6}}\)，取对数：</p>
+    \[
+    \ln P_{n}=\sum_{k=1}^{n}\ln\left(1+\frac{k}{n^{6}}\right).
+    \]
+    <p>因 \(k/n^{6}\le n/n^{6}=n^{-5}\to0\)，用 \(\ln(1+u)\sim u\)：</p>
+    \[
+    \ln P_{n}\sim\sum_{k=1}^{n}\frac{k}{n^{6}}
+    =\frac{1}{n^{6}}\cdot\frac{n(n+1)}{2}
+    =\frac{n+1}{2n^{5}}\to0.
+    \]
+    <p>误差 \(O(\sum k^{2}/n^{12})=O(n^{-8})\)，可忽略。故 \(P_{n}\to e^{0}=1\)。</p>
+    <p>与前两题对照：分母幂次由 \(n^{4},n^{5}\) 升到 \(n^{6}\)，结论仍为 1。只要 \(m>2\)，连乘积极限都是 1。</p>
+    <p>为什么这里能逐项用 \(\ln(1+u)\sim u\)：偏差 \(\ln(1+u)-u=O(u^{2})\) 是一致小量，累加后误差为 \(O\!\left(\sum k^{2}/n^{12}\right)=O(n^{-7})\)，远小于主部 \(O(n^{-5})\)。若把 \(m\) 降到 2，主部 \(\sum k/n^{2}\to1/2\) 而不再趋于 0，答案即变为 \(\sqrt e\)；这就是分水岭的由来。错解常犯的错是看到 \(n\) 个略大于 1 的因子就断言发散，实则每个因子偏离 1 的量是 \(n^{-6}\)，可忽略。</p></div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>误以为因子数增多乘积必发散。当 \(m\ge3\)，对数和为 \(O(n^{2-m})\to0\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>连乘积极限反复出现，记住分水岭 \(m=2\)（答案 \(\sqrt e\)）与 \(m>2\)（答案 1）。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\prod_{k=1}^{n}(1+k/n^{6})\)。</p>
+    <p class="var-ans">答案：1。对数和 \(\sim n(n+1)/(2n^{6})\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q988">
+  <div class="q-head">
+    <span class="qno">第 988 题</span>
+    <span class="qtype">1<sup>∞</sup> 型幂指数列极限</span>
+    <span class="qsrc">P786</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \(x=0\) 的某邻域内可导，且 \(\lim\limits_{x\to0}\dfrac{f(x)-1}{x}=5\)，则 \(\lim\limits_{n\to\infty}\left[f\!\left(\dfrac1n\right)\right]^{n}=\)？</p>
+  </div>
+  <div class="answer">答案：\(e^{5}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>题设隐含 \(f(0)=1\)，且 \(f'(0)=5\)，即 \(f(x)=1+5x+o(x)\)。写成指数形式：</p>
+    \[
+    \left[f\!\left(\frac1n\right)\right]^{n}=e^{\,n\ln f(1/n)}.
+    \]
+    <p>识别为 \(1^{\infty}\) 型。用 \(\ln(1+u)\sim u\)：</p>
+    \[
+    n\ln f(1/n)\sim n\bigl[f(1/n)-1\bigr]
+    =\frac{f(1/n)-1}{1/n}\to5.
+    \]
+    <p>故原极限为 \(e^{5}\)。一般地，\(\lim(f(x)-1)/x=c\Rightarrow[f(1/n)]^{n}\to e^{c}\)。</p>
+    <p>这一结论的依据是 \(1^{\infty}\) 型标准公式 \(\lim u^{v}=e^{\lim v(u-1)}\)：取 \(u=f(1/n)\)、\(v=n\)，则 \(\lim n(f(1/n)-1)=\lim\dfrac{f(1/n)-1}{1/n}=c\)。题设条件本身就是导数定义式 \(f'(0)=c\)，无需再假设 \(f\) 二阶可导。错解常漏看 \(f(0)=1\) 这一隐含前提，从而无法判断底数是否趋于 1；或误把指数 \(n\) 写成 \(-n\)，导致 \(e^{5}\) 与 \(e^{-5}\) 颠倒。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 漏读 \(f(0)=1\) 的隐含条件。② 指数幂次写错导致 \(e^{5}\) 与 \(e^{-5}\) 混淆。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 967、978、998 同型，由导数定义反求幂指数列极限。变体是把 \(1/n\) 换成 \(a/n\)，答案 \(e^{ac}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim(f(x)-1)/x=5\)，求 \(\lim[f(1/n)]^{2n}\)。</p>
+    <p class="var-ans">答案：\(e^{10}\)。\(2n[f(1/n)-1]=2\cdot\dfrac{f(1/n)-1}{1/n}\to10\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q989">
+  <div class="q-head">
+    <span class="qno">第 989 题</span>
+    <span class="qtype">Riemann 和与 \(\arcsin\) 主部替换</span>
+    <span class="qsrc">P787</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\left(\dfrac{k^{5}}{n^{6}+k}+\dfrac{k^{4}}{n^{5}}\right)\arcsin\dfrac{k}{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{8}{75}+\dfrac{151\pi}{960}\approx0.388\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(\dfrac{13}{42}\)。复算：\(-\dfrac{8}{75}+\dfrac{151\pi}{960}\approx0.388\)（权重化为 \(\frac1n[(k/n)^5+(k/n)^4]\) 后 Riemann 和收敛到定积分 \(\int_0^1(x^5+x^4)\arcsin x\,dx\)，\(n=1000\) 求和得 0.389，书答 13/42≈0.310 不符）。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型为 Riemann 和。整理第一项权重：</p>
+    \[
+    \frac{k^{5}}{n^{6}+k}=\frac{k^{5}}{n^{6}}\cdot\frac{1}{1+k/n^{6}}=\frac1n\left(\frac{k}{n}\right)^{5}(1+o(1)),
+    \]
+    <p>修正项 \(\sum k^{6}/n^{12}\le n^{7}/(7n^{12})=O(n^{-5})\to0\)。两项权重合并为 \(\frac1n[(k/n)^{5}+(k/n)^{4}]\)。和式即 \(f(x)=(x^{5}+x^{4})\arcsin x\) 在 \([0,1]\) 上的 Riemann 和：</p>
+    \[
+    \lim_{n\to\infty}\sum_{k=1}^{n}\frac1n f\!\left(\frac{k}{n}\right)=\int_0^1(x^{5}+x^{4})\arcsin x\,dx.
+    \]
+    <p>令 \(u=\arcsin x\) 分部积分（或直接查积分表），得该积分值为 \(-8/75+151\pi/960\approx0.3875\)。数值验证：\(n=1000\) 直接求和得 0.3891，与积分一致。</p>
+    <p>书答 13/42 是把 \(\arcsin(k/n)\) 近似为 \(k/n\) 所得，但 \(\arcsin x\) 在 \([0,1]\) 上偏离 \(x\) 明显（\(\arcsin1=\pi/2\)），Riemann 和必须用真实函数积分。</p><div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 漏掉第一项权重分母 \(+k\) 的修正（本题趋于 0，但需先估计）。</p>
+    <p>② 把 \(\arcsin x\) 的主部记错：\(\arcsin x=x+x^{3}/6+\cdots\)，一阶主部是 \(x\)，不是 \(x^{3}\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和与反三角因子结合，与 979、999 同型。同组题把反三角函数按规律递推，均按「主部替换」口径得有理数答案。复习以严格积分法为准。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\dfrac1n\sum_{k=1}^{n}(k/n)^{4}\arcsin(k/n)\)（主部替换口径）。</p>
+    <p class="var-ans">答案：\(\int_0^1 x^{5}dx=1/6\)。令 \(\arcsin(k/n)\sim k/n\)，权重 \(x^{4}\cdot x=x^{5}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q990">
+  <div class="q-head">
+    <span class="qno">第 990 题</span>
+    <span class="qtype">Taylor 展开求 0/0 极限</span>
+    <span class="qsrc">P787</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-x-\dfrac{x^{3}}{6}}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{3}{40}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别为 \(0/0\) 型。分母 \(x^{5}\)，阶数选择依据：分子中 \(x\)、\(x^{3}/6\) 两项已被预先减掉，剩下第一个非零项须落到 \(x^{5}\) 阶。故 \(\arcsin x\) 展开到 \(x^{5}\)：</p>
+    \[
+    \arcsin x=x+\frac{x^{3}}{6}+\frac{3x^{5}}{40}+o(x^{5}).
+    \]
+    <p>代入分子即 \(\arcsin x-x-x^{3}/6=3x^{5}/40+o(x^{5})\)，除以 \(x^{5}\) 得 \(3/40\)。</p>
+    <p>第二种解法是洛必达：\(\arcsin x\) 一阶导为 \(1/\sqrt{1-x^{2}}\)，逐次求导在 \(x=0\) 处取值，其 \(x^{5}\) 项系数与 Taylor 法一致。典型错解是只展开到 \(x^{3}\)，分子成为 \(o(x^{3})\)，误判为 0。\(\arcsin x\) 的 \(x^{5}\) 系数 \(3/40\) 应与 \(\sin x\) 的 \(1/120\)、\(\tan x\) 的 \(2/15\)、\(\arctan x\) 的 \(1/5\) 对比记忆，注意它们奇偶项符号规律不同。</p>
+    <p>与第 969、980 题对照：969 用 \(\sin x\)、980 用 \(\tan x\)、本题用 \(\arcsin x\)，结构完全平行，只是 \(x^{5}\) 项系数分别为 \(1/120\)、\(2/15\)、\(3/40\)。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开阶数不够，只到 \(x^{3}\) 得 0。</p>
+    <p>② 系数记错：\(\arcsin x\) 的 \(x^{5}\) 项是 \(3/40\)，不是 \(1/40\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>基本初等函数 Taylor 截断极限，与 969、980、1000 同型。核心是熟记六大函数前四阶系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\dfrac{\arcsin x-x-x^{3}/6}{x^{7}}\)。</p>
+    <p class="var-ans">答案：\(\infty\)。分子主部 \(3x^{5}/40\)，除以 \(x^{7}\) 得 \(3/(40x^{2})\to\infty\)。若题目要求保留到 \(x^{7}\)，\(\arcsin x\) 的 \(x^{7}\) 项为 \(5/112\)，再除以 \(x^{7}\) 得 \(5/112\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q991">
+  <div class="q-head">
+    <span class="qno">第 991 题</span>
+    <span class="qtype">\(e^{-1/x^{2}}\) 类无穷小</span>
+    <span class="qsrc">P787</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{e^{-1/x^{2}}}{x^{100}\ln(1+x)}\)。</p>
+  </div>
+  <div class="answer">答案：0</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型：分母 \(x^{100}\ln(1+x)\)，当 \(x\to0\) 时 \(\ln(1+x)\sim x\)，故分母主部为 \(x^{101}\)；分子 \(e^{-1/x^{2}}\) 是比任何幂函数都高阶的无穷小。令 \(t=1/x^{2}\to+\infty\)，则 \(e^{-1/x^{2}}=e^{-t}\)，\(x^{101}=t^{-101/2}\)，比值主部为 \(t^{101/2}e^{-t}\to0\)。</p>
+    <p>这一步的依据是指数函数增长远快于幂函数：\(\lim_{t\to+\infty}t^{a}e^{-t}=0\) 对任意固定 \(a\) 成立，反复用洛必达即得。为什么不用洛必达直接对原式求导：分子导数为 \(e^{-1/x^{2}}\cdot 2/x^{3}\)，比值仍含 \(e^{-1/x^{2}}\) 且幂次不降反升，陷入循环；换元是处理这类非代数衰减的唯一捷径。</p>
+    <p>无论分母幂次多高（本题为 \(x^{101}\)），结论都是 0。典型错解是忘记 \(\ln(1+x)\sim x\)，把分母当成 \(x^{100}\)（虽结论仍为 0，但幂次估计差一阶）。</p>
+    <p>与第 971、981 题同型：分母都是幂函数之和，分子都是 \(e^{-1/x^{2}}\)，结论恒为 0。差别只在分母幂次高低，但无论多高，\(e^{-t}\) 最终都占优。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记 \(\ln(1+x)\sim x\)，把分母当成 \(x^{100}\)，导致幂次估计差一阶（但本题结论仍为 0）。</p>
+    <p>② 以为需要洛必达；换元 \(t=1/x^{2}\) 最直接。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(e^{-1/x^{2}}\) 类无穷小与 \(\ln(1+x)\)、幂函数组合，是「高阶无穷小」概念的标准例题。考研选择题常考这类极限的定性判断。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\dfrac{x^{200}\ln(1+x)}{e^{-1/x^{2}}}\)。</p>
+    <p class="var-ans">答案：\(+\infty\)。换元后为 \(t^{-201/2}e^{t}\to+\infty\)。\(e^{-1/x^{2}}\) 比 \(x^{201}\) 高阶，其倒数主导。</p>
+  </div>
+</article>
+
+<article class="q" id="q992">
+  <div class="q-head">
+    <span class="qno">第 992 题</span>
+    <span class="qtype">三重变限积分与 \(e^{x^{6}}\) 之比</span>
+    <span class="qsrc">P787</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to+\infty}\dfrac{\int_0^{x}\!\int_0^{s}\!\int_0^{t}e^{u^{6}}\,du\,dt\,ds}{x^{5}e^{x^{6}}}\)。</p>
+  </div>
+  <div class="answer">答案：0</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别为 \(x\to+\infty\) 时 \(\infty/\infty\) 型，分子是三重积分。标准动作是洛必达逐层剥皮，每求一次导剥掉一层：</p>
+    \[
+    \frac{d}{dx}\int_0^{x}\!\int_0^{s}\!\int_0^{t}e^{u^{6}}du\,dt\,ds=\int_0^{x}\!\int_0^{t}e^{u^{6}}du\,dt.
+    \]
+    <p>分母导数为</p>
+    \[
+    \frac{d}{dx}(x^{5}e^{x^{6}})=5x^{4}e^{x^{6}}+x^{5}\cdot6x^{5}e^{x^{6}}=e^{x^{6}}(5x^{4}+6x^{10}).
+    \]
+    <p>此时仍为 \(\infty/\infty\)。关键是连续用积分主部渐近式 \(\int e^{u^{p}}du\sim e^{x^{p}}/(px^{p-1})\)，本题 \(p=6\)，每剥一层乘一个 \(1/(6x^{5})\)，三层后内层二重积分主部约为 \(e^{x^{6}}/(6x^{5}\cdot6x^{4})\)。代入后比值主部为</p>
+    \[
+    \frac{e^{x^{6}}/(36x^{9})}{e^{x^{6}}\cdot6x^{10}}=\frac{1}{216x^{19}}\to0.
+    \]
+    <p>典型错解是洛必达后忘记对 \(e^{x^{6}}\) 用链式法则（漏乘 \(6x^{5}\)），或漏掉积分主部的系数因子，导致比值误判为有限。</p>
+    <p>与第 982 题对照：982 是二重积分，本题是三重积分，剥皮多一层，主部多乘一个 \(1/(6x^{5})\)。两者均为 \(\infty/\infty\) 型，结论都是 0。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 洛必达后忘记对 \(e^{x^{6}}\) 用链式法则（乘 \(6x^{5}\)）。</p>
+    <p>② 积分主部系数记错：每剥一层都要乘 \(\dfrac{1}{px^{p-1}}\)，本题 \(p=6\)，共剥三层。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>多层变限积分与 \(e^{x^{p}}\) 之比是解答题拔高题，核心是洛必达剥皮加积分主部渐近式。同组题把 \(p=6\) 换成其他值，方法不变。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\dfrac{\int_0^{x}e^{u^{6}}du}{e^{x^{6}}/(6x^{5})}\)。</p>
+    <p class="var-ans">答案：1。分母恰为单层积分主部渐近式。</p>
+  </div>
+</article>
+
+<article class="q" id="q993">
+  <div class="q-head">
+    <span class="qno">第 993 题</span>
+    <span class="qtype">由极限定值反求幂次</span>
+    <span class="qsrc">P787</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to+\infty}\dfrac{1}{x^{a}}\int_0^{x}\sqrt[7]{1+t^{10}}\,dt=b\)，求 \(a\) 和 \(b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=\dfrac{17}{7},\ b=\dfrac{7}{17}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>与 973、983 同型，识别为「由极限为常数反求幂次」。抓被积函数在无穷远处的最高次项：当 \(t\to\infty\)，</p>
+    \[
+    \sqrt[7]{1+t^{10}}=(t^{10}+1)^{1/7}\sim t^{10/7}.
+    \]
+    <p>积分主部为 \(\int_0^{x}t^{10/7}dt=x^{17/7}/(17/7)=\dfrac7{17}x^{17/7}\)。要使 \(\dfrac{1}{x^{a}}\cdot\dfrac7{17}x^{17/7}\) 趋于非零常数，须 \(a=17/7\)，此时 \(b=7/17\)。</p>
+    <p>一般公式：被积函数 \((1+t^{p})^{1/q}\sim t^{p/q}\)，积分后幂次 \(1+p/q\)，系数 \(b=q/(p+q)\)。本题 \(p=10,q=7\)，\(p/q=10/7\)，故 \(a=1+10/7=17/7\)，\(b=7/17\)。与 973（\(p=8,q=5\)）、983（\(p=9,q=6\)）对照，公式完全一致，只是 \(p,q\) 递增。典型错解是把根指数 7 直接当分母，或忘记积分后幂次加 1。</p>
+    <p>与第 973、983 题对照：三题仅 \(p,q\) 递增，公式 \(a=1+p/q,b=q/(p+q)\) 通用。本题 \(p=10,q=7\) 即得 \(a=17/7,b=7/17\)。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把根指数 7 直接当分母：主部幂次是 \(10/7\)，不是 10 或 7。</p>
+    <p>② 积分后忘记幂次加 1，得 \(a=10/7\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>由极限为常数反求 \(a,b\)，与 973、983 同型。公式 \(a=1+p/q\)、\(b=q/(p+q)\) 通用。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\dfrac{1}{x^{a}}\int_0^{x}\sqrt[2]{1+t^{2}}dt=b\)，求 \(a,b\)。</p>
+    <p class="var-ans">答案：\(a=2,\ b=1/2\)。被积函数 \(\sim t\)，积分 \(\sim x^{2}/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q994">
+  <div class="q-head">
+    <span class="qno">第 994 题</span>
+    <span class="qtype">无穷小的阶与变限积分</span>
+    <span class="qsrc">P787</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 和 \(g(x)\) 为连续函数，当 \(x\to0\) 时，\(f(x)\sim x^{6}\)，\(g(x)\sim x^{7}\)，\(F(x)=\int_0^{x}f(t)\,dt\)，\(G(x)=\int_0^{x}g(t)\,dt\)。则当 \(x\to0\) 时，\(F(x)\) 是 \(G(x)\) 的什么无穷小？</p>
+  </div>
+  <div class="answer">答案：低阶无穷小</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>与 974、984 同型。由 \(f(t)\sim t^{6}\)：</p>
+    \[
+    F(x)=\int_0^{x}f(t)dt\sim\int_0^{x}t^{6}dt=\frac{x^{7}}{7}.
+    \]
+    <p>由 \(g(t)\sim t^{7}\)：</p>
+    \[
+    G(x)=\int_0^{x}g(t)dt\sim\int_0^{x}t^{7}dt=\frac{x^{8}}{8}.
+    \]
+    <p>比较：\(F\sim x^{7}/7\)，\(G\sim x^{8}/8\)。当 \(x\to0\)，\(x^{7}\) 比 \(x^{8}\) 量级大（\(x^{7}/x^{8}=1/x\to\infty\)），即 \(F\) 趋于 0 的速度比 \(G\) 慢，故 \(F\) 是 \(G\) 的<b>低阶无穷小</b>。</p>
+    <p>一般规律：被积函数 \(f\sim x^{p}\)，积分后 \(F\sim x^{p+1}/(p+1)\)。本题 \(p=6\lt{}q=7\)，积分阶数 \(7\lt{}8\)，故为低阶。</p>
+    <p>阶数关系也可由导数看出：\(F'(x)=f(x)\sim x^{p}\)、\(G'(x)=g(x)\sim x^{q}\)，积分使两边阶数同时加 1，故 \(F,G\) 的高低阶关系与 \(f,g\) 一致。比值 \(F/G\) 只由较低幂次一方决定：本题 \(F/G\sim\dfrac{8}{7}x^{-1}\to\infty\)，系数 \(1/7,1/8\) 只改变常数因子、不改变发散方向。若变式把指数反过来（\(f\) 阶数高于 \(g\)），则 \(F/G\to0\)，结论变为高阶。</p></div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 方向搞反：趋于 0 更慢的是低阶。\(x^{7}\) 比 \(x^{8}\) 低阶。</p>
+    <p>② 忘记积分后幂次加 1，直接用 \(x^{6}\) 与 \(x^{7}\) 比较。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>无穷小比较与变限积分结合，反复出现。核心结论：积分后阶数加 1，被积函数阶数小的积分仍低阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 若 \(f\sim x^{3}\)，\(g\sim x^{9}\)，问 \(F=\int_0^x f\) 是 \(G=\int_0^x g\) 的高阶还是低阶无穷小？</p>
+    <p class="var-ans">答案：低阶。\(F\sim x^{4}/4\)，\(G\sim x^{10}/10\)，\(F/G\sim 10/(4x^{6})\to\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q995">
+  <div class="q-head">
+    <span class="qno">第 995 题</span>
+    <span class="qtype">极限（原书公式缺失）</span>
+    <span class="qsrc">P788</span>
+  </div>
+  <div class="stem">
+    <p>计算（原书本题表达式在生成时编译失败，页面图像与 PDF 文本层均只显示「Tex translation failed」，题干公式缺失）。</p>
+  </div>
+  <div class="answer">答案：0</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>本题原表达式在源文档中未能渲染：页面 P788 与 PDF 文本层对应位置均为「Tex translation failed」，无法从现有材料恢复原式。按该组题型分布，相邻 slot10 为 \(\arctan x\) 等单函数 Taylor 截断极限，所给结果为 0，可判断本题为某种 \(0/0\) 型或无穷小比较题，答案为 0。</p>
+    <p>这类题若答案为 0，通常意味着分子（或某部分）是比分母高阶的无穷小。例如常见结构：分子为某函数与其 Taylor 主部之差，且差的阶数高于分母；或分子为 \(e^{-1/x^{2}}\) 类比一切幂函数高阶的项。判断方法是先识别类型，再用等价无穷小或 Taylor 展开到足够阶数比较阶数。由于原式缺失，无法写出唯一确定的逐步推导；所给简版答案 0 按记录保留。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 在原式缺失时凭印象补写表达式，易与同组其他题混淆。</p>
+    <p>② 对答案为 0 的题，常见错误是展开阶数不足，误把高阶无穷小当成同阶，导致算出非零值。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>答案为 0 的极限题在考研中常以「无穷小比较」「Taylor 余项」形式出现。复习时应熟记基本初等函数展开系数，能快速判断分子分母阶数关系。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{-1/x^{2}}}{x^{k}}\)（\(k\) 为任意正整数）。</p>
+    <p class="var-ans">答案：0。换元 \(t=1/x^{2}\) 后为 \(t^{k/2}e^{-t}\to0\)。这是答案恒为 0 的典型结构。</p>
+  </div>
+</article>
+
+<article class="q" id="q996">
+  <div class="q-head">
+    <span class="qno">第 996 题</span>
+    <span class="qtype">不等式证明（符号估计）</span>
+    <span class="qsrc">P788</span>
+  </div>
+  <div class="stem">
+    <p>证明：对于正整数 \(n\)，有 \(\dfrac{1}{6n}-\ln\!\left(1+\dfrac1n\right)\lt{}\dfrac{1}{7n^{7}}\)。</p>
+  </div>
+  <div class="answer">答案：成立</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>与 976、986 同型，先判断左端符号。由 \(\ln(1+x)>x/(1+x)\)（\(x>0\)，对 \(g(x)=\ln(1+x)-x/(1+x)\) 求导 \(g'(x)=x/(1+x)^{2}>0\) 且 \(g(0)=0\) 可得），取 \(x=1/n\)：</p>
+    \[
+    \ln(1+1/n)>\frac{1/n}{1+1/n}=\frac{1}{n+1}.
+    \]
+    <p>当 \(n\ge1\) 时 \(1/(n+1)>1/(6n)\)（即 \(6n>n+1\)，亦即 \(n>1/5\)），故</p>
+    \[
+    \ln(1+1/n)>\frac{1}{n+1}>\frac{1}{6n}\quad\Longrightarrow\quad \frac{1}{6n}-\ln(1+1/n)\lt{}0.
+    \]
+    <p>右端 \(1/(7n^{7})>0\)，负小于正，不等式成立。</p>
+    <p>若精细展开，左端 \(=-5/(6n)+1/(2n^{2})-1/(3n^{3})+\cdots\lt{}0\)，主项 \(-5/(6n)\) 确为负，与符号判断一致。典型错解是舍近求远，把对数展开到 \(n^{-7}\) 再与 \(1/(7n^{7})\) 比较，忽略左端整体为负；这类题的取巧之处正在于符号判断一步到位。</p>
+    <p>与第 976、986 题构成同一不等式模板：左端 \(1/(mn)-\ln(1+1/n)\) 恒为负，右端恒为正，符号判断即证。这类题的取巧之处在于不必展开到右端的幂次。</p>
+  <p>这类不等式在考研中常以夹逼或级数余项估计的形式出现，本题属于符号估计型，考查对 \(\ln(1+x)\) 与有理式大小关系的掌握。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 舍近求远，试图把 \(\ln(1+1/n)\) 展开到 \(n^{-7}\) 再与 \(1/(7n^{7})\) 比较。</p>
+    <p>② 记错 \(\ln(1+x)>x/(1+x)\) 的方向。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 976、986 同型，符号估计型不等式。同组题把系数按规律递推，本质都是判断左端为负。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明 \(\ln(1+1/n)>\dfrac{1}{n+1}\)。</p>
+    <p class="var-ans">答案：令 \(g(x)=\ln(1+x)-x/(1+x)\)，\(g'(x)=x/(1+x)^{2}>0\)，\(g(0)=0\)，故 \(x>0\) 时 \(g>0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q997">
+  <div class="q-head">
+    <span class="qno">第 997 题</span>
+    <span class="qtype">连乘积取对数化为和式</span>
+    <span class="qsrc">P788</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{n\to\infty}\prod\limits_{k=1}^{n}\dfrac{n^{7}+k}{n^{7}}\)。</p>
+  </div>
+  <div class="answer">答案：1</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>与 966、977、987 同型，识别为连乘积取对数。每个因子 \(1+k/n^{7}\)，先估 \(\ln P_{n}\) 量级：\(\ln(1+k/n^{7})\sim k/n^{7}\)，求和得</p>
+    \[
+    \ln P_{n}=\sum_{k=1}^{n}\ln(1+k/n^{7})\sim\sum_{k=1}^{n}\frac{k}{n^{7}}=\frac{n+1}{2n^{6}}\to0.
+    \]
+    <p>逐项等价替换的合法性来自 \(\ln(1+u)-u=O(u^{2})\)，累加误差 \(O(\sum k^{2}/n^{14})=O(n^{-9})\)，远小于主部 \(O(n^{-6})\)。故 \(P_{n}\to e^{0}=1\)。</p>
+    <p>分水岭在 \(m=2\)：\(\sum k/n^{m}\sim n^{2-m}/2\)。\(m>2\) 时趋于 0，乘积为 1；\(m=2\) 时为 \(\sqrt e\)；\(m\lt{}2\) 时发散。本题 \(m=7\) 远在收敛侧。典型错解是看到 \(n\) 个略大于 1 的因子就断言发散，实则每因子偏离量为 \(n^{-7}\)，可忽略。</p>
+    <p>与第 966、977、987 题对照：四题仅分母幂次 \(n^{4},n^{5},n^{6},n^{7}\) 递增，结论均为 1。判断这类题先估 \(\sum k/n^{m}\sim n^{2-m}/2\) 的量级，\(m>2\) 即收敛到 1。典型错解是看到因子数增多就断言发散，实则每因子偏离 \(n^{-7}\) 可忽略。</p>
+  <p>与连乘积题配套的判据是：先把对数值用等价无穷小换成幂次求和，再用 \(\sum k^{r}\sim n^{r+1}/(r+1)\) 估阶。只要主部趋于 0，乘积就趋于 1，与因子数无关。</p>
+  <p>本题与 966、977、987 构成同一模板，仅分母幂次递增，方法与结论完全一致，属于送分的定式题。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>误以为因子数增多乘积必发散。当 \(m\ge3\)，对数和为 \(O(n^{2-m})\to0\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>连乘积极限反复出现，记住分水岭 \(m=2\)（答案 \(\sqrt e\)）与 \(m>2\)（答案 1）。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\prod_{k=1}^{n}(1+k/n^{7})\)。</p>
+    <p class="var-ans">答案：1。对数和 \(\sim n(n+1)/(2n^{7})\to0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q998">
+  <div class="q-head">
+    <span class="qno">第 998 题</span>
+    <span class="qtype">1<sup>∞</sup> 型幂指数列极限</span>
+    <span class="qsrc">P788</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \(x=0\) 的某邻域内可导，且 \(\lim\limits_{x\to0}\dfrac{f(x)-1}{x}=6\)，则 \(\lim\limits_{n\to\infty}\left[f\!\left(\dfrac1n\right)\right]^{n}=\)？</p>
+  </div>
+  <div class="answer">答案：\(e^{6}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>题设隐含 \(f(0)=1\)，且 \(f'(0)=6\)，即 \(f(x)=1+6x+o(x)\)。写成指数形式：</p>
+    \[
+    \left[f\!\left(\frac1n\right)\right]^{n}=e^{\,n\ln f(1/n)}.
+    \]
+    <p>识别为 \(1^{\infty}\) 型。用 \(\ln(1+u)\sim u\)：</p>
+    \[
+    n\ln f(1/n)\sim n\bigl[f(1/n)-1\bigr]
+    =\frac{f(1/n)-1}{1/n}\to6.
+    \]
+    <p>故原极限为 \(e^{6}\)。一般地，\(\lim(f(x)-1)/x=c\Rightarrow[f(1/n)]^{n}\to e^{c}\)。</p>
+    <p>本题与 967、978、988 构成同一模板，只是常数 \(c\) 由 3、4、5 递推到 6。用 \(1^{\infty}\) 公式 \(\lim u^{v}=e^{\lim v(u-1)}\)，取 \(u=f(1/n)\)、\(v=n\)，核心一步是把 \(n[f(1/n)-1]\) 凑成 \(\dfrac{f(1/n)-1}{1/n}\)，直接引用题设即得 \(c\)。这类题若把 \(1/n\) 改成 \(a/n\)，指数上多一个 \(a\) 因子，答案变为 \(e^{ac}\)；这是最常见的变式。</p></div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 漏读 \(f(0)=1\) 的隐含条件。② 指数幂次写错导致 \(e^{6}\) 与 \(e^{-6}\) 混淆。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与 967、978、988 同型，由导数定义反求幂指数列极限。变体是把 \(1/n\) 换成 \(a/n\)，答案 \(e^{ac}\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim(f(x)-1)/x=6\)，求 \(\lim[f(2/n)]^{n}\)。</p>
+    <p class="var-ans">答案：\(e^{12}\)。\(n[f(2/n)-1]=2\cdot\dfrac{f(2/n)-1}{2/n}\to12\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q999">
+  <div class="q-head">
+    <span class="qno">第 999 题</span>
+    <span class="qtype">Riemann 和与 \(\arctan\) 主部替换</span>
+    <span class="qsrc">P788</span>
+  </div>
+  <div class="stem">
+    <p>计算 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\left(\dfrac{k^{6}}{n^{7}+k}+\dfrac{k^{5}}{n^{6}}\right)\arctan\dfrac{k}{n}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac{257}{1260}+\dfrac{\ln2}{14}+\dfrac{5\pi}{42}\approx0.220\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给：\(\dfrac{15}{56}\)。复算：\(-\dfrac{257}{1260}+\dfrac{\ln2}{14}+\dfrac{5\pi}{42}\approx0.220\)（权重化为 \(\frac1n[(k/n)^6+(k/n)^5]\) 后 Riemann 和收敛到定积分 \(\int_0^1(x^6+x^5)\arctan x\,dx\)，\(n=1000\) 求和得 0.220，书答 15/56≈0.268 不符）。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别类型为 Riemann 和。整理第一项权重：</p>
+    \[
+    \frac{k^{6}}{n^{7}+k}=\frac{k^{6}}{n^{7}}\cdot\frac{1}{1+k/n^{7}}=\frac1n\left(\frac{k}{n}\right)^{6}(1+o(1)),
+    \]
+    <p>修正项 \(\sum k^{7}/n^{14}\le n^{8}/(8n^{14})=O(n^{-6})\to0\)。两项权重合并为 \(\frac1n[(k/n)^{6}+(k/n)^{5}]\)。和式即 \(f(x)=(x^{6}+x^{5})\arctan x\) 在 \([0,1]\) 上的 Riemann 和：</p>
+    \[
+    \lim_{n\to\infty}\sum_{k=1}^{n}\frac1n f\!\left(\frac{k}{n}\right)=\int_0^1(x^{6}+x^{5})\arctan x\,dx.
+    \]
+    <p>分部积分（令 \(u=\arctan x\)，\(dv=(x^{6}+x^{5})dx\)）得该积分值为 \(-257/1260+\ln2/14+5\pi/42\approx0.2195\)。数值验证：\(n=1000\) 直接求和得 0.2203，与积分一致。</p>
+    <p>书答 15/56 是把 \(\arctan(k/n)\) 近似为 \(k/n\) 所得，但 \(\arctan1=\pi/4\approx0.785\) 而 \(1\) 与之相差明显，Riemann 和必须用真实函数积分。</p><div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 漏掉第一项权重分母 \(+k\) 的修正（本题趋于 0，但需先估计）。</p>
+    <p>② 把 \(\arctan x\) 的主部记错：\(\arctan x=x-x^{3}/3+\cdots\)，一阶主部是 \(x\)，不是 \(-x^{3}/3\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>Riemann 和与反三角因子结合，与 979、989 同型。同组题把反三角函数按规律递推，均按「主部替换」口径得有理数答案。复习以严格积分法为准。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\dfrac1n\sum_{k=1}^{n}(k/n)^{5}\arctan(k/n)\)（主部替换口径）。</p>
+    <p class="var-ans">答案：\(\int_0^1 x^{6}dx=1/7\)。令 \(\arctan(k/n)\sim k/n\)，权重 \(x^{5}\cdot x=x^{6}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1000">
+  <div class="q-head">
+    <span class="qno">第 1000 题</span>
+    <span class="qtype">Taylor 展开求 0/0 极限</span>
+    <span class="qsrc">P789</span>
+  </div>
+  <div class="stem">
+    <p>求 \(\lim\limits_{x\to0}\dfrac{\arctan x-x+\dfrac{x^{3}}{3}}{x^{5}}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac15\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+    <p>识别为 \(0/0\) 型。分母 \(x^{5}\)，阶数选择依据：分子中 \(x\) 项与 \(x^{3}/3\) 项已被题目预先处理（减 \(x\)、加回 \(x^{3}/3\)），剩下第一个非零项须落到 \(x^{5}\) 阶。故 \(\arctan x\) 展开到 \(x^{5}\)：</p>
+    \[
+    \arctan x=x-\frac{x^{3}}{3}+\frac{x^{5}}{5}+o(x^{5}).
+    \]
+    <p>代入分子即 \(\arctan x-x+x^{3}/3=x^{5}/5+o(x^{5})\)，除以 \(x^{5}\) 得 \(1/5\)。</p>
+    <p>第二种解法是洛必达：\(\arctan x\) 一阶导为 \(1/(1+x^{2})\)，逐次求导在 \(x=0\) 处取值，其 \(x^{5}\) 项系数与 Taylor 法一致。典型错解是把题目看成 \(\arctan x-x-x^{3}/3\)，符号错一位；或只展开到 \(x^{3}\)，误判为 0。\(\arctan x\) 的 \(x^{5}\) 系数 \(1/5\) 应与 \(\sin x\) 的 \(1/120\)、\(\tan x\) 的 \(2/15\)、\(\arcsin x\) 的 \(3/40\) 对比记忆。</p>
+    <p>与第 969、980、990 题同属 Taylor 截断极限，差别在函数：本题用 \(\arctan x\)，其 \(x^{5}\) 系数为 \(1/5\)。这是 966–1000 分片的收尾题。</p>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开阶数不够，只到 \(x^{3}\) 得 0。</p>
+    <p>② 符号错误：\(\arctan x\) 的 \(x^{3}\) 项是 \(-x^{3}/3\)，题目中分子是 \(\arctan x-x+x^{3}/3\)，恰好抵消 \(x^{3}\) 项；若把题目看成 \(\arctan x-x-x^{3}/3\) 就会错。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>基本初等函数 Taylor 截断极限，与 969、980、990 同型。核心是熟记六大函数前四阶系数。本题是分片收尾题。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\dfrac{\arctan x-x+x^{3}/3}{x^{7}}\)。</p>
+    <p class="var-ans">答案：\(-1/7\)。\(\arctan x=x-x^{3}/3+x^{5}/5-x^{7}/7+\cdots\)，分子保留到 \(x^{7}\) 得 \(-x^{7}/7\)，除以 \(x^{7}\) 得 \(-1/7\)。</p>
+  </div>
+</article>

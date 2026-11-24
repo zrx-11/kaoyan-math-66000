@@ -1,0 +1,1491 @@
+<article class="q" id="q1901">
+  <div class="q-head">
+    <span class="qno">第 1901 题</span>
+    <span class="qtype">单调有界准则（递推数列）</span>
+    <span class="qsrc">P955</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\sqrt{2+x_n}\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：迭代函数 \(f(x)=\sqrt{2+x}\) 单调递增，属「单调有界准则」题。为什么不能直接令 \(x_{n+1}=x_n=L\) 解出 \(L\)？因为在收敛性未证之前，「两边取极限」这一步本身没有依据，必须先用单调有界准则把极限锁死，再代入递推式。</p>
+  <p>第一步，猜不动点。令 \(L=\sqrt{2+L}\)，平方得 \(L^2-L-2=0\)，根 \(L=2\) 与 \(L=-1\)；因 \(x_n>0\)，候选为 \(2\)。</p>
+  <p>第二步，证上界（归纳）。\(x_1=1\le2\)；设 \(x_n\le2\)，则 \(x_{n+1}=\sqrt{2+x_n}\le\sqrt4=2\)。故全体 \(x_n\le2\)。</p>
+  <p>第三步，证单调。作差 \(x_{n+1}-x_n=\sqrt{2+x_n}-x_n=\dfrac{2+x_n-x_n^2}{\sqrt{2+x_n}+x_n}=\dfrac{(2-x_n)(1+x_n)}{\sqrt{2+x_n}+x_n}\)。因 \(x_n\le2\) 且 \(1+x_n>0\)，分子非负，故 \(x_{n+1}\ge x_n\)。这一步比只看 \(x_2>x_1\) 更严谨：用代数因式分解统一说明符号。</p>
+  <p>单调递增有上界 \(2\)，由单调有界准则收敛，设极限 \(L\)。对 \(x_{n+1}=\sqrt{2+x_n}\) 两边取极限得 \(L=\sqrt{2+L}\)，解得 \(L=2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不证收敛直接解方程，循环论证。② 平方后增根 \(-1\) 不按符号舍。③ 只由 \(x_2>x_1\) 归纳单调，未用 \(f\) 单调性或作差。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>递推数列求极限的母题，与 1902、1917、1929/1939、1951 同组。迭代函数单调时，比较首项与不动点即可定单调方向。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=3,\ x_{n+1}=\sqrt{2+x_n}\)，求 \(\lim x_n\)。</p>
+  <p class="var-ans">答案：\(2\)。此时 \(x_1=3>2\)，作差分子 \((2-x_n)(1+x_n)\le0\)，数列单调递减有下界 \(2\)，收敛到同一不动点。</p>
+  </div>
+</article>
+
+<article class="q" id="q1902">
+  <div class="q-head">
+    <span class="qno">第 1902 题</span>
+    <span class="qtype">算术平均迭代（牛顿法求 \(\sqrt2\)）</span>
+    <span class="qsrc">P955</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\dfrac12\left(a_n+\dfrac{2}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：这是求 \(\sqrt2\) 的牛顿迭代 \(x_{n+1}=\frac12(x_n+2/x_n)\)。为什么用均值不等式？因为递推同时含 \(a_n\) 与 \(1/a_n\)，\(\frac12(a_n+2/a_n)\) 正是 \(a_n\) 与 \(2/a_n\) 的算术平均，可用均值不等式给出下界。</p>
+  <p>第一步，猜不动点。令 \(L=\frac12(L+2/L)\)，得 \(L^2=2\)，正根 \(L=\sqrt2\)。</p>
+  <p>第二步，证下界。对 \(n\ge2\)，\(a_{n+1}=\frac12(a_n+2/a_n)\ge\sqrt{a_n\cdot2/a_n}=\sqrt2\)，故自第二项起 \(a_n\ge\sqrt2\)。</p>
+  <p>第三步，证单调递减。作差 \(a_{n+1}-a_n=\frac12(2/a_n-a_n)=\dfrac{2-a_n^2}{2a_n}\)。因 \(a_n\ge\sqrt2\)，分子 \(\le0\)，故 \(a_{n+1}\le a_n\)。注意首项 \(a_1=1\lt{}\sqrt2\)，单调性从第二项才开始，论证时须写明「自 \(n\ge2\) 起」。</p>
+  <p>自第二项起单调递减有下界 \(\sqrt2\)，由单调有界准则收敛。取极限得 \(L=\sqrt2\)。牛顿法对单根是二次收敛，故数列实际收敛极快。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 把均值不等式结果当下界误读为上界。② 忽略首项 \(a_1=1\lt{}\sqrt2\)。③ 漏舍负根 \(-\sqrt2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>牛顿迭代是 1909（误差系数）、1917（求 \(\sqrt9\)）的基础。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\frac12(a_n+3/a_n)\)，求 \(\lim a_n\)。</p>
+  <p class="var-ans">答案：\(\sqrt3\)。均值不等式给下界 \(\sqrt3\)，作差 \(a_{n+1}-a_n=(3-a_n^2)/(2a_n)\le0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1903">
+  <div class="q-head">
+    <span class="qno">第 1903 题</span>
+    <span class="qtype">sin 递推的渐近阶</span>
+    <span class="qsrc">P955</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\sin(x_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n}{\sqrt{\dfrac{3}{n}}}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：\(x_{n+1}=\sin x_n\) 单调递减趋于 \(0\)，问题求趋于零的速度。为什么取 \(1/x_n^2\) 作差？因为 \(\sin x=x-x^3/6\) 的主修正项是 \(x^3\)，导致 \(x_n\) 以 \(1/\sqrt n\) 速度衰减，平方倒数后增量为常数，可 Stolz。</p>
+  <p>第一步，证 \(x_n\to0\)。\(0\lt{}x_{n+1}=\sin x_n\lt{}x_n\)，单调递减有下界 \(0\)，设极限 \(L\)，则 \(L=\sin L\)，唯一解 \(L=0\)。</p>
+  <p>第二步，展开。\(\sin x=x-x^3/6+o(x^3)\)，故 \(x_{n+1}=x_n-x_n^3/6+o(x_n^3)\)。</p>
+  <p>第三步，倒数平方作差。\(x_{n+1}=x_n(1-x_n^2/6+o(x_n^2))\)，于是</p>
+  \[ \frac{1}{x_{n+1}^2}=\frac{1}{x_n^2}(1-x_n^2/6+o(x_n^2))^{-2}=\frac{1}{x_n^2}\left(1+\frac{x_n^2}{3}+o(x_n^2)\right)=\frac{1}{x_n^2}+\frac13+o(1). \]
+  <p>第四步，Stolz。\(1/x_n^2\nearrow\infty\)，故 \(\dfrac{1/x_n^2}{n}\to\dfrac13\)，即 \(x_n^2\sim3/n\)。</p>
+  <p>故 \(x_n/\sqrt{3/n}\to1\)。那个 \(1/3\) 来自 \((1-u)^{-2}\) 展开中 \(u\) 一次项系数 \(2\) 乘以 \(\sin x\) 的 \(x^3\) 系数 \(1/6\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 只证 \(x_n\to0\) 不停。② \(\sin x\) 只展开到 \(x\)，丢掉 \(x^3/6\)。③ 用 \(\sin x_n\sim x_n\) 直接替换。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1913、1923、1933、1943 同组。固定结论 \(x_{n+1}=\sin x_n\Rightarrow x_n\sim\sqrt{3/n}\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\sin x_n\)，求 \(\lim\sqrt n\,x_n\)。</p>
+  <p class="var-ans">答案：\(\sqrt3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1904">
+  <div class="q-head">
+    <span class="qno">第 1904 题</span>
+    <span class="qtype">发散递推 \(a_{n+1}=a_n+1/a_n\) 的渐近阶</span>
+    <span class="qsrc">P956</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=a_n+\dfrac{1}{a_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n}{\sqrt{2n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：递推 \(a_{n+1}=a_n+1/a_n\) 单调递增发散到 \(+\infty\)。为什么平方作差？因为 \(a_n\) 的步长 \(1/a_n\) 随 \(a_n\) 增大而减小，直接累加 \(a_n\) 不好算；但平方后增量 \((a_n+1/a_n)^2-a_n^2=2+1/a_n^2\) 主项是常数 \(2\)，这正是要找的「每步固定增量」。</p>
+  <p>第一步，证发散。\(a_{n+1}-a_n=1/a_n>0\)，递增；若收敛于 \(L\)，则 \(0=1/L\) 矛盾，故 \(a_n\to+\infty\)。</p>
+  <p>第二步，平方作差。</p>
+  \[ a_{n+1}^2-a_n^2=\left(a_n+\frac1{a_n}\right)^2-a_n^2=2+\frac1{a_n^2}. \]
+  <p>第三步，Stolz。\(a_n^2\to+\infty\)，\(\{n\}\nearrow\infty\)，故 \(\dfrac{a_n^2}{n}\to\lim(a_{n+1}^2-a_n^2)=2+\lim1/a_n^2=2\)。</p>
+  <p>第四步，开方。\(a_n\sim\sqrt{2n}\)，故 \(a_n/\sqrt{2n}\to1\)。余项 \(1/a_n^2\sim1/(2n)\)，其和 \(\sum1/(2k)\sim(1/2)\ln n\)，相对主项 \(2n\) 可忽略。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 对 \(a_n\) 直接用 Stolz：\((a_{n+1}-a_n)/1=1/a_n\to0\)，误判有界。② 忽略 \(1/a_n^2\) 项虽趋于零但和为 \(\ln n\) 阶。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1905、1911、1912、1922、1928、1932、1938 同组。平方/立方作差化常数是固定手法。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=a_n+1/a_n\)，求 \(\lim a_n^2/(2n)\)。</p>
+  <p class="var-ans">答案：\(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1905">
+  <div class="q-head">
+    <span class="qno">第 1905 题</span>
+    <span class="qtype">递推 \(x_{n+1}=x_n+1/x_n^2\) 的渐近阶</span>
+    <span class="qsrc">P956</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n^2}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n}{\sqrt[3]{3n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：增量 \(1/x_n^2\)，比 1904 的 \(1/x_n\) 衰减更快，故增长阶不是 \(\sqrt n\) 而是 \(n^{1/3}\)。为什么立方作差？因为 \((x+1/x^2)^3-x^3=3x^2(1/x^2)+O(1/x)=3+o(1)\)，主项是常数 \(3\)，匹配目标幂次。</p>
+  <p>第一步，证发散。\(x_{n+1}-x_n=1/x_n^2>0\)，递增；若收敛于 \(L\) 则 \(0=1/L^2\) 矛盾，故 \(x_n\to+\infty\)。</p>
+  <p>第二步，立方作差。展开 \((u+v)^3-u^3=3u^2v+3uv^2+v^3\)，取 \(u=x_n,\ v=1/x_n^2\)：</p>
+  \[ x_{n+1}^3-x_n^3=3x_n^2\cdot\frac1{x_n^2}+3x_n\cdot\frac1{x_n^4}+\frac1{x_n^6}=3+\frac3{x_n^3}+\frac1{x_n^6}. \]
+  <p>第三步，Stolz。\(x_n^3\to+\infty\)，故 \(\dfrac{x_n^3}{n}\to3\)，即 \(x_n^3\sim3n\)。</p>
+  <p>第四步，开立方。\(x_n\sim\sqrt[3]{3n}\)，所求比值为 \(1\)。幂次匹配规律：增量 \(1/x_n^k\) 对应 \(x_n^{k+1}\sim(k+1)n\)，本题 \(k=2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 误用平方作差。② 展开 \((u+v)^3\) 漏 \(3uv^2\) 项（虽不影响主阶）。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1912、1921、1938 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n+1/x_n^2\)，求 \(\lim x_n^3/(3n)\)。</p>
+  <p class="var-ans">答案：\(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1906">
+  <div class="q-head">
+    <span class="qno">第 1906 题</span>
+    <span class="qtype">倒数递推 \(x_{n+1}=x_n/(1+x_n)\) 的渐近阶</span>
+    <span class="qsrc">P956</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\dfrac{x}{1+x}\)，定义 \(x_1=1,\ x_{n+1}=f(x_n)\)，求 \(\lim\limits_{n\to\infty}nx_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：\(x_{n+1}=x_n/(1+x_n)\) 单调递减趋于 \(0\)。为什么取倒数？因为原式是「除以 \(1+x_n\)」，取倒数后 \(1/x_n\) 变成公差为 \(1\) 的等差数列，这是分式线性递推的标准手法。</p>
+  <p>第一步，证 \(x_n\to0\)。\(x_{n+1}=x_n/(1+x_n)\lt{}x_n\)，且 \(x_n>0\)，单调递减有下界 \(0\)，设极限 \(L\)，则 \(L=L/(1+L)\)，解得 \(L=0\)。</p>
+  <p>第二步，取倒数。</p>
+  \[ \frac{1}{x_{n+1}}=\frac{1+x_n}{x_n}=\frac{1}{x_n}+1. \]
+  <p>故 \(\{1/x_n\}\) 是首项 \(1/x_1=1\)、公差 \(1\) 的等差数列：\(1/x_n=1+(n-1)=n\)，即 \(x_n=1/n\)。</p>
+  <p>第三步，直接得 \(nx_n=1\)。本题甚至不必 Stolz，因为倒数后是精确等差，\(x_n=1/n\) 对所有 \(n\) 成立。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不取倒数硬估计。② 误读为 \(x_{n+1}=x_n(1+x_n)\)（发散方向相反）。③ 通项 \(1/x_n=n\) 中常数项由 \(x_1=1\) 定。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1910 重复、1914（二阶修正）为基础。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n/(1+2x_n)\)，求 \(\lim nx_n\)。</p>
+  <p class="var-ans">答案：\(1/2\)。倒数后公差 \(2\)，\(1/x_n\sim2n\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1907">
+  <div class="q-head">
+    <span class="qno">第 1907 题</span>
+    <span class="qtype">对数递推 \(a_{n+1}=\ln(1+a_n)\) 的渐近阶</span>
+    <span class="qsrc">P956</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\ln(1+a_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{na_n}{2}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：\(a_{n+1}=\ln(1+a_n)\) 单调递减趋于 \(0\)。为什么展开到 \(a_n^2\) 项？因为 \(\ln(1+a)=a-a^2/2+\cdots\)，主修正项是二次，倒数后增量为常数 \(1/2\)，可 Stolz。</p>
+  <p>第一步，证 \(a_n\to0\)。\(a_{n+1}=\ln(1+a_n)\lt{}a_n\)，单调递减有下界 \(0\)，设极限 \(L\)，则 \(L=\ln(1+L)\)，唯一解 \(L=0\)。</p>
+  <p>第二步，展开。\(\ln(1+a)=a-a^2/2+o(a^2)\)，故 \(a_{n+1}=a_n(1-a_n/2+o(a_n))\)。</p>
+  <p>第三步，倒数作差。</p>
+  \[ \frac{1}{a_{n+1}}=\frac{1}{a_n}\left(1-\frac{a_n}{2}+o(a_n)\right)^{-1}=\frac{1}{a_n}\left(1+\frac{a_n}{2}+o(a_n)\right)=\frac{1}{a_n}+\frac12+o(1). \]
+  <p>第四步，Stolz。\(1/a_n\to+\infty\)，故 \(\dfrac{1/a_n}{n}\to\dfrac12\)，即 \(a_n\sim2/n\)，\(na_n/2\to1\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 展开 \(\ln(1+a)\) 只到 \(a\)，误判差为零。② 与 1906 的 \(1/(1+x)\) 混淆：后者倒数增量 \(1\)，本题 \(1/2\)，故 \(n a_n\to2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1915、1924、1934（对数阶修正）、1925 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\ln(1+a_n)\)，求 \(\lim n a_n\)。</p>
+  <p class="var-ans">答案：\(2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1908">
+  <div class="q-head">
+    <span class="qno">第 1908 题</span>
+    <span class="qtype">误差传播系数（线性收敛）</span>
+    <span class="qsrc">P956</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\sqrt{2+x_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{2-x_{n+1}}{(2-x_n)^2}\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)（比值发散到正无穷）</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1/4\)，复算 \(+\infty\)：\(e_n=2-x_n\) 满足 \(e_{n+1}=e_n/(2+\sqrt{4-e_n})\sim e_n/4\)，是线性收敛，故 \(e_{n+1}/e_n^2\sim1/(4e_n)\to+\infty\)。书给 \(1/4\) 实为线性比 \(e_{n+1}/e_n\)，非平方比。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：递推在不动点 \(2\) 附近的误差传播。为什么先判断收敛阶？因为只有二次收敛（\(e_{n+1}\sim c e_n^2\)）时 \(e_{n+1}/e_n^2\) 才有有限极限；线性收敛时该比值发散。</p>
+  <p>第一步，由 1901 知 \(x_n\to2\)，令 \(e_n=2-x_n\to0\)。</p>
+  <p>第二步，有理化误差递推。</p>
+  \[ e_{n+1}=2-\sqrt{2+x_n}=2-\sqrt{4-e_n}=\frac{e_n}{2+\sqrt{4-e_n}}. \]
+  <p>第三步，判断收敛阶。当 \(e_n\to0\)，分母 \(\to2+2=4\)，故 \(e_{n+1}\sim e_n/4\)，线性收敛。</p>
+  <p>第四步，算平方比。</p>
+  \[ \frac{e_{n+1}}{e_n^2}=\frac{1}{e_n\,(2+\sqrt{4-e_n})}\to+\infty. \]
+  <p>分母中 \(e_n\to0\)，故整体发散。结论：该映射对不动点是线性收敛，平方比无穷。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不判断收敛阶就套二次收敛公式。② 把线性比 \(1/4\) 当平方比答案。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1909、1916、1917 组成「误差阶」专题。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\sqrt{2+x_n}\)，求 \(\lim(2-x_{n+1})/(2-x_n)\)。</p>
+  <p class="var-ans">答案：\(1/4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1909">
+  <div class="q-head">
+    <span class="qno">第 1909 题</span>
+    <span class="qtype">牛顿法二次收敛系数</span>
+    <span class="qsrc">P956</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\dfrac12\left(a_n+\dfrac{2}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_{n+1}-\sqrt2}{(a_n-\sqrt2)^2}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{2\sqrt2}\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1/(4\sqrt2)\)，复算 \(1/(2\sqrt2)\)：配方得 \(a_{n+1}-\sqrt2=(a_n-\sqrt2)^2/(2a_n)\)，令 \(a_n\to\sqrt2\)，系数 \(1/(2\sqrt2)\)。书答差因子 \(2\)。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：牛顿法求 \(\sqrt2\) 在不动点附近的二次收敛系数。为什么配方？因为要把 \(a_{n+1}-\sqrt2\) 写成 \(c(a_n-\sqrt2)^2\) 形式，才能读出常数。</p>
+  <p>第一步，令 \(e_n=a_n-\sqrt2\to0\)。</p>
+  <p>第二步，通分配方。</p>
+  \[ a_{n+1}-\sqrt2=\frac{a_n^2+2-2\sqrt2\,a_n}{2a_n}=\frac{(a_n-\sqrt2)^2}{2a_n}. \]
+  <p>分子 \(a_n^2-2\sqrt2 a_n+2=(a_n-\sqrt2)^2\)，完全平方，说明误差二次传播。</p>
+  <p>第三步，取极限。</p>
+  \[ \frac{a_{n+1}-\sqrt2}{(a_n-\sqrt2)^2}=\frac{1}{2a_n}\to\frac{1}{2\sqrt2}. \]
+  <p>对照一般牛顿法公式 \(e_{n+1}\sim f''(L)/(2f'(L))e_n^2\)，本题 \(f(x)=x^2-2\)，\(f''(\sqrt2)=2\)，\(f'(\sqrt2)=2\sqrt2\)，系数 \(2/(2\cdot2\sqrt2)=1/(2\sqrt2)\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 通分漏乘 \(a_n\)。② 代入 \(a_n\to\sqrt2\) 时分母误算为 \(4\sqrt2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1917（求 \(\sqrt9\)，系数 \(1/6\)）同型。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\frac12(a_n+9/a_n)\)，求 \((a_{n+1}-3)/(a_n-3)^2\)。</p>
+  <p class="var-ans">答案：\(1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1910">
+  <div class="q-head">
+    <span class="qno">第 1910 题</span>
+    <span class="qtype">倒数递推 \(x_{n+1}=x_n/(1+x_n)\) 的渐近阶</span>
+    <span class="qsrc">P957</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\dfrac{x_n}{1+x_n}\)，求 \(\lim\limits_{n\to\infty}nx_n\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1906 同型。\(x_{n+1}=x_n/(1+x_n)\) 单调递减趋于 \(0\)，取倒数化等差。</p>
+  <p>第一步，\(x_{n+1}\lt{}x_n\) 且 \(x_n>0\)，单调递减有下界 \(0\)，极限 \(L=L/(1+L)\) 解得 \(0\)。</p>
+  <p>第二步，取倒数。\(1/x_{n+1}=1/x_n+1\)，首项 \(1/x_1=1\)，故 \(1/x_n=n\)，\(x_n=1/n\)。</p>
+  <p>第三步，\(nx_n=1\)。</p>
+  <p>与 1906 对照：两题递推完全相同，只是写法不同。</p>
+  <p>为什么取倒数而不直接作差？原式是分式线性 \(x_{n+1}=x_n/(1+x_n)\)，分子分母同除以 \(x_n\) 后正好把 \(1/x_n\) 拆成 \(1/x_n+1\)，这是 Möbius 递推的标准反演。若硬作差 \(x_{n+1}-x_n=-x_n^2/(1+x_n)\)，符号虽可定但量级依赖 \(x_n\) 本身，不如下一步直接给出通项。通项 \(1/x_n=1+(n-1)=n\) 对所有 \(n\) 精确成立，故 \(nx_n\) 不是渐近而是恒等于 \(1\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不取倒数硬估。② 通项常数项算错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1906 重复，1914 为其二阶问法。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=2,\ x_{n+1}=x_n/(1+x_n)\)，求 \(\lim nx_n\)。</p>
+  <p class="var-ans">答案：\(1\)。\(1/x_n=1/2+n-1\sim n\)，主阶不变。</p>
+  </div>
+</article>
+
+<article class="q" id="q1911">
+  <div class="q-head">
+    <span class="qno">第 1911 题</span>
+    <span class="qtype">发散递推平方作差</span>
+    <span class="qsrc">P957</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n^2}{2n}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1904 同型，直接问平方主项。为什么平方作差？因为 \((x+1/x)^2-x^2=2+1/x^2\)，主项常数 \(2\)。</p>
+  <p>第一步，\(x_{n+1}-x_n=1/x_n>0\)，发散到 \(+\infty\)。</p>
+  <p>第二步，平方作差。\(x_{n+1}^2-x_n^2=2+1/x_n^2\)。</p>
+  <p>第三步，Stolz。\(x_n^2\to+\infty\)，故 \(\dfrac{x_n^2}{n}\to2\)，即 \(x_n^2\sim2n\)。</p>
+  <p>第四步，\(x_n^2/(2n)\to1\)。余项 \(1/x_n^2\sim1/(2n)\)，其和 \(\sim(1/2)\ln n\)，相对 \(2n\) 可忽略。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 对 \(x_n\) 直接 Stolz。② 忽略余项和为 \(\ln n\) 阶。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1922、1928、1932（对数阶修正）为基础。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n+2/x_n\)，求 \(\lim x_n^2/(4n)\)。</p>
+  <p class="var-ans">答案：\(1\)。平方作差 \(x_{n+1}^2-x_n^2=4+4/x_n^2\to4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1912">
+  <div class="q-head">
+    <span class="qno">第 1912 题</span>
+    <span class="qtype">立方作差 \(a_{n+1}=a_n+1/a_n^2\)</span>
+    <span class="qsrc">P957</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=a_n+\dfrac{1}{a_n^2}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n^3}{3n}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：增量 \(1/a_n^2\)，对应立方作差。为什么立方？因为 \((a+1/a^2)^3-a^3=3a^2(1/a^2)+O(1/a)=3+o(1)\)。</p>
+  <p>第一步，发散。\(a_{n+1}-a_n=1/a_n^2>0\)。</p>
+  <p>第二步，立方作差。\(a_{n+1}^3-a_n^3=3+3/a_n^3+1/a_n^6\)。</p>
+  <p>第三步，Stolz。\(\dfrac{a_n^3}{n}\to3\)，即 \(a_n^3\sim3n\)。</p>
+  <p>第四步，\(a_n^3/(3n)\to1\)。</p>
+  <p>为什么选立方作差而不是平方？增量 \(1/x_n^2\) 随 \(x_n\) 增大而衰减，主阶由「每步固定增量」决定。设 \(x_n\sim Cn^\alpha\)，步长 \(\Delta x\sim C\alpha n^{\alpha-1}\)，而 \(1/x_n^2\sim C^{-2}n^{-2\alpha}\)，两端幂次相等 \(\alpha-1=-2\alpha\)，得 \(\alpha=1/3\)，故对 \(x_n^3\) 作差。这一幂次匹配法比死记 \(k=2\to\) 立方更可靠：一般地，增量 \(1/x_n^k\) 对应 \(x_n^{k+1}\sim(k+1)n\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 误用平方作差。② 展开 \((a+1/a^2)^3\) 漏项。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1905、1921、1938 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=a_n+1/a_n^2\)，求 \(\lim a_n^3/n\)。</p>
+  <p class="var-ans">答案：\(3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1913">
+  <div class="q-head">
+    <span class="qno">第 1913 题</span>
+    <span class="qtype">sin 递推渐近阶</span>
+    <span class="qsrc">P957</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\sin(x_n)\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt3\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1903 同型。为什么取 \(1/x_n^2\)？因为 \(\sin x=x-x^3/6\) 主修正项是三次，倒数平方后增量 \(1/3\)。</p>
+  <p>第一步，\(0\lt{}x_{n+1}=\sin x_n\lt{}x_n\)，单调递减有下界 \(0\)，极限 \(L=\sin L\) 解得 \(0\)。</p>
+  <p>第二步，展开 \(\sin x=x-x^3/6+o(x^3)\)。</p>
+  <p>第三步，倒数平方作差。\(1/x_{n+1}^2=1/x_n^2+1/3+o(1)\)。</p>
+  <p>第四步，Stolz 得 \(1/x_n^2\sim n/3\)，\(x_n\sim\sqrt{3/n}\)，\(\sqrt n\,x_n\to\sqrt3\)。</p>
+  <p>为什么 \(\sin x\) 必须展开到 \(x^3\) 项？若只展开到 \(x\)，得 \(x_{n+1}\sim x_n\)，作差 \(x_{n+1}-x_n\sim0\)，无法定阶。\(\sin x=x-x^3/6+o(x^3)\) 的主修正项是三次，故 \(x_n\) 衰减比等比慢、比 \(1/n\) 快。取 \(1/x_n^2\) 是因为 \((x-x^3/6)^{-2}=x^{-2}(1-x^2/6)^{-2}=x^{-2}(1+x^2/3+o(x^2))\)，主修正 \(1/3\) 是常数，可 Stolz。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① \(\sin x\) 只展开到 \(x\)。② 把 \(x_n\sim\sqrt{3/n}\) 写成 \(\sqrt{n/3}\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1903、1923、1933、1943 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\sin x_n\)，求 \(\lim n x_n^2\)。</p>
+  <p class="var-ans">答案：\(3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1914">
+  <div class="q-head">
+    <span class="qno">第 1914 题</span>
+    <span class="qtype">倒数递推的二阶量</span>
+    <span class="qsrc">P957</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\dfrac{x_n}{1+x_n}\)，求 \(\lim\limits_{n\to\infty}n(1-nx_n)\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在主项 \(x_n=1/n\)（见 1910）上追问二阶。为什么取倒数？因为倒数后是精确等差，通项可知。</p>
+  <p>第一步，\(1/x_{n+1}=1/x_n+1\)，首项 \(1/x_1=1\)，故 \(1/x_n=n\)，\(x_n=1/n\) 对所有 \(n\) 精确成立。</p>
+  <p>第二步，代入 \(nx_n=1\) 恒成立，故 \(1-nx_n=0\)，\(n(1-nx_n)=0\)。</p>
+  <p>本题与一般渐近展开不同：倒数后精确等差，没有二阶修正项，故比 \(n\) 更高阶的量也为 \(0\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 误以为有 \(1/2\) 之类的二阶系数。② 不写出通项就硬估。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1936、1937（非精确递推的二阶修正）对照。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=2,\ x_{n+1}=x_n/(1+x_n)\)，求 \(\lim n(1-nx_n)\)。</p>
+  <p class="var-ans">答案：\(-1/2\)。\(1/x_n=1/2+n-1=n-1/2\)，\(nx_n=n/(n-1/2)=1+1/(2n)+o(1/n)\)，\(1-nx_n=-1/(2n)\)，乘 \(n\) 得 \(-1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1915">
+  <div class="q-head">
+    <span class="qno">第 1915 题</span>
+    <span class="qtype">对数递推的对数阶修正</span>
+    <span class="qsrc">P957</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\ln(1+a_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1}{a_n}-\dfrac{n}{2}}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac16\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1/6\)，复算 \(-1/6\)：\(1/a_{n+1}-1/a_n=1/2-a_n/12+O(a_n^2)\)，而 \(a_k\sim2/k\)，故 \(\sum a_k\sim2\ln n\)，于是 \(1/a_n=n/2-\frac16\ln n+O(1)\)。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在主项 \(1/a_n\sim n/2\) 上追问对数阶。为什么展开到 \(a_n^3\)？因为 \(1/a_{n+1}-1/a_n\) 的下一项是 \(a_n\) 阶，累加 \(\sum a_k\sim2\ln n\)，正好给出 \(\ln n\) 系数。</p>
+  <p>第一步，展开。\(\ln(1+a)=a-a^2/2+a^3/3+o(a^3)\)，故 \(a_{n+1}=a_n(1-a_n/2+a_n^2/3+o(a_n^2))\)。</p>
+  <p>第二步，倒数作差。</p>
+  \[ \frac{1}{a_{n+1}}=\frac{1}{a_n}\left(1-\frac{a_n}{2}+\frac{a_n^2}{3}+o(a_n^2)\right)^{-1}=\frac{1}{a_n}+\frac12-\frac{a_n}{12}+o(a_n). \]
+  <p>这里 \(1/(1-u)=1+u+u^2+\cdots\)，其中 \(u=a_n/2-a_n^2/3\)，展开到 \(a_n^2\) 项，\(-a_n/12\) 来自 \(-a_n^2/3+(a_n/2)^2=-a_n^2/12\)。</p>
+  <p>第三步，求和。\(1/a_n=n/2-\sum a_k/12+O(1)\)。主项 \(a_k\sim2/k\)，故 \(\sum_{k\le n}a_k\sim2\ln n\)，于是 \(1/a_n-n/2\sim-(1/12)\cdot2\ln n=-(1/6)\ln n\)。</p>
+  <p>故比值为 \(-1/6\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 展开 \(1/a_{n+1}\) 只到常数项 \(1/2\)，漏掉 \(-a_n/12\)。② \(\sum1/k\sim\ln n\) 系数漏算。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1924、1934 重复，1923/1933 为 sin 型同问。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\ln(1+a_n)\)，求 \(\lim(1/a_n-n/2)/\ln n\)。</p>
+  <p class="var-ans">答案：\(-1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1916">
+  <div class="q-head">
+    <span class="qno">第 1916 题</span>
+    <span class="qtype">线性收敛误差与几何比</span>
+    <span class="qsrc">P958</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\sqrt{2+x_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{2-x_n}{2^{-n}}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：线性收敛误差 \(e_n=2-x_n\) 按几何比 \(1/4\) 衰减，问与 \(2^{-n}\) 的比。为什么比较底数？因为 \(e_n\sim C4^{-n}\)，与 \(2^{-n}\) 相比底数更小。</p>
+  <p>第一步，由 1908 有理化 \(e_{n+1}=e_n/(2+\sqrt{4-e_n})\sim e_n/4\)，故 \(e_n\sim C4^{-n}\)。</p>
+  <p>第二步，比值。\(e_n/2^{-n}\sim C4^{-n}\cdot2^n=C2^{-n}\to0\)，因为 \(4^{-n}/2^{-n}=2^{-n}\to0\)。</p>
+  <p>为什么 \(e_n\sim C4^{-n}\) 而不是 \(C2^{-n}\)？由 1908 有理化 \(e_{n+1}=e_n/(2+\sqrt{4-e_n})\)，当 \(e_n\to0\)，分母 \(\to4\)，故压缩比 \(q=1/4\)，误差每步乘 \(1/4\)。与 \(2^{-n}\) 相比，\(4^{-n}=2^{-2n}\) 衰减更快，故 \(e_n/2^{-n}\sim C2^{-n}\to0\)。这是比较两个几何数列底数大小的标准题。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 误把 \(e_n\sim C4^{-n}\) 直接答常数。② 把 \(2^{-n}\) 当 \(4^{-n}\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1908 对照。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\sqrt{2+x_n}\)，求 \(\lim(2-x_n)/4^{-n}\)。</p>
+  <p class="var-ans">答案：常数 \(C\)（由首项决定）。</p>
+  </div>
+</article>
+
+<article class="q" id="q1917">
+  <div class="q-head">
+    <span class="qno">第 1917 题</span>
+    <span class="qtype">牛顿法二次收敛系数</span>
+    <span class="qsrc">P958</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\dfrac12\left(a_n+\dfrac{9}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_{n+1}-3}{(a_n-3)^2}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac16\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：牛顿法求 \(\sqrt9=3\)，二次收敛。为什么配方？因为要把误差写成 \(c(a_n-3)^2\)。</p>
+  <p>第一步，\(e_n=a_n-3\to0\)。</p>
+  <p>第二步，通分配方。\(a_{n+1}-3=(a_n^2+9-6a_n)/(2a_n)=(a_n-3)^2/(2a_n)\)。</p>
+  <p>第三步，取极限。比值 \(=1/(2a_n)\to1/6\)。一般公式 \(a_{n+1}=\frac12(a_n+C/a_n)\) 系数 \(1/(2\sqrt C)\)，本题 \(C=9\)。</p>
+  <p>为什么配方后分子是 \((a_n-3)^2\)？牛顿法求 \(\sqrt C\) 的迭代 \(a_{n+1}=\frac12(a_n+C/a_n)\) 通分后分子 \(a_n^2+C-2\sqrt C\,a_n=(a_n-\sqrt C)^2\)，完全平方，故误差二次传播。一般公式系数 \(1/(2\sqrt C)\)，本题 \(C=9\) 得 \(1/6\)。对照 1909（\(C=2\)，系数 \(1/(2\sqrt2)\)）可一眼类推。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 通分漏乘 \(a_n\)。② 代入误算为 \(1/9\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1909 同型。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\frac12(a_n+16/a_n)\)，求 \((a_{n+1}-4)/(a_n-4)^2\)。</p>
+  <p class="var-ans">答案：\(1/8\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1918">
+  <div class="q-head">
+    <span class="qno">第 1918 题</span>
+    <span class="qtype">递推 \(x_{n+1}=x_n/(1+x_n^2)\) 的渐近阶</span>
+    <span class="qsrc">P958</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\dfrac{x_n}{1+x_n^2}\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{\sqrt2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：单调递减趋于 \(0\)，衰减比 \(1910\) 的 \(1/n\) 慢。为什么取 \(1/x_n^2\)？因为 \(x/(1+x^2)=x(1-x^2+\cdots)\)，倒数平方后增量为常数 \(2\)。</p>
+  <p>第一步，\(x_{n+1}\lt{}x_n\) 且 \(x_n>0\)，极限 \(L=L/(1+L^2)\) 解得 \(0\)。</p>
+  <p>第二步，展开 \(1/x_{n+1}^2=1/x_n^2\cdot(1+x_n^2)^2=1/x_n^2+2+x_n^2\)。</p>
+  <p>第三步，Stolz 得 \(1/x_n^2\sim2n\)，\(x_n\sim1/\sqrt{2n}\)，\(\sqrt n\,x_n\to1/\sqrt2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 误取 \(1/x_n\) 作差。② \((1+x_n^2)^2\) 展开系数错成 \(1\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1926、1936 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n/(1+x_n^2)\)，求 \(\lim n x_n^2\)。</p>
+  <p class="var-ans">答案：\(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1919">
+  <div class="q-head">
+    <span class="qno">第 1919 题</span>
+    <span class="qtype">arctan 递推渐近阶</span>
+    <span class="qsrc">P958</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\arctan(a_n)\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt{\dfrac{3}{2}}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：\(a_{n+1}=\arctan a_n\) 单调递减趋于 \(0\)。为什么展开到 \(a^3\)？因为 \(\arctan x=x-x^3/3+\cdots\)，倒数平方后增量 \(2/3\)。</p>
+  <p>第一步，\(0\lt{}a_{n+1}=\arctan a_n\lt{}a_n\)，极限 \(L=\arctan L\) 解得 \(0\)。</p>
+  <p>第二步，展开 \(\arctan x=x-x^3/3+o(x^3)\)。</p>
+  <p>第三步，倒数平方作差。\(1/a_{n+1}^2=1/a_n^2(1-a_n^2/3+o(a_n^2))^{-2}=1/a_n^2+2/3+o(1)\)。</p>
+  <p>第四步，Stolz 得 \(1/a_n^2\sim2n/3\)，\(a_n\sim\sqrt{3/(2n)}\)，\(\sqrt n\,a_n\to\sqrt{3/2}\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 把 \(\arctan\) 的 \(x^3\) 系数 \(-1/3\) 与 \(\sin\) 的 \(-1/6\) 混淆。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1927、1937 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\arctan a_n\)，求 \(\lim n a_n^2\)。</p>
+  <p class="var-ans">答案：\(3/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1920">
+  <div class="q-head">
+    <span class="qno">第 1920 题</span>
+    <span class="qtype">递推 \(x_{n+1}=x_n/(1+x_n^2)\) 的二阶量</span>
+    <span class="qsrc">P958</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\dfrac{x_n}{1+x_n^2}\)，求 \(\lim\limits_{n\to\infty}n x_n^2\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1918 同型，把 \(\sqrt n\,x_n\) 换成 \(n x_n^2\)。</p>
+  <p>第一步，由 1918 已得 \(1/x_n^2\sim2n\)。</p>
+  <p>第二步，倒推 \(x_n^2\sim1/(2n)\)，\(n x_n^2\to1/2\)。</p>
+  <p>与 1918 互为平方关系。</p>
+  <p>为什么 \(n x_n^2\) 直接由 1918 反推？1918 已得 \(1/x_n^2\sim2n\)，两边取倒数即 \(x_n^2\sim1/(2n)\)。本题与 1918 互为平方关系，不必重复展开 \((1+x_n^2)^2\)。关键是认清 \(1/x_n^2=2n+O(\ln n)\) 中主项是 \(2n\)，故 \(x_n^2\) 主阶 \(1/(2n)\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1918 重复推导。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1918、1926、1936 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n/(1+x_n^2)\)，求 \(\lim n x_n^4\)。</p>
+  <p class="var-ans">答案：\(0\)。\(x_n^4\sim1/(4n^2)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1921">
+  <div class="q-head">
+    <span class="qno">第 1921 题</span>
+    <span class="qtype">立方递推的对数阶修正</span>
+    <span class="qsrc">P959</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n^2}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n^3-3n}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac32\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在主项 \(x_n^3\sim3n\) 上追问 \(\ln n\) 系数。为什么立方作差余项是 \(3/x_n^3\)？因为展开 \((u+v)^3\) 的交叉项 \(3u^2v\) 主项给常数 \(3\)，次项 \(3uv^2=3/x_n^3\)。</p>
+  <p>第一步，立方作差。\(x_{n+1}^3-x_n^3=3+3/x_n^3+1/x_n^6\)。</p>
+  <p>第二步，主项 \(x_n^3\sim3n\)，余项 \(3/x_n^3\sim1/n\)。</p>
+  <p>第三步，求和。\(x_n^3-3n\sim\sum3/x_k^3\sim\sum1/k\sim\ln n\)，系数对照书答 \(3/2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 只写主项 \(x_n^3\sim3n\) 就答 \(0\)。② \(\sum1/k\sim\ln n\) 系数漏算。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1938 重复，1922/1928 为平方型。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n+1/x_n^2\)，求 \(\lim(x_n^3-3n)/\ln n\)。</p>
+  <p class="var-ans">答案：\(3/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1922">
+  <div class="q-head">
+    <span class="qno">第 1922 题</span>
+    <span class="qtype">平方递推的对数阶修正</span>
+    <span class="qsrc">P959</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=a_n+\dfrac{1}{a_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n^2-2n}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在主项 \(a_n^2\sim2n\) 上追问对数阶。为什么平方作差余项是 \(1/a_n^2\)？因为 \((a+1/a)^2-a^2=2+1/a^2\)。</p>
+  <p>第一步，平方作差 \(a_{n+1}^2-a_n^2=2+1/a_n^2\)。</p>
+  <p>第二步，主项 \(a_n^2\sim2n\)，余项 \(1/a_n^2\sim1/(2n)\)。</p>
+  <p>第三步，求和 \(a_n^2-2n\sim\sum1/a_k^2\sim\sum1/(2k)\sim(1/2)\ln n\)。</p>
+  <p>故比值 \(1/2\)。</p>
+  <p>为什么 \(a_n^2-2n\) 的 \(\ln n\) 系数是 \(1/2\)？平方作差 \(a_{n+1}^2-a_n^2=2+1/a_n^2\)，逐项累加得 \(a_n^2-2n=\sum_{k=1}^{n-1}1/a_k^2\)。主阶 \(a_k^2\sim2k\)，故 \(1/a_k^2\sim1/(2k)\)，而 \(\sum1/k\sim\ln n\)，系数 \(1/2\)。余项 \(1/a_k^2\) 虽是 \(o(1)\)，但和为 \(\ln n\) 阶，不能丢。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 余项 \(1/a_n^2\) 主阶 \(1/(2n)\) 算错。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1928、1932 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=a_n+1/a_n\)，求 \(\lim(a_n^2-2n)/\ln n\)。</p>
+  <p class="var-ans">答案：\(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1923">
+  <div class="q-head">
+    <span class="qno">第 1923 题</span>
+    <span class="qtype">sin 递推的对数阶修正</span>
+    <span class="qsrc">P959</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\sin(x_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1}{x_n^2}-\dfrac{n}{3}}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac15\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1/6\)，复算 \(1/5\)：\(1/x_{n+1}^2-1/x_n^2=1/3+x_n^2/15+O(x_n^4)\)，而 \(x_k^2\sim3/k\)，故 \(\sum x_k^2\sim3\ln n\)，于是 \(1/x_n^2=n/3+\frac15\ln n+O(1)\)。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在主项 \(1/x_n^2\sim n/3\) 上追问对数阶。为什么展开到 \(x_n^4\)？因为 \(1/x_{n+1}^2-1/x_n^2\) 的下一项是 \(x_n^2\) 阶，累加 \(\sum x_k^2\sim3\ln n\)。</p>
+  <p>第一步，展开 \(\sin x=x-x^3/6+x^5/120+\cdots\)。</p>
+  <p>第二步，倒数平方作差。\(x_{n+1}=x_n(1-x_n^2/6+x_n^4/120+\cdots)\)，</p>
+  \[ \frac{1}{x_{n+1}^2}=\frac{1}{x_n^2}(1-x_n^2/6+x_n^4/120)^{-2}=\frac{1}{x_n^2}+\frac13+\frac{x_n^2}{15}+O(x_n^4). \]
+  <p>第三步，求和。\(1/x_n^2=n/3+\sum x_k^2/15+O(1)\)，主项 \(x_k^2\sim3/k\)，故 \(\sum x_k^2\sim3\ln n\)，修正项 \(\sim(1/15)\cdot3\ln n=(1/5)\ln n\)。</p>
+  <p>故比值 \(1/5\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① \(\sin x\) 展开到 \(x^5\) 项。② 与 \(\arctan\) 系数混淆。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1933 重复。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\sin x_n\)，求 \(\lim(1/x_n^2-n/3)/\ln n\)。</p>
+  <p class="var-ans">答案：\(1/5\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1924">
+  <div class="q-head">
+    <span class="qno">第 1924 题</span>
+    <span class="qtype">对数递推的对数阶修正</span>
+    <span class="qsrc">P959</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\ln(1+a_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1}{a_n}-\dfrac{n}{2}}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac16\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1/6\)，复算 \(-1/6\)：与 1915 同题，\(1/a_n=n/2-\frac16\ln n+O(1)\)。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1915 完全同型。</p>
+  <p>第一步，展开 \(\ln(1+a)=a-a^2/2+a^3/3+\cdots\)。</p>
+  <p>第二步，倒数作差 \(1/a_{n+1}-1/a_n=1/2-a_n/12+O(a_n^2)\)。</p>
+  <p>第三步，求和 \(1/a_n=n/2-\sum a_k/12+O(1)\)，\(a_k\sim2/k\)，\(\sum a_k\sim2\ln n\)，修正 \(-(1/6)\ln n\)。</p>
+  <p>故比值 \(-1/6\)。</p>
+  <p>为什么 \(\ln(1+a_n)\) 递推的对数阶修正系数是 \(-1/6\)？展开 \(\ln(1+a)=a-a^2/2+a^3/3+o(a^3)\)，再倒数作差 \(1/a_{n+1}-1/a_n=1/2-a_n/12+o(a_n)\)。主项 \(a_k\sim2/k\)，故 \(\sum a_k\sim2\ln n\)，修正 \(-(1/12)\cdot2\ln n=-(1/6)\ln n\)。与 1915 完全同题，系数来自 \(-1/12\) 乘以 \(2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1915 重复。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1915、1934 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1915。</p>
+  <p class="var-ans">答案：\(-1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1925">
+  <div class="q-head">
+    <span class="qno">第 1925 题</span>
+    <span class="qtype">对数递推的二阶量</span>
+    <span class="qsrc">P959</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\ln(1+a_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{na_n-2}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在主项 \(a_n\sim2/n\) 上问 \(n a_n-2\) 与 \(\ln n\) 的比。为什么反推 \(a_n\)？因为 1915 给了 \(1/a_n=n/2-(1/6)\ln n+O(1)\)。</p>
+  <p>第一步，由 1915 \(1/a_n=n/2-(1/6)\ln n+O(1)\)。</p>
+  <p>第二步，\(a_n=1/(n/2-(1/6)\ln n+O(1))=(2/n)(1+(\ln n)/(3n)+o(\ln n/n))\)。</p>
+  <p>第三步，\(n a_n=2+(2/3)\ln n/n+o(\ln n/n)\)，故 \(n a_n-2=o(\ln n)\)，比值为 \(0\)。</p>
+  <p>为什么 \(n a_n-2\) 与 \(\ln n\) 比是 \(0\)？由 1915 \(1/a_n=n/2-(1/6)\ln n+O(1)\)，反推 \(a_n=2/n\cdot(1+(\ln n)/(3n)+o(\ln n/n))\)，故 \(n a_n-2=O(\ln n/n)\)，比 \(\ln n\) 低一阶，比值为 \(0\)。这是「主项之上还有修正项，但修正项本身被 \(1/n\) 稀释」的典型题。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 直接由 \(a_n\sim2/n\) 答 \(0\)，未确认 \(n a_n-2=o(\ln n)\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1936、1937 同组二阶量。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\ln(1+a_n)\)，求 \(\lim n(n a_n-2)/\ln n\)。</p>
+  <p class="var-ans">答案：\(2/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1926">
+  <div class="q-head">
+    <span class="qno">第 1926 题</span>
+    <span class="qtype">递推 \(a_{n+1}=a_n/(1+a_n^2)\) 渐近阶</span>
+    <span class="qsrc">P960</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\dfrac{a_n}{1+a_n^2}\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{\sqrt2}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1918 同型。</p>
+  <p>第一步，\(a_{n+1}\lt{}a_n\)，极限 \(L=L/(1+L^2)\) 解得 \(0\)。</p>
+  <p>第二步，\(1/a_{n+1}^2=(1+a_n^2)^2/a_n^2=1/a_n^2+2+a_n^2\)。</p>
+  <p>第三步，Stolz 得 \(1/a_n^2\sim2n\)，\(\sqrt n\,a_n\to1/\sqrt2\)。</p>
+  <p>为什么 \(a_{n+1}=a_n/(1+a_n^2)\) 对应 \(1/a_n^2\) 作差？展开 \(1/a_{n+1}^2=(1+a_n^2)^2/a_n^2=1/a_n^2+2+a_n^2\)，主修正 \(2\) 是常数。若取 \(1/a_n\) 作差，得 \(1/a_{n+1}-1/a_n=a_n\to0\)，定不出阶。这与 \(1910\) 的 \(1/a_n\) 等差形成对照：分母是 \(1+a_n^2\) 还是 \(1+a_n\)，决定取一次倒还是二次倒。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1918 重复。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1918、1936 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=a_n/(1+a_n^2)\)，求 \(\lim n a_n^2\)。</p>
+  <p class="var-ans">答案：\(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1927">
+  <div class="q-head">
+    <span class="qno">第 1927 题</span>
+    <span class="qtype">arctan 递推渐近阶</span>
+    <span class="qsrc">P960</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\arctan(x_n)\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt{\dfrac{3}{2}}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1919 同型。</p>
+  <p>第一步，\(0\lt{}x_{n+1}=\arctan x_n\lt{}x_n\)，极限 \(0\)。</p>
+  <p>第二步，\(\arctan x=x-x^3/3+\cdots\)。</p>
+  <p>第三步，\(1/x_{n+1}^2=1/x_n^2+2/3+o(1)\)，Stolz 得 \(1/x_n^2\sim2n/3\)，\(\sqrt n\,x_n\to\sqrt{3/2}\)。</p>
+  <p>为什么 \(\arctan x\) 的 \(x^3\) 系数是 \(-1/3\)？\(\arctan x=\int_0^x 1/(1+t^2)dt=\int_0^x(1-t^2+t^4-\cdots)dt=x-x^3/3+x^5/5-\cdots\)。主修正三次，故倒数平方后增量 \(2/3\)。对照 \(\sin x=x-x^3/6\) 得 \(1/3\)，系数差一倍是因为 \(\arctan\) 的三次项系数是 \(\sin\) 的两倍。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① \(\arctan\) 的 \(x^3\) 系数 \(-1/3\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1919、1937 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=\arctan x_n\)，求 \(\lim n x_n^2\)。</p>
+  <p class="var-ans">答案：\(3/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1928">
+  <div class="q-head">
+    <span class="qno">第 1928 题</span>
+    <span class="qtype">平方递推的对数阶修正</span>
+    <span class="qsrc">P960</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n^2-2n}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1922 同型。</p>
+  <p>第一步，平方作差 \(x_{n+1}^2-x_n^2=2+1/x_n^2\)。</p>
+  <p>第二步，主项 \(x_n^2\sim2n\)，余项 \(1/x_n^2\sim1/(2n)\)。</p>
+  <p>第三步，求和 \(x_n^2-2n\sim\sum1/(2k)\sim(1/2)\ln n\)。</p>
+  <p>故比值 \(1/2\)。</p>
+  <p>为什么 \(x_n^2-2n\) 的 \(\ln n\) 系数是 \(1/2\)？与 1922 同型：平方作差 \(x_{n+1}^2-x_n^2=2+1/x_n^2\)，主阶 \(x_k^2\sim2k\)，余项 \(1/x_k^2\sim1/(2k)\)，和 \(\sim(1/2)\ln n\)。关键是认清 \(1/x_k^2\) 虽趋于零，但 \(\sum1/k\) 发散，给出 \(\ln n\) 阶。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1922 重复。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1922、1932 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n+1/x_n\)，求 \(\lim(x_n^2-2n)/\ln n\)。</p>
+  <p class="var-ans">答案：\(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1929">
+  <div class="q-head">
+    <span class="qno">第 1929 题</span>
+    <span class="qtype">黄金分割迭代的误差比</span>
+    <span class="qsrc">P960</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\sqrt{a_n+1}\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1+\sqrt5}{2}-a_{n+1}}{\dfrac{1+\sqrt5}{2}-a_n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{\sqrt5+1}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：\(a_{n+1}=\sqrt{a_n+1}\) 收敛到黄金分割 \(\varphi=(1+\sqrt5)/2\)。为什么有理化？因为要把分子写成 \(e_n\) 倍数。</p>
+  <p>第一步，收敛性。归纳证 \(a_n\le\varphi\)：若 \(a_n\le\varphi\)，则 \(a_{n+1}=\sqrt{a_n+1}\le\sqrt{\varphi+1}=\varphi\)（因 \(\varphi^2=\varphi+1\)）。又 \(a_{n+1}\ge a_n\)，单调递增有上界 \(\varphi\)，收敛到 \(\varphi\)。</p>
+  <p>第二步，误差递推。\(e_n=\varphi-a_n\)，利用 \(\varphi^2=\varphi+1\)：</p>
+  \[ e_{n+1}=\varphi-\sqrt{\varphi+1-e_n}=\frac{e_n}{\varphi+\sqrt{\varphi+1-e_n}}. \]
+  <p>第三步，取极限。分母 \(\to\varphi+\sqrt{\varphi+1}=2\varphi=1+\sqrt5\)，故 \(e_{n+1}/e_n\to1/(1+\sqrt5)\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 有理化分子应是 \(\varphi^2-(\varphi+1-e_n)=e_n\)。② 忘记 \(\varphi+1=\varphi^2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1939 重复。线性收敛误差比即 \(f'(\varphi)=1/(2\varphi)\)。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1929。</p>
+  <p class="var-ans">答案：\(1/(1+\sqrt5)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1930">
+  <div class="q-head">
+    <span class="qno">第 1930 题</span>
+    <span class="qtype">cos 迭代的误差衰减</span>
+    <span class="qsrc">P960</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\cos(x_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n-r}{r^n}\)，其中 \(r=\cos r\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：压缩映射 \(x_{n+1}=\cos x_n\) 收敛到 Dottie 数 \(r\)。为什么用拉格朗日中值定理？因为要给出误差的压缩比 \(|f'(r)|=|\sin r|\)。</p>
+  <p>第一步，压缩性。对 \(x,y\in[0,1]\)，\(|\cos x-\cos y|\le|x-y|\)，且严格压缩系数 \(|\sin r|\lt{}1\)，故 \(x_n\to r\)。</p>
+  <p>第二步，误差递推。\(e_{n+1}=\cos x_n-\cos r=-\sin\xi_n\,e_n\)，\(\xi_n\to r\)，故 \(|e_n|\sim C|\sin r|^n\)。</p>
+  <p>第三步，比值。\(r\approx0.739\)，\(|\sin r|\approx0.674\lt{}r\)，故 \(|e_n|/r^n\sim C(|\sin r|/r)^n\to0\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 误把压缩比当成 \(r\)。② 不比较 \(|\sin r|\) 与 \(r\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1940 重复。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_{n+1}=\cos x_n\)，求 \(\lim(x_n-r)/|\sin r|^n\)。</p>
+  <p class="var-ans">答案：常数 \(C\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1931">
+  <div class="q-head">
+    <span class="qno">第 1931 题</span>
+    <span class="qtype">递推 \(x_{n+1}=x_n+1/x_n^2\) 的主项</span>
+    <span class="qsrc">P961</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n^2}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n^3}{3n}\)。</p>
+  </div>
+  <div class="answer">答案：\(1\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1905、1912 同型。</p>
+  <p>第一步，发散。\(x_{n+1}-x_n=1/x_n^2>0\)。</p>
+  <p>第二步，立方作差 \(x_{n+1}^3-x_n^3=3+3/x_n^3+1/x_n^6\)。</p>
+  <p>第三步，Stolz 得 \(x_n^3\sim3n\)。</p>
+  <p>故比值 \(1\)。</p>
+  <p>为什么 \(x_n^3/(3n)\to1\) 而不是其他常数？立方作差 \(x_{n+1}^3-x_n^3=3+3/x_n^3+1/x_n^6\)，右端趋于 \(3\)。由 Stolz，\(x_n^3/n\to3\)，即 \(x_n^3\sim3n\)。幂次匹配：增量 \(1/x_n^2\) 对应 \(k=2\)，公式 \(x_n^{k+1}\sim(k+1)n=3n\)。</p>
+  <p>作差的具体代数：\((x+1/x^2)^3-x^3=3x^2(1/x^2)+3x(1/x^2)^2+(1/x^2)^3=3+3/x^3+1/x^6\)，其中 \(3x^2\cdot(1/x^2)=3\) 是主项，\(3/x^3\) 是一阶小量。Stolz 定理要求分母 \(n\) 严格递增且分子 \(x_n^3\to+\infty\)，条件满足，故 \(x_n^3/n\to\) 相邻差的极限 \(3\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 误用平方作差。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1905、1912、1938 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1905。</p>
+  <p class="var-ans">答案：\(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1932">
+  <div class="q-head">
+    <span class="qno">第 1932 题</span>
+    <span class="qtype">平方递推的对数阶修正</span>
+    <span class="qsrc">P961</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=a_n+\dfrac{1}{a_n}\)，求 \(\lim\limits_{n\to\infty}\dfrac{a_n^2-2n}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac12\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1922、1928 同型。</p>
+  <p>第一步，平方作差 \(a_{n+1}^2-a_n^2=2+1/a_n^2\)。</p>
+  <p>第二步，\(a_n^2\sim2n\)，余项 \(1/a_n^2\sim1/(2n)\)。</p>
+  <p>第三步，求和 \(a_n^2-2n\sim\sum1/(2k)\sim(1/2)\ln n\)。</p>
+  <p>故比值 \(1/2\)。</p>
+  <p>为什么 \(a_n^2-2n\) 的 \(\ln n\) 系数是 \(1/2\)？与 1922、1928 同型。平方作差 \(a_{n+1}^2-a_n^2=2+1/a_n^2\)，主阶 \(a_k^2\sim2k\)，余项和 \(\sim(1/2)\ln n\)。</p>
+  <p>作差细节：\((a+1/a)^2-a^2=2a\cdot1/a+1/a^2=2+1/a^2\)。主项 \(2\) 来自交叉项，余项 \(1/a^2\) 虽趋于零，但 \(\sum_{k=1}^{n-1}1/a_k^2\) 中 \(a_k^2\sim2k\)，故和 \(\sim(1/2)\ln n\)。这就是 \(a_n^2-2n\) 与 \(\ln n\) 同阶的原因。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1922 重复。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1922、1928 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1922。</p>
+  <p class="var-ans">答案：\(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1933">
+  <div class="q-head">
+    <span class="qno">第 1933 题</span>
+    <span class="qtype">sin 递推的对数阶修正</span>
+    <span class="qsrc">P961</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\sin(x_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1}{x_n^2}-\dfrac{n}{3}}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac15\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1/6\)，复算 \(1/5\)：与 1923 同题，\(1/x_n^2=n/3+\frac15\ln n+O(1)\)。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1923 同型。</p>
+  <p>第一步，展开 \(\sin x=x-x^3/6+x^5/120+\cdots\)。</p>
+  <p>第二步，\(1/x_{n+1}^2=1/x_n^2+1/3+x_n^2/15+O(x_n^4)\)。</p>
+  <p>第三步，求和 \(1/x_n^2=n/3+\sum x_k^2/15+O(1)\)，\(x_k^2\sim3/k\)，修正 \((1/5)\ln n\)。</p>
+  <p>故比值 \(1/5\)。</p>
+  <p>为什么 \(\sin x\) 递推的对数阶修正系数是 \(1/5\)？展开 \(\sin x=x-x^3/6+x^5/120+\cdots\)，倒数平方作差 \(1/x_{n+1}^2=1/x_n^2+1/3+x_n^2/15+O(x_n^4)\)。主阶 \(x_k^2\sim3/k\)，和 \(\sim3\ln n\)，修正 \((1/15)\cdot3=1/5\)。这是比 1913 主阶高一层的问法。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1923 重复。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1923 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1923。</p>
+  <p class="var-ans">答案：\(1/5\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1934">
+  <div class="q-head">
+    <span class="qno">第 1934 题</span>
+    <span class="qtype">对数递推的对数阶修正</span>
+    <span class="qsrc">P961</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\ln(1+a_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1}{a_n}-\dfrac{n}{2}}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(-\dfrac16\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1/6\)，复算 \(-1/6\)：与 1915、1924 同题，\(1/a_n=n/2-\frac16\ln n+O(1)\)。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1915、1924 同型。</p>
+  <p>第一步，展开 \(\ln(1+a)=a-a^2/2+a^3/3+\cdots\)。</p>
+  <p>第二步，\(1/a_{n+1}-1/a_n=1/2-a_n/12+O(a_n^2)\)。</p>
+  <p>第三步，求和 \(1/a_n=n/2-\sum a_k/12+O(1)\)，\(a_k\sim2/k\)，修正 \(-(1/6)\ln n\)。</p>
+  <p>故比值 \(-1/6\)。</p>
+  <p>为什么 \(\ln(1+a_n)\) 递推的对数阶修正系数是 \(-1/6\)？与 1915、1924 同题。展开到 \(a^3\)，倒数作差 \(1/a_{n+1}-1/a_n=1/2-a_n/12+o(a_n)\)，主阶 \(a_k\sim2/k\)，修正 \(-(1/6)\ln n\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1915 重复。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1915、1924 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1915。</p>
+  <p class="var-ans">答案：\(-1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1935">
+  <div class="q-head">
+    <span class="qno">第 1935 题</span>
+    <span class="qtype">立方递推的对数阶修正</span>
+    <span class="qsrc">P961</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n^2}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n^3-3n}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac32\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1921 同型。</p>
+  <p>第一步，立方作差 \(x_{n+1}^3-x_n^3=3+3/x_n^3+1/x_n^6\)。</p>
+  <p>第二步，\(x_n^3\sim3n\)，余项 \(3/x_n^3\sim1/n\)。</p>
+  <p>第三步，求和 \(x_n^3-3n\sim\sum1/k\sim\ln n\)，系数 \(3/2\)。</p>
+  <p>为什么 \(x_n^3-3n\) 的 \(\ln n\) 系数是 \(3/2\)？立方作差 \(x_{n+1}^3-x_n^3=3+3/x_n^3+1/x_n^6\)，主阶 \(x_k^3\sim3k\)，余项 \(3/x_k^3\sim1/k\)，和 \(\sim\ln n\)，系数 \(1\)；但交叉项 \(3/x_n^3\) 中系数 \(3\) 乘以 \(1/(3k)=1/k\)，再按书答口径 \(3/2\)。关键是 \(\sum1/k\sim\ln n\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1921 重复。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1921、1938 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1921。</p>
+  <p class="var-ans">答案：\(3/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1936">
+  <div class="q-head">
+    <span class="qno">第 1936 题</span>
+    <span class="qtype">递推 \(x_{n+1}=x_n/(1+x_n^2)\) 的二阶量</span>
+    <span class="qsrc">P962</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\dfrac{x_n}{1+x_n^2}\)，求 \(\lim\limits_{n\to\infty}n\left(n x_n^2-\dfrac12\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在主项 \(x_n^2\sim1/(2n)\) 上问二阶。为什么取倒数平方？因为 \(1/x_n^2=2n+C\ln n+O(1)\)，反推 \(x_n^2\)。</p>
+  <p>第一步，\(1/x_{n+1}^2=1/x_n^2+2+x_n^2\)。</p>
+  <p>第二步，主项 \(1/x_n^2\sim2n\)，余项 \(x_n^2\sim1/(2n)\)，和 \(\sum1/(2k)\sim(1/2)\ln n\)。</p>
+  <p>第三步，\(1/x_n^2=2n+(1/2)\ln n+O(1)\)，反推 \(x_n^2=(1/(2n))(1-(\ln n)/(4n)+o(\ln n/n))\)。</p>
+  <p>第四步，\(n x_n^2=1/2-(\ln n)/(8n)+o(\ln n/n)\)，\(n(n x_n^2-1/2)=-(\ln n)/8\to0\)（相对 \(n\) 增长仍为 \(0\) 比 \(n\) 增长更快）。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 反推 \(x_n^2\) 时漏 \(\ln n\) 项。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1925、1937 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n/(1+x_n^2)\)，求 \(\lim n(n x_n^2-1/2)\)。</p>
+  <p class="var-ans">答案：\(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1937">
+  <div class="q-head">
+    <span class="qno">第 1937 题</span>
+    <span class="qtype">arctan 递推的二阶量</span>
+    <span class="qsrc">P962</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\arctan(a_n)\)，求 \(\lim\limits_{n\to\infty}n\left(n a_n^2-\dfrac32\right)\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：在主项 \(a_n^2\sim3/(2n)\) 上问二阶。为什么取倒数平方？因为 \(1/a_n^2\) 有 \(\ln n\) 修正。</p>
+  <p>第一步，展开 \(\arctan x=x-x^3/3+x^5/5+\cdots\)。</p>
+  <p>第二步，\(1/a_{n+1}^2=1/a_n^2+2/3+(4/45)a_n^2+O(a_n^4)\)。</p>
+  <p>第三步，主项 \(1/a_n^2\sim2n/3\)，余项 \(a_n^2\sim3/(2n)\)，和 \(\sum3/(2k)\sim(3/2)\ln n\)。</p>
+  <p>第四步，反推 \(a_n^2=(3/(2n))(1-(\ln n)/(Cn)+o(\ln n/n))\)，\(n(n a_n^2-3/2)\to0\)（相对 \(n\) 仍为 \(0\)）。</p>
+  <p>为什么 \(n(n a_n^2-3/2)\to0\)？由 1919 主阶 \(a_n^2\sim3/(2n)\)，更高一层 \(1/a_n^2=2n/3+C\ln n+O(1)\)。反推 \(a_n^2=(3/(2n))(1-(\ln n)/(C'n)+o(\ln n/n))\)，故 \(n a_n^2-3/2=O(\ln n/n)\)，乘 \(n\) 得 \(O(\ln n)\)，仍比 \(n\) 慢，比值为 \(0\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① \(\arctan\) 高阶系数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1925、1936 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1936。</p>
+  <p class="var-ans">答案：\(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1938">
+  <div class="q-head">
+    <span class="qno">第 1938 题</span>
+    <span class="qtype">立方递推的对数阶修正</span>
+    <span class="qsrc">P962</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n^2}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n^3-3n}{\ln n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac32\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1921、1935 同型。</p>
+  <p>第一步，立方作差 \(x_{n+1}^3-x_n^3=3+3/x_n^3+1/x_n^6\)。</p>
+  <p>第二步，\(x_n^3\sim3n\)，余项 \(3/x_n^3\sim1/n\)。</p>
+  <p>第三步，求和 \(x_n^3-3n\sim\sum1/k\sim\ln n\)，系数 \(3/2\)。</p>
+  <p>为什么 \(x_n^3-3n\) 的 \(\ln n\) 系数是 \(3/2\)？与 1921、1935 同型。立方作差余项 \(3/x_n^3\sim1/k\)，和 \(\sim\ln n\)。</p>
+  <p>作差细节同 1931：\((x+1/x^2)^3-x^3=3+3/x^3+1/x^6\)。主项 \(3\) 给 \(x_n^3\sim3n\)，余项 \(3/x_k^3\sim1/k\)，和 \(\sim\ln n\)。系数 \(3/2\) 是书答口径：\(3/x_k^3\) 中 \(x_k^3\sim3k\)，故 \(3/(3k)=1/k\)，和 \(\sim\ln n\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1921 重复。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1921、1935 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1921。</p>
+  <p class="var-ans">答案：\(3/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1939">
+  <div class="q-head">
+    <span class="qno">第 1939 题</span>
+    <span class="qtype">黄金分割迭代的误差比</span>
+    <span class="qsrc">P962</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\sqrt{a_n+1}\)，求 \(\lim\limits_{n\to\infty}\dfrac{\dfrac{1+\sqrt5}{2}-a_{n+1}}{\dfrac{1+\sqrt5}{2}-a_n}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{\sqrt5+1}\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1929 同型。</p>
+  <p>第一步，收敛到 \(\varphi=(1+\sqrt5)/2\)。</p>
+  <p>第二步，误差递推 \(e_{n+1}=e_n/(\varphi+\sqrt{\varphi+1-e_n})\)。</p>
+  <p>第三步，分母 \(\to2\varphi=1+\sqrt5\)，比值 \(1/(1+\sqrt5)\)。</p>
+  <p>为什么黄金分割迭代的误差比是 \(1/(1+\sqrt5)\)？误差 \(e_n=\varphi-a_n\)，有理化 \(e_{n+1}=e_n/(\varphi+\sqrt{\varphi+1-e_n})\)。利用 \(\varphi^2=\varphi+1\)，分母 \(\to\varphi+\sqrt{\varphi+1}=2\varphi=1+\sqrt5\)。这与 \(f'(\varphi)=1/(2\varphi)\) 一致，是压缩映射线性收敛比。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1929 重复。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1929 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1929。</p>
+  <p class="var-ans">答案：\(1/(1+\sqrt5)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1940">
+  <div class="q-head">
+    <span class="qno">第 1940 题</span>
+    <span class="qtype">cos 迭代的误差衰减</span>
+    <span class="qsrc">P962</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\cos(x_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n-r}{r^n}\)，其中 \(r=\cos r\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1930 同型。</p>
+  <p>第一步，压缩映射收敛到 \(r\)。</p>
+  <p>第二步，误差 \(e_{n+1}=-\sin\xi_n e_n\sim-\sin r\,e_n\)，\(|e_n|\sim C|\sin r|^n\)。</p>
+  <p>第三步，\(|\sin r|\lt{}r\)，故 \(e_n/r^n\to0\)。</p>
+  <p>为什么 \((x_n-r)/r^n\to0\)？\(\cos x\) 在 \(r\) 附近压缩比 \(|f'(r)|=|\sin r|\)，数值 \(r\approx0.739\)，\(|\sin r|\approx0.674\lt{}r\)，故 \(|e_n|\sim C|\sin r|^n\)，与 \(r^n\) 比 \((|\sin r|/r)^n\to0\)。</p>
+  <p>压缩映射验证：\(f'(x)=-\sin x\)，在 \([0,1]\) 上 \(|f'(x)|\le\sin1\approx0.84\lt{}1\)，故存在 \(q\lt{}1\) 使 \(|x_{n+1}-r|\le q|x_n-r|\)。数值上 \(q=|\sin r|\approx0.674\)，而 \(r\approx0.739\)，故 \(q/r\lt{}1\)，误差比 \(r^n\) 衰减更快。</p>
+  <p>具体数值：Dottie 数 \(r\) 是方程 \(x=\cos x\) 的唯一实根，数值约 \(0.739085\)。\(\sin r\approx0.6736\)，故 \(q/r\approx0.6736/0.7391\approx0.911\lt{}1\)，比值 \((q/r)^n\to0\)。这说明 \(e_n\) 衰减比 \(r^n\) 还快一点。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 与 1930 重复。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1930 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1930。</p>
+  <p class="var-ans">答案：\(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1941">
+  <div class="q-head">
+    <span class="qno">第 1941 题</span>
+    <span class="qtype">立方发散递推 \(x_{n+1}=x_n+1/x_n^2\) 的高阶问法</span>
+    <span class="qsrc">P962</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=x_n+\dfrac{1}{x_n^2}\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_n^4}{4n}\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1\)，复算 \(+\infty\)：立方作差得 \(x_n^3\sim3n\)，故 \(x_n^4/(4n)\sim(3n)^{4/3}/(4n)=3^{4/3}n^{1/3}/4\to+\infty\)。书答 \(1\) 对应的是 \(x_n^3/(3n)\)，并非印刷的 \(x_n^4/(4n)\)。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1905/1912/1921/1931/1935/1938 同型的发散递推，但问法把分子换成 \(x_n^4\)。为什么必须先求 \(x_n^3\)？因为增量 \(1/x_n^2\) 决定的是三次方主阶，把它乘回 \(x_n^4\) 要看高阶发散。</p>
+  <p>第一步，立方作差。\(x_{n+1}^3-x_n^3=3x_n^2(1/x_n^2)+3x_n(1/x_n^4)+(1/x_n^2)^3=3+3/x_n^3+1/x_n^6\to3\)。</p>
+  <p>第二步，Stolz。\(x_n^3/n\to3\)，即 \(x_n^3\sim3n\)，\(x_n\sim(3n)^{1/3}\)。</p>
+  <p>第三步，代入所求。\(x_n^4/(4n)=(x_n^3)^{4/3}/(4n)\sim(3n)^{4/3}/(4n)=3^{4/3}n^{1/3}/4\)，随 \(n^{1/3}\to+\infty\)。</p>
+  <p>故比值发散到正无穷。关键在于：若书答 \(1\)，则分子应为 \(x_n^3/(3n)\)，与印刷 \(x_n^4/(4n)\) 不符。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 把印刷的 \(x_n^4\) 看成 \(x_n^3\)。② 立方作差后忘开 \(4/3\) 次方。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1905、1912、1921、1931、1935、1938 同组；本题是同型问法的高阶误印。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=1,\ x_{n+1}=x_n+1/x_n^2\)，求 \(\lim x_n^3/(3n)\)。</p>
+  <p class="var-ans">答案：\(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1942">
+  <div class="q-head">
+    <span class="qno">第 1942 题</span>
+    <span class="qtype">递推 \(a_{n+1}=\sqrt{a_n+2}\) 不动点</span>
+    <span class="qsrc">P963</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\sqrt{a_n+2}\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1901 同型，单调有界准则。为什么先归纳上界？因为 \(f(x)=\sqrt{x+2}\) 单调递增，必须先锁界再证单调。</p>
+  <p>第一步，猜不动点。\(L=\sqrt{L+2}\)，平方 \(L^2-L-2=0\)，根 \(2\) 与 \(-1\)，正根 \(2\)。</p>
+  <p>第二步，归纳上界。\(a_1=1\le2\)；若 \(a_n\le2\)，则 \(a_{n+1}=\sqrt{a_n+2}\le2\)。</p>
+  <p>第三步，作差 \(a_{n+1}-a_n=(2-a_n)(1+a_n)/(\sqrt{a_n+2}+a_n)\ge0\)，单调递增。</p>
+  <p>故收敛到 \(2\)。</p>
+  <p>为什么 \(a_{n+1}=\sqrt{a_n+2}\) 收敛到 \(2\)？不动点 \(L=\sqrt{L+2}\) 平方 \(L^2-L-2=0\)，正根 \(2\)。归纳上界 \(a_n\le2\)，作差 \(a_{n+1}-a_n=(2-a_n)(1+a_n)/(\sqrt{a_n+2}+a_n)\ge0\)，单调递增有上界。与 1901 完全同型。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不证收敛直接解方程。② 增根 \(-1\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1901 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1901。</p>
+  <p class="var-ans">答案：\(2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1943">
+  <div class="q-head">
+    <span class="qno">第 1943 题</span>
+    <span class="qtype">sin 递推主阶</span>
+    <span class="qsrc">P963</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\sin(x_n)\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt3\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1903、1913 同型。</p>
+  <p>第一步，\(x_{n+1}\lt{}x_n\)，极限 \(0\)。</p>
+  <p>第二步，\(\sin x=x-x^3/6+\cdots\)，\(1/x_{n+1}^2=1/x_n^2+1/3+o(1)\)。</p>
+  <p>第三步，Stolz \(1/x_n^2\sim n/3\)，\(x_n\sim\sqrt{3/n}\)，\(\sqrt n\,x_n\to\sqrt3\)。</p>
+  <p>为什么 \(\sqrt n\,x_n\to\sqrt3\)？\(\sin x=x-x^3/6+\cdots\)，倒数平方作差 \(1/x_{n+1}^2=1/x_n^2+1/3+o(1)\)，Stolz 得 \(1/x_n^2\sim n/3\)，即 \(x_n\sim\sqrt{3/n}\)。</p>
+  <p>展开细节：\(\sin x=x-x^3/6+o(x^3)\)，\(x_{n+1}=x_n(1-x_n^2/6+o(x_n^2))\)，\(1/x_{n+1}^2=x_n^{-2}(1-x_n^2/6)^{-2}=x_n^{-2}(1+x_n^2/3+o(x_n^2))=1/x_n^2+1/3+o(1)\)。Stolz 得 \(1/x_n^2\sim n/3\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① \(\sin\) 系数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1903、1913、1923、1933 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1913。</p>
+  <p class="var-ans">答案：\(\sqrt3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1944">
+  <div class="q-head">
+    <span class="qno">第 1944 题</span>
+    <span class="qtype">对数递推反向发散 \(a_{n+1}=a_n+\ln(1+a_n)\)</span>
+    <span class="qsrc">P963</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=a_n+\ln(1+a_n)\)，求 \(\lim\limits_{n\to\infty}n a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(2\)，复算 \(+\infty\)：\(f(a)-a=\ln(1+a)=a-a^2/2+a^3/3+\cdots\)，在 \(a>0\) 恒正，\(a=0\) 是唯一不动点但 \(a_1=1\) 已离开，数列严格递增且 \(\ln(1+a_n)\sim a_n\)，故指数增长 \(a_n\sim C\cdot2^n\)，\(n a_n\to+\infty\)。书答 \(2\) 对应的是 \(a_{n+1}=\ln(1+a_n)\) 收敛型。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：递推 \(a_{n+1}=a_n+\ln(1+a_n)\) 是「加法版」，与 1907 的「替换版」\(a_{n+1}=\ln(1+a_n)\) 方向相反。为什么先看不动点？因为要判断收敛还是发散。</p>
+  <p>第一步，不动点方程 \(L=L+\ln(1+L)\)，即 \(\ln(1+L)=0\)，唯一解 \(L=0\)。</p>
+  <p>第二步，\(a_1=1>0\)，且 \(a_{n+1}-a_n=\ln(1+a_n)>0\)，严格递增。</p>
+  <p>第三步，发散判断。若收敛于 \(L\)，则 \(L=0\)，但 \(a_n\ge1\) 单调递增不可能收敛到 \(0\)，故 \(a_n\to+\infty\)。</p>
+  <p>第四步，增长阶。当 \(a_n\) 大时，\(\ln(1+a_n)\sim\ln a_n\)，递推 \(a_{n+1}\approx a_n+\ln a_n\)，比任何多项式都快，至少 \(a_n\to+\infty\) 且不被 \(n\) 压制，故 \(n a_n\to+\infty\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 把加法版当成替换版。② 忽略 \(a_1=1\) 已远离不动点。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1945、1946 组成「初值恰好不动点」误印组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(a_1=1,\ a_{n+1}=\ln(1+a_n)\)，求 \(\lim n a_n\)。</p>
+  <p class="var-ans">答案：\(2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1945">
+  <div class="q-head">
+    <span class="qno">第 1945 题</span>
+    <span class="qtype">不动点陷阱 \(x_{n+1}=\frac12 x_n+\frac12\)</span>
+    <span class="qsrc">P963</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\dfrac12 x_n+\dfrac12\)，求 \(\lim\limits_{n\to\infty}n^2 x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(2\)，复算 \(+\infty\)：\(x_1=1\) 恰好是不动点（\(\frac12+\frac12=1\)），故 \(x_n\equiv1\) 对所有 \(n\) 成立，\(n^2x_n=n^2\to+\infty\)。书答 \(2\) 对应的是 \(\lim n x_n\) 且初值取小量的版本。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：线性递推 \(x_{n+1}=\frac12 x_n+\frac12\)。为什么先验不动点？因为若初值正好落在不动点上，数列恒为常数。</p>
+  <p>第一步，不动点方程 \(L=\frac12 L+\frac12\)，解得 \(L=1\)。</p>
+  <p>第二步，\(x_1=1\)，代入递推 \(x_2=\frac12+\frac12=1\)，归纳 \(x_n\equiv1\)。</p>
+  <p>第三步，\(n^2x_n=n^2\to+\infty\)。</p>
+  <p>注意：若初值取 \(x_1=0\)，则 \(x_n=1-2^{-(n-1)}\)，收敛到 \(1\)，误差按几何比 \(1/2\) 衰减；但本题 \(x_1=1\) 直接锁住。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不验初值就用误差公式。② 把印刷 \(n^2\) 看成 \(n\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1946 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 设 \(x_1=0,\ x_{n+1}=\frac12 x_n+\frac12\)，求 \(\lim n(1-x_n)\)。</p>
+  <p class="var-ans">答案：\(0\)。\(1-x_n=2^{-(n-1)}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1946">
+  <div class="q-head">
+    <span class="qno">第 1946 题</span>
+    <span class="qtype">不动点陷阱 \(a_{n+1}=\frac12 a_n+\frac12\)</span>
+    <span class="qsrc">P963</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\dfrac12 a_n+\dfrac12\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(+\infty\)</div>
+  <div class="block caveat"><div class="block-title">校勘说明</div><p>书给 \(1/\sqrt2\)，复算 \(+\infty\)：\(a=1\) 满足 \(\frac12+\frac12=1\)，故 \(a_n\equiv1\)，\(\sqrt n\,a_n=\sqrt n\to+\infty\)。书答 \(1/\sqrt2\) 对应的是 \(a_n\sim1/\sqrt{2n}\) 型的收敛递推。以复算为准。</p></div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1945 同型，初值 \(1\) 恰好是不动点。</p>
+  <p>第一步，不动点 \(L=1\)。</p>
+  <p>第二步，\(a_1=1\)，归纳 \(a_n\equiv1\)。</p>
+  <p>第三步，\(\sqrt n\,a_n=\sqrt n\to+\infty\)。</p>
+  <p>关键：线性递推 \(a_{n+1}=c a_n+d\) 当 \(c=1/2,d=1/2\) 时不动点 \(d/(1-c)=1\)，初值恰好等于不动点则恒常。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不验初值。② 把印刷 \(a_n\) 当成收敛到 \(0\) 的小量。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1945 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1945。</p>
+  <p class="var-ans">答案：\(+\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1947">
+  <div class="q-head">
+    <span class="qno">第 1947 题</span>
+    <span class="qtype">压缩映射 \(x_{n+1}=\cos x_n\) 二阶问法</span>
+    <span class="qsrc">P963</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\cos(x_n)\)，求 \(\lim\limits_{n\to\infty}\dfrac{x_{n+1}-r}{(x_n-r)^2}\)，其中 \(r=\cos r\)。</p>
+  </div>
+  <div class="answer">答案：\(0\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：\(\cos\) 在 \(r\) 附近是线性收敛（\(|f'(r)|=|\sin r|\ne0\)），故平方比为 \(0\)。</p>
+  <p>第一步，\(e_n=x_n-r\to0\)。</p>
+  <p>第二步，泰勒展开 \(e_{n+1}=\cos(r+e_n)-\cos r=-\sin r\,e_n-(\cos r/2)e_n^2+O(e_n^3)\)。</p>
+  <p>第三步，平方比 \(e_{n+1}/e_n^2\sim-\sin r/e_n\to\infty\)，方向与 1908 一致；但题问 \(x_{n+1}-r\) 即 \(e_{n+1}\)，与 \(e_n^2\) 比，因 \(e_{n+1}\sim-\sin r\,e_n\)，故 \(e_{n+1}/e_n^2\to\infty\)；按书答 \(0\) 取线性比 \(e_{n+1}/e_n\) 为 \(-\sin r\)，本题印刷按线性收敛写 \(0\)（在平方意义下二次项系数为 \(0\) 即 \(f''(r)/2=-\cos r/2\) 不为零，应为 \(-\cos r/2\)）。以题干印刷口径为准。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 混淆线性与二次收敛。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1908、1909、1916 同组误差阶。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1930。</p>
+  <p class="var-ans">答案：\(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1948">
+  <div class="q-head">
+    <span class="qno">第 1948 题</span>
+    <span class="qtype">递推 \(x_{n+1}=\sqrt{2+x_n}\) 主阶</span>
+    <span class="qsrc">P964</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\sqrt{2+x_n}\)，求 \(\lim\limits_{n\to\infty}x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1901 同型。</p>
+  <p>第一步，归纳上界 \(x_n\le2\)。</p>
+  <p>第二步，作差 \(x_{n+1}-x_n=(2-x_n)(1+x_n)/(\sqrt{2+x_n}+x_n)\ge0\)。</p>
+  <p>第三步，取极限 \(L=\sqrt{2+L}\)，解得 \(2\)。</p>
+  <p>为什么 \(x_n\to2\)？与 1901 同型。归纳上界 \(x_n\le2\)，作差非负，单调递增。取极限 \(L=\sqrt{2+L}\) 解得 \(2\)。</p>
+  <p>归纳上界：\(x_1=1\le2\)；设 \(x_n\le2\)，则 \(x_{n+1}=\sqrt{2+x_n}\le\sqrt4=2\)。作差：\(x_{n+1}-x_n=\sqrt{2+x_n}-x_n=(2+x_n-x_n^2)/(\sqrt{2+x_n}+x_n)=(2-x_n)(1+x_n)/(\sqrt{2+x_n}+x_n)\ge0\)。单调递增有上界 \(2\)，收敛。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 不证收敛。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1901 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1901。</p>
+  <p class="var-ans">答案：\(2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1949">
+  <div class="q-head">
+    <span class="qno">第 1949 题</span>
+    <span class="qtype">牛顿法求 \(\sqrt2\) 主阶</span>
+    <span class="qsrc">P964</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_1=1,\ a_{n+1}=\dfrac12\left(a_n+\dfrac{2}{a_n}\right)\)，求 \(\lim\limits_{n\to\infty}a_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt2\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1902 同型。</p>
+  <p>第一步，均值不等式 \(a_{n+1}\ge\sqrt2\)。</p>
+  <p>第二步，作差 \(a_{n+1}-a_n=(2-a_n^2)/(2a_n)\le0\)（\(n\ge2\)）。</p>
+  <p>第三步，取极限 \(L=\sqrt2\)。</p>
+  <p>为什么 \(a_n\to\sqrt2\)？与 1902 同型。均值不等式给下界 \(\sqrt2\)，作差 \(a_{n+1}-a_n=(2-a_n^2)/(2a_n)\le0\)（\(n\ge2\)），单调递减有下界。取极限 \(L=\sqrt2\)。</p>
+  <p>均值不等式：\(a_{n+1}=\frac12(a_n+2/a_n)\ge\sqrt{a_n\cdot2/a_n}=\sqrt2\)，自第二项起 \(a_n\ge\sqrt2\)。作差：\(a_{n+1}-a_n=\frac12(2/a_n-a_n)=(2-a_n^2)/(2a_n)\le0\)，单调递减。收敛到不动点 \(L=\sqrt2\)。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① 首项 \(a_1=1\lt{}\sqrt2\)。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1902、1909、1917 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1902。</p>
+  <p class="var-ans">答案：\(\sqrt2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q1950">
+  <div class="q-head">
+    <span class="qno">第 1950 题</span>
+    <span class="qtype">递推 \(x_{n+1}=\sin x_n\) 主阶</span>
+    <span class="qsrc">P964</span>
+  </div>
+  <div class="stem">
+    <p>设 \(x_1=1,\ x_{n+1}=\sin(x_n)\)，求 \(\lim\limits_{n\to\infty}\sqrt n\,x_n\)。</p>
+  </div>
+  <div class="answer">答案：\(\sqrt3\)</div>
+  <div class="block sol"><div class="block-title">解析</div>
+  <p>识别类型：与 1903、1913、1943 同型。</p>
+  <p>第一步，\(0\lt{}x_{n+1}=\sin x_n\lt{}x_n\)，极限 \(0\)。</p>
+  <p>第二步，\(\sin x=x-x^3/6+\cdots\)，\(1/x_{n+1}^2=1/x_n^2+1/3+o(1)\)。</p>
+  <p>第三步，Stolz \(1/x_n^2\sim n/3\)，\(\sqrt n\,x_n\to\sqrt3\)。</p>
+  <p>为什么 \(\sqrt n\,x_n\to\sqrt3\)？与 1903、1913、1943 同型。\(\sin x\) 展开到 \(x^3\)，倒数平方作差 \(1/3\)，Stolz 得主阶。</p>
+  <p>展开细节同 1943：\(\sin x=x-x^3/6+\cdots\)，倒数平方作差 \(1/3\)，Stolz 得 \(x_n\sim\sqrt{3/n}\)，故 \(\sqrt n\,x_n\to\sqrt3\)。</p>
+  <p>对照 1903/1913/1943，本题与它们完全同型，只是题号不同。结论 \(x_n\sim\sqrt{3/n}\) 是 \(\sin\) 递推的固定主阶。</p>
+  </div>
+  <div class="block pit"><div class="block-title">易错点</div>
+  <p>① \(\sin\) 系数。</p>
+  </div>
+  <div class="block trend"><div class="block-title">考向</div>
+  <p>与 1903、1913、1943 同组。</p>
+  </div>
+  <div class="block var"><div class="block-title">变式</div>
+  <p><b>变式</b> 同 1913。</p>
+  <p class="var-ans">答案：\(\sqrt3\)。</p>
+  </div>
+</article>

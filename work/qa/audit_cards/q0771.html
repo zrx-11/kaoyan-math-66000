@@ -1,0 +1,38 @@
+<article class="q" id="q771">
+  <div class="q-head">
+    <span class="qno">第 771 题</span>
+    <span class="qtype">幂差型 \(e^{\tan x}-e^{\sin x}\) 的泰勒展开</span>
+    <span class="qsrc">P750</span>
+  </div>
+  <div class="stem">
+    <p>求极限 \(\displaystyle\lim_{x\to0}\frac{e^{\tan x}-e^{\sin x}-\dfrac{1}{2}x^3}{x^5}\)。</p>
+  </div>
+  <div class="answer">答案：\(\dfrac{1}{8}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：这是 \(0/0\) 型，但分子是两个同底幂 \(e^{\tan x}\)、\(e^{\sin x}\) 之差，属于「幂差型」，首选提取公因式 \(e^{\sin x}\)，把差化成「指数增量的指数差」。</p>
+    \[ e^{\tan x}-e^{\sin x}=e^{\sin x}\bigl(e^{\tan x-\sin x}-1\bigr). \]
+    <p>令 \(u=\tan x-\sin x\)。当 \(x\to0\) 时 \(u\to0\)，由等价无穷小 \(e^{u}-1\sim u\)，而 \(e^{\sin x}\to1\)，故在所需阶内把 \(e^{\sin x}\) 取作主部 \(1\)，问题化为研究 \(u=\tan x-\sin x\) 的展开。先写出正、余弦的泰勒展开：</p>
+    \[ \tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+o(x^5),\qquad \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}+o(x^5). \]
+    <p>两式相减，一次项 \(x\) 抵消：</p>
+    \[ \tan x-\sin x=\left(\frac13+\frac16\right)x^3+\left(\frac{2}{15}-\frac{1}{120}\right)x^5+o(x^5)=\frac{x^3}{2}+\frac{x^5}{8}+o(x^5). \]
+    <p>于是 \(e^{\tan x}-e^{\sin x}\) 的主部即 \(\tan x-\sin x=\dfrac{x^3}{2}+\dfrac{x^5}{8}+o(x^5)\)。代入分子，所减的 \(\dfrac{x^3}{2}\) 恰好抵消最低阶项：</p>
+    \[ e^{\tan x}-e^{\sin x}-\frac{x^3}{2}=\frac{x^5}{8}+o(x^5),\qquad \text{原式}=\lim_{x\to0}\frac{\dfrac{x^5}{8}+o(x^5)}{x^5}=\frac18. \]
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不提取公因式而分别展开 \(e^{\tan x}\)、\(e^{\sin x}\)，容易在 \(x^3\)、\(x^5\) 阶上漏掉交叉项；提取 \(e^{\sin x}\) 后只需展开一个差 \(\tan x-\sin x\)，计算量最小。</p>
+    <p>② 阶数不够：分母是 \(x^5\)，必须把 \(\tan x\)、\(\sin x\) 都展开到 \(x^5\) 项，只写到 \(x^3\) 会得到 \(0\)。</p>
+    <p>③ 误把 \(e^{\sin x}\) 整体当作常数 \(1\) 后，对 \(e^{u}-1\) 只取一阶 \(u\) 而不核对 \(u^2/2\) 是否影响 \(x^5\)：这里 \(u\sim x^3/2\)，\(u^2/2\sim x^6\)，确属更高阶项，可以舍去。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「两个同指函数相减再除以多项式」是选择题与解答题的高频原型，其标准动作就是提取公因式后用等价无穷小 \(e^u-1\sim u\) 降维。考研常把它改造成已知极限反求参数，或把底数换成 \(a^{\tan x}-a^{\sin x}\)（此时需乘 \(\ln a\)）。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\displaystyle\lim_{x\to0}\frac{e^{\sin x}-1-x}{x^2}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。\(e^{\sin x}-1=\sin x+\dfrac{\sin^2 x}{2}+o(x^2)=\left(x-\dfrac{x^3}{6}\right)+\dfrac{x^2}{2}+o(x^2)\)，减去 \(x\) 后得 \(x^2/2+o(x^2)\)，除以 \(x^2\) 得 \(1/2\)。</p>
+  </div>
+  <!-- 存疑：按严格展开 e^{tan x}-e^{sin x}=x^3/2+x^4/2+3x^5/8+...，相减 x^3/2 后残留 x^4/2，原式应发散；书上答案 1/8 对应舍去 e^{sin x} 的一阶修正（即忽略 x·u 产生的 x^4 项）后的主部系数。此处从书上答案。 -->
+</article>

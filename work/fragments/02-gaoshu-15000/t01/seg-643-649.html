@@ -1,0 +1,468 @@
+<article class="q" id="q239">
+  <div class="q-head">
+    <span class="qno">第 239 题</span>
+    <span class="qtype">变限积分无穷小的阶数</span>
+    <span class="qsrc">P643</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to 0\) 时，\(f(x)=\int_0^x\dfrac{\tan t-t}{t^3}\,dt\) 是 \(x\) 的 \(k\) 阶无穷小，求 \(k\)。</p>
+  </div>
+  <div class="answer">答案：\(k=1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：含变限积分的无穷小阶数判定，采用「被积函数局部展开 → 逐项积分 → 取最低次项」的固定路径。判断阶数时先看被积函数在零点的主部幂次，积分会把幂次升高一次。</p>
+    <p>第一步，对被积函数 \(\dfrac{\tan t-t}{t^3}\) 在 \(t=0\) 处展开。由 \(\tan t=t+\dfrac{t^3}{3}+\dfrac{2t^5}{15}+o(t^5)\)，分子消去一次项后</p>
+    \[ \tan t-t=\frac{t^3}{3}+\frac{2t^5}{15}+o(t^5), \]
+    <p>除以 \(t^3\)，被积函数退化为常数加二次小量：</p>
+    \[ \frac{\tan t-t}{t^3}=\frac13+\frac{2t^2}{15}+o(t^2). \]
+    <p>第二步，逐项积分。被积函数在 \(t=0\) 处趋于常数 \(\dfrac13\)，积分后</p>
+    \[ f(x)=\int_0^x\left(\frac13+\frac{2t^2}{15}+o(t^2)\right)dt=\frac{x}{3}+\frac{2x^3}{45}+o(x^3). \]
+    <p>第三步，读阶数。最低次项为 \(x^1\)，系数 \(\dfrac13\neq 0\)，故 \(f(x)\sim \dfrac{x}{3}\)，是 \(x\) 的一阶无穷小。数值互证：取 \(x=0.05\) 与 \(x=0.02\)，\(f(x)/x\) 分别约为 \(0.3334\)、\(0.3333\)，趋于 \(1/3\)，与级数结果一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误把分子 \(\tan t-t\) 的三阶阶数当成积分结果的阶数。积分会把阶数升高一次：被积函数是 \(O(t^0)\)（常数），积分后是 \(O(x^1)\)；若被积函数是 \(O(t^m)\)，积分后才是 \(O(x^{m+1})\)。本题分子三阶、除以 \(t^3\) 后被积函数退化为常数，阶数反而不高。</p>
+    <p>② 直接对 \(f(x)\) 用洛必达。\(f'(x)=\dfrac{\tan x-x}{x^3}\to \dfrac13\)，说明 \(f(x)\sim \dfrac{x}{3}\)，结论一致；但若忽视 \(f'(0)\) 的极限为常数，会误判为零阶。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>变限积分无穷小的阶数是选择题与解答题的高频题型，核心是「被积函数的局部展开阶数 + 积分升一阶」。常与等价无穷小替换、泰勒展开联合命题，近年在填空题中出现频率较高。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to 0\) 时，\(f(x)=\int_0^x\dfrac{\sin t-t}{t^3}\,dt\) 是 \(x\) 的几阶无穷小？</p>
+    <p class="var-ans">答案：一阶。\(\sin t-t=-\dfrac{t^3}{6}+o(t^3)\)，被积函数 \(\sim -\dfrac16\)，积分后 \(f(x)\sim -\dfrac{x}{6}\)，主部为 \(x^1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q240">
+  <div class="q-head">
+    <span class="qno">第 240 题</span>
+    <span class="qtype">等价无穷小反求系数</span>
+    <span class="qsrc">P643</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to 0\) 时，\(f(x)=ax^4+bx^2\) 与 \(g(x)=\int_0^{\sin x}(e^{-t}-1)\,dt\) 是等价无穷小，求 \(a,b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=0,\ b=-\dfrac12\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两个无穷小等价即 \(\lim\limits_{x\to0}\dfrac{f(x)}{g(x)}=1\)；分别把 \(f\)、\(g\) 展开到最低非零次，令同次项系数对应相等，高阶项不参与比值。</p>
+    <p>展开被积函数。由 \(e^{-t}=1-t+\dfrac{t^2}{2}-\dfrac{t^3}{6}+o(t^3)\)，</p>
+    \[ e^{-t}-1=-t+\frac{t^2}{2}+o(t^2). \]
+    <p>逐项积分到上限 \(\sin x\)：</p>
+    \[ g(x)=-\frac{(\sin x)^2}{2}+\frac{(\sin x)^3}{6}+o\bigl((\sin x)^3\bigr). \]
+    <p>代入 \(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)，\((\sin x)^2=x^2+o(x^2)\)，\((\sin x)^3=O(x^3)\) 高于主部，故</p>
+    \[ g(x)=-\frac{x^2}{2}+o(x^2). \]
+    <p>比较 \(f(x)=ax^4+bx^2\)。\(g(x)\) 最低次为 \(x^2\)，系数 \(-\dfrac12\)；要使 \(f\sim g\)，主部须同为 \(x^2\)，故 \(b=-\dfrac12\)。\(x^4\) 项是高阶小量，\(ax^4/g(x)\to0\)，等价条件不固定 \(a\)，取最简 \(a=0\)。数值互证：\(x=0.05\)、\(0.02\) 时 \(g(x)/x^2\) 分别约为 \(-0.491\)、\(-0.497\)，趋于 \(-1/2\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把上限 \(\sin x\) 直接替换成 \(x\) 时漏写 \((\sin x)^2\sim x^2\) 的等价性，或误写成 \(x\) 一次方。\(\sin x\) 本身是一阶，但平方后是二阶，与 \(g(x)\) 的阶数一致。</p>
+    <p>② 保留 \(x^4\) 项参与比较。\(g(x)\) 展开到 \(x^2\) 已经足够决定等价性，\(x^4\) 项是高阶小量，不能用来定 \(a\)；若强行令 \(x^4\) 项匹配，会得到错误的 \(a\neq 0\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「等价无穷小反求系数」是选择题常见考法，本质是比较两个无穷小的主部。关键在于各自展开到「同阶」即可，不要过度展开；当一个多项式的高次项与另一个无穷小的阶数不匹配时，高次项系数必须为零。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to 0\) 时，\(f(x)=ax^4+bx^2\) 与 \(g(x)=\int_0^{\sin x}(e^t-1)\,dt\) 等价，求 \(a,b\)。</p>
+    <p class="var-ans">答案：\(a=0,\ b=\dfrac12\)。\(e^t-1=t+o(t)\)，积分得 \(g(x)=\dfrac{(\sin x)^2}{2}+o(x^2)\sim \dfrac{x^2}{2}\)，与 \(f(x)\) 的 \(x^2\) 主部比较，得 \(b=\dfrac12\)；\(g(x)\) 不含 \(x^4\) 主部，故 \(a=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q241">
+  <div class="q-head">
+    <span class="qno">第 241 题</span>
+    <span class="qtype">泰勒展开反求系数（高阶无穷小）</span>
+    <span class="qsrc">P643</span>
+  </div>
+  <div class="stem">
+    <p>设当 \(x\to 0\) 时，\(e^{\tan x}-(ax^2+bx+1)\) 是比 \(x^2\) 高阶的无穷小，求 \(a,b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=\dfrac12,\ b=1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：要求差为 \(o(x^2)\)，即把 \(e^{\tan x}\) 展开到 \(x^2\) 项，与 \(ax^2+bx+1\) 逐项相等；嵌套函数由内到外逐层展开，每层只保留到所需阶数。</p>
+    <p>第一步，展开内层 \(\tan x\)：</p>
+    \[ \tan x=x+\frac{x^3}{3}+o(x^3). \]
+    <p>第二步，把 \(u=\tan x\) 代入 \(e^u=1+u+\dfrac{u^2}{2}+o(u^2)\)。因 \(u=O(x)\)，展开到 \(u^2\) 正好对应 \(x^2\)：</p>
+    \[ e^{\tan x}=1+\tan x+\frac{(\tan x)^2}{2}+o(x^2). \]
+    <p>第三步，降阶代入。\(\tan x\) 的 \(x^3\) 项只出现在 \(u^3\) 及更高次中，在 \(o(x^2)\) 内被吸收，故</p>
+    \[ \tan x=x+o(x),\qquad (\tan x)^2=x^2+o(x^2), \]
+    \[ e^{\tan x}=1+x+\frac{x^2}{2}+o(x^2). \]
+    <p>第四步，与 \(ax^2+bx+1\) 比较：常数项 \(1=1\)，一次项 \(b=1\)，二次项 \(a=\dfrac12\)，差为 \(o(x^2)\)，满足题意。数值互证：\(x=0.05\) 时 \(e^{\tan x}-(1+x+x^2/2)\) 与 \(x^2\) 之比已落入 \(o(1)\) 量级，二次项系数 \(1/2\) 与级数一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(\tan x\) 的 \(x^3\) 项代入后误以为会影响 \(x^2\) 系数。链式展开时，\(u=\tan x=x+O(x^3)\)，\(u^2=x^2+O(x^4)\)，\(u\) 中的 \(x^3\) 只在 \(u^3\) 及更高阶出现，不影响 \(x^2\) 系数。</p>
+    <p>② 展开阶数不够。只展开 \(e^u=1+u+o(u)\) 会得到 \(b=1\) 但无法定 \(a\)，必须展开到 \(u^2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「用泰勒展开把函数配成多项式 + 高阶无穷小」是反求系数类问题的标准解法。常见嵌套函数有 \(e^{\tan x}\)、\(\sin(\tan x)\)、\(\ln(1+\sin x)\) 等，关键是从内到外逐层展开，并控制展开到题目要求的阶数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x\to 0\) 时，\(\ln(1+\sin x)-(ax+bx^2)\) 是比 \(x^2\) 高阶的无穷小，求 \(a,b\)。</p>
+    <p class="var-ans">答案：\(a=1,\ b=-\dfrac12\)。\(\ln(1+\sin x)=\sin x-\dfrac{\sin^2x}{2}+o(x^2)=x-\dfrac{x^2}{2}+o(x^2)\)，比较得 \(a=1,\ b=-\dfrac12\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q242">
+  <div class="q-head">
+    <span class="qno">第 242 题</span>
+    <span class="qtype">无穷小阶数比较（选择）</span>
+    <span class="qsrc">P643</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to 0\) 时，下列无穷小量中，最高阶的无穷小是（）。</p>
+    <div class="opts">
+      <p>(A) \(\sin x-x\)</p>
+      <p>(B) \(\tan x-x\)</p>
+      <p>(C) \(x-\arcsin x\)</p>
+      <p>(D) \(x-\sin x-\dfrac{x^3}{6}+\dfrac{x^5}{120}\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：D</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：无穷小阶数比较，逐项泰勒展开，取首个非零项的幂次；阶数最高即幂次最大者。比阶只看首个非零幂次，系数大小不影响阶数判断；扣掉前几项的构造，要沿展开式往后找下一个非零项落在哪一阶。</p>
+    <p>(A) 由 \(\sin x=x-\dfrac{x^3}{6}+\dfrac{x^5}{120}+o(x^5)\)，</p>
+    \[ \sin x-x=-\frac{x^3}{6}+o(x^3), \]
+    <p>三阶。(B) 由 \(\tan x=x+\dfrac{x^3}{3}+o(x^3)\)，</p>
+    \[ \tan x-x=\frac{x^3}{3}+o(x^3), \]
+    <p>三阶。(C) 由 \(\arcsin x=x+\dfrac{x^3}{6}+o(x^3)\)，</p>
+    \[ x-\arcsin x=-\frac{x^3}{6}+o(x^3), \]
+    <p>三阶。(D) 代入 \(\sin x=x-\dfrac{x^3}{6}+\dfrac{x^5}{120}-\dfrac{x^7}{5040}+o(x^7)\)，三阶、五阶项被逐项扣掉：</p>
+    \[ x-\sin x-\frac{x^3}{6}+\frac{x^5}{120} = \frac{x^7}{5040}+o(x^7). \]
+    <p>七阶。A、B、C 均为三阶，D 为七阶，七阶高于三阶，故最高阶为 D。数值互证：\(x=0.05\) 时三个三阶项仍在 \(10^{-4}\) 量级，D 的主部 \(x^7/5040\) 已在 \(10^{-11}\) 量级；\(x\) 减小时量级差距继续拉大。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 (D) 当成「\(\sin x\) 的展开式前几项」而忽略其抵消效果。(D) 是把 \(\sin x\) 的三阶、五阶项全部扣掉，剩下的是七阶项，阶数远高于 A、B、C。</p>
+    <p>② 记错 \(\arcsin x\) 的展开符号。\(\arcsin x=x+\dfrac{x^3}{6}+\cdots\)，与 \(\sin x\) 的 \(-\dfrac{x^3}{6}\) 符号相反；若误记为同号，会误判 (C) 为高阶或零。</p>
+    <p>③ 某选项在已列阶次内全部抵消时，不能直接判为零或零阶，必须继续往后展开一阶，下一个非零项的幂次才是它的阶数。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>无穷小阶数比较是选择题的固定题型，解题关键是熟记常用泰勒展开并逐项抵消。(D) 这类「把展开式前 \(n\) 项扣掉」的构造，本质是考察学生是否知道下一个非零项出现在哪里。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to 0\) 时，\(x-\tan x+\dfrac{x^3}{3}\) 是 \(x\) 的几阶无穷小？</p>
+    <p class="var-ans">答案：五阶。\(\tan x=x+\dfrac{x^3}{3}+\dfrac{2x^5}{15}+o(x^5)\)，故 \(x-\tan x+\dfrac{x^3}{3}=-\dfrac{2x^5}{15}+o(x^5)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q243">
+  <div class="q-head">
+    <span class="qno">第 243 题</span>
+    <span class="qtype">变限积分无穷小的阶数</span>
+    <span class="qsrc">P644</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to 0\) 时，\(f(x)=\int_0^x\dfrac{\cos t-1+\dfrac{t^2}{2}}{t^4}\,dt\) 是 \(x\) 的 \(k\) 阶无穷小，求 \(k\)。</p>
+  </div>
+  <div class="answer">答案：\(k=1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：变限积分无穷小阶数，先展开被积函数再积分；被积函数在零点退化为常数时，积分结果是一阶无穷小。</p>
+    <p>第一步，展开分子。由</p>
+    \[ \cos t=1-\frac{t^2}{2}+\frac{t^4}{24}-\frac{t^6}{720}+o(t^6), \]
+    \[ \cos t-1+\frac{t^2}{2}=\frac{t^4}{24}-\frac{t^6}{720}+o(t^6). \]
+    <p>第二步，除以 \(t^4\)：</p>
+    \[ \frac{\cos t-1+\dfrac{t^2}{2}}{t^4}=\frac{1}{24}-\frac{t^2}{720}+o(t^2). \]
+    <p>第三步，逐项积分。被积函数在 \(t=0\) 处趋于常数 \(\dfrac{1}{24}\)，</p>
+    \[ f(x)=\frac{x}{24}-\frac{x^3}{2160}+o(x^3). \]
+    <p>最低次项为 \(x^1\)，系数 \(1/24\neq0\)，故 \(k=1\)。阶数规则复述：被积函数主部为 \(O(t^m)\) 时，积分主部为 \(O(x^{m+1})\)；本题相除后 \(m=0\)，故积分阶数为 1，不要把分子的四阶直接当成积分阶数。数值互证：\(x=0.05\)、\(x=0.02\) 时 \(f(x)/x\) 分别约为 \(0.041666\)、\(0.041667\)，趋于 \(1/24\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 看到分子是 \(t^4\) 量级、分母也是 \(t^4\)，就以为被积函数是零或高阶。实际上二者相除后是常数 \(\dfrac{1}{24}\)，积分后是一阶无穷小。</p>
+    <p>② 误把分子 \(\cos t-1+\dfrac{t^2}{2}\) 的四阶阶数当成积分结果的阶数。积分升一阶是对「被积函数 \(O(t^m)\)」而言；本题被积函数退化为 \(O(t^0)\)，积分后是 \(O(x^1)\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题与同片区「泰勒余项除以幂函数再积分」的题构成一组训练，反复强调：先把被积函数化简到最低次项，再判断积分后的阶数。常见被积函数是「\(\cos t-1+t^2/2\)」「\(\sin t-t\)」「\(e^t-1-t\)」等泰勒展开余项除以幂函数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to 0\) 时，\(f(x)=\int_0^x\dfrac{\cos t-1+\dfrac{t^2}{2}}{t^2}\,dt\) 是 \(x\) 的几阶无穷小？</p>
+    <p class="var-ans">答案：三阶。被积函数 \(\sim \dfrac{t^2}{24}\)，积分后 \(\sim \dfrac{x^3}{72}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q244">
+  <div class="q-head">
+    <span class="qno">第 244 题</span>
+    <span class="qtype">等价无穷小反求系数（积分上限）</span>
+    <span class="qsrc">P644</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to 0\) 时，\(f(x)=ax^5+bx^4\) 与 \(g(x)=\int_0^{\sin x}\left(e^t-1-t-\dfrac{t^2}{2}-\dfrac{t^3}{6}\right)dt\) 是等价无穷小，求 \(a,b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=\dfrac{1}{120},\ b=0\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>等价无穷小反求系数：先把被积函数扣到最低次余项，逐项积分后与多项式主部比较。</p>
+    <p>第一步，展开被积函数。由 \(e^t=1+t+\dfrac{t^2}{2}+\dfrac{t^3}{6}+\dfrac{t^4}{24}+\dfrac{t^5}{120}+o(t^5)\)，扣掉前四项后</p>
+    \[ e^t-1-t-\frac{t^2}{2}-\frac{t^3}{6}=\frac{t^4}{24}+\frac{t^5}{120}+o(t^5). \]
+    <p>第二步，积分到上限 \(\sin x\)。\(\int t^4\,dt=t^5/5\)，系数 \(1/24\cdot1/5=1/120\)：</p>
+    \[ g(x)=\frac{(\sin x)^5}{120}+o\bigl((\sin x)^5\bigr). \]
+    <p>第三步，代入 \(\sin x=x+o(x)\)，\((\sin x)^5=x^5+o(x^5)\)，故</p>
+    \[ g(x)=\frac{x^5}{120}+o(x^5). \]
+    <p>第四步，比较 \(f(x)=ax^5+bx^4\)。\(g(x)\) 最低次为 \(x^5\)，系数 \(1/120\)；等价要求主部同为 \(x^5\)，故 \(a=1/120\)。\(x^4\) 项阶数低于主部、不参与比值，等价条件不固定 \(b\)，取最简 \(b=0\)。数值互证：\(x=0.05\)、\(x=0.02\) 时 \(g(x)/x^5\) 趋于 \(1/120\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 积分后忘记除以幂次。\(\int t^4 dt=\dfrac{t^5}{5}\)，再乘系数 \(\dfrac{1}{24}\)，得到 \(\dfrac{1}{120}\)；漏写 \(1/5\) 会误得 \(a=1/24\)。</p>
+    <p>② 把上限 \(\sin x\) 的五次方展开成 \(x^5\) 时，误以为 \(\sin x=x\) 一次近似就够。\((\sin x)^5\sim x^5\) 在主部意义下成立，不需要展开 \(\sin x\) 的更高阶项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题是前述「积分上限型等价反求系数」题的进阶版：被积函数扣到四阶余项，积分后变五阶。训练点是「逐项展开 → 积分 → 上限代入 → 与多项式主部比较」的完整流程。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to 0\) 时，\(f(x)=ax^6+bx^5\) 与 \(g(x)=\int_0^{\sin x}\left(e^t-1-t-\dfrac{t^2}{2}-\dfrac{t^3}{6}-\dfrac{t^4}{24}\right)dt\) 等价，求 \(a,b\)。</p>
+    <p class="var-ans">答案：\(a=\dfrac{1}{720},\ b=0\)。被积函数最低次为 \(t^5/120\)，积分后 \((\sin x)^6/720\sim x^6/720\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q245">
+  <div class="q-head">
+    <span class="qno">第 245 题</span>
+    <span class="qtype">由连续函数定积分的阶数</span>
+    <span class="qsrc">P644</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 连续，\(f(0)=1\)，且当 \(x\to 0\) 时，\(\int_0^x f(t)\,dt\) 与 \(x^b\) 为等价无穷小，求 \(b\)。</p>
+  </div>
+  <div class="answer">答案：\(b=1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>利用连续函数的局部性质判断积分主部，只依赖连续性，不需要 \(f\) 的解析式或可导性。题目不给 \(f\) 的解析式，也不假设 \(f\) 在零点可导，结论只能由连续性与变限积分主部定理推出。</p>
+    <p>第一步，由 \(f\) 在 \(x=0\) 处连续且 \(f(0)=1\)，\(t\to0\) 时</p>
+    \[ f(t)=f(0)+o(1)=1+o(1). \]
+    <p>第二步，积分。把 \(f(t)=1+o(1)\) 逐项积分，常数 1 积分得 \(x\)，\(o(1)\) 积分后为 \(o(x)\)，不产生新主部项：</p>
+    \[ \int_0^x f(t)\,dt=\int_0^x(1+o(1))dt=x+o(x). \]
+    <p>第三步，与 \(x^b\) 等价。等价无穷小的定义是比值极限为 1；这里分子分母在 \(x=0\) 处都为 0，必须阶数与系数同时对齐：\(\lim\limits_{x\to0}\dfrac{x+o(x)}{x^b}=1\)，按 \(b\) 分档：</p>
+    \[ b=1:\ \text{比值}\to1;\quad b>1:\ x^{1-b}\to\infty;\quad b<1:\ x^{1-b}\to0. \]
+    <p>三档中只有 \(b=1\) 使比值为 1，故 \(b=1\)。分档理由：\(b>1\) 时分母阶数更高，比值被压低到 0；\(b<1\) 时分母阶数更低，比值被放大到无穷；只有阶数对齐时比值才可能为有限非零常数。若 \(f(0)=c\neq0\)，主部为 \(cx\)，阶数仍为 1。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误把 \(f(0)=1\) 代入后以为积分是 \(x\)，但忽视了「等价」的严格定义。连续函数只保证 \(f(t)\to f(0)\)，不保证 \(f(t)\) 有泰勒展开；本题结论 \(b=1\) 仅依赖连续性，不需要可导。</p>
+    <p>② 误用洛必达法则。\(\lim\dfrac{\int_0^x f(t)dt}{x^b}\) 用洛必达得 \(\dfrac{f(x)}{b x^{b-1}}\)，要此极限为 \(1\)，必须 \(b-1=0\) 且 \(f(0)/b=1\)，即 \(b=1\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题考察「连续函数 → 积分主部」的基本关系，是变限积分求导与无穷小阶数判断的结合点。常与 \(f(0)\neq 0\) 的条件一起出现，结论是：积分从 0 到 x 的主部为 \(f(0)\cdot x\)，阶数恒为 1。若上限改为 \(x^2\) 等幂次量，主部阶数随上限幂次改变；若 \(f(0)=0\) 且 \(f\) 在零点可导，则需用 \(f'(0)\) 决定被积函数主部幂次，即变式情形。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 连续，\(f(0)=0\)，\(f'(0)=2\)，则 \(x\to 0\) 时 \(\int_0^x f(t)dt\) 与 \(x^b\) 等价，求 \(b\)。</p>
+    <p class="var-ans">答案：\(b=2\)。由 \(f'(0)=2\) 得 \(f(t)\sim 2t\)，积分 \(\int_0^x 2t\,dt=x^2\)，主部为 \(x^2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q246">
+  <div class="q-head">
+    <span class="qno">第 246 题</span>
+    <span class="qtype">对数差形式的无穷小阶数</span>
+    <span class="qsrc">P644</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to 0\) 时，\(f(x)=\ln(1+\tan x)-\ln(1+\sin x)\) 是 \(x\) 的 \(n\) 阶无穷小，求正整数 \(n\)。</p>
+  </div>
+  <div class="answer">答案：\(n=3\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两对数之差，外层 \(\ln(1+u)\) 在 \(u\to0\) 时与 \(u\) 等价，问题归结为两个内层函数之差的阶数判定。</p>
+    <p>第一步，比较两个内层函数。由</p>
+    \[ \tan x=x+\frac{x^3}{3}+o(x^3),\quad \sin x=x-\frac{x^3}{6}+o(x^3), \]
+    <p>二者一次项相同，差值为三阶：</p>
+    \[ \tan x-\sin x=\frac{x^3}{2}+o(x^3). \]
+    <p>第二步，处理外层对数。展开 \(\ln(1+u)=u-\dfrac{u^2}{2}+o(u^2)\)，两对数相减后，二次项之差为 \(\dfrac12(\tan^2 x-\sin^2 x)=\dfrac12(\tan x-\sin x)(\tan x+\sin x)=O(x^3)\cdot O(x)=O(x^4)\)，比三阶主部高阶，可略；故</p>
+    \[ \ln(1+\tan x)-\ln(1+\sin x)\sim \tan x-\sin x=\frac{x^3}{2}+o(x^3). \]
+    <p>第三步，读阶数：最低次项为 \(x^3\)，系数 \(1/2\neq0\)，故 \(n=3\)。对数差型题目的通用顺序是：先判内层函数之差的阶数，再确认外层对数的二阶修正是否高阶可略。数值互证：\(x=0.05\)、\(x=0.02\) 时 \(f(x)/x^3\) 分别约为 \(0.476\)、\(0.490\)，趋于 \(1/2\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把两个对数分别展开后相减时，一阶项 \(x\) 会抵消，但展开阶数不够（只到 \(x^2\)）会发现二阶项也抵消，误判为三阶或更高。必须展开到 \(x^3\) 才能看到非零项。</p>
+    <p>② 直接用 \(\ln(1+\tan x)-\ln(1+\sin x)\sim \tan x-\sin x\)。这个等价成立的前提是 \(\tan x-\sin x=o(x)\)，而 \(\tan x-\sin x=x^3/2+o(x^3)\)，确实是三阶，故 \(\ln\) 差 \(\sim \tan x-\sin x\)，结论一致。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数差形式的无穷小阶数判断，本质是「两相近函数之差」的泰勒展开。常用结论：若 \(\varphi(x)-\psi(x)=O(x^n)\)，且 \(\varphi,\psi\to 0\)，则 \(\ln(1+\varphi)-\ln(1+\psi)\sim \varphi-\psi\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to 0\) 时，\(\ln(1+\sin x)-\ln(1+x)\) 是 \(x\) 的几阶无穷小？</p>
+    <p class="var-ans">答案：三阶。\(\sin x-x=-x^3/6+o(x^3)\)，对数差 \(\sim \sin x-x=-x^3/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q247">
+  <div class="q-head">
+    <span class="qno">第 247 题</span>
+    <span class="qtype">泰勒展开反求系数（嵌套函数）</span>
+    <span class="qsrc">P644</span>
+  </div>
+  <div class="stem">
+    <p>设当 \(x\to 0\) 时，\(\sin(\tan x)-(ax^3+bx)\) 是比 \(x^3\) 高阶的无穷小，求 \(a,b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=\dfrac16,\ b=1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：嵌套函数 \(\sin(\tan x)\) 的泰勒展开，要求差为 \(o(x^3)\)，即把 \(\sin(\tan x)\) 展开到 \(x^3\) 项。嵌套展开从内到外逐层进行，每层只保留到 \(x^3\) 所需阶数。</p>
+    <p>第一步，展开内层 \(\tan x\)：</p>
+    \[ \tan x=x+\frac{x^3}{3}+o(x^3). \]
+    <p>第二步，把 \(u=\tan x\) 代入 \(\sin u=u-\dfrac{u^3}{6}+o(u^3)\)。由于 \(u=O(x)\)，\(u^3=O(x^3)\)，正好需要：</p>
+    \[ \sin(\tan x)=\tan x-\frac{(\tan x)^3}{6}+o(x^3). \]
+    <p>第三步，降阶代入。\((\tan x)^3=(x+x^3/3+\cdots)^3=x^3+3x^2\cdot x^3/3+\cdots\)，交叉项最低是 \(x^5\)，不影响 \(x^3\) 系数：</p>
+    \[ \tan x=x+\frac{x^3}{3}+o(x^3),\qquad (\tan x)^3=x^3+o(x^3), \]
+    \[ \sin(\tan x)=x+\left(\frac13-\frac16\right)x^3+o(x^3)=x+\frac{x^3}{6}+o(x^3). \]
+    <p>第四步，与 \(ax^3+bx\) 比较：一次项 \(b=1\)，三次项 \(a=\dfrac16\)。系数唯一性交叉验证：\([\sin(\tan x)]'(0)=1\)，三阶导数归一化系数为 \(1/6\)，与级数一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开 \((\tan x)^3\) 时，误以为需要把 \(\tan x=x+x^3/3\) 完整立方展开。实际上 \((\tan x)^3=x^3+3x^2\cdot\dfrac{x^3}{3}+\cdots=x^3+o(x^3)\)，交叉项最低是 \(x^5\)，不影响 \(x^3\) 系数。</p>
+    <p>② 漏掉 \(\sin u\) 展开中的 \(-u^3/6\) 项。若只展开 \(\sin u=u+o(u)\)，会得到 \(a=0\) 或 \(a=1/3\) 的错误结果。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>嵌套函数的泰勒展开是反求系数类题目的难点，关键是从内到外逐层展开，并控制每层的展开阶数。常见组合：\(\sin(\tan x)\)、\(\tan(\sin x)\)、\(e^{\sin x}\)、\(\ln(1+\tan x)\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(x\to 0\) 时，\(\tan(\sin x)-(ax^3+bx)\) 是 \(o(x^3)\)，求 \(a,b\)。</p>
+    <p class="var-ans">答案：\(a=\dfrac16,\ b=1\)。\(\sin x=x-x^3/6\)，\(\tan u=u+u^3/3+o(u^3)\)，代入得 \(\tan(\sin x)=x-x^3/6+x^3/3+o(x^3)=x+x^3/6+o(x^3)\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q248">
+  <div class="q-head">
+    <span class="qno">第 248 题</span>
+    <span class="qtype">无穷小阶数比较（选择）</span>
+    <span class="qsrc">P644</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to 0\) 时，下列无穷小量中，最低阶的无穷小是（）。</p>
+    <div class="opts">
+      <p>(A) \(x-\sin x\)</p>
+      <p>(B) \(\tan x-x\)</p>
+      <p>(C) \(x-\ln(1+x)\)</p>
+      <p>(D) \(1-\cos x\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：C、D 同为二阶无穷小且彼此等价，无唯一最低阶</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上只给 C。按题面复算，\(x-\ln(1+x)=\tfrac{x^2}2+o(x^2)\)、\(1-\cos x=\tfrac{x^2}2+o(x^2)\)，两者二阶系数相同、比值趋于 1，属等价无穷小，最低阶并列，题目本身缺少唯一答案。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：逐项做泰勒展开，取最低非零项次数；同阶选项再用比值法判断是否等价。四个选项先读首个非零幂次；三阶项在 \(x\to0\) 时比二阶项更高阶（量级更小），故最低阶只在二阶候选中产生。</p>
+    <p>(A) 由 \(\sin x=x-\dfrac{x^3}{6}+o(x^3)\)，</p>
+    \[ x-\sin x=\frac{x^3}{6}+o(x^3), \]
+    <p>三阶。(B) 由 \(\tan x=x+\dfrac{x^3}{3}+o(x^3)\)，</p>
+    \[ \tan x-x=\frac{x^3}{3}+o(x^3), \]
+    <p>三阶。(C) 由 \(\ln(1+x)=x-\dfrac{x^2}{2}+o(x^2)\)，(D) 由 \(\cos x=1-\dfrac{x^2}{2}+o(x^4)\)，</p>
+    \[ x-\ln(1+x)=\frac{x^2}{2}+o(x^2),\qquad 1-\cos x=\frac{x^2}{2}+o(x^2). \]
+    <p>二者同为二阶，主部系数都是 \(\dfrac12\)，且</p>
+    \[ \lim_{x\to0}\frac{x-\ln(1+x)}{1-\cos x}=1, \]
+    <p>故 C、D 彼此等价，最低阶并列；A、B 为三阶。题目问单一「最低阶」，C 与 D 同时满足，无唯一选项；若要得到唯一答案，需把 C 或 D 之一换成三阶及以上的干扰项。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① (C) 与 (D) 的主部都是 \(x^2/2\)，阶数相同，严格按「最低阶」判断二者并列，单看选项字母无法区分谁更「低」。</p>
+    <p>② 把 \(1-\cos x\) 误记为三阶。\(1-\cos x\) 是标准的二阶无穷小，主部 \(x^2/2\)，不要与 \(x-\sin x\)（三阶）混淆。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>无穷小阶数比较是选择题的基础题型，要求熟记常用等价无穷小：\(1-\cos x\sim x^2/2\)、\(x-\sin x\sim x^3/6\)、\(\tan x-x\sim x^3/3\)、\(x-\ln(1+x)\sim x^2/2\)。本题选项设计中 C、D 同阶，需注意。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to 0\) 时，下列无穷小中阶数最低的是（）。(A) \(e^x-1-x\) (B) \(x-\tan x\) (C) \(x-\arcsin x\) (D) \(1-\cos x\)。</p>
+    <p class="var-ans">答案：A、D 同为二阶（主部均 \(x^2/2\)），彼此等价，无唯一最低阶；B、C 为三阶。\(e^x-1-x\sim x^2/2\)，\(x-\tan x\sim -x^3/3\)，\(x-\arcsin x\sim -x^3/6\)，\(1-\cos x\sim x^2/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q249">
+  <div class="q-head">
+    <span class="qno">第 249 题</span>
+    <span class="qtype">变限积分无穷小的阶数</span>
+    <span class="qsrc">P645</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to 0\) 时，\(f(x)=\int_0^x\dfrac{e^t-1-t}{t^2}\,dt\) 是 \(x\) 的 \(k\) 阶无穷小，求 \(k\)。</p>
+  </div>
+  <div class="answer">答案：\(k=1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：变限积分无穷小阶数，被积函数由泰勒余项除以幂函数构成；先展开到最低次，再逐项积分。</p>
+    <p>第一步，展开分子。由</p>
+    \[ e^t=1+t+\frac{t^2}{2}+\frac{t^3}{6}+o(t^3), \]
+    \[ e^t-1-t=\frac{t^2}{2}+\frac{t^3}{6}+o(t^3). \]
+    <p>第二步，除以 \(t^2\)：</p>
+    \[ \frac{e^t-1-t}{t^2}=\frac{1}{2}+\frac{t}{6}+o(t). \]
+    <p>第三步，逐项积分。被积函数在 \(t=0\) 处趋于常数 \(1/2\)，</p>
+    \[ f(x)=\int_0^x\left(\frac12+\frac{t}{6}+o(t)\right)dt=\frac{x}{2}+\frac{x^2}{12}+o(x^2). \]
+    <p>最低次项为 \(x^1\)，系数 \(1/2\neq0\)，故 \(k=1\)。阶数规则同前述余项积分题：分子 \(e^t-1-t\) 为二阶，除以 \(t^2\) 后被积函数退化为常数 \(m=0\)，积分后为一阶；若分母幂次低一阶，被积函数主部为 \(t\) 的一次项，积分阶数随之升到二阶（即变式情形）。数值互证：\(x=0.05\)、\(x=0.02\) 时 \(f(x)/x\) 分别约为 \(0.5042\)、\(0.5017\)，趋于 \(1/2\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 看到 \(e^t-1-t\) 是二阶，除以 \(t^2\) 后误以为被积函数是常数就「没有阶数」。常数的积分是一次函数，阶数为 1。</p>
+    <p>② 误把分子的二阶阶数当成积分后的阶数。积分升一阶的规则是：被积函数 \(O(t^m)\) 对应积分 \(O(x^{m+1})\)；本题被积函数主部是常数（\(m=0\)），积分后是 \(O(x^1)\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题与同片区「泰勒余项除以幂函数 → 被积函数退化为常数 → 积分后一阶无穷小」的题构成一组同型训练，反复训练这条判断路径。常见被积函数还可由 \(\sin t-t\)、\(\cos t-1+t^2/2\) 等余项除以幂函数构成；判断路径一致：先定被积函数主部幂次 \(m\)，积分阶数即为 \(m+1\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to 0\) 时，\(f(x)=\int_0^x\dfrac{e^t-1-t-\dfrac{t^2}{2}}{t^2}\,dt\) 是 \(x\) 的几阶无穷小？</p>
+    <p class="var-ans">答案：二阶。\(e^t-1-t-\dfrac{t^2}{2}=\dfrac{t^3}{6}+o(t^3)\)，被积函数 \(\sim \dfrac{t}{6}\)，积分后 \(f(x)\sim \dfrac{x^2}{12}\)，主部为 \(x^2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q250">
+  <div class="q-head">
+    <span class="qno">第 250 题</span>
+    <span class="qtype">等价无穷小反求系数</span>
+    <span class="qsrc">P645</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to 0\) 时，\(f(x)=ax^3+bx\) 与 \(\_\_\_\_\) 是等价无穷小，求 \(a,b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=-\dfrac{1}{18},\ b=0\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>说明：书页（第 645 页）题干中「与」字之后、「是等价无穷小」之前的比较函数表达式该处为空白，放大裁片核对后图中确无函数式残留，无法从题面读取 \(g(x)\) 的具体形式，故本题无法据题面独立复算，按不可用处理。</p>
+    <p>以下为依据书答案的相容性反推，不是原题原文。书给 \(a=-\dfrac1{18},\ b=0\)，先写多项式</p>
+    \[ f(x)=ax^3+bx. \]
+    <p>若 \(b\neq0\)，\(f(x)\) 的最低次是 \(x\) 一次方，与三阶主部不可能等价，故 \(b=0\)，\(f(x)\sim ax^3=-\dfrac{x^3}{18}\)，即缺失的 \(g(x)\) 主部应为 \(-x^3/18\)。一个相容构造是</p>
+    \[ g(x)=\int_0^x\frac{\sin t-t}{t}\,dt. \]
+    <p>由 \(\sin t-t=-\dfrac{t^3}{6}+o(t^3)\)，除以 \(t\) 得 \(-\dfrac{t^2}{6}+o(t^2)\)，</p>
+    \[ g(x)=\int_0^x\left(-\frac{t^2}{6}+o(t^2)\right)dt=-\frac{x^3}{18}+o(x^3). \]
+    <p>主部恰为 \(-x^3/18\)，与书值相容；此为反推构造，并非书页原字，应先补全 \(g(x)\) 再复算，不能当成原题条件。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 书页题干该处为空白，照抄题干会得到不完整题目，应先标注缺字，不能把反推构造当成原题原文。</p>
+    <p>② 若 \(b\neq 0\)，则 \(f(x)\) 的最低次是 \(x\) 一次方，与三阶主部不可能等价；故 \(b=0\) 是由「阶数必须匹配」直接推出的。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题型与「等价无穷小反求系数」类题同属一片，核心是比较两个无穷小的主部阶数与系数。本题因书页缺字，仅能依据书值反推，实际训练中应补全 \(g(x)\) 后再做。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to 0\) 时，\(f(x)=ax^3+bx\) 与 \(g(x)=\int_0^x\dfrac{\sin t-t}{t}\,dt\) 等价，求 \(a,b\)。</p>
+    <p class="var-ans">答案：\(a=-\dfrac{1}{18},\ b=0\)。推导见解析。</p>
+  </div>
+</article>

@@ -1,0 +1,1947 @@
+<article class="q" id="q46">
+  <div class="q-head">
+    <span class="qno">第 46 题</span>
+    <span class="qtype">夹逼准则求和式极限</span>
+    <span class="qsrc">P605</span>
+  </div>
+  <div class="stem">
+    <p>极限 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{\sqrt{n^{2}+k}}=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(\ln 2\)</p>
+      <p>(D) \(\infty\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：B</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：这是 \(n\) 项求和的极限，通项 \(\dfrac{1}{\sqrt{n^{2}+k}}\) 随 \(k\) 连续变化，但变化范围很窄，适合用夹逼准则，而不是定积分定义。关键观察：分母里 \(n^{2}\) 是主项，\(k\) 只在 \(1\) 到 \(n\) 之间，相对 \(n^{2}\) 是高阶小扰动。</p>
+    <p>固定 \(n\)，对 \(1\le k\le n\)，有</p>
+    \[ n^{2}+1\le n^{2}+k\le n^{2}+n, \]
+    <p>取倒数并开方（注意同向不等号方向）：</p>
+    \[ \frac{1}{\sqrt{n^{2}+n}}\le \frac{1}{\sqrt{n^{2}+k}}\le \frac{1}{\sqrt{n^{2}+1}}. \]
+    <p>对 \(k\) 从 \(1\) 到 \(n\) 求和，两端各有 \(n\) 项：</p>
+    \[ \frac{n}{\sqrt{n^{2}+n}}\le \sum_{k=1}^{n}\frac{1}{\sqrt{n^{2}+k}}\le \frac{n}{\sqrt{n^{2}+1}}. \]
+    <p>左端 \(\dfrac{n}{\sqrt{n^{2}+n}}=\dfrac{1}{\sqrt{1+1/n}}\to1\)，右端 \(\dfrac{n}{\sqrt{n^{2}+1}}=\dfrac{1}{\sqrt{1+1/n^{2}}}\to1\)。两端都趋于同一常数 \(1\)，由夹逼准则，原极限为 \(1\)。数值互证：\(n=1000\) 时和约 \(0.99975\)，\(n=10000\) 时约 \(0.999975\)，随 \(n\) 增大向 1 收敛，选 B。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误用定积分定义。若令 \(x_{k}=k/n\)，把通项写成 \(\dfrac{1}{n\sqrt{1+x_{k}/n}}\cdot\dfrac1n\)，再积 \(\int_0^1\dfrac{dx}{\sqrt{1+x}}\)，会得到 \(2(\sqrt2-1)\approx0.828\)，这是错的——因为 \(k\le n\) 时 \(k/n^{2}\le1/n\to0\)，被积函数其实退化成常数 \(1\)，不是随 \(x\) 变化的函数。</p>
+    <p>② 看到 \(n\) 项、每项约 \(1/n\) 就直接写 \(n\cdot(1/n)=1\)，结论对但理由不严谨；考试中必须用夹逼把上下界真正求出来。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「和式极限」有两条路：项与项之间相对变化大时用定积分定义，相对变化小（主项远大于扰动量）时用夹逼。判别标准是看通项里小指标 \(k\) 相对于主项的尺度。本题代表的是后者，常与 \(n^{2}\pm k\)、\(n^{p}+k\) 这类结构搭配出现在填空或选择中。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{n\to\infty}\sum\limits_{k=1}^{n}\dfrac{1}{\sqrt{n^{2}+k^{2}}}\)。</p>
+    <p class="var-ans">答案：\(\ln(1+\sqrt2)\)。此时 \(k^{2}\) 相对 \(n^{2}\) 不再是小扰动，通项 \(\dfrac{1}{n}\dfrac{1}{\sqrt{1+(k/n)^{2}}}\) 恰为黎曼和，极限 \(\int_0^1\dfrac{dx}{\sqrt{1+x^{2}}}=\ln(x+\sqrt{1+x^{2}})\big|_0^1=\ln(1+\sqrt2)\)。注意与原题的区别：原题扰动是 \(k\)（一阶小），变式扰动是 \(k^{2}\)（与主项同阶）。</p>
+  </div>
+</article>
+
+<article class="q" id="q47">
+  <div class="q-head">
+    <span class="qno">第 47 题</span>
+    <span class="qtype">二项式系数的渐近（Wallis 公式）</span>
+    <span class="qsrc">P605</span>
+  </div>
+  <div class="stem">
+    <p>设 \(a_{n}=\dfrac{(2n)!}{(n!)^{2}}\dfrac{1}{4^{n}}\)，则 \(\lim\limits_{n\to\infty}a_{n}=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(\dfrac{1}{\sqrt{\pi n}}\)</p>
+      <p>(D) \(\infty\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：A</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：这是中心二项式系数 \(\binom{2n}{n}=\dfrac{(2n)!}{(n!)^{2}}\) 除以 \(4^{n}\) 的渐近行为，属于无穷小比较。选项 C 给出的 \(\dfrac{1}{\sqrt{\pi n}}\) 是它的<b>渐近等价量</b>，而不是它的极限——题干问的是极限，不是等价量。</p>
+    <p>先用单调有界或比值法判断趋于哪个方向。计算相邻两项之比：</p>
+    \[ \frac{a_{n+1}}{a_{n}}=\frac{(2n+2)!}{((n+1)!)^{2}}\frac{1}{4^{n+1}}\cdot\frac{(n!)^{2}4^{n}}{(2n)!} =\frac{(2n+2)(2n+1)}{(n+1)^{2}}\cdot\frac14=\frac{2n+1}{2n+2}\lt{}1. \]
+    <p>所以 \(\{a_{n}\}\) 单调递减且 \(a_{n}>0\)，由单调有界定理极限存在；但比值趋于 1，递减速度极慢，不足以排除正极限，需要更精细的渐近估计。</p>
+    <p>用 Stirling 公式 \(n!\sim\sqrt{2\pi n}(n/e)^n\) 代入阶乘比值，可得中心二项式系数的渐近式：</p>
+    \[ \binom{2n}{n}=\frac{(2n)!}{(n!)^2}\sim\frac{4^n}{\sqrt{\pi n}}. \]
+    <p>因此</p>
+    \[ a_{n}=\frac{\binom{2n}{n}}{4^{n}}\sim\frac{1}{\sqrt{\pi n}}\to0. \]
+    <p>关键一步：\(\dfrac{1}{\sqrt{\pi n}}\) 当 \(n\to\infty\) 时是趋于 \(0\) 的无穷小，只是衰减速度慢于 \(\dfrac1n\)。故极限为 \(0\)，选 A。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误选 C。C 是渐近等价式 \(a_{n}\sim\dfrac{1}{\sqrt{\pi n}}\)，不是极限；题干问 \(\lim a_{n}\)，应回答 \(0\)。把「等价无穷小」当成「极限」是这类题最常见的错。</p>
+    <p>② 误以为单调递减趋于某正数。比值 \(\dfrac{2n+1}{2n+2}\to1\)，递减速度极慢，容易让人猜极限为正；必须用 Wallis/Stirling 才能断定它是 \(O(n^{-1/2})\) 量级，从而趋于零。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>中心二项式系数、Stirling 公式 \(\ln n!\sim n\ln n-n\)、Wallis 公式，是「无穷小的阶」这一考点的高档素材。真题常把 \(\dfrac{(2n)!}{(n!)^{2}4^{n}}\) 塞进估计 \(n\) 项乘积、判断级数收敛性的题目里，核心是记住它以 \(n^{-1/2}\) 速率衰减。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 判断级数 \(\sum_{n=1}^{\infty}\dfrac{(2n)!}{(n!)^{2}4^{n}}\) 的敛散性。</p>
+    <p class="var-ans">答案：发散。通项 \(a_{n}\sim\dfrac{1}{\sqrt{\pi n}}\)，而 \(\sum\dfrac{1}{\sqrt n}\) 是 \(p=\dfrac12\lt{}1\) 的发散 \(p\) 级数，由比较判别法，原级数发散。这正说明 \(a_{n}\) 只是趋于零、衰减不够快，不足以让级数收敛。</p>
+  </div>
+</article>
+
+<article class="q" id="q48">
+  <div class="q-head">
+    <span class="qno">第 48 题</span>
+    <span class="qtype">含双曲函数的 0/0 型</span>
+    <span class="qsrc">P605</span>
+  </div>
+  <div class="stem">
+    <p>极限 \(\lim\limits_{x\to0}\dfrac{\cosh x-\cos x}{x^{2}}=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(2\)</p>
+      <p>(D) \(\infty\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：B</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x\to0\) 时分子 \(\cosh x-\cos x\) 与分母 \(x^{2}\) 都是 \(0\)，属 \(0/0\) 型。关键在于 \(\cosh x=\dfrac{e^{x}+e^{-x}}{2}\) 与 \(\cos x\) 的泰勒展开在 \(x^{2}\) 项上符号相反，相减后二阶项叠加。</p>
+    <p>把两个函数都展开到 \(x^{2}\) 阶（因为分母是 \(x^{2}\)，二阶系数正是答案）：</p>
+    \[ \cosh x=1+\frac{x^{2}}{2!}+o(x^{2}),\qquad \cos x=1-\frac{x^{2}}{2!}+o(x^{2}). \]
+    <p>相减：</p>
+    \[ \cosh x-\cos x=\left(1+\frac{x^{2}}{2}\right)-\left(1-\frac{x^{2}}{2}\right)+o(x^{2})=x^{2}+o(x^{2}). \]
+    <p>于是</p>
+    \[ \lim_{x\to0}\frac{\cosh x-\cos x}{x^{2}}=\lim_{x\to0}\frac{x^{2}+o(x^{2})}{x^{2}}=1. \]
+    <p>选 B。也可用等价无穷小：\(\cosh x-1\sim\dfrac{x^{2}}{2}\)，\(1-\cos x\sim\dfrac{x^{2}}{2}\)，故 \(\cosh x-\cos x=(\cosh x-1)+(1-\cos x)\sim\dfrac{x^{2}}2+\dfrac{x^{2}}2=x^{2}\)，殊途同归。数值互证：\(x=0.05\) 时比值约 \(1.00000002\)，\(x=0.02\) 时约 \(1.0000000004\)，向 1 收敛；四阶项在两函数间同为 \(x^4/24\)，相减后抵消，不进入二阶主部。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误把 \(\cosh x\) 当 \(\cos x\) 处理，或记错 \(\cosh x-1\) 的等价无穷小。正确结论是 \(\cosh x-1\sim\dfrac{x^{2}}{2}\)（与 \(1-\cos x\) 同阶同号系数），不是负的。</p>
+    <p>② 看到 \(\cosh x-\cos x\) 以为是同类相减、二阶项抵消为零而选 A。恰恰相反：\(\cosh x\) 的二阶项是 \(+\dfrac{x^{2}}2\)，\(\cos x\) 的二阶项是 \(-\dfrac{x^{2}}2\)，相减后是相加，系数为 \(1\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>双曲函数 \(\sinh x,\cosh x\) 在考研中出现频率中等，但一旦出现，考点就是它与三角函数的泰勒展开对照：\(\cosh\) 与 \(\cos\) 二阶项同号系数异号，\(\sinh\) 与 \(\sin\) 三阶项异号。记住这组对照，含双曲函数的 \(0/0\) 型可一眼定阶。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sinh x-\sin x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。\(\sinh x=x+\dfrac{x^{3}}6+o(x^{3})\)，\(\sin x=x-\dfrac{x^{3}}6+o(x^{3})\)，相减得 \(\dfrac{x^{3}}3+o(x^{3})\)，除以 \(x^{3}\) 得 \(\dfrac13\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q49">
+  <div class="q-head">
+    <span class="qno">第 49 题</span>
+    <span class="qtype">导数定义与尖点</span>
+    <span class="qsrc">P605</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)=\sqrt[3]{x}\)，则 \(\lim\limits_{x\to0}\dfrac{f(x)-f(0)}{x}=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(1\)</p>
+      <p>(C) \(\infty\)</p>
+      <p>(D) 不存在</p>
+    </div>
+  </div>
+  <div class="answer">答案：C</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：这个极限就是 \(f\) 在 \(0\) 点的导数定义式 \(\lim\limits_{x\to0}\dfrac{f(x)-f(0)}{x-0}\)。题干把它写成 \(\dfrac{f(x)-f(0)}{x}\)，正是要考察 \(f(x)=\sqrt[3]{x}\) 在原点是否可导。</p>
+    <p>代入 \(f(0)=0\)，直接计算：</p>
+    \[ \frac{f(x)-f(0)}{x}=\frac{\sqrt[3]{x}}{x}=\frac{x^{1/3}}{x}=x^{-2/3}=\frac{1}{x^{2/3}}. \]
+    <p>当 \(x\to0\) 时，\(x^{2/3}\to0^{+}\)（注意 \(x^{2/3}=(\sqrt[3]{x})^{2}\) 恒非负），故</p>
+    \[ \frac{1}{x^{2/3}}\to+\infty. \]
+    \[ \lim_{x\to0^-}\frac1{x^{2/3}}=\lim_{x\to0^+}\frac1{x^{2/3}}=+\infty. \]
+    <p>这个极限不是某个有限数，而是发散到无穷，对应几何上曲线 \(y=\sqrt[3]{x}\) 在原点的切线是竖直的（\(y\) 轴方向）。数值上 \(x=0.05\) 时比值约 \(7.37\)，\(x=0.02\) 时约 \(13.57\)，两侧同为增大趋势，选 C。</p>
+    <p>需要辨析选项 D：左右两侧 \(\dfrac{1}{x^{2/3}}\) 都趋于 \(+\infty\)，符号一致，不是「不存在但不为 \(\infty\)」的振荡型；按定义它属于极限为无穷（发散到 \(+\infty\)），故选 C 而非 D。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误选 D。很多人知道 \(y=\sqrt[3]{x}\) 在原点「不可导」，就笼统选「不存在」。但不可导分两种：导数为无穷（竖直切线）和左右导数不相等（尖点）。本题两侧同为 \(+\infty\)，属导数为无穷，应选 C。</p>
+    <p>② 把 \(x^{-2/3}\) 当成负的无穷小。\(x^{2/3}\) 是平方，恒正趋于零，倒数趋于 \(+\infty\)，不是 \(-\infty\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>用导数定义式考「连续但不可导」的经典例子：\(y=|x|\)（尖点，左右导数为 \(\pm1\)）与 \(y=\sqrt[3]{x}\)、\(y=x^{1/3}\)（竖直切线，导数为 \(\infty\)）。这两组是选择题中判断「不可导类型」的固定素材，务必区分「不存在但不为无穷」与「为无穷」。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 讨论 \(f(x)=\sqrt[3]{x^{2}}\) 在 \(x=0\) 处的可导性。</p>
+    <p class="var-ans">答案：不可导，且导数不存在但不为无穷。\(\dfrac{f(x)-f(0)}{x}=\dfrac{x^{2/3}}{x}=x^{-1/3}\)，左极限 \(x\to0^{-}\) 为 \(-\infty\)，右极限为 \(+\infty\)，两侧异号，属尖点型不可导。与本题 \(x^{-2/3}\)（两侧同号）形成对照。</p>
+  </div>
+</article>
+
+<article class="q" id="q50">
+  <div class="q-head">
+    <span class="qno">第 50 题</span>
+    <span class="qtype">∞-∞ 型根式差（抓主部）</span>
+    <span class="qsrc">P606</span>
+  </div>
+  <div class="stem">
+    <p>极限 \(\lim\limits_{x\to\infty}\left(\sqrt{x^{4}+x^{2}}-x^{2}\right)=\)</p>
+    <div class="opts">
+      <p>(A) \(0\)</p>
+      <p>(B) \(\dfrac{1}{2}\)</p>
+      <p>(C) \(1\)</p>
+      <p>(D) \(\infty\)</p>
+    </div>
+  </div>
+  <div class="answer">答案：B</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x\to\infty\) 时 \(\sqrt{x^{4}+x^{2}}\) 与 \(x^{2}\) 都趋于 \(+\infty\)，属 \(\infty-\infty\) 型。处理根式差的标准手法是提主部（或有理化），把最高次项提出来，看次一阶的修正项。</p>
+    <p>把 \(x^{2}\) 从根号里提出来：</p>
+    \[ \sqrt{x^{4}+x^{2}}=x^{2}\sqrt{1+\frac{1}{x^{2}}}\quad (x>0). \]
+    <p>令 \(u=\dfrac{1}{x^{2}}\to0\)，用 \(\sqrt{1+u}=1+\dfrac{u}{2}+o(u)\)：</p>
+    \[ \sqrt{1+\frac{1}{x^{2}}}=1+\frac{1}{2x^{2}}+o\!\left(\frac{1}{x^{2}}\right). \]
+    <p>代回：</p>
+    \[ \sqrt{x^{4}+x^{2}}=x^{2}+\frac12+o(1). \]
+    <p>因此</p>
+    \[ \sqrt{x^{4}+x^{2}}-x^{2}=\frac12+o(1)\to\frac12. \]
+    <p>选 B。也可有理化验证：分子分母同乘 \(\sqrt{x^{4}+x^{2}}+x^{2}\)，得 \(\dfrac{x^{2}}{\sqrt{x^{4}+x^{2}}+x^{2}}=\dfrac{1}{\sqrt{1+1/x^{2}}+1}\to\dfrac12\)。数值互证：\(x=10^4\) 与 \(x=10^5\) 时差均稳定在 \(0.5\) 附近；展开余项 \(o(1)\) 随 \(x\to\infty\) 消失，主项 \(x^2\) 抵消后留下的常数 \(1/2\) 才是答案。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误选 A。直觉上 \(\sqrt{x^{4}+x^{2}}\approx x^{2}\)，差应该是 \(0\)。但「主项抵消后剩下的常数项」才是答案，这正是 \(\infty-\infty\) 型的考点：主项抵消不代表差为零，要展开到次一阶。</p>
+    <p>② 提错主部。应提 \(x^{4}\) 而不是 \(x^{2}\)：\(\sqrt{x^{4}+x^{2}}=x^{2}\sqrt{1+1/x^{2}}\)；若误提 \(x^{2}\) 写成 \(x\sqrt{x^{2}+1}\)，后续展开容易出错。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式差 \(\sqrt{A x^{2m}+\cdots}-x^{m}\) 的极限，核心是「提主部 + 二项式展开 \((1+u)^{\alpha}\approx1+\alpha u\)」。这类题在填空和选择中反复出现，关键是判断主项抵消后，剩下的是常数、还是发散、还是趋于零。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\sqrt{x^{4}+x^{2}}-x^{2}-c\right)\)，问 \(c\) 取何值时极限为 \(0\)。</p>
+    <p class="var-ans">答案：\(c=\dfrac12\)。由上题 \(\sqrt{x^{4}+x^{2}}-x^{2}=\dfrac12+o(1)\)，故减去 \(\dfrac12\) 后极限为 \(0\)。这是「用一个常数消去根式差的主部」的标准问法。</p>
+  </div>
+</article>
+
+<article class="q" id="q51">
+  <div class="q-head">
+    <span class="qno">第 51 题</span>
+    <span class="qtype">由极限反求参数（泰勒定阶）</span>
+    <span class="qsrc">P606</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to0}\dfrac{\sin(ax)-\tan(bx)}{x^{3}}=c\)，其中 \(a,b,c\) 是常数，且 \(c\neq0\)，则求 \(a,b,c\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=-\dfrac{1}{2}\)（一组解）</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母是 \(x^{3}\)，且极限非零。这意味着分子中 \(x\) 的一次项、二次项系数必须全部为零（否则除以 \(x^{3}\) 后会发散），只留下 \(x^{3}\) 项，其系数即 \(c\)。这是「泰勒展开到与分母同阶、低次项系数清零」的标准反求参数题型。</p>
+    <p>把两个函数展开到 \(x^{3}\) 阶：</p>
+    \[ \sin(ax)=ax-\frac{a^{3}}{6}x^{3}+o(x^{3}),\qquad \tan(bx)=bx+\frac{b^{3}}{3}x^{3}+o(x^{3}). \]
+    <p>分子：</p>
+    \[ \sin(ax)-\tan(bx)=(a-b)x-\left(\frac{a^{3}}{6}+\frac{b^{3}}{3}\right)x^{3}+o(x^{3}). \]
+    <p>要使除以 \(x^{3}\) 后为有限非零数 \(c\)，一次项系数必须为零：</p>
+    \[ a-b=0\ \Longrightarrow\ a=b. \]
+    <p>此时 \(x^{3}\) 项系数为 \(-\left(\dfrac{a^{3}}6+\dfrac{a^{3}}3\right)=-\dfrac{a^{3}}2\)，故</p>
+    \[ c=-\frac{a^{3}}{2}. \]
+    <p>题目未给 \(|a|\) 的具体归一化条件，参数本质上有一个自由度；取 \(a=b=1\)，则 \(c=-\dfrac12\)。代回验证：此时分子 \(\sin x-\tan x=-\dfrac{x^3}{2}+o(x^3)\)，除以 \(x^3\) 确为 \(-1/2\)，与该组解一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 展开阶数不够。若只写到 \(\sin(ax)\approx ax\)、\(\tan(bx)\approx bx\)，只能得到 \(a=b\)，无法定 \(c\)。分母是 \(x^{3}\)，必须把分子展开到 \(x^{3}\)。</p>
+    <p>② 符号错。\(\sin\) 的三阶项是 \(-\dfrac{a^{3}}6\)，\(\tan\) 的三阶项是 \(+\dfrac{b^{3}}3\)，相减后是 \(-\dfrac{a^{3}}6-\dfrac{b^{3}}3\)，两项都为负；漏掉 \(\tan\) 的正号会把 \(c\) 算成 \(+\dfrac12\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「已知极限为有限非零数，反求多项式系数」是选择题与解答题的常客。通用套路：把分子各函数泰勒展开到分母阶数，令所有低于分母阶数的项系数为零（线性方程组），最低非零阶的系数即极限值。关键是记住 \(\sin,\tan,\ln,(1+x)^{\alpha}\) 的展开系数。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 已知 \(\lim\limits_{x\to0}\dfrac{\sin(ax)-\tan(bx)}{x^{3}}=c\neq0\)，若再给定 \(c=-4\)，求 \(a=b\) 的值。</p>
+    <p class="var-ans">答案：\(a=b=2\)。由 \(c=-\dfrac{a^{3}}2=-4\) 得 \(a^{3}=8\)，故 \(a=2\)。这说明在缺少归一化时，参数由给定的极限值唯一确定。</p>
+  </div>
+</article>
+
+<article class="q" id="q52">
+  <div class="q-head">
+    <span class="qno">第 52 题</span>
+    <span class="qtype">∞-∞ 型反求幂次</span>
+    <span class="qsrc">P606</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to\infty}\left(\sqrt{x^{2}+x}-x\right)x^{k}=d\)，其中 \(k,d\) 为常数，且 \(d\neq0\)，则求 \(k\) 和 \(d\)。</p>
+  </div>
+  <div class="answer">答案：\(k=0,\ d=\dfrac{1}{2}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(k=1,\ d=\dfrac12\)，按题面独立复算为 \(k=0,\ d=\dfrac12\)。\(\sqrt{x^{2}+x}-x\to\dfrac12\) 是非零常数，乘 \(x^{k}\) 要为有限非零只能 \(k=0\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：先求根式差 \(\sqrt{x^{2}+x}-x\) 的主部，再判断乘以 \(x^{k}\) 后何时为有限非零。这是「主部定阶 × 幂函数」定阶题，关键是先判定抵消后留下的是常数、正幂还是负幂，再反配幂次。</p>
+    <p>有理化：\(\sqrt{x^{2}+x}-x=\dfrac{x}{\sqrt{x^{2}+x}+x}=\dfrac{1}{\sqrt{1+1/x}+1}\)。也可把根式按 \(1/x\) 展开：</p>
+    \[ \sqrt{x^{2}+x}=x+\frac12-\frac{1}{8x}+o\!\left(\frac1x\right),\qquad \sqrt{x^{2}+x}-x=\frac12-\frac{1}{8x}+o\!\left(\frac1x\right). \]
+    <p>可见该根式差趋于<b>非零常数</b> \(\dfrac12\)，并不是无穷小。按 \(k\) 的符号分三档讨论：</p>
+    \[ k>0:\ \frac12 x^{k}\to\infty;\qquad k=0:\ \frac12;\qquad k<0:\ o(1)\to0. \]
+    <p>三档中只有 \(k=0\) 给出有限非零极限，故 \(k=0\)，此时</p>
+    \[ d=\lim_{x\to\infty}(\sqrt{x^{2}+x}-x)=\frac12. \]
+    <p>数值互证：取 \(x=1000\) 时根式差约 \(0.499875\)，\(x=10000\) 时约 \(0.499988\)，两档都逼近 \(1/2\)；若错配 \(k=1\)，同一 \(x=1000\) 下乘 \(x\) 后约 \(499.88\)，随 \(x\) 增大发散，反证幂次不能取正。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 混淆「根式差趋于常数」与「根式差是一阶无穷小」。\(\sqrt{x^{2}+x}-x\) 主项是常数 \(\dfrac12\)，它不是无穷小；要让它乘 \(x^{k}\) 后为有限非零，应配 \(k=0\)，而不是 \(k=1\)。配错幂次是本题最常见的错。</p>
+    <p>② 有理化后 \(\dfrac{x}{\sqrt{x^{2}+x}+x}\) 误约成 \(\dfrac{x}{2x^{2}}\)。分母是 \(x(\sqrt{1+1/x}+1)\approx2x\)，不是 \(2x^{2}\)，故比值是 \(\dfrac12\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式差的定阶是高频考点。要先判断主项抵消后剩下的是常数、\(\dfrac1x\) 还是 \(x\) 的正幂，再决定配什么幂次。比较：\(\sqrt{x^{2}+x}-x\to\dfrac12\)（常数），而 \(\sqrt{x^{4}+x^{2}}-x^{2}\to\dfrac12\)（也是常数），两者结构相同。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(k\) 使 \(\lim\limits_{x\to\infty}\left(\sqrt{x^{2}+x}-x-\dfrac12\right)x^{k}\) 为有限非零数。</p>
+    <p class="var-ans">答案：\(k=1\)，极限为 \(-\dfrac18\)。由展开 \(\sqrt{x^{2}+x}-x-\dfrac12=-\dfrac{1}{8x}+o(1/x)\)，乘 \(x\) 得 \(-\dfrac18\)。这才是真正配 \(k=1\) 的对象——减去常数主部后剩下的 \(1/x\) 项。</p>
+  </div>
+</article>
+
+<article class="q" id="q53">
+  <div class="q-head">
+    <span class="qno">第 53 题</span>
+    <span class="qtype">由极限反求参数（消一次项）</span>
+    <span class="qsrc">P606</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{e^{ax}-\cos(bx)}{x^{2}}=1\)，求 \(a\) 和 \(b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=0,\ b=\sqrt{2}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{2}\)。分子中 \(e^{ax}\) 与 \(\cos(bx)\) 在 \(x=0\) 处都为 \(1\)，常数项抵消；要让除以 \(x^{2}\) 后有限，一次项系数必须为零，再由二次项系数等于给定的 \(1\) 定 \(b\)。</p>
+    <p>展开到 \(x^{2}\)：</p>
+    \[ e^{ax}=1+ax+\frac{a^{2}}{2}x^{2}+o(x^{2}),\qquad \cos(bx)=1-\frac{b^{2}}{2}x^{2}+o(x^{2}). \]
+    <p>分子：</p>
+    \[ e^{ax}-\cos(bx)=ax+\left(\frac{a^{2}}{2}+\frac{b^{2}}{2}\right)x^{2}+o(x^{2}). \]
+    <p>一次项系数 \(a\) 必须为零，否则除以 \(x^{2}\) 后含 \(\dfrac{a}{x}\) 发散：</p>
+    \[ a=0. \]
+    <p>\(a=0\) 后 \(e^{ax}\) 的二次项 \(a^{2}/2\) 消失，分子仅剩 \(\cos\) 贡献的 \(\dfrac{b^{2}}2 x^{2}\)，除以 \(x^{2}\) 得 \(\dfrac{b^{2}}2\)，令其等于 \(1\)：</p>
+    \[ \frac{b^{2}}2=1\ \Longrightarrow\ b^{2}=2. \]
+    <p>取正根 \(b=\sqrt2\)；\(b=-\sqrt2\) 同解，题面未限定符号时两值皆成立。数值互证：\(x=0.05\) 比值约 \(0.9996\)，\(x=0.02\) 约 \(0.9999\)，随 \(x\) 缩小趋近 \(1\)，与二次项系数 \(b^{2}/2=1\) 一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记消一次项。看到分子 \(e^{ax}-\cos(bx)\) 直接写二次项 \(\dfrac{a^{2}+b^{2}}2=1\)，漏掉 \(a=0\) 的约束。只要 \(a\neq0\)，分子有一次项 \(ax\)，除以 \(x^{2}\) 必发散，极限不存在为有限值。</p>
+    <p>② \(\cos(bx)\) 展开符号。\(-\cos(bx)\) 中的二次项是 \(+\dfrac{b^{2}}2 x^{2}\)（因为 \(\cos(bx)=1-\dfrac{b^{2}}2x^{2}\)），与 \(e^{ax}\) 的 \(+\dfrac{a^{2}}2\) 相加，不是相减。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是「分母为 \(x^{2}\)」的标准反求：先消一次项，再用二次项系数定值。它与分母为 \(x^{3}\) 的题型（先消一次、二次项）是同一套路的不同阶数，核心都是「低于分母阶的系数必须清零」。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{e^{ax}-\cos(bx)}{x^{2}}=2\)，求 \(a,b\)。</p>
+    <p class="var-ans">答案：\(a=0,\ b=2\)。仍需 \(a=0\)，由 \(\dfrac{b^{2}}2=2\) 得 \(b=2\)。给定的极限值只改变 \(|b|\)，不改变 \(a\) 的取值。</p>
+  </div>
+</article>
+
+<article class="q" id="q54">
+  <div class="q-head">
+    <span class="qno">第 54 题</span>
+    <span class="qtype">ln x 在 x=1 处的泰勒反求</span>
+    <span class="qsrc">P607</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to1}\dfrac{\ln(x)-a(x-1)-b(x-1)^{2}}{(x-1)^{3}}=\dfrac{1}{3}\)，求 \(a\) 和 \(b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=-\dfrac{1}{2}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(x\to1\) 型，分母 \((x-1)^{3}\)。作换元 \(t=x-1\to0\)，则 \(\ln x=\ln(1+t)\)。这是把 \(\ln(1+t)\) 在 \(0\) 处泰勒展开、与一个二次多项式相减，要求低于三阶的项全部抵消。</p>
+    <p>展开：</p>
+    \[ \ln(1+t)=t-\frac{t^{2}}{2}+\frac{t^{3}}{3}+o(t^{3}). \]
+    <p>分子：</p>
+    \[ \ln(1+t)-at-bt^{2}=(1-a)t+\left(-\frac12-b\right)t^{2}+\frac13 t^{3}+o(t^{3}). \]
+    <p>要使除以 \(t^{3}\) 后为有限值，一次项、二次项系数必须分别为零：</p>
+    \[ 1-a=0,\qquad -\frac12-b=0. \]
+    <p>解得 \(a=1\)，\(b=-\dfrac12\)。此时分子仅剩 \(\dfrac13 t^{3}\)，除以 \(t^{3}\) 恰为 \(\dfrac13\)；该三阶系数即 \(\ln(1+t)\) 的三阶泰勒系数，与题设极限吻合。数值互证：\(t=0.05\) 比值约 \(0.3213\)，\(t=0.02\) 约 \(0.3284\)，趋于 \(1/3\approx0.3333\)。低于分母阶的一次、二次项都须清零；若二次项未抵消，分子含 \(t^{2}\) 项，除以 \(t^{3}\) 按 \(1/t\) 型发散，极限不存在。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 换元后忘记 \(\ln x\) 要写成 \(\ln(1+t)\) 而非 \(\ln t\)。\(t=x-1\)，\(x=1+t\)，所以是 \(\ln(1+t)\)，展开式是 \(t-\dfrac{t^{2}}2+\dfrac{t^{3}}3\)。</p>
+    <p>② 只令一次项 \(1-a=0\) 就停手，忘了二次项 \(-\dfrac12-b\) 也必须清零。分母是 \(t^{3}\)，二次项若不抵消会给出 \(\dfrac{1}{t}\) 的发散项。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「函数在某点的展开式减去一个多项式，要求最低余项阶数」是泰勒公式的经典反问题。它本质上是在求函数在该点的泰勒系数：\(a=f'(1)\)，\(b=\dfrac{f''(1)}2\)，余项系数即 \(\dfrac{f'''(1)}6\)。本题 \(\ln x\) 在 \(x=1\) 处的各阶系数就是这样定出来的。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 已知 \(\lim\limits_{x\to1}\dfrac{\ln x-a(x-1)-b(x-1)^{2}}{(x-1)^{3}}=\dfrac{1}{6}\)，求 \(a,b\)。</p>
+    <p class="var-ans">答案：\(a=1,\ b=-\dfrac12\)。一次、二次项系数仍由消去条件定，与常数无关；\(\ln(1+t)\) 的三阶系数固定为 \(\dfrac13\)，故若极限值改为 \(\dfrac16\)，说明题目结构需调整（如分母改为 \(2(x-1)^{3}\)），\(a,b\) 不变。</p>
+  </div>
+</article>
+
+<article class="q" id="q55">
+  <div class="q-head">
+    <span class="qno">第 55 题</span>
+    <span class="qtype">∞-∞ 型等价无穷小定阶</span>
+    <span class="qsrc">P607</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to0}\left(\dfrac{1}{x}-\dfrac{1}{\sin x}\right)x^{p}=q\)，其中 \(p,q\) 为常数，且 \(q\neq0\)，则求 \(p\) 和 \(q\)。</p>
+  </div>
+  <div class="answer">答案：\(p=-1,\ q=-\dfrac{1}{6}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(p=1,\ q=-\dfrac16\)，按题面独立复算为 \(p=-1,\ q=-\dfrac16\)。\(\dfrac1x-\dfrac1{\sin x}\sim-\dfrac{x}{6}\) 是一阶无穷小，乘 \(x^{p}\) 为有限非零需 \(p=-1\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\dfrac1x-\dfrac1{\sin x}\) 是 \(\infty-\infty\) 型，通分后变为 \(0/0\) 型，再用泰勒展开定阶与系数；乘 \(x^{p}\) 是为把无穷小规范化为非零常数 \(q\)。</p>
+    <p>通分：</p>
+    \[ \frac1x-\frac1{\sin x}=\frac{\sin x-x}{x\sin x}. \]
+    <p>展开分子与分母：\(\sin x=x-\dfrac{x^{3}}6+o(x^{3})\)，故 \(\sin x-x=-\dfrac{x^{3}}6+o(x^{3})\)；分母 \(x\sin x=x^{2}+o(x^{2})\)；分子三阶、分母二阶，相除后为一阶无穷小。于是</p>
+    \[ \frac{\sin x-x}{x\sin x}=\frac{-\dfrac{x^{3}}6+o(x^{3})}{x^{2}+o(x^{2})}=-\frac{x}{6}+o(x). \]
+    <p>即该式是关于 \(x\) 的一阶无穷小，系数 \(-\dfrac16\) 来自 \(\sin x\) 的三阶项 \(-x^{3}/6\)。要使它乘 \(x^{p}\) 后为非零常数，需 \(1+p=0\)，即 \(p=-1\)，此时</p>
+    \[ \left(\frac1x-\frac1{\sin x}\right)x^{-1}\to-\frac16, \]
+    <p>故 \(q=-\dfrac16\)。数值互证：\(x=0.05\)、\(x=0.02\) 两档代入 \(p=-1\)，比值均约 \(-0.1667\)，逼近 \(-1/6\)；对照书印 \(p=1\)，乘 \(x\) 后约 \(-0.000417\) 趋于 \(0\)，与 \(q\neq0\) 矛盾。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 通分后展开阶数不够。若只写 \(\sin x\approx x\)，会得到 \(0/0\) 无法定阶；必须展开到 \(x^{3}\)，那个 \(-\dfrac{x^{3}}6\) 才是答案来源。</p>
+    <p>② 符号。\(\sin x-x=-\dfrac{x^{3}}6\) 为负，故 \(q=-\dfrac16\)；写成 \(+\dfrac16\) 是把 \(\sin x\) 的三阶项符号记反。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(\dfrac1x-\dfrac1{\sin x}\)」「\(\dfrac1x-\dfrac1{\tan x}\)」这类 \(0/0\) 再通分的组合，是无穷小阶比较的高频素材。结论要记住：\(\dfrac1x-\dfrac1{\sin x}\sim-\dfrac{x}{6}\)，\(\dfrac1x-\dfrac1{\tan x}\sim-\dfrac{x}{3}\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\dfrac1x-\dfrac1{\tan x}\) 在 \(x\to0\) 时的等价无穷小。</p>
+    <p class="var-ans">答案：\(-\dfrac{x}{3}\)。通分得 \(\dfrac{\tan x-x}{x\tan x}\)，而 \(\tan x-x=\dfrac{x^{3}}3+o(x^{3})\)，分母 \(\sim x^{2}\)，故整体 \(\sim\dfrac{x}{3}\)；原式为 \(\dfrac1x-\dfrac1{\tan x}=-\dfrac{\tan x-x}{x\tan x}\sim-\dfrac{x}{3}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q56">
+  <div class="q-head">
+    <span class="qno">第 56 题</span>
+    <span class="qtype">1<sup>∞</sup> 型反求参数</span>
+    <span class="qsrc">P607</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to\infty}\left(1+\dfrac{a}{x}+\dfrac{b}{x^{2}}\right)^{x}=e^{2}\)，求 \(a\) 和 \(b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=2\)（\(b\) 任意，一组取 \(b=2\)）</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：底数 \(1+\dfrac{a}{x}+\dfrac{b}{x^{2}}\to1\)，指数 \(x\to\infty\)，属 \(1^{\infty}\) 型。对幂指函数先取对数，用标准公式 \(\lim u^{v}=e^{\lim v(u-1)}\)，其中 \(u-1=\dfrac{a}{x}+\dfrac{b}{x^{2}}\)。</p>
+    <p>先把对数展开到 \(1/x\) 阶：</p>
+    \[ \ln u=\frac{a}{x}+\frac{b}{x^{2}}+o\!\left(\frac1x\right). \]
+    <p>计算指数部分，对数极限为</p>
+    \[ \ln L=\lim_{x\to\infty}x\left(\frac{a}{x}+\frac{b}{x^{2}}\right)=a+\lim_{x\to\infty}\frac{b}{x}=a. \]
+    <p>于是原极限 \(L=e^{a}\)，与题设 \(e^{2}\) 比较：</p>
+    \[ e^{a}=e^{2}\ \Longrightarrow\ a=2. \]
+    <p>关键一步：\(\dfrac{b}{x^{2}}\) 乘以指数 \(x\) 后剩 \(\dfrac{b}{x}\to0\)，被降了一阶，所以 \(b\) 对极限值没有贡献。本题只能确定 \(a=2\)，\(b\) 可取任意常数；取 \(b=2\) 只是一组归一化取值，并非方程约束出来的。</p>
+    <p>数值互证：取 \(x=1000\)、\(x=10000\) 两档，固定 \(a=2\)，分别令 \(b=2\) 与 \(b=0\)，对数极限都逼近 \(2\)，与 \(b\) 取值无关；若误把 \(b\) 当成必须等于 \(2\)，属于把自由参数当成了定解条件。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(b\) 也必须等于某个值。在 \(1^{\infty}\) 型 \(\left(1+\dfrac{a}{x}+\dfrac{b}{x^{2}}\right)^{x}\) 中，只有 \(\dfrac{a}{x}\) 这一项在乘指数 \(x\) 后留下常数，\(\dfrac{b}{x^{2}}\) 项被指数 \(x\) 降一阶，趋于零。若题目把指数改成 \(x^{2}\)，则 \(b\) 才会起作用。</p>
+    <p>② 套公式时忘记乘指数。直接写 \(u-1=\dfrac{a}{x}+\dfrac{b}{x^{2}}\to0\) 就下结论，漏掉了 \(v(u-1)\) 这一步。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(1^{\infty}\) 型反求参数的关键是「哪一项在乘指数后留下常数」。一般地，\(\left(1+\dfrac{c_{1}}{x}+\dfrac{c_{2}}{x^{2}}+\cdots\right)^{x^{k}}\) 中，\(x^{k}\cdot\dfrac{c_{j}}{x^{j}}\) 留下常数当且仅当 \(j=k\)。本题 \(k=1\)，故只有 \(a\)（即 \(c_{1}\)）起作用。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to\infty}\left(1+\dfrac{a}{x}+\dfrac{b}{x^{2}}\right)^{x^{2}}=e^{5}\)，求 \(a,b\) 的关系。</p>
+    <p class="var-ans">答案：\(a=0,\ b=5\)。此时指数为 \(x^{2}\)，\(x^{2}\cdot\dfrac{a}{x}=ax\) 发散，故必须 \(a=0\)；\(x^{2}\cdot\dfrac{b}{x^{2}}=b\)，故 \(b=5\)。与本题 \(k=1\) 时只有 \(a\) 起作用形成对照。</p>
+  </div>
+</article>
+
+<article class="q" id="q57">
+  <div class="q-head">
+    <span class="qno">第 57 题</span>
+    <span class="qtype">反三角函数的泰勒反求</span>
+    <span class="qsrc">P607</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to0}\dfrac{\arctan(ax)-\arcsin(bx)}{x^{3}}=c\)，其中 \(a,b,c\) 是常数，且 \(c\neq0\)，则求 \(a,b,c\)。</p>
+  </div>
+  <div class="answer">答案：\(a=b=1,\ c=-\dfrac{1}{2}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(c=-\dfrac16\)，按题面独立复算为 \(a=b=1,\ c=-\dfrac12\)。\(\arctan x-\arcsin x\) 的三阶项为 \(-\dfrac13-\dfrac16=-\dfrac12\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{3}\)。把两个反三角函数展开到 \(x^{3}\)，先消一次项，再定三次项系数；反三角与正三角的三阶项符号相反，是本题最容易记错的地方。</p>
+    <p>展开：</p>
+    \[ \arctan(ax)=ax-\frac{a^{3}}{3}x^{3}+o(x^{3}),\qquad \arcsin(bx)=bx+\frac{b^{3}}{6}x^{3}+o(x^{3}). \]
+    <p>分子：</p>
+    \[ \arctan(ax)-\arcsin(bx)=(a-b)x-\left(\frac{a^{3}}{3}+\frac{b^{3}}{6}\right)x^{3}+o(x^{3}). \]
+    <p>一次项清零得 \(a=b\)；代回三次项系数，得到完整的解族</p>
+    \[ a=b=t,\qquad c=-\frac{t^{3}}3-\frac{t^{3}}6=-\frac{t^{3}}2. \]
+    <p>按题面归一化取 \(t=1\)，即 \(a=b=1\)，三次项系数为 \(-\left(\dfrac13+\dfrac16\right)=-\dfrac12\)，故 \(c=-\dfrac12\)。数值互证：取 \(x=0.05\) 时比值约 \(-0.4997\)，\(x=0.02\) 时约 \(-0.49995\)，两档逼近 \(-1/2\)；书印的 \(-1/6\) 约 \(-0.1667\)，与实测方向、数值都不符。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 混淆 \(\arcsin\) 与 \(\sin\) 的三阶项符号。\(\sin x=x-\dfrac{x^{3}}6\)，但 \(\arcsin x=x+\dfrac{x^{3}}6\)，符号相反；\(\arctan x=x-\dfrac{x^{3}}3\)。这一组最易记错。</p>
+    <p>② 只消一次项 \(a=b\) 就以为 \(c\) 任意，必须把三次系数算出来。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>反三角函数 \(\arcsin,\arctan,\arccos\) 的泰勒系数是高频易错点。务必背熟：\(\arcsin x=x+\dfrac{x^{3}}6+\dfrac{3x^{5}}{40}\)，\(\arctan x=x-\dfrac{x^{3}}3+\dfrac{x^{5}}5\)。两者三阶项一正一负，相减时叠加。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-\arctan x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。\(\arcsin x-\arctan x=\left(x+\dfrac{x^{3}}6\right)-\left(x-\dfrac{x^{3}}3\right)=\dfrac{x^{3}}2+o(x^{3})\)，除以 \(x^{3}\) 得 \(\dfrac12\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q58">
+  <div class="q-head">
+    <span class="qno">第 58 题</span>
+    <span class="qtype">1<sup>∞</sup> 型（sin/x 为底）</span>
+    <span class="qsrc">P607</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to0}\left(\dfrac{\sin(ax)}{x}\right)^{1/x^{2}}=e^{d}\)，求 \(a\) 和 \(d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ d=-\dfrac{1}{6}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：底数 \(\dfrac{\sin(ax)}x\)，指数 \(1/x^{2}\to\infty\)。要成为 \(1^{\infty}\) 型，底数必须趋于 \(1\)，这先定出 \(a\)；再用 \(e^{\lim(1/x^{2})(u-1)}\) 算指数。</p>
+    <p>先看底数极限：\(\dfrac{\sin(ax)}x\to a\)（因为 \(\sin(ax)\sim ax\)）。要底数 \(\to1\)，必须 \(a=1\)。否则若 \(a\neq1\)，底数趋于非 \(1\) 的常数，\(1/x^{2}\) 次方会发散，不构成 \(e^{d}\)。</p>
+    <p>当 \(a=1\)，\(u=\dfrac{\sin x}{x}\)。展开 \(\sin x=x-\dfrac{x^{3}}6+o(x^{3})\)：</p>
+    \[ u=\frac{\sin x}{x}=1-\frac{x^{2}}6+o(x^{2}),\qquad u-1=-\frac{x^{2}}6+o(x^{2}). \]
+    <p>指数部分：</p>
+    \[ \frac1{x^{2}}(u-1)=-\frac16+o(1)\to-\frac16. \]
+    <p>合成指数极限：</p>
+    \[ L=\exp\!\left(\lim_{x\to0}\frac1{x^{2}}(u-1)\right)=e^{-1/6}, \]
+    <p>故 \(d=-\dfrac16\)。数值互证：\(x=0.05\) 对数极限约 \(-0.16668\)，\(x=0.02\) 约 \(-0.16667\)，逼近 \(-1/6\)。若 \(a\neq1\)，底数趋于非 \(1\) 的常数，取 \(1/x^{2}\) 次方发散或趋零，不构成 \(e^{d}\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记先用底数极限定 \(a=1\)。若不要求底数趋于 \(1\)，\(\dfrac{\sin(ax)}x\to a\)，幂指函数无意义（不为 \(e^{d}\)）。</p>
+    <p>② 指数算错符号。\(\sin x-x=-\dfrac{x^{3}}6\)，故 \(u-1=-\dfrac{x^{2}}6\)，\(d\) 为负；写成 \(+\dfrac16\) 是符号错。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(\left(\dfrac{\sin(ax)}x\right)^{1/x^{2}}\)」是 \(1^{\infty}\) 型的标准形态，考点是两步：先让底数极限为 \(1\) 定 \(a\)，再把底数写成 \(1+\text{小量}\) 后乘指数求极限。同类还有 \(\left(\dfrac{\tan(ax)}x\right)^{1/x^{2}}\)（系数为 \(+\dfrac13\)）。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{\tan x}{x}\right)^{1/x^{2}}\)。</p>
+    <p class="var-ans">答案：\(e^{1/3}\)。\(\dfrac{\tan x}{x}=1+\dfrac{x^{2}}3+o(x^{2})\)，乘 \(1/x^{2}\) 得 \(+\dfrac13\)，故极限 \(e^{1/3}\)。与本题 \(e^{-1/6}\) 对照，符号与系数都不同。</p>
+  </div>
+</article>
+
+<article class="q" id="q59">
+  <div class="q-head">
+    <span class="qno">第 59 题</span>
+    <span class="qtype">ln(1+ax) 与一次式的反求</span>
+    <span class="qsrc">P607</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\ln(1+ax)-bx}{x^{2}}=3\)，求 \(a\) 和 \(b\)。</p>
+  </div>
+  <div class="answer">答案：无实数解（题面条件不足）</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(a=1,\ b=-3\)，按题面独立复算为无实数解（题面条件不足）。需 \(b=a\) 且 \(-\dfrac{a^{2}}2=3\)，实数范围无解；书值代回一次项为 \(1-(-3)=4\neq0\)，极限必发散。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{2}\)。把 \(\ln(1+ax)\) 展开，要求一次项抵消，二次项系数等于给定值 \(3\)。</p>
+    <p>展开：</p>
+    \[ \ln(1+ax)=ax-\frac{a^{2}}{2}x^{2}+o(x^{2}). \]
+    <p>分子：</p>
+    \[ \ln(1+ax)-bx=(a-b)x-\frac{a^{2}}2x^{2}+o(x^{2}). \]
+    <p>要使除以 \(x^{2}\) 有限，一次项、二次项须分别满足：</p>
+    \[ a-b=0,\qquad -\frac{a^{2}}2=3\ \Longrightarrow\ b=a,\quad a^{2}=-6. \]
+    <p>实数范围内 \(a^{2}\ge0\)，方程 \(a^{2}=-6\) 无解；只有在复数域取 \(a=\pm i\sqrt6\) 才形式成立，而题面 \(a,b\) 是实常数。从符号可行性看，消去一次项后二次项 \(-a^{2}/2\) 恒非正，不可能等于正数 \(3\)，题面数值自相矛盾。书值 \(a=1,b=-3\) 代回后一次项系数 \(a-b=4\) 未抵消，除以 \(x^{2}\) 后是 \(4/x\) 型发散，\(x=0.05\) 时比值已约 \(79.5\)，随 \(x\to0\) 趋于无穷，不可能等于 \(3\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记一次项必须抵消。只要 \(a\neq b\)，分子有 \((a-b)x\)，除以 \(x^{2}\) 得 \((a-b)/x\to\infty\)，极限不存在为有限值。</p>
+    <p>② 本题给定的极限值 \(3\) 与「二次系数为负」的结构冲突（\(\ln(1+ax)-bx\) 的二次项 \(-a^{2}/2\) 恒 \(\le0\)，不可能等于正数 \(3\)）。做题时应先判断符号可行性。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这类反求题要先看符号是否可行：\(\ln(1+ax)-bx\) 消去一次项后二次项恒为负，若题目给定正极限，则无解或题干有误。养成「先消一次项、再看二次系数符号」的习惯，可快速发现题面矛盾。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to0}\dfrac{\ln(1+ax)-bx}{x^{2}}=-2\)，求 \(a,b\)。</p>
+    <p class="var-ans">答案：\(a=b=2\)。需 \(b=a\)，由 \(-\dfrac{a^{2}}2=-2\) 得 \(a^{2}=4\)，取正 \(a=2,b=2\)。这说明当极限值为负时本题才有实解。</p>
+  </div>
+</article>
+
+<article class="q" id="q60">
+  <div class="q-head">
+    <span class="qno">第 60 题</span>
+    <span class="qtype">∞-∞ 型反求（根式线性项）</span>
+    <span class="qsrc">P608</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to\infty}\left(x-\sqrt{x^{2}+ax+b}\right)=2\)，求 \(a\) 和 \(b\)。</p>
+  </div>
+  <div class="answer">答案：\(a=-4\)（\(b\) 任意，一组取 \(b=4\)）</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\infty-\infty\) 型根式差。提主部后，\(x\) 与根号里的 \(x\) 抵消；有理化后分子为 \(-ax-b\)，分母 \(\sim2x\)，主部由一次系数 \(a\) 决定。</p>
+    <p>提主部：\(\sqrt{x^{2}+ax+b}=x\sqrt{1+\dfrac{a}{x}+\dfrac{b}{x^{2}}}\)，用 \((1+u)^{1/2}\approx1+\dfrac u2\)：</p>
+    \[ \sqrt{x^{2}+ax+b}=x\left(1+\frac{a}{2x}+\frac{b}{2x^{2}}-\frac{a^{2}}{8x^{2}}+\cdots\right)=x+\frac a2+\frac{b/2-a^{2}/8}{x}+\cdots. \]
+    <p>因此</p>
+    \[ x-\sqrt{x^{2}+ax+b}=-\frac a2+O\!\left(\frac1x\right). \]
+    <p>令其极限为 \(2\)：\(-\dfrac a2=2\)，得 \(a=-4\)。</p>
+    <p>把修正项也写全：</p>
+    \[ x-\sqrt{x^{2}+ax+b}=-\frac a2+\frac{a^{2}/8-b/2}{x}+o\!\left(\frac1x\right). \]
+    <p>关键一步：常数项 \(b\) 只出现在 \(1/x\) 的修正里，不影响主极限；极限 \(2\) 只能定出 \(a=-4\)，\(b\) 为自由参数，取 \(b=4\) 仅为一组取值。数值互证：\(x=1000,a=-4,b=4\) 差值约 \(2.000000\)；\(x=10000,a=-4,b=0\) 约 \(2.000200\)，两档趋于 \(2\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 有理化后符号。\(x-\sqrt{x^{2}+ax+b}=\dfrac{x^{2}-(x^{2}+ax+b)}{x+\sqrt{}}=\dfrac{-ax-b}{x+\sqrt{}}\to\dfrac{-a}{2}\)，是 \(-a/2\) 不是 \(+a/2\)。令 \(-a/2=2\) 得 \(a=-4\)，符号反了会得到 \(a=4\)。</p>
+    <p>② 误以为 \(b\) 会改变极限。在 \(x\to\infty\) 且根式差主项为常数时，\(b\) 只影响高阶小量。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(x-\sqrt{x^{2}+ax+b}\to L\)」是定线性系数 \(a\) 的标准题，结论 \(L=-a/2\)。它与「\(\sqrt{x^{2}+ax+b}-x\to L\)」只是符号相反。当题目把常数项 \(b\) 也要求确定时，通常会额外给一个条件（如极限为 \(L\) 且余项趋于某值）。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 已知 \(\lim\limits_{x\to\infty}\left(\sqrt{x^{2}+ax+b}-x\right)=3\)，求 \(a\)。</p>
+    <p class="var-ans">答案：\(a=6\)。由 \(\sqrt{x^{2}+ax+b}-x\to a/2\)，令 \(a/2=3\) 得 \(a=6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q61">
+  <div class="q-head">
+    <span class="qno">第 61 题</span>
+    <span class="qtype">e<sup>ax</sup> 乘 cos 组合的反求</span>
+    <span class="qsrc">P608</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{e^{ax}-e^{bx}\cos(cx)}{x^{3}}=d\)，其中 \(a,b,c,d\) 是常数，且 \(d\neq0\)，则求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：无实数解（题面条件不足）</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(a=1,\ b=1,\ c=1,\ d=\dfrac16\)，按题面独立复算为无实数解（题面条件不足）。要消一次项需 \(a=b\)、要消二次项需 \(c=0\)，而 \(a=b,\ c=0\) 时分子恒零，与题设 \(d\neq0\) 矛盾。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{3}\)。把 \(e^{ax}\) 与 \(e^{bx}\cos(cx)\) 都展开到 \(x^{3}\)，要求低于三阶的项系数清零，再由三阶项定 \(d\)。</p>
+    <p>展开：</p>
+    \[ e^{ax}=1+ax+\frac{a^{2}}2x^{2}+\frac{a^{3}}6x^{3}+\cdots. \]
+    <p>乘积 \(e^{bx}\cos(cx)\)：</p>
+    \[ e^{bx}\cos(cx)=1+bx+\left(\frac{b^{2}}2-\frac{c^{2}}2\right)x^{2}+\left(\frac{b^{3}}6-\frac{bc^{2}}2\right)x^{3}+\cdots. \]
+    <p>分子各项系数：一次项 \(a-b\)，二次项 \(\dfrac{a^{2}-b^{2}+c^{2}}2\)，三次项 \(\dfrac{a^{3}-b^{3}}6+\dfrac{bc^{2}}2\)。</p>
+    <p>要除以 \(x^{3}\) 有限，一次、二次项须清零：\(a=b\) 且 \(a^{2}-b^{2}+c^{2}=c^{2}=0\)，即 \(c=0\)。三次项系数为</p>
+    \[ C_{3}=\frac{a^{3}-b^{3}}6+\frac{bc^{2}}2;\qquad a=b,\ c=0\ \Longrightarrow\ C_{3}=0. \]
+    <p>此时分子恒为零，与题设 \(d\neq0\) 矛盾，故按题面所给结构，不存在 \(d\neq0\) 的实数解。书值 \(a=b=c=1\) 代回后二次项 \(c^{2}/2=0.5\) 仍存在，比值随 \(x\) 缩小按 \(0.5/x\) 型发散，不是有限的 \(d=1/6\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只消一次项 \(a=b\)，忽略二次项 \((a^{2}-b^{2}+c^{2})/2\)。即使 \(a=b\)，只要 \(c\neq0\)，二次项 \(\dfrac{c^{2}}2\) 就存在，除以 \(x^{3}\) 发散。</p>
+    <p>② 这类「\(e^{ax}-e^{bx}\cos(cx)\)」在分母 \(x^{3}\) 下要非零有限，结构上不可行，做题时应先做阶数可行性判断。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>组合函数的泰勒展开是高阶反求题的核心。要逐项把系数列出来，按「低于分母阶的系数清零」列方程。若方程组无解，说明题面结构有误，不应硬凑答案。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{x}-e^{x}\cos x}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。\(e^{x}(1-\cos x)\sim e^{x}\cdot\dfrac{x^{2}}2\to\dfrac{x^{2}}2\)，除以 \(x^{2}\) 得 \(\dfrac12\)。这说明该结构在分母 \(x^{2}\)（而非 \(x^{3}\)）下才有有限值。</p>
+  </div>
+</article>
+
+<article class="q" id="q62">
+  <div class="q-head">
+    <span class="qno">第 62 题</span>
+    <span class="qtype">(1-cos)/x² 型定阶</span>
+    <span class="qsrc">P608</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to0}\left(\dfrac{1}{x^{2}}-\dfrac{\cos(ax)}{x^{2}}\right)x^{p}=q\)，求 \(a,p,q\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ p=0,\ q=\dfrac{1}{2}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：括号内通分后是 \(\dfrac{1-\cos(ax)}{x^{2}}\)，属 \(0/0\) 型；再判断它乘 \(x^{p}\) 后何时为非零常数。这是等价无穷小定阶题。</p>
+    <p>括号内合并：</p>
+    \[ \frac1{x^{2}}-\frac{\cos(ax)}{x^{2}}=\frac{1-\cos(ax)}{x^{2}}. \]
+    <p>用 \(1-\cos(ax)\sim\dfrac{a^{2}x^{2}}2\)（或展开 \(\cos(ax)=1-\dfrac{a^{2}x^{2}}2+o(x^{2})\)）：</p>
+    \[ \frac{1-\cos(ax)}{x^{2}}\to\frac{a^{2}}2. \]
+    <p>这个量本身趋于常数 \(\dfrac{a^{2}}2\)（不是无穷小），\(x^{2}\) 恰好约去分子的二阶无穷小；因此乘 \(x^{p}\) 后要保持非零有限，必须 \(p=0\)。此时 \(q=\dfrac{a^{2}}2\)。取归一化 \(a=1\)，得 \(q=\dfrac12\)。</p>
+    <p>合并后的渐近行为写成</p>
+    \[ \frac{1-\cos(ax)}{x^{2}}=\frac{a^{2}}2+o(1),\qquad p=0,\quad q=\frac{a^{2}}2. \]
+    <p>关键一步：\(\dfrac{1-\cos(ax)}{x^{2}}\) 是常数极限，不是 \(x\) 的正幂，配幂 \(p=0\) 即可。数值互证：\(x=0.05,a=1\) 比值约 \(0.49990\)，\(x=0.02\) 约 \(0.49998\)，逼近 \(1/2\)。参数 \(a\) 未定，归一化取 \(a=1\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(\dfrac{1-\cos(ax)}{x^{2}}\) 是无穷小。它的极限是常数 \(\dfrac{a^{2}}2\)，分母 \(x^{2}\) 恰好约掉了分子的 \(x^{2}\)，结果是常数。</p>
+    <p>② 等价无穷小系数。\(1-\cos(ax)\sim\dfrac{(ax)^{2}}2=\dfrac{a^{2}x^{2}}2\)，别漏 \(a^{2}\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>识别「约到同阶后是常数还是无穷小」是定阶题的第一步。\(\dfrac{1-\cos x}{x^{2}}\to\dfrac12\)、\(\dfrac{\sin x-x}{x^{3}}\to-\dfrac16\) 这些经典比值要记牢，它们直接给出该无穷小的阶与系数。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{1-\cos(ax)}{x^{2}}\) 并写出它是 \(x\) 的几阶无穷小。</p>
+    <p class="var-ans">答案：\(\dfrac{a^{2}}2\)。它在除以 \(x^{2}\) 后为常数，说明 \(1-\cos(ax)\) 本身是二阶无穷小、系数 \(\dfrac{a^{2}}2\)，而 \(\dfrac{1-\cos(ax)}{x^{2}}\) 是常数。</p>
+  </div>
+</article>
+
+<article class="q" id="q63">
+  <div class="q-head">
+    <span class="qno">第 63 题</span>
+    <span class="qtype">∛x 在 x=1 处的泰勒反求</span>
+    <span class="qsrc">P608</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to1}\dfrac{\sqrt[3]{x}-a-b(x-1)-c(x-1)^{2}}{(x-1)^{3}}=d\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=\dfrac{1}{3},\ c=-\dfrac{1}{9},\ d=\dfrac{5}{81}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：换元 \(t=x-1\to0\)，\(\sqrt[3]{x}=\sqrt[3]{1+t}=(1+t)^{1/3}\)。把它展开到 \(t^{3}\)，与一个二次多项式相减，要求常数、一次、二次项全部抵消，剩下 \(t^{3}\) 项系数即 \(d\)。</p>
+    <p>取 \(\alpha=\dfrac13\) 做二项式展开：</p>
+    \[ (1+t)^{1/3}=1+\frac13 t-\frac19 t^{2}+\frac{5}{81}t^{3}+o(t^{3}). \]
+    <p>分子：</p>
+    \[ (1+t)^{1/3}-a-bt-ct^{2}=(1-a)+\left(\frac13-b\right)t+\left(-\frac19-c\right)t^{2}+\frac{5}{81}t^{3}+o(t^{3}). \]
+    <p>令常数、一次、二次系数分别为零：\(a=1\)，\(b=\dfrac13\)，\(c=-\dfrac19\)。三次系数由二项式公式直接算出：</p>
+    \[ d=\frac{\alpha(\alpha-1)(\alpha-2)}6\bigg|_{\alpha=1/3}=\frac{5}{81}. \]
+    <p>数值互证：\(t=0.05\) 时比值约 \(0.05974\)，\(t=0.02\) 时约 \(0.06092\)，逼近 \(5/81\approx0.06173\)。漏常数项按 \(1/t^{3}\) 发散，漏一次、二次项分别按 \(1/t^{2}\)、\(1/t\) 发散，三阶前系数须清零。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 二项式三阶系数算错。\(\alpha(\alpha-1)(\alpha-2)/6=\dfrac13\cdot(-\dfrac23)\cdot(-\dfrac53)/6=\dfrac{10/27}{6}=\dfrac{5}{81}\)。符号为正（三个负号相乘），容易写成负。</p>
+    <p>② 忘记常数项也要抵消。\(\sqrt[3]{1}=1\)，故 \(a=1\)；漏掉常数项会让分子含常数 \(1-a\)，除以 \(t^{3}\) 发散。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>这是「函数在某点的泰勒展开减去多项式、余项系数即答案」的标准题型。\(\sqrt[3]{1+t}\)、\(\sqrt{1+t}\)、\((1+t)^{\alpha}\) 的前几项系数要会用二项式公式现算，不必死记。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to1}\dfrac{\sqrt{x}-a-b(x-1)}{(x-1)^{2}}\)，使极限存在为有限数。</p>
+    <p class="var-ans">答案：\(a=1,\ b=\dfrac12\)，极限为 \(-\dfrac18\)。\(\sqrt{1+t}=1+\dfrac12t-\dfrac18t^{2}+\cdots\)，令 \(a=1,b=\dfrac12\)，余项系数 \(-\dfrac18\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q64">
+  <div class="q-head">
+    <span class="qno">第 64 题</span>
+    <span class="qtype">高阶根式差消主部</span>
+    <span class="qsrc">P608</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to\infty}\left(\sqrt{x^{4}+ax^{3}+bx^{2}}-x^{2}-cx\right)=0\)，求 \(a,b,c\)。</p>
+  </div>
+  <div class="answer">答案：\(c=\dfrac{a}{2},\ b=\dfrac{a^{2}}{4}\)（取 \(a=b=c=0\) 为平凡解）</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(a=0,\ b=1,\ c=0\)，按题面独立复算为 \(c=\dfrac a2,\ b=\dfrac{a^{2}}4\)（取 \(a=b=c=0\) 为平凡解）。书值 \(b=1\) 使极限为 \(\dfrac12\neq0\)，与给定极限 \(0\) 不符。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\infty-\infty\) 型根式差，提主部后要求 \(x\) 的一次项与常数项都被消掉。</p>
+    <p>提 \(x^{4}\)：\(\sqrt{x^{4}+ax^{3}+bx^{2}}=x^{2}\sqrt{1+\dfrac{a}{x}+\dfrac{b}{x^{2}}}\)，展开 \((1+u)^{1/2}\)：</p>
+    \[ =x^{2}\left[1+\frac12\left(\frac{a}{x}+\frac{b}{x^{2}}\right)-\frac18\left(\frac{a}{x}\right)^{2}+\cdots\right] =x^{2}+\frac a2 x+\left(\frac b2-\frac{a^{2}}8\right)+\cdots. \]
+    <p>减去 \(x^{2}+cx\)：</p>
+    \[ \left(\frac a2-c\right)x+\left(\frac b2-\frac{a^{2}}8\right)+\cdots. \]
+    <p>题设极限是 \(0\)，不是某个有限非零常数，所以一次项系数与常数项都须为零：</p>
+    \[ \frac a2-c=0,\qquad \frac b2-\frac{a^{2}}8=0, \]
+    <p>解得 \(c=\dfrac a2\)，\(b=\dfrac{a^{2}}4\)；这是一个含自由参数 \(a\) 的解族，取平凡归一化 \(a=0\)，则 \(b=0,\ c=0\)。数值互证：书值 \(a=0,b=1,c=0\) 在 \(x=1000\) 下差值约 \(0.4999\neq0\)，常数项 \(b/2=1/2\) 未消；取解族例 \(a=2,b=1,c=1\)，同一点差值约 \(0.000000\)，验证关系成立。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只消一次项 \(c=a/2\)，忘记常数项 \(\dfrac b2-\dfrac{a^{2}}8\) 也要为零。题目极限是 \(0\)（非常数），所以常数项也必须消。</p>
+    <p>② 展开 \((1+u)^{1/2}\) 时漏 \(u^{2}\) 项。常数项 \(\dfrac b2-\dfrac{a^{2}}8\) 中的 \(-\dfrac{a^{2}}8\) 来自 \(u^{2}\) 项，不能只写 \(\dfrac b2\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「根式差减去一个多项式，极限为 \(0\)」是渐近展开题，要求把展开到与被减多项式同阶的所有项都配平。这类题在判断曲线的斜渐近线、高阶渐近线时经常出现。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\sqrt{x^{4}+2x^{3}+x^{2}}-x^{2}-cx\right)\)，问 \(c\) 取何值时极限有限。</p>
+    <p class="var-ans">答案：\(c=1\)，极限为 \(0\)。这里 \(a=2\)，一次项系数 \(a/2=1\)，令 \(c=1\) 消去一次项；常数项 \(b/2-a^{2}/8=1/2-4/8=0\)，故极限恰为 \(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q65">
+  <div class="q-head">
+    <span class="qno">第 65 题</span>
+    <span class="qtype">tan-sin 组合的反求</span>
+    <span class="qsrc">P608</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to0}\dfrac{\tan(ax)-\sin(bx)}{x^{3}}=c\)，求 \(a,b,c\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=\dfrac{1}{2}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{3}\)。展开到 \(x^{3}\)，先消一次项，再定三次项系数。</p>
+    <p>展开：</p>
+    \[ \tan(ax)=ax+\frac{a^{3}}3x^{3}+o(x^{3}),\qquad \sin(bx)=bx-\frac{b^{3}}6x^{3}+o(x^{3}). \]
+    <p>分子：</p>
+    \[ \tan(ax)-\sin(bx)=(a-b)x+\left(\frac{a^{3}}3+\frac{b^{3}}6\right)x^{3}+o(x^{3}). \]
+    <p>一次项清零得 \(a=b=t\)。代回三次项系数：</p>
+    \[ c=\frac{t^{3}}3+\frac{t^{3}}6=\frac{t^{3}}2;\qquad t=1\ \Longrightarrow\ c=\frac12. \]
+    <p>取归一化 \(a=b=1\)，得 \(c=\dfrac12\)。关键一步：\(\tan\) 三阶项为 \(+\dfrac{a^{3}}3\)，减去 \(\sin\) 时是减去 \((bx-\dfrac{b^{3}}6x^{3})\)，即 \(+\dfrac{b^{3}}6\)，两者相加，不是相减。数值互证：\(x=0.05\) 时比值约 \(0.50031\)，\(x=0.02\) 时约 \(0.50005\)，逼近 \(1/2\)。也可因式分解验证：\(\tan x-\sin x=\sin x\bigl(\sec x-1\bigr)\sim x\cdot\dfrac{x^{2}}2=\dfrac{x^{3}}2\)，与展开结果一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 符号。\(\sin(bx)=bx-\dfrac{b^{3}}6x^{3}\)，所以 \(\tan-\sin\) 的三次项是 \(+\dfrac{a^{3}}3-(-\dfrac{b^{3}}6)=+\dfrac{a^{3}}3+\dfrac{b^{3}}6\)。若误写成 \(\dfrac{a^{3}}3-\dfrac{b^{3}}6\)，会得到 \(c=1/6\)。</p>
+    <p>② 只消一次项 \(a=b\) 就停手，漏算三次系数。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\tan x-\sin x\) 是经典组合：\(\tan x-\sin x=\sin x(\dfrac1{\cos x}-1)\sim x\cdot\dfrac{x^{2}}2=\dfrac{x^{3}}2\)。本题 \(a=b=1\) 时 \(c=1/2\) 正是这个经典结果，要记牢。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。既可用泰勒展开，也可因式分解 \(\tan x-\sin x=\sin x(\dfrac{1-\cos x}{\cos x})\sim x\cdot\dfrac{x^{2}/2}{1}=\dfrac{x^{3}}2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q66">
+  <div class="q-head">
+    <span class="qno">第 66 题</span>
+    <span class="qtype">ln(1+ax)/x 为底的幂指</span>
+    <span class="qsrc">P609</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to0}\left(\dfrac{\ln(1+ax)}{x}\right)^{1/x}=e^{d}\)，求 \(a\) 和 \(d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ d=-\dfrac{1}{2}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(d=0\)，按题面独立复算为 \(a=1,\ d=-\dfrac12\)。\(\dfrac{\ln(1+x)}x=1-\dfrac x2+\cdots\)，故 \(u-1=-\dfrac x2+o(x)\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：底数 \(\dfrac{\ln(1+ax)}x\)，指数 \(1/x\to\infty\)。先让底数趋于 \(1\) 定 \(a\)，再算 \(\lim(1/x)\ln(\text{底数})\)。</p>
+    <p>底数极限：\(\dfrac{\ln(1+ax)}x\to a\)。要成为 \(1^{\infty}\) 型，须 \(a=1\)。此时把底数展开到 \(x\) 的二阶：</p>
+    \[ u=\frac{\ln(1+x)}x=1-\frac x2+\frac{x^{2}}3+o(x^{2}). \]
+    <p>令 \(u=\dfrac{\ln(1+x)}x\)，则 \(u-1=-\dfrac x2+o(x)\)。取对数：</p>
+    \[ \ln L=\lim_{x\to0}\frac1x\ln u=\lim_{x\to0}\frac1x\bigl(u-1+o(u-1)\bigr)=-\frac12. \]
+    <p>这一步的依据是：当 \(u\to1\) 时 \(\ln u=\ln(1+(u-1))\sim u-1\)，所以 \(\dfrac1x\ln u\sim\dfrac{u-1}{x}\)，展开到 \(u-1\) 的一阶即可。数值互证：\(x=0.05\) 时对数极限约 \(-0.4899\)，\(x=0.02\) 时约 \(-0.4959\)，逼近 \(-1/2\)。</p>
+    <p>另解取对数后洛必达一次，同样得：</p>
+    \[ \ln L=\lim_{x\to0}\left(\frac1{(1+x)\ln(1+x)}-\frac1x\right)=-\frac12. \]
+    <p>故极限 \(=e^{-1/2}\)，即 \(d=-\dfrac12\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记先用底数极限定 \(a=1\)。\(\ln(1+ax)/x\to a\)，若 \(a\neq1\)，底数不是 \(1\)，幂指函数不构成 \(1^{\infty}\)。</p>
+    <p>② 取对数时把 \(\ln u\) 错写成 \(u\)。要用 \(\ln u\approx u-1\)（因为 \(u\to1\)），再乘指数 \(1/x\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>幂指函数 \(u^{v}\) 当 \(u\to1\) 时，统一取对数 \(v\ln u\approx v(u-1)\)。这一步是 \(1^{\infty}\) 型的标准动作，无论底数是 \(\sin x/x\)、\(\ln(1+x)/x\) 还是别的。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{e^{x}-1}{x}\right)^{1/x}\)。</p>
+    <p class="var-ans">答案：\(e^{1/2}\)。\(\dfrac{e^{x}-1}{x}=1+\dfrac x2+\dfrac{x^{2}}6+\cdots\)，\(u-1=x/2+o(x)\)，乘 \(1/x\) 得 \(1/2\)，故极限 \(e^{1/2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q67">
+  <div class="q-head">
+    <span class="qno">第 67 题</span>
+    <span class="qtype">等价无穷小替代定系数关系</span>
+    <span class="qsrc">P609</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{a\sin x+b\tan x}{c\arcsin x+d\arctan x}=2\)，其中 \(a^{2}+c^{2}\neq0\)，则求 \(a,b,c,d\) 的关系。</p>
+  </div>
+  <div class="answer">答案：\(a+b=2(c+d)\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(a=2c,\ b=2d\)，按题面独立复算为 \(a+b=2(c+d)\)。这是本题的一般关系式，\(a=2c,\ b=2d\) 只是其中一组特例。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分子分母都是一阶无穷小的线性组合。当 \(x\to0\)，\(\sin x\sim x\)、\(\tan x\sim x\)、\(\arcsin x\sim x\)、\(\arctan x\sim x\)，全部等价于 \(x\)，因此整个分式在一阶意义下就是系数比。</p>
+    <p>用等价无穷小同时替换（分子分母各自都是一阶，可直接替换）：</p>
+    \[ a\sin x+b\tan x\sim(a+b)x, \]
+    \[ c\arcsin x+d\arctan x\sim(c+d)x. \]
+    <p>于是</p>
+    \[ \frac{a\sin x+b\tan x}{c\arcsin x+d\arctan x}\to\frac{a+b}{c+d}. \]
+    <p>令其等于 \(2\)：\(\dfrac{a+b}{c+d}=2\)，即 \(a+b=2(c+d)\)（需 \(c+d\neq0\)）。这是必要且充分的关系；\(a=2c,\ b=2d\) 只是满足该关系的一组特例，把两个条件拆开分别对系数并没有依据。数值互证：取 \(a=2,b=2,c=1,d=1\) 与一般例 \(a=3,b=1,c=1,d=1\)，后者 \(a+b=4=2(c+d)\)，\(x=0.05\) 时比值均约 \(2.000\)。各函数的三阶偏差（如 \(\tan x-x\sim x^{3}/3\)）在一阶比中被消去，不影响系数比。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为这些等价无穷小不能混用。它们都是 \(x\) 的一阶无穷小，在整个分式为一阶比时，同时替换是安全的。</p>
+    <p>② 分母 \(c+d=0\) 时分式无意义，需 \(c+d\neq0\)。题设 \(a^{2}+c^{2}\neq0\) 只排除了全零，做题时还应保证分母系数和不为零。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>等价无穷小替代是求 \(0/0\) 型极限最快的工具，但只在「整体作为因子」时可用。本题四个函数都 \(\sim x\)，直接比系数即可，是对等价无穷小的基础应用。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{2\sin x+3\tan x}{5\arcsin x+7\arctan x}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{5}{12}\)。分子系数和 \(2+3=5\)，分母 \(5+7=12\)，比值 \(5/12\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q68">
+  <div class="q-head">
+    <span class="qno">第 68 题</span>
+    <span class="qtype">1<sup>∞</sup> 型含参数指数</span>
+    <span class="qsrc">P609</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to\infty}\left(1+\dfrac{a}{x}+\dfrac{b}{x^{2}}\right)^{cx}=e^{d}\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：\(d=ac\)（一组取 \(a=1,\ c=1\)，则 \(d=1\)；\(b\) 任意）</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：底数 \(1+a/x+b/x^{2}\to1\)，指数 \(cx\to\infty\)，属 \(1^{\infty}\) 型。对幂指式取对数，用 \(\lim L=\exp(\lim cx(u-1))\)，其中 \(u=1+a/x+b/x^{2}\)。</p>
+    <p>令 \(w=1/x\)，先展开对数：</p>
+    \[ \ln(1+aw+bw^{2})=aw+\left(b-\frac{a^{2}}2\right)w^{2}+O(w^{3}). \]
+    <p>乘回指数 \(cx\)：</p>
+    \[ \ln L=\lim_{x\to\infty}cx\ln\!\left(1+\frac a x+\frac b{x^{2}}\right)=ac+\frac{c(b-a^{2}/2)}{x}+O\!\left(\frac1{x^{2}}\right)\to ac. \]
+    <p>因此 \(L=e^{ac}\)，与题设 \(e^{d}\) 比较得关系：</p>
+    \[ d=ac,\qquad b\ \text{任意}. \]
+    <p>自由度核查：\(b\) 项乘以 \(cx\) 后为 \(bc/x\to0\)，只进入 \(1/x\) 修正，故 \(b\) 任意；\(a,c\) 只需满足乘积为 \(d\)。取归一化 \(a=1,c=1\)，则 \(d=1\)，\(b\) 可任取。数值互证：\(a=c=1,b=1\) 时，\(x=1000\) 与 \(x=10000\) 两点值为 \(2.71964\)、\(2.71842\)，向 \(e\approx2.71828\) 收敛。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 漏掉指数里的参数 \(c\)。极限是 \(e^{ac}\)，不是 \(e^{a}\)；若题目指数是 \(x\)，则 \(d=a\)，但本题指数是 \(cx\)。</p>
+    <p>② 误以为 \(b\) 也要定值。\(b/x^{2}\cdot cx=bc/x\to0\)，不贡献。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(1^{\infty}\) 型的一般公式：\(\lim(1+\dfrac{c_{1}}{x}+\dfrac{c_{2}}{x^{2}}+\cdots)^{x^{k}}=e^{c_{k}}\)。指数次幂 \(k\) 决定了哪一项 \(c_{k}/x^{k}\) 留下常数。本题 \(k=1\)，留下 \(c_{1}=a\)，再乘指数里的 \(c\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to\infty}\left(1+\dfrac{a}{x}+\dfrac{b}{x^{2}}\right)^{2x}=e^{3}\)，求 \(a\)。</p>
+    <p class="var-ans">答案：\(a=\dfrac32\)。指数 \(2x\) 乘 \(a/x\) 得 \(2a\)，令 \(2a=3\) 得 \(a=3/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q69">
+  <div class="q-head">
+    <span class="qno">第 69 题</span>
+    <span class="qtype">e<sup>ax</sup>-1 与一次式反求</span>
+    <span class="qsrc">P609</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to0}\dfrac{e^{ax}-1-bx}{x^{2}}=c\)，求 \(a,b,c\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=\dfrac{1}{2}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{2}\)。展开 \(e^{ax}\)，要求一次项抵消，二次项系数即 \(c\)。</p>
+    <p>展开：</p>
+    \[ e^{ax}=1+ax+\frac{a^{2}}2x^{2}+o(x^{2}). \]
+    <p>分子：</p>
+    \[ e^{ax}-1-bx=(a-b)x+\frac{a^{2}}2x^{2}+o(x^{2}). \]
+    <p>一次项清零得 \(b=a\)。此时二次项系数 \(\dfrac{a^{2}}2\) 即 \(c\)。取归一化 \(a=1\)，则 \(b=1\)，\(c=\dfrac12\)。</p>
+    <p>为什么必须先令 \(b=a\)：若 \(b\neq a\)，分子最低阶是一次项 \((a-b)x\)，除以 \(x^{2}\) 后得到 \((a-b)/x\)，在 \(x\to0\) 时发散到无穷，与题设「极限为有限常数 \(c\)」矛盾。所以 \(b=a\) 是有限极限的必要条件，再由二次项系数定 \(c\)。</p>
+    <p>另解（洛必达）：在 \(b=a\) 的前提下，\(\dfrac{e^{ax}-1-ax}{x^{2}}\) 是 \(0/0\) 型，两次洛必达：</p>
+    \[ \lim_{x\to0}\frac{ae^{ax}-a}{2x}=\lim_{x\to0}\frac{a^{2}e^{ax}}2=\frac{a^{2}}2, \]
+    <p>与泰勒结果一致。</p>
+    <p>这正是 \(\lim\limits_{x\to0}\dfrac{e^{x}-1-x}{x^{2}}=\dfrac12\) 的标准结果，要记牢。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记一次项 \(a-b\) 必须为零。若 \(a\neq b\)，分子有 \((a-b)x\)，除以 \(x^{2}\) 发散。</p>
+    <p>② 二次项系数。\(e^{ax}-1\sim ax\)，但减去 \(bx\) 后要 \(b=a\)，余项二次项是 \(a^{2}/2\)，别写成 \(a/2\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\((e^{ax}-1-bx)/x^{2}\)」类题与 \((\ln(1+ax)-bx)/x^{2}\) 是一对：前者二次项 \(+a^{2}/2\)，后者二次项 \(-a^{2}/2\)。符号相反，要对照记忆。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{2x}-1-2x}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(2\)。\(a=2,b=2\)，二次系数 \(a^{2}/2=2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q70">
+  <div class="q-head">
+    <span class="qno">第 70 题</span>
+    <span class="qtype">√(1+ax) 与一次式反求</span>
+    <span class="qsrc">P609</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+ax}-1-bx}{x^{2}}=d\)，求 \(a,b,d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=\dfrac{1}{2},\ d=-\dfrac{1}{8}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{2}\)。用二项式展开 \(\sqrt{1+ax}=(1+ax)^{1/2}\)，要求一次项抵消，二次项系数即 \(d\)。</p>
+    <p>展开到二阶：</p>
+    \[ \sqrt{1+ax}=1+\frac12 ax-\frac18 a^{2}x^{2}+o(x^{2}). \]
+    <p>分子相减：</p>
+    \[ \sqrt{1+ax}-1-bx=\left(\frac a2-b\right)x-\frac{a^{2}}8x^{2}+o(x^{2}). \]
+    <p>一次项清零得 \(b=a/2\)；若 \(b\neq a/2\)，分子最低阶为一次项，除以 \(x^{2}\) 后给出 \((a/2-b)/x\)，在 \(x\to0\) 时发散，与有限极限矛盾。一次项抵消后，二次项系数 \(-a^{2}/8\) 即 \(d\)：</p>
+    \[ d=\lim_{x\to0}\frac{\sqrt{1+ax}-1-bx}{x^{2}}=-\frac{a^{2}}8. \]
+    <p>自由度核查：\(a\) 可任取，\(b=a/2\)、\(d=-a^{2}/8\) 随 \(a\) 确定；取归一化 \(a=1\)，则 \(b=1/2\)，\(d=-1/8\)。数值互证：\(x=0.05,0.02\) 两点比值 \(-0.12197,-0.12377\)，向 \(-1/8\) 收敛，这是 \(\sqrt{1+x}-1-x/2\) 的标准二阶余项。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 二次项符号。\(\sqrt{1+u}=1+u/2-u^{2}/8+\cdots\)，二次项为负，故 \(d=-a^{2}/8\)，别写成正。</p>
+    <p>② 一次项系数是 \(a/2\) 不是 \(a\)。要令 \(b=a/2\)，写成 \(b=a\) 会导致一次项不抵消。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\((1+u)^{\alpha}\) 的展开 \(\alpha u+\alpha(\alpha-1)u^{2}/2\) 是反求参数题的通用工具。\(\alpha=1/2\) 给 \(b=a/2,d=-a^{2}/8\)，\(\alpha=1/3\) 给 \(b=a/3,d=-a^{2}/9\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sqrt[3]{1+x}-1-x/3}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac19\)。\((1+x)^{1/3}=1+x/3-x^{2}/9+\cdots\)，余项系数 \(-1/9\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q71">
+  <div class="q-head">
+    <span class="qno">第 71 题</span>
+    <span class="qtype">sin 与 x cos 组合的高阶反求</span>
+    <span class="qsrc">P610</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to0}\dfrac{\sin(ax)-ax\cos(bx)}{x^{5}}=c\)，求 \(a,b,c\)。</p>
+  </div>
+  <div class="answer">答案：\(b=\pm\dfrac{1}{\sqrt3},\ c=\dfrac{1}{270}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(b=1,\ c=\dfrac1{120}\)，按题面独立复算为 \(b=\pm\dfrac1{\sqrt3},\ c=\dfrac1{270}\)。三阶清零条件 \(b^{2}=\dfrac{a^{2}}3\)，取 \(a=1\) 得 \(b=\pm\dfrac1{\sqrt3}\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{5}\)。把 \(\sin(ax)\) 与 \(ax\cos(bx)\) 展开到 \(x^{5}\)，要求 \(x,x^{3}\) 项系数清零，最低非零项（\(x^{5}\)）系数即 \(c\)。</p>
+    <p>展开：</p>
+    \[ \sin(ax)=ax-\frac{a^{3}}6x^{3}+\frac{a^{5}}{120}x^{5}+o(x^{5}), \]
+    \[ ax\cos(bx)=ax\left(1-\frac{b^{2}}2x^{2}+\frac{b^{4}}{24}x^{4}\right)=ax-\frac{ab^{2}}2x^{3}+\frac{ab^{4}}{24}x^{5}+o(x^{5}). \]
+    <p>分子：</p>
+    \[ \sin(ax)-ax\cos(bx)=\left(-\frac{a^{3}}6+\frac{ab^{2}}2\right)x^{3}+\left(\frac{a^{5}}{120}-\frac{ab^{4}}{24}\right)x^{5}+o(x^{5}). \]
+    <p>要除以 \(x^{5}\) 有限，\(x^{3}\) 项须清零：\(-a^{3}/6+ab^{2}/2=0\)，即 \(b^{2}=a^{2}/3\)。取归一化 \(a=1\)，则 \(b=\pm1/\sqrt3\)，\(b^{4}=1/9\)，五阶系数为 \(\dfrac1{120}-\dfrac{1/9}{24}=\dfrac1{120}-\dfrac1{216}=\dfrac1{270}\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记 \(x^{3}\) 项也要清零。分母是 \(x^{5}\)，低于五阶的 \(x^{3}\) 项若不消，除以 \(x^{5}\) 会给出 \(\dfrac{1}{x^{2}}\) 发散。</p>
+    <p>② 展开 \(\cos(bx)\) 后乘 \(ax\)，各阶都要乘 \(a\)，不能漏。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>高阶反求题（分母 \(x^{5}\)）要求展开到五阶、并把所有低阶系数清零。这类题的参数个数通常与低阶项个数对应，要逐项列方程求解。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-x\cos x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。\(\sin x-x\cos x=(x-x^{3}/6+x^{5}/120)-x(1-x^{2}/2+x^{4}/24)=x^{3}/3+o(x^{3})\)，除以 \(x^{3}\) 得 \(1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q72">
+  <div class="q-head">
+    <span class="qno">第 72 题</span>
+    <span class="qtype">立方根差消主部</span>
+    <span class="qsrc">P610</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to\infty}\left(x-\sqrt[3]{x^{3}+ax^{2}+bx}\right)=c\)，求 \(a,b,c\)。</p>
+  </div>
+  <div class="answer">答案：\(c=-\dfrac a3\)（取 \(a=0\) 则 \(c=0\)；\(b\) 任意）</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\infty-\infty\) 型立方根差。提主部 \(x\)，用 \((1+u)^{1/3}\) 展开，看 \(x\) 抵消后剩下的常数。</p>
+    <p>提 \(x^{3}\)：</p>
+    \[ \sqrt[3]{x^{3}+ax^{2}+bx}=x\sqrt[3]{1+\frac a x+\frac b{x^{2}}}=x\left[1+\frac13\left(\frac a x+\frac b{x^{2}}\right)-\frac19\left(\frac a x\right)^{2}+\cdots\right]=x+\frac a3+\frac{b/3-a^{2}/9}{x}+\cdots. \]
+    <p>因此</p>
+    \[ x-\sqrt[3]{x^{3}+ax^{2}+bx}=-\frac a3+O\!\left(\frac1x\right). \]
+    <p>把 \(x^{3}+ax^{2}+bx=x^{3}(1+a/x+b/x^{2})\)，取 \(u=a/x\)，用 \((1+u)^{1/3}\approx1+u/3-u^{2}/9\)；只需常数项，\(-u^{2}/9\) 项乘 \(x\) 后只贡献 \(1/x\)。</p>
+    <p>另解（有理化）：用 \(A-B=(A^{3}-B^{3})/(A^{2}+AB+B^{2})\)，令 \(A=x\)、\(B=\sqrt[3]{x^{3}+ax^{2}+bx}\)，则</p>
+    \[ A^{3}-B^{3}=-ax^{2}-bx,\quad A^{2}+AB+B^{2}\sim3x^{2},\quad A-B\sim\frac{-ax^{2}}{3x^{2}}=-\frac a3, \]
+    <p>与展开一致。</p>
+    <p>故 \(c=-a/3\)；\(b\) 只进 \(1/x\) 项。取 \(a=0\)，则 \(c=0\)，\(b\) 任意。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 二项式一次系数是 \(1/3\) 不是 \(1/2\)。立方根对应 \(\alpha=1/3\)，故 \(c=-a/3\)，别按平方根公式写 \(-a/2\)。</p>
+    <p>② 符号：\(x-\sqrt[3]{\cdots}\) 的极限是 \(-a/3\)，与 \(\sqrt[3]{\cdots}-x\) 反号。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式差 \(\sqrt[m]{x^{m}+ax^{m-1}+\cdots}-x\to a/m\) 是通用公式。平方根 \(m=2\) 给 \(a/2\)，立方根 \(m=3\) 给 \(a/3\)。记牢这个比例关系，可一眼定线性系数。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\sqrt[3]{x^{3}+6x^{2}}-x\right)\)。</p>
+    <p class="var-ans">答案：\(2\)。由公式 \(a/m=6/3=2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q73">
+  <div class="q-head">
+    <span class="qno">第 73 题</span>
+    <span class="qtype">e<sup>ax</sup>-cos(bx)-cx 反求</span>
+    <span class="qsrc">P610</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{e^{ax}-\cos(bx)-cx}{x^{3}}=d\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：无实数解（题面条件不足）</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(a=1,\ b=1,\ c=1,\ d=\dfrac16\)，按题面独立复算为 无实数解（题面条件不足）。消去二次项需 \(a^{2}+b^{2}=0\)，在实数范围内只能 \(a=b=0\)，此时分子恒为零，与 \(d\neq0\) 矛盾。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{3}\)。展开 \(e^{ax}\) 与 \(\cos(bx)\)，要求一次、二次项系数清零，三次项即 \(d\)。</p>
+    <p>展开：</p>
+    \[ e^{ax}=1+ax+\frac{a^{2}}2x^{2}+\frac{a^{3}}6x^{3}+\cdots, \]
+    \[ \cos(bx)=1-\frac{b^{2}}2x^{2}+\cdots. \]
+    <p>分子：</p>
+    \[ e^{ax}-\cos(bx)-cx=(a-c)x+\frac{a^{2}+b^{2}}2x^{2}+\frac{a^{3}}6x^{3}+\cdots. \]
+    <p>一次项清零得 \(c=a\)。二次项系数 \(\dfrac{a^{2}+b^{2}}2\) 要为零，在实数范围内只能 \(a=b=0\)，此时三次项也为零，分子恒为零，与 \(d\neq0\) 矛盾。故按题面所给结构，本题在实数范围内不存在 \(d\neq0\) 的解。</p>
+    <p>数值反例：用书答 \(a=b=c=1\) 代回，\(x=0.05,0.02\) 比值 \(20.17,50.17\)，随 \(x\) 减小按 \(1/(2x)\) 发散，印证书答不成立。二次项 \(a^{2}+b^{2}\) 在实数域内非负，无法被一次项抵消；只有把分母降为 \(x^{2}\)，二次项本身作为主部才有有限极限，题面配 \(x^{3}\) 且要求 \(d\neq0\)，二者不相容。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只令一次项 \(c=a\)，忽略二次项 \((a^{2}+b^{2})/2\)。\(e^{ax}\) 的二次项 \(+a^{2}/2\) 与 \(-\cos(bx)\) 的 \(+b^{2}/2\) 相加，恒非负，无法在实数范围内抵消。</p>
+    <p>② 遇到结构矛盾应先判断可行性，而不是硬套答案。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>反求参数题的第一步永远是「按阶列方程」。若方程在实数范围无解，说明题面给的极限值或函数组合有误，应在解题时指出，而不是盲目接受。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{x}-\cos x-x}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(1\)。\(e^{x}-\cos x-x=(1+x+x^{2}/2)-(1-x^{2}/2)-x=x^{2}+o(x^{2})\)，除以 \(x^{2}\) 得 \(1\)。这说明该结构在分母 \(x^{2}\)（而非 \(x^{3}\)）下才有有限值。</p>
+  </div>
+</article>
+
+<article class="q" id="q74">
+  <div class="q-head">
+    <span class="qno">第 74 题</span>
+    <span class="qtype">ln x 四阶泰勒反求</span>
+    <span class="qsrc">P610</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to1}\dfrac{\ln(x)-a(x-1)-b(x-1)^{2}-c(x-1)^{3}}{(x-1)^{4}}=d\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=-\dfrac{1}{2},\ c=\dfrac{1}{3},\ d=-\dfrac{1}{4}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：换元 \(t=x-1\to0\)，\(\ln x=\ln(1+t)\)。展开到四阶，与三次多项式相减，要求常数、一次、二次、三次项全部抵消，四阶系数即 \(d\)。</p>
+    <p>展开：</p>
+    \[ \ln(1+t)=t-\frac{t^{2}}2+\frac{t^{3}}3-\frac{t^{4}}4+o(t^{4}). \]
+    <p>分子：</p>
+    \[ \ln(1+t)-at-bt^{2}-ct^{3}=(1-a)t+\left(-\frac12-b\right)t^{2}+\left(\frac13-c\right)t^{3}-\frac14t^{4}+o(t^{4}). \]
+    <p>令低阶系数为零：\(a=1\)，\(b=-\dfrac12\)，\(c=\dfrac13\)。此时四阶系数 \(-\dfrac14\) 即 \(d\)：</p>
+    \[ d=\lim_{t\to0}\frac{\ln(1+t)-t+\frac12t^{2}-\frac13t^{3}}{t^{4}}=-\frac14. \]
+    <p>这正是 \(\ln(1+t)\) 泰勒系数的直接读取：\(f'(1)=1\)，\(f''(1)/2=-1/2\)，\(f'''(1)/6=1/3\)，\(f^{(4)}(1)/24=-1/4\)。数值互证：\(x=1.05\) 与 \(x=1.02\) 两点比值为 \(-0.24040\)、\(-0.24607\)，向 \(-1/4=-0.25\) 收敛。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 四阶符号。\(\ln(1+t)=t-t^{2}/2+t^{3}/3-t^{4}/4+\cdots\)，四阶项为负，故 \(d=-1/4\)。</p>
+    <p>② 忘记逐项消。一次、二次、三次系数都必须为零，否则除以 \(t^{4}\) 会发散。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>高阶泰勒反求就是「读取函数在该点的各阶导数」。\(\ln(1+t)\) 的系数 \((-1)^{n+1}/n\) 要背熟；这类题的答案直接就是泰勒系数，不需要额外计算。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to1}\dfrac{\ln x-(x-1)}{(x-1)^{2}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac12\)。\(\ln(1+t)-t=-t^{2}/2+o(t^{2})\)，除以 \(t^{2}\) 得 \(-1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q75">
+  <div class="q-head">
+    <span class="qno">第 75 题</span>
+    <span class="qtype">tan(ax)/x 为底的幂指</span>
+    <span class="qsrc">P610</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to0}\left(\dfrac{\tan(ax)}{x}\right)^{1/x^{2}}=e^{d}\)，求 \(a\) 和 \(d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ d=\dfrac{1}{3}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：底数 \(\tan(ax)/x\to a\)，指数 \(1/x^{2}\to\infty\)。要成 \(1^{\infty}\) 型须 \(a=1\)，再算 \(\lim(1/x^{2})(u-1)\)。</p>
+    <p>当 \(a=1\)，\(u=\dfrac{\tan x}{x}\)。展开 \(\tan x=x+\dfrac{x^{3}}3+o(x^{3})\)：</p>
+    \[ u=\frac{\tan x}{x}=1+\frac{x^{2}}3+o(x^{2}),\qquad u-1=\frac{x^{2}}3+o(x^{2}). \]
+    <p>乘指数 \(1/x^{2}\)：</p>
+    \[ \frac1{x^{2}}(u-1)=\frac13+o(1)\to\frac13. \]
+    <p>为什么只展开到三阶：底数 \(u=\tan(ax)/x\) 在 \(x\to0\) 时，一阶项 \(a\) 先被定 \(a=1\) 用掉，与 \(1\) 的差来自 \(\tan(ax)\) 三阶项 \(a^{3}x^{3}/3\)，除以 \(x\) 后为 \(a^{3}x^{2}/3\)，与指数 \(1/x^{2}\) 配成常数；\(\tan x\) 是奇函数，二阶没有项，必须写到三阶。</p>
+    <p>另解（取对数洛必达）：\(\ln L=\lim\limits_{x\to0}\dfrac1{x^{2}}\ln\dfrac{\tan x}{x}\)，这是 \(0/0\) 型，洛必达一次后化简等价于 \(\tan x\) 三阶展开：</p>
+    \[ \ln L=\lim_{x\to0}\frac1{x^{2}}\ln\!\left(1+\frac{x^{2}}3+o(x^{2})\right)=\frac13. \]
+    <p>故极限 \(=e^{1/3}\)，即 \(d=1/3\)。这是 \(\tan x\) 三阶项 \(+x^{3}/3\) 的直接体现。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记先定 \(a=1\)。\(\tan(ax)/x\to a\)，底数须为 \(1\) 才能用 \(1^{\infty}\) 公式。</p>
+    <p>② 符号。\(\tan x=x+x^{3}/3+\cdots\)，三阶项为正，故 \(d=+1/3\)；与 \(\sin x\) 的 \(-1/6\) 对照记忆。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\((\text{某函数}/x)^{1/x^{2}}\)」是 \(1^{\infty}\) 型的固定题型，指数由该函数三阶泰勒系数决定。\(\sin\) 给 \(-1/6\)，\(\tan\) 给 \(+1/3\)，\(\arcsin\) 给 \(+1/6\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{\arcsin x}{x}\right)^{1/x^{2}}\)。</p>
+    <p class="var-ans">答案：\(e^{1/6}\)。\(\arcsin x/x=1+x^{2}/6+o(x^{2})\)，乘 \(1/x^{2}\) 得 \(1/6\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q76">
+  <div class="q-head">
+    <span class="qno">第 76 题</span>
+    <span class="qtype">arcsin-arctan 反求</span>
+    <span class="qsrc">P610</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\arcsin(ax)-\arctan(bx)}{x^{3}}=c\)，求 \(a,b,c\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=\dfrac{1}{2}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(c=-\dfrac16\)，按题面独立复算为 \(a=1,\ b=1,\ c=\dfrac12\)。\(\arcsin x=x+\dfrac{x^{3}}6\)、\(\arctan x=x-\dfrac{x^{3}}3\)，相减后三阶项为 \(\dfrac16+\dfrac13=\dfrac12\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{3}\)。展开两个反三角函数到三阶，先消一次项，再定三次系数。</p>
+    <p>展开：</p>
+    \[ \arcsin(ax)=ax+\frac{a^{3}}6x^{3}+o(x^{3}),\qquad \arctan(bx)=bx-\frac{b^{3}}3x^{3}+o(x^{3}). \]
+    <p>分子：</p>
+    \[ \arcsin(ax)-\arctan(bx)=(a-b)x+\left(\frac{a^{3}}6+\frac{b^{3}}3\right)x^{3}+o(x^{3}). \]
+    <p>为什么展开到三阶：分母是 \(x^{3}\)，一次项 \(x\) 若不抵消，除以 \(x^{3}\) 会给出 \(1/x^{2}\) 发散；故必须先令 \(a-b=0\)，再看 \(x^{3}\) 项系数。两个反三角函数都是奇函数，展开到 \(x^{3}\) 即够定系数。</p>
+    <p>一次项清零得 \(a=b\)。取归一化 \(a=b=1\)，三次项系数为 \(\dfrac16+\dfrac13=\dfrac12\)，即 \(c=+\dfrac12\)：</p>
+    \[ c=\lim_{x\to0}\frac{\arcsin x-\arctan x}{x^{3}}=\frac16+\frac13=\frac12. \]
+    <p>另解（导数法）：\(\arcsin(ax)\) 与 \(\arctan(bx)\) 在 \(0\) 处的三阶系数由导数求出：\((\arcsin)'''(0)=1\) 对应系数 \(1/6\)，\((\arctan)'''(0)=-2\) 对应系数 \(-1/3\)，与展开一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 两个反三角函数三阶项符号。\(\arcsin\) 为 \(+1/6\)，\(\arctan\) 为 \(-1/3\)，相减后是 \(+1/6+1/3=1/2\)。记反符号会得到错误的 \(c\)。</p>
+    <p>② 只消一次项 \(a=b\)，漏算三次系数。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>反三角函数组合的极限题，核心是背熟 \(\arcsin,\arctan,\arccos\) 的泰勒系数。考试常把 \(\arcsin x-\arctan x\) 作为 \(x^{3}\) 阶无穷小的标准例子出现。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\arcsin x-\arctan x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。展开即得 \(1/6+1/3=1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q77">
+  <div class="q-head">
+    <span class="qno">第 77 题</span>
+    <span class="qtype">两个根式差的线性系数</span>
+    <span class="qsrc">P610</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to\infty}\left(\sqrt{x^{2}+ax+b}-\sqrt{x^{2}+cx+d}\right)=e\)，求 \(a,b,c,d,e\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=0,\ c=2,\ d=0,\ e=-\dfrac{1}{2}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\infty-\infty\) 型两个根式之差。分别提主部，\(x\) 项抵消后，差由一次系数 \(a,c\) 决定。</p>
+    <p>提主部：</p>
+    \[ \sqrt{x^{2}+ax+b}=x+\frac a2+O\!\left(\frac1x\right),\qquad \sqrt{x^{2}+cx+d}=x+\frac c2+O\!\left(\frac1x\right). \]
+    <p>相减：</p>
+    \[ \sqrt{x^{2}+ax+b}-\sqrt{x^{2}+cx+d}=\frac{a-c}{2}+O\!\left(\frac1x\right). \]
+    <p>为什么 \(b,d\) 不影响极限：提主部 \(\sqrt{x^{2}+ax+b}=x\sqrt{1+a/x+b/x^{2}}\)，用 \((1+u)^{1/2}\approx1+u/2\)，\(u=a/x+b/x^{2}\)；乘 \(x\) 后常数项只来自 \(a\)，\(b\) 只贡献 \(1/x\) 项。两式相减后 \(1/x\) 项仍趋于零，极限只由 \(a-c\) 决定。</p>
+    <p>另解（有理化）：分子分母同乘 \(\sqrt{x^{2}+ax+b}+\sqrt{x^{2}+cx+d}\)，分母 \(\sim2x\)，故</p>
+    \[ e=\lim_{x\to\infty}\frac{(a-c)x+(b-d)}{\sqrt{x^{2}+ax+b}+\sqrt{x^{2}+cx+d}}=\frac{a-c}{2}, \]
+    <p>与展开一致。</p>
+    <p>故 \(e=(a-c)/2\)。取 \(a=1,c=2\)，则 \(e=-1/2\)；\(b,d\) 只进 \(1/x\) 修正，取 \(b=d=0\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(b,d\) 会改变极限。在两个同阶根式相减、主部 \(x\) 抵消后，常数项由一次系数 \(a,c\) 决定，\(b,d\) 是高阶小量。</p>
+    <p>② 符号：差是 \((a-c)/2\)，不是 \((a+c)/2\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>两个二次根式相减 \(\sqrt{x^{2}+ax+b}-\sqrt{x^{2}+cx+d}\to(a-c)/2\) 是通用结论。这类题常与斜渐近线结合：若极限为常数，说明两条曲线在无穷远处趋近。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\sqrt{x^{2}+4x}-\sqrt{x^{2}+2x}\right)\)。</p>
+    <p class="var-ans">答案：\(1\)。\((a-c)/2=(4-2)/2=1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q78">
+  <div class="q-head">
+    <span class="qno">第 78 题</span>
+    <span class="qtype">ln 与 sin 组合反求</span>
+    <span class="qsrc">P611</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to0}\dfrac{\ln(1+ax)-\sin(bx)}{x^{2}}=c\)，求 \(a,b,c\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=-\dfrac{1}{2}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(c=0\)，按题面独立复算为 \(a=1,\ b=1,\ c=-\dfrac12\)。\(\ln(1+x)-\sin x=-x^{2}/2+\cdots\)，除以 \(x^{2}\) 得 \(-1/2\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{2}\)。展开 \(\ln(1+ax)\) 与 \(\sin(bx)\)，要求一次项抵消，二次项系数即 \(c\)。</p>
+    <p>展开：</p>
+    \[ \ln(1+ax)=ax-\frac{a^{2}}2x^{2}+o(x^{2}),\qquad \sin(bx)=bx-\frac{b^{3}}6x^{3}+o(x^{3}). \]
+    <p>注意 \(\sin(bx)\) 展开到 \(x^{2}\) 阶只有 \(bx\)，没有二次项。分子：</p>
+    \[ \ln(1+ax)-\sin(bx)=(a-b)x-\frac{a^{2}}2x^{2}+o(x^{2}). \]
+    <p>为什么 \(\sin(bx)\) 不贡献二次项：\(\sin\) 是奇函数，泰勒展开只有奇次项 \(x,x^{3},x^{5},\cdots\)，在 \(x^{2}\) 阶恒为零；故二次项只能来自 \(\ln(1+ax)\) 的 \(-a^{2}x^{2}/2\)。</p>
+    <p>一次项清零得 \(a=b\)。此时二次项系数 \(-a^{2}/2\) 即 \(c\)。取归一化 \(a=b=1\)，则 \(c=-\dfrac12\)。</p>
+    <p>另解（等价无穷小）：\(\ln(1+ax)\sim ax-a^{2}x^{2}/2\)，\(\sin(bx)\sim bx\)，\(b=a\) 时代入，分子 \(=\ln(1+ax)-ax\sim-a^{2}x^{2}/2\)：</p>
+    \[ c=\lim_{x\to0}\frac{\ln(1+ax)-\sin(ax)}{x^{2}}=-\frac{a^{2}}2. \]
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记 \(\sin(bx)\) 在 \(x^{2}\) 阶没有贡献，分子二次项只来自 \(\ln(1+ax)\)。</p>
+    <p>② 符号：\(\ln(1+ax)\) 二次项为负，故 \(c=-a^{2}/2\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>不同函数组合的反求题，要分清每个函数在哪一阶开始有贡献。\(\ln\) 与 \(\sin\) 的一次项都为 \(1\)，故 \(a=b\) 是首要条件；二次项只由 \(\ln\) 提供。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-\sin x}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac12\)。展开即得。</p>
+  </div>
+</article>
+
+<article class="q" id="q79">
+  <div class="q-head">
+    <span class="qno">第 79 题</span>
+    <span class="qtype">指数函数与 cos 组合反求</span>
+    <span class="qsrc">P611</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{ae^{x}+be^{-x}+c\cos x}{x^{2}}=d\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=-2,\ d=2\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(d=1\)，按题面独立复算为 \(a=1,\ b=1,\ c=-2,\ d=2\)。二次项系数 \(\dfrac{a+b-c}{2}=\dfrac{1+1-(-2)}2=2\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{2}\)。三个函数在 \(x=0\) 处都取常数，需按常数项、一次项、二次项三列系数方程。</p>
+    <p>分别展开：</p>
+    \[ ae^{x}=a+ax+\frac a2x^{2}+o(x^{2}),\quad be^{-x}=b-bx+\frac b2x^{2}+o(x^{2}),\quad c\cos x=c-\frac c2x^{2}+o(x^{2}). \]
+    <p>合并后各阶系数：常数 \(a+b+c\)，一次 \(a-b\)，二次 \((a+b-c)/2\)。要除以 \(x^{2}\) 有限，常数项与一次项必须同时为零：</p>
+    \[ \begin{cases}a+b+c=0,\\ a-b=0,\end{cases}\quad\Longrightarrow\quad b=a,\ c=-2a. \]
+    <p>常数项不平分会给出 \(1/x^{2}\) 发散，一次项不平分会给出 \(1/x\) 发散，二者是独立约束，必须联立。代入二次项系数：</p>
+    \[ d=\frac{a+b-c}{2}=\frac{a+a+2a}{2}=2a. \]
+    <p>取归一化 \(a=1\)，则 \(b=1\)，\(c=-2\)，\(d=2\)。数值互证：\((e^{x}+e^{-x}-2\cos x)/x^{2}\) 在 \(x=0.05\) 与 \(x=0.02\) 两点均为 \(2.00000\)，与复算一致。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 漏掉常数项条件 \(a+b+c=0\)。三个函数在 \(x=0\) 处都不为零，常数项必须由 \(a,b,c\) 配平。</p>
+    <p>② 一次项 \(a-b=0\) 与常数项 \(a+b+c=0\) 是两个独立方程，要联立。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>多个函数线性组合的极限反求，本质是用各阶泰勒系数列方程组。\(e^{x},e^{-x},\cos x\) 的偶次项对称、奇次项反对称，是这类题的常用素材。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{x}+e^{-x}-2\cos x}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(2\)。\((1+x+x^{2}/2)+(1-x+x^{2}/2)-2(1-x^{2}/2)=2x^{2}+o(x^{2})\)，除以 \(x^{2}\) 得 \(2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q80">
+  <div class="q-head">
+    <span class="qno">第 80 题</span>
+    <span class="qtype">1/x 与 1/ln(1+x) 组合定阶</span>
+    <span class="qsrc">P611</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to0}\left(\dfrac{1}{x}-\dfrac{1}{\ln(1+x)}\right)x^{p}=q\)，求 \(p\) 和 \(q\)。</p>
+  </div>
+  <div class="answer">答案：\(p=0,\ q=-\dfrac{1}{2}\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(p=1,\ q=\dfrac12\)，按题面独立复算为 \(p=0,\ q=-\dfrac12\)。\(\dfrac1x-\dfrac1{\ln(1+x)}=-\dfrac12-\dfrac{x}{12}+\cdots\)，主部是常数，乘 \(x^{p}\) 要有限须 \(p=0\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\infty-\infty\) 型，通分后用泰勒展开定阶。这是经典极限 \(\lim\limits_{x\to0}\left(\dfrac1{\ln(1+x)}-\dfrac1x\right)=\dfrac12\) 的变形。</p>
+    <p>展开 \(\ln(1+x)=x-\dfrac{x^{2}}2+\dfrac{x^{3}}3-\cdots\)，取倒数：</p>
+    \[ \frac1{\ln(1+x)}=\frac1{x}\cdot\frac1{1-x/2+x^{2}/3-\cdots}=\frac1x\left(1+\frac x2+\frac{x^{2}}{12}+\cdots\right)=\frac1x+\frac12+\frac x{12}+\cdots. \]
+    <p>因此题面括号内</p>
+    \[ \frac1x-\frac1{\ln(1+x)}=-\frac12-\frac x{12}+\cdots\to-\frac12. \]
+    <p>这里取倒数的手法是：把 \(\ln(1+x)=x(1-x/2+x^{2}/3-\cdots)\) 中的括号部分记作 \(g(x)\)，则 \(\dfrac1{\ln(1+x)}=\dfrac1x\cdot\dfrac1{g(x)}\)；再用 \(\dfrac1{1-u}=1+u+u^{2}+\cdots\)，其中 \(u=x/2-x^{2}/3+\cdots\)，展开到 \(x^{2}\) 即得 \(\dfrac1{g(x)}=1+x/2+x^{2}/12+\cdots\)。这一步是关键，不能直接对 \(\ln(1+x)\) 取倒数而不展开。</p>
+    <p>括号内主项是<b>常数</b> \(-1/2\)（不是无穷小），要使它乘 \(x^{p}\) 后为有限非零，须 \(p=0\)，此时 \(q=-\dfrac12\)：</p>
+    \[ q=\lim_{x\to0}\left(\frac1x-\frac1{\ln(1+x)}\right)x^{p}=-\frac12\quad(p=0). \]
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 符号。\(\dfrac1{\ln(1+x)}-\dfrac1x\to+1/2\)，故 \(\dfrac1x-\dfrac1{\ln(1+x)}\to-1/2\)，两者反号。</p>
+    <p>② 通分后展开阶数。要算到常数项，必须把 \(\ln(1+x)\) 展开到 \(x^{2}\) 并取倒数。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(\lim\limits_{x\to0}\left(\dfrac1{\ln(1+x)}-\dfrac1x\right)=1/2\) 是必须背熟的经典极限，常作为填空题或选择题的中间步骤出现。它与 \(\dfrac1x-\dfrac1{\sin x}\sim-x/6\)、\(\dfrac1x-\dfrac1{\tan x}\sim-x/3\) 同属「两个无穷大之差通分后定阶」这一类，区别在于本题通分后剩下的是常数 \(1/2\)，而后两者剩下的是一阶无穷小。考试中要先判断通分后是常数还是无穷小，再决定配什么幂次。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac1{\ln(1+x)}-\dfrac1x\right)\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。展开即得。</p>
+  </div>
+</article>
+
+<article class="q" id="q81">
+  <div class="q-head">
+    <span class="qno">第 81 题</span>
+    <span class="qtype">sin-tan 五阶反求</span>
+    <span class="qsrc">P611</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{\sin(ax)-\tan(bx)+cx^{3}}{x^{5}}=d\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=\dfrac12,\ d=-\dfrac18\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(c=\dfrac13,\ d=-\dfrac1{15}\)，按题面独立复算为 \(a=1,\ b=1,\ c=\dfrac12,\ d=-\dfrac18\)。三阶系数 \(\dfrac{a^{3}}6+\dfrac{a^{3}}3=\dfrac{a^{3}}2\)，取 \(a=1\) 得 \(c=1/2\)；五阶系数 \(1/120-2/15=-1/8\) 即 \(d\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{5}\)。展开到五阶，要求 \(x,x^{3}\) 项清零，五阶系数即 \(d\)。</p>
+    <p>展开：</p>
+    \[ \sin(ax)=ax-\frac{a^{3}}6x^{3}+\frac{a^{5}}{120}x^{5}+\cdots, \]
+    \[ \tan(bx)=bx+\frac{b^{3}}3x^{3}+\frac{2b^{5}}{15}x^{5}+\cdots. \]
+    <p>分子：</p>
+    \[ \sin(ax)-\tan(bx)+cx^{3}=(a-b)x+\left(-\frac{a^{3}}6-\frac{b^{3}}3+c\right)x^{3}+\left(\frac{a^{5}}{120}-\frac{2b^{5}}{15}\right)x^{5}+\cdots. \]
+    <p>一次项清零：\(a=b\)。三次项清零：\(c=\dfrac{a^{3}}6+\dfrac{b^{3}}3=\dfrac{a^{3}}2\)。取归一化 \(a=b=1\)，则 \(c=1/2\)，五阶系数 \(1/120-2/15=1/120-16/120=-15/120=-1/8\)，即 \(d=-1/8\)。</p>
+    <p>数值互证：\(a=b=1,c=1/2\) 时，\(x=0.05,0.02\) 比值 \(-0.12514,-0.12502\)，向 \(-1/8\) 收敛。\(a=b\) 可任取缩放，\(c=a^{3}/2\)、\(d=-a^{5}/8\) 随之确定；书答 \(c=1/3\) 只取 \(\tan\) 三阶系数，漏并 \(\sin\) 的 \(-1/6\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\tan x\) 五阶系数是 \(2/15\)，不是 \(1/15\)。记错会算错 \(d\)。</p>
+    <p>② 三次项系数 \(c\) 要把 \(\sin\) 的 \(-a^{3}/6\) 与 \(\tan\) 的 \(+b^{3}/3\) 都并入，再令其和为零。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>五阶反求题要求展开到五阶、并把所有低阶系数清零。这类题的参数个数与低阶项个数对应，要逐项列方程。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sin x-\tan x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac12\)。\((x-x^{3}/6)-(x+x^{3}/3)=-x^{3}/2+o(x^{3})\)，除以 \(x^{3}\) 得 \(-1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q82">
+  <div class="q-head">
+    <span class="qno">第 82 题</span>
+    <span class="qtype">四次根差消主部</span>
+    <span class="qsrc">P611</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to\infty}\left(\sqrt[4]{x^{4}+ax^{3}+bx^{2}}-x-c\right)=0\)，求 \(a,b,c\)。</p>
+  </div>
+  <div class="answer">答案：\(c=\dfrac a4\)（取 \(a=0\) 则 \(c=0\)；\(b\) 任意）</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(\infty-\infty\) 型四次根式差。提主部 \(x\)，用 \((1+u)^{1/4}\) 展开，要求一次项与常数项都被消掉。</p>
+    <p>提 \(x^{4}\)：</p>
+    \[ \sqrt[4]{x^{4}+ax^{3}+bx^{2}}=x\left(1+\frac a x+\frac b{x^{2}}\right)^{1/4}=x\left[1+\frac14\left(\frac a x+\frac b{x^{2}}\right)-\frac{3}{32}\left(\frac a x\right)^{2}+\cdots\right]=x+\frac a4+\frac{b/4-3a^{2}/32}{x}+\cdots. \]
+    <p>减去 \(x+c\)：</p>
+    \[ \left(\frac a4-c\right)+\frac{b/4-3a^{2}/32}{x}+\cdots. \]
+    <p>为什么展开到常数项：根式差减去常数 \(c\) 后趋于零，主部是常数 \(a/4\)（非无穷小），须用 \(c\) 抵消；\(1/x\) 项本身趋于零，无需抵消，故方程只有 \(c=a/4\)。</p>
+    <p>二项式系数来源：\((1+u)^{1/4}=1+u/4-3u^{2}/32+\cdots\)，\(u=a/x+b/x^{2}\)；乘 \(x\) 后 \(u/4\) 的 \(a/x\) 项贡献 \(a/4\)。</p>
+    \[ \frac{\alpha(\alpha-1)}2\bigg|_{\alpha=1/4}=\frac{(1/4)(-3/4)}2=-\frac3{32}. \]
+    <p>故常数项为零：\(c=a/4\)；\(b\) 只进 \(1/x\) 项。取 \(a=0\)，则 \(c=0\)，\(b\) 任意。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 四次根一次系数是 \(1/4\) 不是 \(1/2\)。\(\sqrt[4]{x^{4}+ax^{3}}-x\to a/4\)，别按平方根公式写 \(a/2\)。</p>
+    <p>② 常数项 \(c\) 用来抵消 \(a/4\)，不是任意。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式差 \(\sqrt[m]{x^{m}+ax^{m-1}+\cdots}-x\to a/m\) 是通用公式。本题 \(m=4\)，一次系数 \(a/4\)，与平方根 \(a/2\)、立方根 \(a/3\) 对照记忆。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to\infty}\left(\sqrt[4]{x^{4}+8x^{3}}-x-c\right)\)，问 \(c\) 取何值时极限为 \(0\)。</p>
+    <p class="var-ans">答案：\(c=2\)。由 \(a/4=8/4=2\)，令 \(c=2\) 消去常数项。</p>
+  </div>
+</article>
+
+<article class="q" id="q83">
+  <div class="q-head">
+    <span class="qno">第 83 题</span>
+    <span class="qtype">√x 四阶泰勒反求</span>
+    <span class="qsrc">P611</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to1}\dfrac{\sqrt{x}-a-b(x-1)-c(x-1)^{2}-d(x-1)^{3}}{(x-1)^{4}}=e\)，求 \(a,b,c,d,e\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=\dfrac{1}{2},\ c=-\dfrac{1}{8},\ d=\dfrac{1}{16},\ e=-\dfrac{5}{128}\)</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：换元 \(t=x-1\to0\)，\(\sqrt{x}=\sqrt{1+t}=(1+t)^{1/2}\)。展开到四阶，与三次多项式相减，要求常数、一、二、三次项全部抵消，四阶系数即 \(e\)。</p>
+    <p>用二项式公式展开：</p>
+    \[ (1+t)^{1/2}=1+\frac12 t-\frac18 t^{2}+\frac1{16}t^{3}-\frac5{128}t^{4}+o(t^{4}). \]
+    <p>分子：</p>
+    \[ (1+t)^{1/2}-a-bt-ct^{2}-dt^{3}=(1-a)+\left(\frac12-b\right)t+\left(-\frac18-c\right)t^{2}+\left(\frac1{16}-d\right)t^{3}-\frac5{128}t^{4}+o(t^{4}). \]
+    <p>令低阶系数为零：\(a=1\)，\(b=1/2\)，\(c=-1/8\)，\(d=1/16\)。四阶系数用二项式公式 \(\alpha(\alpha-1)(\alpha-2)(\alpha-3)/24\)，取 \(\alpha=1/2\)，得 \(-5/128\)，即 \(e\)：</p>
+    \[ e=\lim_{t\to0}\frac{\sqrt{1+t}-1-\frac12t+\frac18t^{2}-\frac1{16}t^{3}}{t^{4}}=-\frac5{128}. \]
+    <p>数值互证：\(x=1.05\)、\(1.02\) 两点比值为 \(-0.03774\)、\(-0.03852\)，向 \(-5/128\approx-0.03906\) 收敛。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 四阶系数 \(-5/128\) 容易算错。用二项式公式 \(\alpha(\alpha-1)(\alpha-2)(\alpha-3)/24\)，取 \(\alpha=1/2\) 即得 \(-5/128\)。</p>
+    <p>② 忘记逐项消。常数、一、二、三次系数都必须为零。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>高阶泰勒反求就是读取函数在该点的各阶导数。\(\sqrt{1+t}\) 的前几项系数 \(1/2,-1/8,1/16,-5/128\) 要会用二项式公式现算。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to1}\dfrac{\sqrt{x}-1-(x-1)/2}{(x-1)^{2}}\)。</p>
+    <p class="var-ans">答案：\(-\dfrac18\)。\(\sqrt{1+t}-1-t/2=-t^{2}/8+o(t^{2})\)，除以 \(t^{2}\) 得 \(-1/8\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q84">
+  <div class="q-head">
+    <span class="qno">第 84 题</span>
+    <span class="qtype">e<sup>ax</sup>-e<sup>bx</sup>cos(cx) 四阶反求</span>
+    <span class="qsrc">P612</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to0}\dfrac{e^{ax}-e^{bx}\cos(cx)+dx^{3}}{x^{4}}=e\)，求 \(a,b,c,d,e\)。</p>
+  </div>
+  <div class="answer">答案：无实数解（题面条件不足）</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(c=1,\ e=\dfrac1{24}\)，按题面独立复算为 无实数解（题面条件不足）。消一次项需 \(a=b\)、消二次项需 \(c=0\)，而 \(a=b,\ c=0\) 时分子恒零，与题设 \(e\neq0\) 矛盾。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{4}\)。展开 \(e^{ax}\) 与 \(e^{bx}\cos(cx)\) 到四阶，低阶项全部抵消后四阶系数即 \(e\)。</p>
+    <p>乘积 \(e^{bx}\cos(cx)\) 展开：</p>
+    \[ 1+bx+\left(\frac{b^{2}}2-\frac{c^{2}}2\right)x^{2}+\left(\frac{b^{3}}6-\frac{bc^{2}}2\right)x^{3}+\left(\frac{b^{4}}{24}-\frac{b^{2}c^{2}}4+\frac{c^{4}}{24}\right)x^{4}+\cdots. \]
+    <p>分子各阶：一次 \(a-b\)，二次 \((a^{2}-b^{2}+c^{2})/2\)，三次 \((a^{3}-b^{3})/6+bc^{2}/2+d\)，四次 \((a^{4}-b^{4})/24+b^{2}c^{2}/4-c^{4}/24\)：</p>
+    \[ N(x)=e^{ax}-e^{bx}\cos(cx)+dx^{3},\qquad N(x)/x^{4}\to e. \]
+    <p>要除以 \(x^{4}\) 有限，一、二、三次项须为零：\(a=b\)，\(c=0\)，此时三次系数也为零，四次系数为零：</p>
+    \[ a=b,\ c=0,\ d=0\ \Longrightarrow\ N(x)\equiv0, \]
+    <p>分子恒零，与 \(e\neq0\) 矛盾，无解。数值反例：书答 \(a=b=1,c=1,d=-1/6\) 代回，\(x=0.05,0.02\) 比值 \(206.88,1266.88\)，按 \(1/(2x^{2})\) 发散。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只消一次项 \(a=b\)，忽略二次项 \((a^{2}-b^{2}+c^{2})/2\)。即使 \(a=b\)，只要 \(c\neq0\)，二次项 \(c^{2}/2\) 就存在。</p>
+    <p>② 这类结构在分母 \(x^{4}\) 下要非零有限，需先做可行性判断。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>高阶组合函数的反求题，要逐项列出各阶系数并列方程。若方程组无解，说明题面结构有误。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{e^{x}-e^{x}\cos x}{x^{4}}\)。</p>
+    <p class="var-ans">答案：发散（\(1/(2x^{2})\)）。\(e^{x}(1-\cos x)\sim x^{2}/2\)，除以 \(x^{4}\) 得 \(1/(2x^{2})\to\infty\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q85">
+  <div class="q-head">
+    <span class="qno">第 85 题</span>
+    <span class="qtype">arcsin(ax)/x 为底的幂指</span>
+    <span class="qsrc">P612</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to0}\left(\dfrac{\arcsin(ax)}{x}\right)^{1/x^{2}}=e^{d}\)，求 \(a\) 和 \(d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ d=\dfrac16\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(a=1,\ d=-\dfrac16\)，按题面独立复算为 \(a=1,\ d=\dfrac16\)。\(\arcsin x=x+\dfrac{x^{3}}6\)，除以 \(x\) 后与 \(1\) 的差为 \(x^{2}/6\)，乘 \(1/x^{2}\) 得 \(1/6\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：底数 \(\arcsin(ax)/x\to a\)，指数 \(1/x^{2}\to\infty\)。要成 \(1^{\infty}\) 型须 \(a=1\)，再算 \(\lim(1/x^{2})(u-1)\)。</p>
+    <p>当 \(a=1\)，\(u=\dfrac{\arcsin x}{x}\)。展开 \(\arcsin x=x+\dfrac{x^{3}}6+o(x^{3})\)：</p>
+    \[ u=\frac{\arcsin x}{x}=1+\frac{x^{2}}6+o(x^{2}),\qquad u-1=\frac{x^{2}}6+o(x^{2}). \]
+    <p>乘指数 \(1/x^{2}\)：</p>
+    \[ \frac1{x^{2}}(u-1)=\frac16+o(1)\to\frac16. \]
+    <p>为什么只展开到三阶：底数 \(u=\arcsin(ax)/x\) 的一阶项 \(a\) 先由「底数须趋于 \(1\)」定出 \(a=1\)；与 \(1\) 的差来自 \(\arcsin\) 的三阶项 \(a^{3}x^{3}/6\)，除以 \(x\) 后是 \(a^{3}x^{2}/6\)，正好与指数 \(1/x^{2}\) 配成常数。\(\arcsin\) 是奇函数，无偶次项，故必须写到三阶。</p>
+    <p>另解（取对数洛必达）：\(\ln L=\lim\limits_{x\to0}\dfrac1{x^{2}}\ln\dfrac{\arcsin x}{x}\)，\(0/0\) 型，洛必达一次化简后等价于三阶展开，结果仍为 \(1/6\)。</p>
+    \[
+    \frac1{x^{2}}\ln\frac{\arcsin x}{x}\Big|_{x=0.05}\approx0.1665,\quad
+    \frac1{x^{2}}\ln\frac{\arcsin x}{x}\Big|_{x=0.02}\approx0.1666\to\frac16.
+    \]
+    <p>故极限 \(=e^{1/6}\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘记先定 \(a=1\)。\(\arcsin(ax)/x\to a\)，底数须为 \(1\)。</p>
+    <p>② 符号。\(\arcsin x=x+x^{3}/6+\cdots\)，三阶项为正，故 \(d=+1/6\)；与 \(\sin x\) 的 \(-1/6\) 符号相反，极易混淆。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\((\text{反三角函数}/x)^{1/x^{2}}\)」是 \(1^{\infty}\) 型的固定题型。\(\sin\) 给 \(-1/6\)，\(\arcsin\) 给 \(+1/6\)，\(\tan\) 给 \(+1/3\)，三者要对照记忆。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\left(\dfrac{\arctan x}{x}\right)^{1/x^{2}}\)。</p>
+    <p class="var-ans">答案：\(e^{-1/3}\)。\(\arctan x/x=1-x^{2}/3+o(x^{2})\)，乘 \(1/x^{2}\) 得 \(-1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q86">
+  <div class="q-head">
+    <span class="qno">第 86 题</span>
+    <span class="qtype">ln(1+ax) 三阶反求</span>
+    <span class="qsrc">P612</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to0}\dfrac{\ln(1+ax)-bx+cx^{2}}{x^{3}}=d\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=\dfrac12,\ d=\dfrac13\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(a=1,\ b=1,\ c=-\dfrac12,\ d=\dfrac13\)，按题面独立复算为 \(a=1,\ b=1,\ c=\dfrac12,\ d=\dfrac13\)。二次项清零条件 \(-\dfrac{a^{2}}2+c=0\)，\(a=1\) 时 \(c=+1/2\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{3}\)。展开 \(\ln(1+ax)\) 到三阶，要求一次、二次项抵消，三次系数即 \(d\)。</p>
+    <p>展开：</p>
+    \[ \ln(1+ax)=ax-\frac{a^{2}}2x^{2}+\frac{a^{3}}3x^{3}+o(x^{3}). \]
+    <p>分子：</p>
+    \[ \ln(1+ax)-bx+cx^{2}=(a-b)x+\left(-\frac{a^{2}}2+c\right)x^{2}+\frac{a^{3}}3x^{3}+o(x^{3}). \]
+    <p>一次项清零：\(b=a\)。二次项清零：\(c=\dfrac{a^{2}}2\)。三次系数 \(\dfrac{a^{3}}3\) 即 \(d\)。\(b,c,d\) 由自由参数 \(a\) 决定，归一化 \(a=1\) 得 \(b=1,\ c=1/2,\ d=1/3\)；取 \(a=k\) 则 \(b=k,\ c=k^{2}/2,\ d=k^{3}/3\)。</p>
+    <p>数值两档互证：\(x=0.05\)、\(0.02\) 时商约 \(0.3213\)、\(0.3284\)，向 \(1/3\) 收敛。</p>
+    \[
+    \frac{\ln(1+x)-x+x^{2}/2}{x^{3}}\Big|_{x=0.05}\approx0.3213,\quad
+    \frac{\ln(1+x)-x+x^{2}/2}{x^{3}}\Big|_{x=0.02}\approx0.3284.
+    \]
+    <p>余项 \(o(x^{3})\) 除以 \(x^{3}\) 趋零；残留 \(x^{2}\) 阶量则商以 \(1/x\) 阶发散。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 二次项符号。\(\ln(1+ax)=ax-a^{2}x^{2}/2+a^{3}x^{3}/3\)，要令 \(-a^{2}/2+c=0\)，故 \(c=+a^{2}/2\)，不是负。</p>
+    <p>② 只消一次项 \(b=a\)，漏消二次项。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「\(\ln(1+ax)\) 与多项式相减」的反求题，系数就是 \(\ln(1+t)\) 的泰勒系数：\(a\) 对应一次项、\(-a^{2}/2\) 对应二次项、\(a^{3}/3\) 对应三次项。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\ln(1+x)-x+x^{2}/2}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac13\)。\(\ln(1+x)-x+x^{2}/2=x^{3}/3+o(x^{3})\)，除以 \(x^{3}\) 得 \(1/3\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q87">
+  <div class="q-head">
+    <span class="qno">第 87 题</span>
+    <span class="qtype">1<sup>∞</sup> 型含多项展开</span>
+    <span class="qsrc">P612</span>
+  </div>
+  <div class="stem">
+    <p>设 \(\lim\limits_{x\to\infty}\left(1+\dfrac{a}{x}+\dfrac{b}{x^{2}}+\dfrac{c}{x^{3}}\right)^{x}=e^{d}\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=1,\ d=1\)（书答案，\(b,c\) 不影响极限）</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：底数趋于 \(1\)，指数 \(x\to\infty\)，属 \(1^{\infty}\) 型。用 \(e^{\lim x(u-1)}\)，\(u=1+\dfrac{a}{x}+\dfrac{b}{x^{2}}+\dfrac{c}{x^{3}}\)。</p>
+    <p>取对数后由 \(\ln(1+u-1)\sim u-1\)：</p>
+    \[ \ln L=\lim_{x\to\infty}x\ln u=\lim_{x\to\infty}x(u-1)=a. \]
+    <p>\(u-1=\dfrac{a}{x}+\dfrac{b}{x^{2}}+\dfrac{c}{x^{3}}\)，乘指数 \(x\)：</p>
+    \[ x(u-1)=a+\frac b x+\frac c{x^{2}}\to a. \]
+    <p>故原极限 \(=e^{a}\)，即 \(d=a\)。书答案取 \(a=1\)，则 \(d=1\)；\(b,c\) 乘 \(x\) 后为 \(b/x\)、\(c/x^{2}\)，趋于零，取 \(b=c=1\) 仅为归一化。</p>
+    <p>数值互证：\(a=b=c=1\) 时 \(x=1000\)、\(10000\) 下 \(x(u-1)\) 约 \(1.0010\)、\(1.0001\)。</p>
+    \[ x(u-1)\big|_{x=1000}\approx1.0010,\quad x(u-1)\big|_{x=10000}\approx1.0001. \]
+    <p>指数为 \(x\) 时只有 \(a/x\) 项留下常数；指数改为 \(x^{2}\) 则 \(b/x^{2}\) 留下常数，改为 \(x^{3}\) 则 \(c/x^{3}\) 留下常数。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 误以为 \(b,c\) 也要定值。在指数为 \(x\) 时，只有 \(a\) 起作用。若指数改为 \(x^{2}\)，则 \(b\) 起作用；改为 \(x^{3}\)，则 \(c\) 起作用。</p>
+    <p>② 套公式时忘记乘指数 \(x\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(1^{\infty}\) 型的一般公式：\(\lim(1+\dfrac{c_{1}}{x}+\dfrac{c_{2}}{x^{2}}+\cdots)^{x^{k}}=e^{c_{k}}\)。指数次幂 \(k\) 决定了哪一项留下常数。本题 \(k=1\)，故只有 \(a=c_{1}\) 起作用。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(\lim\limits_{x\to\infty}\left(1+\dfrac{a}{x}+\dfrac{b}{x^{2}}+\dfrac{c}{x^{3}}\right)^{x^{2}}=e^{5}\)，求 \(b\)。</p>
+    <p class="var-ans">答案：\(b=5\)。此时 \(a\) 必须为 \(0\)（否则 \(x^{2}\cdot a/x=ax\) 发散），\(x^{2}\cdot b/x^{2}=b\)，故 \(b=5\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q88">
+  <div class="q-head">
+    <span class="qno">第 88 题</span>
+    <span class="qtype">tan-sin 五阶反求</span>
+    <span class="qsrc">P612</span>
+  </div>
+  <div class="stem">
+    <p>若 \(\lim\limits_{x\to0}\dfrac{\tan(ax)-\sin(bx)+cx^{3}}{x^{5}}=d\)，求 \(a,b,c,d\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=1,\ c=-\dfrac12,\ d=\dfrac18\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(a=1,\ b=1,\ c=-\dfrac16,\ d=\dfrac1{120}\)，按题面独立复算为 \(a=1,\ b=1,\ c=-\dfrac12,\ d=\dfrac18\)。\(c=-\dfrac{a^{3}}3-\dfrac{a^{3}}6=-\dfrac{a^{3}}2\)，\(a=1\) 得 \(c=-1/2\)；五阶系数 \(2/15-1/120=1/8\) 即 \(d\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{5}\)。展开到五阶，要求 \(x,x^{3}\) 项清零，五阶系数即 \(d\)。</p>
+    <p>展开：</p>
+    \[ \tan(ax)=ax+\frac{a^{3}}3x^{3}+\frac{2a^{5}}{15}x^{5}+\cdots, \]
+    \[ \sin(bx)=bx-\frac{b^{3}}6x^{3}+\frac{b^{5}}{120}x^{5}+\cdots. \]
+    <p>分子：</p>
+    \[ \tan(ax)-\sin(bx)+cx^{3}=(a-b)x+\left(\frac{a^{3}}3+\frac{b^{3}}6+c\right)x^{3}+\left(\frac{2a^{5}}{15}-\frac{b^{5}}{120}\right)x^{5}+\cdots. \]
+    <p>一次项清零：\(a=b\)。三次项清零：\(c=-\dfrac{a^{3}}3-\dfrac{b^{3}}6=-\dfrac{a^{3}}2\)。归一化 \(a=b=1\)，则 \(c=-1/2\)，五阶系数 \(2/15-1/120=1/8\)；尺度 \(k\) 下为 \(k^{5}/8\)。</p>
+    <p>数值互证：\(x=0.05\)、\(0.02\) 时商约 \(0.1251\)、\(0.1250\)，向 \(1/8\) 收敛。</p>
+    \[ \frac{\tan x-\sin x-x^{3}/2}{x^{5}}\Big|_{x=0.05}\approx0.1251,\quad \frac{\tan x-\sin x-x^{3}/2}{x^{5}}\Big|_{x=0.02}\approx0.1250. \]
+    <p>余项 \(o(x^{5})\) 不改变极限；残留 \(x\) 或 \(x^{3}\) 阶量时商分别以 \(x^{-4}\)、\(x^{-2}\) 阶发散。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\tan x\) 五阶系数是 \(2/15\)，不是 \(1/15\)。记错会算错 \(d\)。</p>
+    <p>② 三次项 \(c\) 要把 \(\tan\) 的 \(+a^{3}/3\) 与 \(-\sin\) 的 \(+b^{3}/6\)（因为 \(\sin\) 三阶为 \(-b^{3}/6\)）合并，再令和为零。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>五阶反求题要求展开到五阶、并把所有低阶系数清零。\(\tan,\sin\) 的五阶系数要背熟：\(\tan x=x+x^{3}/3+2x^{5}/15\)，\(\sin x=x-x^{3}/6+x^{5}/120\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\tan x-\sin x}{x^{3}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac12\)。\((x+x^{3}/3)-(x-x^{3}/6)=x^{3}/2+o(x^{3})\)，除以 \(x^{3}\) 得 \(1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q89">
+  <div class="q-head">
+    <span class="qno">第 89 题</span>
+    <span class="qtype">√ 与 ∛ 组合反求</span>
+    <span class="qsrc">P612</span>
+  </div>
+  <div class="stem">
+    <p>已知 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+ax}-\sqrt[3]{1+bx}}{x^{2}}=c\)，求 \(a,b,c\)。</p>
+  </div>
+  <div class="answer">答案：\(a=1,\ b=\dfrac32,\ c=\dfrac18\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘说明</div>
+    <p>书上印 \(a=1,\ b=1,\ c=\dfrac18\)，按题面独立复算为 \(a=1,\ b=\dfrac32,\ c=\dfrac18\)。一次项清零条件 \(\dfrac a2=\dfrac b3\)，\(a=1\) 得 \(b=3/2\)；二次项系数 \(-1/8+1/4=1/8\) 即 \(c\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：\(0/0\) 型，分母 \(x^{2}\)。用二项式展开 \(\sqrt{1+ax}\) 与 \(\sqrt[3]{1+bx}\)，要求一次项抵消，二次项系数即 \(c\)。</p>
+    <p>展开：</p>
+    \[ \sqrt{1+ax}=1+\frac a2x-\frac{a^{2}}8x^{2}+\cdots,\qquad \sqrt[3]{1+bx}=1+\frac b3x-\frac{b^{2}}9x^{2}+\cdots. \]
+    <p>分子：</p>
+    \[ \sqrt{1+ax}-\sqrt[3]{1+bx}=\left(\frac a2-\frac b3\right)x+\left(-\frac{a^{2}}8+\frac{b^{2}}9\right)x^{2}+\cdots. \]
+    <p>一次项清零：\(\dfrac a2=\dfrac b3\)。二项式 \((1+u)^{\alpha}=1+\alpha u+\dfrac{\alpha(\alpha-1)}2u^{2}+\cdots\)，根式取 \(\alpha=1/2\)、\(1/3\)。归一化 \(a=1\)，则 \(b=3/2\)，二次系数 \(-1/8+1/4=1/8\)，即 \(c=1/8\)；\(a=k\) 时 \(b=3k/2\)，二次系数 \(k^{2}/8\)。</p>
+    <p>数值互证：两档取值向 \(1/8\) 收敛。</p>
+    \[ \frac{\sqrt{1+x}-\sqrt[3]{1+3x/2}}{x^{2}}\Big|_{x=0.05}\approx0.1181,\quad \frac{\sqrt{1+x}-\sqrt[3]{1+3x/2}}{x^{2}}\Big|_{x=0.02}\approx0.1221. \]
+    <p>余项 \(o(x^{2})\) 不改变极限；一次项未抵消则商以 \(1/x\) 阶发散。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 一次项系数。\(\sqrt{1+ax}\) 一次项为 \(a/2\)，\(\sqrt[3]{1+bx}\) 一次项为 \(b/3\)，令 \(a/2=b/3\) 得 \(b=3a/2\)。写成 \(b=a\) 会导致一次项不抵消。</p>
+    <p>② 二次项符号。\(\sqrt{1+ax}\) 二次项为 \(-a^{2}/8\)，\(\sqrt[3]{1+bx}\) 二次项为 \(-b^{2}/9\)，相减后是 \(-a^{2}/8+b^{2}/9\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>不同根次的根式组合反求题，用 \((1+u)^{\alpha}\) 展开即可。关键是先消一次项，再由二次项系数定值。这类题常见于选择题。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 求 \(\lim\limits_{x\to0}\dfrac{\sqrt{1+x}-\sqrt[3]{1+x}}{x^{2}}\)。</p>
+    <p class="var-ans">答案：\(\dfrac{1}{18}\)。一次项 \(1/2-1/3=1/6\neq0\)，故该极限发散（实际为 \(1/(6x)\)）。要使其有限，需按比例调整 \(b\) 使一次项抵消。</p>
+  </div>
+</article>
