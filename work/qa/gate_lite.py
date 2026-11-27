@@ -17,7 +17,8 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-ART_RE = re.compile(r'<article class="q" id="q(\d+)".*?</article>', re.S)
+# id 允许草稿占位（qTMP / 任意非空串）：并行生产时子智能体不编号，装配后再分配 qN
+ART_RE = re.compile(r'<article class="q" id="q([0-9A-Za-z_-]+)".*?</article>', re.S)
 QNO_RE = re.compile(r'class="qno">第\s*(\d+)\s*题')
 ANS_RE = re.compile(r'<div class="answer">(.*?)</div>', re.S)
 SOL_RE = re.compile(r'<div class="block sol">(.*?)(?=<div class="block (?:pit|trend|var|caveat)">|</article>)', re.S)
@@ -88,17 +89,20 @@ def main():
     for f in walk(args[:1]):
         txt = open(f, encoding="utf-8", errors="replace").read()
         for m in ART_RE.finditer(txt):
-            q = int(m.group(1))
-            if lo and q < lo:
+            raw = m.group(1)
+            # 草稿占位 id（qTMP）不参与题号区间筛选与查重
+            q = int(raw) if raw.isdigit() else None
+            if q is not None and lo and q < lo:
                 continue
-            if hi and q > hi:
+            if q is not None and hi and q > hi:
                 continue
             total += 1
-            if q in ids:
+            if q is not None and q in ids:
                 print(f"FAIL q{q}  id 重复（同批次内）")
                 bad += 1
                 continue
-            ids.add(q)
+            if q is not None:
+                ids.add(q)
             fails = check(m.group(0))
             if QNO_RE.search(m.group(0)) is None:
                 fails.append("缺 qno")
