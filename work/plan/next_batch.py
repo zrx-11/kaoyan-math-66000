@@ -44,6 +44,22 @@ def pdf_path():
     return None
 
 
+
+def max_qno(slug, t):
+    """该专题目录里已有的最大「第 N 题」，用于续编 qno（qno 是专题内编号，不从 1 重来）。"""
+    d = os.path.join(FRAG, slug, f"t{t:02d}")
+    if not os.path.isdir(d):
+        return 0
+    mx = 0
+    for name in os.listdir(d):
+        if not name.endswith(".html"):
+            continue
+        txt = open(os.path.join(d, name), encoding="utf-8", errors="replace").read()
+        for m in re.finditer(r'class="qno">第\s*(\d+)\s*题', txt):
+            mx = max(mx, int(m.group(1)))
+    return mx
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("n", type=int, nargs="?", default=4)
@@ -75,7 +91,8 @@ def main():
         lec = os.path.join(WORK, "content", "lectures", slug, f"t{t:02d}.html")
         print(f"── {u['id']}  第{u['vol']}册 / t{t:02d}《{name}》  P{lo}–{hi}")
         print(f"   目标分片: work/fragments/{slug}/t{t:02d}/seg-{lo}-{hi}.html")
-        print(f"   起始 id: q{start_id} （qno 从第 1 题起）")
+        q0 = max_qno(slug, t) + 1
+        print(f"   起始 id: q{start_id} （qno 从第 {q0} 题起）")
         print(f"   讲解页:   {'已存在' if os.path.exists(lec) else '❌ 缺失 → 先跑 work/plan/scaffold_topic.py ' + f'{slug} {t}'}")
         if pdf:
             print(f"   页图:     mkdir -p {os.path.relpath(pdir, ROOT)} && pdftoppm -png -r 150 -gray "
