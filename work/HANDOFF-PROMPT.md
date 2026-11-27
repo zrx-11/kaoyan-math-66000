@@ -181,3 +181,53 @@
 
 **怎么区分两阶段**：台账 note 里带 `[cover]` 的是「只过结构闸门」；不带的是核过的。
 `verify_queue.py` 就是按这个标记取的，所以阶段一入账时**必须写这个前缀**，否则那道题永远不会被核。
+
+## 八、并行生产的装配规则（11-28 起强制）
+
+单线程一页一页写，6 万题跑不完；但并行写卡会撞 id。把「写内容」和「发号」拆开即可：
+
+1. **子智能体只写草稿**：落到 `work/drafts/<册>-<起>-<止>.html`，每卡
+   `id="qTMP"`、`<span class="qno">第 0 题</span>`，`qsrc` 必须准确（`P20` 对应 `p-00020.png`）。
+2. **装配发号**：主控收齐草稿后按页序连续发号，一个分片一次：
+   ```bash
+   python3 work/qa/assemble.py --out work/fragments/<slug>/t<NN>/seg-<起>-<止>.html \
+       --start <全局下一 id> --qno-start <本专题下一题号> \
+       work/drafts/<册>-<起>-<止>.html [更多草稿...]
+   ```
+   它会按 `qsrc` 页号排序、覆盖 id 与 qno、拒绝覆盖已存在的分片（除非 `--force`）。
+3. **闸门 + 入账**：
+   ```bash
+   python3 work/qa/gate_lite.py work/fragments/<slug>/t<NN>/seg-<起>-<止>.html
+   python3 work/qa/add_cover_rows.py work/fragments/<slug>/t<NN>/seg-<起>-<止>.html
+   ```
+   `add_cover_rows.py` 幂等（已入账的 q 号自动跳过），`note` 固定 `[cover] 结构闸门通过；待阶段二复算`。
+4. **刷新 + 建站 + 发布**：`build_plan.py` → `build_site.py` → `bash work/publish.sh` → 核远端 HEAD 与 `data.json`。
+
+**子智能体不许做的事**（写进提示词，不然必踩）：自编 id / 改 `checks.csv` / 改已有分片 /
+跑 `build_site.py`、`publish.sh`、`build_plan.py` / 动 `topics.json`。
+
+### 可直接粘贴的「继续」提示词
+
+给生产子智能体：
+
+```
+真源目录 /home/user/Doubao/chats/38454435152889602/kaoyan66000（不要去同级 ../work/，已废弃）。
+先读 work/spec/CARD-FORMAT.md、work/plan/README.md 第 2 节、work/fragments/01-tixing-6000/t01/seg-18-19.html。
+本次负责 P<起>–P<止>（页面图 work/pages/<slug>/p-00<页>.png，Read 直接看）。
+逐题六块写卡到 work/drafts/<名字>.html：id 写 qTMP、qno 写「第 0 题」占位（装配时统一发号，自编号会撞）；
+qsrc 写 P<页>；sol 300–420 字且至少一处行间公式；var 必须有 var-ans；
+题干与页面图逐字一致；禁词「核对：」「略去」「待补」；裸 < > 写成 \lt{} \gt{}；
+题面印「(Tex translation failed)」或残缺者跳过不编造，只在报告列出。
+只动 work/drafts/ 下自己那份；不要改 checks.csv、不要改已有分片、不要跑 build/publish。
+写完 python3 work/qa/gate_lite.py <草稿> 到全绿，回报张数/跳过项/gate 末行/覆盖题号范围。
+```
+
+给核验子智能体：
+
+```
+真源目录 /home/user/Doubao/chats/38454435152889602/kaoyan66000。
+本轮核阶段一 cover 卡：python3 work/plan/verify_queue.py --limit <N> [--vol X]
+逐题回页面图核题干 → 独立复算 → 判 pass/fixed/skip；改判只走 work/verify/rerecord.py。
+fixed 必须同时加 class="block caveat" 校勘块；答案栏按复算值写，书错值只在校勘块里说明。
+结束跑 python3 work/qa/ledger_audit.py，三类告警必须为 0；gate.py failed=0。
+```

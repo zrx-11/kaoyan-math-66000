@@ -59,7 +59,7 @@ pdftoppm -v                # poppler，用于 PDF → 页面图
 ├── data.json                                   # 站点索引，同样生成
 ├── assets/site.css                             # 全站样式（唯一可手改的站点文件）
 ├── .nojekyll                                   # 关掉 GitHub Pages 的 Jekyll 处理
-└── work/                                       # 工作台（唯一该改东西的地方）
+└── work/                                       # 工作台（仓库内这一份是唯一真源；项目根 ../work/ 已于 11-24 废弃）
     ├── AGENT-HANDBOOK.md                       # 本文件
     ├── README.md                               # 工作台导航
     ├── spec/                                   # 规范：PIPELINE / QC / CARD-FORMAT / LEDGER / VERIFY

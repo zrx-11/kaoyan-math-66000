@@ -80,6 +80,8 @@ python3 work/plan/verify_queue.py --vol 2 --limit 200 # 按册、限量
 | `python3 work/qa/gate_lite.py <文件\|目录>` | 阶段一闸门 |
 | `python3 work/qa/range_map.py 起 止` | 题号 → 承载文件 |
 | `python3 work/qa/find_orphans.py` | 扫游离 `<p>` |
+| `python3 work/qa/assemble.py --out … --start … --qno-start … <草稿...>` | 并行草稿按页序装配，统一发 id 与 qno |
+| `python3 work/qa/add_cover_rows.py <分片>` | 给新卡补 `[cover]` 台账行（幂等） |
 | `python3 work/qa/ledger_audit.py` | 账实审计（fixed ⇔ caveat） |
 
 ## 5. 现在的账（快照）
@@ -93,3 +95,13 @@ python3 work/plan/verify_queue.py --vol 2 --limit 200 # 按册、限量
 1. **不要 `--refreeze`**：会让所有 `tNN` 重新编号，已建卡的目录全部错位。
 2. **不要按题号切派活范围**：一律按分片文件切，`range_map.py` 先查。两段共享一个文件时只按块合并。
 3. **不要把阶段一的 `pass` 当成「已核」**：`note` 里没有 `[cover]` 的才是核过的。审计与统计都按这条区分。
+
+## 7. 并行生产怎么发号（11-28 起强制）
+
+并行写卡必撞 id，所以把「写内容」与「发号」拆开：
+
+1. 子智能体只写草稿 `work/drafts/<名字>.html`，卡上 `id="qTMP"`、`qno` 写「第 0 题」；
+2. 主控用 `assemble.py` 按 `qsrc` 页序装配，连续发全局 id 与专题内 qno；
+3. `gate_lite.py` → `add_cover_rows.py` → `build_plan.py` → `build_site.py` → `publish.sh`。
+
+子智能体禁止：自编 id、改 `checks.csv`、改已有分片、跑 `build_site.py`/`publish.sh`、动 `topics.json`。
