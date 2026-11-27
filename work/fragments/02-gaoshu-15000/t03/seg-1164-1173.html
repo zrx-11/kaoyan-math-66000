@@ -1,0 +1,1553 @@
+<article class="q" id="q3986">
+  <div class="q-head">
+    <span class="qno">第 165 题</span>
+    <span class="qtype">求参 · 双重换位</span>
+    <span class="qsrc">P1164</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sin(\tan x)-\tan(\sin x)\) 与 \(x^{u}\) 是同阶无穷小，求 \(u\)。</p>
+  </div>
+  <div class="answer">答案：\(u=7\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：内外换位型。三次项被换位拉平，二、三、五级都不给答案，必须查到七次。展开写足：</p>
+    \[
+    \tan x=x+\tfrac{x^{3}}{3}+\tfrac{2x^{5}}{15}+\tfrac{17x^{7}}{315}+\cdots,\quad \sin x=x-\tfrac{x^{3}}{6}+\tfrac{x^{5}}{120}-\tfrac{x^{7}}{5040}+\cdots
+    \]
+    <p>把 \(\tan x\) 代进 \(\sin\)、\(\sin x\) 代进 \(\tan\)，各算到五次，两支都是 \(x+\tfrac{x^{3}}{6}-\tfrac{x^{5}}{40}\)，逐项相同，于是阶数至少是七。</p>
+    <p>七次系数各由四路相加得来：\(\tan\) 自身、三次、五次、七次项分别贡献，两支得 \(-\tfrac{275}{5040}\) 与 \(-\tfrac{107}{5040}\)，相减后：</p>
+    \[
+    \sin(\tan x)-\tan(\sin x)=\Big(-\tfrac{275}{5040}+\tfrac{107}{5040}\Big)x^{7}+o(x^{7})=-\tfrac{x^{7}}{30}+o(x^{7})
+    \]
+    <p>比值收敛到 \(-\tfrac{1}{30}\)，非零：</p>
+    \[
+    \lim_{x\to0}\frac{\sin(\tan x)-\tan(\sin x)}{x^{7}}=-\frac{1}{30}\neq0
+    \]
+    <p>故 \(u=7\)，主部 \(-\tfrac{x^{7}}{30}\)。数值抽查 \(x=0.01\) 得 \(-3.3337\times10^{-16}\)，与 \(-3.3333\times10^{-16}\) 只差千分之一。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 方向写反：本题是 \(\sin(\tan x)-\tan(\sin x)\)，主部带负号 \(-\dfrac{x^{7}}{30}\)；若写成 \(+\dfrac{x^{7}}{30}\)，等于把 \(\tan(\sin x)-\sin(\tan x)\) 的结论搬了过来。② 只查到三次项，看见两支都是 \(x+\dfrac{x^{3}}{6}\) 就宣布差为零，答「高阶但说不出几阶」。③ 只查到五次项，看到 \(-\dfrac{x^{5}}{40}\) 相同再停手，仍答不出阶数。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>换位相减是这一族的高阶形态，考卷里它常以「与 \(x^{n}\) 同阶，求 \(n\)」的参数题出现，也可以做成求极限 \(\dfrac{\sin(\tan x)-\tan(\sin x)}{x^{7}}\) 的分式题。同族的换位对还有 \(\arcsin(\tan x)-\tan(\arcsin x)\)、\(\sin(\arctan x)-\arctan(\sin x)\)，判断手法完全一样：先看三次项是否拉平，再逐层加幂。若把内层再换成 \(x^{2}\) 或 \(x^{3}\)，阶数就是七乘内层次数，本段后面连着考了三次。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\tan(\tan x)-\sin(\sin x)\) 与 \(x^{u}\) 是同阶无穷小，求 \(u\)。</p>
+    <p class="var-ans">答案：\(u=3\) 阶，主部 \(x^{3}\)。换位把三次项拉平这件事只在 \(\sin\) 与 \(\tan\) 之间成立；外层换成 \(\tan\) 套 \(\tan\)、\(\sin\) 套 \(\sin\) 时，三次系数变成 \(\dfrac{2}{3}\) 与 \(-\dfrac{1}{3}\)，相减得 \(1\)，阶数直接落回三次。</p>
+  </div>
+</article>
+
+<article class="q" id="q3987">
+  <div class="q-head">
+    <span class="qno">第 166 题</span>
+    <span class="qtype">求参 · 指数包壳</span>
+    <span class="qsrc">P1164</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(e^{\sin x}-e^{\arcsin x}\) 与 \(x^{v}\) 是同阶无穷小，求 \(v\)。</p>
+  </div>
+  <div class="answer">答案：\(v=3\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：外层是同一个指数函数，里面的 \(\sin x\) 与 \(\arcsin x\) 本身都趋于零，所以不能把两支各自换成 \(1+x\) 再相减——那样 \(1-1=0\)，什么也读不出来。正确的看法是把指数差提出来：</p>
+    \[
+    e^{\sin x}-e^{\arcsin x}=e^{\arcsin x}\left(e^{\sin x-\arcsin x}-1\right).
+    \]
+    <p>右端括号里的指数差可以先算，两支展开的一次项相同、三次项相反：</p>
+    \[
+    \sin x-\arcsin x=\left(x-\frac{x^{3}}{6}\right)-\left(x+\frac{x^{3}}{6}\right)+o(x^{3})=-\frac{x^{3}}{3}+o(x^{3}).
+    \]
+    <p>有了这个差，再用 \(e^{z}-1\sim z\)（\(z\to0\)）把它收口，同时 \(\arcsin x\to0\) 保证前因子 \(e^{\arcsin x}\to1\)：</p>
+    \[
+    e^{\sin x}-e^{\arcsin x}\sim 1\cdot\left(-\frac{x^{3}}{3}\right)=-\frac{x^{3}}{3},
+    \]
+    <p>故 \(v=3\)，主部为 \(-\dfrac{x^{3}}{3}\)。两个因子各管一件事：外层指数在 \(0\) 处取值为 \(1\)，只贡献系数 \(1\)；真正决定阶数的是内层两支的差。数值抽查 \(x=0.01\) 得 \(-3.3669\times10^{-7}\)，与 \(-\dfrac{x^{3}}{3}=-3.3333\times10^{-7}\) 相差约百分之一，这点偏差正是下一个五次项留下的。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 对两支分别用 \(e^{u}-1\sim u\) 写成 \(\sin x-\arcsin x\) 后再各取 \(x\)，得 \(x-x=0\)，误判为「更高阶」甚至恒等于零。② 漏掉外层前因子 \(e^{\arcsin x}\)，把主部直接写成一阶的差。③ 把 \(\sin x-\arcsin x\) 的符号记错，写成 \(+\dfrac{x^{3}}{3}\)；\(\sin\) 的三次项是 \(-\dfrac{1}{6}\)、\(\arcsin\) 的是 \(+\dfrac{1}{6}\)，相减必为负。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「同一个外函数套两个内函数」是高频结构，\(e^{\tan x}-e^{\sin x}\)、\(\ln(1+\tan x)-\ln(1+\sin x)\)、\(\arctan(\tan x)-\arctan(\sin x)\) 都是同一把钥匙：先把外层的差提成「外函数在内层差处的增量」，阶数由内层差决定，系数由外函数的导数在内层公共极限处的取值决定。若内层再嵌一层（如 \(e^{\sin(x^{3})}-e^{\arcsin(x^{3})}\)），阶数就是三乘内层次数，本段第 180、195 两题正是这个走向。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(e^{\tan x}-e^{\sin x}\) 与 \(x^{v}\) 是同阶无穷小，求 \(v\)。</p>
+    <p class="var-ans">答案：\(v=3\) 阶，主部 \(\dfrac{x^{3}}{2}\)。把内层换成 \(\tan x\) 与 \(\sin x\)，指数差变成 \(\tan x-\sin x\sim\dfrac{x^{3}}{2}\)，外层指数在零点的值仍是 \(1\)，阶数不动而符号转正。</p>
+  </div>
+</article>
+
+<article class="q" id="q3988">
+  <div class="q-head">
+    <span class="qno">第 167 题</span>
+    <span class="qtype">求参 · 对数包壳</span>
+    <span class="qsrc">P1164</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\ln(1+\tan x)-\ln(1+\sin x)\) 与 \(x^{w}\) 是同阶无穷小，求 \(w\)。</p>
+  </div>
+  <div class="answer">答案：\(w=3\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：与上一题同族，外层换成对数。两个对数相减不必分别展开，先用对数的差商恒等式把它们并成一个对数，题目的结构立刻暴露：</p>
+    \[
+    \ln(1+\tan x)-\ln(1+\sin x)=\ln\frac{1+\tan x}{1+\sin x}.
+    \]
+    <p>比值写成「\(1\) 加上一个小量」的形式，小量就是两支之差除以 \(1+\sin x\)：</p>
+    \[
+    \frac{1+\tan x}{1+\sin x}=1+\frac{\tan x-\sin x}{1+\sin x},\qquad \frac{\tan x-\sin x}{1+\sin x}\sim \tan x-\sin x\sim\frac{x^{3}}{2}.
+    \]
+    <p>于是整个对数等价于这个小量本身（\(\ln(1+z)\sim z\)，此处 \(z\to0\)）：</p>
+    \[
+    \ln\frac{1+\tan x}{1+\sin x}\sim \frac{x^{3}}{2},
+    \]
+    <p>故 \(w=3\)，主部为 \(+\dfrac{x^{3}}{2}\)。这条路径的好处是只算了一个 \(\tan x-\sin x\)，不必把两个对数各展开两次再对消；系数 \(\dfrac{1}{2}\) 也不是凑出来的，它正是 \(\tan\) 与 \(\sin\) 三次项 \(\dfrac{1}{3}\) 与 \(\dfrac{1}{6}\) 之和。数值抽查 \(x=0.01\) 得 \(4.9506\times10^{-7}\)，与 \(\dfrac{x^{3}}{2}=5.0\times10^{-7}\) 相差约百分之一，差量来自五次项。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 两个对数分别用 \(\ln(1+u)\sim u\) 换成 \(\tan x-\sin x\)，这一步其实对，但随后又各取一次项得 \(x-x=0\)，把结果写没了。② 分母 \(1+\sin x\) 被当成 \(1\) 直接删掉：在极限里它确实趋于 \(1\)，但删之前要说明「它是常数因子」，否则系数与阶数的来源就断了。③ 符号写成 \(-\dfrac{x^{3}}{2}\)，把对数差当成了正弦族相减。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数差并成比值是通用动作，凡是 \(\ln A-\ln B\) 的结构都该先并再算，能省一次展开且不易丢项。考卷里它常配着参数出现：「与 \(x^{k}\) 同阶求 \(k\)」，或者做成 \(\dfrac{\ln(1+\tan x)-\ln(1+\sin x)}{x^{3}}\) 的极限题，答案就是 \(\dfrac{1}{2}\)。内层换成 \(\tan(x^{2})\) 与 \(\sin(x^{2})\) 时阶数翻倍成六，本段第 181、196 两题是这条线的延伸。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\ln(1+\arcsin x)-\ln(1+\arctan x)\) 与 \(x^{w}\) 是同阶无穷小，求 \(w\)。</p>
+    <p class="var-ans">答案：\(w=3\) 阶，主部 \(\dfrac{x^{3}}{2}\)。\(\arcsin x\) 的三次项 \(+\dfrac{1}{6}\) 与 \(\arctan x\) 的三次项 \(-\dfrac{1}{3}\) 相减得 \(\dfrac{1}{2}\)，这正是比值小量 \(\dfrac{\arcsin x-\arctan x}{1+\arctan x}\) 的首项；对数 \(\ln(1+z)\) 的原样收口不改系数，故主部就是 \(\dfrac{x^{3}}{2}\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q3989">
+  <div class="q-head">
+    <span class="qno">第 168 题</span>
+    <span class="qtype">求参 · 分母配幂</span>
+    <span class="qsrc">P1164</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\dfrac{1-\cos(x^{3})}{x^{a}}\) 的极限存在且不为零，求 \(a\)。</p>
+  </div>
+  <div class="answer">答案：\(a=6\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：这题不给「同阶」的目标幂，而是用「极限存在且不为零」反过来限定分母的幂次，本质是判分子阶数再配同阶分母。分子的余弦折叠一步就能读阶：</p>
+    \[
+    1-\cos(x^{3})=2\sin^{2}\frac{x^{3}}{2}\sim 2\left(\frac{x^{3}}{2}\right)^{2}=\frac{x^{6}}{2}.
+    \]
+    <p>分子是六阶无穷小，分子与分母同阶时比值才存在且非零，于是分母必须也是六阶：</p>
+    \[
+    \frac{1-\cos(x^{3})}{x^{a}}\sim\frac{x^{6}/2}{x^{a}}=\frac{1}{2x^{a-6}},
+    \]
+    <p>这个量要收敛到非零常数，只能让 \(a-6=0\)，即 \(a=6\)：</p>
+    \[
+    \lim_{x\to0}\frac{1-\cos(x^{3})}{x^{6}}=\frac{1}{2}\neq0
+    \]
+    <p>两侧都验一下：若 \(a\lt{}6\)，分母压得不够，比值趋于 \(0\)（极限存在但为零，不合题意）；若 \(a\gt{}6\)，比值发散，极限不存在。数值抽查 \(x=0.1\) 得 \(0.49999996\)，确实贴着 \(\dfrac{1}{2}\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 对 \(1-\cos(x^{3})\) 只翻一次幂，按 \(1-\cos u\sim\dfrac{u^{2}}{2}\) 却把 \(u\) 当成 \(x\)，答 \(a=2\) 或 \(a=4\)。② 把「不为零」漏读，只求「存在」，于是 \(a\lt{}6\) 的任何值都能让极限为 \(0\)，答案就不唯一了。③ 记成 \(1-\cos u\sim\dfrac{u^{2}}{2}\) 但系数写成 \(1\)，虽然 \(a\) 仍对，一旦题目改问极限值就错。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「极限存在且不为零」是判阶题的逆用形态，考卷里比正问更常见：给定分式让考生补参数，答案由分子阶数唯一确定。同族的变体有三类——分子写成 \(\tan x-\sin x\) 让考生先判三阶再配三次分母；分子带参数写成 \(1-\cos(ax)\)，用极限值 \(a^{2}\) 反解；分母换成 \(x^{a}\ln(1+x)\) 之类，要求把两个因子各降一级再配。判阶手法不变，只是把「读阶」换成了「凑阶」。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\dfrac{\tan(x^{2})-\sin(x^{2})}{x^{a}}\) 的极限存在且不为零，求 \(a\) 与该极限值。</p>
+    <p class="var-ans">答案：\(a=6\)，极限值 \(\dfrac{1}{2}\)。\(\tan u-\sin u\sim\dfrac{u^{3}}{2}\)（三分之一次项与六分之一次项同号相加），带入 \(u=x^{2}\) 得 \(\dfrac{x^{6}}{2}\)，分子六阶，分母配六次后比值恰为该系数。</p>
+  </div>
+</article>
+
+<article class="q" id="q3990">
+  <div class="q-head">
+    <span class="qno">第 169 题</span>
+    <span class="qtype">求参 · 双根式比阶</span>
+    <span class="qsrc">P1164</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sqrt[3]{1+x^{2}}-\sqrt[4]{1+x^{3}}\) 与 \(x^{b}\) 是同阶无穷小，求 \(b\)。</p>
+  </div>
+  <div class="answer">答案：\(b=2\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先看结构：两支都是「1 加一个小量」的方根，阶数由各自展开的最低次幂决定，不能把两根先近似成 1 再相减。按二项式展开写到各自首个非零项：</p>
+    \[
+    (1+x^{2})^{1/3}=1+\frac{x^{2}}{3}-\frac{x^{4}}{9}+\cdots,\qquad
+    (1+x^{3})^{1/4}=1+\frac{x^{3}}{4}+\cdots
+    \]
+    <p>相减时常数项 \(1-1\) 抵消，剩下的最低次是左支的二次项；右支最低只到三次，比二次高一阶，在定阶这一轮不参与开口：</p>
+    \[
+    \sqrt[3]{1+x^{2}}-\sqrt[4]{1+x^{3}}=\frac{x^{2}}{3}-\frac{x^{3}}{4}+o(x^{3})
+    \]
+    <p>用比值极限确认阶数与系数，极限非零即同阶：</p>
+    \[
+    \lim_{x\to0}\frac{\sqrt[3]{1+x^{2}}-\sqrt[4]{1+x^{3}}}{x^{2}}=\frac{1}{3}\neq0
+    \]
+    <p>故 \(b=2\)，主部 \(+\dfrac{x^{2}}{3}\)。这里定阶的是幂次低的一方，系数是该方根的指数 \(1/3\)，不是两根指数相减得到的数。数值抽查 \(x=0.05\) 得 \(8.01\times10^{-4}\)，与 \(\dfrac{x^{2}}{3}=8.33\times10^{-4}\) 相差约百分之四，偏差来自三次项与四次修正项。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(1/3\) 与 \(1/4\) 当成同一幂次上的系数先约掉，误判两支二次项抵消、差为更高阶。② 盯着右支的 \(x^{3}\) 项作答，把阶数写成 \(3\)，没有按「低次者胜」取左支的二次项。③ 把根指数 \(3,4\) 与根号内的幂次 \(2,3\) 混在一起读，展开时内幂代错。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>两根异幂相减是判阶题的常见形态，考卷里既可配参数问「与 \(x^{k}\) 同阶求 \(k\)」，也可做成 \(\dfrac{\sqrt[3]{1+x^{2}}-\sqrt[4]{1+x^{3}}}{x^{2}}\) 的分式极限题，答案就是系数 \(1/3\)。同族走向是交叉根次：左根内幂高、右根内幂低时，定阶方换到另一侧，符号随之翻转。判阶手法不变，先各展到首个非零项，再比谁的幂次更低。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，求极限 \(\displaystyle\lim_{x\to0}\frac{\sqrt[5]{1+x^{2}}-\sqrt[3]{1+x^{4}}}{x^{2}}\)。</p>
+    <p class="var-ans">答案：二阶，主部 \(\dfrac{x^{2}}{5}\)，极限值 \(\dfrac{1}{5}\)。五次根贡献 \(x^{2}/5\)，三次根内幂为 \(4\) 只出 \(x^{4}/3\)，低次二次项单独定阶，除以 \(x^{2}\) 后比值即该系数。</p>
+  </div>
+</article>
+
+<article class="q" id="q3991">
+  <div class="q-head">
+    <span class="qno">第 170 题</span>
+    <span class="qtype">求参 · 反三角与正弦差</span>
+    <span class="qsrc">P1164</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\arctan(x)-\sin(x)\) 与 \(x^{p}\) 是同阶无穷小，求 \(p\)。</p>
+  </div>
+  <div class="answer">答案：\(p=3\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>这题的抓手是两支都从同一个一次项 \(x\) 出发，一次项抵消之后才轮到三次项开口。反正切与正弦的展开都只有奇次幂，偶次项本来就不存在，不是展开时被忽略掉的：</p>
+    \[
+    \arctan x=x-\frac{x^{3}}{3}+\frac{x^{5}}{5}-\cdots,\qquad
+    \sin x=x-\frac{x^{3}}{6}+\frac{x^{5}}{120}-\cdots
+    \]
+    <p>逐项相减，一次项 \(x-x=0\)，三次系数是 \(-\dfrac{1}{3}\) 减去 \(-\dfrac{1}{6}\)：</p>
+    \[
+    \arctan x-\sin x=\left(-\frac{1}{3}+\frac{1}{6}\right)x^{3}+o(x^{3})=-\frac{x^{3}}{6}+o(x^{3})
+    \]
+    <p>比值极限同时给出阶数与系数：</p>
+    \[
+    \lim_{x\to0}\frac{\arctan x-\sin x}{x^{3}}=-\frac{1}{6}\neq0
+    \]
+    <p>故 \(p=3\)，主部 \(-\dfrac{x^{3}}{6}\)。负号来自两支三次项同号相减：\(\arctan\) 的 \(-1/3\) 比 \(\sin\) 的 \(-1/6\) 更负，差值落在负侧。五次系数 \(1/5-1/120=23/120\) 只是下一层，不改变三阶的判断。数值抽查 \(x=0.05\) 得 \(-2.08\times10^{-5}\)，与 \(-\dfrac{x^{3}}{6}=-2.08\times10^{-5}\) 基本贴合，残差正是这一五次项留下的。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 认 \(\arctan x\) 与 \(\sin x\) 一阶等价、相减为零，答不出阶数；实际上一阶相同只说明更低阶不出现，三次系数仍要逐项对。② 把三次系数记成 \(-1/3\)，漏掉减去正弦三次项 \(-1/6\) 这一步。③ 以为展开里缺的偶次项是被「忽略」的，其实反正切与正弦级数本就只含奇次幂，判阶时不能按缺项去找补。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「反函数对相减」是考研高频结构，同族配对还有 \(\arcsin x-\sin x\)、\(x-\arctan x\)、\(\tan x-\arctan x\)，判断路径一致：先核一次项是否相同，再比三次系数。考卷形态以参数题「与 \(x^{n}\) 同阶求 \(n\)」为主，也可改成求 \(\dfrac{\arctan x-\sin x}{x^{3}}\) 的极限，答案即三次系数。把内层换成 \(x^{2}\)、\(x^{3}\) 时，阶数按内层次数成倍抬高。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\arctan x-\sin x+\dfrac{x^{3}}{6}\) 与 \(x^{p}\) 是同阶无穷小，求 \(p\) 与主部。</p>
+    <p class="var-ans">答案：\(p=5\) 阶，主部 \(\dfrac{23x^{5}}{120}\)。原式三次主部为 \(-x^{3}/6\)，加上 \(x^{3}/6\) 后三次项对消，剩五次系数 \(1/5-1/120=23/120\)；这是「减去下一层截断考更高阶」的典型走法。</p>
+  </div>
+</article>
+
+<article class="q" id="q3992">
+  <div class="q-head">
+    <span class="qno">第 171 题</span>
+    <span class="qtype">求参 · 双层嵌套</span>
+    <span class="qsrc">P1164</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\ln(1+\sin x^{2})-\sin(\ln(1+x^{2}))\) 与 \(x^{q}\) 是同阶无穷小，求 \(q\)。</p>
+  </div>
+  <div class="answer">答案：\(q=8\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两支的关系是同一组函数在「对数包正弦」与「正弦包对数」里互换嵌套位置，直接在 \(x\) 上展开层数太多，先令 \(u=x^{2}\)，压成关于 \(u\) 的差：</p>
+    \[
+    \ln(1+\sin u)-\sin(\ln(1+u))
+    \]
+    <p>左支先写 \(\sin u=u-\dfrac{u^{3}}{6}+\cdots\) 再套对数；右支先写 \(\ln(1+u)=u-\dfrac{u^{2}}{2}+\dfrac{u^{3}}{3}-\dfrac{u^{4}}{4}+\cdots\) 再套正弦。两支各算到四次：</p>
+    \[
+    \ln(1+\sin u)=u-\frac{u^{2}}{2}+\frac{u^{3}}{6}-\frac{u^{4}}{12}+\cdots
+    \]
+    \[
+    \sin(\ln(1+u))=u-\frac{u^{2}}{2}+\frac{u^{3}}{6}+0\cdot u^{4}+\cdots
+    \]
+    <p>前三次逐项相同，四次上左支是 \(-1/12\)、右支为零，差值的首个非零项落在四次：</p>
+    \[
+    \ln(1+\sin u)-\sin(\ln(1+u))=-\frac{u^{4}}{12}+o(u^{4})=-\frac{x^{8}}{12}+o(x^{8})
+    \]
+    <p>故 \(q=8\)，主部 \(-\dfrac{x^{8}}{12}\)。右支四次项为零，是因为正弦自身只取到三次幂，对数的四次项经平方回头贡献时两路正好抵消。比值极限为 \(-1/12\)。数值抽查 \(x=0.05\) 得 \(-3.24\times10^{-12}\)，与 \(-\dfrac{x^{8}}{12}=-3.26\times10^{-12}\) 相差不到百分之一。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只算到 \(u^{3}\) 看到两支都是 \(u-u^{2}/2+u^{3}/6\) 就宣布恒等，答不出阶数；四次项必须继续展开。② 漏掉 \(-1/4\) 这一路，对数四次项与正弦三次幂在右支交汇，少算一路就会把四次系数算错。③ 换元后忘记 \(u=x^{2}\)，把 \(u^{4}\) 误写成 \(x^{4}\)，阶数少乘一倍。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>双层嵌套是本段系数最容易丢项的一类，考卷里常以高参数阶出现，判断时先换元压到单层函数，再按「内层展开—外层代入—逐项对消」走两遍。其他换位互包配对路径相同。内幂换成 \(x^{3}\)、\(x^{4}\) 时，首个非零项的幂次按内层次数乘倍。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\ln(1+\sin x^{3})-\sin(\ln(1+x^{3}))\) 与 \(x^{q}\) 是同阶无穷小，求 \(q\) 与主部。</p>
+    <p class="var-ans">答案：\(q=12\) 阶，主部 \(-\dfrac{x^{12}}{12}\)。令 \(u=x^{3}\)，首个非零项仍是 \(-u^{4}/12\)，换回 \(x\) 即 \(-x^{12}/12\)；内幂由 \(2\) 换 \(3\)，阶数八乘二分之三得十二。</p>
+  </div>
+</article>
+
+<article class="q" id="q3993">
+  <div class="q-head">
+    <span class="qno">第 172 题</span>
+    <span class="qtype">求参 · 幂指比无穷远</span>
+    <span class="qsrc">P1165</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to\infty\) 时，\(\left(1+\dfrac{1}{x}+\dfrac{1}{x^{2}}+\dfrac{1}{x^{3}}\right)^{x}-e\) 与 \(\dfrac{1}{x^{r}}\) 是同阶无穷小，求 \(r\)。</p>
+  </div>
+  <div class="answer">答案：\(r=1\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>把式子摊开看：这是 \(x\to\infty\) 的幂指比，底数趋于 1、指数趋于无穷，不能直接把底数近似成 1。令 \(u=1/x\)，先取对数把指数搬下来：</p>
+    \[
+    \ln L=x\ln(1+u+u^{2}+u^{3})=\frac{1}{u}\ln(1+u+u^{2}+u^{3})
+    \]
+    <p>对数展开到二次即可，乘回 \(1/u\) 后正好对应 \(u\) 的一次项：</p>
+    \[
+    \ln(1+u+u^{2}+u^{3})=u+\frac{u^{2}}{2}+\frac{u^{3}}{3}+\cdots
+    \]
+    \[
+    \ln L=1+\frac{u}{2}+\frac{u^{2}}{3}+\cdots
+    \]
+    <p>还原指数，前因子在 \(u=0\) 处取值为 \(e\)：</p>
+    \[
+    L=e\cdot\exp\left(\frac{u}{2}+\cdots\right)=e\left(1+\frac{u}{2}+\cdots\right),\qquad L-e\sim\frac{e}{2}u=\frac{e}{2x}
+    \]
+    <p>故 \(r=1\)，主部 \(\dfrac{e}{2x}\)。定阶看 \(u\) 的最低次，系数里的 \(1/2\) 来自底数二次项与对数展开 \(-u^{2}/2\) 的合并，不是 \(1\)。数值抽查 \(x=100\) 得 \(1.37\times10^{-2}\)，与 \(\dfrac{e}{2x}=1.36\times10^{-2}\) 相差约百分之一，高阶残差来自 \(u^{2}\) 一路。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 多因子时只保留 \(u\) 的一次项，却把系数算成 \(1\)：底数里的 \(1/x^{2}\) 与对数的平方项合并后，一次系数是 \(1/2\)。② 把 \(r\) 与 \(u=1/x\) 的幂次混为一谈，看到底数有三项就答高阶。③ 还原指数时漏掉前因子 \(e\)，把主部写成 \(u/2\) 而不是 \(eu/2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>幂指比在 \(x\to\infty\) 处的判阶是极限题的难点型，标准动作就是取对数降指数：先算 \(\ln L\) 偏离常数多少，再用 \(e^{z}-1\sim z\) 还原。考卷里既可配参数问 \(1/x^{r}\) 的阶，也可直接求 \(x\left[(1+\cdots)^{x}-e\right]\) 的极限，答案即系数乘 \(e\)。底数各项系数改变时，阶数不变、主部系数随之重算。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to\infty\) 时，\(\left(1+\dfrac{1}{x}+\dfrac{2}{x^{2}}\right)^{x}-e\) 与 \(\dfrac{1}{x^{r}}\) 是同阶无穷小，求 \(r\) 与主部。</p>
+    <p class="var-ans">答案：\(r=1\) 阶，主部 \(\dfrac{3e}{2x}\)。令 \(u=1/x\)，\(\ln(1+u+2u^{2})=u+\dfrac{3}{2}u^{2}+\cdots\)，还原后 \(L-e\sim e\cdot\dfrac{3}{2}u\)；阶数仍由 \(u\) 的一次项定，系数随底数二次项改变。</p>
+  </div>
+</article>
+
+<article class="q" id="q3994">
+  <div class="q-head">
+    <span class="qno">第 173 题</span>
+    <span class="qtype">求参 · 根式交叉</span>
+    <span class="qsrc">P1165</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sqrt{1+x^{3}}-\sqrt[3]{1+x^{2}}\) 与 \(x^{s}\) 是同阶无穷小，求 \(s\)。</p>
+  </div>
+  <div class="answer">答案：\(s=2\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先看两支各出几次：左支根号里是 \(x^{3}\)，右支立方根里是 \(x^{2}\)，内幂不同，两支的最低次也不同。按二项式展开写到首个非零项：</p>
+    \[
+    \sqrt{1+x^{3}}=1+\frac{x^{3}}{2}+\cdots,\qquad
+    \sqrt[3]{1+x^{2}}=1+\frac{x^{2}}{3}-\frac{x^{4}}{9}+\cdots
+    \]
+    <p>相减后常数抵消，右支的二次项更低，单独定阶，左支的三次项只是下一层：</p>
+    \[
+    \sqrt{1+x^{3}}-\sqrt[3]{1+x^{2}}=-\frac{x^{2}}{3}+\frac{x^{3}}{2}+o(x^{3})
+    \]
+    <p>比值极限确认阶数与系数：</p>
+    \[
+    \lim_{x\to0}\frac{\sqrt{1+x^{3}}-\sqrt[3]{1+x^{2}}}{x^{2}}=-\frac{1}{3}\neq0
+    \]
+    <p>故 \(s=2\)，主部 \(-\dfrac{x^{2}}{3}\)。负号来自被减的右支：右支在前一项是正的 \(x^{2}/3\)，被整体减掉后留在负侧。左支的三次项 \(x^{3}/2\) 比二次高一阶，在定阶这一轮只是陪衬，不能反过来拿它定阶。数值抽查 \(x=0.05\) 得 \(-7.70\times10^{-4}\)，与 \(-\dfrac{x^{2}}{3}=-8.33\times10^{-4}\) 相差约百分之八，残差由三次项撑大。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 凭印象认「平方根比立方根强」先取左支的 \(x^{3}\)，误判三阶；实际上定阶只比内幂高低，与根的次数无关。② 符号写成正号，忘了二次项来自被减的右支。③ 系数张冠李戴，把左支的 \(1/2\) 安到二次项上，二次项系数应是右支的 \(1/3\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>交叉根式与第 170 题同属一族，差别在定阶方换到另一侧、符号翻转。考卷里常配参数问阶，也可写成两个根式相减除以指定幂次的极限题，考系数符号。判断时把两根的内幂与根指数分开列，先比内幂定阶，再取该支的根指数作系数。内幂对调、根次换配都只是这把钥匙的变体。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sqrt{1+x^{4}}-\sqrt[4]{1+x^{2}}\) 与 \(x^{s}\) 是同阶无穷小，求 \(s\) 与主部。</p>
+    <p class="var-ans">答案：\(s=2\) 阶，主部 \(-\dfrac{x^{2}}{4}\)。平方根内幂为 \(4\) 只出 \(x^{4}/2\)，四次根内幂为 \(2\) 贡献 \(x^{2}/4\)，低次二次项来自被减的右支，系数带负号。</p>
+  </div>
+</article>
+
+<article class="q" id="q3995">
+  <div class="q-head">
+    <span class="qno">第 174 题</span>
+    <span class="qtype">求参 · 正弦乘余弦</span>
+    <span class="qsrc">P1165</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sin(x^{3})-x^{3}\cos(x^{2})\) 与 \(x^{t}\) 是同阶无穷小，求 \(t\)。</p>
+  </div>
+  <div class="answer">答案：\(t=7\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>这题要盯住被 \(x^{3}\) 乘住的余弦：表面上两支都从 \(x^{3}\) 出发，但余弦的二次项乘上外面的 \(x^{3}\) 后会抬出一个新的低次项。两支分别展开：</p>
+    \[
+    \sin(x^{3})=x^{3}-\frac{x^{9}}{6}+\cdots,\qquad
+    \cos(x^{2})=1-\frac{x^{4}}{2}+\frac{x^{8}}{24}+\cdots
+    \]
+    <p>余弦只含偶次幂，正弦只含奇次幂，这是级数本身的缺项，不是省略。把余弦乘回 \(x^{3}\)：</p>
+    \[
+    x^{3}\cos(x^{2})=x^{3}-\frac{x^{7}}{2}+\frac{x^{11}}{24}+\cdots
+    \]
+    <p>两个 \(x^{3}\) 抵消后，首个非零项是余弦二次项贡献的 \(x^{7}\)，系数为正：</p>
+    \[
+    \sin(x^{3})-x^{3}\cos(x^{2})=\frac{x^{7}}{2}-\frac{x^{9}}{6}+\cdots
+    \]
+    <p>比值极限确认结果：</p>
+    \[
+    \lim_{x\to0}\frac{\sin(x^{3})-x^{3}\cos(x^{2})}{x^{7}}=\frac{1}{2}\neq0
+    \]
+    <p>故 \(t=7\)，主部 \(+\dfrac{x^{7}}{2}\)。七次项全部来自余弦那一支，正弦自身的下一项要到九次，不能把正弦的 \(-1/6\) 与余弦的 \(-1/2\) 拉到同一层相加。数值抽查 \(x=0.05\) 得 \(3.90\times10^{-10}\)，与 \(\dfrac{x^{7}}{2}=3.91\times10^{-10}\) 基本贴合。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只展开正弦，看见两支的 \(x^{3}\) 相消就答差为零或「高阶但不定阶」，没去乘余弦的二次项。② 把余弦二次项系数 \(-1/2\) 与正弦三次项系数 \(-1/6\) 错放到同一幂次上相加。③ 把正弦自己的九次项 \(-x^{9}/6\) 当成首个非零项，漏看余弦乘出的七次项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「正弦折叠项减去同幂乘余弦」是固定手法族，本段后面的第 183、190、199 题都是同一结构换内幂。考卷里以参数题为主，阶数等于外层幂加余弦内层的二次幂；系数只由余弦二次项给出。做题时先写出余弦的偶次展开，再逐项乘回外层幂，最后与正弦的奇次项对齐比阶。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sin(x^{2})-x^{2}\cos(x^{3})\) 与 \(x^{t}\) 是同阶无穷小，求 \(t\) 与主部。</p>
+    <p class="var-ans">答案：\(t=6\) 阶，主部 \(-\dfrac{x^{6}}{6}\)。\(\sin(x^{2})=x^{2}-x^{6}/6+\cdots\)，而 \(x^{2}\cos(x^{3})=x^{2}+o(x^{6})\)，余弦二次项乘出的是 \(x^{8}\)，首项低了一层，于是六次项由正弦自身给出，系数为负。</p>
+  </div>
+</article>
+
+<article class="q" id="q3996">
+  <div class="q-head">
+    <span class="qno">第 175 题</span>
+    <span class="qtype">求参 · 对数与反正弦对消</span>
+    <span class="qsrc">P1165</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\ln(1+x^{4})-x^{2}\arcsin(x^{2})\) 与 \(x^{u}\) 是同阶无穷小，求 \(u\)。</p>
+  </div>
+  <div class="answer">答案：\(u=8\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两支的首项先对上：对数支从 \(x^{4}\) 起，反正弦支外面乘了 \(x^{2}\)，首项也是 \(x^{4}\)，抵消之后才看八次项。分别展开：</p>
+    \[
+    \ln(1+x^{4})=x^{4}-\frac{x^{8}}{2}+\frac{x^{12}}{3}+\cdots
+    \]
+    \[
+    \arcsin(x^{2})=x^{2}+\frac{x^{6}}{6}+\cdots,\qquad
+    x^{2}\arcsin(x^{2})=x^{4}+\frac{x^{8}}{6}+\cdots
+    \]
+    <p>反正弦只含奇次幂，对内层 \(u=x^{2}\) 是 \(u+u^{3}/6+\cdots\)，没有偶次项。两支 \(x^{4}\) 抵消，八次系数相减：</p>
+    \[
+    \ln(1+x^{4})-x^{2}\arcsin(x^{2})=-\frac{x^{8}}{2}-\frac{x^{8}}{6}+o(x^{8})=-\frac{2x^{8}}{3}+o(x^{8})
+    \]
+    <p>比值极限确认阶数：</p>
+    \[
+    \lim_{x\to0}\frac{\ln(1+x^{4})-x^{2}\arcsin(x^{2})}{x^{8}}=-\frac{2}{3}\neq0
+    \]
+    <p>故 \(u=8\)，主部 \(-\dfrac{2x^{8}}{3}\)。系数 \(-2/3\) 是 \(-1/2\) 与 \(+1/6\) 相减的结果，右支八次项符号为正，相减后绝对值变大。数值抽查 \(x=0.1\) 得 \(-6.67\times10^{-9}\)，与 \(-\dfrac{2x^{8}}{3}=-6.67\times10^{-9}\) 贴合到四位有效数字。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只取对数的 \(x^{4}\) 项，认定两支相等、差为更高阶，没有继续展到八次。② 把反正弦的 \(x^{6}/6\) 当成主项答六阶，这一项被外面的 \(x^{2}\) 乘出 \(x^{8}\)，阶数要乘回外层幂。③ 符号取反：右支八次项是正的，减去一个正数使负侧系数加重。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「对数折叠项减去带外幂的反三角」是本段后半段的主线结构，第 186、191、200 题沿这条线变化外幂与内幂。考卷里常配参数问阶，也可做成分式极限问八次系数。判断时先对齐两支首项是否同阶抵消，再分别写下一层系数，注意反三角级数只有奇次、对数级数从一次起全次都有。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\ln(1+x^{4})-x^{2}\sin(x^{2})\) 与 \(x^{u}\) 是同阶无穷小，求 \(u\) 与主部。</p>
+    <p class="var-ans">答案：\(u=8\) 阶，主部 \(-\dfrac{x^{8}}{3}\)。把反正弦换成同族的正弦：\(\sin(x^{2})=x^{2}-x^{6}/6+\cdots\)，乘 \(x^{2}\) 得 \(x^{4}-x^{8}/6\)，与对数支相减后八次系数为 \(-1/2+1/6=-1/3\)，阶数不变而系数改变。</p>
+  </div>
+</article>
+
+<article class="q" id="q3997">
+  <div class="q-head">
+    <span class="qno">第 176 题</span>
+    <span class="qtype">求参 · 异阶并置</span>
+    <span class="qsrc">P1165</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(e^{x^{3}}-\cos(x^{4})\) 与 \(x^{v}\) 是同阶无穷小，求 \(v\)。</p>
+  </div>
+  <div class="answer">答案：\(v=3\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先看结构：两支分别是指数包 \(x^{3}\) 与余弦包 \(x^{4}\)，展开的起步次数本就不同，不存在同次项对消的环节；判阶时各自写出最低次项，次数低的一支直接定阶，不必硬去找相消。</p>
+    <p>指数按 \(e^{u}=1+u+\dfrac{u^{2}}{2}+\cdots\) 展开，幅角 \(u=x^{3}\)：</p>
+    \[
+    e^{x^{3}}=1+x^{3}+\frac{x^{6}}{2}+o(x^{6})
+    \]
+    <p>余弦是偶函数，只含偶次幂，幅角换成 \(x^{4}\) 后首项修正落在八次，六次层本来就没有项，不能凭空补一个出来：</p>
+    \[
+    \cos(x^{4})=1-\frac{x^{8}}{2}+o(x^{8})
+    \]
+    <p>两支常数 \(1\) 抵消后，指数支的三次项无人对消，相减后首项即三次：</p>
+    \[
+    e^{x^{3}}-\cos(x^{4})=x^{3}+\frac{x^{6}}{2}+o(x^{6})
+    \]
+    <p>比值收敛到非零常数：</p>
+    \[
+    \lim_{x\to0}\frac{e^{x^{3}}-\cos(x^{4})}{x^{3}}=1\neq0
+    \]
+    <p>故 \(v=3\)，主部 \(+x^{3}\)。数值抽查 \(x=0.01\) 时差式约 \(1.000001\times10^{-6}\)，与主部 \(x^{3}=1.0\times10^{-6}\) 几乎重合，比值为 \(1.0000\)；下一个六次项留下的偏差在第六位小数以后。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 套用「相减必升阶」的习惯，硬找同次项对消，跳过三次项去答六阶或八阶；本题两支本就异阶，低阶一方直接定阶。② 把余弦的首项修正 \(x^{8}/2\) 当成整支首项，忽略指数支的 \(x^{3}\) 已经先出。③ 常数项抵消后留下的是指数支三次项，不要当成更高阶残量。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>异阶并置不需要逐项对消，分别读两支最低次、取较小者即可。考卷常配 \(e^{x^{k}}-\cos(x^{\ell})\) 这类对比结构，阶数由内层幂次较小的一支决定，也可反过来做成分式极限。本段 184、189、192、198 是同一走向，只换内层数字。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(e^{x^{3}}-x^{3}-\cos(x^{4})\) 与 \(x^{v}\) 是同阶无穷小，求 \(v\) 及主部。</p>
+    <p class="var-ans">答案：\(v=6\) 阶，主部 \(\dfrac{x^{6}}{2}\)。先把指数支的三次项人为减掉，指数支残留 \(x^{6}/2\)；余弦支首项修正落在八次，不参与六次层，故阶数抬到六，主部为正。</p>
+  </div>
+</article>
+
+<article class="q" id="q3998">
+  <div class="q-head">
+    <span class="qno">第 177 题</span>
+    <span class="qtype">求参 · 同底根式差</span>
+    <span class="qsrc">P1165</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sqrt[4]{1+x^{4}}-\sqrt[6]{1+x^{4}}\) 与 \(x^{w}\) 是同阶无穷小，求 \(w\)。</p>
+  </div>
+  <div class="answer">答案：\(w=4\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>这题的抓手是：两个根式共用同一个底数 \(1+x^{4}\)，差别只在根指数；不必有理化，直接按二项式展开写到一次项，系数取两根指数倒数之差即可。</p>
+    <p>令 \(u=x^{4}\)，二项式展开 \((1+u)^{\alpha}=1+\alpha u+o(u)\)，两支分别取 \(\alpha=\dfrac14\) 与 \(\alpha=\dfrac16\)：</p>
+    \[
+    \sqrt[4]{1+x^{4}}=1+\frac{x^{4}}{4}+o(x^{4}),\qquad
+    \sqrt[6]{1+x^{4}}=1+\frac{x^{4}}{6}+o(x^{4})
+    \]
+    <p>常数 \(1\) 抵消，四次项取系数差：</p>
+    \[
+    \sqrt[4]{1+x^{4}}-\sqrt[6]{1+x^{4}}
+    =\left(\frac14-\frac16\right)x^{4}+o(x^{4})
+    =\frac{x^{4}}{12}+o(x^{4})
+    \]
+    <p>两支四次项同次但系数不等，不会对消；二次修正层属于 \(o(x^{4})\)，不会压低首项次数。比值校验：</p>
+    \[
+    \lim_{x\to0}\frac{\sqrt[4]{1+x^{4}}-\sqrt[6]{1+x^{4}}}{x^{4}}=\frac{1}{12}\neq0
+    \]
+    <p>故 \(w=4\)，主部 \(+\dfrac{x^{4}}{12}\)。数值抽查 \(x=0.01\) 时差式约 \(8.3333\times10^{-10}\)，与主部 \(x^{4}/12=8.3333\times10^{-10}\) 完全贴合。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 看到同底就把两个根式当成同一函数，相减写为 \(0\)；根指数不同，倒数系数不同，不会抵消。② 系数差做成 \(1/4+1/6\)，或误写成 \(1/24\)；正确是 \(1/4-1/6=1/12\)。③ 按根指数大小判阶答六阶；阶数由内层 \(u=x^{4}\) 决定，两支同为四次，系数差非零故定四阶。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>同底双根式差是二项式展开的基础型：常数项抵消后首项次数等于内层幂次，主部系数为两根指数倒数之差。卷面更换根指数对或内层 \(x^{k}\) 时，阶数随内层次数抬高；系数相等则首项抵消，再往二次修正层找。本段 185、188 是同型延伸。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sqrt[4]{1+x^{6}}-\sqrt[6]{1+x^{6}}\) 与 \(x^{w}\) 是同阶无穷小，求 \(w\) 及主部。</p>
+    <p class="var-ans">答案：\(w=6\) 阶，主部 \(\dfrac{x^{6}}{12}\)。令 \(u=x^{6}\)，系数差仍是 \(1/4-1/6=1/12\)；内层由四次换成六次，阶数随内层次数抬到六，系数不变。</p>
+  </div>
+</article>
+
+<article class="q" id="q3999">
+  <div class="q-head">
+    <span class="qno">第 178 题</span>
+    <span class="qtype">求参 · 嵌套换位</span>
+    <span class="qsrc">P1166</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sin(\tan(x^{2}))-\tan(\sin(x^{2}))\) 与 \(x^{y}\) 是同阶无穷小，求 \(y\)。</p>
+  </div>
+  <div class="answer">答案：\(y=14\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先换元看内层：题面是换位复合那一组母题，只是内层从 \(x\) 换成 \(x^{2}\)；先在 \(u\to0\) 的尺度上记住换位对的主部，再把 \(u=x^{2}\) 代回去，幂次按内层次数乘倍。</p>
+    <p>母题两支展开写到七次：\(\tan u=u+\dfrac{u^{3}}{3}+\cdots\)，\(\sin u=u-\dfrac{u^{3}}{6}+\cdots\)，逐项对齐后一至五次相同，七次残项为：</p>
+    \[
+    \sin(\tan u)-\tan(\sin u)=-\frac{u^{7}}{30}+o(u^{7})
+    \]
+    <p>代回 \(u=x^{2}\)，内层两次方把七次抬成十四次：</p>
+    \[
+    \sin(\tan(x^{2}))-\tan(\sin(x^{2}))
+    =-\frac{(x^{2})^{7}}{30}+o((x^{2})^{7})
+    =-\frac{x^{14}}{30}+o(x^{14})
+    \]
+    <p>方向提醒：本题是 \(\sin(\tan)-\tan(\sin)\) 一侧，主部带负号；反向对 \(\tan(\sin)-\sin(\tan)\) 才带正号。比值校验：</p>
+    \[
+    \lim_{x\to0}\frac{\sin(\tan(x^{2}))-\tan(\sin(x^{2}))}{x^{14}}=-\frac{1}{30}\neq0
+    \]
+    <p>故 \(y=14\)，主部 \(-\dfrac{x^{14}}{30}\)。数值抽查 \(x=0.1\) 时差式约 \(-3.3337\times10^{-16}\)，与主部 \(-x^{14}/30=-3.3333\times10^{-16}\) 相差万分之一，偏差来自更高阶修正。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(x^{2}\) 只代进其中一层，复合关系断裂，展开次数全部错位。② 答七阶：只记住换位对在 \(u\) 尺度是七阶，忘了 \(u=x^{2}\) 后阶数要乘二，七乘二得十四。③ 符号写正：方向是 \(\sin(\tan)-\tan(\sin)\)，主部为负，与反向对混同就会把符号带反。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>嵌套换位是本段高阶形态的固定延伸：母题在 \(u\) 尺度定阶 \(n\)，内层换 \(x^{k}\) 后阶数变 \(nk\)，符号随母题保留。卷面常以参数题出现，也可做成除以 \(x^{14}\) 的极限题。本段 187、194 是内层换 \(x^{3}\)、\(x^{4}\) 的同型题。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sin(\tan(x^{5}))-\tan(\sin(x^{5}))\) 与 \(x^{y}\) 是同阶无穷小，求 \(y\) 及主部。</p>
+    <p class="var-ans">答案：\(y=35\) 阶，主部 \(-\dfrac{x^{35}}{30}\)。母题七次残项 \(-u^{7}/30\) 代 \(u=x^{5}\)，阶数 \(7\times5=35\)，负号保留；内层幂次每加一，阶数按七倍放大。</p>
+  </div>
+</article>
+
+<article class="q" id="q4000">
+  <div class="q-head">
+    <span class="qno">第 179 题</span>
+    <span class="qtype">求参 · 嵌套指数壳</span>
+    <span class="qsrc">P1166</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(e^{\sin(x^{3})}-e^{\arcsin(x^{3})}\) 与 \(x^{z}\) 是同阶无穷小，求 \(z\)。</p>
+  </div>
+  <div class="answer">答案：\(z=9\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>这题的抓手是：与指数包壳母题同型，外层同为指数，内层换成 \(x^{3}\)；先在 \(u\) 尺度上把「提公因子、转指数差」走通，得到三次主部，再代回内层乘幂。</p>
+    <p>提取公因子 \(e^{\arcsin(x^{3})}\)，差式转成公因子乘指数差：</p>
+    \[
+    e^{\sin(x^{3})}-e^{\arcsin(x^{3})}
+    =e^{\arcsin(x^{3})}\left(e^{\sin(x^{3})-\arcsin(x^{3})}-1\right)
+    \]
+    <p>内层两支展开到三次：\(\sin u=u-\dfrac{u^{3}}{6}+\cdots\)，\(\arcsin u=u+\dfrac{u^{3}}{6}+\cdots\)，相减得 \(-u^{3}/3\)。令 \(u=x^{3}\)：</p>
+    \[
+    \sin(x^{3})-\arcsin(x^{3})=-\frac{x^{9}}{3}+o(x^{9})
+    \]
+    <p>前因子 \(e^{\arcsin(x^{3})}\to1\)，括号内用 \(e^{w}-1\sim w\) 收口：</p>
+    \[
+    e^{\sin(x^{3})}-e^{\arcsin(x^{3})}\sim -\frac{x^{9}}{3}
+    \]
+    <p>比值校验：</p>
+    \[
+    \lim_{x\to0}\frac{e^{\sin(x^{3})}-e^{\arcsin(x^{3})}}{x^{9}}=-\frac{1}{3}\neq0
+    \]
+    <p>故 \(z=9\)，主部 \(-\dfrac{x^{9}}{3}\)。数值抽查 \(x=0.1\) 时差式约 \(-3.3367\times10^{-10}\)，与主部 \(-x^{9}/3=-3.3333\times10^{-10}\) 相差约千分之一，偏差来自前因子展开带出的十二次修正层。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 答三阶：只看内层在 \(u\) 尺度的三次，漏乘内层次数三，三乘三得九。② 系数写成 \(-1/3\) 却把阶写成六，系数与阶数错位。③ 两支分别用 \(e^{u}-1\sim u\) 后取一次项相消判为零，没有走到三次残项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>同外函数包两内函数的结构，阶数由内层差决定，外层导数在公共极限处只给系数。内层换 \(x^{k}\) 后阶数为母题阶数乘 \(k\)；本段 195 是内层换 \(x^{5}\) 的延伸。考卷里也会把外层换成对数、反正切，走同一把钥匙：先提成外层在内层差处的增量，再读内层差的最低次。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(e^{\arctan x}-e^{\arcsin x}\) 与 \(x^{z}\) 是同阶无穷小，求 \(z\) 及主部。</p>
+    <p class="var-ans">答案：\(z=3\) 阶，主部 \(-\dfrac{x^{3}}{2}\)。提公因子后指数差为 \(\arctan x-\arcsin x=(-1/3-1/6)x^{3}=-x^{3}/2\)，外层前因子趋于 \(1\)；阶数仍为三，系数由两支三次系数之差给出。</p>
+  </div>
+</article>
+
+<article class="q" id="q4001">
+  <div class="q-head">
+    <span class="qno">第 180 题</span>
+    <span class="qtype">求参 · 嵌套对数壳</span>
+    <span class="qsrc">P1166</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\ln(1+\tan(x^{2}))-\ln(1+\sin(x^{2}))\) 与 \(x^{m}\) 是同阶无穷小，求 \(m\)。</p>
+  </div>
+  <div class="answer">答案：\(m=6\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两支的关系是：与对数差母题同族，外层为对数、内层嵌了 \(x^{2}\)；先用对数差并成比值，在 \(u\) 尺度读出三次主部，再折回 \(x\) 的幂次。</p>
+    <p>两个对数相减不必分别展开，先用差商恒等式并成一个对数：</p>
+    \[
+    \ln(1+\tan(x^{2}))-\ln(1+\sin(x^{2}))
+    =\ln\frac{1+\tan(x^{2})}{1+\sin(x^{2})}
+    \]
+    <p>比值写成「\(1\) 加小量」，小量为两支之差除以 \(1+\sin(x^{2})\)，分母在零点趋于 \(1\)：</p>
+    \[
+    \frac{\tan(x^{2})-\sin(x^{2})}{1+\sin(x^{2})}\sim\tan(x^{2})-\sin(x^{2})\sim\frac{x^{6}}{2}
+    \]
+    <p>令 \(u=x^{2}\)，母题 \(\tan u-\sin u\sim u^{3}/2\)，折回 \(u^{3}=x^{6}\)。再用 \(\ln(1+z)\sim z\) 收口：</p>
+    \[
+    \ln\frac{1+\tan(x^{2})}{1+\sin(x^{2})}\sim\frac{x^{6}}{2}
+    \]
+    <p>比值校验：</p>
+    \[
+    \lim_{x\to0}\frac{\ln(1+\tan(x^{2}))-\ln(1+\sin(x^{2}))}{x^{6}}=\frac{1}{2}\neq0
+    \]
+    <p>故 \(m=6\)，主部 \(+\dfrac{x^{6}}{2}\)。数值抽查 \(x=0.1\) 时差式约 \(4.9506\times10^{-7}\)，与主部 \(x^{6}/2=5.0\times10^{-7}\) 相差约百分之一，差量来自八次修正项。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只代内层不乘幂次，答三阶；\(u=x^{2}\)，\(u^{3}\) 折回是 \(x^{6}\)。② 两个对数各自等价成正切、正弦后只取一次项，见 \(x^{2}-x^{2}=0\) 就停在对消层。③ 符号写成负；正切与正弦的三次修正一正一负，相减后系数相加为正。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数差并比值是通用动作，内层换 \(x^{k}\) 后阶数为母题三次乘 \(k\)。本段 196 是内层换 \(x^{3}\) 的同型延伸。卷面也常做成分式极限，答案就是主部系数；外层换成反正切、反函数配对时，手法仍是先并比值再读小量最低次。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\ln(1+\arcsin x)-\ln(1+\sin x)\) 与 \(x^{m}\) 是同阶无穷小，求 \(m\) 及主部。</p>
+    <p class="var-ans">答案：\(m=3\) 阶，主部 \(\dfrac{x^{3}}{3}\)。比值小量为 \(\arcsin x-\sin x=x^{3}/6+x^{3}/6=x^{3}/3\)，对数等价回小量本身；外层前因子趋于 \(1\)，阶数三次，系数为两次正修正之和。</p>
+  </div>
+</article>
+
+<article class="q" id="q4002">
+  <div class="q-head">
+    <span class="qno">第 181 题</span>
+    <span class="qtype">求参 · 交叉根次错位</span>
+    <span class="qsrc">P1166</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sqrt[3]{1+x^{4}}-\sqrt[4]{1+x^{3}}\) 与 \(x^{n}\) 是同阶无穷小，求 \(n\)。</p>
+  </div>
+  <div class="answer">答案：\(n=3\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先看结构：两支是根指数与内层次数交叉搭配的根式，各自最低次修正落在不同幂上，不存在同次对消；谁的内层幂次低，谁先出首项。</p>
+    <p>左支内层是 \(x^{4}\)，按 \((1+u)^{\alpha}=1+\alpha u+o(u)\) 展开：</p>
+    \[
+    \sqrt[3]{1+x^{4}}=1+\frac{x^{4}}{3}+o(x^{4})
+    \]
+    <p>右支内层是 \(x^{3}\)，首项修正落在三次：</p>
+    \[
+    \sqrt[4]{1+x^{3}}=1+\frac{x^{3}}{4}+o(x^{3})
+    \]
+    <p>相减时三次项只来自右支，原式次序为左减右，右支首项被减成负号；四次项由左支补上，属于更高一层：</p>
+    \[
+    \sqrt[3]{1+x^{4}}-\sqrt[4]{1+x^{3}}
+    =-\frac{x^{3}}{4}+\frac{x^{4}}{3}+o(x^{4})
+    \]
+    <p>比值校验：</p>
+    \[
+    \lim_{x\to0}\frac{\sqrt[3]{1+x^{4}}-\sqrt[4]{1+x^{3}}}{x^{3}}=-\frac{1}{4}\neq0
+    \]
+    <p>故 \(n=3\)，主部 \(-\dfrac{x^{3}}{4}\)。数值抽查 \(x=0.02\) 时差式约 \(-1.9467\times10^{-6}\)，与主部 \(-x^{3}/4=-2.0000\times10^{-6}\) 比值 \(0.973\)，剩余偏差正是左支 \(x^{4}/3\) 层留下的。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 认「外层次数低的先出」，按根指数三比四小就取左支；定阶看的是内层幂次，右支内层 \(x^{3}\) 更低。② 符号写正：左减右，右支首项 \(+x^{3}/4\) 被减成 \(-x^{3}/4\)。③ 把左支的 \(x^{4}/3\) 当首项答四阶，忽略右支 \(x^{3}\) 已经先出现。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>交叉根次型的判阶规则固定为「比内层幂次，低者定阶」，系数取低次支的根指数倒数，符号随两支次序。卷面会更换根指数对与内层幂次对，本段 170、174、193、197 是同族；也可放进分式题，分母配低次支的幂，比值即主部系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sqrt[5]{1+x^{6}}-\sqrt[3]{1+x^{5}}\) 与 \(x^{n}\) 是同阶无穷小，求 \(n\) 及主部。</p>
+    <p class="var-ans">答案：\(n=5\) 阶，主部 \(-\dfrac{x^{5}}{3}\)。左支最低次是 \(x^{6}/5\)，右支最低次是 \(x^{5}/3\)；右支内层幂次低，左减右后首项为 \(-x^{5}/3\)，六次项只作高阶修正。</p>
+  </div>
+</article>
+
+<article class="q" id="q4003">
+  <div class="q-head">
+    <span class="qno">第 182 题</span>
+    <span class="qtype">求参 · 正弦配余弦</span>
+    <span class="qsrc">P1166</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sin(x^{4})-x^{4}\cos(x^{3})\) 与 \(x^{o}\) 是同阶无穷小，求 \(o\)。</p>
+  </div>
+  <div class="answer">答案：\(o=10\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两支的关系是：一支正弦包 \(x^{4}\)，一支 \(x^{4}\) 乘余弦包 \(x^{3}\)；四次主项先对消，首项来自余弦二次修正被 \(x^{4}\) 抬上去的那一层。</p>
+    <p>正弦把 \(x^{4}\) 整体代入 \(\sin u=u-u^{3}/6+\cdots\)，自身修正落在十二次：</p>
+    \[
+    \sin(x^{4})=x^{4}-\frac{x^{12}}{6}+o(x^{12})
+    \]
+    <p>余弦展开到二次，再乘回 \(x^{4}\)：</p>
+    \[
+    x^{4}\cos(x^{3})=x^{4}\left(1-\frac{x^{6}}{2}+o(x^{6})\right)
+    =x^{4}-\frac{x^{10}}{2}+o(x^{10})
+    \]
+    <p>四次项抵消后，余弦支的二次修正被原式负号翻正；正弦侧在十次层没有项，首项只由余弦支出：</p>
+    \[
+    \sin(x^{4})-x^{4}\cos(x^{3})=\frac{x^{10}}{2}+o(x^{10})
+    \]
+    <p>比值校验：</p>
+    \[
+    \lim_{x\to0}\frac{\sin(x^{4})-x^{4}\cos(x^{3})}{x^{10}}=\frac{1}{2}\neq0
+    \]
+    <p>故 \(o=10\)，主部 \(+\dfrac{x^{10}}{2}\)。数值抽查 \(x=0.1\) 时差式约 \(4.9833\times10^{-11}\)，与主部 \(x^{10}/2=5.0000\times10^{-11}\) 相差约千分之三，偏差来自十二次项。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 与同型题混在一起，只看正弦的 \(x^{4}\) 项就判两支相等、差为零；正弦自身修正落在十二次，十次层要靠余弦支出。② 余弦二次项系数 \(-1/2\) 被 \(x^{4}\) 乘得 \(-x^{10}/2\)，原式带负号后翻正，符号写反成 \(-x^{10}/2\)。③ 漏乘余弦幅角 \(x^{3}\) 的次数，误判修正落在八次或九次。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「正弦配多项式乘余弦」是标准对齐型：先写内层幂次，三角展开整体平移再乘回多项式，首项由余弦二次修正与多项式幂次合并决定。本段 175、190、199 是同型题；卷面也可做成分式极限，比值即主部系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sin(x^{7})-x^{7}\cos(x^{6})\) 与 \(x^{o}\) 是同阶无穷小，求 \(o\) 及主部。</p>
+    <p class="var-ans">答案：\(o=19\) 阶，主部 \(\dfrac{x^{19}}{2}\)。余弦二次项 \(-x^{12}/2\) 乘 \(x^{7}\) 得 \(-x^{19}/2\)，原式相减后翻正；正弦自身修正落在二十一次，不参与十九次层。</p>
+  </div>
+</article>
+
+<article class="q" id="q4004">
+  <div class="q-head">
+    <span class="qno">第 183 题</span>
+    <span class="qtype">求参 · 指数压余弦</span>
+    <span class="qsrc">P1166</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(e^{x^{4}}-\cos(x^{5})\) 与 \(x^{p}\) 是同阶无穷小，求 \(p\)。</p>
+  </div>
+  <div class="answer">答案：\(p=4\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两支并排摆着，但首项幂次本就不同：指数支 \(e^{x^{4}}\) 从四次项起，余弦支 \(\cos(x^{5})\) 要到十次项才出第一个非零项。这种异阶并置不需要找对消，低阶一支直接定阶。</p>
+    <p>先把两支各自展开到首个非零项：</p>
+    \[
+    e^{x^{4}}=1+x^{4}+\frac{x^{8}}{2}+o(x^{8}),
+    \]
+    \[
+    \cos(x^{5})=1-\frac{x^{10}}{2}+o(x^{10}).
+    \]
+    <p>余弦只含偶次幂，把 \(x^{5}\) 代进去后最低非零项是 \(x^{10}/2\)；\(x^{5}\) 的一次、三次项在余弦级数里本来就不存在，不是人为删掉的项。两式相减，常数项 \(1-1=0\)，四次项只来自指数支：</p>
+    \[
+    e^{x^{4}}-\cos(x^{5})=x^{4}+\frac{x^{8}}{2}+\frac{x^{10}}{2}+o(x^{10}),
+    \]
+    <p>比值收敛到非零常数：</p>
+    \[
+    \lim_{x\to0}\frac{e^{x^{4}}-\cos(x^{5})}{x^{4}}=1\neq0.
+    \]
+    <p>故 \(p=4\)，主部 \(+x^{4}\)。数值抽查 \(x=0.01\) 得 \(1.0\times10^{-8}\)，与主部 \(x^{4}=1.0\times10^{-8}\) 完全贴合，偏差来自八次、十次修正项。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 硬套「相减必升阶」，在两支里寻找对消项，误答五阶或八阶；本题两支首项幂次不同，对消无从发生。② 把 \(\cos(x^{5})\) 的首项记成 \(x^{5}/2\)：余弦只含偶次，代入 \(x^{5}\) 后最低非零项是 \(x^{10}/2\)，奇次项本来就没有。③ 系数抄成 \(1/2\)：\(e^{u}\) 的内层一次项系数为 \(1\)，主部就是 \(x^{4}\)，不要再乘余弦展开的 \(1/2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>异阶并置族的定阶规则固定：比较两支首项幂次，较小者定阶，主部系数取低阶支的首项系数。卷面常以「与 \(x^{n}\) 同阶求 \(n\)」的参数题出现，也可改成分式极限，问分母该配几次幂。同族的 \(e^{x^{m}}-\cos(x^{n})\) 只要指数支更低阶，结论都由 \(m\) 决定；本段第 177、189、192、198 题是这条线的连续延伸。若两支次序反过来（余弦支更低），阶数就归余弦支，见变式。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(e^{x^{2}}-\cos x\) 与 \(x^{p}\) 是同阶无穷小，求 \(p\) 与主部。</p>
+    <p class="var-ans">答案：\(p=2\) 阶，主部 \(+\dfrac{3x^{2}}{2}\)。展开 \(e^{x^{2}}=1+x^{2}+\dfrac{x^{4}}{2}+\cdots\)、\(\cos x=1-\dfrac{x^{2}}{2}+\dfrac{x^{4}}{24}+\cdots\)，二次系数 \(1+\dfrac{1}{2}=\dfrac{3}{2}\)；这一例两支同到二次，系数相加而非独存。</p>
+  </div>
+</article>
+
+<article class="q" id="q4005">
+  <div class="q-head">
+    <span class="qno">第 184 题</span>
+    <span class="qtype">求参 · 同底异次根</span>
+    <span class="qsrc">P1167</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sqrt[5]{1+x^{5}}-\sqrt[9]{1+x^{5}}\) 与 \(x^{q}\) 是同阶无穷小，求 \(q\)。</p>
+  </div>
+  <div class="answer">答案：\(q=5\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两个根式共用同一个底数 \(1+x^{5}\)，差别只在根指数。令 \(u=x^{5}\to0\)，用二项展开 \((1+u)^{\alpha}=1+\alpha u+o(u)\)，两支的常数项都为 \(1\)，一次内层项分别带各自的根指数系数：</p>
+    \[
+    (1+x^{5})^{1/5}=1+\frac{1}{5}x^{5}+o(x^{5}),\qquad
+    (1+x^{5})^{1/9}=1+\frac{1}{9}x^{5}+o(x^{5}).
+    \]
+    <p>常数项相减为零，首个非零项落在内层幂次 \(x^{5}\) 上，系数是两个根指数的差：</p>
+    \[
+    \sqrt[5]{1+x^{5}}-\sqrt[9]{1+x^{5}}=\left(\frac{1}{5}-\frac{1}{9}\right)x^{5}+o(x^{5})=\frac{4}{45}x^{5}+o(x^{5}).
+    \]
+    <p>比值极限非零：</p>
+    \[
+    \lim_{x\to0}\frac{\sqrt[5]{1+x^{5}}-\sqrt[9]{1+x^{5}}}{x^{5}}=\frac{4}{45}\neq0.
+    \]
+    <p>故 \(q=5\)，主部 \(\dfrac{4x^{5}}{45}\)。阶数由内层幂次 \(5\) 定，与根指数是 \(5\) 还是 \(9\) 无关。数值抽查 \(x=0.01\) 得 \(8.8889\times10^{-12}\)，与主部 \(\dfrac{4x^{5}}{45}=8.8889\times10^{-12}\) 一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 系数通分算错：\(\dfrac{1}{5}-\dfrac{1}{9}=\dfrac{9-5}{45}=\dfrac{4}{45}\)，既不是 \(1/4\)，也不是 \(1/30\)。② 阶数取成根次较大的 \(9\)：两支内层都是 \(x^{5}\)，首项同落五次方，阶数由内层幂次定。③ 把两根当成同一函数判差为零：底数相同不代表根指数相同，一次项系数 \(\alpha\) 不同，差式首项就存在。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>同底根式差是「公因子二项展开」的干净样板，卷面换根指数、换内层幂次都不改变手法：系数永远是两个 \(\alpha\) 之差，阶数永远看底数里 \(x\) 的幂次。考卷位置有两类：一是同阶参数题定阶，二是改成分式极限直接问首项系数。另一支是交叉根式（两支底数幂次不同），低次者胜，见本段第 170、174、182、193、197 题，判据不要混用。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sqrt[3]{1+x^{3}}-\sqrt[5]{1+x^{3}}\) 与 \(x^{q}\) 是同阶无穷小，求 \(q\) 与主部。</p>
+    <p class="var-ans">答案：\(q=3\) 阶，主部 \(\dfrac{2x^{3}}{15}\)。二项展开一次项系数 \(1/3-1/5=2/15\)，阶数由内层 \(x^{3}\) 定；两根指数不同，一次系数就不同，差式首项不为零。</p>
+  </div>
+</article>
+
+<article class="q" id="q4006">
+  <div class="q-head">
+    <span class="qno">第 185 题</span>
+    <span class="qtype">求参 · 对数配反正弦</span>
+    <span class="qsrc">P1167</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\ln(1+x^{6})-x^{3}\arcsin(x^{3})\) 与 \(x^{r}\) 是同阶无穷小，求 \(r\)。</p>
+  </div>
+  <div class="answer">答案：\(r=12\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两支的首个非零项都压在 \(x^{6}\)，先对消，再往下一层查到十二次。对数按 \(\ln(1+u)=u-\dfrac{u^{2}}{2}+o(u^{2})\) 展开：</p>
+    \[
+    \ln(1+x^{6})=x^{6}-\frac{x^{12}}{2}+o(x^{12}).
+    \]
+    <p>反正弦只有奇次项，\(\arcsin u=u+\dfrac{u^{3}}{6}+o(u^{3})\)，取 \(u=x^{3}\) 后再乘前因子 \(x^{3}\)：</p>
+    \[
+    x^{3}\arcsin(x^{3})=x^{3}\left(x^{3}+\frac{x^{9}}{6}+o(x^{9})\right)=x^{6}+\frac{x^{12}}{6}+o(x^{12}).
+    \]
+    <p>注意 \(u^{3}=x^{9}\) 还要乘外壳 \(x^{3}\) 才落到 \(x^{12}\)，这支不存在单独的 \(x^{9}\) 项。两支六次系数都是 \(1\)，对消后十二次系数相减：</p>
+    \[
+    \ln(1+x^{6})-x^{3}\arcsin(x^{3})=\left(-\frac{1}{2}-\frac{1}{6}\right)x^{12}+o(x^{12})=-\frac{2}{3}x^{12}+o(x^{12}).
+    \]
+    <p>比值收敛到非零常数：</p>
+    \[
+    \lim_{x\to0}\frac{\ln(1+x^{6})-x^{3}\arcsin(x^{3})}{x^{12}}=-\frac{2}{3}\neq0.
+    \]
+    <p>故 \(r=12\)，主部 \(-\dfrac{2x^{12}}{3}\)。数值抽查 \(x=0.05\) 得 \(-1.6276\times10^{-16}\)，与主部 \(-\dfrac{2x^{12}}{3}=-1.6276\times10^{-16}\) 一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(\arcsin\) 的 \(u^{3}/6\) 直接当成 \(x^{9}\) 项，误答九阶；\(u^{3}=x^{9}\) 必须再乘外壳 \(x^{3}\) 才落到十二次。② 只取两支的 \(x^{6}\) 项，见系数都是 \(1\) 就宣布差为零；对消之后必须继续展开第二层。③ 符号或系数出错：十二次系数是 \(-1/2\) 减 \(+1/6\)，得 \(-2/3\)，写成 \(+2/3\) 或 \(-1/3\) 都不对。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数与反三角配对、首项对消后升阶，是八到十三阶题的常见结构。判断顺序固定：先比两支首项幂次是否相同，相同则继续展开第二层，再由第二层系数差定阶。卷面换内层幂次就改变阶数，本段第 176、191、200 题是同一条线；另一类考法是放进极限题，按算出的阶数配分母，比值即第二层系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\ln(1+x^{4})-x\arcsin(x^{3})\) 与 \(x^{r}\) 是同阶无穷小，求 \(r\) 与主部。</p>
+    <p class="var-ans">答案：\(r=8\) 阶，主部 \(-\dfrac{x^{8}}{2}\)。\(\ln(1+x^{4})=x^{4}-\dfrac{x^{8}}{2}+\cdots\)，而 \(x\arcsin(x^{3})=x^{4}+\dfrac{x^{10}}{6}+\cdots\)；四次项对消后右支要到十次，低阶来自左支的 \(-x^{8}/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q4007">
+  <div class="q-head">
+    <span class="qno">第 186 题</span>
+    <span class="qtype">求参 · 换位嵌套代换</span>
+    <span class="qsrc">P1167</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sin(\tan(x^{3}))-\tan(\sin(x^{3}))\) 与 \(x^{s}\) 是同阶无穷小，求 \(s\)。</p>
+  </div>
+  <div class="answer">答案：\(s=21\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>这是换位相减式套上一层内层代换。令 \(u=x^{3}\)，先在 \(u\to0\) 的尺度上看清换位式的首项：三次、五次项两支逐项相同，首个非零项出现在七次，系数为 \(-1/30\)：</p>
+    \[
+    \sin(\tan u)-\tan(\sin u)=-\frac{u^{7}}{30}+o(u^{7}).
+    \]
+    <p>再把 \(u=x^{3}\) 代回，七次项随之乘到内层次数的三倍：</p>
+    \[
+    \sin(\tan(x^{3}))-\tan(\sin(x^{3}))=-\frac{(x^{3})^{7}}{30}+o((x^{3})^{7})=-\frac{x^{21}}{30}+o(x^{21}).
+    \]
+    <p>比值极限非零：</p>
+    \[
+    \lim_{x\to0}\frac{\sin(\tan(x^{3}))-\tan(\sin(x^{3}))}{x^{21}}=-\frac{1}{30}\neq0.
+    \]
+    <p>故 \(s=21\)，主部 \(-\dfrac{x^{21}}{30}\)。方向需要盯住：本题是 \(\sin(\tan)-\tan(\sin)\)，主部带负号；反序 \( \tan(\sin)-\sin(\tan)\) 才是正号。数值抽查 \(x=0.05\) 得 \(-1.5895\times10^{-29}\)，与主部 \(-x^{21}/30=-1.5895\times10^{-29}\) 一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 忘乘内层次数，答成七阶：\(u=x^{3}\)，\(u^{7}\) 落到 \(x^{21}\)，阶数是 \(7\times3=21\)。② 方向取反写成正号：\(\sin(\tan)-\tan(\sin)\) 主部为负，反序才为 \(+x^{7}/30\)。③ 只展开到三次、五次项见两支相同就停手，判不出七次首项；换位题必须查到首项对消结束的那一层。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>换位嵌套是同族高阶题的载体：内层换成 \(x^{2}\) 得十四阶，换成本题的 \(x^{3}\) 得二十一阶，换成 \(x^{4}\) 得二十八阶，阶数一律是 \(7\times\) 内层次数，系数 \(-1/30\) 不变。卷面也可做成极限题，问二十一次分母下的比值；其余换位对（\(\arctan\) 与 \(\sin\) 互换等）判断手法相同，都是先看三次项是否拉平，再逐层加幂。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sin(\tan(x^{6}))-\tan(\sin(x^{6}))\) 与 \(x^{s}\) 是同阶无穷小，求 \(s\) 与主部。</p>
+    <p class="var-ans">答案：\(s=42\) 阶，主部 \(-\dfrac{x^{42}}{30}\)。换位式本身固定为七阶：内层取 \(u=x^{m}\) 后，七次项落到 \(u^{7}=x^{7m}\)，阶数即 \(7m\)；此处 \(m=6\)，故 \(7\times6=42\)，系数 \(-1/30\) 不变，方向仍为 \(\sin(\tan)-\tan(\sin)\)，符号保持负。</p>
+  </div>
+</article>
+
+<article class="q" id="q4008">
+  <div class="q-head">
+    <span class="qno">第 187 题</span>
+    <span class="qtype">求参 · 邻近次根差</span>
+    <span class="qsrc">P1167</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sqrt[6]{1+x^{6}}-\sqrt[7]{1+x^{6}}\) 与 \(x^{t}\) 是同阶无穷小，求 \(t\)。</p>
+  </div>
+  <div class="answer">答案：\(t=6\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>与第 185 题同族，同底 \((1+x^{6})\) 的两个邻近次根。令 \(u=x^{6}\)，二项展开各取一次内层项：</p>
+    \[
+    (1+x^{6})^{1/6}=1+\frac{x^{6}}{6}+o(x^{6}),\qquad
+    (1+x^{6})^{1/7}=1+\frac{x^{6}}{7}+o(x^{6}).
+    \]
+    <p>常数项对消，首项系数为两根指数之差：</p>
+    \[
+    \sqrt[6]{1+x^{6}}-\sqrt[7]{1+x^{6}}=\left(\frac{1}{6}-\frac{1}{7}\right)x^{6}+o(x^{6})=\frac{x^{6}}{42}+o(x^{6}).
+    \]
+    <p>比值极限非零：</p>
+    \[
+    \lim_{x\to0}\frac{\sqrt[6]{1+x^{6}}-\sqrt[7]{1+x^{6}}}{x^{6}}=\frac{1}{42}\neq0.
+    \]
+    <p>故 \(t=6\)，主部 \(\dfrac{x^{6}}{42}\)。阶数由内层幂次 \(6\) 定，根指数 \(7\) 不参与定阶。数值抽查 \(x=0.01\) 得 \(2.3810\times10^{-14}\)，与主部 \(x^{6}/42=2.3810\times10^{-14}\) 一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 系数算对却把阶写成 \(7\)：\(1/6-1/7=1/42\) 没错，阶数看内层 \(x^{6}\)，不看较大的根次 \(7\)。② 通分算错：公分母 \(42\)，分子 \(7-6=1\)，既不是 \(1/6-1/7=1\)，也不是 \(1/36\)。③ 以为两根次接近，差就是更高阶小量：只要根指数 \(\alpha\) 不同，一次项系数就不同，首项仍是 \(x^{6}\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>邻近次根差是同底根式差的数字简化版，考场里常和交叉根式混排。判阶顺序：先看底数里 \(x\) 的幂次，系数再看两个根指数之差；分式极限题里分母配 \(x^{6}\)，比值即 \(1/42\)。把底幂换成 \(x^{8}\)、根指数换成 \(4\) 与 \(3\) 时，系数差为负，主部符号随之反转，见变式。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sqrt[4]{1+x^{8}}-\sqrt[3]{1+x^{8}}\) 与 \(x^{t}\) 是同阶无穷小，求 \(t\) 与主部。</p>
+    <p class="var-ans">答案：\(t=8\) 阶，主部 \(-\dfrac{x^{8}}{12}\)。系数 \(1/4-1/3=-1/12\)，阶数由内层 \(x^{8}\) 定；根次大的一侧一次系数更小，相减后主部为负。</p>
+  </div>
+</article>
+
+<article class="q" id="q4009">
+  <div class="q-head">
+    <span class="qno">第 188 题</span>
+    <span class="qtype">求参 · 低阶项独存</span>
+    <span class="qsrc">P1167</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(e^{x^{5}}-\cos(x^{6})\) 与 \(x^{u}\) 是同阶无穷小，求 \(u\)。</p>
+  </div>
+  <div class="answer">答案：\(u=5\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>指数支与余弦支再次错开阶数：指数支 \(e^{x^{5}}\) 从五次项起，余弦支 \(\cos(x^{6})\) 十二次才出第一个非零项，五次项无人对消。两支分别展开：</p>
+    \[
+    e^{x^{5}}=1+x^{5}+\frac{x^{10}}{2}+o(x^{10}),\qquad
+    \cos(x^{6})=1-\frac{x^{12}}{2}+o(x^{12}).
+    \]
+    <p>余弦偶次折叠后首项是 \(2\times6=12\) 次，五次、七次项在余弦级数里本来就没有。相减后常数项归 \(0\)，五次项只来自指数支：</p>
+    \[
+    e^{x^{5}}-\cos(x^{6})=x^{5}+\frac{x^{10}}{2}+\frac{x^{12}}{2}+o(x^{12}).
+    \]
+    <p>比值收敛到非零常数：</p>
+    \[
+    \lim_{x\to0}\frac{e^{x^{5}}-\cos(x^{6})}{x^{5}}=1\neq0.
+    \]
+    <p>故 \(u=5\)，主部 \(+x^{5}\)。数值抽查 \(x=0.01\) 得 \(1.0\times10^{-10}\)，与主部 \(x^{5}=1.0\times10^{-10}\) 贴合，余下偏差来自十次项。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(\cos(x^{6})\) 的 \(x^{12}/2\) 当成首项，误答十二阶；余弦偶次折叠后首项是 \(12\) 次，远高于指数支的五次。② 套相消思路在两支里找五次项配对，误判差为高阶；两支首项幂次不同，低阶一支直接定阶。③ 系数抄成 \(1/2\)：\(e^{u}\) 的内层一次项系数为 \(1\)，主部就是 \(x^{5}\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>与第 184 题同一族，只是幂次整体后移。\(e^{x^{m}}-\cos(x^{n})\) 的定阶规则：比较 \(m\) 与 \(2n\)，较小者定阶，主部取低阶支首项系数。卷面常出现在选择题里判断「是否同阶」，也可配成分式极限问分母幂次。若把独存首项主动减掉，阶数会抬到指数支的二次项，见变式。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(e^{x^{5}}-\cos(x^{6})-x^{5}\) 与 \(x^{u}\) 是同阶无穷小，求 \(u\) 与主部。</p>
+    <p class="var-ans">答案：\(u=10\) 阶，主部 \(+\dfrac{x^{10}}{2}\)。减去独存的五次首项后，下一项来自 \(e^{x^{5}}\) 的二次项 \(x^{10}/2\)；余弦支的 \(x^{12}\) 仍在更高阶，不参与定阶。</p>
+  </div>
+</article>
+
+<article class="q" id="q4010">
+  <div class="q-head">
+    <span class="qno">第 189 题</span>
+    <span class="qtype">求参 · 余弦乘幂壳</span>
+    <span class="qsrc">P1167</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sin(x^{5})-x^{5}\cos(x^{4})\) 与 \(x^{v}\) 是同阶无穷小，求 \(v\)。</p>
+  </div>
+  <div class="answer">答案：\(v=13\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>外壳 \(x^{5}\) 把余弦的二次项抬高了幂次。先把两支按各自级数展开：正弦只含奇次，</p>
+    \[
+    \sin(x^{5})=x^{5}-\frac{x^{15}}{6}+o(x^{15}),
+    \]
+    <p>余弦只含偶次，二次项经外壳相乘后落次为 \(5+2\times4=13\)：</p>
+    \[
+    x^{5}\cos(x^{4})=x^{5}\left(1-\frac{x^{8}}{2}+o(x^{8})\right)=x^{5}-\frac{x^{13}}{2}+o(x^{13}).
+    \]
+    <p>首项 \(x^{5}\) 对消；原式是正弦减外壳余弦，余弦二次项自带负号，减完反成正的十三次项：</p>
+    \[
+    \sin(x^{5})-x^{5}\cos(x^{4})=\frac{x^{13}}{2}+o(x^{13}).
+    \]
+    <p>比值收敛到非零常数：</p>
+    \[
+    \lim_{x\to0}\frac{\sin(x^{5})-x^{5}\cos(x^{4})}{x^{13}}=\frac{1}{2}\neq0.
+    \]
+    <p>故 \(v=13\)，主部 \(+\dfrac{x^{13}}{2}\)。数值抽查 \(x=0.05\) 得 \(6.0984\times10^{-18}\)，与主部 \(x^{13}/2=6.1035\times10^{-18}\) 相差约千分之一，偏差来自十五次项。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只看首项 \(x^{5}\) 对消就判差为零或答「更高阶」；必须把余弦二次项乘进外壳再看落次。② 阶数取错：本题余弦内层是 \(x^{4}\)，二次项 \(x^{8}\) 乘外壳 \(x^{5}\) 落 \(x^{13}\)；若把内层记成 \(x^{3}\)，落次就变成十一阶。③ 符号搞反：原式是正弦减外壳余弦，余弦二次项带负号，减完为 \(+x^{13}/2\)；对照第 175、183 题时先分清外壳幂次与内层幂次各是多少。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「正弦减外壳乘余弦」是第 175、183、199 题的同一条线：\(\sin(x^{a})-x^{a}\cos(x^{b})\)，首项 \(x^{a}\) 对消后，余弦二次项 \(-x^{2b}/2\) 乘外壳落到 \(x^{a+2b}\)。卷面改两个幂次即改阶数，也可做成极限题问十三次分母下的比值 \(1/2\)；与换位族、指数余弦并置族混排时，先认外壳结构再动手展开。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sin(x^{2})-x^{2}\cos x\) 与 \(x^{v}\) 是同阶无穷小，求 \(v\) 与主部。</p>
+    <p class="var-ans">答案：\(v=4\) 阶，主部 \(+\dfrac{x^{4}}{2}\)。外壳 \(x^{2}\)，\(\cos x\) 的二次项 \(-x^{2}/2\) 乘外壳落 \(x^{4}\)；\(\sin(x^{2})\) 的下一项在 \(x^{6}\)，不参与首阶定阶。</p>
+  </div>
+</article>
+
+<article class="q" id="q4011">
+  <div class="q-head">
+    <span class="qno">第 190 题</span>
+    <span class="qtype">求参 · 双支次项比低</span>
+    <span class="qsrc">P1168</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\ln(1+x^{7})-x^{4}\arcsin(x^{3})\) 与 \(x^{w}\) 是同阶无穷小，求 \(w\)。</p>
+  </div>
+  <div class="answer">答案：\(w=13\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两支先展开到首项之后的下一个非零项，再比次低幂。左支对数、右支反正弦乘幂：</p>
+    \[
+    \ln(1+x^{7})=x^{7}-\frac{x^{14}}{2}+o(x^{14}),
+    \]
+    <p>反正弦只有奇次幂，取 \(u=x^{3}\)，展开后乘上 \(x^{4}\)：</p>
+    \[
+    \arcsin(x^{3})=x^{3}+\frac{x^{9}}{6}+o(x^{9}),\qquad
+    x^{4}\arcsin(x^{3})=x^{7}+\frac{x^{13}}{6}+o(x^{13}).
+    \]
+    <p>两支 \(x^{7}\) 系数都是 \(1\)，相减对消。往下读：左支首项 \(x^{14}\)，右支首项 \(x^{13}\)；反正弦下一个奇次幂已是 \(x^{19}\)，\(x^{14}\) 本无项。合并：</p>
+    \[
+    \ln(1+x^{7})-x^{4}\arcsin(x^{3})=-\frac{x^{13}}{6}-\frac{x^{14}}{2}+o(x^{14}).
+    \]
+    <p>首非零项是 \(x^{13}\)，系数 \(-\dfrac{1}{6}\)，比值极限非零：</p>
+    \[
+    \lim_{x\to0}\frac{\ln(1+x^{7})-x^{4}\arcsin(x^{3})}{x^{13}}=-\frac{1}{6}\neq0.
+    \]
+    <p>故 \(w=13\)，主部 \(-\dfrac{x^{13}}{6}\)，低阶项来自右支。抽查 \(x=0.1\) 得 \(-2.17\times10^{-14}\)，与主部 \(-1.67\times10^{-14}\) 同号同阶，比值 \(-0.217\) 趋于 \(-1/6\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 认定对数支一定先出次低项，对消后直接取 \(x^{14}\) 答 \(w=14\)；右支反正弦下一项是 \(x^{13}\)，更低。② 符号取反：右支 \(+\dfrac{x^{13}}{6}\) 被整体减去，主部为负。③ 忽略反正弦只出奇次幂，以为右支也有 \(x^{14}\) 项对消；该项本不存在。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「首项对消后比次低项」是常见判阶形态，考卷多做成「与 \(x^{k}\) 同阶求 \(k\)」或分子除以 \(x^{13}\) 的极限题，答案即系数 \(-1/6\)。同族结构 \(\ln(1+x^{m})-x^{p}\arcsin(x^{q})\)：先核对 \(m=p+q\) 对消首项，再比较 \(2m\) 与 \(p+3q\) 谁小，阶数由较小者决定。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，求 \(\lim\dfrac{\ln(1+x^{5})-x^{2}\arcsin(x^{3})}{x^{10}}\)。</p>
+    <p class="var-ans">答案：\(10\) 阶，主部 \(-\dfrac{x^{10}}{2}\)，极限 \(-\dfrac{1}{2}\)。对数支 \(x^{5}-\dfrac{x^{10}}{2}\)，右支 \(x^{2}\arcsin(x^{3})=x^{5}+\dfrac{x^{11}}{6}+\cdots\)；\(x^{5}\) 对消后 \(x^{10}\) 更低，系数 \(-1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q4012">
+  <div class="q-head">
+    <span class="qno">第 191 题</span>
+    <span class="qtype">求参 · 幂阶直读</span>
+    <span class="qsrc">P1168</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(e^{x^{6}}-\cos(x^{7})\) 与 \(x^{y}\) 是同阶无穷小，求 \(y\)。</p>
+  </div>
+  <div class="answer">答案：\(y=6\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两支幂次本就不同，不存在相消升阶，低阶一方直接定阶；先读出各自首项再比较。指数函数全次展开：</p>
+    \[
+    e^{x^{6}}=1+x^{6}+\frac{x^{12}}{2}+o(x^{12}),
+    \]
+    <p>余弦只含偶次幂，取 \(u=x^{7}\)，平方后是 \(x^{14}\)，展开里没有 \(x^{7}\)、\(x^{21}\) 这类奇次项：</p>
+    \[
+    \cos(x^{7})=1-\frac{x^{14}}{2}+o(x^{14}).
+    \]
+    <p>两支常数项 \(1\) 相减归零，指数支的 \(x^{6}\) 无人对消，余弦支首个非零修正要到 \(x^{14}\) 才出现：</p>
+    \[
+    e^{x^{6}}-\cos(x^{7})=x^{6}+\frac{x^{12}}{2}+\frac{x^{14}}{2}+o(x^{14}).
+    \]
+    <p>首非零项是 \(x^{6}\)，系数为 \(1\)，比值极限非零：</p>
+    \[
+    \lim_{x\to0}\frac{e^{x^{6}}-\cos(x^{7})}{x^{6}}=1\neq0.
+    \]
+    <p>故 \(y=6\)，主部 \(+x^{6}\)，谁的首项幂次低谁定阶。数值抽查 \(x=0.1\) 时差式约 \(1.000\times10^{-6}\)，与 \(x^{6}=10^{-6}\) 吻合，比值 \(1.0000005\)，偏差来自 \(x^{12}/2\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 套「相减必升阶」硬找对消，误答 \(7\) 阶或 \(14\) 阶；两支本就异阶，没有首项对消。② 把余弦支 \(-x^{14}/2\) 当首项，忽略指数支更低的 \(x^{6}\) 早已独立存在。③ 以为常数项 \(1\) 相减后还要再升一次阶；归零后指数支留下的 \(x^{6}\) 就是首项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>异阶并置族的判阶只有一步：读出两支最低非零幂，取较低者。卷面常把幂次 \(m,n\) 重新配对成参数题，也可做成 \(\dfrac{e^{x^{m}}-\cos(x^{n})}{x^{m}}\) 问极限值；把余弦换成 \(1/(1+x^{n})\) 这类几何展开，次序不变。只有两支首项幂次相同时，才需要继续查系数是否对消。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(e^{x^{2}}-\dfrac{1}{1+x^{3}}\) 是 \(x\) 的几阶无穷小，写出主部。</p>
+    <p class="var-ans">答案：\(2\) 阶，主部 \(+x^{2}\)。指数支 \(e^{x^{2}}=1+x^{2}+x^{4}/2+\cdots\)，几何倒数支 \(1/(1+x^{3})=1-x^{3}+\cdots\)；常数项相消后 \(x^{2}\) 无人对消，\(x^{3}\) 是更高阶修正。</p>
+  </div>
+</article>
+
+<article class="q" id="q4013">
+  <div class="q-head">
+    <span class="qno">第 192 题</span>
+    <span class="qtype">求参 · 交叉根式</span>
+    <span class="qsrc">P1168</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sqrt[7]{1+x^{8}}-\sqrt[8]{1+x^{7}}\) 与 \(x^{z}\) 是同阶无穷小，求 \(z\)。</p>
+  </div>
+  <div class="answer">答案：\(z=7\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先比两支各自展开的最低次幂，二次修正项暂时不必动笔。两个根式都是 \((1+u)^{\alpha}\) 的形式，用二项式展开取一次项：</p>
+    \[
+    (1+x^{8})^{1/7}=1+\frac{x^{8}}{7}+o(x^{8}),
+    \]
+    \[
+    (1+x^{7})^{1/8}=1+\frac{x^{7}}{8}+o(x^{7}).
+    \]
+    <p>左支括号里是 \(x^{8}\)，首项只能到 \(x^{8}\)；右支括号里是 \(x^{7}\)，首项 \(x^{7}\)。根指数大小与括号幂次并不对应，低次者胜出。常数项相消后合并：</p>
+    \[
+    \sqrt[7]{1+x^{8}}-\sqrt[8]{1+x^{7}}=-\frac{x^{7}}{8}+\frac{x^{8}}{7}+o(x^{8}).
+    \]
+    <p>首非零项是 \(x^{7}\)，系数 \(-\dfrac{1}{8}\)，比值极限非零：</p>
+    \[
+    \lim_{x\to0}\frac{\sqrt[7]{1+x^{8}}-\sqrt[8]{1+x^{7}}}{x^{7}}=-\frac{1}{8}\neq0.
+    \]
+    <p>故 \(z=7\)，主部 \(-\dfrac{x^{7}}{8}\)。数值抽查 \(x=0.1\) 时差式约 \(-1.11\times10^{-8}\)，与主部 \(-x^{7}/8=-1.25\times10^{-8}\) 同号；除以 \(x^{7}\) 得 \(-0.111\)，随 \(x\) 缩小趋于 \(-1/8\)，偏差来自下一项 \(x^{8}/7\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 按「括号里指数大的先出」判断，取成 \(8\) 阶；判阶看的是展开后 \(x\) 的幂次，而不是括号里 \(x^{8}\) 与 \(x^{7}\) 谁大。② 符号写成正号：右支 \(+\dfrac{x^{7}}{8}\) 被减去，主部必为负。③ 把两个系数 \(1/7\) 与 \(1/8\) 当成同幂项先约掉，误以为两支一次主项相消为零。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>交叉根式族的通用手法是二项式展开取一次项，比较两支首项幂次，低次者定阶、系数为两支一次系数之差。卷面常把根指数与括号幂次重新配对成参数题，也可把分式 \(\dfrac{\sqrt[m]{1+x^{n}}-\sqrt[n]{1+x^{m}}}{x^{\min(m,n)}}\) 问极限值；同族同底根式相减时两支幂次相同，需另算系数差。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sqrt[5]{1+x^{6}}-\sqrt[6]{1+x^{5}}\) 与 \(x^{z}\) 同阶，求 \(z\) 及主部。</p>
+    <p class="var-ans">答案：\(z=5\)，主部 \(-\dfrac{x^{5}}{6}\)。五次方根支展开到 \(x^{6}/5\)，六次方根支给出 \(x^{5}/6\)；低次的 \(x^{5}\) 项定阶，被减后系数为负。</p>
+  </div>
+</article>
+
+<article class="q" id="q4014">
+  <div class="q-head">
+    <span class="qno">第 193 题</span>
+    <span class="qtype">求参 · 四次换位</span>
+    <span class="qsrc">P1168</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sin(\tan(x^{4}))-\tan(\sin(x^{4}))\) 与 \(x^{a}\) 是同阶无穷小，求 \(a\)。</p>
+  </div>
+  <div class="answer">答案：\(a=28\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先换元 \(u=x^{4}\)，还原成基础换位式，认清基础式阶数与主部后，再把内层次数乘回去。两支展开写到七次：</p>
+    \[
+    \tan u=u+\frac{u^{3}}{3}+\frac{2u^{5}}{15}+\frac{17u^{7}}{315}+\cdots,\quad
+    \sin u=u-\frac{u^{3}}{6}+\frac{u^{5}}{120}-\frac{u^{7}}{5040}+\cdots
+    \]
+    <p>代入两支后一、三、五次项逐项相同，阶数至少到七级；七次系数相减剩 \(-1/30\)：</p>
+    \[
+    \sin(\tan u)-\tan(\sin u)=-\frac{u^{7}}{30}+o(u^{7}).
+    \]
+    <p>代回 \(u=x^{4}\)，内层幂次把阶数整体乘四倍：</p>
+    \[
+    \sin(\tan(x^{4}))-\tan(\sin(x^{4}))=-\frac{(x^{4})^{7}}{30}+o((x^{4})^{7})=-\frac{x^{28}}{30}+o(x^{28}).
+    \]
+    <p>首非零项 \(x^{28}\)，系数 \(-1/30\)，比值非零：</p>
+    \[
+    \lim_{x\to0}\frac{\sin(\tan(x^{4}))-\tan(\sin(x^{4}))}{x^{28}}=-\frac{1}{30}\neq0.
+    \]
+    <p>故 \(a=28\)，主部 \(-\dfrac{x^{28}}{30}\)，次序 \(\sin(\tan)-\tan(\sin)\) 带负号。抽查 \(x=0.35\) 得 \(-5.71\times10^{-15}\)，与主部吻合，比值 \(-0.03335\) 趋于 \(-1/30\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只记基础式七阶，忘了内层 \(x^{4}\) 要把阶数乘四倍，答 \(a=7\)；正确为 \(7\times4=28\)。② 方向取反写成正号：本题 \(\sin(\tan u)-\tan(\sin u)\) 主部为负，反过来才带正号。③ 换元只代进一个函数，另一支仍按 \(u\) 展开，系数阶数都接不上。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>嵌套换位是高阶判阶代表，基础式在三级、五级拉平、七级出首非零项；卷面常把内层换成 \(x^{2}\)、\(x^{3}\)、\(x^{4}\)，阶数按基础阶数乘内层次数放大，系数 \(-1/30\) 不变。既可出参数题，也可做成除以 \(x^{28}\) 的极限题；同族换位对换成反正切、反正弦组合，判断次序相同。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\arctan(\sin x)-\sin(\arctan x)\) 与 \(x^{a}\) 同阶，求 \(a\) 及主部。</p>
+    <p class="var-ans">答案：\(a=7\)，主部 \(-\dfrac{x^{7}}{30}\)。这对反三角换位在一、三、五次项同样拉平，七级系数 \(-1/30\)；未做内层代换，阶数保持七级。</p>
+  </div>
+</article>
+
+<article class="q" id="q4015">
+  <div class="q-head">
+    <span class="qno">第 194 题</span>
+    <span class="qtype">求参 · 双层指数包壳</span>
+    <span class="qsrc">P1168</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(e^{\sin(x^{5})}-e^{\arcsin(x^{5})}\) 与 \(x^{b}\) 是同阶无穷小，求 \(b\)。</p>
+  </div>
+  <div class="answer">答案：\(b=15\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>令 \(u=x^{5}\)，外层是同一个指数函数，两支内层都趋于零；阶数由内层两支的差决定，外层指数在零点取值为 \(1\)，只贡献系数。先把公因子提出来：</p>
+    \[
+    e^{\sin u}-e^{\arcsin u}=e^{\arcsin u}\left(e^{\sin u-\arcsin u}-1\right).
+    \]
+    <p>括号里的指数差先展开，两支一次项相同、三次项相反：</p>
+    \[
+    \sin u-\arcsin u=\left(u-\frac{u^{3}}{6}\right)-\left(u+\frac{u^{3}}{6}\right)+o(u^{3})=-\frac{u^{3}}{3}+o(u^{3}).
+    \]
+    <p>再用 \(e^{z}-1\sim z\) 收口，前因子 \(e^{\arcsin u}\to1\)：</p>
+    \[
+    e^{\sin u}-e^{\arcsin u}\sim 1\cdot\left(-\frac{u^{3}}{3}\right)=-\frac{u^{3}}{3}.
+    \]
+    <p>代回 \(u=x^{5}\)，内层幂次把阶数乘五倍：</p>
+    \[
+    e^{\sin(x^{5})}-e^{\arcsin(x^{5})}=-\frac{x^{15}}{3}+o(x^{15}),\qquad
+    \lim_{x\to0}\frac{e^{\sin(x^{5})}-e^{\arcsin(x^{5})}}{x^{15}}=-\frac{1}{3}\neq0.
+    \]
+    <p>故 \(b=15\)，主部 \(-\dfrac{x^{15}}{3}\)。两个因子各管一件事：前因子趋于常数 \(1\)，真正定阶的是内层差。数值抽查 \(x=0.2\) 时差式约 \(-1.09\times10^{-11}\)，与主部 \(-x^{15}/3\approx-1.09\times10^{-11}\) 吻合。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 漏乘内层次数，只按基础式答 \(3\) 阶；内层 \(x^{5}\)，阶数应为 \(3\times5=15\)。② 两支分别用 \(e^{u}-1\sim u\) 取一次项得 \(u-u=0\) 后卡住，没写到三次项。③ 符号记反：\(\sin\) 三次项 \(-1/6\)、\(\arcsin\) 为 \(+1/6\)，相减必为负，不能写成 \(+x^{15}/3\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「同一外函数套两个内函数」是高频结构：先把外层差提成外函数在内层差处的增量，阶数由内层差决定，系数由外函数在公共极限处的取值决定。卷面常把配对换成 \(\tan\) 与 \(\sin\)、\(\arctan\) 与 \(\arcsin\)；内层再嵌 \(x^{k}\) 时，阶数按基础阶数乘 \(k\) 放大。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(e^{\sin(x^{2})}-e^{\tan(x^{2})}\) 与 \(x^{b}\) 同阶，求 \(b\) 及主部。</p>
+    <p class="var-ans">答案：\(b=6\)，主部 \(-\dfrac{x^{6}}{2}\)。令 \(u=x^{2}\)，内层差 \(\sin u-\tan u=\left(u-\dfrac{u^{3}}{6}\right)-\left(u+\dfrac{u^{3}}{3}\right)=-\dfrac{u^{3}}{2}\)，乘内层次数得 \(-u^{3}/2=-x^{6}/2\)；外层指数在零点取值为 \(1\)，导数不改系数。</p>
+  </div>
+</article>
+
+<article class="q" id="q4016">
+  <div class="q-head">
+    <span class="qno">第 195 题</span>
+    <span class="qtype">求参 · 双层对数包壳</span>
+    <span class="qsrc">P1168</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\ln(1+\tan(x^{3}))-\ln(1+\sin(x^{3}))\) 与 \(x^{c}\) 是同阶无穷小，求 \(c\)。</p>
+  </div>
+  <div class="answer">答案：\(c=9\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>令 \(u=x^{3}\)，两个对数相减先并成一个对数，不必各展开两次。由对数差商恒等式：</p>
+    \[
+    \ln(1+\tan u)-\ln(1+\sin u)=\ln\frac{1+\tan u}{1+\sin u}.
+    \]
+    <p>比值写成「\(1\) 加一个小量」，小量即两支之差除以 \(1+\sin u\)，分母在 \(u\to0\) 时趋于 \(1\)，只是常数因子：</p>
+    \[
+    \frac{1+\tan u}{1+\sin u}=1+\frac{\tan u-\sin u}{1+\sin u},\qquad \tan u-\sin u\sim\frac{u^{3}}{2}.
+    \]
+    <p>于是整个对数等价于这个小量本身（\(\ln(1+z)\sim z\)，\(z\to0\)）：</p>
+    \[
+    \ln\frac{1+\tan u}{1+\sin u}\sim\frac{u^{3}}{2}.
+    \]
+    <p>代回 \(u=x^{3}\)，内层幂次把阶数乘三倍：</p>
+    \[
+    \ln(1+\tan(x^{3}))-\ln(1+\sin(x^{3}))=\frac{x^{9}}{2}+o(x^{9}),\qquad
+    \lim_{x\to0}\frac{\ln(1+\tan(x^{3}))-\ln(1+\sin(x^{3}))}{x^{9}}=\frac{1}{2}\neq0.
+    \]
+    <p>故 \(c=9\)，主部 \(+\dfrac{x^{9}}{2}\)。这条路只算了一次 \(\tan u-\sin u\)，系数 \(1/2\) 正是正切与正弦三次项 \(1/3\) 与 \(1/6\) 之和。数值抽查 \(x=0.1\) 时差式约 \(4.995\times10^{-10}\)，与主部 \(x^{9}/2=5.0\times10^{-10}\) 吻合。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 漏乘内层次数，只按基础式答 \(3\) 阶；内层 \(x^{3}\)，阶数应为 \(3\times3=9\)。② 两个对数各用 \(\ln(1+u)\sim u\) 换成 \(\tan u-\sin u\) 后，又取一次项得 \(u-u=0\)，在一阶停手。③ 符号写成负号：\(\tan u-\sin u\) 三次系数为正，对数包壳不改符号，主部带正号。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数差并成比值是通用动作，凡 \(\ln A-\ln B\) 都该先并再算，省一次展开且不易丢项。卷面可配参数问阶数，也可做成 \(\dfrac{\ln(1+\tan(x^{3}))-\ln(1+\sin(x^{3}))}{x^{9}}\) 的极限题，答案 \(1/2\)。内层换成成对函数时阶数由内层差最低次决定；再嵌 \(x^{k}\)，阶数按基础阶数乘 \(k\) 放大。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\ln(1+\sin x)-\ln(1+\arctan x)\) 与 \(x^{c}\) 同阶，求 \(c\) 及主部。</p>
+    <p class="var-ans">答案：\(c=3\)，主部 \(\dfrac{x^{3}}{6}\)。内层差 \(\sin x-\arctan x=\left(x-\dfrac{x^{3}}{6}\right)-\left(x-\dfrac{x^{3}}{3}\right)=\dfrac{x^{3}}{6}\)，对数差并成比值后压回一级，系数即内层三次系数。</p>
+  </div>
+</article>
+
+<article class="q" id="q4017">
+  <div class="q-head">
+    <span class="qno">第 196 题</span>
+    <span class="qtype">求参 · 交叉根次对置</span>
+    <span class="qsrc">P1169</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sqrt[8]{1+x^{9}}-\sqrt[9]{1+x^{8}}\) 与 \(x^{d}\) 是同阶无穷小，求 \(d\)。</p>
+  </div>
+  <div class="answer">答案：\(d=8\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>两支根式的根指数与内层幂次互相交叉，判阶不能看内层指数大小，只能各自展开到首个非零项，让次数更低的一方定阶；两支常数项都是 \(1\)，相减后自动抵消。</p>
+    <p>第一支根指数为 \(8\)，内层是 \(x^{9}\)，首个非零项落在九次：</p>
+    \[
+    \sqrt[8]{1+x^{9}}=1+\frac{x^{9}}{8}+o(x^{9}),
+    \]
+    <p>第二支根指数为 \(9\)，内层是 \(x^{8}\)，首个非零项落在八次：</p>
+    \[
+    \sqrt[9]{1+x^{8}}=1+\frac{x^{8}}{9}+o(x^{8}).
+    \]
+    <p>两支相减，八次层只有第二支送出的 \(+\dfrac{x^{8}}{9}\)，原式带负号后系数翻为负，第一支九次项只是更高阶修正：</p>
+    \[
+    \sqrt[8]{1+x^{9}}-\sqrt[9]{1+x^{8}}=-\frac{x^{8}}{9}+\frac{x^{9}}{8}+o(x^{9}).
+    \]
+    <p>比值收敛到 \(-\dfrac{1}{9}\)，非零：</p>
+    \[
+    \lim_{x\to0}\frac{\sqrt[8]{1+x^{9}}-\sqrt[9]{1+x^{8}}}{x^{8}}=-\frac{1}{9}\neq0.
+    \]
+    <p>故 \(d=8\)，主部 \(-\dfrac{x^{8}}{9}\)。数值抽查 \(x=0.01\) 得 \(-1.0986\times10^{-17}\)，与 \(-x^{8}/9=-1.1111\times10^{-17}\) 相差约百分之一，偏差来自九次项 \(x^{9}/8\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 按内层指数大小判阶，误取九次答 \(d=9\)；定阶看展开后首项次数，不是内层幂次。② 把两支一次系数 \(\dfrac18\) 与 \(\dfrac19\) 相乘写成 \(1/72\)，主部系数应取根指数倒数 \(1/9\)，不含乘积。③ 误以为两支一次系数相近会先抵消再升高阶：首项次数本就不同，不存在同次相消。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>交叉根式是双根式族里最容易看错次序的形态：根指数小的支，内层幂次往往更大，首项反而靠后；首项次数由内层幂次单独决定，系数才由根指数倒数给出。卷面会把根指数与内层幂次重新配对，判阶动作固定为各写首项、比较次数。同底双根式是另一把钥匙：首项同为一次，系数取根指数倒数之差；这类题也常改写成分式极限，分母配到首项次数即可。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sqrt[5]{1+x^{7}}-\sqrt[7]{1+x^{5}}\) 与 \(x^{d}\) 是同阶无穷小，求 \(d\) 及主部。</p>
+    <p class="var-ans">答案：\(d=5\) 阶，主部 \(-\dfrac{x^{5}}{7}\)。第一支 \(x^{7}/5\) 落在七次，第二支 \(x^{5}/7\) 落在五次，低次者胜；原式带负号，五次系数为 \(-1/7\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q4018">
+  <div class="q-head">
+    <span class="qno">第 197 题</span>
+    <span class="qtype">求参 · 高阶不消</span>
+    <span class="qsrc">P1169</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(e^{x^{7}}-\cos(x^{8})\) 与 \(x^{e}\) 是同阶无穷小，求 \(e\)。</p>
+  </div>
+  <div class="answer">答案：\(e=7\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>这两支在零点本来就不在同一层，展开后不需要寻找相消，低阶一方的首项直接定阶。指数函数 \(e^{u}\) 从 \(u\) 自身起步，余弦 \(\cos u\) 只含偶次幂，两支常数项抵消后，分别看各自的首个非零项落在哪一层。</p>
+    <p>指数支把 \(x^{7}\) 整体代入 \(e^{u}=1+u+u^{2}/2+\cdots\)，首项是七次：</p>
+    \[
+    e^{x^{7}}=1+x^{7}+o(x^{7}).
+    \]
+    <p>余弦支只展开偶次，幅角 \(x^{8}\) 的二次修正落在十六次，七次层本来就没有项：</p>
+    \[
+    \cos(x^{8})=1-\frac{x^{16}}{2}+o(x^{16}).
+    \]
+    <p>常数 \(1\) 抵消后，七次层只有指数支的 \(x^{7}\) 独存，指数二次项 \(x^{14}/2\) 与余弦的十六次项都属于更高阶：</p>
+    \[
+    e^{x^{7}}-\cos(x^{8})=x^{7}+o(x^{7}).
+    \]
+    <p>比值校验：</p>
+    \[
+    \lim_{x\to0}\frac{e^{x^{7}}-\cos(x^{8})}{x^{7}}=1\neq0.
+    \]
+    <p>故 \(e=7\)，主部 \(x^{7}\)。数值抽查 \(x=0.01\) 得 \(1.0\times10^{-14}\)，与 \(x^{7}=1.0\times10^{-14}\) 一致；下一层修正 \(x^{14}/2\) 在该点小到不影响前位数字。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把余弦支的 \(x^{16}/2\) 当成主部，答十六阶；余弦二次修正的次数是幅角次数的两倍，比指数首项高得多。② 套用「相减必升阶」的想法硬找两支相消，本题两支首项不同次，根本没有可消的同次项。③ 误以为 \(e^{x^{7}}\) 含一次项：\(e^{u}\) 的线性项就是 \(u\) 本身，\(u=x^{7}\)，首项直接从七次起。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>异阶并置是本段反复出现的一族，指数配余弦各换幂次；判断顺序固定为先读两支首项次数，低者定阶，高者只作修正。卷面常做成分式极限 \((e^{x^{7}}-\cos(x^{8}))/x^{7}\)，答案就是指数首项系数；也会把两支内层幂次对调，让余弦支或指数支哪一边更低，阶数随之落到更低的那个幂次。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(e^{x^{8}}-\cos(x^{7})\) 与 \(x^{e}\) 是同阶无穷小，求 \(e\) 及主部。</p>
+    <p class="var-ans">答案：\(e=8\) 阶，主部 \(x^{8}\)。对调内层幂次后，指数支首项升到 \(x^{8}\)，余弦支二次修正落在 \(x^{14}\)，八次层仍由指数支独存；系数为 \(1\)，阶数随指数内层升到八。</p>
+  </div>
+</article>
+
+<article class="q" id="q4019">
+  <div class="q-head">
+    <span class="qno">第 198 题</span>
+    <span class="qtype">求参 · 高次余弦乘壳</span>
+    <span class="qsrc">P1169</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\sin(x^{6})-x^{6}\cos(x^{5})\) 与 \(x^{f}\) 是同阶无穷小，求 \(f\)。</p>
+  </div>
+  <div class="answer">答案：\(f=16\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>一支正弦配一支乘壳余弦，六次主项先抵消，阶数要往下查到余弦二次修正被多项式壳抬出的那一层；内层幂次不同，先把内层整体代入三角级数，再乘回前面的多项式。</p>
+    <p>正弦是奇函数，三层残项隔两层出现，把 \(x^{6}\) 代入 \(\sin u=u-u^{3}/6+\cdots\)：</p>
+    \[
+    \sin(x^{6})=x^{6}-\frac{x^{18}}{6}+o(x^{18}).
+    \]
+    <p>余弦只含偶次，二次项先展开再乘 \(x^{6}\) 的壳：</p>
+    \[
+    x^{6}\cos(x^{5})=x^{6}\left(1-\frac{x^{10}}{2}+o(x^{10})\right)
+    =x^{6}-\frac{x^{16}}{2}+o(x^{16}).
+    \]
+    <p>六次项 \(x^{6}\) 整块抵消；正弦侧十六次层没有项（三层残项是 \(x^{18}\)），余弦侧二次项被壳乘出十六次，原式前带负号翻为正：</p>
+    \[
+    \sin(x^{6})-x^{6}\cos(x^{5})=\frac{x^{16}}{2}+o(x^{16}).
+    \]
+    <p>比值校验：</p>
+    \[
+    \lim_{x\to0}\frac{\sin(x^{6})-x^{6}\cos(x^{5})}{x^{16}}=\frac{1}{2}\neq0.
+    \]
+    <p>故 \(f=16\)，主部 \(x^{16}/2\)。数值抽查 \(x=0.01\) 得 \(4.9998\times10^{-33}\)，与 \(x^{16}/2=5.0\times10^{-33}\) 吻合，残差来自三层项 \(-x^{18}/6\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只看到 \(\sin(x^{6})\sim x^{6}\) 与 \(x^{6}\cos(x^{5})\sim x^{6}\) 抵消就答「阶数为零」或止步；必须展开到首个修正项再比较。② 把余弦二次项乘壳后的次数算成 \(6+5=11\) 之类：余弦二次项是 \(-(x^{5})^{2}/2=-x^{10}/2\)，乘壳 \(x^{6}\) 得 \(x^{16}\)，次数相加为 \(6+2\times5\)。③ 符号带反：壳支二次项为负，原式减去壳支后该项翻正，主部是 \(+x^{16}/2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「正弦配乘壳余弦」是三角多项式族的标准形态，阶数为壳幂 \(m\) 加余弦幅角次数两倍 \(2n\)，首项落在 \(x^{m+2n}\)，系数恒为 \(1/2\)。卷面会调整 \(m,n\) 配对，也可把正弦换成正切；高阶考法是减掉已得主部，再追问下一层残项阶数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，\(\sin(x^{6})-x^{6}\cos(x^{5})-\dfrac{x^{16}}{2}\) 与 \(x^{f}\) 是同阶无穷小，求 \(f\) 及主部。</p>
+    <p class="var-ans">答案：\(f=18\) 阶，主部 \(-\dfrac{x^{18}}{6}\)。十六次主部被减掉后，剩下正弦自身三层残项 \(-x^{18}/6\)；余弦支下一项是 \(x^{26}/24\)，落在更高层，不参与十八次定阶。</p>
+  </div>
+</article>
+
+<article class="q" id="q4020">
+  <div class="q-head">
+    <span class="qno">第 199 题</span>
+    <span class="qtype">求参 · 高低阶错位</span>
+    <span class="qsrc">P1169</span>
+  </div>
+  <div class="stem">
+    <p>当 \(x\to0\) 时，\(\ln(1+x^{8})-x^{5}\arcsin(x^{4})\) 与 \(x^{g}\) 是同阶无穷小，求 \(g\)。</p>
+  </div>
+  <div class="answer">答案：\(g=8\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>本题关键不在系数计算，而在先比较两支首项次数：右支乘壳反正弦的首项比左支对数高一阶，两支不在同一层，相消从一开始就不发生；先比次数再谈系数。</p>
+    <p>对数支内层是 \(x^{8}\)，按 \(\ln(1+u)=u-u^{2}/2+\cdots\) 展开：</p>
+    \[
+    \ln(1+x^{8})=x^{8}-\frac{x^{16}}{2}+o(x^{16}).
+    \]
+    <p>反正弦只含奇次，三层项先展开再乘 \(x^{5}\) 的壳：</p>
+    \[
+    \arcsin(x^{4})=x^{4}+\frac{x^{12}}{6}+o(x^{12}),\qquad
+    x^{5}\arcsin(x^{4})=x^{9}+\frac{x^{17}}{6}+o(x^{17}).
+    \]
+    <p>右支首项是 \(x^{9}\)，比左支 \(x^{8}\) 高一阶，八次层只有对数支的 \(x^{8}\)，不存在同次对消；右支 \(x^{9}\) 作为下一阶修正出现：</p>
+    \[
+    \ln(1+x^{8})-x^{5}\arcsin(x^{4})=x^{8}-x^{9}-\frac{x^{16}}{2}+o(x^{16}).
+    \]
+    <p>比值校验：</p>
+    \[
+    \lim_{x\to0}\frac{\ln(1+x^{8})-x^{5}\arcsin(x^{4})}{x^{8}}=1\neq0.
+    \]
+    <p>故 \(g=8\)，主部 \(x^{8}\)。数值抽查 \(x=0.01\) 得 \(9.9\times10^{-17}\)，与 \(x^{8}=1.0\times10^{-16}\) 相差百分之一，正是右支 \(x^{9}\) 项的修正。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 认定两支首项同次、必然相消，顺着十六次去答阶数；本题右支首项是 \(x^{9}\)，与 \(x^{8}\) 不同次，没有可消的项。② 反过来把右支首项 \(x^{9}\) 当成整个差式的主项，答九阶；定阶取两支首项中次数更低者，即对数支的八次。③ 把 \(\arcsin(x^{4})\) 的三层项 \(x^{12}/6\) 乘壳后次数算错，误以为右支首项也是八次。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数乘壳与反三角乘壳相减是本段最后一族，判断顺序固定为先写两支首项、比较次数：首项同次才进入系数相消，首项异次则低次一方直接定阶。卷面会换壳幂与幅角幂，也会把反正弦换成反正切、正弦；另一类考法是改写成极限分式，分母配到首项次数，比值就是低次支首项系数。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 当 \(x\to0\) 时，求 \(\displaystyle\lim_{x\to0}\dfrac{\ln(1+x^{7})-x^{3}\arcsin(x^{5})}{x^{7}}\)。</p>
+    <p class="var-ans">答案：极限 \(1\)，原式 \(7\) 阶，主部 \(x^{7}\)。对数支首项 \(x^{7}\)；右支 \(x^{3}\arcsin(x^{5})=x^{8}+x^{18}/6+\cdots\)，首项高一阶不参与相消，分式比值即对数首项系数 \(1\)。</p>
+  </div>
+</article>
