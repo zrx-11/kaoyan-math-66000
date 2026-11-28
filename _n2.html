@@ -1,0 +1,725 @@
+<article class="q" id="q1">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">三阶·条件不足</span>
+    <span class="qsrc">P106</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([-a,a]\) 上三阶可导，\(f(-a)=a\)，\(f(a)=a\)，\(f'(0)=0\)，证明存在 \(x_{0}\in(-a,a)\) 使 \(a^{2}f'''(x_{0})=6\)。</p>
+  </div>
+  <div class="answer">答案：命题不成立。反例 \(f(x)\equiv a\)：\(f(-a)=a\)、\(f(a)=a\)、\(f'(0)=0\) 全部满足，而 \(f'''\equiv0\)，左端 \(a^{2}f'''(x_{0})\equiv0\)，取不到 \(6\)。三条数据只约束到二次以下形状，三阶导无约束。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两端函数值加一个内点导数共三条数据，结论却指向三阶导；按插值口径，钉死一条三次曲线需要四条数据，本题少一条，三阶导不被约束。</p>
+    \[ H(x)=Ax^{3}+Bx^{2}+Cx+D,\qquad H'(0)=0\ \Longrightarrow\ C=0. \]
+    <p>代入两端等值条件：</p>
+    \[ H(-a)=-Aa^{3}+Ba^{2}+D=a,\qquad H(a)=Aa^{3}+Ba^{2}+D=a. \]
+    <p>两式相减得 \(2Aa^{3}=0\)，即 \(A=0\)；插值三次退化为二次，\(H'''=6A=0\)，\(B,D\) 之间仍留一个自由参数：</p>
+    \[ D=a-Ba^{2},\qquad H(x)=Bx^{2}+a-Ba^{2}. \]
+    <p>令 \(g=f-H\)，则 \(g(-a)=g(a)=g'(0)=0\)，只有三个零点，罗尔两次最多落到二阶导，无法推出 \(g'''=0\)，故 \(f'''\) 不必等于插值常数。</p>
+    <p>取常值函数 \(f\equiv a\) 逐条验前提：\(f(-a)=a\)、\(f(a)=a\)、\(f'(0)=0\) 均成立，\(f'''\equiv0\)，而 \(a^{2}\cdot0=0\ne6\)，结论不成立。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把「两条端点值＋一个内点导数」当成四条件：三阶结论需要四条 Hermite 数据，少一条就不能锁死三次系数。</p>
+    <p>② 罗尔次数算错：三个零点只能保证 \(g''\) 有零点，再往下要第四个零点支撑，缺数据就写 \(g'''=0\) 属越界。</p>
+    <p>③ 反例不验前提：常值函数虽简单，仍须逐条报出两端值与 \(f'(0)\)，并说明三阶导恒为 \(0\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「三条件 → 三阶导常数」是本族典型伪命题骨架：先列三次插值方程，若解出首项系数自由或被钉成另一常数，再用常值函数、二次单项式代入验前提。变体多把内点导数换成 \(f'(0)=0\)、区间换成对称区间，判断口径不变：先数数据条数是否够结论阶数。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([-a,a]\) 上三阶可导，\(f(-a)=f(a)=a\)，\(f'(0)=0\)，且附加 \(f'''\equiv0\)，写出满足条件的函数族。</p>
+    <p class="var-ans">答案：退化为二次函数 \(f(x)=Bx^{2}+D\)，端点条件给 \(Ba^{2}+D=a\)，\(B\) 自由、\(D=a-Ba^{2}\)，不能唯一确定；常值函数 \(f\equiv a\) 是其中 \(B=0\) 的一支。</p>
+  </div>
+</article>
+
+<article class="q" id="q2">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">二阶·曲率上控</span>
+    <span class="qsrc">P106</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([0,1]\) 上二阶可导，\(f(0)=0\)，\(f(1)=1\)，且 \(f''(x)\ge6\)，证明 \(f(x)\le x^{2}(3-2x)\)。</p>
+  </div>
+  <div class="answer">答案：命题成立。记 \(g(x)=3x^{2}-2x^{3}\)，令 \(h=f-g\)，则 \(h(0)=h(1)=0\)；由 \(f''\ge6\) 与 \(g''=6-12x\) 得 \(h''\ge12x\ge0\)，\(h\) 为凸函数，端点连线为零，故 \(h(x)\le0\)，即 \(f(x)\le g(x)\)。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：一端二阶导下界，结论是与给定多项式比大小；正路是作差辅助函数，把比较化为差函数的凸凹方向。</p>
+    \[ g(x)=3x^{2}-2x^{3},\qquad g''(x)=6-12x. \]
+    <p>作差 \(h=f-g\)，由端点条件：</p>
+    \[ h(0)=f(0)-g(0)=0,\qquad h(1)=f(1)-g(1)=1-1=0. \]
+    <p>二阶导比较：</p>
+    \[ h''(x)=f''(x)-g''(x)\ge6-(6-12x)=12x\ge0\quad(x\in[0,1]). \]
+    <p>\(h\) 在 \([0,1]\) 上凸，凸函数在区间内不高于端点连线：</p>
+    \[ h(x)\le(1-x)h(0)+xh(1)=0, \]
+    <p>即 \(f(x)\le g(x)=x^{2}(3-2x)\)。内部 \(12x\gt{}0\) 使 \(h''\gt{}0\)，严格凸，内部严格低于零端点弦，取等只可能出现在端点。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 凸凹方向写反：\(h''\ge0\) 是凸函数，结论是 \(h\le\) 弦；若记成凹函数就会推出 \(h\ge0\)，与命题方向相反。</p>
+    <p>② 漏算 \(g''\)：直接拿 \(f''\ge6\) 去比 \(g\) 不够，必须把 \(g''=6-12x\) 减掉，差函数曲率才是 \(12x\)。</p>
+    <p>③ 端点值代错：\(g(1)=3-2=1\) 与 \(f(1)=1\) 对齐，\(h(1)=0\)；\(g(0)=0\) 与 \(f(0)=0\) 对齐。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「二阶导单侧有界＋两端定值 → 与多项式比大小」是不等式三件套之一：作差、算差函数二阶导、定凸凹后用端点弦压界。多项式多由题给端点与曲率系数反解；若题面换成 \(f''\le M\) 而下控某多项式，先看差函数是否被迫为凹，方向不符即伪命题。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([0,1]\) 上二阶可导，\(f(0)=0\)，\(f(1)=1\)，\(f''(x)\le6\)，判断 \(f(x)\ge g(x)\)（\(g=3x^{2}-2x^{3}\)）是否必然成立。</p>
+    <p class="var-ans">答案：不成立。取 \(f(x)=x\)，\(f''=0\le6\) 满足前提；在 \(x=1/2\) 处 \(f=1/2\)，\(g=11/16\)，\(f<g\)，下控方向被破坏。</p>
+  </div>
+</article>
+
+<article class="q" id="q3">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">三阶·中点下界</span>
+    <span class="qsrc">P106</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([a,b]\) 上三阶可导，\(f(a)=f(b)=0\)，\(f'(a)=f'(b)=0\)，证明存在 \(\eta\in(a,b)\) 使 \(|f'''(\eta)|\ge\dfrac{24}{(b-a)^{3}}\left|f\left(\dfrac{a+b}{2}\right)\right|\)。</p>
+  </div>
+  <div class="answer">答案：命题成立。记 \(h=b-a\)、中点 \(c\)、\(v=f(c)\)；两端各为二重零点，把区间两半分别作三次拟合，三阶导的最佳比值为 \(96|v|/h^{3}\)，书给的较弱下界 \(24|v|/h^{3}\) 随之成立。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两端函数值与两端导数共四条双零数据，结论在三阶导与中点值之间，属三阶中点下界，可用两半区间的三次样条作差商桥梁。</p>
+    \[ c=\frac{a+b}{2},\qquad h=b-a,\qquad v=f(c). \]
+    <p>归一化到 \([0,1]\)，左半构造三次 \(P(x)=-16vx^{3}+12vx^{2}\)，核验端点与衔接：</p>
+    \[ P(0)=0,\quad P'(0)=0,\quad P(1/2)=v,\quad P'(1/2)=0. \]
+    <p>右半取镜像 \(R(x)=P(1-x)\)，中点函数值与一阶导连续；左半 \(P'''=-96v\)，右半 \(R'''=96v\)，该样条即此约束下的极值：</p>
+    \[ \max_{[a,b]}|f'''|\ge\frac{96|v|}{h^{3}}. \]
+    <p>最佳比值强于书给常数 \(24\)，故存在 \(\eta\) 使</p>
+    \[ |f'''(\eta)|\ge\frac{24}{h^{3}}|v|=\frac{24}{(b-a)^{3}}\left|f\left(\frac{a+b}{2}\right)\right|. \]
+    <p>代 \(f(x)=x^{2}(1-x)^{2}\) 验算：双零端点与两端导零均满足，\(f(1/2)=1/16\)，\(f'''\) 最大绝对值 \(12\)，不小于右端 \(1.5\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把四条件当成 Hermite 插值常数题：本题插值多项式恒为零，中点值不在四条数据内，常数要靠样条下界另算。</p>
+    <p>② 比值量纲出错：三阶导对中点值的界带 \(h^{-3}\)，区间拉长时常数按三次方缩小，不能照搬二阶题的 \(h^{-2}\)。</p>
+    <p>③ 极值样条的衔接条件漏掉中点导数连续：两半各立三次而不接 \(f'\)，得到的比值不是最佳比。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>双零端点配中点值的下界题，阶数随结论导数升一档：二阶版常数 \(4/h^{2}\)，三阶版最佳 \(96/h^{3}\)。题面若改给 \(\left|f'''\right|\le M\) 反求中点值上界，同一不等式反解即可；若把中点换成任意内点 \(x_{0}\)，两半长度 \(d_{1}=x_{0}-a\)、\(d_{2}=b-x_{0}\) 分别进入差商分母。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([a,b]\) 上三阶可导，\(f(a)=f(b)=f'(a)=f'(b)=0\)，且 \(\left|f'''(x)\right|\le M\)，求中点值 \(\left|f(c)\right|\) 的上界。</p>
+    <p class="var-ans">答案：由主命题反解，\(\left|f(c)\right|\le M(b-a)^{3}/24\)（书给口径）；按样条最佳比可收紧到 \(M(b-a)^{3}/96\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q4">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">二阶·积分拆导</span>
+    <span class="qsrc">P106</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([0,2]\) 上二阶可导，\(f(0)=1\)，\(f(2)=3\)，且 \(\left|f''(x)\right|\le1\)，证明 \(\left|f'(x)\right|\le2\)。</p>
+  </div>
+  <div class="answer">答案：命题成立。由 \(\left|f''\right|\le1\) 得 \(f'\) 为 \(1\)-Lipschitz；把定值 \(2=f(2)-f(0)\) 写成 \(\int_{0}^{2}f'(t)\,\mathrm{d}t\)，在任意 \(x\) 处拆出 \(2f'(x)\) 加有界扰动，缩放得 \(\left|f'(x)\right|\le\dfrac{(x-1)^{2}+3}{2}\le2\)。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：给两端函数值（一段定积分）与二阶导上界，要求控制一阶导。单点拉格朗日只给内点导数，正路是把定值写成积分，拆出「该点导数＋扰动」，扰动靠 Lipschitz 压住。</p>
+    <p>由中值定理，对任意 \(t,s\in[0,2]\) 有 \(\left|f'(t)-f'(s)\right|\le\left|t-s\right|\)。取牛顿–莱布尼茨公式并拆分：</p>
+    \[ 2=f(2)-f(0)=\int_{0}^{2}f'(t)\,\mathrm{d}t=2f'(x)+\int_{0}^{2}\left[f'(t)-f'(x)\right]\mathrm{d}t. \]
+    <p>扰动项逐点用 Lipschitz 再积分，分界为 \(x\)：</p>
+    \[ \left|\int_{0}^{2}\left[f'(t)-f'(x)\right]\mathrm{d}t\right|\le\frac12\int_{0}^{2}|t-x|\,\mathrm{d}t=\frac{x^{2}+(2-x)^{2}}{2}. \]
+    <p>合并两式：</p>
+    \[ 2\left|f'(x)\right|\le2+\frac{x^{2}+(2-x)^{2}}{2}=x^{2}-2x+4, \]
+    \[ \left|f'(x)\right|\le\frac{x^{2}-2x+4}{2}=\frac{(x-1)^{2}+3}{2}\le2. \]
+    <p>常数在端点取得到：\(f=1+2t-\tfrac12t^{2}\) 满足 \(f(0)=1\)、\(f(2)=3\)、\(f''=-1\)，且 \(f'(0)=2\)，边界取等。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(\left|f''\right|\le1\) 直接读成 \(\left|f'\right|\le1\)：区间长 \(2\) 带一次放大，漏掉 \(\left|t-s\right|\) 因子就全错。</p>
+    <p>② 先找某点 \(c\) 使 \(f'(c)=1\) 再估 \(f'(x)-f'(c)\)：基准点路线比整段积分松，放缩后到不了 \(2\)。</p>
+    <p>③ 把 \(f(2)-f(0)=2\) 当变量：它是定值必须原样保留，若再上界成 \(\int\left|f'\right|\) 即成循环论证。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「端点函数值差＋二阶导有界 → 一阶导有界」是定积分恒等式的标准用法，比泰勒展开短，不必选展开点。区间换 \([0,L]\)、上界换 \(M\)，界随之变成 \(\dfrac{1}{L}\left[\Delta+\dfrac{M}{2}(x^{2}+(L-x)^{2})\right]\)。同骨架常配「求最佳常数」或「证某点可取等」，落点都在判断哪一步放缩取等。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([0,2]\) 上二阶可导，\(f(0)=1\)，\(f(2)=3\)，\(\left|f''(x)\right|\le1\)，且 \(f'(0)=2\)，证明 \(f(x)=1+2x-\tfrac12x^{2}\)。</p>
+    <p class="var-ans">答案：成立，属刚性结论。在 \(x=0\) 处扰动积分等于 \(-\int_{0}^{2}(2-t)\,\mathrm{d}t=-2\)，而逐点 \(\left|f'(t)-2\right|\le2-t\)，被积函数处处不高于右端且积分相等，只能逐点取等，得 \(f'(t)=2-t\)，积分并由 \(f(0)=1\) 定常数即得。</p>
+  </div>
+</article>
+
+<article class="q" id="q5">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">三阶·对称三条件</span>
+    <span class="qsrc">P106</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \([-1,1]\) 上三阶可导，\(f(-1)=-1\)，\(f(1)=1\)，\(f'(0)=0\)，证明存在 \(x_{0}\in(-1,1)\) 使 \(f'''(x_{0})=3\)。</p>
+  </div>
+  <div class="answer">答案：命题不成立。反例 \(f(x)=x^{3}\)：\(f(-1)=-1\)、\(f(1)=1\)、\(f'(0)=0\) 全部满足，而 \(f'''\equiv6\)，无处取到 \(3\)。三条数据对应的三次插值首项系数被钉为 \(1\)，插值三阶导为 \(6\)，并非 \(3\)。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两端函数值加内点导数共三条数据，结论指向三阶导；先解三次插值看首项系数被钉成多少，再判断书给常数是否对得上。</p>
+    \[ H(x)=Ax^{3}+Bx^{2}+Cx+D,\qquad H'(0)=0\ \Longrightarrow\ C=0. \]
+    <p>代入两端条件：</p>
+    \[ H(-1)=-A+B-D=-1,\qquad H(1)=A+B+D=1. \]
+    <p>两式相加得 \(B+D=0\)，相减得 \(2A=2\)，即 \(A=1\)。插值三阶导：</p>
+    \[ H'''=6A=6. \]
+    <p>令 \(g=f-H\)，则 \(g(-1)=g(1)=g'(0)=0\)，三个零点只支撑到二阶导，\(g'''\) 不必为零，故 \(f'''\) 不被这条插值常数锁死；但书给的 \(3\) 连插值值 \(6\) 也对不上。</p>
+    <p>取 \(f=x^{3}\) 逐条验前提：\(f(-1)=-1\)、\(f(1)=1\)、\(f'(x)=3x^{2}\) 故 \(f'(0)=0\)，前提全满足；\(f'''\equiv6\)，永远取不到 \(3\)，命题结论不成立。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 对称区间就套奇函数模板：\(f(-1)=-1\)、\(f(1)=1\) 只给两端反号，不强制函数为奇，\(Bx^{2}\) 型偶部仍可存在。</p>
+    <p>② 插值常数算错：两端相减直接给出 \(A=1\)，三阶导 \(6A=6\)，把首项系数与三阶导混为一谈就会写成 \(3\)。</p>
+    <p>③ 反例不验前提：\(x^{3}\) 的 \(f'(0)=0\) 要单独报出，不能只验两端值。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对称区间三条件题，先按 \(Ax^{3}+Bx^{2}+Cx+D\) 解方程组：内点导数定 \(C\)，两端和差定 \(B,D,A\)。若结论常数与 \(6A\) 不符即判假；若 \(A\) 自由则条件不足。变体把端点值换成同号、内点导数换 \(f''(0)=0\)，解方程组的顺序不变。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([-1,1]\) 上三阶可导，\(f(-1)=-1\)，\(f(1)=1\)，\(f'(0)=0\)，且 \(f'''\equiv6\)，写出满足条件的三次函数族。</p>
+    <p class="var-ans">答案：\(f(x)=x^{3}+Bx^{2}-B\)，其中 \(B\) 自由；\(f=x^{3}\) 是 \(B=0\) 的一支。可见 \(6\) 是三条件在三次插值下被钉住的常数，书给的 \(3\) 与它不符。</p>
+  </div>
+</article>
+
+<article class="q" id="q6">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">二阶·多项式下控</span>
+    <span class="qsrc">P106</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([0,1]\) 上二阶可导，\(f(0)=0\)，\(f(1)=1\)，且 \(f''(x)\le12\)，证明 \(f(x)\ge6x^{2}-8x^{3}+3x^{4}\)。</p>
+  </div>
+  <div class="answer">答案：命题不成立。反例 \(f(x)=x\)：\(f(0)=0\)、\(f(1)=1\)、\(f''\equiv0\le12\) 全部满足；在 \(x=1/2\) 处 \(f=1/2\)，而右端 \(g=11/16\)，\(f<g\)，下控不等式被破坏。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：二阶导上界配两端定值，结论要求 \(f\) 不低于给定四次多项式。先作差看差函数被推向凸还是凹，再取简单函数扫点。</p>
+    \[ g(x)=6x^{2}-8x^{3}+3x^{4},\qquad g''(x)=12-48x+36x^{2}. \]
+    <p>作差 \(h=f-g\)，端点：</p>
+    \[ h(0)=0,\qquad h(1)=1-(6-8+3)=0. \]
+    <p>由 \(f''\le12\) 只能得上界：</p>
+    \[ h''=f''-g''\le12-g''=12x(4-3x)\ge0\quad(x\in[0,1]). \]
+    <p>这只是 \(h''\) 不超过一个非负量，没有给 \(h''\) 下界，\(h\) 不必为凹，无法由零端点弦推出 \(h\ge0\)。取线性函数 \(f=x\) 实测：</p>
+    \[ g(1/2)=6\cdot\frac14-8\cdot\frac18+3\cdot\frac1{16}=\frac{11}{16},\qquad f(1/2)=\frac12<\frac{11}{16}. \]
+    <p>前提逐条核验：\(f(0)=0\)、\(f(1)=1\)、\(f''\equiv0\le12\) 均成立，而 \(f(1/2)<g(1/2)\)，结论 \(f\ge g\) 不成立。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 方向配错：\(f''\le12\) 是上界，配合下控 \(f\ge g\) 需要差函数为凹（\(h''\le0\)），题面曲率方向与结论方向不匹配。</p>
+    <p>② 把 \(12-g''\ge0\) 读成 \(h''\ge0\)：不等式传过去是 \(h''\le\) 右端，符号方向不能反。</p>
+    <p>③ 只在端点验多项式：\(g(0)=0\)、\(g(1)=1\) 对齐不代表内部 \(g\) 在 \(f\) 下方，必须取内点扫值。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「二阶导单侧界＋多项式比较」先核对方向：下界 \(f''\ge M\) 配上控 \(f\le g\) 多为真，上界 \(f''\le M\) 配下控 \(f\ge g\) 多为伪。伪例常取 \(f=x\) 扫中点；若要翻成真命题，需把 \(g\) 换成与曲率方向一致的包络，或把单侧界换成双侧有界。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([0,1]\) 上二阶可导，\(f(0)=0\)，\(f(1)=1\)，\(f''(x)\ge12\)，判断 \(f(x)\le g(x)\)（\(g=6x^{2}-8x^{3}+3x^{4}\)）是否成立。</p>
+    <p class="var-ans">答案：成立。令 \(h=f-g\)，则 \(h(0)=h(1)=0\)，\(h''\ge12-g''=12x(4-3x)\ge0\)，\(h\) 为凸函数，不高于零端点弦，故 \(h\le0\)，即 \(f\le g\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q7">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">三阶·Hermite常数</span>
+    <span class="qsrc">P107</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([a,b]\) 上三阶可导，\(f(a)=f(b)=0\)，\(f'(a)=1\)，\(f'(b)=0\)，证明存在 \(\eta\in(a,b)\) 使 \(f'''(\eta)=\dfrac{6}{(b-a)^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：命题成立。四条件恰钉住一条三次 Hermite 插值曲线，其三次项系数对应三阶导常数 \(6/h^{2}\)（\(h=b-a\)）；令 \(g=f-H\)，两端各为二重零点，两次罗尔得 \(g'''(\eta)=0\)，故 \(f'''(\eta)=6/h^{2}\)。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两端值加两端导数共四条数据，恰是三次曲线的插值条件，常数由插值多项式唯一决定，先写 Hermite 公式再验罗尔次数。</p>
+    \[ h=b-a,\quad y_{0}=0,\ y_{1}=0,\quad s_{0}=1,\ s_{1}=0. \]
+    <p>三次 Hermite 插值的三阶导为常数：</p>
+    \[ H'''=\frac{6\left[2(y_{0}-y_{1})+(s_{0}+s_{1})h\right]}{h^{3}}=\frac{6(0+h)}{h^{3}}=\frac{6}{h^{2}}. \]
+    <p>令 \(g=f-H\)，则 \(g(a)=g'(a)=g(b)=g'(b)=0\)：\(a,b\) 各是二重零点。由 \(g(a)=g(b)=0\) 罗尔一次得内点 \(g'=0\)，连同两端 \(g'=0\) 共三个一阶导零点，再罗尔两次落到三阶：</p>
+    \[ g'''(\eta)=0\ \Longrightarrow\ f'''(\eta)=H'''=\frac{6}{(b-a)^{2}}. \]
+    <p>反代核验：取 \(f=H\) 本身，四条件逐条满足，\(f'''\equiv6/h^{2}\)，结论常数与书给一致；本命题为可复现的存在性结论。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 常数套错公式：\(s_{0}=1,s_{1}=0\) 进入 \((s_{0}+s_{1})h\)，分子只有 \(6h\)，别把两端导数差也写进 \(2(y_{0}-y_{1})\)。</p>
+    <p>② 罗尔次数不足：四个数据给两个二重零点，必须凑够三个 \(g'\) 零点才落到三阶，只罗尔一次只能到二阶。</p>
+    <p>③ 区间量纲：结论是 \(6/h^{2}\) 而非 \(6/h^{3}\)，导数数据 \(s\) 带长度一次方，与函数值数据的幂次不同。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>「三阶可导＋四个端点数据＋让证 \(f'''\) 等于某数」一律先算插值三次再判真假。一般数据 \(f(a)=y_{0}\)、\(f(b)=y_{1}\)、\(f'(a)=s_{0}\)、\(f'(b)=s_{1}\) 对应 \(H'''=6[2(y_{0}-y_{1})+(s_{0}+s_{1})h]/h^{3}\)。变体多交换两端导数值、改端点函数值，依据始终是同一条公式。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 承本题条件，若结论改为 \(f'''(\eta)=-6/(b-a)^{2}\)，判断是否成立。</p>
+    <p class="var-ans">答案：不成立。Hermite 插值三阶导为 \(+6/h^{2}\)，取 \(f=H\) 时 \(f'''\equiv6/h^{2}\)，取不到负值；符号由 \(s_{0}+s_{1}=1\) 决定，本题两端导数之和为正，改号即伪。</p>
+  </div>
+</article>
+
+<article class="q" id="q8">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">二阶·导函数有界</span>
+    <span class="qsrc">P107</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([0,3]\) 上二阶可导，\(f(0)=0\)，\(f(3)=9\)，且 \(\left|f''(x)\right|\le2\)，证明 \(\left|f'(x)\right|\le6\)。</p>
+  </div>
+  <div class="answer">答案：命题成立。由 \(\left|f''\right|\le2\) 得 \(f'\) 为 \(2\)-Lipschitz；定值 \(9=f(3)-f(0)\) 写成积分后拆出 \(3f'(x)\) 加扰动，缩放得 \(\left|f'(x)\right|\le x^{2}-3x+6\le6\)，端点取等。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两端函数值差 \(9\) 配二阶导上界 \(2\)，目标控制一阶导；用定积分恒等式拆分，扰动项按 Lipschitz 积分估计。</p>
+    <p>对任意 \(t,s\in[0,3]\)，\(\left|f'(t)-f'(s)\right|\le2\left|t-s\right|\)。牛顿–莱布尼茨拆分：</p>
+    \[ 9=f(3)-f(0)=\int_{0}^{3}f'(t)\,\mathrm{d}t=3f'(x)+\int_{0}^{3}\left[f'(t)-f'(x)\right]\mathrm{d}t. \]
+    <p>扰动项逐点估计再积分：</p>
+    \[ \left|\int_{0}^{3}\left[f'(t)-f'(x)\right]\mathrm{d}t\right|\le\int_{0}^{3}2|t-x|\,\mathrm{d}t=x^{2}+(3-x)^{2}. \]
+    <p>合并两式：</p>
+    \[ 3\left|f'(x)\right|\le9+x^{2}+(3-x)^{2}=2x^{2}-6x+18, \]
+    \[ \left|f'(x)\right|\le\frac{2x^{2}-6x+18}{3}=x^{2}-3x+6. \]
+    <p>右端在 \([0,3]\) 上于端点取最大 \(6\)，故 \(\left|f'(x)\right|\le6\)。取等函数 \(f=6t-t^{2}\) 满足 \(f(0)=0\)、\(f(3)=9\)、\(f''=-2\)，且 \(f'(0)=6\)。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 扰动积分漏 \(M\) 因子：\(\left|f'(t)-f'(x)\right|\le2|t-x|\)，积分后带 \(2\)，漏乘会把上界算松一半。</p>
+    <p>② 二次函数最值取错：\(x^{2}-3x+6\) 开口向上，最大值在端点 \(0\) 或 \(3\) 处，顶点是最小值点。</p>
+    <p>③ 把 \(f(3)-f(0)=9\) 当成可放缩量：定值必须留在左端，不能再用 \(\int\left|f'\right|\) 上界替代。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题与同段积分拆导各题同骨架：\(L\left|f'(x)\right|\le\Delta+\dfrac{M}{2}[x^{2}+(L-x)^{2}]\)。端点处的最佳上界为 \((\Delta+ML^{2}/2)/L\)，本题 \((9+2\cdot9/2)/3=6\)。变式常把 \(M\)、\(L\) 改成数值后让求最佳常数，或附加端点导数值证函数唯一。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([0,3]\) 上二阶可导，\(f(0)=0\)，\(f(3)=9\)，\(\left|f''(x)\right|\le2\)，且 \(f'(3)=0\)，求 \(f'(0)\) 的值并写出 \(f\)。</p>
+    <p class="var-ans">答案：\(f'(0)=6\)，\(f(x)=6x-x^{2}\)。由对称取等构造，\(f''=-2\) 全程取边界，积分 \(f(3)=18-9=9\) 与题面对齐，\(f'(3)=6-6=0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q9">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">三阶·条件不足</span>
+    <span class="qsrc">P107</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([0,\pi]\) 上三阶可导，\(f(0)=0\)，\(f(\pi)=\pi\)，\(f'(0)=0\)，证明存在 \(x_{0}\in(0,\pi)\) 使 \(f'''(x_{0})=\dfrac{6}{\pi^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：命题不成立。反例 \(f(x)=x^{2}/\pi\)：\(f(0)=0\)、\(f(\pi)=\pi\)、\(f'(0)=0\) 全部满足，而 \(f'''\equiv0\)，取不到 \(6/\pi^{2}\)。三条数据下三次插值首项系数自由，三阶导未被钉住。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两端值加一个端点导数共三条数据，结论指向三阶导；数据条数少于三阶结论所需，先解三次插值看首项是否自由。</p>
+    \[ H(x)=Ax^{3}+Bx^{2}+Cx+D. \]
+    <p>由 \(H(0)=0\) 得 \(D=0\)，由 \(H'(0)=0\) 得 \(C=0\)；再由 \(H(\pi)=\pi\)：</p>
+    \[ A\pi^{3}+B\pi^{2}=\pi\ \Longrightarrow\ A=-\frac{B}{\pi}+\frac{1}{\pi^{2}}. \]
+    <p>首项系数 \(A\) 随自由参数 \(B\) 变动，故</p>
+    \[ H'''=6A=-\frac{6B}{\pi}+\frac{6}{\pi^{2}} \]
+    <p>不是定值。令 \(g=f-H\)，只有 \(g(0)=g(\pi)=g'(0)=0\) 三个零点，罗尔两次最多到二阶，\(g'''\) 不必为零，三阶导不被约束。</p>
+    <p>取二次函数 \(f=x^{2}/\pi\) 逐条验前提：\(f(0)=0\)，\(f(\pi)=\pi^{2}/\pi=\pi\)，\(f'(x)=2x/\pi\) 故 \(f'(0)=0\)，前提全满足；\(f'''\equiv0\)，永远取不到 \(6/\pi^{2}\)，结论不成立。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 看到 \(f'(0)=0\) 就当四条件：题面只给一个端点导数，另一端 \(f'(\pi)\) 缺失，Hermite 数据凑不齐四条。</p>
+    <p>② 把插值自由参数消掉硬凑常数：\(B\) 自由时 \(A\) 也自由，不能令 \(B=0\) 后把对应三阶导当成必然值。</p>
+    <p>③ 反例阶数过低不验：二次函数三阶导恒零，恰是检验「三阶结论是否被约束」的最简反例。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>三条件三阶题的判法固定：解三次插值，若首项系数自由即条件不足，用二次函数或常值函数出反例；若首项被钉成定值但书给常数不符，再用该插值多项式出反例。区间换成 \([0,\pi/2]\)、端点值换成三角函数值，方程组结构不变。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 承本题条件，补充 \(f'(\pi)=0\)，按四条件 Hermite 插值求被钉住的 \(f'''\) 常数。</p>
+    <p class="var-ans">答案：\(h=\pi\)，\(y_{0}=0\)、\(y_{1}=\pi\)、\(s_{0}=s_{1}=0\)，\(H'''=6[2(0-\pi)+0]/\pi^{3}=-12/\pi^{2}\)。补上端点导数后三阶导才被唯一钉住。</p>
+  </div>
+</article>
+
+<article class="q" id="q10">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">二阶·曲率上控</span>
+    <span class="qsrc">P107</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([0,1]\) 上二阶可导，\(f(0)=0\)，\(f(1)=1\)，且 \(f''(x)\ge24\)，证明 \(f(x)\le12x^{2}-16x^{3}+5x^{4}\)。</p>
+  </div>
+  <div class="answer">答案：命题成立。记 \(g=12x^{2}-16x^{3}+5x^{4}\)，令 \(h=f-g\)，则 \(h(0)=h(1)=0\)；由 \(f''\ge24\) 与 \(g''=24-96x+60x^{2}\) 得 \(h''\ge12x(8-5x)\ge0\)，\(h\) 为凸函数，不高于零端点弦，故 \(f\le g\)。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：二阶导下界配两端定值，结论上控给定四次多项式；作差后核对差函数曲率方向是否被迫为凸。</p>
+    \[ g(x)=12x^{2}-16x^{3}+5x^{4},\qquad g''(x)=24-96x+60x^{2}. \]
+    <p>作差 \(h=f-g\)，端点对齐：</p>
+    \[ h(0)=0,\qquad h(1)=1-(12-16+5)=0. \]
+    <p>二阶导比较：</p>
+    \[ h''=f''-g''\ge24-(24-96x+60x^{2})=96x-60x^{2}=12x(8-5x)\ge0, \]
+    <p>其中 \(x\in[0,1]\) 时 \(8-5x\ge3\gt{}0\)，故 \(h\) 在 \([0,1]\) 上凸。凸函数不高于端点连线：</p>
+    \[ h(x)\le(1-x)h(0)+xh(1)=0, \]
+    <p>即 \(f(x)\le g(x)=12x^{2}-16x^{3}+5x^{4}\)。内部 \(12x(8-5x)\gt{}0\)，严格凸，内部严格低于零弦。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 多项式二阶导求错：\(5x^{4}\) 的二阶导是 \(60x^{2}\)，\(-16x^{3}\) 的二阶导是 \(-96x\)，漏项会把 \(h''\) 的下界算反。</p>
+    <p>② 凸凹结论写反：\(h''\ge0\) 对应 \(h\le\) 弦，与上控 \(f\le g\) 同向；若记成凹函数就推出反向不等式。</p>
+    <p>③ 端点 \(g(1)\) 代错：\(12-16+5=1\)，与 \(f(1)=1\) 对齐，\(h(1)=0\) 才接得上凸弦论证。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题与同段 \(f''\ge6\) 上控题同骨架，只是曲率常数与多项式系数放大一档。判真前提是差函数二阶导下界在整个区间非负；若题面换成 \(f''\le M\) 配下控多项式，先扫中点，方向不符多为伪。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([0,1]\) 上二阶可导，\(f(0)=0\)，\(f(1)=1\)，\(f''(x)\ge24\)，在 \(x=1/2\) 处比较 \(f(1/2)\) 与 \(g(1/2)=21/16\) 的大小方向。</p>
+    <p class="var-ans">答案：\(f(1/2)\le21/16\)。由主命题 \(f\le g\) 直接代入；内部严格凸使不等式在 \(1/2\) 处为严格小于，等号只可能落在端点。</p>
+  </div>
+</article>
+
+<article class="q" id="q11">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">三阶·Hermite常数</span>
+    <span class="qsrc">P107</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([a,b]\) 上三阶可导，\(f(a)=0\)，\(f(b)=0\)，\(f'(a)=0\)，\(f'(b)=1\)，证明存在 \(\eta\in(a,b)\) 使 \(f'''(\eta)=\dfrac{6}{(b-a)^{2}}\)。</p>
+  </div>
+  <div class="answer">答案：命题成立。这是第 12 题的镜像数据：\(s_{0}=0\)、\(s_{1}=1\)，Hermite 插值三阶导仍为 \(6/h^{2}\)；令 \(g=f-H\)，两端各为二重零点，两次罗尔得 \(g'''(\eta)=0\)，故 \(f'''(\eta)=6/h^{2}\)。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：四条端点数据钉一条三次 Hermite 曲线，常数由公式唯一给出；与左端取导值 \(1\) 的一题互为左右镜像。</p>
+    \[ h=b-a,\quad y_{0}=0,\ y_{1}=0,\quad s_{0}=0,\ s_{1}=1. \]
+    <p>代入 Hermite 三阶导公式：</p>
+    \[ H'''=\frac{6\left[2(y_{0}-y_{1})+(s_{0}+s_{1})h\right]}{h^{3}}=\frac{6h}{h^{3}}=\frac{6}{h^{2}}. \]
+    <p>令 \(g=f-H\)，\(g(a)=g'(a)=g(b)=g'(b)=0\)，两端各是二重零点。罗尔一次得内点 \(g'\) 零点，连同两端 \(g'=0\) 共三个一阶导零点，再两次罗尔：</p>
+    \[ g'''(\eta)=0\ \Longrightarrow\ f'''(\eta)=H'''=\frac{6}{(b-a)^{2}}. \]
+    <p>取 \(f=H\) 核验：四条件逐条满足，\(f'''\equiv6/h^{2}\)，与书给常数一致；镜像翻转 \(x\mapsto a+b-x\) 后即化归第 12 题的数据排列。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 镜像后常数变号：公式里是 \(s_{0}+s_{1}\) 而非 \(s_{1}-s_{0}\)，两端导数值 \(1\) 换到右端，三阶导常数仍为正 \(6/h^{2}\)。</p>
+    <p>② 把 \(f(a)=f(b)=0\) 与导零混作一条：函数值零与导数零是两条独立数据，缺一凑不齐二重零点。</p>
+    <p>③ 罗尔链条漏内点：两端 \(g'=0\) 之外还需函数值零给出的内点 \(g'=0\)，三个一阶导零点才够落三阶。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>同一公式的镜像变体在题集中反复出现：交换 \(s_{0},s_{1}\) 不改变 \(s_{0}+s_{1}\)，常数不变；改变导数值大小才按比例缩放。掌握公式后，四条件题先报 \(y_{0},y_{1},s_{0},s_{1},h\) 五个量代入即可判真假。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([a,b]\) 上三阶可导，\(f(a)=f(b)=0\)，\(f'(a)=0\)，\(f'(b)=2\)，求被钉住的 \(f'''(\eta)\) 常数。</p>
+    <p class="var-ans">答案：\(H'''=6(0+2h)/h^{3}=12/h^{2}=12/(b-a)^{2}\)。导数值翻倍，三阶导常数同比例翻倍。</p>
+  </div>
+</article>
+
+<article class="q" id="q12">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">二阶·导数上界</span>
+    <span class="qsrc">P107</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([0,2]\) 上二阶可导，\(f(0)=1\)，\(f(2)=5\)，且 \(\left|f''(x)\right|\le3\)，证明 \(\left|f'(x)\right|\le4\)。</p>
+  </div>
+  <div class="answer">答案：命题不成立。反例 \(f(x)=1+5x-\tfrac32x^{2}\)：\(f(0)=1\)、\(f(2)=5\)、\(f''=-3\) 全部满足，而 \(f'(0)=5\gt{}4\)。积分分解给出的端点最佳上界为 \(5\)，书给 \(4\) 偏紧。</div>
+
+  <div class="block caveat">
+    <div class="block-title">校勘</div>
+    <p>书给 \(\left|f'(x)\right|\le4\)；复算按积分恒等式：\(2|f'(x)|\le4+\tfrac32[x^{2}+(2-x)^{2}]\)，右端在端点取最大 \(10\)，除以 \(2\) 得最佳上界 \(5\)。反例 \(f=1+5x-\tfrac32x^{2}\) 验全部前提且 \(f'(0)=5\)。故书给 \(4\) 偏紧，正确常数应为 \(5\)。</p>
+  </div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两端函数值差 \(4\) 配二阶导上界 \(3\)，表面是积分拆导型导数上界；先按恒等式算出最佳上界，再与书给 \(4\) 比对。</p>
+    <p>由 \(\left|f''\right|\le3\)，对任意 \(t,s\in[0,2]\) 有 \(\left|f'(t)-f'(s)\right|\le3\left|t-s\right|\)。拆分定值：</p>
+    \[ 4=f(2)-f(0)=\int_{0}^{2}f'(t)\,\mathrm{d}t=2f'(x)+\int_{0}^{2}\left[f'(t)-f'(x)\right]\mathrm{d}t. \]
+    <p>扰动项按 Lipschitz 积分：</p>
+    \[ \left|\int_{0}^{2}\left[f'(t)-f'(x)\right]\mathrm{d}t\right|\le\frac32\int_{0}^{2}|t-x|\,\mathrm{d}t=\frac32\left[x^{2}+(2-x)^{2}\right]. \]
+    <p>合并：</p>
+    \[ 2\left|f'(x)\right|\le4+\frac32\left[x^{2}+(2-x)^{2}\right]. \]
+    <p>右端在 \(x=0\) 与 \(x=2\) 取最大 \(4+6=10\)，故 \(\left|f'(x)\right|\le5\)，到不了书给的 \(4\)。反例 \(f=1+5x-\tfrac32x^{2}\) 逐条验前提：\(f(0)=1\)，\(f(2)=1+10-6=5\)，\(f''=-3\) 满足 \(\left|f''\right|\le3\)；\(f'(x)=5-3x\)，\(f'(0)=5\gt{}4\)，结论不成立。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 只套题集结论不重算常数：区间长、函数值差、二阶导上界三个量都变了，最佳上界要重新代入公式。</p>
+    <p>② 扰动积分漏 \(M/2\)：\(\int|t-x|\,\mathrm{d}t=\tfrac12[x^{2}+(L-x)^{2}]\)，再乘 \(M=3\)，系数错了上界就跟着错。</p>
+    <p>③ 反例不取边界曲率：让 \(f''\) 全程取 \(-3\)，导数从 \(5\) 线性降到 \(-1\)，积分才恰好等于 \(4\)；曲率取内部值到不了端点极值。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>导数上界题的真伪分水岭是最佳常数：先用公式算出端点极值 \(U=(\Delta+ML^{2}/2)/L\)，书给界若不小于 \(U\) 为真，若小于 \(U\) 即伪，并可取边界二次函数出反例。变式常反解：给定要求的导数上界，反求允许的二阶导上界 \(M\)。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([0,2]\) 上二阶可导，\(f(0)=1\)，\(f(2)=5\)，若要求对一切 \(x\) 都有 \(\left|f'(x)\right|\le4\)，求二阶导上界 \(M\) 的最大允许值。</p>
+    <p class="var-ans">答案：\(M=2\)。端点不等式 \(2\cdot4\le4+\tfrac{M}{2}\cdot4\)，即 \(8\le4+2M\)，解得 \(M\ge2\)；取 \(M=2\) 时边界函数 \(f=1+4t-t^{2}\) 满足 \(f(2)=5\)、\(f''=-2\) 且 \(f'(0)=4\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q13">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">三阶·对称三条件</span>
+    <span class="qsrc">P107</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) в \([-2,2]\) 上三阶可导，\(f(-2)=2\)，\(f(2)=2\)，\(f'(0)=0\)，证明存在 \(x_{0}\in(-2,2)\) 使 \(f'''(x_{0})=\dfrac34\)。</p>
+  </div>
+  <div class="answer">答案：命题不成立。反例 \(f(x)\equiv2\)：\(f(-2)=2\)、\(f(2)=2\)、\(f'(0)=0\) 全部满足，而 \(f'''\equiv0\)，取不到 \(3/4\)。三条数据未约束三阶导。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：对称区间上两端等值加内点导数共三条数据，结论指向三阶导；与第 6、10 题同骨架，先列三次插值看首项系数。</p>
+    \[ H(x)=Ax^{3}+Bx^{2}+Cx+D,\qquad H'(0)=0\ \Longrightarrow\ C=0. \]
+    <p>两端等值：</p>
+    \[ H(-2)=-8A+4B+D=2,\qquad H(2)=8A+4B+D=2. \]
+    <p>两式相减得 \(16A=0\)，即 \(A=0\)，插值三次退化为二次：</p>
+    \[ H'''=6A=0,\qquad 4B+D=2. \]
+    <p>\(B,D\) 仍留自由参数。令 \(g=f-H\)，只有 \(g(-2)=g(2)=g'(0)=0\) 三个零点，罗尔两次最多到二阶，\(g'''\) 不必为零。</p>
+    <p>取常值函数 \(f\equiv2\) 逐条验前提：\(f(-2)=2\)、\(f(2)=2\)、\(f'(0)=0\) 均成立，\(f'''\equiv0\)，而 \(0\ne3/4\)，结论不成立。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 对称区间＋内点导数为零就凑成四条件：题面缺另一端导数数据，三阶导不被 Hermite 插值锁死。</p>
+    <p>② 插值首项符号算错：两端等值相减直接给出 \(A=0\)，三阶导插值值为零，与书给 \(3/4\) 对不上。</p>
+    <p>③ 反例选取不当：常值函数同时满足两端等值与内点导零，是检验三阶约束的最简反例。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对称区间三条件题与第 6、10 题同组：两端同号配 \(f'(0)=0\) 时插值首项被消成零，结论三阶导常数必伪；两端反号时首项被钉成非零常数，再与书给值比对。区间长度只影响常数量级，不改变「数据不足」的判定。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 承本题条件，补充 \(f''(0)=0\)，判断三次插值的首项系数是否仍为零。</p>
+    <p class="var-ans">答案：仍为零。新增 \(f''(0)=0\) 只定 \(B=0\)，\(A\) 由两端等值相减已被消去，\(H'''=0\)；此时插值退化为常值 \(2\)，自由参数被进一步消去一个。</p>
+  </div>
+</article>
+
+<article class="q" id="q14">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">二阶·多项式下控</span>
+    <span class="qsrc">P107</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([0,1]\) 上二阶可导，\(f(0)=0\)，\(f(1)=1\)，且 \(f''(x)\le60\)，证明 \(f(x)\ge30x^{2}-60x^{3}+30x^{4}\)。</p>
+  </div>
+  <div class="answer">答案：命题不成立。反例 \(f(x)=x\)：\(f(0)=0\)、\(f(1)=1\)、\(f''\equiv0\le60\) 全部满足；在 \(x=1/2\) 处 \(f=1/2\)，右端 \(g=15/8\)，\(f<g\)，下控不等式被破坏。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：二阶导上界配两端定值，结论要求 \(f\) 不低于给定四次多项式；先作差核对曲率方向，再取线性函数扫中点。</p>
+    \[ g(x)=30x^{2}-60x^{3}+30x^{4},\qquad g''(x)=60-360x+180x^{2}. \]
+    <p>作差 \(h=f-g\)，端点：</p>
+    \[ h(0)=0,\qquad h(1)=1-(30-60+30)=0. \]
+    <p>由 \(f''\le60\) 只能得上界：</p>
+    \[ h''=f''-g''\le60-g''=360x-180x^{2}=180x(2-x)\ge0. \]
+    <p>这只是 \(h''\) 不超过一个非负量，未给 \(h''\) 下界，\(h\) 不必为凹，不能由零端点弦推出 \(h\ge0\)。取 \(f=x\) 实测：</p>
+    \[ g(1/2)=30\cdot\frac14-60\cdot\frac18+30\cdot\frac1{16}=\frac{15}{8},\qquad f(1/2)=\frac12<\frac{15}{8}. \]
+    <p>前提逐条核验：\(f(0)=0\)、\(f(1)=1\)、\(f''\equiv0\le60\) 均成立，而 \(f(1/2)<g(1/2)\)，结论 \(f\ge g\) 不成立。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 方向配错：上界 \(f''\le60\) 配下控 \(f\ge g\) 需要差函数为凹，题面曲率方向与结论方向相反。</p>
+    <p>② 符号传递出错：\(h''\le60-g''\)，右端非负不代表 \(h''\ge0\)，不能把上界读成下界。</p>
+    <p>③ 多项式系数大就以为包络紧：\(g(1/2)=15/8\gt{}1\)，中点处 \(g\) 已高于 \(f(1)=1\) 的线性弦，扫内点即穿帮。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题与第 11 题同属「上界曲率＋下控多项式」伪命题组，差别只在曲率常数与多项式系数。判伪后可对照真命题骨架：把条件换成 \(f''\ge60\)、结论改成 \(f\le g\)，差函数被迫为凸，方向才对齐。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 取线性函数 \(f(x)=x\)，在 \(x=1/3\)、\(x=2/3\) 处比较 \(f\) 与 \(g=30x^{2}-60x^{3}+30x^{4}\) 的大小，并写出 \(g-x\) 的符号。</p>
+    <p class="var-ans">答案：\(g-x=30x^{2}(1-x)^{2}-x\)；在 \(1/3\)、\(2/3\) 处 \(g\) 均大于 \(x\)，线性弦处处被 \(g\) 压在下方。这正是主命题下控方向不成立的几何原因：包络 \(g\) 在内部高于连接两端的弦。</p>
+  </div>
+</article>
+
+<article class="q" id="q15">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">三阶·Hermite常数</span>
+    <span class="qsrc">P107</span>
+  </div>
+  <div class="stem">
+    <p>设 \(f(x)\) 在 \([1,3]\) 上三阶可导，\(f(1)=0\)，\(f(3)=0\)，\(f'(1)=1\)，\(f'(3)=0\)，证明存在 \(\eta\in(1,3)\) 使 \(f'''(\eta)=\dfrac32\)。</p>
+  </div>
+  <div class="answer">答案：命题成立。区间长 \(h=2\)，四数据 \(y_{0}=y_{1}=0\)、\(s_{0}=1\)、\(s_{1}=0\)，Hermite 插值三阶导 \(6h/h^{3}=3/2\)；令 \(g=f-H\)，两端二重零点两次罗尔得 \(g'''(\eta)=0\)，故 \(f'''(\eta)=3/2\)。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：四条端点数据钉三次 Hermite 曲线，区间不是 \([0,1]\) 而是 \([1,3]\)，先算区间长再代公式。</p>
+    \[ h=3-1=2,\quad y_{0}=0,\ y_{1}=0,\quad s_{0}=1,\ s_{1}=0. \]
+    <p>Hermite 三阶导：</p>
+    \[ H'''=\frac{6\left[2(y_{0}-y_{1})+(s_{0}+s_{1})h\right]}{h^{3}}=\frac{6\cdot2}{2^{3}}=\frac{12}{8}=\frac32. \]
+    <p>令 \(g=f-H\)，\(g(1)=g'(1)=g(3)=g'(3)=0\)，两端各为二重零点。罗尔一次得内点 \(g'\) 零点，连同两端 \(g'=0\) 共三个一阶导零点，再两次罗尔：</p>
+    \[ g'''(\eta)=0\ \Longrightarrow\ f'''(\eta)=H'''=\frac32. \]
+    <p>平移核验：把 \(t=x-1\) 换到 \([0,2]\)，数据排列与第 12 题 \(s_{0}=1,s_{1}=0\) 一致；取 \(f=H\) 时 \(f'''\equiv3/2\)，与书给常数对齐。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 区间长取成端点序号差 \(3-1=2\) 后忘记立方：公式分母是 \(h^{3}=8\)，分子 \(6h=12\)，常数 \(3/2\) 不是 \(6/4\) 的粗算值。</p>
+    <p>② 平移区间改变数据：平移只换自变量，\(y,s\) 原样保留，不能把 \(f'(1)=1\) 随平移改掉。</p>
+    <p>③ 罗尔次数仍按三条件题处理：本题四条件齐全，两端二重零点才支撑得到三阶。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>四条件 Hermite 题的数值验算就两步：定 \(h\)，代五量。区间取非标准长度（\([1,3]\)、\([0,2]\)）时常数随 \(h^{-2}\) 或 \(h^{-3}\) 缩放；变式常把区间缩短或拉长，检验能否正确重算 \(h\) 的幂次。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([1,2]\) 上三阶可导，\(f(1)=f(2)=0\)，\(f'(1)=1\)，\(f'(2)=0\)，求被钉住的 \(f'''(\eta)\) 常数。</p>
+    <p class="var-ans">答案：\(h=1\)，\(H'''=6\cdot1/1^{3}=6\)。区间长由 \(2\) 缩到 \(1\)，常数由 \(3/2\) 升到 \(6\)，符合 \(h^{-2}\) 缩放口径。</p>
+  </div>
+</article>
+
+<article class="q" id="q16">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">二阶·积分拆导</span>
+    <span class="qsrc">P107</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \([0,4]\) 上二阶可导，\(f(0)=0\)，\(f(4)=16\)，且 \(\left|f''(x)\right|\le1\)，证明 \(\left|f'(x)\right|\le8\)。</p>
+  </div>
+  <div class="answer">答案：命题成立。由 \(\left|f''\right|\le1\) 得 \(f'\) 为 \(1\)-Lipschitz；定值 \(16=f(4)-f(0)\) 写成积分后拆出 \(4f'(x)\) 加扰动，缩放得 \(\left|f'(x)\right|\le\dfrac{x^{2}-4x+24}{4}\le6\)，强于书给的 \(8\)。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两端函数值差 \(16\) 配二阶导上界 \(1\)，积分拆导型；先算最佳上界，再确认书给 \(8\) 是否被覆盖。</p>
+    <p>对任意 \(t,s\in[0,4]\)，\(\left|f'(t)-f'(s)\right|\le\left|t-s\right|\)。拆分定值：</p>
+    \[ 16=f(4)-f(0)=\int_{0}^{4}f'(t)\,\mathrm{d}t=4f'(x)+\int_{0}^{4}\left[f'(t)-f'(x)\right]\mathrm{d}t. \]
+    <p>扰动项积分估计：</p>
+    \[ \left|\int_{0}^{4}\left[f'(t)-f'(x)\right]\mathrm{d}t\right|\le\frac12\int_{0}^{4}|t-x|\,\mathrm{d}t=\frac{x^{2}+(4-x)^{2}}{2}. \]
+    <p>合并：</p>
+    \[ 4\left|f'(x)\right|\le16+\frac{x^{2}+(4-x)^{2}}{2}, \]
+    \[ \left|f'(x)\right|\le\frac{x^{2}+(4-x)^{2}+32}{8}=\frac{x^{2}-4x+24}{4}. \]
+    <p>右端在端点取最大 \(24/4=6\)，故 \(\left|f'(x)\right|\le6\lt8\)，书给 \(8\) 是更宽的界。取等函数 \(f=6t-\tfrac12t^{2}\)：\(f(4)=24-8=16\)，\(f''=-1\)，\(f'(0)=6\)，最佳常数 \(6\) 可达到。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 最佳界与书给界混为一谈：本题算出来 \(6\)，书给 \(8\) 仍成立，不要因 \(6<8\) 判伪；判伪只发生在书给界小于最佳界时。</p>
+    <p>② 积分扰动系数漏 \(1/2\)：\(\int|t-x|\,\mathrm{d}t\) 本身带 \(1/2\)，再乘 \(M=1\)，漏乘会把上界抬高。</p>
+    <p>③ 二次最值取在顶点：右端开口向上，最大值在端点 \(0\) 或 \(4\)，顶点 \(x=2\) 是最小值点。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>宽界命题在题集中常见：最佳常数小于书给常数时命题为真但不紧。同骨架变式会反过来问「最佳上界是多少」，此时按端点极值 \(U=(\Delta+ML^{2}/2)/L\) 报 \(6\)；也可附加 \(f'(0)=6\) 证函数唯一。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(f(x)\) 在 \([0,4]\) 上二阶可导，\(f(0)=0\)，\(f(4)=16\)，\(\left|f''(x)\right|\le1\)，求 \(\left|f'(x)\right|\) 的最佳上界，并写出达到端点极值的函数。</p>
+    <p class="var-ans">答案：最佳上界 \(6\)，函数 \(f(x)=6x-\tfrac12x^{2}\)。\(f''=-1\) 全程取边界，\(f'(0)=6\)、\(f'(4)=2\)，积分 \(f(4)=24-8=16\) 与题面对齐。</p>
+  </div>
+</article>
+
+<article class="q" id="q17">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">三阶·条件不足</span>
+    <span class="qsrc">P107</span>
+  </div>
+  <div class="stem">
+    <p>【冯建轩】设 \(f(x)\) 在 \(\left[0,\dfrac{\pi}{2}\right]\) 上三阶可导，\(f(0)=0\)，\(f\left(\dfrac{\pi}{2}\right)=1\)，\(f'(0)=0\)，证明存在 \(x_{0}\in\left(0,\dfrac{\pi}{2}\right)\) 使 \(f'''(x_{0})=\dfrac{48}{\pi^{3}}\)。</p>
+  </div>
+  <div class="answer">答案：命题不成立。反例 \(f(x)=4x^{2}/\pi^{2}\)：\(f(0)=0\)、\(f(\pi/2)=1\)、\(f'(0)=0\) 全部满足，而 \(f'''\equiv0\)，取不到 \(48/\pi^{3}\)。三条数据下三阶导未被钉住。</div>
+
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>识别类型：两端值加一个端点导数共三条数据，结论指向三阶导；区间取 \([0,\pi/2]\)，先解三次插值看首项是否自由。</p>
+    \[ H(x)=Ax^{3}+Bx^{2}+Cx+D. \]
+    <p>由 \(H(0)=0\) 得 \(D=0\)，由 \(H'(0)=0\) 得 \(C=0\)；记 \(h=\pi/2\)，代入 \(H(h)=1\)：</p>
+    \[ Ah^{3}+Bh^{2}=1\ \Longrightarrow\ A=\frac{1-Bh^{2}}{h^{3}}. \]
+    <p>首项系数 \(A\) 随 \(B\) 自由变动，三阶导不是定值：</p>
+    \[ H'''=6A=\frac{6(1-Bh^{2})}{h^{3}}. \]
+    <p>令 \(g=f-H\)，只有 \(g(0)=g(h)=g'(0)=0\) 三个零点，罗尔两次最多到二阶，\(g'''\) 不必为零。</p>
+    <p>取二次函数 \(f=4x^{2}/\pi^{2}\) 逐条验前提：\(f(0)=0\)，\(f(\pi/2)=4/\pi^{2}\cdot\pi^{2}/4=1\)，\(f'(x)=8x/\pi^{2}\) 故 \(f'(0)=0\)，前提全满足；\(f'''\equiv0\)，永远取不到 \(48/\pi^{3}\)，结论不成立。</p>
+  </div>
+
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 把 \(\pi/2\) 长度代错：区间长 \(h=\pi/2\)，不是 \(\pi\)；但本题三条件不足，无论 \(h\) 取何值三阶导都不被锁死。</p>
+    <p>② 补不足的数据硬凑常数：缺 \(f'(h)=0\) 一条，Hermite 四条件差一条，不能把二次反例排除在外。</p>
+    <p>③ 反例系数不验端点：\(4/\pi^{2}\) 由 \(f(\pi/2)=1\) 反解，须代回端点确认等于 \(1\)。</p>
+  </div>
+
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>本题与第 14 题同属三角函数值区间的三条件伪命题组。补全另一端导数后才进入 Hermite 验算：按公式 \(H'''=6[2(y_{0}-y_{1})+(s_{0}+s_{1})h]/h^{3}\) 重算常数，再与题面数值比对。</p>
+  </div>
+
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 承本题三条件，取三次函数族 \(f=Ax^{3}+Bx^{2}\)（由 \(f(0)=0,f'(0)=0\) 消去一次项与常数项），说明 \(f'''\) 能取到哪些值。</p>
+    <p class="var-ans">答案：由 \(f(\pi/2)=1\) 得 \(Ah^{3}+Bh^{2}=1\)，\(A\) 随 \(B\) 自由，\(f'''=6A\) 可取任意实数；二次反例对应 \(A=0\)。三条件下不存在被钉住的三阶导常数，题面 \(48/\pi^{3}\) 只是众多可能值之一。</p>
+  </div>
+</article>
+
+<!--END-->
