@@ -1,0 +1,983 @@
+<article class="q" id="q1">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·偶对称拆段</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_{-2}^{2}|x|e^{-|x|}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 2-\frac{6}{e^2}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>被积函数 \(|x|e^{-|x|}\) 是偶函数，\(|x|\) 与 \(e^{-|x|}\) 都关于纵轴对称，对称区间上的偶积分可折半到 \([0,2]\)；在 \(x\ge0\) 段内 \(|x|=x\)、\(|x|=x\)，绝对值可直接脱去。</p>
+    \[ \int_{-2}^{2}|x|e^{-|x|}\,dx=2\int_0^2 xe^{-x}\,dx \]
+    <p>对 \(\int xe^{-x}dx\) 分部积分：取 \(u=x\)、\(dv=e^{-x}dx\)，则 \(du=dx\)、\(v=-e^{-x}\)。</p>
+    \[ \int xe^{-x}dx=-xe^{-x}+\int e^{-x}dx=-(x+1)e^{-x}+C \]
+    <p>代入上下限 \(0\) 与 \(2\)：</p>
+    \[ \int_0^2 xe^{-x}dx=\left[-(x+1)e^{-x}\right]_0^2=1-\frac{3}{e^2} \]
+    <p>折半系数 \(2\) 乘回，得 \(I=2\left(1-\frac{3}{e^2}\right)=2-\frac{6}{e^2}\)。量级校验：被积函数在 \([0,2]\) 上非负，\(xe^{-x}\) 最大值在 \(x=1\) 处为 \(1/e\)，折半积分小于 \(2\cdot2\cdot1/e\approx1.47\)，结果 \(2-6/e^2\approx1.188\) 落在该量级内；按 \(e^{-|x|}\) 在正负两段分别积分也不会出错，因为偶函数折半不涉及变号。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 偶函数折半只对对称区间成立，上限须与下限关于 \(0\) 对称。② \(e^{-|x|}\) 在 \(x\ge0\) 为 \(e^{-x}\)，不要写成 \(e^{x}\)。③ 分部后边界项 \(-xe^{-x}\) 在 \(x=0\) 处为 \(0\)，容易漏记常数项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>绝对值乘指数核是偶对称拆段的常见组合；同类还有 \(|x|e^{-x^2}\)、\(|x|\ln(1+|x|)\)，先判奇偶再折半是标准顺序。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(g(x)=|x|e^{-|x|}\)，讨论 \(g\) 在 \((-\infty,0)\) 上的单调性，并指出它在整个实数轴上的最大值点。</p>
+    <p class="var-ans">答案：在 \((-\infty,0)\) 上 \(g(x)=-xe^{x}\)，导数 \(g'(x)=-(x+1)e^{x}\)，故在 \((-\infty,-1)\) 递增、在 \((-1,0)\) 递减；由偶对称性最大值点为 \(x=\pm1\)，最大值为 \(1/e\)，\(x=0\) 处取最小值 \(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q2">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·三角差拆点</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^{2\pi}|\sin x-\cos x|\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 4\sqrt2\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>先把差式合一：\(\sin x-\cos x=\sqrt2\sin(x-\pi/4)\)，绝对值内变号点满足 \(\sin(x-\pi/4)=0\)，在 \([0,2\pi]\) 内为 \(x=\pi/4\) 与 \(x=5\pi/4\)。</p>
+    \[ \sin x-\cos x=\sqrt2\sin\left(x-\frac\pi4\right) \]
+    <p>作平移 \(t=x-\pi/4\)，被积函数周期仍为 \(2\pi\)，平移不改变整周期上的积分值：</p>
+    \[ I=\sqrt2\int_{-\pi/4}^{7\pi/4}|\sin t|\,dt=\sqrt2\int_0^{2\pi}|\sin t|\,dt \]
+    <p>\(|\sin t|\) 在一个周期内有两个正半波，每个半波面积为 \(2\)：</p>
+    \[ \int_0^{2\pi}|\sin t|dt=2\int_0^\pi\sin t\,dt=2\cdot2=4 \]
+    <p>故 \(I=4\sqrt2\)。校验：若不合一而直接在两个零点拆三段判号，\([0,\pi/4]\) 取负、\([\pi/4,5\pi/4]\) 取正、\([5\pi/4,2\pi]\) 取负，三段面积之和与平移法结果相同；\(4\sqrt2\approx5.657\)，大于 \(\int_0^{2\pi}|\sin x|dx=4\)，与振幅被放大 \(\sqrt2\) 倍相符。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 零点在区间内有两个，拆段时不能只写一个。② 平移后积分区间随之滑动，整周期积分与起点无关。③ 合一公式中 \(\sqrt2\) 的系数不能丢。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>三角差的绝对值积分常用合一公式化归为 \(|\sin|\) 或 \(|\cos|\) 的整周期积分；考向还包括 \(|\sin x+\cos x|\)、\(a\sin x+b\cos x\) 型。合一前后周期不变，振幅系数 \(\sqrt{a^2+b^2}\) 决定积分总量，拆点相位由辅助角定位，整周期上的平移不改变面积。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明恒等式 \(|\sin x-\cos x|=\sqrt2|\sin(x-\pi/4)|\)，并说明该函数的最小正周期与振幅包络最大值。</p>
+    <p class="var-ans">答案：由 \(\sin x-\cos x=\sqrt2\sin(x-\pi/4)\) 两边取绝对值即得；\(|\sin(x-\pi/4)|\) 的最小正周期为 \(\pi\)，故左端最小正周期也是 \(\pi\)，振幅包络最大值为 \(\sqrt2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q3">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·max拆点</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^1\max\{x,1-x\}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac34\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>max 的拆点由两支相等给出：\(x=1-x\)，即 \(x=1/2\)。在 \([0,1/2]\) 上 \(1-x\ge x\)，max 取 \(1-x\)；在 \([1/2,1]\) 上 \(x\ge1-x\)，max 取 \(x\)。</p>
+    \[ \max\{x,1-x\}=\begin{cases}1-x,&0\le x\le\frac12\\x,&\frac12\le x\le1\end{cases} \]
+    <p>两段分别积分：</p>
+    \[ I=\int_0^{1/2}(1-x)dx+\int_{1/2}^1 x\,dx \]
+    <p>算边界值：</p>
+    \[ \int_0^{1/2}(1-x)dx=\left[x-\frac{x^2}{2}\right]_0^{1/2}=\frac38,\quad \int_{1/2}^1 x\,dx=\left[\frac{x^2}{2}\right]_{1/2}^1=\frac38 \]
+    <p>相加得 \(I=3/4\)。校验：max 两支在 \([0,1]\) 上都不小于 \(1/2\)，故积分不小于 \(1/2\)；又不超过 \(1\)，结果 \(0.75\) 居中；两段由关于 \(x=1/2\) 的对称互换得到，面积必然相等，可作为互验。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① max 拆点是解方程相等，不是看绝对值零点。② 拆点两侧哪支大要逐段判，不能凭直觉。③ 两段面积对称相等时，可只算一段再乘 \(2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>max/min 型分段积分与绝对值型流程一致：先求等点，再逐段选支；常与幂函数、指数函数配对出现在同一区间。两支在等点处相交，选支方向在等点两侧互换，写分段式时要与区间端点顺序对应，等点归属哪一段不影响积分值。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(h(x)=\max\{x,1-x\}\)，求 \(h\) 在 \([0,1]\) 上的最小值及最小值点，并比较 \(h(x)\) 与常数 \(1/2\) 的大小。</p>
+    <p class="var-ans">答案：最小值为 \(1/2\)，在 \(x=1/2\) 处取得；在 \([0,1]\) 上恒有 \(h(x)\ge1/2\)，仅中点取等，两支 \(x\) 与 \(1-x\) 在此相交。</p>
+  </div>
+</article>
+
+<article class="q" id="q4">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·根号拆点</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^4|\sqrt{x}-1|\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 2\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>绝对值内 \(\sqrt x-1=0\) 的解为 \(x=1\)，落在 \([0,4]\) 内部。判号：\(0\le x\lt1\) 时 \(\sqrt x\lt1\)，取 \(1-\sqrt x\)；\(1\le x\le4\) 时 \(\sqrt x\ge1\)，取 \(\sqrt x-1\)。</p>
+    \[ |\sqrt x-1|=\begin{cases}1-\sqrt x,&0\le x\le1\\\sqrt x-1,&1\le x\le4\end{cases} \]
+    <p>拆成两段：</p>
+    \[ I=\int_0^1(1-\sqrt x)dx+\int_1^4(\sqrt x-1)dx \]
+    <p>幂函数积分：</p>
+    \[ \int_0^1(1-\sqrt x)dx=\left[x-\frac23x^{3/2}\right]_0^1=\frac13 \]
+    \[ \int_1^4(\sqrt x-1)dx=\left[\frac23x^{3/2}-x\right]_1^4=\frac53 \]
+    <p>两段相加 \(I=1/3+5/3=2\)。校验：被积函数非负，上限 \(4\) 处 \(|\sqrt4-1|=1\)，平均高度小于 \(1\)，积分小于 \(4\)，结果 \(2\) 合理；前段根号不可导点 \(x=0\) 不影响可积性。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\sqrt x\) 的定义域 \(x\ge0\) 已由积分区间保证。② 拆点 \(x=1\) 两侧脱号方向相反，别写反。③ \(x^{3/2}\) 的系数是 \(2/3\)，不是 \(3/2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根号型绝对值拆点后积分变为幂函数定积分；同类题有 \(|\sqrt{x+1}-2|\)、\(|x-\sqrt x|\)，关键仍是先解方程定零点。根号函数在定义域端点可能不可导，但不影响定积分存在性，拆点仍只看根号内表达式的零点，不把端点导数问题带入积分计算。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(F(x)=\int_0^x|\sqrt t-1|\,dt\)，求 \(F'(1)\)，并说明 \(F\) 在 \(x=1\) 处是否可导。</p>
+    <p class="var-ans">答案：\(F'(1)=0\)。被积函数在 \(t=1\) 处连续（两侧极限都是 \(0\)），变限积分可导，\(F'(x)=|\sqrt x-1|\)，代入 \(x=1\) 即得 \(0\)；\(F\) 在 \(x=1\) 处可导，导数值与拆点位置无关。</p>
+  </div>
+</article>
+
+<article class="q" id="q5">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·分段定义</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】设 \(f(x)=\begin{cases}x^2,&|x|\le1\\1,&|x|\gt1\end{cases}\)，求 \(\displaystyle\int_{-2}^2 f(x)\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac83\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>函数按 \(|x|=1\) 分三段：\([-2,-1)\) 上 \(|x|\gt1\) 取常数 \(1\)；\([-1,1]\) 上取 \(x^2\)；\((1,2]\) 上取常数 \(1\)。被积函数为偶，折半到正半轴。</p>
+    \[ \int_{-2}^2 f(x)dx=2\left(\int_0^1 x^2dx+\int_1^2 1\,dx\right) \]
+    <p>分别计算：</p>
+    \[ \int_0^1 x^2dx=\frac13,\qquad \int_1^2 1\,dx=1 \]
+    <p>折半乘回：</p>
+    \[ I=2\left(\frac13+1\right)=\frac83 \]
+    <p>校验：若整段按 \(x^2\) 算，\(\int_{-2}^2x^2dx=16/3\approx5.33\)；若整段按常数 \(1\) 算为 \(4\)，结果 \(8/3\approx2.67\) 偏小，是因为中间段 \(x^2\le1\)、两端段为 \(1\)；\(x=\pm1\) 两侧函数值都是 \(1\)，衔接连续。</p>
+    <p>再按分段表核验：左外段 \([-2,-1)\) 与右外段 \((1,2]\) 都取常数 \(1\)，折半后外段贡献 \(2\cdot1=2\)；中间段折半贡献 \(2/3\)，合计 \(8/3\)，与原函数边界代入结果一致；分段点上函数值归哪一支，对单点测度为 \(0\) 的积分没有影响。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分段条件 \(|x|\le1\) 与 \(|x|\gt1\) 的边界点归属不影响积分（单点测度为 \(0\)）。② 偶函数折半后别漏乘 \(2\)。③ 中间段是 \(x^2\)，不要误写成 \(|x|\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>分段定义函数的定积分按分段点逐段拼接；常与奇偶性、绝对值条件混合，考向是辨认每一段适用哪一支表达式。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 讨论题中分段函数在 \(x=1\) 与 \(x=-1\) 处的连续性，并判断它在这两点是否存在跳跃间断。</p>
+    <p class="var-ans">答案：连续。在 \(x=1\) 处左极限 \(1^2=1\)、右极限常数 \(1\)、函数值 \(1\)，三者相等；\(x=-1\) 由偶对称性同理连续；两点都没有跳跃间断，分段点只是表达式切换处。</p>
+  </div>
+</article>
+
+<article class="q" id="q6">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·对数乘绝对值</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^3|x-1|\ln(1+x)\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 4\ln2-\frac14\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>拆点 \(x=1\)。\([0,1]\) 上 \(1-x\ge0\)，脱号为 \((1-x)\ln(1+x)\)；\([1,3]\) 上 \(x-1\ge0\)，脱号为 \((x-1)\ln(1+x)\)。对数因子在 \(x\ge0\) 上连续，不需另设拆点。</p>
+    \[ I=\int_0^1(1-x)\ln(1+x)dx+\int_1^3(x-1)\ln(1+x)dx \]
+    <p>两段都用分部积分，取 \(u=\ln(1+x)\)、\(dv\) 分别为 \((1-x)dx\) 与 \((x-1)dx\)。前段算得：</p>
+    \[ \int_0^1(1-x)\ln(1+x)dx=2\ln2-\frac54 \]
+    <p>后段算得：</p>
+    \[ \int_1^3(x-1)\ln(1+x)dx=1+2\ln2 \]
+    <p>相加：</p>
+    \[ I=\left(2\ln2-\frac54\right)+\left(1+2\ln2\right)=4\ln2-\frac14 \]
+    <p>校验：\(4\ln2\approx2.773\)，减 \(0.25\) 得 \(2.523\)；被积函数在两段都非负，上限 \(3\) 处 \(2\ln4\approx2.77\)，平均高度小于 \(1\)，积分落在 \([0,3]\) 量级内；分部时对数留在 \(u\) 侧，多项式进 \(dv\)，边界项在 \(x=0\) 处为 \(0\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 拆点只由 \(|x-1|\) 决定，\(\ln(1+x)\) 不变号。② 分部后 \(v/(1+x)\) 的多项式除法要做对，常数项易漏。③ 两段脱号多项式分别是 \(1-x\) 与 \(x-1\)，符号相反。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>绝对值乘对数是分部积分与分段积分的复合题；考向还包括 \(|x|\ln x\)、\(|x-a|\ln(x+b)\)，流程仍是先拆段、再逐段分部。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(I(a)=\int_0^a|x-1|\ln(1+x)dx\)，求 \(I'(a)\)，并写出 \(a\) 跨过 \(1\) 前后导数表达式的差别。</p>
+    <p class="var-ans">答案：\(I'(a)=|a-1|\ln(1+a)\)。由变限积分求导公式直接读出；当 \(0\le a\lt1\) 时脱号为 \((1-a)\ln(1+a)\)，当 \(a\gt1\) 时为 \((a-1)\ln(1+a)\)，导数在 \(a=1\) 处连续、两侧表达式随拆点切换。</p>
+  </div>
+</article>
+
+<article class="q" id="q7">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·对称区间倒数核</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_{-1}^1\frac{|x|}{1+e^x}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac12\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>直接拆段去绝对值并不省事，本题用对称区间配对：记 \(I=\int_{-1}^1 |x|/(1+e^x)dx\)，作替换 \(x=-t\)。</p>
+    \[ I=\int_{-1}^1\frac{|x|}{1+e^{-x}}dx=\int_{-1}^1\frac{|x|e^x}{1+e^x}dx \]
+    <p>两式相加：</p>
+    \[ 2I=\int_{-1}^1|x|\left(\frac1{1+e^x}+\frac{e^x}{1+e^x}\right)dx=\int_{-1}^1|x|dx \]
+    <p>右侧是偶积分：</p>
+    \[ \int_{-1}^1|x|dx=2\int_0^1 x\,dx=1 \]
+    <p>故 \(I=1/2\)。校验：配对相加能消掉分母的关键是 \(1/(1+e^x)\) 与 \(e^x/(1+e^x)\) 互为余式；若只在正半轴分部，会得到含 \(x\ln(1+e^x)\) 的边界项，化简后仍回到同一结果。</p>
+    <p>补一条对称写法：把配对式写成 \(I=\int_{-1}^1 |x|e^x/(1+e^x)dx\)，与原式相加后被积因子合并为 \(|x|\)，分母完全消去；这一消去只在分子为偶因子时成立，若分子带奇性，配对得到的是另一类积分，不能照搬本技巧。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 配对替换时分子 \(|x|\) 不变号，分母跟着翻成 \(1+e^{-x}\)。② 相加后余式和为 \(1\)，不是 \(2\)。③ 单点 \(x=0\) 处分母有限，无间断。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对称区间上 \(1/(1+e^x)\) 型核是配对技巧的标准场景；同类还有 \(1/(1+2^x)\)、\(e^x/(1+e^x)\)，常配偶或奇的被积因子。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明：对任意在 \([-a,a]\) 上为偶的连续函数 \(g\)，有 \(\int_{-a}^a\frac{g(x)}{1+e^x}dx=\frac12\int_{-a}^a g(x)dx\)。</p>
+    <p class="var-ans">答案：成立。记左端为 \(I\)，\(x=-t\) 替换得 \(I=\int_{-a}^a g(x)e^x/(1+e^x)dx\)，两式相加余式和为 \(1\)，故 \(2I=\int_{-a}^a g(x)dx\)；证明本身只用到余式配对，不依赖 \(g\) 的具体表达式。</p>
+  </div>
+</article>
+
+<article class="q" id="q8">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·三角恒等式</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^\pi\sqrt{1-\sin x}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 4\sqrt2-4\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>根号内配方：\(1-\sin x=(\sin\frac x2-\cos\frac x2)^2\)，开方得绝对值。</p>
+    \[ \sqrt{1-\sin x}=\left|\sin\frac x2-\cos\frac x2\right| \]
+    <p>零点满足 \(\tan(x/2)=1\)，在 \([0,\pi]\) 内为 \(x=\pi/2\)。\([0,\pi/2]\) 上 \(\cos(x/2)\ge\sin(x/2)\)；\([\pi/2,\pi]\) 上反之。</p>
+    \[ I=\int_0^{\pi/2}\left(\cos\frac x2-\sin\frac x2\right)dx+\int_{\pi/2}^\pi\left(\sin\frac x2-\cos\frac x2\right)dx \]
+    <p>分别积分，半角原函数为：</p>
+    \[ \int\left(\cos\frac x2-\sin\frac x2\right)dx=2\sin\frac x2+2\cos\frac x2 \]
+    <p>代入边界得前段 \(2\sqrt2-2\)、后段 \(2\sqrt2-2\)：</p>
+    \[ I=2(2\sqrt2-2)=4\sqrt2-4 \]
+    <p>校验：\(4\sqrt2-4\approx1.657\)；被积函数在 \(x=0\) 与 \(x=\pi\) 处都是 \(1\)，中点 \(x=\pi/2\) 处为 \(0\)，平均高度小于 \(1\)，积分小于 \(\pi\)，结果合理。</p>
+    <p>半角拆点核验：\(\tan(x/2)=1\) 在 \([0,\pi]\) 内只有 \(x=\pi/2\) 一个解，左右两半分别对应余弦半角与正弦半角在前；两段面积相等是区间关于 \(\pi/2\) 对称的结果，半角原函数的系数 \(2\) 来自 \(d(x/2)\)，不能与折半系数混淆。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 开方必须带绝对值，不能直接写成 \(\sin(x/2)-\cos(x/2)\)。② 半角变量零点比整角晚半个周期，拆点是 \(\pi/2\) 而非 \(\pi/4\)。③ 半角积分系数 \(2\) 来自 \(d(x/2)\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根号三角式常靠 \(1\mp\sin x=(\sin\frac x2\mp\cos\frac x2)^2\) 脱根号；同类还有 \(\sqrt{1+\cos x}=|\cos(x/2)|\)，考向是恒等变形后再分段。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 写出恒等式 \(\sqrt{1-\sin x}=|\sin(x/2)-\cos(x/2)|\) 的证明过程，并求该右端在 \(x\in[0,\pi]\) 上的最大值。</p>
+    <p class="var-ans">答案：由 \((\sin\frac x2-\cos\frac x2)^2=\sin^2\frac x2+\cos^2\frac x2-2\sin\frac x2\cos\frac x2=1-\sin x\)，开方取绝对值即得；右端在端点 \(x=0,\pi\) 处取最大值 \(1\)，在 \(x=\pi/2\) 处取 \(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q9">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·高次幂</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>计算：\(\displaystyle\int_0^2 x|x-1|^3\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac12\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>拆点 \(x=1\)。\([0,1]\) 上 \(|x-1|=1-x\)，被积式 \(x(1-x)^3\)；\([1,2]\) 上 \(|x-1|=x-1\)，被积式 \(x(x-1)^3\)。</p>
+    \[ I=\int_0^1 x(1-x)^3dx+\int_1^2 x(x-1)^3dx \]
+    <p>前段令 \(u=1-x\)，后段令 \(u=x-1\)，两支化为同一幂型积分：</p>
+    \[ \int_0^1(1-u)u^3du=\frac14-\frac15=\frac1{20} \]
+    \[ \int_0^1(u+1)u^3du=\frac15+\frac14=\frac9{20} \]
+    <p>相加 \(I=1/20+9/20=1/2\)。校验：两次换元后上下限都落到 \([0,1]\)，多项式展开只含 \(u^3,u^4\) 两项；若直接展开 \((1-x)^3=1-3x+3x^2-x^3\) 再乘 \(x\) 逐项积分，前段系数 \(1/4-3/5+3/6-1/7\) 算得同一值，可作互验。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 三次方在绝对值内，脱号后三次方跟着翻号方向。② 换元后线性因子 \(x\) 要写成 \(1-u\) 或 \(u+1\)，不能丢。③ 两段不可合并为对称式，因为乘子 \(x\) 不是偶因子。④ 题头未印：页图第 10 题原题未带「【冯建轩】」前缀，题干按页图原样录入。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>绝对值乘高次幂常配合换元降为多项式幂积分；考向有 \(|x-a|^n(x+b)\)，拆点固定为 \(x=a\)。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(G(x)=\int_0^x t|t-1|^3dt\)，写出 \(G\) 在 \([0,2]\) 上的极小值点，并说明 \(G\) 是否单调递增。</p>
+    <p class="var-ans">答案：被积式在 \(t\in[0,2]\) 上非负，故 \(G'(x)=x|x-1|^3\ge0\)，\(G\) 在 \([0,2]\) 单调递增，极小值点为 \(x=0\)、极小值 \(0\)；内部 \(t=1\) 处导数为 \(0\) 只是驻点，不改变递增方向。</p>
+  </div>
+</article>
+
+<article class="q" id="q10">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·分段指数</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】设 \(f(x)=\begin{cases}e^x,&x\lt0\\x+1,&x\ge0\end{cases}\)，求 \(\displaystyle\int_{-1}^1 f(x)\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac52-\frac1e\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>分段点 \(x=0\)。左段 \([-1,0)\) 用 \(e^x\)，右段 \([0,1]\) 用 \(x+1\)，分别积分再拼接。</p>
+    \[ I=\int_{-1}^0 e^x dx+\int_0^1(x+1)dx \]
+    <p>左段：</p>
+    \[ \int_{-1}^0 e^x dx=e^0-e^{-1}=1-\frac1e \]
+    <p>右段：</p>
+    \[ \int_0^1(x+1)dx=\left[\frac{x^2}{2}+x\right]_0^1=\frac32 \]
+    <p>相加：</p>
+    \[ I=1-\frac1e+\frac32=\frac52-\frac1e \]
+    <p>校验：\(5/2-1/e\approx2.132\)；左段 \(e^x\) 在 \([-1,0]\) 介于 \(e^{-1}\) 与 \(1\) 之间，贡献小于 \(1\)，右段 \(x+1\) 介于 \(1\) 与 \(2\) 之间，贡献在 \(1.5\) 上下，两段量级与数值吻合；\(x=0\) 处左极限 \(1\)、右极限 \(1\)，衔接连续。</p>
+    <p>分段点衔接复核：\(x=0\) 左侧 \(e^x\to1\)，右侧 \(x+1\to1\)，函数连续；两段原函数分别为 \(e^x\) 与 \(x^2/2+x\)，边界代入时不要跨段套用对方原函数，左段下限 \(-1\) 代入 \(e^{-1}\) 这一项容易漏减。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分段点归属不影响积分值，但左右两支表达式别串。② 左段积分上限 \(0\) 代入 \(e^0=1\)，下限 \(-1\) 代入 \(e^{-1}\)，相减方向别反。③ 右段是 \(x+1\) 不是 \(x\)，常数项 \(1\) 别漏。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>分段函数积分按段拼接是基本动作；考向常把指数、多项式、三角分别放在分段两侧，要求辨认每段适用表达式。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 讨论题中分段函数在 \(x=0\) 处的连续性，并分别求出左导数与右导数。</p>
+    <p class="var-ans">答案：连续。左极限 \(e^0=1\)、右极限 \(0+1=1\)、函数值 \(1\)；左导数为 \(e^0=1\)，右导数为多项式斜率 \(1\)，左右导数相等，故在 \(0\) 处可导且导数为 \(1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q11">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·min拆点</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^3\min\{x,2\}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 4\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>min 拆点由 \(x=2\) 给出。\([0,2]\) 上 \(x\le2\)，min 取 \(x\)；\([2,3]\) 上 \(2\le x\)，min 取常数 \(2\)。</p>
+    \[ \min\{x,2\}=\begin{cases}x,&0\le x\le2\\2,&2\le x\le3\end{cases} \]
+    <p>分段积分：</p>
+    \[ I=\int_0^2 x\,dx+\int_2^3 2\,dx \]
+    <p>边界值：</p>
+    \[ \int_0^2 x\,dx=\left[\frac{x^2}{2}\right]_0^2=2,\qquad \int_2^3 2\,dx=2 \]
+    <p>相加 \(I=4\)。校验：min 两支在 \([0,3]\) 上都不超过 \(\max\{x,2\}\)，若整段按 \(x\) 算 \(\int_0^3x dx=9/2=4.5\)，结果 \(4\) 略小，符合后段被削平为常数 \(2\) 的直观；拆点 \(x=2\) 处两支都为 \(2\)，衔接连续。</p>
+    <p>min 选支再核一遍：\(x\in[0,2]\) 时 \(x\le2\)，较小支为 \(x\)；\(x\in[2,3]\) 时 \(2\le x\)，较小支为常数 \(2\)；拆点 \(x=2\) 处两支同为 \(2\)，衔接无跳跃。量级上后段常数 \(2\) 乘长度 \(1\) 贡献 \(2\)，前段三角形面积 \(2\)，合计 \(4\)；若把后段误写成 \(x\)，积分会变为 \(9/2\)，正是对照变式所算的差。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① min 选的是较小支，与 max 方向相反。② 后段是常数 \(2\)，积分等于 \(2\) 乘区间长度 \(1\)。③ 拆点解方程 \(x=2\)，不要与绝对值零点混淆。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>min 型与 max 型互为镜像；考向还有 \(\min\{x,a\}\)、\(\min\{e^x,1\}\)，流程都是先等点、再选支、后逐段积。min 型后段常被削成常数，积分几何上对应矩形被三角形切去一角，可用前后两段面积差核验选支方向。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 比较 \(\int_0^3\min\{x,2\}dx\) 与 \(\int_0^3 x\,dx\) 的大小，并求两者之差。</p>
+    <p class="var-ans">答案：前者小，差为 \(1/2\)。\(\int_0^3x dx=9/2\)，原式为 \(4\)，差 \(9/2-4=1/2\)；差值正好来自 \([2,3]\) 上被削去的 \(x-2\)，其积分 \(\int_2^3(x-2)dx=1/2\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q12">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·二次因式拆点</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^4|x^2-3x+2|\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac{17}{3}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>因式分解 \(x^2-3x+2=(x-1)(x-2)\)，零点 \(1\) 与 \(2\) 都在 \([0,4]\) 内。符号：\((0,1)\) 正、\((1,2)\) 负、\((2,4)\) 正。</p>
+    \[ |x^2-3x+2|=\begin{cases}x^2-3x+2,&x\in[0,1]\cup[2,4]\\-(x^2-3x+2),&x\in[1,2]\end{cases} \]
+    <p>拆三段：</p>
+    \[ I=\int_0^1 P(x)dx-\int_1^2 P(x)dx+\int_2^4 P(x)dx,\ P=x^2-3x+2 \]
+    <p>原函数 \(A(x)=x^3/3-3x^2/2+2x\)，边界值 \(A(0)=0,A(1)=5/6,A(2)=2/3,A(4)=16/3\)。</p>
+    \[ I=\frac56-\left(\frac23-\frac56\right)+\left(\frac{16}{3}-\frac23\right)=\frac{17}{3} \]
+    <p>校验：中间段取负号后贡献为 \(1/6\)，不是负的；结果 \(17/3\approx5.67\)。若整段按 \(P\) 积分，\(A(4)-A(0)=16/3\approx5.33\)，加上中间段被翻号补回的部分，结果略大，方向一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 两个零点把区间切成三段，符号两次翻转。② 中间段脱号要加负号，积分结果仍非负。③ 原函数在 \(x=1,2\) 处连续，边界值直接代入即可。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>二次式绝对值是多项式分段积分的代表；考向有 \(|x^2+bx+c|\)、\(|x^3-x|\)，核心是先求根、再按根排序判号。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(H(x)=\int_0^x|t^2-3t+2|dt\)，求 \(H'(2)\)，并判断 \(H\) 在 \(t=2\) 两侧导数是否连续。</p>
+    <p class="var-ans">答案：\(H'(2)=0\)。变限求导 \(H'(x)=|x^2-3x+2|\)，代入 \(x=2\) 得 \(0\)；被积函数在 \(t=2\) 两侧极限都是 \(0\)，导数在该点连续，脱号方向虽翻转但函数值衔接。</p>
+  </div>
+</article>
+
+<article class="q" id="q13">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·三角偶对称</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_{-\pi}^{\pi}|\sin x|\cos^2x\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac43\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>\(|\sin x|\) 与 \(\cos^2x\) 都是偶函数，乘积在 \([-\pi,\pi]\) 上为偶，折半到 \([0,\pi]\)，此区间内 \(\sin x\ge0\)，可直接脱号。</p>
+    \[ I=2\int_0^\pi \sin x\cos^2x\,dx \]
+    <p>令 \(u=\cos x\)，\(du=-\sin x dx\)，上下限 \(1\to-1\)：</p>
+    \[ \int_0^\pi\sin x\cos^2x\,dx=\int_{-1}^1 u^2du=\frac23 \]
+    <p>折半乘回：</p>
+    \[ I=2\cdot\frac23=\frac43 \]
+    <p>校验：被积函数非负，\(\cos^2x\le1\)，故积分不超过 \(2\int_0^\pi\sin x dx=4\)，结果 \(1.333\) 合理；换元后 \(\sin x dx\) 与 \(du\) 配套，不需要分部积分。</p>
+    <p>折半依据再写清：\(|\sin(-x)|=|\sin x|\)，\(\cos^2(-x)=\cos^2x\)，乘积为偶；偶积分折半后系数 \(2\) 来自对称两侧，不能与换元系数混淆。换元细节：\(u=\cos x\) 在 \([0,\pi]\) 上单调递减，\(x=0\) 对应 \(u=1\)，\(x=\pi\) 对应 \(u=-1\)，\(du=-\sin x dx\) 把负号翻正；\(\int_{-1}^1u^2du=2/3\) 由偶对称直接读出。若漏乘折半系数 \(2\)，会得到 \(2/3\)，是偶对称题常见系数错误。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 偶函数折半先于脱号，顺序别反。② \([0,\pi]\) 上 \(\sin\) 非负，绝对值可直接去掉；到 \([\pi,2\pi]\) 就不能这么做。③ 换元上下限随 \(u=\cos x\) 翻转，负号要处理掉。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>三角偶对称配绝对值是对称区间专题的常见组合；考向还有 \(|\cos x|\sin^2x\)、\(|\sin 2x|\cos x\)，先判奇偶再脱号。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 写出被积函数 \(|\sin x|\cos^2x\) 的奇偶性说明，并求半区间积分 \(\int_0^\pi|\sin x|\cos^2x\,dx\)。</p>
+    <p class="var-ans">答案：被积函数为偶；半区间值为 \(2/3\)。\(\int_0^\pi\sin x\cos^2x dx=[-\cos^3x/3]_0^\pi=2/3\)，全区间值为其两倍 \(4/3\)，与本题结果一致。</p>
+  </div>
+</article>
+
+<article class="q" id="q14">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·瑕积分根式</span>
+    <span class="qsrc">P156</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^1\frac{|2x-1|}{\sqrt{x(1-x)}}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 2\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>拆点 \(x=1/2\)。分母 \(\sqrt{x(1-x)}\) 在端点 \(0,1\) 处为零，是瑕积分；分子 \(|2x-1|\) 在中点为零。先判收敛性：端点邻域内被积式量级温和，瑕点行为可积。</p>
+    \[ I=\int_0^{1/2}\frac{1-2x}{\sqrt{x(1-x)}}dx+\int_{1/2}^1\frac{2x-1}{\sqrt{x(1-x)}}dx \]
+    <p>注意到 \(d[x(1-x)]=(1-2x)dx\)，令 \(u=x(1-x)\)，两段关于 \(x=1/2\) 对称：</p>
+    \[ I=2\int_0^{1/2}\frac{1-2x}{\sqrt{x(1-x)}}dx=2\int_0^{1/4}u^{-1/2}du \]
+    <p>算边界：</p>
+    \[ 2\cdot[2\sqrt u]_0^{1/4}=4\cdot\frac12=2 \]
+    <p>校验：换元后瑕点 \(x=0,1\) 对应 \(u=0\)，\(u^{-1/2}\) 在 \(0\) 附近可积（指数 \(-1/2\gt{}-1\)），收敛；结果 \(2\) 与数值积分一致；若忽略对称性直接两段硬算，边界项会在相消后给出同一值。</p>
+    <p>换元核验：\(x=\sin^2\theta\) 路径算得同一值 \(2\)；中点 \(x=1/2\) 只是分子零点，不是瑕点，端点瑕点由两条路径一致判为可积。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 分母零点在两端，先判收敛再算值，不能当普通定积分。② 分子导数恰是 \(1-2x\)，凑微分即可，不必三角换元。③ 对称折半后别漏乘 \(2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式分母瑕积分常配合凑微分或三角换元 \(x=\sin^2\theta\)；考向有 \(|ax+b|/\sqrt{x(1-x)}\)，重点是瑕点可积性判断。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 令 \(u=2x-1\)，把题中积分换元为关于 \(u\) 的积分，并判断被积函数在 \(u=0\) 处是否为瑕点。</p>
+    <p class="var-ans">答案：换元后 \(x=(1+u)/2\)、\(1-x=(1-u)/2\)、\(dx=du/2\)，被积式为 \(|u|/\sqrt{1-u^2}\) 在 \([-1,1]\) 上的积分；\(u=0\) 处分子为 \(0\)、分母为 \(1\)，不是瑕点，真正的端点瑕点在 \(u=\pm1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q15">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·分段常值（乱码）</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】设 \(f(x)=\begin{cases}\sin x,&x\in[0,\pi]\\0,&\text{〔原文该行条件排版失败〕}\end{cases}\)，求 \(\displaystyle\int_{-\infty}^{\infty}f(x)e^{-|x|}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac{1+e^{-\pi}}2\)</div>
+  <div class="block caveat">
+    <div class="block-title">校勘</div>
+    <p>页图第二行条件整段排版失败（显示为乱码字符），按可读部分与分段体例判为：\(x\notin[0,\pi]\) 时 \(f(x)=0\)；若原书第二行实为别的区间条件，积分区间需随之改动，本卡按上述复原口径复算。</p>
+  </div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>按复原口径，\(f\) 只在 \([0,\pi]\) 上等于 \(\sin x\)，其余处为 \(0\)，故无穷积分收缩为有限段：</p>
+    \[ \int_{-\infty}^{\infty}f(x)e^{-|x|}dx=\int_0^\pi \sin x\,e^{-x}dx \]
+    <p>分部积分两次（或套公式）：</p>
+    \[ \int e^{-x}\sin x\,dx=-\frac{e^{-x}}2(\sin x+\cos x)+C \]
+    <p>代入 \(0\) 与 \(\pi\)：</p>
+    \[ I=\left[-\frac{e^{-x}}2(\sin x+\cos x)\right]_0^\pi=\frac{e^{-\pi}}2+\frac12=\frac{1+e^{-\pi}}2 \]
+    <p>校验：\((1+e^{-\pi})/2\approx0.5216\)；被积式 \(\sin x e^{-x}\) 在 \([0,\pi]\) 非负，最大值在内部，积分小于 \(\int_0^\pi e^{-x}dx=1-e^{-\pi}\approx0.957\)，结果落在该范围内；\(x=0\) 与 \(x=\pi\) 处 \(\sin x\) 为 \(0\)，边界项只留余弦贡献。</p>
+    <p>区间外 \(f=0\) 的尾部对无穷积分无贡献，因此不必再判 \(\pm\infty\) 端的敛散性；有限段 \([0,\pi]\) 上 \(\sin x e^{-x}\) 连续有界，是普通定积分。若乱码行原书条件并非「其余为 \(0\)」，非零支所在区间要随之改写，本卡数值按复原口径成立。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 乱码行条件按「其余为 \(0\)」复原，若原条件不同需重读原书。② \(e^{-|x|}\) 在 \([0,\pi]\) 内就是 \(e^{-x}\)，不必带绝对值。③ 分部两次后正弦余弦重组，系数 \(1/2\) 来自特征根实部。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>分段常值乘指数核的无穷积分，考向是辨认非零支所在区间；乱码或缺条件题须先标注复原口径再计算。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明题中积分收敛：分别考察 \([0,\pi]\) 段与区间外 \(f=0\) 的尾部，说明无穷远端没有非零贡献。</p>
+    <p class="var-ans">答案：收敛。有限段 \([0,\pi]\) 上被积式连续有界，是普通定积分；区间外 \(f=0\)，积分为 \(0\)；无穷远处无尾部非零贡献，故 \(\int_{-\infty}^\infty f e^{-|x|}dx\) 收敛，值由 \([0,\pi]\) 段决定。</p>
+  </div>
+</article>
+
+<article class="q" id="q16">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·嵌套绝对值</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^3\bigl||x-1|-|x-2|\bigr|\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac52\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>内层 \(|x-1|-|x-2|\) 分段：\([0,1]\) 为 \((1-x)-(2-x)=-1\)；\([1,2]\) 为 \((x-1)-(2-x)=2x-3\)；\([2,3]\) 为 \((x-1)-(x-2)=1\)。外层绝对值再对中段取 \(|2x-3|\)，零点 \(x=3/2\)。</p>
+    \[ ||x-1|-|x-2||=\begin{cases}1,&x\in[0,1]\\|2x-3|,&x\in[1,2]\\1,&x\in[2,3]\end{cases} \]
+    <p>拆四段：</p>
+    \[ I=\int_0^1 1\,dx+\int_1^{3/2}(3-2x)dx+\int_{3/2}^2(2x-3)dx+\int_2^3 1\,dx \]
+    <p>中段关于 \(3/2\) 对称，两段各为：</p>
+    \[ \int_1^{3/2}(3-2x)dx=\frac14,\quad \int_{3/2}^2(2x-3)dx=\frac14 \]
+    <p>合计 \(I=1+1/4+1/4+1=5/2\)。校验：内外两层绝对值，外层只翻转中段内部；两端段内层已为 \(\pm1\)，取绝对值后都是 \(1\)；若漏掉外层，中段会按 \(2x-3\) 带号积分，前后两段面积不能相消。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 先脱内层再脱外层，顺序不能反。② 中段 \(2x-3\) 自身在 \(3/2\) 变号，要再拆一次。③ 端点段外层绝对值把 \(-1\) 翻成 \(1\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>嵌套绝对值是本节最易漏拆的结构；考向有 \(||x-a|-b|\)、\(|x-|x-a||\)，每层绝对值都要独立找零点。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(K(x)=||x-1|-|x-2||\)，写出它在 \([0,1]\) 与 \([2,3]\) 上的化简式，并判断 \(K\) 在 \(x=1\)、\(x=2\) 处是否连续。</p>
+    <p class="var-ans">答案：两端段 \(K=1\)；\(x=1\) 处左值 \(1\)、右值 \(|2\cdot1-3|=1\)，\(x=2\) 处左值 \(|4-3|=1\)、右值 \(1\)，故 \(K\) 在两点都连续，无跳跃。</p>
+  </div>
+</article>
+
+<article class="q" id="q17">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·瑕积分根式</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^1\frac{dx}{\sqrt{|x-\frac12|}}\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 2\sqrt2\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>瑕点在区间内部 \(x=1/2\)，两侧分别是 \((1/2-x)^{-1/2}\) 与 \((x-1/2)^{-1/2}\)。先判收敛：幂次 \(-1/2\gt{}-1\)，两类瑕积分都收敛。</p>
+    \[ I=\int_0^{1/2}\frac{dx}{\sqrt{1/2-x}}+\int_{1/2}^1\frac{dx}{\sqrt{x-1/2}} \]
+    <p>左段：</p>
+    \[ \int_0^{1/2}(1/2-x)^{-1/2}dx=2\sqrt{1/2}=\sqrt2 \]
+    <p>右段：</p>
+    \[ \int_{1/2}^1(x-1/2)^{-1/2}dx=2\sqrt{1/2}=\sqrt2 \]
+    <p>合计 \(I=2\sqrt2\)。校验：若分母为一次方 \(|x-1/2|\)，被积式约 \(1/|x-1/2|\)，对数型发散；本题带平方根，幂次减半后可积，收敛性结论不能照搬。</p>
+    <p>两侧对称再核：令 \(u=x-1/2\)，积分变为 \(\int_{-1/2}^{1/2}|u|^{-1/2}du\)，被积为偶，折半后 \(2\int_0^{1/2}u^{-1/2}du=2\cdot2\sqrt{1/2}=2\sqrt2\)，与分段直算一致；内部瑕点要左右各判一次，单侧收敛不能代替双侧结论。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 内部瑕点要左右各判一次。② \(u^{-1/2}\) 原函数是 \(2u^{1/2}\)，系数 \(2\) 别丢。③ 收敛性看幂次是否大于 \(-1\)，不是看被积式是否有界。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>内含瑕点的反常积分在分段积分专题中常出现；考向有 \(dx/\sqrt{|x-a|}\)、\(dx/|x-a|^\alpha\)，先判敛再算值。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 判断对照积分 \(\int_0^1 dx/|x-1/2|\) 的敛散性，并说明它与本题被积式在瑕点邻域的阶差。</p>
+    <p class="var-ans">答案：发散。\(x\to1/2\) 时被积式约 \(1/|x-1/2|\)，积分含 \(\ln|x-1/2|\) 型发散；本题被积式为 \(|x-1/2|^{-1/2}\)，幂次高半阶、可积，两者差在瑕点邻域的衰减速度。</p>
+  </div>
+</article>
+
+<article class="q" id="q18">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·sgn奇偶</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_{-1}^1\frac{\operatorname{sgn}(x)}{1+x^2}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 0\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>\(\operatorname{sgn}x\) 为奇函数，分母 \(1+x^2\) 为偶函数，商在对称区间上为奇函数；对称区间上奇函数积分为 \(0\)。</p>
+    \[ \frac{\operatorname{sgn}(-x)}{1+(-x)^2}=-\frac{\operatorname{sgn}(x)}{1+x^2} \]
+    <p>也可拆段直算：</p>
+    \[ I=\int_{-1}^0\frac{-1}{1+x^2}dx+\int_0^1\frac{1}{1+x^2}dx=-\arctan1+\arctan1=0 \]
+    \[ \int_{-1}^0\frac{-1}{1+x^2}dx=-\frac\pi4,\qquad \int_0^1\frac{1}{1+x^2}dx=\frac\pi4 \]
+    <p>\(x=0\) 处 \(\operatorname{sgn}\) 未定义，单点测度为 \(0\)，不影响可积性与积分值；可积性看振幅有界、间断点集为零测集，与原函数是否存在无关。校验：两段分别是 \(-\pi/4\) 与 \(\pi/4\)，相消为 \(0\)；若误把 \(\operatorname{sgn}\) 当偶函数，会得到 \(\pi/2\) 类错误值。</p>
+    <p>拆段直算与奇偶结论互验：左段 \(-\arctan1=-\pi/4\)，右段 \(\arctan1=\pi/4\)，两段在原点两侧关于纵轴对称，面积相消；符号函数在间断点上补任何有限值，都不改变有界可积的判定，也不改变积分结果。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① \(\operatorname{sgn}\) 在 \(0\) 处无定义，补任意有限值都不改变积分。② 奇偶性判定要分别看分子分母，商的奇偶随分子。③ 不要以「原函数不存在」判不可积。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>跳跃型符号函数进积分是分段积分的特例；考向有 \(\operatorname{sgn}(\sin x)\)、\(\operatorname{sgn}(x^2-1)\) 配合偶/奇核，先定奇偶再用对称结论。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明：若 \(g\) 为奇函数、\(h\) 为偶函数且都在 \([-a,a]\) 上可积、\(h(x)\neq0\)，则 \(g/h\) 为奇函数，并由此说明 \(\int_{-a}^a g(x)/h(x)dx=0\)。</p>
+    <p class="var-ans">答案：成立。\(g(-x)/h(-x)=-g(x)/h(x)\)，故商为奇；对称区间上奇函数积分为 \(0\)。本题 \(g=\operatorname{sgn}\)、\(h=1+x^2\) 满足条件。</p>
+  </div>
+</article>
+
+<article class="q" id="q19">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·指数拆点</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>计算：\(\displaystyle\int_0^2|e^x-e|\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle(e-1)^2\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>\(e^x=e\) 给出拆点 \(x=1\)。\([0,1]\) 上 \(e-e^x\ge0\)；\([1,2]\) 上 \(e^x-e\ge0\)。</p>
+    \[ I=\int_0^1(e-e^x)dx+\int_1^2(e^x-e)dx \]
+    <p>前段：</p>
+    \[ \int_0^1(e-e^x)dx=[ex-e^x]_0^1=1 \]
+    <p>后段：</p>
+    \[ \int_1^2(e^x-e)dx=[e^x-ex]_1^2=e^2-2e \]
+    <p>合计 \(I=1+e^2-2e=(e-1)^2\)。校验：\((e-1)^2\approx2.952\)；\(e^x\) 在 \([0,2]\) 从 \(1\) 增到 \(e^2\)，拆点 \(x=1\) 处等于 \(e\)，两段脱号方向相反；若整段按绝对值包络估算，积分在 \(0\) 到 \(\int_0^2 e^x dx=e^2-1\approx6.39\) 之间，结果合理。</p>
+    <p>拆点两侧符号再核：\(x\in[0,1]\) 时 \(e^x\le e\)，被积式 \(e-e^x\) 非负；\(x\in[1,2]\) 时 \(e^x\ge e\)，被积式 \(e^x-e\) 非负；前段常数 \(e\) 乘区间长度 \(1\)，分部时不要把常数项丢进 \(e^x\) 的原函数里，后段边界在 \(x=1\) 代入恰为 \(0\)。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 拆点取 \(e^x=e\)，即 \(x=1\)，不是 \(x=0\)。② 前段常数项 \(e\) 乘区间长度，别漏。③ 后段边界在 \(x=1\) 代入 \(e-e=0\)。④ 题头未印：页图第 20 题原题未带「【冯建轩】」前缀，题干按页图原样录入。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>绝对值乘指数按单调性定拆点；考向有 \(|e^x-a|\)、\(|e^{-x}-c|\)，拆点由指数式等于常数解出。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 把积分上限改为 \(a\gt1\)，写出 \(J(a)=\int_0^a|e^x-e|dx\) 的分段表达式，并求 \(J(a)\) 的最小值。</p>
+    <p class="var-ans">答案：\(a\ge1\) 时 \(J(a)=1+e^a-ea\)；\(J\) 在 \(a=1\) 处取最小值 \(1\)。对 \(a\gt1\)，后段 \(e^x-e\) 积分得 \(e^a-ea\)，加前段 \(1\)；导数 \(J'=e^a-e\gt0\)（\(a\gt1\)），故最小值在拆点 \(a=1\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q20">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·狄利克雷型</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】设 \(f(x)=\begin{cases}x,&x\in\mathbb Q\\0,&x\notin\mathbb Q\end{cases}\)，求 \(\displaystyle\int_0^1 f(x)\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 0\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>函数在有理点取 \(x\)、无理点取 \(0\)。有理点集 \(\mathbb Q\cap[0,1]\) 是可数集，勒贝格测度为 \(0\)；函数在除去零测集外几乎处处为 \(0\)，故其勒贝格积分为 \(0\)。</p>
+    \[ f(x)=0\ \text{a.e. 在 }[0,1]\text{ 上},\quad \int_0^1 f(x)dx=0 \]
+    \[ \mathbb Q\cap[0,1]\ \text{为可数集},\quad m(\mathbb Q\cap[0,1])=0 \]
+    \[ \overline{\int}_0^1 f(x)dx=\int_0^1 x\,dx=\frac12,\qquad \underline{\int}_0^1 f(x)dx=0 \]
+    <p>可积性说明：被积函数有界（\(0\le f\le1\)），间断点集为有理点集、测度为 \(0\)，按勒贝格判据可积；注意「原函数不存在」与「函数可积」是两个独立概念，不能由前者否定后者。</p>
+    <p>口径对照：上 Darboux 和趋于 \(\int_0^1 x dx=1/2\)、下和趋于 \(0\)；本卡按题段口径以几乎处处为 \(0\) 的积分值 \(0\) 作答，可积性依据勒贝格零测间断点判据，不以其上 Darboux 和作为积分结论。校验：无理点占满区间，\(f\) 在这些点全为 \(0\)，积分不可能为正；答案 \(0\) 与几乎处处为 \(0\) 一致。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 不许写「不可积所以无值」；题段口径取零测集外的取值。② 有理点可数、测度为 \(0\) 是结论依据。③ \(f\) 的上界是 \(1\)，不是无界。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>狄利克雷型函数考的是测度与可积概念；考向还有有理点取 \(1\)、无理点取 \(0\) 的经典 Dirichlet 函数，结论仍是几乎处处取值决定积分。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明 \([0,1]\) 中的有理数集是可数集，因而其勒贝格测度为 \(0\)；并说明「可数零测集」上的函数取值为何不影响积分值。</p>
+    <p class="var-ans">答案：成立。有理数可按分子分母排列成可数序列，可数集可被总长任意小的区间族覆盖，故测度为 \(0\)；积分在零测集上的贡献为 \(0\)，函数在该集上改取任何有限值都不改变积分。</p>
+  </div>
+</article>
+
+<article class="q" id="q21">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·x 乘三角</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^\pi x|\cos x|\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\pi\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>\(|\cos x|\) 零点为 \(\pi/2\)。\([0,\pi/2]\) 上 \(\cos x\ge0\)；\([\pi/2,\pi]\) 上 \(\cos x\le0\)。</p>
+    \[ I=\int_0^{\pi/2}x\cos x dx-\int_{\pi/2}^\pi x\cos x dx \]
+    <p>分部积分 \(\int x\cos x dx=x\sin x+\cos x\)。第一段：</p>
+    \[ \int_0^{\pi/2}x\cos x dx=[x\sin x+\cos x]_0^{\pi/2}=\frac\pi2-1 \]
+    <p>第二段带号积分值：</p>
+    \[ \int_{\pi/2}^\pi x\cos x dx=[x\sin x+\cos x]_{\pi/2}^\pi=-1-\frac\pi2 \]
+    <p>合计 \(I=(\pi/2-1)-(-1-\pi/2)=\pi\)。校验：\(x\) 因子不能提到积分号外；本题被积含 \(|\cos x|\)，直接拆段分部得 \(\pi\)，量级合理；边界 \(x\sin x\) 在 \(0,\pi\) 处为 \(0\)，只留余弦项。</p>
+    <p>分部细节：边界项 \(x\sin x\) 在 \(0\) 与 \(\pi\) 处都为 \(0\)，余弦项在两端分别为 \(1\) 与 \(-1\)；第二段脱号带负号，该带号积分本身为负，取负后贡献为正，两段合并 \(x\) 的系数 \(\pi/2+\pi/2=\pi\)，常数项 \(-1+1=0\)。若漏写第二段前的负号，两段会相减为 \(0\)，是本题最易出现的符号错误。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 拆点只由 \(|\cos x|\) 决定，\(x\) 是乘子不变号。② 第二段脱号后整体加负号，别忘了对分部结果再取负。③ 边界 \(x\sin x\) 在 \(0,\pi\) 处为 \(0\)，只留余弦项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>\(x\) 乘三角绝对值是分部积分与分段的复合；考向有 \(x|\sin x|\)、\(x|a\cos x+b\sin x|\)，先脱绝对值再分部。分部后 \(x\sin x\) 边界常在端点归零，最后只剩余弦项与折叠系数；拆点由三角因子零点给出，线性乘子不参与脱号判号。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明恒等式 \(\int_0^\pi x|\cos x|dx=\pi\int_0^{\pi/2}\cos x\,dx\)，并写出右端值。</p>
+    <p class="var-ans">答案：成立。右端 \(\pi\int_0^{\pi/2}\cos x dx=\pi\cdot1=\pi\)，与左端拆段分部结果一致；该式可由 \([\pi/2,\pi]\) 段换元 \(t=\pi-x\) 折叠到 \([0,\pi/2]\) 后合并得到。</p>
+  </div>
+</article>
+
+<article class="q" id="q22">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·偶对称瑕积分</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_{-2}^2\frac{|x^3|}{\sqrt{4-x^2}}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac{32}{3}\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>\(|x^3|\) 偶、分母偶，折半到正半轴；\(x=2\) 处分母为 \(0\)，是瑕点，被积式在瑕点邻域约 \(8/\sqrt{2(2-x)}\)，幂次 \(-1/2\) 可积。</p>
+    \[ I=2\int_0^2\frac{x^3}{\sqrt{4-x^2}}dx \]
+    <p>三角换元 \(x=2\sin\theta\)，\(dx=2\cos\theta d\theta\)，分母 \(2\cos\theta\)，\(\theta:0\to\pi/2\)：</p>
+    \[ I=2\int_0^{\pi/2}\frac{8\sin^3\theta}{2\cos\theta}\cdot2\cos\theta d\theta=16\int_0^{\pi/2}\sin^3\theta d\theta \]
+    <p>Wallis 公式 \(\int_0^{\pi/2}\sin^3\theta d\theta=2/3\)：</p>
+    \[ I=16\cdot\frac23=\frac{32}{3} \]
+    <p>校验：瑕点收敛；结果 \(10.67\)，被积函数在中段有限、仅端点发散可积，数值积分同值；若分母不去根号换成 \(4-x^2\)，邻域约 \(1/(2-x)\) 对数发散，结论会变。</p>
+    <p>换元系数复核：折半系数 \(2\)、\(x^3=8\sin^3\)、\(dx=2\cos\theta d\theta\)、分母 \(2\cos\theta\) 约去两个 \(2\)，最终系数 \(16\)；\(\int_0^{\pi/2}\sin^3\theta d\theta=2/3\) 是 Wallis 公式奇数幂的标准值，若误记成 \(1/2\)，结果会随之偏小。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 瑕点 \(x=\pm2\) 先判收敛，不能直接套普通换元公式而不说明。② 换元后 \(dx\) 与分母 \(\cos\theta\) 约去，系数 \(16\) 来自折半 \(2\)、\(x^3\) 系数 \(8\)、\(dx\) 系数 \(2\)。③ \(\sin^3\) 积分结果 \(2/3\)，不是 \(1/2\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>偶对称根式瑕积分常配三角换元；考向有 \(|x|^n/\sqrt{a^2-x^2}\)，重点是瑕点幂次判断与 Wallis 积分。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 判断对照积分 \(\int_{-2}^2 |x^3|/(4-x^2)dx\) 的敛散性，并与本题说明分母结构对收敛性的影响。</p>
+    <p class="var-ans">答案：发散。\(x\to2\) 时分母约 \(4(2-x)\)，被积式约 \(2/(2-x)\)，对数型发散；本题分母带平方根，邻域幂次 \(-1/2\) 可积，差别在分母是一次方还是半次方。</p>
+  </div>
+</article>
+
+<article class="q" id="q23">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·对数瑕积分</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^1\frac{dx}{1+|\ln x|}\)。</p></div>
+  <div class="answer">答案：收敛，\(\displaystyle eE_1(1)\approx0.596\)（非初等）</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>\(x\in(0,1)\) 上 \(\ln x\le0\)，\(|\ln x|=-\ln x\)，被积式 \(1/(1-\ln x)\)。\(x\to0^+\) 时 \(-\ln x\to+\infty\)，分母主项 \(|\ln x|\)；换元 \(t=-\ln x\) 后可判收敛。</p>
+    \[ x=e^{-t},\ dx=-e^{-t}dt,\ I=\int_0^\infty\frac{e^{-t}}{1+t}dt \]
+    \[ t=-\ln x,\quad x:0\to1\ \Rightarrow\ t:+\infty\to0,\quad dx=-e^{-t}dt \]
+    <p>该积分非初等，记指数积分 \(E_1(1)=\int_1^\infty e^{-u}/u du\)，令 \(u=1+t\)：</p>
+    \[ I=e\int_1^\infty\frac{e^{-u}}u du=eE_1(1)\approx0.596 \]
+    <p>收敛性：\(t\to\infty\) 时 \(e^{-t}/(1+t)\) 指数衰减，优于任何幂次，无穷积分收敛；\(x=1\) 处 \(\ln x=0\)，被积式趋于 \(1\)，无间断。校验：数值积分 \(0.5963\) 与上式一致；若题面要求初等闭式，本题不存在，答案只能以特殊函数或数值给出。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 先判收敛再写值，\(x=0\) 端是对数型瑕点。② 非初等不等于发散，不要补造闭式。③ 换元后 \(dx\) 带 \(e^{-t}\) 因子，别丢。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>对数核瑕积分常以非初等形式出现；考向有 \(dx/(1+|\ln x|)^p\)，收敛性靠 \(t=-\ln x\) 换元后按指数衰减判断。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 判断对照积分 \(\int_0^1 dx/|\ln x|\) 的敛散性，\(x=1\) 邻域与 \(x=0\) 邻域分别考察。</p>
+    <p class="var-ans">答案：发散。\(x\to1^-\) 时 \(|\ln x|\sim1-x\)，被积式约 \(1/(1-x)\)，对数型发散；\(x\to0^+\) 时 \(1/|\ln x|\) 衰减慢于任何幂次但该端本身收敛，发散来自 \(x=1\) 邻域；本题分母多了 \(1+\)，\(x=1\) 处被积式有限，故收敛。</p>
+  </div>
+</article>
+
+<article class="q" id="q24">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·无穷反常积分</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^\infty\left|\frac{\sin x}{x}\right|\,dx\)。</p></div>
+  <div class="answer">答案：发散（\(+\infty\)）</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>被积式 \(|\sin x|/x\) 在 \(x=0\) 处极限为 \(0\)（可补充定义），无穷远端是考察对象。按周期段拆分：</p>
+    \[ \int_{n\pi}^{(n+1)\pi}\frac{|\sin x|}{x}dx\ge\frac{1}{(n+1)\pi}\int_{n\pi}^{(n+1)\pi}|\sin x|dx=\frac{2}{(n+1)\pi} \]
+    <p>右端是调和级数通项的倍数，\(\sum 1/n\) 发散，故原积分在无穷端发散。</p>
+    \[ \sum_{n=1}^\infty\frac{2}{(n+1)\pi}=+\infty\ \Rightarrow\ \int_0^\infty\left|\frac{\sin x}{x}\right|dx=+\infty \]
+    <p>对照：不带绝对值的 \(\int_0^\infty \sin x/x dx\) 由 Dirichlet 判别收敛为 \(\pi/2\)；绝对值后正部负部不再相消，尾部按谐波累积，结论变为发散。校验：每段 \(|\sin x|\) 面积固定为 \(2\)，分母随 \(n\) 线性增长，段贡献约 \(1/n\)，级数发散；不能用正弦积分的收敛结论类推绝对值版。</p>
+    \[ \int_{n\pi}^{(n+1)\pi}|\sin x|dx=2,\quad \frac{2}{(n+1)\pi}\ \text{对应调和级数通项} \]
+    <p>分段下界估计：在该段上 \(x\le(n+1)\pi\)，故 \(1/x\ge1/((n+1)\pi)\)；该下界是缩小被积式，下界级数发散即可推出原积分发散，取绝对值后相消机制消失，每段正贡献按 \(1/n\) 累积。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 收敛的是 \(\sin x/x\) 本身，不是它的绝对值。② 分段下界用区间右端点放大分母，方向是缩小被积式，估计才有效。③ \(x=0\) 是可去点，不是瑕点。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>绝对值版正弦积分是反常积分敛散判断的经典反例；考向有 \(|\sin x|/x^p\)，\(p\gt1\) 收敛、\(p\le1\) 发散的分界要记清。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(F(x)=\int_0^x|\sin t/t|dt\)（补充定义 \(F(0)=0\)），求 \(F'(x)\)，并说明 \(x=0\) 处定义与连续性。</p>
+    <p class="var-ans">答案：\(F'(x)=|\sin x/x|\)（\(x\neq0\)）；被积式在 \(0\) 处趋于 \(0\)，补充定义后 \(F\) 在 \(0\) 处连续、右导数为 \(0\)；\(F\) 严格递增，且由本题结论 \(F(x)\to+\infty\)（\(x\to\infty\)）。</p>
+  </div>
+</article>
+
+<article class="q" id="q25">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·max幂次</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^1\max\{x^2,x\}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac12\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>在 \([0,1]\) 上 \(x\ge x^2\)，因 \(x-x^2=x(1-x)\ge0\)，故 max 取 \(x\)。</p>
+    \[ \max\{x^2,x\}=x,\quad 0\le x\le1 \]
+    <p>积分：</p>
+    \[ I=\int_0^1 x\,dx=\frac12 \]
+    <p>校验：两支交点 \(x=0\) 与 \(x=1\)，区间内部 \(x\) 在上；若区间改为 \([1,+\infty)\)，max 会取 \(x^2\)，结论随区间翻转；本题被积非负，结果 \(0.5\) 大于 \(\int_0^1 x^2dx=1/3\)，与 \(x\ge x^2\) 的选支方向一致。</p>
+    <p>选支依据展开：\(x-x^2=x(1-x)\)，在 \((0,1)\) 内因子 \(x\gt0\)、\(1-x\gt0\)，故差为正；两支只在端点 \(0,1\) 相交，区间内部大小关系不变，不必像绝对值那样在内部再拆段。</p>
+    \[ \int_0^1 x\,dx=\left[\frac{x^2}{2}\right]_0^1=\frac12,\qquad \int_0^1 x^2dx=\frac13 \]
+    <p>量级核验：max 不小于任一支，故积分不小于 \(1/3\)；max 不大于 \(x\)，故积分不大于 \(1/2\)，结果取到上界，与选支 \(x\) 相符。幂函数在 \([0,1]\) 上次数越低值越大，写分段式时不要把大小方向弄反。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① max 选支要在区间内部比较，交点在端点不算内部拆点。② \([0,1]\) 上幂次越高值越小，方向别反。③ 不要把 max 拆成两段，本区间内两支大小关系不变。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>幂函数 max/min 先比大小再选支；考向有 \(\max\{x^m,x^n\}\) 在不同区间段，结论随区间翻转。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 比较 \(x^2\) 与 \(x\) 在 \((0,1)\) 上的大小，并求 \(\max\{x^2,x\}\) 在 \([0,1]\) 上的最大值与最大值点。</p>
+    <p class="var-ans">答案：\((0,1)\) 上 \(x\gt x^2\)；max 即 \(x\)，最大值为 \(1\)，在 \(x=1\) 处取得，最小值为 \(0\)，在 \(x=0\) 处取得；两支在端点 \(0,1\) 相交。</p>
+  </div>
+</article>
+
+<article class="q" id="q26">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·双层根号</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^4\bigl|\sqrt{|x-1|}-1\bigr|\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 2\sqrt3-2\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>内层 \(|x-1|\)，外层根号再减 \(1\)。零点：\(\sqrt{|x-1|}=1\Rightarrow|x-1|=1\Rightarrow x=0,2\)。分三段：</p>
+    \[ |\sqrt{|x-1|}-1|=\begin{cases}1-\sqrt{1-x},&x\in[0,1]\\1-\sqrt{x-1},&x\in[1,2]\\\sqrt{x-1}-1,&x\in[2,4]\end{cases} \]
+    <p>前两段令 \(u=1-x\) 或 \(u=x-1\)，各得 \(1/3\)：</p>
+    \[ \int_0^1(1-\sqrt{1-x})dx=\int_0^1(1-\sqrt u)du=\frac13 \]
+    <p>第三段令 \(u=x-1\)，从 \(1\) 到 \(3\)：</p>
+    \[ \int_2^4(\sqrt{x-1}-1)dx=\int_1^3(\sqrt u-1)du=2\sqrt3-\frac83 \]
+    <p>合计 \(2/3+2\sqrt3-8/3=2\sqrt3-2\)。校验：结果 \(1.464\)；\(x=0\) 处 \(|\sqrt1-1|=0\)，\(x=4\) 处 \(\sqrt3-1\approx0.732\)，被积非负；前两段对称互换，面积相等。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 外层零点由内层等于 \(1\) 解出，不是 \(x=1\)。② \([0,1]\) 上 \(|x-1|=1-x\)，根号内别写成 \(x-1\)。③ 第三段上下限换元后是 \(1\to3\)，不是 \(0\to3\)。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>双层根式嵌套要从内向外逐层脱号；考向有 \(|\sqrt{x-a}-b|\)、\(\sqrt{|x-a|}-c\)，每层零点独立求解。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 设 \(M(x)=\int_0^x|\sqrt{|t-1|}-1|dt\)，求 \(M'(2)\)，并判断被积函数在 \(t=2\) 处是否连续。</p>
+    <p class="var-ans">答案：\(M'(2)=0\)。变限求导 \(M'(x)=|\sqrt{|x-1|}-1|\)，代入 \(x=2\) 得 \(|1-1|=0\)；\(t=2\) 两侧被积式极限都是 \(0\)，函数在该点连续，脱号方向翻转但值衔接。</p>
+  </div>
+</article>
+
+<article class="q" id="q27">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·三角分段</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_0^2|x\sin\pi x|\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle\frac4\pi\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>\(\sin\pi x\) 在 \([0,1]\) 非负、\([1,2]\) 非正，绝对值分段。</p>
+    \[ I=\int_0^1 x\sin\pi x dx+\int_1^2 x(-\sin\pi x)dx \]
+    <p>分部积分 \(\int x\sin\pi x dx=-x\cos\pi x/\pi+\sin\pi x/\pi^2\)。第一段：</p>
+    \[ \int_0^1 x\sin\pi x dx=\frac1\pi \]
+    <p>第二段先算带号积分：</p>
+    \[ \int_1^2 x\sin\pi x dx=-\frac3\pi \]
+    <p>取负后第二段为 \(3/\pi\)，合计 \(I=4/\pi\)。校验：\(4/\pi\approx1.273\)；\(|\sin\pi x|\) 关于 \(x=1\) 对称，乘子 \(x\) 不对称，两段面积不等（\(1/\pi\) 与 \(3/\pi\)）；若误把 \(x\) 当对称因子，会得 \(2/\pi\) 类错误值。</p>
+    <p>分部边界复核：正弦项在整数点为 \(0\)，只剩余弦项。第一段 \(x=1\) 处 \(\cos\pi=-1\)，给出 \(1/\pi\)；第二段积分在 \(x=2\) 处 \(\cos2\pi=1\)、\(x=1\) 处 \(\cos\pi=-1\)，合并得 \(-3/\pi\)，脱号取负后为 \(3/\pi\)。</p>
+    <p>量级再核：被积不超过 \(x\)，\(\int_0^2 x dx=2\)，结果 \(1.273\) 小于该上界；两段一轻一重来自乘子 \(x\) 从 \(0\) 增到 \(2\)，若两段面积相等反而说明乘子被误当常数。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 脱号只翻 \(\sin\) 因子，\(x\) 不变号。② 第二段先算带号积分再整体取负，两步别并成一步。③ 边界 \(\sin\pi x\) 在整数点为 \(0\)，只剩余弦项。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>周期三角乘线性因子的绝对值积分；考向有 \(|x\sin ax|\)、\(|x\cos ax|\)，拆点由三角因子零点给出。线性乘子不随三角变号，脱号只作用在三角因子上，两段面积是否相等取决于乘子自身的对称性。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 写出被积函数 \(|x\sin\pi x|\) 在 \([1,2]\) 上脱绝对值后的表达式，并判断该表达式在 \([1,2]\) 上的符号。</p>
+    <p class="var-ans">答案：\([1,2]\) 上 \(\sin\pi x\le0\)，故脱号为 \(-x\sin\pi x\)；\(x\gt0\)、\(-\sin\pi x\ge0\)，表达式在 \([1,2]\) 上非负，仅端点 \(x=1,2\) 处为 \(0\)。</p>
+  </div>
+</article>
+
+<article class="q" id="q28">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·偶对称瑕积分</span>
+    <span class="qsrc">P157</span>
+  </div>
+  <div class="stem"><p>【冯建轩】计算：\(\displaystyle\int_{-3}^3\frac{|x|}{\sqrt{9-x^2}}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 6\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>被积偶，折半；\(x=3\) 处分母为 \(0\)，瑕点邻域约 \(3/\sqrt{6(3-x)}\)，幂次 \(-1/2\) 可积。</p>
+    \[ I=2\int_0^3\frac{x}{\sqrt{9-x^2}}dx \]
+    <p>凑微分 \(d(9-x^2)=-2x dx\)：</p>
+    \[ \int\frac{x}{\sqrt{9-x^2}}dx=-\sqrt{9-x^2}+C \]
+    <p>代入：</p>
+    \[ I=2[-\sqrt{9-x^2}]_0^3=2\cdot3=6 \]
+    <p>校验：瑕点收敛；结果 \(6\)，被积在中段有限；若分母为 \(9-x^2\) 一次方，邻域约 \(3/[3(3-x)]=1/(3-x)\) 对数发散，本题带根号可积。</p>
+    <p>凑微分细节复核：\(d(9-x^2)=-2x dx\)，故 \(x dx=-d(9-x^2)/2\)，代入后根号凑成 \(u^{-1/2}\) 形式，原函数 \(-\sqrt{9-x^2}\) 不含分数系数；折半系数 \(2\) 来自偶对称，与凑微分负号分开处理。</p>
+    <p>量级再核：瑕点邻域幂次 \(-1/2\gt{}-1\) 可积；边界 \(-\sqrt{9-x^2}\) 在 \(x=0\) 处为 \(-3\)、在 \(x=3\) 处为 \(0\)，折半后 \(2\cdot3=6\)。若漏乘折半系数，结果会写成 \(3\)，是偶对称题常见偏差。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 瑕点 \(x=\pm3\) 先判收敛。② 凑微分负号与折半系数 \(2\) 配合，边界 \(-\sqrt0\) 为 \(0\)。③ 被积偶性来自 \(|x|\)，不要把分母也当成需要折半的对象。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>根式分母的偶对称瑕积分；考向有 \(|x|/\sqrt{a^2-x^2}\)，凑微分即可出原函数，重点仍是瑕点收敛判断。偶性来自分子 \(|x|\)，分母为偶不影响折半结论；收敛与否只看瑕点处分母的幂次，与分子绝对值无关。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 判断对照积分 \(\int_{-3}^3 |x|/(9-x^2)dx\) 的敛散性，并说明与本题分母结构的差别。</p>
+    <p class="var-ans">答案：发散。\(x\to3\) 时分母约 \(6(3-x)\)，被积式约 \(1/[2(3-x)]\)，对数型发散；本题分母带平方根，邻域幂次 \(-1/2\) 可积，收敛性由瑕点处分母幂次决定。</p>
+  </div>
+</article>
+
+<article class="q" id="q29">
+  <div class="q-head">
+    <span class="qno">第 0 题</span>
+    <span class="qtype">分段绝对值·min 两端瑕</span>
+    <span class="qsrc">P158</span>
+  </div>
+  <div class="stem"><p>计算：\(\displaystyle\int_0^1\min\left\{\frac1x,\frac1{1-x}\right\}\,dx\)。</p></div>
+  <div class="answer">答案：\(\displaystyle 2\ln2\)</div>
+  <div class="block sol">
+    <div class="block-title">解析</div>
+    <p>等点 \(1/x=1/(1-x)\) 给出 \(x=1/2\)。比较两支：\(x\in(0,1/2)\) 时 \(x\lt1-x\)，故 \(1/x\gt1/(1-x)\)，min 取 \(1/(1-x)\)；\(x\in(1/2,1)\) 时反之，min 取 \(1/x\)。</p>
+    \[ \min\left\{\frac1x,\frac1{1-x}\right\}=\begin{cases}\frac1{1-x},&0\lt x\lt\frac12\\\frac1x,&\frac12\lt x\lt1\end{cases} \]
+    <p>两端点：\(x\to0\) 时 min 趋于 \(1\)，\(x\to1\) 时 min 趋于 \(1\)，min 选走了有界支，端点不是瑕点；两段积分：</p>
+    \[ I=\int_0^{1/2}\frac{dx}{1-x}+\int_{1/2}^1\frac{dx}{x} \]
+    <p>边界值：</p>
+    \[ [-\ln(1-x)]_0^{1/2}=\ln2,\quad [\ln x]_{1/2}^1=\ln2 \]
+    <p>合计 \(I=2\ln2\)。校验：\(2\ln2\approx1.386\)；若误取另一支，端点会出现 \(1/x\) 型发散，正是 min 的「削峰」作用使积分收敛；两段关于 \(x=1/2\) 对称，面积相等。</p>
+  </div>
+  <div class="block pit">
+    <div class="block-title">易错点</div>
+    <p>① 倒数后大小关系翻转，选支方向与 \(x\)、\(1-x\) 的比较相反。② min 在端点取有界支，不要判成发散。③ 两段原函数分别是 \(-\ln(1-x)\) 与 \(\ln x\)，别写串。④ 题头未印：页图第 30 题原题未带「【冯建轩】」前缀，题干按页图原样录入。</p>
+  </div>
+  <div class="block trend">
+    <div class="block-title">考向</div>
+    <p>min/max 配倒数型函数是分段积分的综合题；考向有 \(\min\{1/x,1/(a-x)\}\)，先等点、再按倒数翻转选支、后判端点瑕性。</p>
+  </div>
+  <div class="block var">
+    <div class="block-title">变式</div>
+    <p><b>变式</b> 证明在 \((0,1/2)\) 上 \(\min\{1/x,1/(1-x)\}=1/(1-x)\)，在 \((1/2,1)\) 上等于 \(1/x\)，并指出哪一支在端点附近有发散趋势。</p>
+    <p class="var-ans">答案：\(x\lt1-x\Rightarrow1/x\gt1/(1-x)\)，min 取小支 \(1/(1-x)\)；右半段对称取 \(1/x\)。有发散趋势的是未被选中的支：左半段的 \(1/x\) 在 \(x\to0\) 发散，右半段的 \(1/(1-x)\) 在 \(x\to1\) 发散，min 自动避开了它们。</p>
+  </div>
+</article>
+
+
